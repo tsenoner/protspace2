@@ -1,3 +1,17 @@
+import {
+  AdjustmentsVerticalIcon,
+  ArrowDownOnSquareIcon,
+  ArrowsPointingInIcon,
+  CameraIcon,
+  ChevronDoubleLeftIcon,
+  ChevronDoubleRightIcon,
+  ClipboardDocumentListIcon,
+  CogIcon,
+  DocumentArrowDownIcon,
+  DocumentArrowUpIcon,
+  DocumentChartBarIcon,
+  MapIcon,
+} from "@heroicons/react/24/solid";
 import React, {
   ChangeEvent,
   MutableRefObject,
@@ -6,65 +20,50 @@ import React, {
   useRef,
   useState,
 } from "react";
-import Nav from "./Nav";
-import { Progress } from "@chakra-ui/react";
-import { CSSTransition } from "react-transition-group";
-import {
-  ChevronDoubleRightIcon,
-  ChevronDoubleLeftIcon,
-  ArrowDownOnSquareIcon,
-  CameraIcon,
-  ArrowsPointingInIcon,
-  MapIcon,
-  DocumentArrowUpIcon,
-  DocumentArrowDownIcon,
-  AdjustmentsVerticalIcon,
-  CogIcon,
-  ClipboardDocumentIcon,
-  ClipboardDocumentListIcon,
-  DocumentChartBarIcon,
-} from "@heroicons/react/24/solid";
 import { PropagateLoader } from "react-spinners";
-import ErrorModal from "./ErrorModal";
-import SettingsModal from "./SettingsModal";
+import { CSSTransition } from "react-transition-group";
+import { ScatterBoard, type ScatterBoardRef } from "scatter-board-library";
+import { Vector3 } from "three";
+import { colorList, shapeList } from "../helpers/constants";
+import { useAppDispatch, useAppSelector } from "../helpers/hooks";
 import {
-  setTechnique,
-  setIsLegendOpen,
+  fetchAndSetData,
+  setCSVFilePath,
+  setCameraPosition,
+  setCameraRotation,
+  setColorAndShapeKey,
+  setColorKey,
   setColorParam,
   setColorParamList,
   setData,
-  setShapeParam,
-  setShapeParamList,
-  setThreeD,
-  setTwoLegend,
-  setSearchItems,
-  setColorKey,
-  setShapeKey,
-  setKeyList,
-  fetchAndSetData,
-  setCameraPosition,
-  setCameraRotation,
-  setCSVFilePath,
-  setSelectedMols,
   setDataItems,
   setErrorMessage,
-  setPdbExists,
-  setColorAndShapeKey,
+  setIsLegendOpen,
   setIsLoading,
+  setKeyList,
+  setPdbExists,
+  setSearchItems,
+  setSelectedMols,
+  setShapeKey,
+  setShapeParam,
+  setShapeParamList,
+  setTechnique,
+  setThreeD,
+  setTwoLegend,
 } from "../redux/actions/settings";
 import EntitySearch from "./EntitySearch";
-import { Vector3 } from "three";
-import { useAppDispatch, useAppSelector } from "../helpers/hooks";
+import ErrorModal from "./ErrorModal";
 import { FileUploadFormModal } from "./FileUploadFormModal";
-import { ScatterBoard, type ScatterBoardRef } from "scatter-board-library";
-import { colorList, shapeList } from "../helpers/constants";
+import Nav from "./Nav";
+import SettingsModal from "./SettingsModal";
 // import MoleculeViewer, { MoleculeViewerRef } from "./MoleculeViewer";
-import { csvToJson } from "../helpers/csvToJson";
-import { Item } from "../data";
+import { Box, Select } from "@chakra-ui/react";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-import { Box, Select } from "@chakra-ui/react";
+import { Item } from "../data";
+import { csvToJson } from "../helpers/csvToJson";
 import MolstarViewer from "./MolstarViewer";
+import { TransitionChildren } from "react-transition-group/Transition";
 // import Reader from "./Reader";
 
 const VisualizationComp = () => {
@@ -304,8 +303,7 @@ const VisualizationComp = () => {
     URL.revokeObjectURL(url);
   };
 
-  const { colorKey, shapeKey, twoLegend, threeD, searchAtomStyle, keyList } =
-    useAppSelector((state) => state.settings);
+  const { colorKey, keyList } = useAppSelector((state) => state.settings);
 
   const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
@@ -466,104 +464,23 @@ const VisualizationComp = () => {
                 classNames="fade"
                 unmountOnExit
               >
-                <div className="has-tooltip">
-                  <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
-                    Download Plot
-                  </span>
-                  <div
-                    className="rounded-full bg-yellow-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
-                    onClick={() => scatterRef?.current?.downloadScreenshot()}
-                  >
-                    <ArrowDownOnSquareIcon className="w-6 m-auto text-white" />
-                  </div>
-                </div>
-              </CSSTransition>
-              <CSSTransition
-                in={isFABOpen}
-                timeout={300}
-                classNames="fade"
-                unmountOnExit
-              >
-                <div className="has-tooltip">
-                  <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
-                    Download Visualization
-                  </span>
-                  <div
-                    className="rounded-full bg-blue-200 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
-                    onClick={() =>
-                      moleculeViewerRef?.current?.downloadScreenshot()
-                    }
-                  >
-                    <CameraIcon className="w-6 m-auto text-white" />
-                  </div>
-                </div>
-              </CSSTransition>
-              <CSSTransition
-                in={isFABOpen}
-                timeout={300}
-                classNames="fade"
-                unmountOnExit
-              >
-                <div className="has-tooltip">
-                  <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
-                    {settings.isLegendOpen ? "Hide Legend" : "Show Legend"}
-                  </span>
-                  <div
-                    className="rounded-full bg-green-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
-                    onClick={() =>
-                      dispatch(setIsLegendOpen(!settings.isLegendOpen))
-                    }
-                  >
-                    {settings.isLegendOpen ? (
-                      <ArrowsPointingInIcon className="w-6 m-auto text-white" />
-                    ) : (
-                      <MapIcon className="w-6 m-auto text-white" />
-                    )}
-                  </div>
-                </div>
-              </CSSTransition>
-              <CSSTransition
-                in={isFABOpen}
-                timeout={300}
-                classNames="fade"
-                unmountOnExit
-              >
-                <div className="has-tooltip">
-                  <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
-                    Export Project
-                  </span>
-                  <div
-                    className="rounded-full bg-pink-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
-                    onClick={() => exportFile()}
-                  >
-                    <DocumentArrowUpIcon className="w-6 m-auto text-white" />
-                  </div>
-                </div>
-              </CSSTransition>
-              <CSSTransition
-                in={isFABOpen}
-                timeout={300}
-                classNames="fade"
-                unmountOnExit
-              >
-                <div className="has-tooltip">
-                  <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
-                    Import Project
-                  </span>
-
-                  <input
-                    type="file"
-                    accept=".json"
-                    onChange={handleFileChangeJSON}
-                    className="hidden"
-                    id="file-upload"
-                  />
-                  <label className="file-label" htmlFor="file-upload">
-                    <div className="rounded-full bg-purple-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md">
-                      <DocumentArrowDownIcon className="w-6 m-auto text-white" />
+                {
+                  (
+                    <div className="has-tooltip">
+                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
+                        Download Plot
+                      </span>
+                      <div
+                        className="rounded-full bg-yellow-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
+                        onClick={() =>
+                          scatterRef?.current?.downloadScreenshot()
+                        }
+                      >
+                        <ArrowDownOnSquareIcon className="w-6 m-auto text-white" />
+                      </div>
                     </div>
-                  </label>
-                </div>
+                  ) as TransitionChildren
+                }
               </CSSTransition>
               <CSSTransition
                 in={isFABOpen}
@@ -571,42 +488,18 @@ const VisualizationComp = () => {
                 classNames="fade"
                 unmountOnExit
               >
-                <div className="has-tooltip">
-                  <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
-                    Export CSV
-                  </span>
-                  <div
-                    className="rounded-full bg-stone-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
-                    onClick={downloadCSV}
-                  >
-                    <ClipboardDocumentListIcon className="w-6 m-auto text-white" />
-                  </div>
-                </div>
-              </CSSTransition>
-              <CSSTransition
-                in={isFABOpen}
-                timeout={300}
-                classNames="fade"
-                unmountOnExit
-              >
-                <div className="has-tooltip">
-                  <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
-                    Import CSV
-                  </span>
-
-                  <input
-                    type="file"
-                    accept=".csv"
-                    onChange={handleFileChangeCSV}
-                    className="hidden"
-                    id="file-upload-csv"
-                  />
-                  <label className="file-label" htmlFor="file-upload-csv">
-                    <div className="rounded-full bg-red-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md">
-                      <DocumentChartBarIcon className="w-6 m-auto text-white" />
+                {
+                  (
+                    <div className="has-tooltip">
+                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
+                        Download Visualization
+                      </span>
+                      <div className="rounded-full bg-blue-200 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md">
+                        <CameraIcon className="w-6 m-auto text-white" />
+                      </div>
                     </div>
-                  </label>
-                </div>
+                  ) as TransitionChildren
+                }
               </CSSTransition>
               <CSSTransition
                 in={isFABOpen}
@@ -614,17 +507,27 @@ const VisualizationComp = () => {
                 classNames="fade"
                 unmountOnExit
               >
-                <div className="has-tooltip">
-                  <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
-                    Settings
-                  </span>
-                  <div
-                    className="rounded-full bg-emerald-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
-                    onClick={() => setSettingsShown(true)}
-                  >
-                    <AdjustmentsVerticalIcon className="w-6 m-auto text-white" />
-                  </div>
-                </div>
+                {
+                  (
+                    <div className="has-tooltip">
+                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
+                        {settings.isLegendOpen ? "Hide Legend" : "Show Legend"}
+                      </span>
+                      <div
+                        className="rounded-full bg-green-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
+                        onClick={() =>
+                          dispatch(setIsLegendOpen(!settings.isLegendOpen))
+                        }
+                      >
+                        {settings.isLegendOpen ? (
+                          <ArrowsPointingInIcon className="w-6 m-auto text-white" />
+                        ) : (
+                          <MapIcon className="w-6 m-auto text-white" />
+                        )}
+                      </div>
+                    </div>
+                  ) as TransitionChildren
+                }
               </CSSTransition>
               <CSSTransition
                 in={isFABOpen}
@@ -632,19 +535,147 @@ const VisualizationComp = () => {
                 classNames="fade"
                 unmountOnExit
               >
-                <div className="has-tooltip">
-                  <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
-                    File Settings
-                  </span>
-                  <div
-                    onClick={() => {
-                      setFileUploadShown(true);
-                    }}
-                    className="rounded-full bg-gray-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
-                  >
-                    <CogIcon className="w-6 m-auto text-white" />
-                  </div>
-                </div>
+                {
+                  (
+                    <div className="has-tooltip">
+                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
+                        Export Project
+                      </span>
+                      <div
+                        className="rounded-full bg-pink-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
+                        onClick={() => exportFile()}
+                      >
+                        <DocumentArrowUpIcon className="w-6 m-auto text-white" />
+                      </div>
+                    </div>
+                  ) as TransitionChildren
+                }
+              </CSSTransition>
+              <CSSTransition
+                in={isFABOpen}
+                timeout={300}
+                classNames="fade"
+                unmountOnExit
+              >
+                {
+                  (
+                    <div className="has-tooltip">
+                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
+                        Import Project
+                      </span>
+
+                      <input
+                        type="file"
+                        accept=".json"
+                        onChange={handleFileChangeJSON}
+                        className="hidden"
+                        id="file-upload"
+                      />
+                      <label className="file-label" htmlFor="file-upload">
+                        <div className="rounded-full bg-purple-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md">
+                          <DocumentArrowDownIcon className="w-6 m-auto text-white" />
+                        </div>
+                      </label>
+                    </div>
+                  ) as TransitionChildren
+                }
+              </CSSTransition>
+              <CSSTransition
+                in={isFABOpen}
+                timeout={300}
+                classNames="fade"
+                unmountOnExit
+              >
+                {
+                  (
+                    <div className="has-tooltip">
+                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
+                        Export CSV
+                      </span>
+                      <div
+                        className="rounded-full bg-stone-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
+                        onClick={downloadCSV}
+                      >
+                        <ClipboardDocumentListIcon className="w-6 m-auto text-white" />
+                      </div>
+                    </div>
+                  ) as TransitionChildren
+                }
+              </CSSTransition>
+              <CSSTransition
+                in={isFABOpen}
+                timeout={300}
+                classNames="fade"
+                unmountOnExit
+              >
+                {
+                  (
+                    <div className="has-tooltip">
+                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
+                        Import CSV
+                      </span>
+
+                      <input
+                        type="file"
+                        accept=".csv"
+                        onChange={handleFileChangeCSV}
+                        className="hidden"
+                        id="file-upload-csv"
+                      />
+                      <label className="file-label" htmlFor="file-upload-csv">
+                        <div className="rounded-full bg-red-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md">
+                          <DocumentChartBarIcon className="w-6 m-auto text-white" />
+                        </div>
+                      </label>
+                    </div>
+                  ) as TransitionChildren
+                }
+              </CSSTransition>
+              <CSSTransition
+                in={isFABOpen}
+                timeout={300}
+                classNames="fade"
+                unmountOnExit
+              >
+                {
+                  (
+                    <div className="has-tooltip">
+                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
+                        Settings
+                      </span>
+                      <div
+                        className="rounded-full bg-emerald-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
+                        onClick={() => setSettingsShown(true)}
+                      >
+                        <AdjustmentsVerticalIcon className="w-6 m-auto text-white" />
+                      </div>
+                    </div>
+                  ) as TransitionChildren
+                }
+              </CSSTransition>
+              <CSSTransition
+                in={isFABOpen}
+                timeout={300}
+                classNames="fade"
+                unmountOnExit
+              >
+                {
+                  (
+                    <div className="has-tooltip">
+                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
+                        File Settings
+                      </span>
+                      <div
+                        onClick={() => {
+                          setFileUploadShown(true);
+                        }}
+                        className="rounded-full bg-gray-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
+                      >
+                        <CogIcon className="w-6 m-auto text-white" />
+                      </div>
+                    </div>
+                  ) as TransitionChildren
+                }
               </CSSTransition>
             </div>
           </div>

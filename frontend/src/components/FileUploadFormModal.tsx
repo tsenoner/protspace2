@@ -61,7 +61,7 @@ export function FileUploadFormModal({
   const [threeD, setSwitchThreeD] = useState(true);
   const [threedDefaultSet, setThreedDefaultSet] = useState(true);
   const dispatch = useAppDispatch();
-  const { technique, pdb } = useAppSelector((state) => state.settings);
+  const { technique } = useAppSelector((state) => state.settings);
   const [selectedTechnique, setSelectedTechnique] = useState<string>(technique);
   const [processedData, setProcessedData] = useState<any>(null);
   const [useBackend, setUseBackend] = useState(false);
