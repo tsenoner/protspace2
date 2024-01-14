@@ -1,0 +1,420 @@
+import { AtomStyleSpec, Item } from "../../data";
+import { colorList, shapeList } from "../../helpers/constants";
+import {
+  SET_ATOM_STYLE,
+  SET_COLOR_KEY,
+  SET_COLOR_PARAM,
+  SET_COLOR_PARAM_LIST,
+  SET_CSV_FILE_PATH,
+  SET_DATA,
+  SET_DATA_ITEMS,
+  SET_MOLECULE_SHOWN,
+  SET_SEARCH_ITEMS,
+  SET_SHAPE_KEY,
+  SET_SHAPE_PARAM,
+  SET_SHAPE_PARAM_LIST,
+  SET_TECHNIQUE,
+  SET_THREE_D,
+  SET_TWO_LEGEND,
+  SET_KEY_LIST,
+  SET_IS_LEGEND_OPEN,
+  SET_ERROR_MESSAGE,
+  SET_SEARCH_ATOM_STYLE,
+  ADD_TO_ATOM_STYLE,
+  REMOVE_FROM_ATOM_STYLE,
+  ADD_TO_SEARCH_ATOM_STYLE,
+  REMOVE_FROM_SEARCH_ATOM_STYLE,
+  SET_PDB_EXISTS,
+  SET_MOLECULE_NAME,
+  SET_CAMERA_POSITION,
+  SET_CAMERA_ROTATION,
+  SET_COLOR_AND_SHAPE_KEY,
+  SET_SELECTED_MOLS,
+  SET_IS_LOADING,
+  SET_PDB,
+} from "../actionTypes";
+
+// Default styles
+const defaultStyles: AtomStyleSpec = {
+  cartoon: {
+    hidden: false,
+    color: "spectrum",
+    style: "rectangle",
+    ribbon: false,
+    arrows: false,
+    tubes: false,
+    thickness: 0.4,
+    width: 1,
+    opacity: 1,
+  },
+  line: {
+    hidden: false,
+    color: "spectrum",
+    wireframe: false,
+    opacity: 1,
+  },
+  stick: {
+    hidden: false,
+    color: "spectrum",
+    opacity: 1,
+    radius: 1,
+    showNonBonded: false,
+    singleBonds: false,
+  },
+};
+
+const initialAtomStyleState: AtomStyleSpec = {
+  cartoon: {
+    hidden: false,
+    color: "spectrum",
+    style: "rectangle",
+    ribbon: false,
+    arrows: false,
+    tubes: false,
+    thickness: 0.4,
+    width: 1,
+    opacity: 1,
+  },
+};
+
+interface SettingsState {
+  colorKey: string;
+  shapeKey: string;
+  twoLegend: boolean;
+  technique: string;
+  threeD: boolean;
+  atomStyle: AtomStyleSpec;
+  searchAtomStyle: AtomStyleSpec;
+  searchItems: Item[];
+  colorParam: string;
+  shapeParam: string;
+  moleculeShown: boolean;
+  data: any[];
+  shapeParamList: string[];
+  colorParamList: string[];
+  csvFilePath: string;
+  dataItems: Item[];
+  keyList: string[];
+  isLegendOpen: boolean;
+  errorMessage: string;
+  pdbExists: boolean;
+  moleculeName: string;
+  selectedMols: string[];
+  cameraPosition: any;
+  cameraRotation: any;
+  isLoading: boolean;
+  pdb: { relativePath: string; fileData: string }[];
+}
+
+const initialState: SettingsState = {
+  colorKey: "",
+  shapeKey: "",
+  twoLegend: false,
+  technique: "umap",
+  threeD: true,
+  atomStyle: initialAtomStyleState,
+  searchAtomStyle: initialAtomStyleState,
+  searchItems: [],
+  colorParam: "",
+  shapeParam: "",
+  moleculeShown: false,
+  data: [],
+  shapeParamList: [],
+  colorParamList: [],
+  csvFilePath: "df_3FTx_mature_esm2.csv",
+  dataItems: [],
+  keyList: [],
+  isLegendOpen: true,
+  errorMessage: "",
+  pdbExists: true,
+  moleculeName: "",
+  cameraPosition: null,
+  cameraRotation: null,
+  selectedMols: [],
+  isLoading: false,
+  pdb: [],
+};
+
+const settingsReducer = (
+  state = initialState,
+  action: {
+    type: any;
+    payload: any;
+  }
+) => {
+  let newItems;
+  let colorParamList: string[] = [];
+  let shapeParamList: string[] = [];
+  let items: Item[] = [];
+  switch (action.type) {
+    case SET_DATA:
+      return {
+        ...state,
+        data: action.payload,
+      };
+    case SET_PDB_EXISTS:
+      return {
+        ...state,
+        pdbExists: action.payload,
+      };
+    case SET_ERROR_MESSAGE:
+      return {
+        ...state,
+        errorMessage: action.payload,
+      };
+    case SET_CAMERA_POSITION:
+      return {
+        ...state,
+        cameraPosition: action.payload,
+      };
+    case SET_CAMERA_ROTATION:
+      return {
+        ...state,
+        cameraRotation: action.payload,
+      };
+    case SET_SHAPE_PARAM_LIST:
+      return {
+        ...state,
+        shapeParamList: action.payload,
+      };
+    case SET_COLOR_PARAM_LIST:
+      return {
+        ...state,
+        colorParamList: action.payload,
+      };
+    case SET_CSV_FILE_PATH:
+      return {
+        ...state,
+        csvFilePath: action.payload,
+      };
+    case SET_SELECTED_MOLS:
+      return {
+        ...state,
+        selectedMols: action.payload,
+      };
+    case SET_DATA_ITEMS:
+      return {
+        ...state,
+        dataItems: action.payload,
+      };
+    case SET_COLOR_PARAM:
+      return {
+        ...state,
+        colorParam: action.payload,
+      };
+    case SET_SHAPE_PARAM:
+      return {
+        ...state,
+        shapeParam: action.payload,
+      };
+    case SET_COLOR_AND_SHAPE_KEY:
+      state.data.forEach((element: any) => {
+        for (const key in element) {
+          const value = element[key];
+          if (
+            typeof value === "string" &&
+            items.filter((e) => e.category === key && e.name === value)
+              .length === 0
+          ) {
+            if (key === action.payload.colorKey) {
+              items.push({
+                category: key,
+                color: colorList[colorParamList.length % colorList.length],
+                name: value,
+              });
+              colorParamList.push(value);
+            } else if (key === action.payload.shapeKey) {
+              items.push({
+                category: key,
+                img: shapeList[shapeParamList.length % shapeList.length],
+                name: value,
+              });
+              shapeParamList.push(value);
+            } else {
+              items.push({ category: key, name: value });
+            }
+          }
+        }
+      });
+      return {
+        ...state,
+        colorParamList: colorParamList,
+        shapeParamList: shapeParamList,
+        items: items,
+        colorKey: action.payload.colorKey,
+        shapeKey: action.payload.shapeKey,
+      };
+    case SET_COLOR_KEY:
+      state.data.forEach((element: any) => {
+        for (const key in element) {
+          const value = element[key];
+          if (
+            typeof value === "string" &&
+            items.filter((e) => e.category === key && e.name === value)
+              .length === 0
+          ) {
+            if (key === action.payload) {
+              items.push({
+                category: key,
+                color: colorList[colorParamList.length % colorList.length],
+                name: value,
+              });
+              colorParamList.push(value);
+            } else if (key === state.shapeKey) {
+              items.push({
+                category: key,
+                img: shapeList[shapeParamList.length % shapeList.length],
+                name: value,
+              });
+              shapeParamList.push(value);
+            } else {
+              items.push({ category: key, name: value });
+            }
+          }
+        }
+      });
+      return {
+        ...state,
+        colorParamList: colorParamList,
+        shapeParamList: shapeParamList,
+        items: items,
+        colorKey: action.payload,
+      };
+    case SET_SHAPE_KEY:
+      state.data.forEach((element: any) => {
+        for (const key in element) {
+          const value = element[key];
+          if (
+            typeof value === "string" &&
+            items.filter((e) => e.category === key && e.name === value)
+              .length === 0
+          ) {
+            if (key === state.colorKey) {
+              items.push({
+                category: key,
+                color: colorList[colorParamList.length % colorList.length],
+                name: value,
+              });
+              colorParamList.push(value);
+            } else if (key === action.payload) {
+              items.push({
+                category: key,
+                img: shapeList[shapeParamList.length % shapeList.length],
+                name: value,
+              });
+              shapeParamList.push(value);
+            } else {
+              items.push({ category: key, name: value });
+            }
+          }
+        }
+      });
+      return {
+        ...state,
+        colorParamList: colorParamList,
+        shapeParamList: shapeParamList,
+        items: items,
+        shapeKey: action.payload,
+      };
+    case SET_TWO_LEGEND:
+      return {
+        ...state,
+        twoLegend: action.payload,
+      };
+    case SET_TECHNIQUE:
+      return {
+        ...state,
+        technique: action.payload,
+      };
+    case SET_MOLECULE_NAME:
+      return {
+        ...state,
+        moleculeName: action.payload,
+      };
+    case SET_THREE_D:
+      return {
+        ...state,
+        threeD: action.payload,
+      };
+    case SET_ATOM_STYLE:
+      return {
+        ...state,
+        atomStyle: action.payload,
+      };
+    case SET_SEARCH_ATOM_STYLE:
+      return {
+        ...state,
+        searchAtomStyle: action.payload,
+      };
+    case SET_SEARCH_ITEMS:
+      return {
+        ...state,
+        searchItems: action.payload,
+      };
+    case SET_IS_LEGEND_OPEN:
+      return {
+        ...state,
+        isLegendOpen: action.payload,
+      };
+    case SET_KEY_LIST:
+      return {
+        ...state,
+        keyList: action.payload,
+      };
+    case SET_MOLECULE_SHOWN:
+      return {
+        ...state,
+        moleculeShown: action.payload,
+      };
+    case ADD_TO_ATOM_STYLE:
+      newItems = {
+        ...state.atomStyle,
+        [action.payload]: defaultStyles[action.payload as keyof AtomStyleSpec],
+      };
+      return {
+        ...state,
+        atomStyle: newItems,
+      };
+    case ADD_TO_SEARCH_ATOM_STYLE:
+      newItems = {
+        ...state.searchAtomStyle,
+        [action.payload]: defaultStyles[action.payload as keyof AtomStyleSpec],
+      };
+      return {
+        ...state,
+        searchAtomStyle: newItems,
+      };
+    case REMOVE_FROM_ATOM_STYLE:
+      newItems = {
+        ...state.atomStyle,
+      };
+      delete newItems[action.payload as keyof AtomStyleSpec];
+      return {
+        ...state,
+        atomStyle: newItems,
+      };
+    case REMOVE_FROM_SEARCH_ATOM_STYLE:
+      newItems = {
+        ...state.searchAtomStyle,
+      };
+      delete newItems[action.payload as keyof AtomStyleSpec];
+      return {
+        ...state,
+        searchAtomStyle: newItems,
+      };
+    case SET_IS_LOADING:
+      return {
+        ...state,
+        isLoading: action.payload,
+      };
+    case SET_PDB:
+      return {
+        ...state,
+        pdb: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export default settingsReducer;

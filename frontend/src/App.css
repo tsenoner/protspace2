@@ -1,0 +1,25 @@
+.msp-plugin .msp-viewport-controls-panel {
+  height: 300px;
+  overflow-y: scroll;
+}
+
+.cancelButton {
+  width: 50%;
+  display: flex;
+  place-content: center;
+  margin-top: 24px;
+  background: red;
+  margin: auto;
+  margin-top: 24px;
+  border-radius: 16px;
+  padding: 8px;
+  color: white;
+}
+
+/* .msp-layout-region .msp-layout-bottom {
+  display: none;
+}
+*/
+/* .msp-plugin .msp-viewport-controls-buttons .msp-btn-link-toggle-off {
+  display: none;
+} */
