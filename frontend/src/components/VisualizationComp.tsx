@@ -435,9 +435,6 @@ const VisualizationComp = () => {
                   }
                 }}
               />
-              {/* {settings.selectedMols && (
-                <MoleculeViewer ref={moleculeViewerRef} />
-              )} */}
               {settings.selectedMols.length !== 0 && <MolstarViewer />}
             </div>
             <div className="absolute z-20 bottom-4 right-2 m-2 flex">
