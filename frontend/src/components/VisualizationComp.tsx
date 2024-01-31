@@ -2,7 +2,6 @@ import {
   AdjustmentsVerticalIcon,
   ArrowDownOnSquareIcon,
   ArrowsPointingInIcon,
-  CameraIcon,
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
   ClipboardDocumentListIcon,
