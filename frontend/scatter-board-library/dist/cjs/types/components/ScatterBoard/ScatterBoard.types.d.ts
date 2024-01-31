@@ -3,6 +3,7 @@ import { Item } from "../../helpers/data";
 import { PerspectiveCamera } from "three";
 export interface ScatterBoardRef {
     downloadScreenshot: () => void;
+    downloadSVG: () => void;
 }
 export interface ScatterBoardProps {
     cameraRef?: MutableRefObject<PerspectiveCamera>;

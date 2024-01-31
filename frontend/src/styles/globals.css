@@ -45,7 +45,7 @@
 }
 
 .nav-bg {
-  @apply md:h-16 flex justify-between md:items-center items-start px-4 dark:bg-gray-800 bg-stone-200 py-4 md:py-0 dark:text-white;
+  @apply md:h-16 flex justify-between md:items-center items-start px-4 py-4 md:py-0 dark:text-white;
 }
 
 .footer-bg {

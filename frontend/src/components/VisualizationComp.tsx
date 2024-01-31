@@ -22,6 +22,8 @@ import React, {
 } from "react";
 import { PropagateLoader } from "react-spinners";
 import { CSSTransition } from "react-transition-group";
+import { BsFiletypeSvg } from "react-icons/bs";
+
 import { ScatterBoard, type ScatterBoardRef } from "scatter-board-library";
 import { Vector3 } from "three";
 import { colorList, shapeList } from "../helpers/constants";
@@ -60,10 +62,10 @@ import SettingsModal from "./SettingsModal";
 import { Box, Select } from "@chakra-ui/react";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
+import { TransitionChildren } from "react-transition-group/Transition";
 import { Item } from "../data";
 import { csvToJson } from "../helpers/csvToJson";
 import MolstarViewer from "./MolstarViewer";
-import { TransitionChildren } from "react-transition-group/Transition";
 // import Reader from "./Reader";
 
 const VisualizationComp = () => {
@@ -492,15 +494,22 @@ const VisualizationComp = () => {
                   (
                     <div className="has-tooltip">
                       <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
-                        Download Visualization
+                        Download as SVG
                       </span>
-                      <div className="rounded-full bg-blue-200 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md">
-                        <CameraIcon className="w-6 m-auto text-white" />
+                      <div
+                        onClick={() => scatterRef?.current?.downloadSVG()}
+                        className="rounded-full bg-blue-200 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
+                      >
+                        <BsFiletypeSvg
+                          style={{ color: "blue", fontSize: "1.5rem" }}
+                          className="w-6 m-auto text-white"
+                        />
                       </div>
                     </div>
                   ) as TransitionChildren
                 }
               </CSSTransition>
+
               <CSSTransition
                 in={isFABOpen}
                 timeout={300}
@@ -569,9 +578,9 @@ const VisualizationComp = () => {
                         accept=".json"
                         onChange={handleFileChangeJSON}
                         className="hidden"
-                        id="file-upload"
+                        id="file-upload-json"
                       />
-                      <label className="file-label" htmlFor="file-upload">
+                      <label className="file-label" htmlFor="file-upload-json">
                         <div className="rounded-full bg-purple-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md">
                           <DocumentArrowDownIcon className="w-6 m-auto text-white" />
                         </div>

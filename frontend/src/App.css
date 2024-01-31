@@ -16,6 +16,9 @@
   color: white;
 }
 
+.nav-bg {
+  background: none !important;
+}
 /* .msp-layout-region .msp-layout-bottom {
   display: none;
 }

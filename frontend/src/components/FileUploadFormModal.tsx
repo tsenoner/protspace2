@@ -63,6 +63,9 @@ export function FileUploadFormModal({
   const dispatch = useAppDispatch();
   const { technique } = useAppSelector((state) => state.settings);
   const [selectedTechnique, setSelectedTechnique] = useState<string>(technique);
+  const [selectedTechniqueDefault, setSelectedTechniqueDefault] =
+    useState<string>("umap");
+
   const [processedData, setProcessedData] = useState<any>(null);
   const [useBackend, setUseBackend] = useState(false);
   const dispatchThunk = useDispatch<ThunkDispatch<any, any, any>>();
@@ -296,6 +299,14 @@ export function FileUploadFormModal({
     setThreedDefaultSet(event.target.checked);
   };
 
+  const handleTechniqueChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setSelectedTechniqueDefault(event.target.value);
+  };
+
+  const techniqueList = ["umap", "pca", "tsne"];
+
   return (
     <div className={fileUploadShown ? "flex" : "hidden"}>
       <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -312,222 +323,83 @@ export function FileUploadFormModal({
                 <XMarkIcon className="w-4" />
               </button>
             </div>
-            <Tabs isFitted>
-              <TabList columnGap={"8px"}>
-                <Tab>Upload Data</Tab>
-                <Tab>Use Default Dataset</Tab>
-              </TabList>
-              <TabIndicator
-                mt="-1.5px"
-                height="2px"
-                bg="blue.500"
-                borderRadius="1px"
-              />
-              <TabPanels>
-                <TabPanel px={0} py={4}>
-                  <div>
-                    <div className="mb-2">
-                      <label
-                        htmlFor="file-upload"
-                        className="block text-gray-700 text-sm font-bold mb-2"
-                      >
-                        <p className="pb-2">Upload H5 File</p>
-                        <div className="cursor-pointer p-4 w-full flex justify-center border-dashed border border-gray-300 rounded">
-                          <AttachmentIcon />
-                        </div>
-                        <input
-                          id="file-upload"
-                          type="file"
-                          accept=".h5"
-                          onChange={(event) =>
-                            handleFileChange(event, setH5File)
-                          }
-                          required
-                        />
-                        {h5File && (
-                          <p className="text-sm text-gray-500 mt-2">
-                            {h5File.name} uploaded
-                          </p>
-                        )}
-                      </label>
-                    </div>
-
-                    <div className="mb-4">
-                      <label
-                        htmlFor="file-upload-csv"
-                        className="block text-gray-700 text-sm font-bold mb-2"
-                      >
-                        <p className="pb-2">Upload CSV File</p>
-                        <div className="cursor-pointer p-4 w-full flex justify-center border-dashed border border-gray-300 rounded">
-                          <AttachmentIcon />
-                        </div>
-                        <input
-                          id="file-upload-csv"
-                          type="file"
-                          accept=".csv"
-                          onChange={(event) =>
-                            handleFileChange(event, setCsvFile)
-                          }
-                          required
-                        />
-                        {csvFile && (
-                          <p className="text-sm text-gray-500 mt-2">
-                            {csvFile.name} uploaded
-                          </p>
-                        )}
-                      </label>
-                    </div>
-
-                    <div className="mb-4">
-                      <label
-                        htmlFor="file-upload-pdb"
-                        className="block text-gray-700 text-sm font-bold mb-2"
-                      >
-                        <p className="pb-2">Upload Compressed PDB folder</p>
-                        <div className="cursor-pointer p-4 w-full flex justify-center border-dashed border border-gray-300 rounded">
-                          <AttachmentIcon />
-                        </div>
-                        <input
-                          id="file-upload-pdb"
-                          type="file"
-                          accept=".zip"
-                          onChange={(event) =>
-                            handleFileChangePDB(event, setPdbFile)
-                          }
-                          required
-                          name="zipFile"
-                          className="mb-2"
-                        />
-                        {pdbFile && (
-                          <p className="text-sm text-gray-500 mt-2">
-                            {pdbFile.name} uploaded
-                          </p>
-                        )}
-                      </label>
-                    </div>
-                    <Box>
-                      <FormControl display="flex" alignItems="center" mb={2}>
-                        <FormLabel htmlFor="2D" mb="0">
-                          2D
-                        </FormLabel>
-                        <Switch
-                          defaultChecked={threeD}
-                          id="dimensions"
-                          onChange={handleSwitch}
-                        />
-                        <FormLabel htmlFor="3D" mb="0" ml={3}>
-                          3D
-                        </FormLabel>
-                      </FormControl>
-
-                      <FormControl display="flex" alignItems="center" mb={2}>
-                        <FormLabel htmlFor="server" mb="0">
-                          Your browser
-                        </FormLabel>
-                        <Switch
-                          defaultChecked={useBackend}
-                          id="dimensions"
-                          onChange={handleSwitchServer}
-                        />
-                        <FormLabel htmlFor="browser" mb="0" ml={3}>
-                          Use our server for calculations
-                        </FormLabel>
-                      </FormControl>
-                    </Box>
-                    <TechniquesDropdown
-                      selectedTechnique={selectedTechnique}
-                      setSelectedTechnique={setSelectedTechnique}
-                      nNeighbours={nNeighbours}
-                      setNNeighbours={setNNeighbours}
-                      setMetric={setMetric}
-                      setMinDist={setMinDist}
-                      metric={metric}
-                      minDist={minDist}
-                      setTsneMetric={setTsneMetric}
-                      tsneMetric={tsneMetric}
-                      setLearningRate={setLearningRate}
-                      learningRate={learningRate}
-                      setPerplexity={setPerplexity}
-                      perplexity={perplexity}
-                      setIterations={setIterations}
-                      iterations={iterations}
-                    />
-
-                    <p className="text-red-500">{formErrorMessage}</p>
-
-                    <div className="flex justify-end">
-                      <Button
-                        colorScheme="blue"
-                        className="mt-4"
-                        onClick={handleUpload}
-                      >
-                        Upload
-                      </Button>
-                    </div>
-                  </div>
-                </TabPanel>
-                <TabPanel px={0} py={4}>
-                  <div className="mt-2">
-                    <div className="flex flex-col mb-2">
-                      <label
-                        className="block text-gray-700 text-sm font-bold mb-2"
-                        htmlFor="defaultDataset"
-                      >
-                        Dataset
-                      </label>
-                      <select
-                        onChange={(event) => {
-                          setDataset(event.target.value);
-                        }}
-                        id="defaultDataset"
-                        className="min-w-100 bg-transparent"
-                        value={dataset}
-                      >
-                        {defaultDatasets.map(
-                          (option: string, index: number) => (
-                            <option key={index} value={option}>
-                              {option}
-                            </option>
-                          )
-                        )}
-                      </select>
-                      <FormControl display="flex" alignItems="center" mt={2}>
-                        <FormLabel htmlFor="2D" mb="0">
-                          2D
-                        </FormLabel>
-                        <Switch
-                          defaultChecked={threedDefaultSet}
-                          id="dimensions"
-                          onChange={handleSwitchDefaultSet}
-                        />
-                        <FormLabel htmlFor="3D" mb="0" ml={3}>
-                          3D
-                        </FormLabel>
-                      </FormControl>
-                    </div>
-                    <div className="flex justify-end">
-                      <Button
-                        className="mt-4"
-                        colorScheme="blue"
-                        onClick={() => {
-                          if (dataset === defaultDatasets[0]) {
-                            dispatch(setCSVFilePath("df_3FTx_mature_esm2.csv"));
-                            dispatch(setPdbExists(true));
-                          } else if (dataset === defaultDatasets[1]) {
-                            dispatch(setCSVFilePath("df_KLK_esm2.csv"));
-                            dispatch(setPdbExists(false));
-                          }
-                          dispatch(setThreeD(threedDefaultSet));
-                          setFileUploadShown(false);
-                        }}
-                      >
-                        Save
-                      </Button>
-                    </div>
-                  </div>
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
+            <div className="mt-2">
+              <div className="flex flex-col mb-2">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="defaultDataset"
+                >
+                  Dataset
+                </label>
+                <select
+                  onChange={(event) => {
+                    setDataset(event.target.value);
+                  }}
+                  id="defaultDataset"
+                  className="min-w-100 bg-transparent"
+                  value={dataset}
+                >
+                  {defaultDatasets.map((option: string, index: number) => (
+                    <option key={index} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+                <FormControl display="flex" alignItems="center" mt={2}>
+                  <FormLabel htmlFor="2D" mb="0">
+                    2D
+                  </FormLabel>
+                  <Switch
+                    defaultChecked={threedDefaultSet}
+                    id="dimensions"
+                    onChange={handleSwitchDefaultSet}
+                  />
+                  <FormLabel htmlFor="3D" mb="0" ml={3}>
+                    3D
+                  </FormLabel>
+                </FormControl>
+              </div>
+              <div>
+                <label
+                  htmlFor="techniques"
+                  className="text-gray-700 text-sm font-bold"
+                >
+                  Technique
+                </label>
+                <select
+                  onChange={handleTechniqueChange}
+                  id="techniques"
+                  className="mt-2 min-w-100 bg-transparent"
+                  value={selectedTechniqueDefault}
+                >
+                  {techniqueList.map((option, index) => (
+                    <option key={index} value={option}>
+                      {option.toUpperCase()}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex justify-end">
+                <Button
+                  className="mt-4"
+                  colorScheme="blue"
+                  onClick={() => {
+                    if (dataset === defaultDatasets[0]) {
+                      dispatch(setCSVFilePath("df_3FTx_mature_esm2.csv"));
+                      dispatch(setPdbExists(true));
+                    } else if (dataset === defaultDatasets[1]) {
+                      dispatch(setCSVFilePath("df_KLK_esm2.csv"));
+                      dispatch(setPdbExists(false));
+                    }
+                    dispatch(setThreeD(threedDefaultSet));
+                    dispatch(setTechnique(selectedTechniqueDefault));
+                    setFileUploadShown(false);
+                  }}
+                >
+                  Save
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

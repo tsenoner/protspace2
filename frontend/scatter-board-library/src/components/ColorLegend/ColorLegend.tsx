@@ -13,7 +13,6 @@ const ColorLegend: React.FC<ColorLegendProps> = ({
   colorList,
 }) => {
   const [closed, setClosed] = useState(false);
-  console.log("colorParamList", colorParamList);
   return (
     <div className="block bg-slate-100 rounded-md mr-4 w-full mt-2">
       <div

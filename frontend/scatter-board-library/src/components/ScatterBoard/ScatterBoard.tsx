@@ -71,6 +71,8 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
     }>({});
     const [imageSrc, takeScreenshot] = useScreenshot();
     const [entityName, setEntityName] = useState("");
+    const objArr = useRef([]);
+    // const renderer = new THREE.WebGLRenderer({ antialias: true });
 
     const legendRefFull = (
       <div className="absolute h-full w-full -z-20" ref={legendRef}>
@@ -104,6 +106,9 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
     useImperativeHandle(ref, () => ({
       downloadScreenshot() {
         createScreenshot();
+      },
+      downloadSVG() {
+        downloadSVG();
       },
     }));
 
@@ -195,6 +200,64 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       };
     };
 
+    function updateSvgAxes(camera: any, renderer: any) {
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+      const svgContainerRect = document
+        .getElementById("svg-container")
+        .getBoundingClientRect();
+
+      function projectToScreen(
+        obj: THREE.Object3D<THREE.Event>,
+        camera: THREE.Camera,
+        renderer: {
+          context: { canvas: { clientWidth: number; clientHeight: number } };
+        }
+      ) {
+        var vector = new THREE.Vector3();
+        var widthHalf = 0.5 * window.innerWidth;
+        var heightHalf = 0.5 * window.innerHeight;
+
+        obj.updateMatrixWorld();
+        vector.setFromMatrixPosition(obj.matrixWorld);
+        vector.project(camera);
+
+        vector.x = vector.x * widthHalf + widthHalf;
+        vector.y = -(vector.y * heightHalf) + heightHalf;
+
+        return {
+          x: vector.x + svgContainerRect.left,
+          y: vector.y + svgContainerRect.top,
+        };
+      }
+
+      // Create temporary Object3D for projection
+      const tempObj = new THREE.Object3D();
+
+      // Project the X axis endpoint
+      tempObj.position.copy(new THREE.Vector3(20, 0, 0)); // X axis endpoint
+      const xAxis2D = projectToScreen(tempObj, camera, renderer);
+
+      // Project the Y axis endpoint
+      tempObj.position.copy(new THREE.Vector3(0, 20, 0)); // Y axis endpoint
+      const yAxis2D = projectToScreen(tempObj, camera, renderer);
+
+      // Update SVG lines
+      const xAxisSvg = document.getElementById("svg-x-axis");
+      const yAxisSvg = document.getElementById("svg-y-axis");
+
+      xAxisSvg?.setAttribute("x2", xAxis2D.x.toString());
+      xAxisSvg?.setAttribute("y2", xAxis2D.y.toString());
+
+      yAxisSvg?.setAttribute("x2", yAxis2D.x.toString());
+      yAxisSvg?.setAttribute("y2", yAxis2D.y.toString());
+    }
+    let maxX = -Infinity,
+      minX = Infinity,
+      maxY = -Infinity,
+      minY = Infinity,
+      maxZ = -Infinity,
+      minZ = Infinity;
+
     function createShape(
       twoLegend: boolean,
       path: string,
@@ -207,8 +270,48 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       opacity: number,
       userData: any
     ) {
+      minX = Math.min(minX, coordinates.x);
+      maxX = Math.max(maxX, coordinates.x);
+      minY = Math.min(minY, coordinates.y);
+      maxY = Math.max(maxY, coordinates.y);
+      minZ = Math.min(minZ, coordinates.z ?? 0); // Assuming z can be optional
+      maxZ = Math.max(maxZ, coordinates.z ?? 0);
+
       const loader = new SVGLoader();
       let group;
+      // const divElement = document.createElement("div");
+      // divElement.innerHTML = "Info about " + userData[dataItems[0].category];
+      // divElement.style.background = "red";
+      // divElement.className = "info-div"; // Add a class for styling
+      // document.body.appendChild(divElement);
+      let svgContainer = document.getElementById("svg-container");
+      if (!svgContainer) {
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'createElementNS' does not exist on type 'Document'.
+        svgContainer = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "svg"
+        );
+        svgContainer!.id = "svg-container";
+        svgContainer!.style.position = "absolute";
+        svgContainer!.style.width = "100%";
+        svgContainer!.style.height = "100%";
+        svgContainer!.style.top = "0";
+        svgContainer!.style.left = "0";
+        svgContainer!.style.zIndex = "-1";
+        document.body.appendChild(svgContainer!);
+      }
+
+      // Create an SVG circle element
+      const svgCircle = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "circle"
+      );
+      // svgCircle.setAttribute("r", `${coordinates.z}`); // Radius of the circle
+      svgCircle.setAttribute("cx", "100"); // Center the circle horizontally
+      svgCircle.setAttribute("cy", "200"); // Center the circle vertically
+      svgCircle.style.fill = userData.color; // Color from userData
+      svgCircle.style.position = "absolute";
+      svgContainer!.appendChild(svgCircle);
 
       loader.load(
         // resource URL
@@ -263,15 +366,50 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
             const mesh = new THREE.Mesh(geometry, material);
             mesh.userData = userData;
             mesh.position.set(coordinates.x, coordinates.y, coordinates.z ?? 0);
+            // objArr.current.push({ divObj: mesh, divElem: divElement });
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+            objArr.current.push({ divObj: mesh, svgElem: svgCircle });
+
             sceneRef.current.add(mesh);
           }
         }
       );
     }
 
+    function calculateScaleFactor(distance: number) {
+      // Simple linear scaling based on distance
+      // You may need to adjust the formula to get the desired effect
+      const minScale = 0.5; // Minimum scale at maximum distance
+      const maxDistance = 50; // Adjust as per your scene's size
+      return 1 - Math.min(distance / maxDistance, 1) * (1 - minScale);
+    }
+
     useEffect(() => {
       colorReset();
     }, [data, colorParam, shapeParam, searchItems]);
+
+    function toScreenPosition(
+      obj: { updateMatrixWorld: () => void; matrixWorld: THREE.Matrix4 },
+      camera: THREE.Camera
+    ) {
+      var vector = new THREE.Vector3();
+
+      // TODO: need to update this when resize window
+      var widthHalf = 0.5 * window.innerWidth;
+      var heightHalf = 0.5 * window.innerHeight;
+
+      obj.updateMatrixWorld();
+      vector.setFromMatrixPosition(obj.matrixWorld);
+      vector.project(camera);
+
+      vector.x = vector.x * widthHalf + widthHalf;
+      vector.y = -(vector.y * heightHalf) + heightHalf;
+
+      return {
+        x: vector.x,
+        y: vector.y,
+      };
+    }
 
     function onClick(event: MouseEvent<HTMLElement>): void {
       if (event.detail === 1) {
@@ -314,41 +452,71 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
     }
 
     function colorReset() {
-      sceneRef.current &&
-        sceneRef.current.traverse((obj: any) => {
-          if (obj.isMesh) {
-            let color = obj.userData.color;
-            let opacity = 0.8;
-            if (colorParam !== "" && colorParam !== obj.userData[colorKey]) {
-              color = "#EEEEEE";
-              opacity = 0.4;
+      objArr.current.forEach((objData) => {
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+        let color = objData.divObj.userData.color;
+        let opacity = 0.8;
+        let svgOpacity = 1.0; // SVGs use a 0-1 range for opacity
+
+        // Apply the same logic for determining color and opacity
+        if (
+          colorParam !== "" &&
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+          colorParam !== objData.divObj.userData[colorKey]
+        ) {
+          color = "#EEEEEE";
+          opacity = 0.4;
+          svgOpacity = 0.4;
+        }
+        if (
+          shapeParam !== "" &&
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+          shapeParam !== objData.divObj.userData[shapeKey]
+        ) {
+          color = "#EEEEEE";
+          opacity = 0.4;
+          svgOpacity = 0.4;
+        }
+        if (
+          searchItems.length &&
+          !searchItems.find((item) => {
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+            for (const key in objData.divObj.userData) {
+              // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+              if (item.name == objData.divObj.userData[key]) {
+                return true;
+              }
             }
-            if (shapeParam !== "" && shapeParam !== obj.userData[shapeKey]) {
-              color = "#EEEEEE";
-              opacity = 0.4;
-            }
-            if (
-              searchItems.length &&
-              !searchItems.find((item: Item) => {
-                for (const key in obj.userData) {
-                  if (item.name == obj.userData[key]) {
-                    return true;
-                  }
-                }
-                return false;
-              })
-            ) {
-              color = "#EEEEEE";
-              opacity = 0.4;
-            }
-            if (obj.userData[dataItems[0].category] === entityName) {
-              color = "#FD1C03";
-              opacity = 1;
-            }
-            obj.material.color.set(color);
-            obj.material.opacity = opacity;
-          }
-        });
+            return false;
+          })
+        ) {
+          color = "#EEEEEE";
+          opacity = 0.4;
+          svgOpacity = 0.4;
+        }
+
+        if (
+          dataItems[0] &&
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+          objData.divObj.userData[dataItems[0].category] === entityName
+        ) {
+          color = "#FD1C03";
+          opacity = 1;
+          svgOpacity = 1.0;
+        }
+
+        // Update 3D object
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+        objData.divObj.material.color.set(color);
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+        objData.divObj.material.opacity = opacity;
+
+        // Update SVG element
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+        objData.svgElem.style.fill = color;
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+        objData.svgElem.style.opacity = svgOpacity;
+      });
     }
 
     function onPointerMove(event: { clientX: number; clientY: number }) {
@@ -380,11 +548,11 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
                 truncate(obj.userData[colorKey], 30)
             );
           } else {
-            setInfo(
-              obj.userData.identifier +
-                " | " +
-                truncate(obj.userData[colorKey], 30)
-            );
+            // setInfo(
+            //   obj.userData.identifier +
+            //     " | " +
+            //     truncate(obj.userData[colorKey], 30)
+            // );
           }
           break;
         }
@@ -543,6 +711,135 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       return cube;
     }
 
+    function createBigCube(
+      minX: number,
+      maxX: number,
+      minY: number,
+      maxY: number,
+      minZ: number,
+      maxZ: number
+    ) {
+      // Calculate the size and position of the cube
+      const width = maxX - minX;
+      const height = maxY - minY;
+      const depth = maxZ - minZ;
+      const centerX = (minX + maxX) / 2;
+      const centerY = (minY + maxY) / 2;
+      const centerZ = (minZ + maxZ) / 2;
+
+      // Create the cube
+      // const geometry = new THREE.BoxGeometry(width, height, depth);
+      // const material = new THREE.MeshBasicMaterial({
+      //   color: 0x000000,
+      //   wireframe: true,
+      //   side: THREE.FrontSide,
+      // });
+      // const cube = new THREE.Mesh(geometry, material);
+      // cube.position.set(centerX, centerY, centerZ);
+
+      const edgesGeometry = new THREE.BufferGeometry();
+
+      // Define the vertices for the edges
+      const vertices = new Float32Array([
+        // Bottom rectangle
+        -width / 2,
+        -height / 2,
+        -depth / 2,
+        width / 2,
+        -height / 2,
+        -depth / 2,
+        width / 2,
+        -height / 2,
+        -depth / 2,
+        width / 2,
+        -height / 2,
+        depth / 2,
+        width / 2,
+        -height / 2,
+        depth / 2,
+        -width / 2,
+        -height / 2,
+        depth / 2,
+        -width / 2,
+        -height / 2,
+        depth / 2,
+        -width / 2,
+        -height / 2,
+        -depth / 2,
+
+        // Top rectangle
+        -width / 2,
+        height / 2,
+        -depth / 2,
+        width / 2,
+        height / 2,
+        -depth / 2,
+        width / 2,
+        height / 2,
+        -depth / 2,
+        width / 2,
+        height / 2,
+        depth / 2,
+        width / 2,
+        height / 2,
+        depth / 2,
+        -width / 2,
+        height / 2,
+        depth / 2,
+        -width / 2,
+        height / 2,
+        depth / 2,
+        -width / 2,
+        height / 2,
+        -depth / 2,
+
+        // Vertical lines
+        -width / 2,
+        -height / 2,
+        -depth / 2,
+        -width / 2,
+        height / 2,
+        -depth / 2,
+        width / 2,
+        -height / 2,
+        -depth / 2,
+        width / 2,
+        height / 2,
+        -depth / 2,
+        width / 2,
+        -height / 2,
+        depth / 2,
+        width / 2,
+        height / 2,
+        depth / 2,
+        -width / 2,
+        -height / 2,
+        depth / 2,
+        -width / 2,
+        height / 2,
+        depth / 2,
+      ]);
+
+      // Add vertices to geometry
+      edgesGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(vertices, 3)
+      );
+
+      // Create a material for the edges
+      const material = new THREE.LineBasicMaterial({ color: 0xadd8e6 });
+
+      // Create a line segments object to represent the edges
+      const cubeEdges = new THREE.LineSegments(edgesGeometry, material);
+
+      // Set the position of the cube
+      cubeEdges.position.set(centerX, centerY, centerZ);
+
+      return cubeEdges;
+
+      // return cube;
+    }
+
     useEffect(() => {
       const miniScene = new THREE.Scene();
       miniSceneRef.current = miniScene;
@@ -612,23 +909,23 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
         1000
       );
       const renderer = new THREE.WebGLRenderer({ antialias: true });
-
       sceneRef.current = scene;
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setClearColor(0xffffff);
       containerRef.current.appendChild(renderer.domElement);
       rendererRef.current = renderer;
 
-      var xAxisMaterial = new THREE.LineBasicMaterial({ color: 0xc2dedc });
+      var xAxisMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
       var xAxisGeometry = new THREE.BufferGeometry().setFromPoints([
         new THREE.Vector3(0, 0, 0),
         new THREE.Vector3(20, 0, 0),
       ]);
       var xAxis = new THREE.Line(xAxisGeometry, xAxisMaterial);
+
       scene.add(xAxis);
 
       // Create the Y-axis line segment
-      var yAxisMaterial = new THREE.LineBasicMaterial({ color: 0xece5c7 });
+      var yAxisMaterial = new THREE.LineBasicMaterial({ color: 0x00ff00 });
       var yAxisGeometry = new THREE.BufferGeometry().setFromPoints([
         new THREE.Vector3(0, 0, 0),
         new THREE.Vector3(0, 20, 0),
@@ -638,7 +935,7 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
 
       if (threeD) {
         // Create the Z-axis line segment
-        var zAxisMaterial = new THREE.LineBasicMaterial({ color: 0xcdc2ae });
+        var zAxisMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff });
         var zAxisGeometry = new THREE.BufferGeometry().setFromPoints([
           new THREE.Vector3(0, 0, 0),
           new THREE.Vector3(0, 0, 20),
@@ -651,8 +948,14 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
         y: 0,
         z: 0,
       };
+      let coordinates;
+      let minX: number;
+      let maxX: number;
+      let minY: number;
+      let maxY: number;
+      let minZ: number;
+      let maxZ: number;
       data.forEach(async (point: any, index: any) => {
-        let coordinates;
         if (threeD) {
           if (technique === "umap") {
             coordinates = {
@@ -737,7 +1040,6 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
             colorInScene = "#EEEEEE";
             opacity = 0.4;
           }
-          //console.log(coordinates+ " " + shape + " " + color + " " +point);
           createShape(twoLegend, shape, coordinates, colorInScene, opacity, {
             color: color,
             index: index,
@@ -747,6 +1049,17 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
         middle.x += coordinates.x;
         middle.y += coordinates.y;
         middle.z += coordinates.z ?? 0;
+
+        minX = Math.min(minX ?? Infinity, coordinates.x);
+        maxX = Math.max(maxX ?? -Infinity, coordinates.x);
+        minY = Math.min(minY ?? Infinity, coordinates.y);
+        maxY = Math.max(maxY ?? -Infinity, coordinates.y);
+        minZ = Math.min(minZ ?? Infinity, coordinates.z ?? 0);
+        maxZ = Math.max(maxZ ?? -Infinity, coordinates.z ?? 0);
+        if (index === data.length - 1) {
+          const cubeBig = createBigCube(minX, maxX, minY, maxY, minZ, maxZ);
+          sceneRef.current.add(cubeBig);
+        }
       });
 
       middle.x /= data.length;
@@ -779,8 +1092,33 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       // set up orbit controls
 
       const controls = new OrbitControls(camera, renderer.domElement);
+      // controls.addEventListener("change", () => {
+      //   console.log(controls);
+      // });
       controls.minDistance = 10;
       controls.maxDistance = 50;
+      // controls.addEventListener("change", () => {
+      //   objArr.current.forEach(function (objData) {
+      //     const proj = toScreenPosition(
+      //       // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+      //       objData.divObj,
+      //       cameraRef.current
+
+      //       // rendererRef.current
+      //     );
+      //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+      //     objData.svgElem.setAttribute("cx", proj.x);
+      //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+      //     objData.svgElem.setAttribute("cy", proj.y);
+      //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+      //     const distance = objData.divObj.position.distanceTo(
+      //       cameraRef.current.position
+      //     );
+      //     const scaleFactor = calculateScaleFactor(distance);
+      //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+      //     objData.svgElem.setAttribute("r", 5 * scaleFactor);
+      //   });
+      // });
       const miniControls = new OrbitControls(
         miniCamera,
         miniRenderer.domElement
@@ -807,25 +1145,22 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
         requestAnimationFrame(animate);
         camera.position.copy(miniCamera.position);
         camera.rotation.copy(miniCamera.rotation);
-
+        // if (cubeBig) {
+        //   cubeBig.lookAt(camera.position);
+        // }
         controls.update();
         const currentDistance = controls.target.distanceTo(
           controls.object.position
         );
 
-        // Check if the user zoomed in or out
-        if (currentDistance < previousDistance) {
-          // Trigger an event for zooming in
-          console.log("Zoomed in!");
-          console.log(currentDistance);
-          // Call your function or dispatch an action, etc.
-        } else if (currentDistance > previousDistance) {
-          // Trigger an event for zooming out
-          console.log("Zoomed out!");
-          console.log(currentDistance);
-
-          // Call your function or dispatch an action, etc.
-        }
+        // // Check if the user zoomed in or out
+        // if (currentDistance < previousDistance) {
+        //   // Trigger an event for zooming in
+        //   // Call your function or dispatch an action, etc.
+        // } else if (currentDistance > previousDistance) {
+        //   // Trigger an event for zooming out
+        //   // Call your function or dispatch an action, etc.
+        // }
         previousDistance = currentDistance;
 
         sceneRef.current.traverse((obj: any) => {
@@ -872,6 +1207,136 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       threeD,
     ]);
 
+    // function downloadSVG() {
+    //   updateSvgAxes(cameraRef.current, rendererRef.current);
+    //   objArr.current.forEach(function (objData) {
+    //     const proj = toScreenPosition(
+    //       // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+    //       objData.divObj,
+    //       cameraRef.current
+
+    //       // rendererRef.current
+    //     );
+    //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+    //     objData.svgElem.setAttribute("cx", proj.x);
+    //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+    //     objData.svgElem.setAttribute("cy", proj.y);
+    //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+    //     const distance = objData.divObj.position.distanceTo(
+    //       cameraRef.current.position
+    //     );
+    //     const scaleFactor = calculateScaleFactor(distance);
+    //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+    //     objData.svgElem.setAttribute("r", 5 * scaleFactor);
+    //   });
+
+    //   const svgContainer = document.getElementById("svg-container");
+    //   if (!svgContainer) {
+    //     console.error("SVG container not found");
+    //     return;
+    //   }
+    //   // Serialize the SVG content
+    //   const serializer = new XMLSerializer();
+    //   const svgString = serializer.serializeToString(svgContainer);
+
+    //   // Create a Blob from the SVG string
+    //   const blob = new Blob([svgString], { type: "image/svg+xml" });
+
+    //   // Create a download link
+    //   const downloadLink = document.createElement("a");
+    //   downloadLink.href = URL.createObjectURL(blob);
+    //   downloadLink.download = "scatterplot.svg";
+
+    //   // Append the link to the body, click it, and then remove it
+    //   document.body.appendChild(downloadLink);
+    //   downloadLink.click();
+    //   document.body.removeChild(downloadLink);
+    // }
+
+    function drawSVG() {
+      objArr.current.forEach(function (objData) {
+        const proj = toScreenPosition(
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+          objData.divObj,
+          cameraRef.current
+
+          // rendererRef.current
+        );
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+        objData.svgElem.setAttribute("cx", proj.x);
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+        objData.svgElem.setAttribute("cy", proj.y);
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+        const distance = objData.divObj.position.distanceTo(
+          cameraRef.current.position
+        );
+        const scaleFactor = calculateScaleFactor(distance);
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+        objData.svgElem.setAttribute("r", 5 * scaleFactor);
+      });
+    }
+
+    function downloadSVG() {
+      // Clear existing SVG content
+      let svgContainer = document.getElementById("svg-container");
+      // Function to project 3D coordinates to 2D
+      function projectToScreen(obj3D: THREE.Vector3) {
+        const vector = new THREE.Vector3();
+        const widthHalf = 0.5 * window.innerWidth;
+        const heightHalf = 0.5 * window.innerHeight;
+
+        // Assuming obj3D is a THREE.Vector3 representing a position in 3D space
+        vector.copy(obj3D);
+        vector.project(cameraRef.current);
+
+        vector.x = vector.x * widthHalf + widthHalf;
+        vector.y = -(vector.y * heightHalf) + heightHalf;
+
+        return { x: vector.x, y: vector.y };
+      }
+
+      // Create and add SVG lines for axes
+      const axesPoints = {
+        x: [new THREE.Vector3(0, 0, 0), new THREE.Vector3(20, 0, 0)],
+        y: [new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 20, 0)],
+        z: [new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, 20)],
+      };
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+      Object.entries(axesPoints).forEach(([axis, points]) => {
+        const line = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "line"
+        );
+        const start = projectToScreen(points[0]);
+        const end = projectToScreen(points[1]);
+
+        line.setAttribute("x1", start.x.toString());
+        line.setAttribute("y1", start.y.toString());
+        line.setAttribute("x2", end.x.toString());
+        line.setAttribute("y2", end.y.toString());
+        line.style.stroke =
+          axis === "x" ? "red" : axis === "y" ? "green" : "blue";
+        line.style.strokeWidth = "2";
+
+        // svgContainer!.appendChild(line);
+      });
+
+      // Create and add SVG circles for each 3D object
+      drawSVG();
+
+      // Serialize and download the SVG
+      const serializer = new XMLSerializer();
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+      const svgString = serializer.serializeToString(svgContainer);
+      const blob = new Blob([svgString], { type: "image/svg+xml" });
+      const downloadLink = document.createElement("a");
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = "scatterplot.svg";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    }
+
     return (
       <div className="relative h-full flex overflow-hidden">
         <div
@@ -885,7 +1350,7 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
         </div>
         {legendRefFull}
         <div
-          className="h-full w-full bg-blue-500"
+          className="h-full w-full"
           onPointerMove={onPointerMove}
           onPointerDown={onPointerDown}
           onClick={onClick}
@@ -943,7 +1408,6 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
           />
           <p className="absolute bottom-12 left-24 w-20">{axisName}</p>
         </div>
-
         <div className="flex absolute bottom-12 right-0 m-8 z-20">
           <div>
             <p>{info}</p>

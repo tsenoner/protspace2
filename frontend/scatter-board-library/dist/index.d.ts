@@ -40,6 +40,7 @@ interface Item {
 
 interface ScatterBoardRef {
     downloadScreenshot: () => void;
+    downloadSVG: () => void;
 }
 interface ScatterBoardProps {
     cameraRef?: MutableRefObject<PerspectiveCamera>;

@@ -74,7 +74,7 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = "/*\n! tailwindcss v3.3.5 | MIT License | https://tailwindcss.com\n*//*\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\n*/\n\n*,\n::before,\n::after {\n  box-sizing: border-box; /* 1 */\n  border-width: 0; /* 2 */\n  border-style: solid; /* 2 */\n  border-color: #e5e7eb; /* 2 */\n}\n\n::before,\n::after {\n  --tw-content: '';\n}\n\n/*\n1. Use a consistent sensible line-height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n3. Use a more readable tab size.\n4. Use the user's configured `sans` font-family by default.\n5. Use the user's configured `sans` font-feature-settings by default.\n6. Use the user's configured `sans` font-variation-settings by default.\n*/\n\nhtml {\n  line-height: 1.5; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n  -moz-tab-size: 4; /* 3 */\n  -o-tab-size: 4;\n     tab-size: 4; /* 3 */\n  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"; /* 4 */\n  font-feature-settings: normal; /* 5 */\n  font-variation-settings: normal; /* 6 */\n}\n\n/*\n1. Remove the margin in all browsers.\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\n*/\n\nbody {\n  margin: 0; /* 1 */\n  line-height: inherit; /* 2 */\n}\n\n/*\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n3. Ensure horizontal rules are visible by default.\n*/\n\nhr {\n  height: 0; /* 1 */\n  color: inherit; /* 2 */\n  border-top-width: 1px; /* 3 */\n}\n\n/*\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\n\nabbr:where([title]) {\n  -webkit-text-decoration: underline dotted;\n          text-decoration: underline dotted;\n}\n\n/*\nRemove the default font size and weight for headings.\n*/\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/*\nReset links to optimize for opt-in styling instead of opt-out.\n*/\n\na {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/*\nAdd the correct font weight in Edge and Safari.\n*/\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/*\n1. Use the user's configured `mono` font family by default.\n2. Correct the odd `em` font sizing in all browsers.\n*/\n\ncode,\nkbd,\nsamp,\npre {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/*\nAdd the correct font size in all browsers.\n*/\n\nsmall {\n  font-size: 80%;\n}\n\n/*\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\n*/\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/*\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n3. Remove gaps between table borders by default.\n*/\n\ntable {\n  text-indent: 0; /* 1 */\n  border-color: inherit; /* 2 */\n  border-collapse: collapse; /* 3 */\n}\n\n/*\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n3. Remove default padding in all browsers.\n*/\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-feature-settings: inherit; /* 1 */\n  font-variation-settings: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  font-weight: inherit; /* 1 */\n  line-height: inherit; /* 1 */\n  color: inherit; /* 1 */\n  margin: 0; /* 2 */\n  padding: 0; /* 3 */\n}\n\n/*\nRemove the inheritance of text transform in Edge and Firefox.\n*/\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Remove default button styles.\n*/\n\nbutton,\n[type='button'],\n[type='reset'],\n[type='submit'] {\n  -webkit-appearance: button; /* 1 */\n  background-color: transparent; /* 2 */\n  background-image: none; /* 2 */\n}\n\n/*\nUse the modern Firefox focus style for all focusable elements.\n*/\n\n:-moz-focusring {\n  outline: auto;\n}\n\n/*\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\n*/\n\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\n/*\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\n\nprogress {\n  vertical-align: baseline;\n}\n\n/*\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n\n::-webkit-inner-spin-button,\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/*\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n\n[type='search'] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/*\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to `inherit` in Safari.\n*/\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\n\nsummary {\n  display: list-item;\n}\n\n/*\nRemoves the default spacing and border for appropriate elements.\n*/\n\nblockquote,\ndl,\ndd,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\nfigure,\np,\npre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol,\nul,\nmenu {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/*\nReset default styling for dialogs.\n*/\ndialog {\n  padding: 0;\n}\n\n/*\nPrevent resizing textareas horizontally by default.\n*/\n\ntextarea {\n  resize: vertical;\n}\n\n/*\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\n2. Set the default placeholder color to the user's configured gray 400 color.\n*/\n\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\ninput::placeholder,\ntextarea::placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\n/*\nSet the default cursor for buttons.\n*/\n\nbutton,\n[role=\"button\"] {\n  cursor: pointer;\n}\n\n/*\nMake sure disabled buttons don't get the pointer cursor.\n*/\n:disabled {\n  cursor: default;\n}\n\n/*\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\n   This can trigger a poorly considered lint error in some tools but is included by design.\n*/\n\nimg,\nsvg,\nvideo,\ncanvas,\naudio,\niframe,\nembed,\nobject {\n  display: block; /* 1 */\n  vertical-align: middle; /* 2 */\n}\n\n/*\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\n*/\n\nimg,\nvideo {\n  max-width: 100%;\n  height: auto;\n}\n\n/* Make elements with the HTML hidden attribute stay hidden by default */\n[hidden] {\n  display: none;\n}\n\n*, ::before, ::after {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n\n::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n.container {\n  width: 100%;\n}\n@media (min-width: 640px) {\n\n  .container {\n    max-width: 640px;\n  }\n}\n@media (min-width: 768px) {\n\n  .container {\n    max-width: 768px;\n  }\n}\n@media (min-width: 1024px) {\n\n  .container {\n    max-width: 1024px;\n  }\n}\n@media (min-width: 1280px) {\n\n  .container {\n    max-width: 1280px;\n  }\n}\n@media (min-width: 1536px) {\n\n  .container {\n    max-width: 1536px;\n  }\n}\n.absolute {\n  position: absolute;\n}\n.relative {\n  position: relative;\n}\n.inset-0 {\n  inset: 0px;\n}\n.bottom-12 {\n  bottom: 3rem;\n}\n.bottom-96 {\n  bottom: 24rem;\n}\n.left-0 {\n  left: 0px;\n}\n.left-20 {\n  left: 5rem;\n}\n.left-24 {\n  left: 6rem;\n}\n.left-5 {\n  left: 1.25rem;\n}\n.right-0 {\n  right: 0px;\n}\n.right-64 {\n  right: 16rem;\n}\n.top-12 {\n  top: 3rem;\n}\n.top-20 {\n  top: 5rem;\n}\n.top-24 {\n  top: 6rem;\n}\n.top-32 {\n  top: 8rem;\n}\n.-z-20 {\n  z-index: -20;\n}\n.z-10 {\n  z-index: 10;\n}\n.z-20 {\n  z-index: 20;\n}\n.z-30 {\n  z-index: 30;\n}\n.m-8 {\n  margin: 2rem;\n}\n.m-auto {\n  margin: auto;\n}\n.mx-2 {\n  margin-left: 0.5rem;\n  margin-right: 0.5rem;\n}\n.ml-auto {\n  margin-left: auto;\n}\n.mr-4 {\n  margin-right: 1rem;\n}\n.mr-auto {\n  margin-right: auto;\n}\n.mt-2 {\n  margin-top: 0.5rem;\n}\n.block {\n  display: block;\n}\n.inline {\n  display: inline;\n}\n.flex {\n  display: flex;\n}\n.hidden {\n  display: none;\n}\n.h-24 {\n  height: 6rem;\n}\n.h-4 {\n  height: 1rem;\n}\n.h-40 {\n  height: 10rem;\n}\n.h-6 {\n  height: 1.5rem;\n}\n.h-64 {\n  height: 16rem;\n}\n.h-full {\n  height: 100%;\n}\n.min-h-custom {\n  min-height: 32px;\n}\n.w-0 {\n  width: 0px;\n}\n.w-0\\.5 {\n  width: 0.125rem;\n}\n.w-16 {\n  width: 4rem;\n}\n.w-20 {\n  width: 5rem;\n}\n.w-24 {\n  width: 6rem;\n}\n.w-4 {\n  width: 1rem;\n}\n.w-40 {\n  width: 10rem;\n}\n.w-6 {\n  width: 1.5rem;\n}\n.w-60 {\n  width: 15rem;\n}\n.w-64 {\n  width: 16rem;\n}\n.w-80 {\n  width: 20rem;\n}\n.w-full {\n  width: 100%;\n}\n.origin-top-left {\n  transform-origin: top left;\n}\n.transform {\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n.cursor-pointer {\n  cursor: pointer;\n}\n.place-content-around {\n  place-content: space-around;\n}\n.items-center {\n  align-items: center;\n}\n.justify-center {\n  justify-content: center;\n}\n.justify-between {\n  justify-content: space-between;\n}\n.gap-x-2 {\n  -moz-column-gap: 0.5rem;\n       column-gap: 0.5rem;\n}\n.overflow-hidden {\n  overflow: hidden;\n}\n.overflow-x-auto {\n  overflow-x: auto;\n}\n.overflow-y-auto {\n  overflow-y: auto;\n}\n.truncate {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.whitespace-nowrap {\n  white-space: nowrap;\n}\n.break-all {\n  word-break: break-all;\n}\n.rounded-full {\n  border-radius: 9999px;\n}\n.rounded-md {\n  border-radius: 0.375rem;\n}\n.border-2 {\n  border-width: 2px;\n}\n.border-stone-400 {\n  --tw-border-opacity: 1;\n  border-color: rgb(168 162 158 / var(--tw-border-opacity));\n}\n.bg-blue-500 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(59 130 246 / var(--tw-bg-opacity));\n}\n.bg-gray-300 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(209 213 219 / var(--tw-bg-opacity));\n}\n.bg-slate-100 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(241 245 249 / var(--tw-bg-opacity));\n}\n.bg-stone-300 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(214 211 209 / var(--tw-bg-opacity));\n}\n.bg-stone-400 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(168 162 158 / var(--tw-bg-opacity));\n}\n.bg-white {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n}\n.bg-opacity-50 {\n  --tw-bg-opacity: 0.5;\n}\n.p-1 {\n  padding: 0.25rem;\n}\n.p-4 {\n  padding: 1rem;\n}\n.px-4 {\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n.py-1 {\n  padding-top: 0.25rem;\n  padding-bottom: 0.25rem;\n}\n.pb-1 {\n  padding-bottom: 0.25rem;\n}\n.text-center {\n  text-align: center;\n}\n.text-xs {\n  font-size: 0.75rem;\n  line-height: 1rem;\n}\n.text-black {\n  --tw-text-opacity: 1;\n  color: rgb(0 0 0 / var(--tw-text-opacity));\n}\n.text-gray-500 {\n  --tw-text-opacity: 1;\n  color: rgb(107 114 128 / var(--tw-text-opacity));\n}\n.line-through {\n  text-decoration-line: line-through;\n}\n.transition-all {\n  transition-property: all;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n.duration-300 {\n  transition-duration: 300ms;\n}\n.ease-in-out {\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n}\n.hover\\:opacity-10:hover {\n  opacity: 0.1;\n}\n.hover\\:shadow-md:hover {\n  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}";
+var css_248z = "/*\n! tailwindcss v3.3.5 | MIT License | https://tailwindcss.com\n*//*\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\n*/\n\n*,\n::before,\n::after {\n  box-sizing: border-box; /* 1 */\n  border-width: 0; /* 2 */\n  border-style: solid; /* 2 */\n  border-color: #e5e7eb; /* 2 */\n}\n\n::before,\n::after {\n  --tw-content: '';\n}\n\n/*\n1. Use a consistent sensible line-height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n3. Use a more readable tab size.\n4. Use the user's configured `sans` font-family by default.\n5. Use the user's configured `sans` font-feature-settings by default.\n6. Use the user's configured `sans` font-variation-settings by default.\n*/\n\nhtml {\n  line-height: 1.5; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n  -moz-tab-size: 4; /* 3 */\n  -o-tab-size: 4;\n     tab-size: 4; /* 3 */\n  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"; /* 4 */\n  font-feature-settings: normal; /* 5 */\n  font-variation-settings: normal; /* 6 */\n}\n\n/*\n1. Remove the margin in all browsers.\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\n*/\n\nbody {\n  margin: 0; /* 1 */\n  line-height: inherit; /* 2 */\n}\n\n/*\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n3. Ensure horizontal rules are visible by default.\n*/\n\nhr {\n  height: 0; /* 1 */\n  color: inherit; /* 2 */\n  border-top-width: 1px; /* 3 */\n}\n\n/*\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\n\nabbr:where([title]) {\n  -webkit-text-decoration: underline dotted;\n          text-decoration: underline dotted;\n}\n\n/*\nRemove the default font size and weight for headings.\n*/\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/*\nReset links to optimize for opt-in styling instead of opt-out.\n*/\n\na {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/*\nAdd the correct font weight in Edge and Safari.\n*/\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/*\n1. Use the user's configured `mono` font family by default.\n2. Correct the odd `em` font sizing in all browsers.\n*/\n\ncode,\nkbd,\nsamp,\npre {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/*\nAdd the correct font size in all browsers.\n*/\n\nsmall {\n  font-size: 80%;\n}\n\n/*\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\n*/\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/*\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n3. Remove gaps between table borders by default.\n*/\n\ntable {\n  text-indent: 0; /* 1 */\n  border-color: inherit; /* 2 */\n  border-collapse: collapse; /* 3 */\n}\n\n/*\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n3. Remove default padding in all browsers.\n*/\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-feature-settings: inherit; /* 1 */\n  font-variation-settings: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  font-weight: inherit; /* 1 */\n  line-height: inherit; /* 1 */\n  color: inherit; /* 1 */\n  margin: 0; /* 2 */\n  padding: 0; /* 3 */\n}\n\n/*\nRemove the inheritance of text transform in Edge and Firefox.\n*/\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Remove default button styles.\n*/\n\nbutton,\n[type='button'],\n[type='reset'],\n[type='submit'] {\n  -webkit-appearance: button; /* 1 */\n  background-color: transparent; /* 2 */\n  background-image: none; /* 2 */\n}\n\n/*\nUse the modern Firefox focus style for all focusable elements.\n*/\n\n:-moz-focusring {\n  outline: auto;\n}\n\n/*\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\n*/\n\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\n/*\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\n\nprogress {\n  vertical-align: baseline;\n}\n\n/*\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n\n::-webkit-inner-spin-button,\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/*\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n\n[type='search'] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/*\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to `inherit` in Safari.\n*/\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\n\nsummary {\n  display: list-item;\n}\n\n/*\nRemoves the default spacing and border for appropriate elements.\n*/\n\nblockquote,\ndl,\ndd,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\nfigure,\np,\npre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol,\nul,\nmenu {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/*\nReset default styling for dialogs.\n*/\ndialog {\n  padding: 0;\n}\n\n/*\nPrevent resizing textareas horizontally by default.\n*/\n\ntextarea {\n  resize: vertical;\n}\n\n/*\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\n2. Set the default placeholder color to the user's configured gray 400 color.\n*/\n\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\ninput::placeholder,\ntextarea::placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\n/*\nSet the default cursor for buttons.\n*/\n\nbutton,\n[role=\"button\"] {\n  cursor: pointer;\n}\n\n/*\nMake sure disabled buttons don't get the pointer cursor.\n*/\n:disabled {\n  cursor: default;\n}\n\n/*\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\n   This can trigger a poorly considered lint error in some tools but is included by design.\n*/\n\nimg,\nsvg,\nvideo,\ncanvas,\naudio,\niframe,\nembed,\nobject {\n  display: block; /* 1 */\n  vertical-align: middle; /* 2 */\n}\n\n/*\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\n*/\n\nimg,\nvideo {\n  max-width: 100%;\n  height: auto;\n}\n\n/* Make elements with the HTML hidden attribute stay hidden by default */\n[hidden] {\n  display: none;\n}\n\n*, ::before, ::after {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n\n::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n.container {\n  width: 100%;\n}\n@media (min-width: 640px) {\n\n  .container {\n    max-width: 640px;\n  }\n}\n@media (min-width: 768px) {\n\n  .container {\n    max-width: 768px;\n  }\n}\n@media (min-width: 1024px) {\n\n  .container {\n    max-width: 1024px;\n  }\n}\n@media (min-width: 1280px) {\n\n  .container {\n    max-width: 1280px;\n  }\n}\n@media (min-width: 1536px) {\n\n  .container {\n    max-width: 1536px;\n  }\n}\n.absolute {\n  position: absolute;\n}\n.relative {\n  position: relative;\n}\n.inset-0 {\n  inset: 0px;\n}\n.bottom-12 {\n  bottom: 3rem;\n}\n.bottom-96 {\n  bottom: 24rem;\n}\n.left-0 {\n  left: 0px;\n}\n.left-20 {\n  left: 5rem;\n}\n.left-24 {\n  left: 6rem;\n}\n.left-5 {\n  left: 1.25rem;\n}\n.right-0 {\n  right: 0px;\n}\n.right-64 {\n  right: 16rem;\n}\n.top-12 {\n  top: 3rem;\n}\n.top-20 {\n  top: 5rem;\n}\n.top-24 {\n  top: 6rem;\n}\n.top-32 {\n  top: 8rem;\n}\n.-z-20 {\n  z-index: -20;\n}\n.z-10 {\n  z-index: 10;\n}\n.z-20 {\n  z-index: 20;\n}\n.z-30 {\n  z-index: 30;\n}\n.m-8 {\n  margin: 2rem;\n}\n.m-auto {\n  margin: auto;\n}\n.mx-2 {\n  margin-left: 0.5rem;\n  margin-right: 0.5rem;\n}\n.ml-auto {\n  margin-left: auto;\n}\n.mr-4 {\n  margin-right: 1rem;\n}\n.mr-auto {\n  margin-right: auto;\n}\n.mt-2 {\n  margin-top: 0.5rem;\n}\n.block {\n  display: block;\n}\n.inline {\n  display: inline;\n}\n.flex {\n  display: flex;\n}\n.hidden {\n  display: none;\n}\n.h-24 {\n  height: 6rem;\n}\n.h-4 {\n  height: 1rem;\n}\n.h-40 {\n  height: 10rem;\n}\n.h-6 {\n  height: 1.5rem;\n}\n.h-64 {\n  height: 16rem;\n}\n.h-full {\n  height: 100%;\n}\n.min-h-custom {\n  min-height: 32px;\n}\n.w-0 {\n  width: 0px;\n}\n.w-0\\.5 {\n  width: 0.125rem;\n}\n.w-16 {\n  width: 4rem;\n}\n.w-20 {\n  width: 5rem;\n}\n.w-24 {\n  width: 6rem;\n}\n.w-4 {\n  width: 1rem;\n}\n.w-40 {\n  width: 10rem;\n}\n.w-6 {\n  width: 1.5rem;\n}\n.w-60 {\n  width: 15rem;\n}\n.w-64 {\n  width: 16rem;\n}\n.w-80 {\n  width: 20rem;\n}\n.w-full {\n  width: 100%;\n}\n.origin-top-left {\n  transform-origin: top left;\n}\n.transform {\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n.cursor-pointer {\n  cursor: pointer;\n}\n.resize {\n  resize: both;\n}\n.place-content-around {\n  place-content: space-around;\n}\n.items-center {\n  align-items: center;\n}\n.justify-center {\n  justify-content: center;\n}\n.justify-between {\n  justify-content: space-between;\n}\n.gap-x-2 {\n  -moz-column-gap: 0.5rem;\n       column-gap: 0.5rem;\n}\n.overflow-hidden {\n  overflow: hidden;\n}\n.overflow-x-auto {\n  overflow-x: auto;\n}\n.overflow-y-auto {\n  overflow-y: auto;\n}\n.truncate {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.whitespace-nowrap {\n  white-space: nowrap;\n}\n.break-all {\n  word-break: break-all;\n}\n.rounded-full {\n  border-radius: 9999px;\n}\n.rounded-md {\n  border-radius: 0.375rem;\n}\n.border-2 {\n  border-width: 2px;\n}\n.border-stone-400 {\n  --tw-border-opacity: 1;\n  border-color: rgb(168 162 158 / var(--tw-border-opacity));\n}\n.bg-gray-300 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(209 213 219 / var(--tw-bg-opacity));\n}\n.bg-slate-100 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(241 245 249 / var(--tw-bg-opacity));\n}\n.bg-stone-300 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(214 211 209 / var(--tw-bg-opacity));\n}\n.bg-stone-400 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(168 162 158 / var(--tw-bg-opacity));\n}\n.bg-white {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n}\n.bg-opacity-50 {\n  --tw-bg-opacity: 0.5;\n}\n.p-1 {\n  padding: 0.25rem;\n}\n.p-4 {\n  padding: 1rem;\n}\n.px-4 {\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n.py-1 {\n  padding-top: 0.25rem;\n  padding-bottom: 0.25rem;\n}\n.pb-1 {\n  padding-bottom: 0.25rem;\n}\n.text-center {\n  text-align: center;\n}\n.text-xs {\n  font-size: 0.75rem;\n  line-height: 1rem;\n}\n.text-black {\n  --tw-text-opacity: 1;\n  color: rgb(0 0 0 / var(--tw-text-opacity));\n}\n.text-gray-500 {\n  --tw-text-opacity: 1;\n  color: rgb(107 114 128 / var(--tw-text-opacity));\n}\n.line-through {\n  text-decoration-line: line-through;\n}\n.transition-all {\n  transition-property: all;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n.duration-300 {\n  transition-duration: 300ms;\n}\n.ease-in-out {\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n}\n.hover\\:opacity-10:hover {\n  opacity: 0.1;\n}\n.hover\\:shadow-md:hover {\n  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}";
 styleInject(css_248z);
 
 const ColorLegendItem = ({ color, selected, screenshot, text, onClick, }) => {
@@ -91,7 +91,6 @@ const ColorLegendItem = ({ color, selected, screenshot, text, onClick, }) => {
 
 const ColorLegend = ({ screenshot, colorKey, colorParamList, colorParam, setColorParam, colorList, }) => {
     const [closed, setClosed] = useState(false);
-    console.log("colorParamList", colorParamList);
     return (React__default.createElement("div", { className: "block bg-slate-100 rounded-md mr-4 w-full mt-2" },
         React__default.createElement("div", { className: "flex items-center justify-between w-80 p-4 cursor-pointer", onClick: () => {
                 setClosed(!closed);
@@ -30421,6 +30420,56 @@ class Line extends Object3D {
 
 }
 
+const _start = /*@__PURE__*/ new Vector3();
+const _end = /*@__PURE__*/ new Vector3();
+
+class LineSegments extends Line {
+
+	constructor( geometry, material ) {
+
+		super( geometry, material );
+
+		this.isLineSegments = true;
+
+		this.type = 'LineSegments';
+
+	}
+
+	computeLineDistances() {
+
+		const geometry = this.geometry;
+
+		// we assume non-indexed geometry
+
+		if ( geometry.index === null ) {
+
+			const positionAttribute = geometry.attributes.position;
+			const lineDistances = [];
+
+			for ( let i = 0, l = positionAttribute.count; i < l; i += 2 ) {
+
+				_start.fromBufferAttribute( positionAttribute, i );
+				_end.fromBufferAttribute( positionAttribute, i + 1 );
+
+				lineDistances[ i ] = ( i === 0 ) ? 0 : lineDistances[ i - 1 ];
+				lineDistances[ i + 1 ] = lineDistances[ i ] + _start.distanceTo( _end );
+
+			}
+
+			geometry.setAttribute( 'lineDistance', new Float32BufferAttribute( lineDistances, 1 ) );
+
+		} else {
+
+			console.warn( 'THREE.LineSegments.computeLineDistances(): Computation only possible with non-indexed BufferGeometry.' );
+
+		}
+
+		return this;
+
+	}
+
+}
+
 /**
  * Extensible curve object.
  *
@@ -47539,6 +47588,8 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
     const [controllerPosition, setControllerPosition] = useState({});
     const [imageSrc, takeScreenshot] = useScreenshot();
     const [entityName, setEntityName] = useState("");
+    const objArr = useRef([]);
+    // const renderer = new THREE.WebGLRenderer({ antialias: true });
     const legendRefFull = (React__default.createElement("div", { className: "absolute h-full w-full -z-20", ref: legendRef },
         React__default.createElement("div", { className: "inline" },
             twoLegend && (React__default.createElement("div", { className: "flex absolute right-64" },
@@ -47548,6 +47599,9 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
     useImperativeHandle(ref, () => ({
         downloadScreenshot() {
             createScreenshot();
+        },
+        downloadSVG() {
+            downloadSVG();
         },
     }));
     function createScreenshot() {
@@ -47619,9 +47673,43 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
             });
         };
     });
+    let maxX = -Infinity, minX = Infinity, maxY = -Infinity, minY = Infinity, maxZ = -Infinity, minZ = Infinity;
     function createShape(twoLegend, path, coordinates, colorInScene, opacity, userData) {
+        var _a, _b;
+        minX = Math.min(minX, coordinates.x);
+        maxX = Math.max(maxX, coordinates.x);
+        minY = Math.min(minY, coordinates.y);
+        maxY = Math.max(maxY, coordinates.y);
+        minZ = Math.min(minZ, (_a = coordinates.z) !== null && _a !== void 0 ? _a : 0); // Assuming z can be optional
+        maxZ = Math.max(maxZ, (_b = coordinates.z) !== null && _b !== void 0 ? _b : 0);
         const loader = new SVGLoader();
         let group;
+        // const divElement = document.createElement("div");
+        // divElement.innerHTML = "Info about " + userData[dataItems[0].category];
+        // divElement.style.background = "red";
+        // divElement.className = "info-div"; // Add a class for styling
+        // document.body.appendChild(divElement);
+        let svgContainer = document.getElementById("svg-container");
+        if (!svgContainer) {
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'createElementNS' does not exist on type 'Document'.
+            svgContainer = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svgContainer.id = "svg-container";
+            svgContainer.style.position = "absolute";
+            svgContainer.style.width = "100%";
+            svgContainer.style.height = "100%";
+            svgContainer.style.top = "0";
+            svgContainer.style.left = "0";
+            svgContainer.style.zIndex = "-1";
+            document.body.appendChild(svgContainer);
+        }
+        // Create an SVG circle element
+        const svgCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        // svgCircle.setAttribute("r", `${coordinates.z}`); // Radius of the circle
+        svgCircle.setAttribute("cx", "100"); // Center the circle horizontally
+        svgCircle.setAttribute("cy", "200"); // Center the circle vertically
+        svgCircle.style.fill = userData.color; // Color from userData
+        svgCircle.style.position = "absolute";
+        svgContainer.appendChild(svgCircle);
         loader.load(
         // resource URL
         path, 
@@ -47668,13 +47756,38 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
                 const mesh = new Mesh(geometry, material);
                 mesh.userData = userData;
                 mesh.position.set(coordinates.x, coordinates.y, (_b = coordinates.z) !== null && _b !== void 0 ? _b : 0);
+                // objArr.current.push({ divObj: mesh, divElem: divElement });
+                // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+                objArr.current.push({ divObj: mesh, svgElem: svgCircle });
                 sceneRef.current.add(mesh);
             }
         });
     }
+    function calculateScaleFactor(distance) {
+        // Simple linear scaling based on distance
+        // You may need to adjust the formula to get the desired effect
+        const minScale = 0.5; // Minimum scale at maximum distance
+        const maxDistance = 50; // Adjust as per your scene's size
+        return 1 - Math.min(distance / maxDistance, 1) * (1 - minScale);
+    }
     useEffect(() => {
         colorReset();
     }, [data, colorParam, shapeParam, searchItems]);
+    function toScreenPosition(obj, camera) {
+        var vector = new Vector3();
+        // TODO: need to update this when resize window
+        var widthHalf = 0.5 * window.innerWidth;
+        var heightHalf = 0.5 * window.innerHeight;
+        obj.updateMatrixWorld();
+        vector.setFromMatrixPosition(obj.matrixWorld);
+        vector.project(camera);
+        vector.x = vector.x * widthHalf + widthHalf;
+        vector.y = -(vector.y * heightHalf) + heightHalf;
+        return {
+            x: vector.x,
+            y: vector.y,
+        };
+    }
     function onClick(event) {
         if (event.detail === 1) {
             setControllerShown(false);
@@ -47710,39 +47823,59 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
         setControllerShown(false);
     }
     function colorReset() {
-        sceneRef.current &&
-            sceneRef.current.traverse((obj) => {
-                if (obj.isMesh) {
-                    let color = obj.userData.color;
-                    let opacity = 0.8;
-                    if (colorParam !== "" && colorParam !== obj.userData[colorKey]) {
-                        color = "#EEEEEE";
-                        opacity = 0.4;
+        objArr.current.forEach((objData) => {
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+            let color = objData.divObj.userData.color;
+            let opacity = 0.8;
+            let svgOpacity = 1.0; // SVGs use a 0-1 range for opacity
+            // Apply the same logic for determining color and opacity
+            if (colorParam !== "" &&
+                // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+                colorParam !== objData.divObj.userData[colorKey]) {
+                color = "#EEEEEE";
+                opacity = 0.4;
+                svgOpacity = 0.4;
+            }
+            if (shapeParam !== "" &&
+                // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+                shapeParam !== objData.divObj.userData[shapeKey]) {
+                color = "#EEEEEE";
+                opacity = 0.4;
+                svgOpacity = 0.4;
+            }
+            if (searchItems.length &&
+                !searchItems.find((item) => {
+                    // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+                    for (const key in objData.divObj.userData) {
+                        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+                        if (item.name == objData.divObj.userData[key]) {
+                            return true;
+                        }
                     }
-                    if (shapeParam !== "" && shapeParam !== obj.userData[shapeKey]) {
-                        color = "#EEEEEE";
-                        opacity = 0.4;
-                    }
-                    if (searchItems.length &&
-                        !searchItems.find((item) => {
-                            for (const key in obj.userData) {
-                                if (item.name == obj.userData[key]) {
-                                    return true;
-                                }
-                            }
-                            return false;
-                        })) {
-                        color = "#EEEEEE";
-                        opacity = 0.4;
-                    }
-                    if (obj.userData[dataItems[0].category] === entityName) {
-                        color = "#FD1C03";
-                        opacity = 1;
-                    }
-                    obj.material.color.set(color);
-                    obj.material.opacity = opacity;
-                }
-            });
+                    return false;
+                })) {
+                color = "#EEEEEE";
+                opacity = 0.4;
+                svgOpacity = 0.4;
+            }
+            if (dataItems[0] &&
+                // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+                objData.divObj.userData[dataItems[0].category] === entityName) {
+                color = "#FD1C03";
+                opacity = 1;
+                svgOpacity = 1.0;
+            }
+            // Update 3D object
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+            objData.divObj.material.color.set(color);
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+            objData.divObj.material.opacity = opacity;
+            // Update SVG element
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+            objData.svgElem.style.fill = color;
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+            objData.svgElem.style.opacity = svgOpacity;
+        });
     }
     function onPointerMove(event) {
         // calculate pointer position in normalized device coordinates (-1 to +1) for
@@ -47764,11 +47897,6 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
                 if (twoLegend) {
                     setInfo(truncate(obj.userData[shapeKey], 30) +
                         " " +
-                        truncate(obj.userData[colorKey], 30));
-                }
-                else {
-                    setInfo(obj.userData.identifier +
-                        " | " +
                         truncate(obj.userData[colorKey], 30));
                 }
                 break;
@@ -47894,6 +48022,113 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
         cube.add(planeFront, planeBack, planeLeft, planeRight, planeTop, planeBottom);
         return cube;
     }
+    function createBigCube(minX, maxX, minY, maxY, minZ, maxZ) {
+        // Calculate the size and position of the cube
+        const width = maxX - minX;
+        const height = maxY - minY;
+        const depth = maxZ - minZ;
+        const centerX = (minX + maxX) / 2;
+        const centerY = (minY + maxY) / 2;
+        const centerZ = (minZ + maxZ) / 2;
+        // Create the cube
+        // const geometry = new THREE.BoxGeometry(width, height, depth);
+        // const material = new THREE.MeshBasicMaterial({
+        //   color: 0x000000,
+        //   wireframe: true,
+        //   side: THREE.FrontSide,
+        // });
+        // const cube = new THREE.Mesh(geometry, material);
+        // cube.position.set(centerX, centerY, centerZ);
+        const edgesGeometry = new BufferGeometry();
+        // Define the vertices for the edges
+        const vertices = new Float32Array([
+            // Bottom rectangle
+            -width / 2,
+            -height / 2,
+            -depth / 2,
+            width / 2,
+            -height / 2,
+            -depth / 2,
+            width / 2,
+            -height / 2,
+            -depth / 2,
+            width / 2,
+            -height / 2,
+            depth / 2,
+            width / 2,
+            -height / 2,
+            depth / 2,
+            -width / 2,
+            -height / 2,
+            depth / 2,
+            -width / 2,
+            -height / 2,
+            depth / 2,
+            -width / 2,
+            -height / 2,
+            -depth / 2,
+            // Top rectangle
+            -width / 2,
+            height / 2,
+            -depth / 2,
+            width / 2,
+            height / 2,
+            -depth / 2,
+            width / 2,
+            height / 2,
+            -depth / 2,
+            width / 2,
+            height / 2,
+            depth / 2,
+            width / 2,
+            height / 2,
+            depth / 2,
+            -width / 2,
+            height / 2,
+            depth / 2,
+            -width / 2,
+            height / 2,
+            depth / 2,
+            -width / 2,
+            height / 2,
+            -depth / 2,
+            // Vertical lines
+            -width / 2,
+            -height / 2,
+            -depth / 2,
+            -width / 2,
+            height / 2,
+            -depth / 2,
+            width / 2,
+            -height / 2,
+            -depth / 2,
+            width / 2,
+            height / 2,
+            -depth / 2,
+            width / 2,
+            -height / 2,
+            depth / 2,
+            width / 2,
+            height / 2,
+            depth / 2,
+            -width / 2,
+            -height / 2,
+            depth / 2,
+            -width / 2,
+            height / 2,
+            depth / 2,
+        ]);
+        // Add vertices to geometry
+        edgesGeometry.setAttribute("position", new BufferAttribute(vertices, 3));
+        // Create a material for the edges
+        const material = new LineBasicMaterial({ color: 0xadd8e6 });
+        // Create a line segments object to represent the edges
+        const cubeEdges = new LineSegments(edgesGeometry, material);
+        // Set the position of the cube
+        cubeEdges.position.set(centerX, centerY, centerZ);
+        return cubeEdges;
+        // return cube;
+    }
     useEffect(() => {
         const miniScene = new Scene();
         miniSceneRef.current = miniScene;
@@ -47954,7 +48189,7 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
         renderer.setClearColor(0xffffff);
         containerRef.current.appendChild(renderer.domElement);
         rendererRef.current = renderer;
-        var xAxisMaterial = new LineBasicMaterial({ color: 0xc2dedc });
+        var xAxisMaterial = new LineBasicMaterial({ color: 0xff0000 });
         var xAxisGeometry = new BufferGeometry().setFromPoints([
             new Vector3(0, 0, 0),
             new Vector3(20, 0, 0),
@@ -47962,7 +48197,7 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
         var xAxis = new Line(xAxisGeometry, xAxisMaterial);
         scene.add(xAxis);
         // Create the Y-axis line segment
-        var yAxisMaterial = new LineBasicMaterial({ color: 0xece5c7 });
+        var yAxisMaterial = new LineBasicMaterial({ color: 0x00ff00 });
         var yAxisGeometry = new BufferGeometry().setFromPoints([
             new Vector3(0, 0, 0),
             new Vector3(0, 20, 0),
@@ -47971,7 +48206,7 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
         scene.add(yAxis);
         if (threeD) {
             // Create the Z-axis line segment
-            var zAxisMaterial = new LineBasicMaterial({ color: 0xcdc2ae });
+            var zAxisMaterial = new LineBasicMaterial({ color: 0x0000ff });
             var zAxisGeometry = new BufferGeometry().setFromPoints([
                 new Vector3(0, 0, 0),
                 new Vector3(0, 0, 20),
@@ -47984,9 +48219,15 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
             y: 0,
             z: 0,
         };
+        let coordinates;
+        let minX;
+        let maxX;
+        let minY;
+        let maxY;
+        let minZ;
+        let maxZ;
         data.forEach((point, index) => __awaiter$1(void 0, void 0, void 0, function* () {
-            var _a;
-            let coordinates;
+            var _a, _b, _c;
             if (threeD) {
                 if (technique === "umap") {
                     coordinates = {
@@ -48063,12 +48304,21 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
                     colorInScene = "#EEEEEE";
                     opacity = 0.4;
                 }
-                //console.log(coordinates+ " " + shape + " " + color + " " +point);
                 createShape(twoLegend, shape, coordinates, colorInScene, opacity, Object.assign({ color: color, index: index }, point));
             }
             middle.x += coordinates.x;
             middle.y += coordinates.y;
             middle.z += (_a = coordinates.z) !== null && _a !== void 0 ? _a : 0;
+            minX = Math.min(minX !== null && minX !== void 0 ? minX : Infinity, coordinates.x);
+            maxX = Math.max(maxX !== null && maxX !== void 0 ? maxX : -Infinity, coordinates.x);
+            minY = Math.min(minY !== null && minY !== void 0 ? minY : Infinity, coordinates.y);
+            maxY = Math.max(maxY !== null && maxY !== void 0 ? maxY : -Infinity, coordinates.y);
+            minZ = Math.min(minZ !== null && minZ !== void 0 ? minZ : Infinity, (_b = coordinates.z) !== null && _b !== void 0 ? _b : 0);
+            maxZ = Math.max(maxZ !== null && maxZ !== void 0 ? maxZ : -Infinity, (_c = coordinates.z) !== null && _c !== void 0 ? _c : 0);
+            if (index === data.length - 1) {
+                const cubeBig = createBigCube(minX, maxX, minY, maxY, minZ, maxZ);
+                sceneRef.current.add(cubeBig);
+            }
         }));
         middle.x /= data.length;
         middle.y /= data.length;
@@ -48092,8 +48342,32 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
         cameraRef.current = camera;
         // set up orbit controls
         const controls = new OrbitControls(camera, renderer.domElement);
+        // controls.addEventListener("change", () => {
+        //   console.log(controls);
+        // });
         controls.minDistance = 10;
         controls.maxDistance = 50;
+        // controls.addEventListener("change", () => {
+        //   objArr.current.forEach(function (objData) {
+        //     const proj = toScreenPosition(
+        //       // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+        //       objData.divObj,
+        //       cameraRef.current
+        //       // rendererRef.current
+        //     );
+        //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+        //     objData.svgElem.setAttribute("cx", proj.x);
+        //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+        //     objData.svgElem.setAttribute("cy", proj.y);
+        //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+        //     const distance = objData.divObj.position.distanceTo(
+        //       cameraRef.current.position
+        //     );
+        //     const scaleFactor = calculateScaleFactor(distance);
+        //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+        //     objData.svgElem.setAttribute("r", 5 * scaleFactor);
+        //   });
+        // });
         const miniControls = new OrbitControls(miniCamera, miniRenderer.domElement);
         controlsRef.current = controls;
         miniControlsRef.current = miniControls;
@@ -48107,28 +48381,17 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
             controls.enableRotate = false; // Disable rotation
             controls.enablePan = true; // Enable panning
         }
-        let previousDistance = controls.target.distanceTo(controls.object.position);
+        controls.target.distanceTo(controls.object.position);
         // Animation loop
         const animate = () => {
             requestAnimationFrame(animate);
             camera.position.copy(miniCamera.position);
             camera.rotation.copy(miniCamera.rotation);
+            // if (cubeBig) {
+            //   cubeBig.lookAt(camera.position);
+            // }
             controls.update();
-            const currentDistance = controls.target.distanceTo(controls.object.position);
-            // Check if the user zoomed in or out
-            if (currentDistance < previousDistance) {
-                // Trigger an event for zooming in
-                console.log("Zoomed in!");
-                console.log(currentDistance);
-                // Call your function or dispatch an action, etc.
-            }
-            else if (currentDistance > previousDistance) {
-                // Trigger an event for zooming out
-                console.log("Zoomed out!");
-                console.log(currentDistance);
-                // Call your function or dispatch an action, etc.
-            }
-            previousDistance = currentDistance;
+            controls.target.distanceTo(controls.object.position);
             sceneRef.current.traverse((obj) => {
                 if (obj instanceof Mesh) {
                     obj.lookAt(obj.position.clone().add(camera.position));
@@ -48168,13 +48431,120 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
         twoLegend,
         threeD,
     ]);
+    // function downloadSVG() {
+    //   updateSvgAxes(cameraRef.current, rendererRef.current);
+    //   objArr.current.forEach(function (objData) {
+    //     const proj = toScreenPosition(
+    //       // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+    //       objData.divObj,
+    //       cameraRef.current
+    //       // rendererRef.current
+    //     );
+    //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+    //     objData.svgElem.setAttribute("cx", proj.x);
+    //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+    //     objData.svgElem.setAttribute("cy", proj.y);
+    //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+    //     const distance = objData.divObj.position.distanceTo(
+    //       cameraRef.current.position
+    //     );
+    //     const scaleFactor = calculateScaleFactor(distance);
+    //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+    //     objData.svgElem.setAttribute("r", 5 * scaleFactor);
+    //   });
+    //   const svgContainer = document.getElementById("svg-container");
+    //   if (!svgContainer) {
+    //     console.error("SVG container not found");
+    //     return;
+    //   }
+    //   // Serialize the SVG content
+    //   const serializer = new XMLSerializer();
+    //   const svgString = serializer.serializeToString(svgContainer);
+    //   // Create a Blob from the SVG string
+    //   const blob = new Blob([svgString], { type: "image/svg+xml" });
+    //   // Create a download link
+    //   const downloadLink = document.createElement("a");
+    //   downloadLink.href = URL.createObjectURL(blob);
+    //   downloadLink.download = "scatterplot.svg";
+    //   // Append the link to the body, click it, and then remove it
+    //   document.body.appendChild(downloadLink);
+    //   downloadLink.click();
+    //   document.body.removeChild(downloadLink);
+    // }
+    function drawSVG() {
+        objArr.current.forEach(function (objData) {
+            const proj = toScreenPosition(
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+            objData.divObj, cameraRef.current
+            // rendererRef.current
+            );
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+            objData.svgElem.setAttribute("cx", proj.x);
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+            objData.svgElem.setAttribute("cy", proj.y);
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+            const distance = objData.divObj.position.distanceTo(cameraRef.current.position);
+            const scaleFactor = calculateScaleFactor(distance);
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+            objData.svgElem.setAttribute("r", 5 * scaleFactor);
+        });
+    }
+    function downloadSVG() {
+        // Clear existing SVG content
+        let svgContainer = document.getElementById("svg-container");
+        // Function to project 3D coordinates to 2D
+        function projectToScreen(obj3D) {
+            const vector = new Vector3();
+            const widthHalf = 0.5 * window.innerWidth;
+            const heightHalf = 0.5 * window.innerHeight;
+            // Assuming obj3D is a THREE.Vector3 representing a position in 3D space
+            vector.copy(obj3D);
+            vector.project(cameraRef.current);
+            vector.x = vector.x * widthHalf + widthHalf;
+            vector.y = -(vector.y * heightHalf) + heightHalf;
+            return { x: vector.x, y: vector.y };
+        }
+        // Create and add SVG lines for axes
+        const axesPoints = {
+            x: [new Vector3(0, 0, 0), new Vector3(20, 0, 0)],
+            y: [new Vector3(0, 0, 0), new Vector3(0, 20, 0)],
+            z: [new Vector3(0, 0, 0), new Vector3(0, 0, 20)],
+        };
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+        Object.entries(axesPoints).forEach(([axis, points]) => {
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            const start = projectToScreen(points[0]);
+            const end = projectToScreen(points[1]);
+            line.setAttribute("x1", start.x.toString());
+            line.setAttribute("y1", start.y.toString());
+            line.setAttribute("x2", end.x.toString());
+            line.setAttribute("y2", end.y.toString());
+            line.style.stroke =
+                axis === "x" ? "red" : axis === "y" ? "green" : "blue";
+            line.style.strokeWidth = "2";
+            // svgContainer!.appendChild(line);
+        });
+        // Create and add SVG circles for each 3D object
+        drawSVG();
+        // Serialize and download the SVG
+        const serializer = new XMLSerializer();
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+        const svgString = serializer.serializeToString(svgContainer);
+        const blob = new Blob([svgString], { type: "image/svg+xml" });
+        const downloadLink = document.createElement("a");
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.download = "scatterplot.svg";
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    }
     return (React__default.createElement("div", { className: "relative h-full flex overflow-hidden" },
         React__default.createElement("div", { className: loading
                 ? "absolute inset-0 z-30 flex justify-center items-center bg-opacity-50 bg-gray-300"
                 : "hidden" },
             React__default.createElement(_default, { color: "#0066bd", size: 30, loading: true })),
         legendRefFull,
-        React__default.createElement("div", { className: "h-full w-full bg-blue-500", onPointerMove: onPointerMove, onPointerDown: onPointerDown, onClick: onClick, ref: containerRef }),
+        React__default.createElement("div", { className: "h-full w-full", onPointerMove: onPointerMove, onPointerDown: onPointerDown, onClick: onClick, ref: containerRef }),
         React__default.createElement("div", { className: isLegendOpen ? "inline z-10" : "hidden" },
             twoLegend && (React__default.createElement("div", { className: "flex absolute right-64 top-24" },
                 React__default.createElement(ShapeLegend, { screenshot: false, shapeKey: shapeKey, shapeParamList: shapeParamList, shapeParam: shapeParam, setShapeParam: (param) => setShapeParam(param), shapeList: shapeList }))),
