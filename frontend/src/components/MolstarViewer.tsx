@@ -109,7 +109,7 @@ const MolstarViewer = () => {
 
       const data = await window.molstar.builders.data.download(
         {
-          url: `https://protspace.onrender.com/data/${selectedMols[0]}`,
+          url: `https://protspace.onrender.com/data/${selectedMols[0]}.pdb`,
         },
         { state: { isGhost: true } }
       );
