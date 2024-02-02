@@ -23,7 +23,7 @@ import { ColorNames } from "molstar/lib/mol-util/color/names";
 import { ParamDefinition as PD } from "molstar/lib/mol-util/param-definition";
 import { MdFullscreen } from "react-icons/md";
 import { useAppDispatch, useAppSelector } from "../helpers/hooks";
-import { setErrorMessage, setSelectedMols } from "../redux/actions/settings";
+import { setSelectedMols } from "../redux/actions/settings";
 
 declare global {
   interface Window {
@@ -76,7 +76,6 @@ const MySpec: PluginUISpec = {
 const MolstarViewer = () => {
   const parent = createRef<HTMLDivElement>();
   const selectedMols = useAppSelector((state) => state.settings.selectedMols);
-  const setting = useAppSelector((state) => state.settings);
   const dispatch = useAppDispatch();
   // @ts-expect-error ts-migrate(2532) FIXME: use URL.
   const [url, setURl] = useState("");
@@ -84,42 +83,22 @@ const MolstarViewer = () => {
   const handleFullScreen = () => {
     handle.active ? handle.exit() : handle.enter();
   };
-  // const fetchData = async () => {
-  //   try {
-  //     for (let index = 0; index < selectedMols.length; index++) {
-  //       const response = await fetch(
-  //         `${"http://localhost:8000"}/pdb/${selectedMols[index]}`
-  //       );
-  //       if (response.status === 404) {
-  //         dispatch(setSelectedMols([]));
-  //         dispatch(setErrorMessage("Failed to load PDB file"));
-  //         return;
-  //       }
-  //       const data = await response.url;
-  //       setURl(data);
-  //     }
-  //   } catch (error) {
-  //     console.error(`Failed to load PDB: ${error}`);
-  //     dispatch(setSelectedMols([]));
-  //     dispatch(setErrorMessage("Failed to load PDB file"));
-  //   }
-  // };
 
-  if (setting.pdb.length === 0) {
-    dispatch(setSelectedMols([]));
-    dispatch(setErrorMessage("First load PDB file"));
-    return null;
-  }
+  // if (setting.pdb.length === 0) {
+  //   dispatch(setSelectedMols([]));
+  //   dispatch(setErrorMessage("First load PDB file"));
+  //   return null;
+  // }
 
-  let blob = new Blob(
-    [
-      setting.pdb &&
-        setting.pdb.find((obj: { relativePath: string | any[] }) =>
-          obj.relativePath.includes(selectedMols[0])
-        ).fileData,
-    ],
-    { type: "text/plain" }
-  );
+  // let blob = new Blob(
+  //   [
+  //     setting.pdb &&
+  //       setting.pdb.find((obj: { relativePath: string | any[] }) =>
+  //         obj.relativePath.includes(selectedMols[0])
+  //       ).fileData,
+  //   ],
+  //   { type: "text/plain" }
+  // );
 
   useEffect(() => {
     async function init() {
@@ -130,7 +109,7 @@ const MolstarViewer = () => {
 
       const data = await window.molstar.builders.data.download(
         {
-          url: URL.createObjectURL(blob),
+          url: `https://protspace.onrender.com/data/${selectedMols[0]}`,
         },
         { state: { isGhost: true } }
       );
