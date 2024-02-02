@@ -47899,6 +47899,12 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
                         " " +
                         truncate(obj.userData[colorKey], 30));
                 }
+                else {
+                    obj.geometry.type !== "BufferGeometry" &&
+                        setInfo(obj.userData.identifier +
+                            " | " +
+                            truncate(obj.userData[colorKey], 30));
+                }
                 break;
             }
         }

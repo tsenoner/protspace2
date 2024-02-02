@@ -548,11 +548,12 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
                 truncate(obj.userData[colorKey], 30)
             );
           } else {
-            // setInfo(
-            //   obj.userData.identifier +
-            //     " | " +
-            //     truncate(obj.userData[colorKey], 30)
-            // );
+            obj.geometry.type !== "BufferGeometry" &&
+              setInfo(
+                obj.userData.identifier +
+                  " | " +
+                  truncate(obj.userData[colorKey], 30)
+              );
           }
           break;
         }

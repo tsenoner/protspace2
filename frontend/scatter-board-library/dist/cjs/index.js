@@ -47919,6 +47919,12 @@ const ScatterBoard = React$1.forwardRef(({ cameraRef = React$1.useRef(), setColo
                         " " +
                         truncate(obj.userData[colorKey], 30));
                 }
+                else {
+                    obj.geometry.type !== "BufferGeometry" &&
+                        setInfo(obj.userData.identifier +
+                            " | " +
+                            truncate(obj.userData[colorKey], 30));
+                }
                 break;
             }
         }
