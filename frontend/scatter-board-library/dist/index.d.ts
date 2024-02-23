@@ -8,6 +8,8 @@ interface ColorLegendProps {
     colorParam: string;
     setColorParam: (colorParam: string) => void;
     colorList: string[];
+    keyList: string[];
+    setListParam: (listParam: string) => void;
 }
 
 declare const ColorLegend: React.FC<ColorLegendProps>;
@@ -48,6 +50,8 @@ interface ScatterBoardProps {
     onVisualizeClicked?: (value: string) => void;
     onCompareClicked?: (value: string) => void;
     setShapeParam: (value: string) => void;
+    setListParam: (value: string) => void;
+    keyList: string[];
     twoLegend: boolean;
     isLegendOpen: boolean;
     searchItems: Item[];

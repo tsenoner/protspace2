@@ -1,36 +1,21 @@
-import { Button, FormControl, FormLabel, Switch } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import React, { ChangeEvent, useState } from "react";
-import { defaultDatasets } from "../data";
-import { useAppDispatch } from "../helpers/hooks";
-import {
-  setCSVFilePath,
-  setPdbExists,
-  setTechnique,
-  setThreeD,
-} from "../redux/actions/settings";
+import React from "react";
+import { useAppDispatch, useAppSelector } from "../helpers/hooks";
+import { setTechnique } from "../redux/actions/settings";
 
 export function FileUploadFormModal({
   fileUploadShown,
   setFileUploadShown,
 }: any) {
-  const [dataset, setDataset] = useState(defaultDatasets[0]);
-  const [threedDefaultSet, setThreedDefaultSet] = useState(true);
   const dispatch = useAppDispatch();
-  const [selectedTechniqueDefault, setSelectedTechniqueDefault] =
-    useState<string>("umap");
-
-  const handleSwitchDefaultSet = (event: ChangeEvent<HTMLInputElement>) => {
-    setThreedDefaultSet(event.target.checked);
-  };
+  const { technique, projections } = useAppSelector((state) => state.settings);
 
   const handleTechniqueChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setSelectedTechniqueDefault(event.target.value);
+    dispatch(setTechnique(event.target.value));
   };
-
-  const techniqueList = ["umap", "pca", "tsne"];
 
   return (
     <div className={fileUploadShown ? "flex" : "hidden"}>
@@ -49,75 +34,54 @@ export function FileUploadFormModal({
               </button>
             </div>
             <div className="mt-2">
-              <div className="flex flex-col mb-2">
-                <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="defaultDataset"
-                >
-                  Dataset
-                </label>
-                <select
-                  onChange={(event) => {
-                    setDataset(event.target.value);
-                  }}
-                  id="defaultDataset"
-                  className="min-w-100 bg-transparent"
-                  value={dataset}
-                >
-                  {defaultDatasets.map((option: string, index: number) => (
-                    <option key={index} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-                <FormControl display="flex" alignItems="center" mt={2}>
-                  <FormLabel htmlFor="2D" mb="0">
-                    2D
-                  </FormLabel>
-                  <Switch
-                    defaultChecked={threedDefaultSet}
-                    id="dimensions"
-                    onChange={handleSwitchDefaultSet}
-                  />
-                  <FormLabel htmlFor="3D" mb="0" ml={3}>
-                    3D
-                  </FormLabel>
-                </FormControl>
-              </div>
               <div>
+                <p className="text-gray-700 text-sm font-bold">
+                  Projection Name:{" "}
+                  {Object.keys(projections).length !== 0
+                    ? projections[technique].name
+                    : " -"}
+                </p>
+                <p className="text-gray-700 text-sm font-bold">
+                  Dimension:
+                  {Object.keys(projections).length !== 0
+                    ? projections[technique].dimensions
+                    : " -"}
+                </p>
                 <label
                   htmlFor="techniques"
                   className="text-gray-700 text-sm font-bold"
                 >
-                  Technique
+                  Projections
                 </label>
-                <select
-                  onChange={handleTechniqueChange}
-                  id="techniques"
-                  className="mt-2 min-w-100 bg-transparent"
-                  value={selectedTechniqueDefault}
-                >
-                  {techniqueList.map((option, index) => (
-                    <option key={index} value={option}>
-                      {option.toUpperCase()}
-                    </option>
-                  ))}
-                </select>
+
+                {Object.keys(projections).length === 0 ? (
+                  <div> No projections available </div>
+                ) : (
+                  <select
+                    onChange={handleTechniqueChange}
+                    id="techniques"
+                    className="mt-2 min-w-100 bg-transparent"
+                    value={technique && technique}
+                  >
+                    {projections.map(
+                      (
+                        projection: any,
+                        index: React.Key | number | null | undefined
+                      ) => (
+                        <option key={index} value={index as string}>
+                          {projection && projection.name.toUpperCase()}
+                        </option>
+                      )
+                    )}
+                  </select>
+                )}
               </div>
               <div className="flex justify-end">
                 <Button
                   className="mt-4"
                   colorScheme="blue"
                   onClick={() => {
-                    if (dataset === defaultDatasets[0]) {
-                      dispatch(setCSVFilePath("df_3FTx_mature_esm2.csv"));
-                      dispatch(setPdbExists(true));
-                    } else if (dataset === defaultDatasets[1]) {
-                      dispatch(setCSVFilePath("df_KLK_esm2.csv"));
-                      dispatch(setPdbExists(false));
-                    }
-                    dispatch(setThreeD(threedDefaultSet));
-                    dispatch(setTechnique(selectedTechniqueDefault));
+                    dispatch(setTechnique(technique));
                     setFileUploadShown(false);
                   }}
                 >

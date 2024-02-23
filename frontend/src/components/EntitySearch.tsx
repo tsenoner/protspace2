@@ -54,19 +54,21 @@ export default function EntitySearch() {
   const keyList = useAppSelector((state) => state.settings.keyList);
   const [query, setQuery] = useState("");
   const { data, loading } = useQuery({ query });
-
   const groupedResults =
     data && data.length > 0 ? GroupBy(data, "category") : undefined;
   const [closed, setClosed] = useState(false);
 
   return (
-    <main className="z-20 absolute top-16 w-80 bg-white">
-      <div className="m-4">
+    <main
+      className="z-20 absolute top-20 w-82 bg-white"
+      style={{ left: "8px", background: "#f1f5f9", borderRadius: "8px" }}
+    >
+      <div className="p-1">
         <div
           className="flex w-80 cursor-pointer"
           onClick={() => setClosed(!closed)}
         >
-          <p className={closed ? "p-2" : "p-2 mr-auto"}>Search</p>
+          <p className={closed ? "p-2" : "p-2 mr-auto pl-0"}>Search</p>
           {closed ? (
             <ArrowDownIcon
               className="w-4 mx-2"

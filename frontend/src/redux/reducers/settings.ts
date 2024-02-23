@@ -1,37 +1,44 @@
 import { AtomStyleSpec, Item } from "../../data";
 import { colorList, shapeList } from "../../helpers/constants";
 import {
+  ADD_TO_ATOM_STYLE,
+  ADD_TO_SEARCH_ATOM_STYLE,
+  REMOVE_FROM_ATOM_STYLE,
+  REMOVE_FROM_SEARCH_ATOM_STYLE,
   SET_ATOM_STYLE,
+  SET_CAMERA,
+  SET_CAMERA_POSITION,
+  SET_CAMERA_ROTATION,
+  SET_COLOR_AND_SHAPE_KEY,
   SET_COLOR_KEY,
   SET_COLOR_PARAM,
   SET_COLOR_PARAM_LIST,
   SET_CSV_FILE_PATH,
   SET_DATA,
   SET_DATA_ITEMS,
+  SET_DEFAULT_COLOR_SCHEME,
+  SET_ERROR_MESSAGE,
+  SET_HIGHLIGHTING,
+  SET_IS_LEGEND_OPEN,
+  SET_IS_LOADING,
+  SET_KEY_LIST,
+  SET_LEGEND,
+  SET_MOLECULE_NAME,
   SET_MOLECULE_SHOWN,
+  SET_PDB,
+  SET_PDB_EXISTS,
+  SET_PROJECTIONS,
+  SET_PROTEIN_DATA,
+  SET_SEARCH_ATOM_STYLE,
   SET_SEARCH_ITEMS,
+  SET_SELECTED_MOLS,
   SET_SHAPE_KEY,
   SET_SHAPE_PARAM,
   SET_SHAPE_PARAM_LIST,
+  SET_STRUCTURES,
   SET_TECHNIQUE,
   SET_THREE_D,
   SET_TWO_LEGEND,
-  SET_KEY_LIST,
-  SET_IS_LEGEND_OPEN,
-  SET_ERROR_MESSAGE,
-  SET_SEARCH_ATOM_STYLE,
-  ADD_TO_ATOM_STYLE,
-  REMOVE_FROM_ATOM_STYLE,
-  ADD_TO_SEARCH_ATOM_STYLE,
-  REMOVE_FROM_SEARCH_ATOM_STYLE,
-  SET_PDB_EXISTS,
-  SET_MOLECULE_NAME,
-  SET_CAMERA_POSITION,
-  SET_CAMERA_ROTATION,
-  SET_COLOR_AND_SHAPE_KEY,
-  SET_SELECTED_MOLS,
-  SET_IS_LOADING,
-  SET_PDB,
 } from "../actionTypes";
 
 // Default styles
@@ -81,7 +88,7 @@ interface SettingsState {
   colorKey: string;
   shapeKey: string;
   twoLegend: boolean;
-  technique: string;
+  technique: number;
   threeD: boolean;
   atomStyle: AtomStyleSpec;
   searchAtomStyle: AtomStyleSpec;
@@ -104,13 +111,20 @@ interface SettingsState {
   cameraRotation: any;
   isLoading: boolean;
   pdb: { relativePath: string; fileData: string }[];
+  default_color_scheme: any[];
+  camera: any[];
+  legend: any;
+  highlighting: any;
+  projections: any;
+  structures: any;
+  protein_data: any;
 }
 
 const initialState: SettingsState = {
   colorKey: "",
   shapeKey: "",
   twoLegend: false,
-  technique: "umap",
+  technique: 0,
   threeD: true,
   atomStyle: initialAtomStyleState,
   searchAtomStyle: initialAtomStyleState,
@@ -133,6 +147,13 @@ const initialState: SettingsState = {
   selectedMols: [],
   isLoading: false,
   pdb: [],
+  default_color_scheme: [],
+  camera: [],
+  legend: {},
+  highlighting: {},
+  projections: {},
+  structures: {},
+  protein_data: {},
 };
 
 const settingsReducer = (
@@ -209,8 +230,8 @@ const settingsReducer = (
       };
     case SET_COLOR_AND_SHAPE_KEY:
       state.data.forEach((element: any) => {
-        for (const key in element) {
-          const value = element[key];
+        for (const key in element.features) {
+          const value = element.features[key];
           if (
             typeof value === "string" &&
             items.filter((e) => e.category === key && e.name === value)
@@ -223,13 +244,6 @@ const settingsReducer = (
                 name: value,
               });
               colorParamList.push(value);
-            } else if (key === action.payload.shapeKey) {
-              items.push({
-                category: key,
-                img: shapeList[shapeParamList.length % shapeList.length],
-                name: value,
-              });
-              shapeParamList.push(value);
             } else {
               items.push({ category: key, name: value });
             }
@@ -322,8 +336,63 @@ const settingsReducer = (
         twoLegend: action.payload,
       };
     case SET_TECHNIQUE:
+      const selectedProjection = state.projections[action.payload];
+      selectedProjection.data.forEach((element: any) => {
+        element = Object.assign(
+          element,
+          state.protein_data[element.identifier]
+        );
+      });
+
+      const itemsLocal: Item[] = [];
+      const colorParamListLocal: string[] = [];
+      const keys = Object.keys(selectedProjection.data[0].features).filter(
+        (item: any) => !Number(selectedProjection.data[0].features[item])
+      );
+      const colorKey = keys[1];
+      const newData = selectedProjection.data.map((item: any) => {
+        const newItem = {
+          ...item,
+        }; // Create a copy of the current item
+        for (const key in newItem) {
+          if (
+            newItem.hasOwnProperty(key) &&
+            typeof newItem[key] === "string" &&
+            newItem[key] === ""
+          ) {
+            newItem[key] = "NaN";
+          }
+        }
+        return newItem;
+      });
+
+      newData.forEach((element: any) => {
+        for (const key in element.features) {
+          const value = element.features[key];
+          if (
+            typeof value === "string" &&
+            itemsLocal.filter((e) => e.category === key && e.name === value)
+              .length === 0
+          ) {
+            if (key === colorKey) {
+              itemsLocal.push({
+                category: key,
+                color: colorList[colorParamListLocal.length % colorList.length],
+                name: value,
+              });
+              colorParamListLocal.push(value);
+            } else {
+              itemsLocal.push({ category: key, name: value });
+            }
+          }
+        }
+      });
+
       return {
         ...state,
+        colorParamList: colorParamListLocal,
+        data: selectedProjection.data,
+        threeD: selectedProjection.dimensions === 3,
         technique: action.payload,
       };
     case SET_MOLECULE_NAME:
@@ -412,6 +481,42 @@ const settingsReducer = (
         ...state,
         pdb: action.payload,
       };
+    case SET_DEFAULT_COLOR_SCHEME:
+      return {
+        ...state,
+        default_color_scheme: action.payload,
+      };
+    case SET_CAMERA:
+      return {
+        ...state,
+        camera: action.payload,
+      };
+    case SET_LEGEND:
+      return {
+        ...state,
+        legend: action.payload,
+      };
+    case SET_HIGHLIGHTING:
+      return {
+        ...state,
+        highlighting: action.payload,
+      };
+    case SET_PROJECTIONS:
+      return {
+        ...state,
+        projections: action.payload,
+      };
+    case SET_STRUCTURES:
+      return {
+        ...state,
+        structures: action.payload,
+      };
+    case SET_PROTEIN_DATA:
+      return {
+        ...state,
+        protein_data: action.payload,
+      };
+
     default:
       return state;
   }

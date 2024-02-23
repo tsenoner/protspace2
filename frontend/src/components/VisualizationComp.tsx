@@ -1,27 +1,23 @@
 import {
-  AdjustmentsVerticalIcon,
   ArrowDownOnSquareIcon,
   ArrowsPointingInIcon,
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
-  ClipboardDocumentListIcon,
   CogIcon,
   DocumentArrowDownIcon,
   DocumentArrowUpIcon,
-  DocumentChartBarIcon,
   MapIcon,
 } from "@heroicons/react/24/solid";
 import React, {
-  ChangeEvent,
   MutableRefObject,
   createRef,
   useEffect,
   useRef,
   useState,
 } from "react";
+import { BsFiletypeSvg } from "react-icons/bs";
 import { PropagateLoader } from "react-spinners";
 import { CSSTransition } from "react-transition-group";
-import { BsFiletypeSvg } from "react-icons/bs";
 
 import { ScatterBoard, type ScatterBoardRef } from "scatter-board-library";
 import { Vector3 } from "three";
@@ -29,7 +25,6 @@ import { colorList, shapeList } from "../helpers/constants";
 import { useAppDispatch, useAppSelector } from "../helpers/hooks";
 import {
   fetchAndSetData,
-  setCSVFilePath,
   setCameraPosition,
   setCameraRotation,
   setColorAndShapeKey,
@@ -37,33 +32,26 @@ import {
   setColorParam,
   setColorParamList,
   setData,
-  setDataItems,
   setErrorMessage,
   setIsLegendOpen,
   setIsLoading,
   setKeyList,
-  setPdbExists,
+  setProjections,
+  setProteinData,
   setSearchItems,
   setSelectedMols,
-  setShapeKey,
   setShapeParam,
-  setShapeParamList,
-  setTechnique,
   setThreeD,
-  setTwoLegend,
 } from "../redux/actions/settings";
 import EntitySearch from "./EntitySearch";
 import ErrorModal from "./ErrorModal";
 import { FileUploadFormModal } from "./FileUploadFormModal";
 import Nav from "./Nav";
-import SettingsModal from "./SettingsModal";
 // import MoleculeViewer, { MoleculeViewerRef } from "./MoleculeViewer";
-import { Box, Select } from "@chakra-ui/react";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { TransitionChildren } from "react-transition-group/Transition";
 import { Item } from "../data";
-import { csvToJson } from "../helpers/csvToJson";
 import MolstarViewer from "./MolstarViewer";
 // import Reader from "./Reader";
 
@@ -71,8 +59,7 @@ const VisualizationComp = () => {
   const cameraRef = useRef() as MutableRefObject<THREE.PerspectiveCamera>;
   const scatterRef = createRef<ScatterBoardRef>();
   // const moleculeViewerRef = createRef<MoleculeViewerRef>();
-  const [isFABOpen, setIsFABOpen] = useState(false);
-  const [settingsShown, setSettingsShown] = useState(false);
+  const [isFABOpen, setIsFABOpen] = useState(true);
   const [fileUploadShown, setFileUploadShown] = useState(true);
   const settings = useAppSelector((state) => state.settings);
   const dispatch = useAppDispatch();
@@ -84,31 +71,42 @@ const VisualizationComp = () => {
     }
   }, [settings.csvFilePath]);
 
-  function exportFile() {
+  function exportFileV2() {
     const jsonData = {
-      data: settings.data,
-      keyList: settings.keyList,
-      technique: settings.technique,
-      colorParam: settings.colorParam,
-      colorKey: settings.colorKey,
-      shapeParam: settings.shapeParam,
-      shapeKey: settings.shapeKey,
-      searchItems: settings.searchItems,
-      colorParamList: settings.colorParamList,
-      shapeParamList: settings.shapeParamList,
-      threeD: settings.threeD,
-      twoLegend: settings.twoLegend,
-      csvFilePath: settings.csvFilePath,
-      position: {
-        x: cameraRef.current.position.x,
-        y: cameraRef.current.position.y,
-        z: cameraRef.current.position.z,
+      visualization_state: {
+        default_color_scheme: "",
+        camera: [
+          {
+            position: {
+              x: cameraRef.current.position.x,
+              y: cameraRef.current.position.y,
+              z: cameraRef.current.position.z,
+            },
+            rotation: {
+              x: cameraRef.current.rotation.x,
+              y: cameraRef.current.rotation.y,
+              z: cameraRef.current.rotation.z,
+            },
+            zoom: cameraRef.current.zoom,
+          },
+        ],
+        searchItems: settings.searchItems,
+        colorParamList: settings.colorParamList,
+        colorParam: settings.colorParam,
+        colorKey: settings.colorKey,
+        keyList: settings.keyList,
+        technique: settings.technique,
+        legend: {
+          selected_feature: "settings.legend.selected_feature",
+          mapping: "settings.legend.mapping",
+        },
+        highlighting: settings.highlighting,
+        projection: settings.highlighting.selectedProjection,
+        structures: settings.highlighting.shownStructures,
       },
-      rotation: {
-        x: cameraRef.current.rotation.x,
-        y: cameraRef.current.rotation.y,
-        z: cameraRef.current.rotation.z,
-      },
+
+      protein_data: settings.protein_data,
+      projections: settings.projections,
     };
 
     const jsonString = JSON.stringify(jsonData, null, 2);
@@ -117,12 +115,52 @@ const VisualizationComp = () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "data.json"; // Change the filename as needed
+    link.download = "customData.json"; // You can customize the filename here
     link.click();
 
     // Clean up
     URL.revokeObjectURL(url);
   }
+
+  // function exportFile() {
+  //   const jsonData = {
+  //     data: settings.data,
+  //     keyList: settings.keyList,
+  //     technique: settings.technique,
+  //     colorParam: settings.colorParam,
+  //     colorKey: settings.colorKey,
+  //     shapeParam: settings.shapeParam,
+  //     shapeKey: settings.shapeKey,
+  //     searchItems: settings.searchItems,
+  //     colorParamList: settings.colorParamList,
+  //     shapeParamList: settings.shapeParamList,
+  //     threeD: settings.threeD,
+  //     twoLegend: settings.twoLegend,
+  //     csvFilePath: settings.csvFilePath,
+  //     position: {
+  //       x: cameraRef.current.position.x,
+  //       y: cameraRef.current.position.y,
+  //       z: cameraRef.current.position.z,
+  //     },
+  //     rotation: {
+  //       x: cameraRef.current.rotation.x,
+  //       y: cameraRef.current.rotation.y,
+  //       z: cameraRef.current.rotation.z,
+  //     },
+  //   };
+
+  //   const jsonString = JSON.stringify(jsonData, null, 2);
+  //   const blob = new Blob([jsonString], { type: "application/json" });
+
+  //   const url = URL.createObjectURL(blob);
+  //   const link = document.createElement("a");
+  //   link.href = url;
+  //   link.download = "data.json"; // Change the filename as needed
+  //   link.click();
+
+  //   // Clean up
+  //   URL.revokeObjectURL(url);
+  // }
 
   const handleFileChangeJSON = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -132,13 +170,13 @@ const VisualizationComp = () => {
     }
   };
 
-  const handleFileChangeCSV = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      dispatch(setIsLoading(true));
-      fetchDataFromFile(file);
-    }
-  };
+  // const handleFileChangeCSV = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event.target.files?.[0];
+  //   if (file) {
+  //     dispatch(setIsLoading(true));
+  //     fetchDataFromFile(file);
+  //   }
+  // };
 
   const readFileContentsJSON = (file: File) => {
     const reader = new FileReader();
@@ -147,7 +185,7 @@ const VisualizationComp = () => {
       if (fileContents) {
         try {
           const parsedObject = JSON.parse(fileContents as string);
-          importFile(parsedObject);
+          importFileV2(parsedObject);
         } catch (error) {
           setErrorMessage("JSON could not be parsed. Please check the file.");
           console.error("Error parsing JSON:", error);
@@ -157,159 +195,247 @@ const VisualizationComp = () => {
     reader.readAsText(file);
   };
 
-  const fetchDataFromFile = async (file: File) => {
-    const reader = new FileReader();
+  // const fetchDataFromFile = async (file: File) => {
+  //   const reader = new FileReader();
 
-    reader.onload = async (event) => {
-      const fileContents = event.target?.result;
-      if (fileContents) {
-        try {
-          const json = csvToJson(fileContents as string);
-          const data = JSON.parse(JSON.stringify(json, null, 2));
-          console.log("data: ", data);
-          const items: Item[] = [];
-          const colorParamList: string[] = [];
-          const shapeParamList: string[] = [];
-          const keys = Object.keys(data[0]).filter(
-            (item: any) => !Number(data[0][item])
-          );
-          const colorKey = keys[1];
-          const shapeKey = keys[2];
-          const newData = data.map((item: any) => {
-            const newItem = {
-              ...item,
-            }; // Create a copy of the current item
-            for (const key in newItem) {
-              if (
-                newItem.hasOwnProperty(key) &&
-                typeof newItem[key] === "string" &&
-                newItem[key] === ""
-              ) {
-                newItem[key] = "NaN";
-              }
-            }
-            return newItem;
-          });
+  //   reader.onload = async (event) => {
+  //     const fileContents = event.target?.result;
+  //     if (fileContents) {
+  //       try {
+  //         const json = csvToJson(fileContents as string);
+  //         const data = JSON.parse(JSON.stringify(json, null, 2));
+  //         console.log("data: ", data);
+  //         const items: Item[] = [];
+  //         const colorParamList: string[] = [];
+  //         const shapeParamList: string[] = [];
+  //         const keys = Object.keys(data[0]).filter(
+  //           (item: any) => !Number(data[0][item])
+  //         );
+  //         const colorKey = keys[1];
+  //         const shapeKey = keys[2];
+  //         const newData = data.map((item: any) => {
+  //           const newItem = {
+  //             ...item,
+  //           }; // Create a copy of the current item
+  //           for (const key in newItem) {
+  //             if (
+  //               newItem.hasOwnProperty(key) &&
+  //               typeof newItem[key] === "string" &&
+  //               newItem[key] === ""
+  //             ) {
+  //               newItem[key] = "NaN";
+  //             }
+  //           }
+  //           return newItem;
+  //         });
 
-          newData.forEach((element: any) => {
-            for (const key in element) {
-              const value = element[key];
-              if (
-                typeof value === "string" &&
-                items.filter((e) => e.category === key && e.name === value)
-                  .length === 0
-              ) {
-                if (key === colorKey) {
-                  items.push({
-                    category: key,
-                    color: colorList[colorParamList.length % colorList.length],
-                    name: value,
-                  });
-                  colorParamList.push(value);
-                } else if (key === shapeKey) {
-                  items.push({
-                    category: key,
-                    img: shapeList[shapeParamList.length % shapeList.length],
-                    name: value,
-                  });
-                  shapeParamList.push(value);
-                } else {
-                  items.push({ category: key, name: value });
-                }
-              }
-            }
-          });
-          dispatch(setCSVFilePath(""));
-          dispatch(setData(newData));
-          dispatch(setDataItems(items));
-          dispatch(setShapeParamList(shapeParamList));
-          dispatch(setColorParamList(colorParamList));
-          dispatch(setKeyList(keys));
-          dispatch(setColorKey(colorKey));
-          dispatch(setShapeKey(shapeKey));
-          dispatch(setColorParam(""));
-          dispatch(setShapeParam(""));
-          dispatch(setSelectedMols([]));
-          dispatch(setPdbExists(false));
-          dispatch(setSearchItems([]));
-          dispatch(setIsLoading(false));
-        } catch (error) {
-          console.error("Error parsing CSV:", error);
-          dispatch(setIsLoading(false));
+  //         newData.forEach((element: any) => {
+  //           for (const key in element) {
+  //             const value = element[key];
+  //             if (
+  //               typeof value === "string" &&
+  //               items.filter((e) => e.category === key && e.name === value)
+  //                 .length === 0
+  //             ) {
+  //               if (key === colorKey) {
+  //                 items.push({
+  //                   category: key,
+  //                   color: colorList[colorParamList.length % colorList.length],
+  //                   name: value,
+  //                 });
+  //                 colorParamList.push(value);
+  //               } else if (key === shapeKey) {
+  //                 items.push({
+  //                   category: key,
+  //                   img: shapeList[shapeParamList.length % shapeList.length],
+  //                   name: value,
+  //                 });
+  //                 shapeParamList.push(value);
+  //               } else {
+  //                 items.push({ category: key, name: value });
+  //               }
+  //             }
+  //           }
+  //         });
+  //         dispatch(setCSVFilePath(""));
+  //         dispatch(setData(newData));
+  //         dispatch(setDataItems(items));
+  //         dispatch(setShapeParamList(shapeParamList));
+  //         dispatch(setColorParamList(colorParamList));
+  //         dispatch(setKeyList(keys));
+  //         dispatch(setColorKey(colorKey));
+  //         dispatch(setShapeKey(shapeKey));
+  //         dispatch(setColorParam(""));
+  //         dispatch(setShapeParam(""));
+  //         dispatch(setSelectedMols([]));
+  //         dispatch(setPdbExists(false));
+  //         dispatch(setSearchItems([]));
+  //         dispatch(setIsLoading(false));
+  //       } catch (error) {
+  //         console.error("Error parsing CSV:", error);
+  //         dispatch(setIsLoading(false));
+  //       }
+  //     }
+  //   };
+  //   reader.readAsText(file);
+  // };
+
+  // function importFile(parsedObject: any) {
+  //   dispatch(setTechnique(parsedObject.technique ?? ""));
+  //   dispatch(setColorParam(parsedObject.colorParam ?? ""));
+  //   dispatch(setShapeParam(parsedObject.shapeParam ?? ""));
+  //   dispatch(setSearchItems(parsedObject.searchItems ?? []));
+  //   dispatch(setThreeD(parsedObject.threeD ?? false));
+  //   dispatch(setTwoLegend(parsedObject.twoLegend ?? false));
+  //   dispatch(setCSVFilePath(parsedObject.csvFilePath ?? ""));
+  //   dispatch(setColorKey(parsedObject.colorKey ?? ""));
+  //   dispatch(setShapeKey(parsedObject.shapeKey ?? ""));
+  //   dispatch(setData(parsedObject.data ?? []));
+  //   dispatch(setKeyList(parsedObject.keyList ?? []));
+  //   dispatch(setColorParamList(parsedObject.colorParamList ?? []));
+  //   dispatch(setShapeParamList(parsedObject.shapeParamList ?? []));
+  //   dispatch(setSelectedMols([]));
+  //   dispatch(setPdbExists(false));
+  //   dispatch(
+  //     setCameraPosition(
+  //       new Vector3(
+  //         parsedObject.position.x,
+  //         parsedObject.position.y,
+  //         parsedObject.position.z
+  //       )
+  //     )
+  //   );
+  //   dispatch(
+  //     setCameraRotation(
+  //       new Vector3(
+  //         parsedObject.position.x,
+  //         parsedObject.position.y,
+  //         parsedObject.position.z
+  //       )
+  //     )
+  //   );
+
+  //   dispatch(setIsLoading(false));
+  // }
+
+  function importFileV2(parsedObject: any) {
+    const selectedProjection = parsedObject.visualization_state.technique ?? 0;
+    parsedObject.projections[selectedProjection].data.forEach(
+      (element: any) => {
+        element = Object.assign(
+          element,
+          parsedObject.protein_data[element.identifier]
+        );
+      }
+    );
+
+    const items: Item[] = [];
+    const colorParamList: string[] =
+      parsedObject.visualization_state.colorParamList ?? [];
+    const keys = Object.keys(
+      parsedObject.projections[selectedProjection].data[0].features
+    ).filter(
+      (item: any) =>
+        !Number(
+          parsedObject.projections[selectedProjection].data[0].features[item]
+        )
+    );
+    const colorKey = keys[1];
+    const newData = parsedObject.projections[selectedProjection].data.map(
+      (item: any) => {
+        const newItem = {
+          ...item,
+        }; // Create a copy of the current item
+        for (const key in newItem) {
+          if (
+            newItem.hasOwnProperty(key) &&
+            typeof newItem[key] === "string" &&
+            newItem[key] === ""
+          ) {
+            newItem[key] = "NaN";
+          }
+        }
+        return newItem;
+      }
+    );
+
+    newData.forEach((element: any) => {
+      for (const key in element.features) {
+        const value = element.features[key];
+        if (
+          typeof value === "string" &&
+          items.filter((e) => e.category === key && e.name === value).length ===
+            0
+        ) {
+          if (key === colorKey) {
+            items.push({
+              category: key,
+              color: colorList[colorParamList.length % colorList.length],
+              name: value,
+            });
+            colorParamList.push(value);
+          } else {
+            items.push({ category: key, name: value });
+          }
         }
       }
-    };
-    reader.readAsText(file);
-  };
+    });
 
-  function importFile(parsedObject: any) {
-    dispatch(setTechnique(parsedObject.technique ?? ""));
-    dispatch(setColorParam(parsedObject.colorParam ?? ""));
-    dispatch(setShapeParam(parsedObject.shapeParam ?? ""));
-    dispatch(setSearchItems(parsedObject.searchItems ?? []));
-    dispatch(setThreeD(parsedObject.threeD ?? false));
-    dispatch(setTwoLegend(parsedObject.twoLegend ?? false));
-    dispatch(setCSVFilePath(parsedObject.csvFilePath ?? ""));
-    dispatch(setColorKey(parsedObject.colorKey ?? ""));
-    dispatch(setShapeKey(parsedObject.shapeKey ?? ""));
-    dispatch(setData(parsedObject.data ?? []));
-    dispatch(setKeyList(parsedObject.keyList ?? []));
-    dispatch(setColorParamList(parsedObject.colorParamList ?? []));
-    dispatch(setShapeParamList(parsedObject.shapeParamList ?? []));
-    dispatch(setSelectedMols([]));
-    dispatch(setPdbExists(false));
+    dispatch(setData(parsedObject.projections[selectedProjection].data));
+    dispatch(
+      setKeyList(
+        Object.keys(
+          parsedObject.projections[selectedProjection].data[0].features
+        )
+      )
+    );
+    dispatch(
+      setThreeD(parsedObject.projections[selectedProjection].dimensions === 3)
+    );
+    dispatch(
+      setColorKey(parsedObject.visualization_state.colorKey ?? "major_group")
+    );
+    dispatch(setColorParam(parsedObject.visualization_state.colorParam ?? ""));
+    dispatch(setColorParamList(colorParamList));
+    dispatch(
+      setSearchItems(parsedObject.visualization_state.searchItems ?? [])
+    );
+
+    dispatch(setProjections(parsedObject.projections));
+    dispatch(setProteinData(parsedObject.protein_data));
+
     dispatch(
       setCameraPosition(
         new Vector3(
-          parsedObject.position.x,
-          parsedObject.position.y,
-          parsedObject.position.z
+          parsedObject.visualization_state.camera[0].position.x,
+          parsedObject.visualization_state.camera[0].position.y,
+          parsedObject.visualization_state.camera[0].position.z
         )
       )
     );
     dispatch(
       setCameraRotation(
         new Vector3(
-          parsedObject.position.x,
-          parsedObject.position.y,
-          parsedObject.position.z
+          parsedObject.visualization_state.camera[0].position.x,
+          parsedObject.visualization_state.camera[0].position.y,
+          parsedObject.visualization_state.camera[0].position.z
         )
       )
     );
+    // dispatch(
+    //   setSearchItems(
+    //     parsedObject.visualization_state.highlighting.search_selection ?? []
+    //   )
+    // );
     dispatch(setIsLoading(false));
   }
 
-  const downloadCSV = () => {
-    // Extract headers from the keys of the first object
-    const headers = Object.keys(settings.data[0]);
+  // const { colorKey, keyList } = useAppSelector((state) => state.settings);
 
-    // Convert the data objects into rows
-    const rows = settings.data.map((obj: any) => {
-      return headers.map((header) => obj[header]);
-    });
-
-    // Combine headers and rows into a CSV string
-    const csvContent = [
-      headers.join(","),
-      ...rows.map((row: string[]) => row.join(",")),
-    ].join("\n");
-    const blob = new Blob([csvContent], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "embeddings.csv";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  };
-
-  const { colorKey, keyList } = useAppSelector((state) => state.settings);
-
-  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const selectedValue = event.target.value;
-    dispatch(setColorAndShapeKey(selectedValue, ""));
-  };
+  // const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
+  //   const selectedValue = event.target.value;
+  //   dispatch(setColorAndShapeKey(selectedValue, ""));
+  // };
 
   return (
     <div className="h-screen w-screen overflow-hidden">
@@ -320,12 +446,6 @@ const VisualizationComp = () => {
         <FileUploadFormModal
           fileUploadShown={fileUploadShown}
           setFileUploadShown={setFileUploadShown}
-          // setLoading={setLoading}
-        />
-        <SettingsModal
-          pdbExists={true}
-          settingsShown={settingsShown}
-          setSettingsShown={setSettingsShown}
         />
         <div
           className={
@@ -377,7 +497,7 @@ const VisualizationComp = () => {
         </div>
         <EntitySearch />
         {/* <Reader /> */}
-        <Box className="z-20 absolute top-16 w-80 m-4 right-0">
+        {/* <Box className="z-20 absolute top-16 w-80 m-4 right-0">
           <Select
             variant="filled"
             value={colorKey}
@@ -389,7 +509,7 @@ const VisualizationComp = () => {
               </option>
             ))}
           </Select>
-        </Box>
+        </Box> */}
         <div className="h-full">
           <div className="bg-white h-full">
             <div className="absolute z-0 top-0 left-0">
@@ -400,6 +520,10 @@ const VisualizationComp = () => {
                 }
                 setShapeParam={(param: string) =>
                   dispatch(setShapeParam(param))
+                }
+                keyList={settings.keyList}
+                setListParam={(param: string) =>
+                  dispatch(setColorAndShapeKey(param, ""))
                 }
                 twoLegend={settings.twoLegend}
                 isLegendOpen={settings.isLegendOpen}
@@ -435,11 +559,14 @@ const VisualizationComp = () => {
                   }
                 }}
               />
+              {/* {settings.selectedMols && (
+                <MoleculeViewer ref={moleculeViewerRef} />
+              )} */}
               {settings.selectedMols.length !== 0 && <MolstarViewer />}
             </div>
-            <div className="absolute z-20 bottom-4 right-2 m-2 flex">
+            <div className="absolute z-20 top-4 right-2 m-2 flex">
               <div className="has-tooltip">
-                <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
+                <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
                   {isFABOpen ? "Collapse" : "Expand"}
                 </span>
                 <div
@@ -465,7 +592,7 @@ const VisualizationComp = () => {
                 {
                   (
                     <div className="has-tooltip">
-                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
+                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
                         Download Plot
                       </span>
                       <div
@@ -489,7 +616,7 @@ const VisualizationComp = () => {
                 {
                   (
                     <div className="has-tooltip">
-                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
+                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
                         Download as SVG
                       </span>
                       <div
@@ -515,7 +642,7 @@ const VisualizationComp = () => {
                 {
                   (
                     <div className="has-tooltip">
-                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
+                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
                         {settings.isLegendOpen ? "Hide Legend" : "Show Legend"}
                       </span>
                       <div
@@ -543,12 +670,12 @@ const VisualizationComp = () => {
                 {
                   (
                     <div className="has-tooltip">
-                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
+                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
                         Export Project
                       </span>
                       <div
                         className="rounded-full bg-pink-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
-                        onClick={() => exportFile()}
+                        onClick={() => exportFileV2()}
                       >
                         <DocumentArrowUpIcon className="w-6 m-auto text-white" />
                       </div>
@@ -565,7 +692,7 @@ const VisualizationComp = () => {
                 {
                   (
                     <div className="has-tooltip">
-                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
+                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
                         Import Project
                       </span>
 
@@ -594,81 +721,8 @@ const VisualizationComp = () => {
                 {
                   (
                     <div className="has-tooltip">
-                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
-                        Export CSV
-                      </span>
-                      <div
-                        className="rounded-full bg-stone-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
-                        onClick={downloadCSV}
-                      >
-                        <ClipboardDocumentListIcon className="w-6 m-auto text-white" />
-                      </div>
-                    </div>
-                  ) as TransitionChildren
-                }
-              </CSSTransition>
-              <CSSTransition
-                in={isFABOpen}
-                timeout={300}
-                classNames="fade"
-                unmountOnExit
-              >
-                {
-                  (
-                    <div className="has-tooltip">
-                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
-                        Import CSV
-                      </span>
-
-                      <input
-                        type="file"
-                        accept=".csv"
-                        onChange={handleFileChangeCSV}
-                        className="hidden"
-                        id="file-upload-csv"
-                      />
-                      <label className="file-label" htmlFor="file-upload-csv">
-                        <div className="rounded-full bg-red-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md">
-                          <DocumentChartBarIcon className="w-6 m-auto text-white" />
-                        </div>
-                      </label>
-                    </div>
-                  ) as TransitionChildren
-                }
-              </CSSTransition>
-              <CSSTransition
-                in={isFABOpen}
-                timeout={300}
-                classNames="fade"
-                unmountOnExit
-              >
-                {
-                  (
-                    <div className="has-tooltip">
-                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
+                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
                         Settings
-                      </span>
-                      <div
-                        className="rounded-full bg-emerald-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
-                        onClick={() => setSettingsShown(true)}
-                      >
-                        <AdjustmentsVerticalIcon className="w-6 m-auto text-white" />
-                      </div>
-                    </div>
-                  ) as TransitionChildren
-                }
-              </CSSTransition>
-              <CSSTransition
-                in={isFABOpen}
-                timeout={300}
-                classNames="fade"
-                unmountOnExit
-              >
-                {
-                  (
-                    <div className="has-tooltip">
-                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white -mt-8">
-                        File Settings
                       </span>
                       <div
                         onClick={() => {

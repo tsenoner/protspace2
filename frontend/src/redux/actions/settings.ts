@@ -1,7 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { Vector3 } from "three/src/Three.js";
 import { fetchData } from "../../api/api";
 import { AtomStyleSpec, Item } from "../../data";
-import { colorList, shapeList } from "../../helpers/constants";
+import { colorList } from "../../helpers/constants";
 import {
   ADD_TO_ATOM_STYLE,
   ADD_TO_SEARCH_ATOM_STYLE,
@@ -25,6 +26,8 @@ import {
   SET_MOLECULE_SHOWN,
   SET_PDB,
   SET_PDB_EXISTS,
+  SET_PROJECTIONS,
+  SET_PROTEIN_DATA,
   SET_SEARCH_ATOM_STYLE,
   SET_SEARCH_ITEMS,
   SET_SELECTED_MOLS,
@@ -167,6 +170,14 @@ export function setColorAndShapeKey(colorKey: string, shapeKey: string) {
   };
 }
 
+export function setProjections(projections: any) {
+  return { type: SET_PROJECTIONS, payload: projections };
+}
+
+export function setProteinData(proteinData: any) {
+  return { type: SET_PROTEIN_DATA, payload: proteinData };
+}
+
 export const fetchAndSetData = createAsyncThunk<
   void,
   object,
@@ -175,39 +186,42 @@ export const fetchAndSetData = createAsyncThunk<
   try {
     const data =
       Object.keys(localData).length === 0 ? await fetchData() : localData;
-    const items: Item[] = [];
-    const colorParamList: string[] = [];
-    const shapeParamList: string[] = [];
-    const keys = Object.keys(data[0]).filter(
-      (item: any) => !Number(data[0][item])
-    );
-    var colorKey = keys[1];
-    var shapeKey = keys[2];
-    if (keys.length === 2) {
-      shapeKey = keys[0];
-    } else if (keys.length === 1) {
-      colorKey = keys[0];
-      shapeKey = "";
-    }
-    const newData = data.map((item: any) => {
-      const newItem = {
-        ...item,
-      }; // Create a copy of the current item
-      for (const key in newItem) {
-        if (
-          newItem.hasOwnProperty(key) &&
-          typeof newItem[key] === "string" &&
-          newItem[key] === ""
-        ) {
-          newItem[key] = "NaN";
-        }
-      }
-      return newItem;
+    const selectedProjection = data.visualization_state.technique ?? 0;
+    data.projections[selectedProjection].data.forEach((element: any) => {
+      element = Object.assign(element, data.protein_data[element.identifier]);
     });
 
+    const items: Item[] = [];
+    const colorParamList: string[] =
+      data.visualization_state.colorParamList ?? [];
+    const keys = Object.keys(
+      data.projections[selectedProjection].data[0].features
+    ).filter(
+      (item: any) =>
+        !Number(data.projections[selectedProjection].data[0].features[item])
+    );
+    const colorKey = keys[1];
+    const newData = data.projections[selectedProjection].data.map(
+      (item: any) => {
+        const newItem = {
+          ...item,
+        }; // Create a copy of the current item
+        for (const key in newItem) {
+          if (
+            newItem.hasOwnProperty(key) &&
+            typeof newItem[key] === "string" &&
+            newItem[key] === ""
+          ) {
+            newItem[key] = "NaN";
+          }
+        }
+        return newItem;
+      }
+    );
+
     newData.forEach((element: any) => {
-      for (const key in element) {
-        const value = element[key];
+      for (const key in element.features) {
+        const value = element.features[key];
         if (
           typeof value === "string" &&
           items.filter((e) => e.category === key && e.name === value).length ===
@@ -220,32 +234,52 @@ export const fetchAndSetData = createAsyncThunk<
               name: value,
             });
             colorParamList.push(value);
-          } else if (key === shapeKey) {
-            items.push({
-              category: key,
-              img: shapeList[shapeParamList.length % shapeList.length],
-              name: value,
-            });
-            shapeParamList.push(value);
           } else {
             items.push({ category: key, name: value });
           }
         }
       }
     });
-    thunkAPI.dispatch(setData(newData));
-    thunkAPI.dispatch(setDataItems(items));
-    thunkAPI.dispatch(setShapeParamList(shapeParamList));
+
+    thunkAPI.dispatch(setData(data.projections[selectedProjection].data));
+    thunkAPI.dispatch(
+      setKeyList(
+        Object.keys(data.projections[selectedProjection].data[0].features)
+      )
+    );
+    thunkAPI.dispatch(
+      setThreeD(data.projections[selectedProjection].dimensions === 3)
+    );
+    thunkAPI.dispatch(
+      setColorKey(data.visualization_state.colorKey ?? "major_group")
+    );
+    thunkAPI.dispatch(setColorParam(data.visualization_state.colorParam ?? ""));
     thunkAPI.dispatch(setColorParamList(colorParamList));
-    thunkAPI.dispatch(setKeyList(keys));
-    thunkAPI.dispatch(setColorKey(colorKey));
-    thunkAPI.dispatch(setShapeKey(shapeKey));
-    thunkAPI.dispatch(setColorParam(""));
-    thunkAPI.dispatch(setShapeParam(""));
-    // thunkAPI.dispatch(setTechnique("umap"));
-    if (keys.length === 1) {
-      thunkAPI.dispatch(setTwoLegend(false));
-    }
+    thunkAPI.dispatch(
+      setSearchItems(data.visualization_state.searchItems ?? [])
+    );
+
+    thunkAPI.dispatch(setProjections(data.projections));
+    thunkAPI.dispatch(setProteinData(data.protein_data));
+
+    thunkAPI.dispatch(
+      setCameraPosition(
+        new Vector3(
+          data.visualization_state.camera[0].position.x,
+          data.visualization_state.camera[0].position.y,
+          data.visualization_state.camera[0].position.z
+        )
+      )
+    );
+    thunkAPI.dispatch(
+      setCameraRotation(
+        new Vector3(
+          data.visualization_state.camera[0].position.x,
+          data.visualization_state.camera[0].position.y,
+          data.visualization_state.camera[0].position.z
+        )
+      )
+    );
   } catch (error) {
     console.error("Error fetching data:", error);
     thunkAPI.dispatch(

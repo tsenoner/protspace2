@@ -1,16 +1,13 @@
-import { csvToJson } from "../helpers/csvToJson";
-import store from "../redux/store";
-
 export const fetchData = async () => {
-  const csvFilePath = store.getState().settings.csvFilePath;
+  const filePath = "/df_3FTx_mature_prott5.json";
   try {
-    const response = await fetch(csvFilePath);
+    const response = await fetch(filePath);
     if (!response.ok) {
       throw new Error("Failed to fetch data");
     }
-    const text = await response.text();
-    const json = csvToJson(text);
-    const data = JSON.parse(JSON.stringify(json, null, 2));
+
+    const data = await response.json();
+
     return data;
   } catch (error) {
     console.error("Error fetching data:", error);

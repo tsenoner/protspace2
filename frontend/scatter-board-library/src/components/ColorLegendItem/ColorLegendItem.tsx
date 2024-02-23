@@ -10,27 +10,30 @@ const ColorLegendItem: React.FC<ColorLegendItemProps> = ({
   onClick,
 }) => {
   return (
-    <div
-      onClick={onClick}
-      className="flex gap-x-2 min-h-custom selection:border-r-1 items-center cursor-pointer"
-    >
+    <div>
       <div
-        className={`w-4 h-4 rounded-full`}
-        style={{
-          backgroundColor: color,
-        }}
-      />
-      <p
-        className={`${
-          selected
-            ? "text-black"
-            : screenshot
-            ? "text-gray-500"
-            : "text-gray-500 line-through"
-        } w-60 break-all`}
+        onClick={onClick}
+        className="flex gap-x-2 min-h-custom selection:border-r-1 items-center cursor-pointer"
       >
-        {text}
-      </p>
+        <div
+          className={`w-4 h-4 rounded-full`}
+          style={{
+            backgroundColor: color,
+          }}
+        />
+        <p
+          className={`${
+            selected
+              ? "text-black"
+              : screenshot
+              ? "text-gray-500"
+              : "text-gray-500 line-through"
+          } w-60 break-all`}
+        >
+          {text}
+        </p>
+      </div>
+      <div></div>
     </div>
   );
 };

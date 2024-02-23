@@ -5,4 +5,6 @@ export interface ColorLegendProps {
     colorParam: string;
     setColorParam: (colorParam: string) => void;
     colorList: string[];
+    keyList: string[];
+    setListParam: (listParam: string) => void;
 }
