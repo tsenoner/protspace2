@@ -9,33 +9,5 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script>
-      console.log("Page loaded");
-
-      // Function to handle message events
-      function handleMessage(event) {
-        console.log("Received message event:", event);
-
-        // Log the origin of the received message
-        console.log("Message origin:", event.origin);
-
-        // Conditional origin check for security
-        if (event.origin !== "https://colab.research.google.com") {
-          console.error("Message from unknown origin:", event.origin);
-          return; // Stop processing the message if the origin is not recognized
-        }
-
-        // Assuming the message is a simple object or string
-        console.log("Message received from Colab:", event.data);
-      }
-
-      // Add the event listener for receiving messages
-      window.addEventListener("message", handleMessage);
-
-      // Ensure to clean up this event listener, especially if navigating away or closing the page
-      window.onbeforeunload = function () {
-        window.removeEventListener("message", handleMessage);
-      };
-    </script>
   </body>
 </html>
