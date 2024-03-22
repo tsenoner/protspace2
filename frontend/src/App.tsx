@@ -4,25 +4,25 @@ import VisualizationComp from "./components/VisualizationComp";
 
 function App() {
   useEffect(() => {
-    // Function to handle the message event
-    const handleMessage = (event: any) => {
-      // Optional: Check the origin of the message sender for security
-      // if (event.origin !== "http://expected-origin.com")
-      //   return;
+    const handleMessage = (event: { origin: string; data: any }) => {
+      console.log("Received message event:", event);
 
-      // Assuming your message is a simple object
-      console.log("Message received from colab:", event.data);
+      // Log the origin of the received message
+      console.log("Message origin:", event.origin);
 
-      // TODO: Handle the received message as needed
+      // Conditional origin check for security (adjust the origin according to your sending site)
+      if (event.origin !== "https://colab.research.google.com") {
+        console.error("Message from unknown origin:", event.origin);
+        return; // Stop processing the message further if the origin is not recognized
+      }
+
+      // Assuming your message is a simple object or string
+      console.log("Message received from Colab:", event.data);
     };
 
-    // Add the event listener for receiving messages
     window.addEventListener("message", handleMessage);
-
-    // Cleanup: Remove the event listener when the component unmounts
     return () => window.removeEventListener("message", handleMessage);
-  }, []); // The empty array ensures this effect runs only once on mount
-
+  }, []);
   return (
     <>
       <VisualizationComp />
