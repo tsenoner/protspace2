@@ -23,6 +23,8 @@ function App() {
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
   }, []);
+
+  console.log("App rendered");
   return (
     <>
       <VisualizationComp />
