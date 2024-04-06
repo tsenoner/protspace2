@@ -25,7 +25,6 @@ import { colorList, shapeList } from "../helpers/constants";
 import { useAppDispatch, useAppSelector } from "../helpers/hooks";
 import {
   fetchAndSetData,
-  setCSVFilePath,
   setCameraPosition,
   setCameraRotation,
   setColorAndShapeKey,
@@ -40,14 +39,11 @@ import {
   setIsLegendOpen,
   setIsLoading,
   setKeyList,
-  setPdbExists,
   setProjections,
   setProteinData,
   setSearchItems,
   setSelectedMols,
-  setShapeKey,
   setShapeParam,
-  setShapeParamList,
   setTechnique,
   setThreeD,
 } from "../redux/actions/settings";
@@ -61,7 +57,6 @@ import { ThunkDispatch } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { TransitionChildren } from "react-transition-group/Transition";
 import { Item } from "../data";
-import { csvToJson } from "../helpers/csvToJson";
 import MolstarViewer from "./MolstarViewer";
 // import Reader from "./Reader";
 
@@ -193,91 +188,6 @@ const VisualizationComp = () => {
         } catch (error) {
           setErrorMessage("JSON could not be parsed. Please check the file.");
           console.error("Error parsing JSON:", error);
-        }
-      }
-    };
-    reader.readAsText(file);
-  };
-
-  const fetchDataFromFile = async (file: File) => {
-    const reader = new FileReader();
-
-    reader.onload = async (event) => {
-      const fileContents = event.target?.result;
-      if (fileContents) {
-        try {
-          const json = csvToJson(fileContents as string);
-          const data = JSON.parse(JSON.stringify(json, null, 2));
-          console.log("data: ", data);
-          const items: Item[] = [];
-          const colorParamList: string[] = [];
-          const shapeParamList: string[] = [];
-          const keys = Object.keys(data[0]).filter(
-            (item: any) => !Number(data[0][item])
-          );
-          const colorKey = keys[1];
-          const shapeKey = keys[2];
-          const newData = data.map((item: any) => {
-            const newItem = {
-              ...item,
-            }; // Create a copy of the current item
-            for (const key in newItem) {
-              if (
-                newItem.hasOwnProperty(key) &&
-                typeof newItem[key] === "string" &&
-                newItem[key] === ""
-              ) {
-                newItem[key] = "NaN";
-              }
-            }
-            return newItem;
-          });
-
-          newData.forEach((element: any) => {
-            for (const key in element) {
-              const value = element[key];
-              if (
-                typeof value === "string" &&
-                items.filter((e) => e.category === key && e.name === value)
-                  .length === 0
-              ) {
-                if (key === colorKey) {
-                  items.push({
-                    category: key,
-                    color: colorList[colorParamList.length % colorList.length],
-                    name: value,
-                  });
-                  colorParamList.push(value);
-                } else if (key === shapeKey) {
-                  items.push({
-                    category: key,
-                    img: shapeList[shapeParamList.length % shapeList.length],
-                    name: value,
-                  });
-                  shapeParamList.push(value);
-                } else {
-                  items.push({ category: key, name: value });
-                }
-              }
-            }
-          });
-          dispatch(setCSVFilePath(""));
-          dispatch(setData(newData));
-          dispatch(setDataItems(items));
-          dispatch(setShapeParamList(shapeParamList));
-          dispatch(setColorParamList(colorParamList));
-          dispatch(setKeyList(keys));
-          dispatch(setColorKey(colorKey));
-          dispatch(setShapeKey(shapeKey));
-          dispatch(setColorParam(""));
-          dispatch(setShapeParam(""));
-          dispatch(setSelectedMols([]));
-          dispatch(setPdbExists(false));
-          dispatch(setSearchItems([]));
-          dispatch(setIsLoading(false));
-        } catch (error) {
-          console.error("Error parsing CSV:", error);
-          dispatch(setIsLoading(false));
         }
       }
     };

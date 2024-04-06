@@ -8,7 +8,18 @@ interface ColorLegendProps {
     colorParam: string;
     setColorParam: (colorParam: string) => void;
     colorList: string[];
+    keyList: string[];
+    setListParam: (listParam: string) => void;
+    setCustomFeatures: (customFeatures: string[]) => void;
+    customizations: ParamCustomization[];
+    lightMode: boolean;
 }
+type ParamCustomization = {
+    featureName: string;
+    customName: string;
+    color: string;
+    category: string;
+};
 
 declare const ColorLegend: React.FC<ColorLegendProps>;
 
@@ -43,11 +54,14 @@ interface ScatterBoardRef {
     downloadSVG: () => void;
 }
 interface ScatterBoardProps {
+    lightMode: boolean;
     cameraRef?: MutableRefObject<PerspectiveCamera>;
     setColorParam: (value: string) => void;
     onVisualizeClicked?: (value: string) => void;
     onCompareClicked?: (value: string) => void;
     setShapeParam: (value: string) => void;
+    setListParam: (value: string) => void;
+    keyList: string[];
     twoLegend: boolean;
     isLegendOpen: boolean;
     searchItems: Item[];
@@ -66,6 +80,8 @@ interface ScatterBoardProps {
     colorList: string[];
     shapeList: string[];
     setErrorMessage?: (value: string) => void;
+    customFeatures?: any;
+    setCustomFeatures: (value: string[]) => void;
 }
 
 declare const ScatterBoard: React.ForwardRefExoticComponent<ScatterBoardProps & React.RefAttributes<ScatterBoardRef>>;

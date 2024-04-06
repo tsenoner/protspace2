@@ -361,7 +361,7 @@ const settingsReducer = (
       };
     case SET_TECHNIQUE:
       const selectedProjection = state.projections[action.payload];
-      selectedProjection.data.forEach((element: any, index: number) => {
+      selectedProjection.data.forEach((element: any) => {
         element = Object.assign(
           element,
           state.protein_data[element.identifier]

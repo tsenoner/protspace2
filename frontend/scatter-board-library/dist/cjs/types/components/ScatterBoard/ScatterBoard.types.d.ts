@@ -6,11 +6,14 @@ export interface ScatterBoardRef {
     downloadSVG: () => void;
 }
 export interface ScatterBoardProps {
+    lightMode: boolean;
     cameraRef?: MutableRefObject<PerspectiveCamera>;
     setColorParam: (value: string) => void;
     onVisualizeClicked?: (value: string) => void;
     onCompareClicked?: (value: string) => void;
     setShapeParam: (value: string) => void;
+    setListParam: (value: string) => void;
+    keyList: string[];
     twoLegend: boolean;
     isLegendOpen: boolean;
     searchItems: Item[];
@@ -29,4 +32,6 @@ export interface ScatterBoardProps {
     colorList: string[];
     shapeList: string[];
     setErrorMessage?: (value: string) => void;
+    customFeatures?: any;
+    setCustomFeatures: (value: string[]) => void;
 }

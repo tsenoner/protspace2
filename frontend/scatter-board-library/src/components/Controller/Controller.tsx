@@ -32,13 +32,13 @@ const Controller: React.FC<ControllerProps> = ({
       <div className="w-full absolute z-20 top-12 text-xs flex place-content-around">
         <p
           onClick={onVisualizeClicked}
-          className="w-16 text-center hover:shadow-md py-1"
+          className="w-16 text-center hover:shadow-md py-1 text-black"
         >
           Visualize
         </p>
         <p
           onClick={onCompareClicked}
-          className="w-16 text-center hover:shadow-md py-1"
+          className="w-16 text-center hover:shadow-md py-1 text-black"
         >
           Compare
         </p>

@@ -1,5 +1,189 @@
 import * as React$1 from 'react';
-import React__default, { useState, forwardRef, useRef, useImperativeHandle, useEffect } from 'react';
+import React__default, { useState, useEffect, forwardRef, useRef, useImperativeHandle } from 'react';
+
+function styleInject(css, ref) {
+  if ( ref === void 0 ) ref = {};
+  var insertAt = ref.insertAt;
+
+  if (!css || typeof document === 'undefined') { return; }
+
+  var head = document.head || document.getElementsByTagName('head')[0];
+  var style = document.createElement('style');
+  style.type = 'text/css';
+
+  if (insertAt === 'top') {
+    if (head.firstChild) {
+      head.insertBefore(style, head.firstChild);
+    } else {
+      head.appendChild(style);
+    }
+  } else {
+    head.appendChild(style);
+  }
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
+}
+
+var css_248z = "/*\n! tailwindcss v3.3.5 | MIT License | https://tailwindcss.com\n*//*\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\n*/\n\n*,\n::before,\n::after {\n  box-sizing: border-box; /* 1 */\n  border-width: 0; /* 2 */\n  border-style: solid; /* 2 */\n  border-color: #e5e7eb; /* 2 */\n}\n\n::before,\n::after {\n  --tw-content: '';\n}\n\n/*\n1. Use a consistent sensible line-height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n3. Use a more readable tab size.\n4. Use the user's configured `sans` font-family by default.\n5. Use the user's configured `sans` font-feature-settings by default.\n6. Use the user's configured `sans` font-variation-settings by default.\n*/\n\nhtml {\n  line-height: 1.5; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n  -moz-tab-size: 4; /* 3 */\n  -o-tab-size: 4;\n     tab-size: 4; /* 3 */\n  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"; /* 4 */\n  font-feature-settings: normal; /* 5 */\n  font-variation-settings: normal; /* 6 */\n}\n\n/*\n1. Remove the margin in all browsers.\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\n*/\n\nbody {\n  margin: 0; /* 1 */\n  line-height: inherit; /* 2 */\n}\n\n/*\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n3. Ensure horizontal rules are visible by default.\n*/\n\nhr {\n  height: 0; /* 1 */\n  color: inherit; /* 2 */\n  border-top-width: 1px; /* 3 */\n}\n\n/*\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\n\nabbr:where([title]) {\n  -webkit-text-decoration: underline dotted;\n          text-decoration: underline dotted;\n}\n\n/*\nRemove the default font size and weight for headings.\n*/\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/*\nReset links to optimize for opt-in styling instead of opt-out.\n*/\n\na {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/*\nAdd the correct font weight in Edge and Safari.\n*/\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/*\n1. Use the user's configured `mono` font family by default.\n2. Correct the odd `em` font sizing in all browsers.\n*/\n\ncode,\nkbd,\nsamp,\npre {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/*\nAdd the correct font size in all browsers.\n*/\n\nsmall {\n  font-size: 80%;\n}\n\n/*\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\n*/\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/*\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n3. Remove gaps between table borders by default.\n*/\n\ntable {\n  text-indent: 0; /* 1 */\n  border-color: inherit; /* 2 */\n  border-collapse: collapse; /* 3 */\n}\n\n/*\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n3. Remove default padding in all browsers.\n*/\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-feature-settings: inherit; /* 1 */\n  font-variation-settings: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  font-weight: inherit; /* 1 */\n  line-height: inherit; /* 1 */\n  color: inherit; /* 1 */\n  margin: 0; /* 2 */\n  padding: 0; /* 3 */\n}\n\n/*\nRemove the inheritance of text transform in Edge and Firefox.\n*/\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Remove default button styles.\n*/\n\nbutton,\n[type='button'],\n[type='reset'],\n[type='submit'] {\n  -webkit-appearance: button; /* 1 */\n  background-color: transparent; /* 2 */\n  background-image: none; /* 2 */\n}\n\n/*\nUse the modern Firefox focus style for all focusable elements.\n*/\n\n:-moz-focusring {\n  outline: auto;\n}\n\n/*\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\n*/\n\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\n/*\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\n\nprogress {\n  vertical-align: baseline;\n}\n\n/*\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n\n::-webkit-inner-spin-button,\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/*\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n\n[type='search'] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/*\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to `inherit` in Safari.\n*/\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\n\nsummary {\n  display: list-item;\n}\n\n/*\nRemoves the default spacing and border for appropriate elements.\n*/\n\nblockquote,\ndl,\ndd,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\nfigure,\np,\npre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol,\nul,\nmenu {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/*\nReset default styling for dialogs.\n*/\ndialog {\n  padding: 0;\n}\n\n/*\nPrevent resizing textareas horizontally by default.\n*/\n\ntextarea {\n  resize: vertical;\n}\n\n/*\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\n2. Set the default placeholder color to the user's configured gray 400 color.\n*/\n\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\ninput::placeholder,\ntextarea::placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\n/*\nSet the default cursor for buttons.\n*/\n\nbutton,\n[role=\"button\"] {\n  cursor: pointer;\n}\n\n/*\nMake sure disabled buttons don't get the pointer cursor.\n*/\n:disabled {\n  cursor: default;\n}\n\n/*\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\n   This can trigger a poorly considered lint error in some tools but is included by design.\n*/\n\nimg,\nsvg,\nvideo,\ncanvas,\naudio,\niframe,\nembed,\nobject {\n  display: block; /* 1 */\n  vertical-align: middle; /* 2 */\n}\n\n/*\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\n*/\n\nimg,\nvideo {\n  max-width: 100%;\n  height: auto;\n}\n\n/* Make elements with the HTML hidden attribute stay hidden by default */\n[hidden] {\n  display: none;\n}\n\n*, ::before, ::after {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n\n::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n.container {\n  width: 100%;\n}\n@media (min-width: 640px) {\n\n  .container {\n    max-width: 640px;\n  }\n}\n@media (min-width: 768px) {\n\n  .container {\n    max-width: 768px;\n  }\n}\n@media (min-width: 1024px) {\n\n  .container {\n    max-width: 1024px;\n  }\n}\n@media (min-width: 1280px) {\n\n  .container {\n    max-width: 1280px;\n  }\n}\n@media (min-width: 1536px) {\n\n  .container {\n    max-width: 1536px;\n  }\n}\n.fixed {\n  position: fixed;\n}\n.absolute {\n  position: absolute;\n}\n.relative {\n  position: relative;\n}\n.inset-0 {\n  inset: 0px;\n}\n.bottom-0 {\n  bottom: 0px;\n}\n.bottom-12 {\n  bottom: 3rem;\n}\n.bottom-16 {\n  bottom: 4rem;\n}\n.bottom-8 {\n  bottom: 2rem;\n}\n.left-0 {\n  left: 0px;\n}\n.left-20 {\n  left: 5rem;\n}\n.left-24 {\n  left: 6rem;\n}\n.left-5 {\n  left: 1.25rem;\n}\n.right-0 {\n  right: 0px;\n}\n.right-64 {\n  right: 16rem;\n}\n.top-0 {\n  top: 0px;\n}\n.top-12 {\n  top: 3rem;\n}\n.top-20 {\n  top: 5rem;\n}\n.top-24 {\n  top: 6rem;\n}\n.top-32 {\n  top: 8rem;\n}\n.-z-20 {\n  z-index: -20;\n}\n.z-0 {\n  z-index: 0;\n}\n.z-10 {\n  z-index: 10;\n}\n.z-20 {\n  z-index: 20;\n}\n.z-30 {\n  z-index: 30;\n}\n.m-8 {\n  margin: 2rem;\n}\n.m-auto {\n  margin: auto;\n}\n.mx-2 {\n  margin-left: 0.5rem;\n  margin-right: 0.5rem;\n}\n.my-4 {\n  margin-top: 1rem;\n  margin-bottom: 1rem;\n}\n.ml-auto {\n  margin-left: auto;\n}\n.mr-2 {\n  margin-right: 0.5rem;\n}\n.mr-4 {\n  margin-right: 1rem;\n}\n.mr-auto {\n  margin-right: auto;\n}\n.mt-2 {\n  margin-top: 0.5rem;\n}\n.mt-4 {\n  margin-top: 1rem;\n}\n.block {\n  display: block;\n}\n.inline {\n  display: inline;\n}\n.flex {\n  display: flex;\n}\n.hidden {\n  display: none;\n}\n.h-24 {\n  height: 6rem;\n}\n.h-4 {\n  height: 1rem;\n}\n.h-40 {\n  height: 10rem;\n}\n.h-6 {\n  height: 1.5rem;\n}\n.h-64 {\n  height: 16rem;\n}\n.h-full {\n  height: 100%;\n}\n.min-h-custom {\n  min-height: 32px;\n}\n.w-0 {\n  width: 0px;\n}\n.w-0\\.5 {\n  width: 0.125rem;\n}\n.w-16 {\n  width: 4rem;\n}\n.w-20 {\n  width: 5rem;\n}\n.w-24 {\n  width: 6rem;\n}\n.w-4 {\n  width: 1rem;\n}\n.w-40 {\n  width: 10rem;\n}\n.w-6 {\n  width: 1.5rem;\n}\n.w-60 {\n  width: 15rem;\n}\n.w-64 {\n  width: 16rem;\n}\n.w-full {\n  width: 100%;\n}\n.origin-top-left {\n  transform-origin: top left;\n}\n.transform {\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n.cursor-pointer {\n  cursor: pointer;\n}\n.resize {\n  resize: both;\n}\n.flex-col {\n  flex-direction: column;\n}\n.place-content-around {\n  place-content: space-around;\n}\n.items-center {\n  align-items: center;\n}\n.justify-center {\n  justify-content: center;\n}\n.justify-between {\n  justify-content: space-between;\n}\n.gap-x-2 {\n  -moz-column-gap: 0.5rem;\n       column-gap: 0.5rem;\n}\n.overflow-hidden {\n  overflow: hidden;\n}\n.overflow-x-auto {\n  overflow-x: auto;\n}\n.overflow-y-auto {\n  overflow-y: auto;\n}\n.truncate {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.whitespace-nowrap {\n  white-space: nowrap;\n}\n.break-all {\n  word-break: break-all;\n}\n.rounded {\n  border-radius: 0.25rem;\n}\n.rounded-full {\n  border-radius: 9999px;\n}\n.rounded-md {\n  border-radius: 0.375rem;\n}\n.border {\n  border-width: 1px;\n}\n.border-2 {\n  border-width: 2px;\n}\n.border-gray-300 {\n  --tw-border-opacity: 1;\n  border-color: rgb(209 213 219 / var(--tw-border-opacity));\n}\n.border-stone-400 {\n  --tw-border-opacity: 1;\n  border-color: rgb(168 162 158 / var(--tw-border-opacity));\n}\n.bg-black {\n  --tw-bg-opacity: 1;\n  background-color: rgb(0 0 0 / var(--tw-bg-opacity));\n}\n.bg-blue-500 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(59 130 246 / var(--tw-bg-opacity));\n}\n.bg-gray-100 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(243 244 246 / var(--tw-bg-opacity));\n}\n.bg-gray-300 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(209 213 219 / var(--tw-bg-opacity));\n}\n.bg-gray-50 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(249 250 251 / var(--tw-bg-opacity));\n}\n.bg-red-500 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(239 68 68 / var(--tw-bg-opacity));\n}\n.bg-stone-300 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(214 211 209 / var(--tw-bg-opacity));\n}\n.bg-stone-400 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(168 162 158 / var(--tw-bg-opacity));\n}\n.bg-white {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n}\n.bg-opacity-50 {\n  --tw-bg-opacity: 0.5;\n}\n.p-1 {\n  padding: 0.25rem;\n}\n.p-2 {\n  padding: 0.5rem;\n}\n.p-2\\.5 {\n  padding: 0.625rem;\n}\n.px-3 {\n  padding-left: 0.75rem;\n  padding-right: 0.75rem;\n}\n.px-4 {\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n.px-6 {\n  padding-left: 1.5rem;\n  padding-right: 1.5rem;\n}\n.py-1 {\n  padding-top: 0.25rem;\n  padding-bottom: 0.25rem;\n}\n.py-4 {\n  padding-top: 1rem;\n  padding-bottom: 1rem;\n}\n.pb-1 {\n  padding-bottom: 0.25rem;\n}\n.pl-2 {\n  padding-left: 0.5rem;\n}\n.text-center {\n  text-align: center;\n}\n.text-sm {\n  font-size: 0.875rem;\n  line-height: 1.25rem;\n}\n.text-xs {\n  font-size: 0.75rem;\n  line-height: 1rem;\n}\n.uppercase {\n  text-transform: uppercase;\n}\n.text-black {\n  --tw-text-opacity: 1;\n  color: rgb(0 0 0 / var(--tw-text-opacity));\n}\n.text-gray-500 {\n  --tw-text-opacity: 1;\n  color: rgb(107 114 128 / var(--tw-text-opacity));\n}\n.text-gray-900 {\n  --tw-text-opacity: 1;\n  color: rgb(17 24 39 / var(--tw-text-opacity));\n}\n.text-white {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity));\n}\n.line-through {\n  text-decoration-line: line-through;\n}\n.opacity-50 {\n  opacity: 0.5;\n}\n.transition {\n  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;\n  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;\n  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n.transition-all {\n  transition-property: all;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n.duration-300 {\n  transition-duration: 300ms;\n}\n.ease-in-out {\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n}\n.hover\\:bg-blue-700:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(29 78 216 / var(--tw-bg-opacity));\n}\n.hover\\:bg-red-700:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(185 28 28 / var(--tw-bg-opacity));\n}\n.hover\\:opacity-10:hover {\n  opacity: 0.1;\n}\n.hover\\:shadow-md:hover {\n  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n.focus\\:border-blue-500:focus {\n  --tw-border-opacity: 1;\n  border-color: rgb(59 130 246 / var(--tw-border-opacity));\n}\n.focus\\:ring-blue-500:focus {\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity));\n}\n@media (prefers-color-scheme: dark) {\n\n  .dark\\:border-gray-600 {\n    --tw-border-opacity: 1;\n    border-color: rgb(75 85 99 / var(--tw-border-opacity));\n  }\n\n  .dark\\:bg-gray-700 {\n    --tw-bg-opacity: 1;\n    background-color: rgb(55 65 81 / var(--tw-bg-opacity));\n  }\n\n  .dark\\:text-white {\n    --tw-text-opacity: 1;\n    color: rgb(255 255 255 / var(--tw-text-opacity));\n  }\n\n  .dark\\:placeholder-gray-400::-moz-placeholder {\n    --tw-placeholder-opacity: 1;\n    color: rgb(156 163 175 / var(--tw-placeholder-opacity));\n  }\n\n  .dark\\:placeholder-gray-400::placeholder {\n    --tw-placeholder-opacity: 1;\n    color: rgb(156 163 175 / var(--tw-placeholder-opacity));\n  }\n\n  .dark\\:focus\\:border-blue-500:focus {\n    --tw-border-opacity: 1;\n    border-color: rgb(59 130 246 / var(--tw-border-opacity));\n  }\n\n  .dark\\:focus\\:ring-blue-500:focus {\n    --tw-ring-opacity: 1;\n    --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity));\n  }\n}";
+styleInject(css_248z);
+
+const ColorLegendItem = ({ color, selected, screenshot, text, onClick, lightMode, }) => {
+    const textColor = lightMode ? "black" : "white";
+    return (React__default.createElement("div", null,
+        React__default.createElement("div", { onClick: onClick, className: "flex gap-x-2 min-h-custom selection:border-r-1 items-center cursor-pointer" },
+            React__default.createElement("div", { className: `w-4 h-4 rounded-full`, style: {
+                    backgroundColor: color,
+                } }),
+            React__default.createElement("p", { style: { color: screenshot ? "black" : textColor }, className: `${selected
+                    ? "text-black"
+                    : screenshot
+                        ? "text-black"
+                        : "text-black line-through opacity-50"} w-60 break-all` }, text))));
+};
+
+const EditColorModal = ({ isOpen, onClose, colorList, onSave, colorParamList, existingCustomizations, category, }) => {
+    const initializeEditList = () => {
+        return colorParamList.map((featureName, index) => {
+            const existingCustomization = Object.keys(existingCustomizations).length !== 0 &&
+                existingCustomizations.find((c) => c.featureName === featureName && c.category === category);
+            return {
+                featureName,
+                // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
+                customName: (existingCustomization === null || existingCustomization === void 0 ? void 0 : existingCustomization.customName) || featureName,
+                color: featureName === "NaN"
+                    ? "#000000"
+                    : // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
+                        (existingCustomization === null || existingCustomization === void 0 ? void 0 : existingCustomization.color) ||
+                            colorList[index % colorList.length],
+                category: category,
+            };
+        });
+    };
+    const [editList, setEditList] = useState(initializeEditList);
+    useEffect(() => {
+        setEditList(initializeEditList());
+    }, [colorList, colorParamList, existingCustomizations]);
+    // Handle changes in color
+    const handleColorChange = (color, index) => {
+        const newEditList = [...editList];
+        newEditList[index].color = color;
+        setEditList(newEditList);
+    };
+    // Handle changes in custom name
+    const handleNameChange = (customName, index) => {
+        const newEditList = [...editList];
+        newEditList[index].customName = customName;
+        setEditList(newEditList);
+    };
+    const handleSave = () => {
+        const sortedEditList = [...editList].sort((a, b) => a.customName.localeCompare(b.customName));
+        onSave(sortedEditList);
+    };
+    // Component render
+    return isOpen ? (React__default.createElement("div", { className: "fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 flex items-center justify-center" },
+        React__default.createElement("div", { style: { maxHeight: "480px", minWidth: "420px", overflow: "scroll" }, className: "bg-white px-6 py-4 rounded" },
+            React__default.createElement("h2", { style: {
+                    fontSize: "24px",
+                    fontWeight: "600",
+                    color: "#333",
+                    textAlign: "center",
+                    marginBottom: "20px",
+                    textTransform: "uppercase",
+                    letterSpacing: "1px",
+                    borderBottom: "2px solid #eee",
+                    paddingBottom: "10px",
+                } }, "Edit Labels and Colors"),
+            editList.map((item, index) => (React__default.createElement("div", { className: "flex items-center justify-between my-4", key: index },
+                React__default.createElement("input", { id: `hidden-color-input-${index}`, type: "color", value: item.color, onChange: (e) => handleColorChange(e.target.value, index), style: {
+                        opacity: 0,
+                        left: "40%",
+                        top: 200,
+                        position: "absolute",
+                        width: "24px",
+                        height: "24px",
+                        zIndex: -1,
+                        background: "none",
+                    } }),
+                React__default.createElement("div", { style: {
+                        width: "24px",
+                        height: "24px",
+                        borderRadius: "50%",
+                        background: item.color,
+                        cursor: "pointer",
+                    }, onClick: () => document.getElementById(`hidden-color-input-${index}`).click() }),
+                React__default.createElement("input", { type: "text", value: item.customName, onChange: (e) => handleNameChange(e.target.value, index), className: "text-black p-1 rounded bg-gray-100", style: { border: "1px solid #33333338", width: "87%" } })))),
+            React__default.createElement("div", { className: "flex justify-between mt-4", style: { borderTop: "2px solid #eee", paddingTop: "16px" } },
+                React__default.createElement("button", { onClick: handleSave, className: "bg-blue-500 text-white p-2 rounded hover:bg-blue-700 transition duration-300 ease-in-out mr-2" }, "Save"),
+                React__default.createElement("button", { onClick: onClose, className: "bg-red-500 text-white p-2 rounded hover:bg-red-700 transition duration-300 ease-in-out" }, "Cancel"))))) : null;
+};
+const ColorLegend = ({ screenshot, colorKey, keyList, setListParam, colorParamList, colorParam, setColorParam, colorList, setCustomFeatures, customizations, lightMode, }) => {
+    const [closed, setClosed] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const findCustomization = (featureName) => {
+        return (Object.keys(customizations).length !== 0 &&
+            customizations.find((c) => c.featureName === featureName && c.category === colorKey));
+    };
+    const sortLogicBasedOnCustomFeatures = (customFeatures) => {
+        const sortedCustomFeatures = customFeatures.sort((a, b) => a.customName.localeCompare(b.customName));
+        const sortedFeatureNames = sortedCustomFeatures.map((feature) => feature.featureName);
+        return sortedFeatureNames;
+    };
+    const [sortedList, setSortedList] = useState([]);
+    const [listToRender, setListToRender] = useState(colorParamList);
+    useEffect(() => {
+        if (sortedList.length > 0 && sortedList.length === colorParamList.length) {
+            setListToRender(sortedList);
+        }
+        else {
+            setListToRender(colorParamList);
+        }
+    }, [sortedList, colorParamList, customizations]);
+    useEffect(() => {
+        // Sort custom features and update sortedList
+        const newSortedList = sortLogicBasedOnCustomFeatures(customizations);
+        setSortedList(newSortedList);
+    }, [customizations]);
+    return (React__default.createElement("div", { id: "color-legend", className: "block rounded-md mr-4 w-full mt-2 legend p-2", style: { background: lightMode ? "#F0F2F5" : "#101827" } },
+        React__default.createElement("div", { className: "flex items-center" },
+            React__default.createElement("select", { className: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", value: colorKey, onChange: (e) => setListParam(e.target.value) }, keyList.map((option, index) => (React__default.createElement("option", { key: index, value: option }, option.toUpperCase())))),
+            React__default.createElement("div", { className: "cursor-pointer pl-2", onClick: () => setIsEditModalOpen(true) },
+                React__default.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: "1.5", stroke: "currentColor", className: "w-6 h-6", style: { marginTop: "-8px", color: lightMode ? "black" : "white" } },
+                    React__default.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" }),
+                    React__default.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" })))),
+        React__default.createElement("div", { id: "pngFile" },
+            React__default.createElement("ul", { style: {
+                    maxHeight: `${window.innerHeight - 330}px`,
+                }, className: closed
+                    ? "hidden"
+                    : screenshot
+                        ? "h-full px-3 overflow-hidden"
+                        : "h-full overflow-y-auto px-3 transition-all duration-300 ease-in-out" }, listToRender.map((value, index) => {
+                const customization = findCustomization(value);
+                const displayColor = 
+                // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
+                (customization === null || customization === void 0 ? void 0 : customization.color) || colorList[index % colorList.length];
+                // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
+                const displayName = (customization === null || customization === void 0 ? void 0 : customization.customName) || value;
+                return (React__default.createElement("li", { key: value },
+                    React__default.createElement(ColorLegendItem, { color: value === "NaN" ? "#000000" : displayColor, text: displayName, screenshot: screenshot, selected: colorParam === "" || value === colorParam, onClick: () => {
+                            if (value === colorParam) {
+                                setColorParam("");
+                            }
+                            else {
+                                setColorParam(value);
+                            }
+                        }, lightMode: lightMode })));
+            }))),
+        colorParamList.length !== 0 && (React__default.createElement(EditColorModal, { isOpen: isEditModalOpen, onClose: () => setIsEditModalOpen(false), colorParamList: listToRender, colorList: colorList, existingCustomizations: customizations, onSave: (newCustomizations) => {
+                setCustomFeatures(newCustomizations);
+                setSortedList(newCustomizations.map((c) => c.featureName));
+                setIsEditModalOpen(false);
+            }, category: colorKey }))));
+};
 
 function ArrowDownIcon({
   title,
@@ -47,89 +231,6 @@ function XMarkIcon({
 const ForwardRef = React$1.forwardRef(XMarkIcon);
 var XMarkIcon$1 = ForwardRef;
 
-function styleInject(css, ref) {
-  if ( ref === void 0 ) ref = {};
-  var insertAt = ref.insertAt;
-
-  if (!css || typeof document === 'undefined') { return; }
-
-  var head = document.head || document.getElementsByTagName('head')[0];
-  var style = document.createElement('style');
-  style.type = 'text/css';
-
-  if (insertAt === 'top') {
-    if (head.firstChild) {
-      head.insertBefore(style, head.firstChild);
-    } else {
-      head.appendChild(style);
-    }
-  } else {
-    head.appendChild(style);
-  }
-
-  if (style.styleSheet) {
-    style.styleSheet.cssText = css;
-  } else {
-    style.appendChild(document.createTextNode(css));
-  }
-}
-
-var css_248z = "/*\n! tailwindcss v3.3.5 | MIT License | https://tailwindcss.com\n*//*\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\n*/\n\n*,\n::before,\n::after {\n  box-sizing: border-box; /* 1 */\n  border-width: 0; /* 2 */\n  border-style: solid; /* 2 */\n  border-color: #e5e7eb; /* 2 */\n}\n\n::before,\n::after {\n  --tw-content: '';\n}\n\n/*\n1. Use a consistent sensible line-height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n3. Use a more readable tab size.\n4. Use the user's configured `sans` font-family by default.\n5. Use the user's configured `sans` font-feature-settings by default.\n6. Use the user's configured `sans` font-variation-settings by default.\n*/\n\nhtml {\n  line-height: 1.5; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n  -moz-tab-size: 4; /* 3 */\n  -o-tab-size: 4;\n     tab-size: 4; /* 3 */\n  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"; /* 4 */\n  font-feature-settings: normal; /* 5 */\n  font-variation-settings: normal; /* 6 */\n}\n\n/*\n1. Remove the margin in all browsers.\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\n*/\n\nbody {\n  margin: 0; /* 1 */\n  line-height: inherit; /* 2 */\n}\n\n/*\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n3. Ensure horizontal rules are visible by default.\n*/\n\nhr {\n  height: 0; /* 1 */\n  color: inherit; /* 2 */\n  border-top-width: 1px; /* 3 */\n}\n\n/*\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\n\nabbr:where([title]) {\n  -webkit-text-decoration: underline dotted;\n          text-decoration: underline dotted;\n}\n\n/*\nRemove the default font size and weight for headings.\n*/\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/*\nReset links to optimize for opt-in styling instead of opt-out.\n*/\n\na {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/*\nAdd the correct font weight in Edge and Safari.\n*/\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/*\n1. Use the user's configured `mono` font family by default.\n2. Correct the odd `em` font sizing in all browsers.\n*/\n\ncode,\nkbd,\nsamp,\npre {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/*\nAdd the correct font size in all browsers.\n*/\n\nsmall {\n  font-size: 80%;\n}\n\n/*\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\n*/\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/*\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n3. Remove gaps between table borders by default.\n*/\n\ntable {\n  text-indent: 0; /* 1 */\n  border-color: inherit; /* 2 */\n  border-collapse: collapse; /* 3 */\n}\n\n/*\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n3. Remove default padding in all browsers.\n*/\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-feature-settings: inherit; /* 1 */\n  font-variation-settings: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  font-weight: inherit; /* 1 */\n  line-height: inherit; /* 1 */\n  color: inherit; /* 1 */\n  margin: 0; /* 2 */\n  padding: 0; /* 3 */\n}\n\n/*\nRemove the inheritance of text transform in Edge and Firefox.\n*/\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Remove default button styles.\n*/\n\nbutton,\n[type='button'],\n[type='reset'],\n[type='submit'] {\n  -webkit-appearance: button; /* 1 */\n  background-color: transparent; /* 2 */\n  background-image: none; /* 2 */\n}\n\n/*\nUse the modern Firefox focus style for all focusable elements.\n*/\n\n:-moz-focusring {\n  outline: auto;\n}\n\n/*\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\n*/\n\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\n/*\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\n\nprogress {\n  vertical-align: baseline;\n}\n\n/*\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n\n::-webkit-inner-spin-button,\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/*\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n\n[type='search'] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/*\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to `inherit` in Safari.\n*/\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\n\nsummary {\n  display: list-item;\n}\n\n/*\nRemoves the default spacing and border for appropriate elements.\n*/\n\nblockquote,\ndl,\ndd,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\nfigure,\np,\npre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol,\nul,\nmenu {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/*\nReset default styling for dialogs.\n*/\ndialog {\n  padding: 0;\n}\n\n/*\nPrevent resizing textareas horizontally by default.\n*/\n\ntextarea {\n  resize: vertical;\n}\n\n/*\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\n2. Set the default placeholder color to the user's configured gray 400 color.\n*/\n\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\ninput::placeholder,\ntextarea::placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\n/*\nSet the default cursor for buttons.\n*/\n\nbutton,\n[role=\"button\"] {\n  cursor: pointer;\n}\n\n/*\nMake sure disabled buttons don't get the pointer cursor.\n*/\n:disabled {\n  cursor: default;\n}\n\n/*\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\n   This can trigger a poorly considered lint error in some tools but is included by design.\n*/\n\nimg,\nsvg,\nvideo,\ncanvas,\naudio,\niframe,\nembed,\nobject {\n  display: block; /* 1 */\n  vertical-align: middle; /* 2 */\n}\n\n/*\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\n*/\n\nimg,\nvideo {\n  max-width: 100%;\n  height: auto;\n}\n\n/* Make elements with the HTML hidden attribute stay hidden by default */\n[hidden] {\n  display: none;\n}\n\n*, ::before, ::after {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n\n::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n.container {\n  width: 100%;\n}\n@media (min-width: 640px) {\n\n  .container {\n    max-width: 640px;\n  }\n}\n@media (min-width: 768px) {\n\n  .container {\n    max-width: 768px;\n  }\n}\n@media (min-width: 1024px) {\n\n  .container {\n    max-width: 1024px;\n  }\n}\n@media (min-width: 1280px) {\n\n  .container {\n    max-width: 1280px;\n  }\n}\n@media (min-width: 1536px) {\n\n  .container {\n    max-width: 1536px;\n  }\n}\n.absolute {\n  position: absolute;\n}\n.relative {\n  position: relative;\n}\n.inset-0 {\n  inset: 0px;\n}\n.bottom-12 {\n  bottom: 3rem;\n}\n.bottom-96 {\n  bottom: 24rem;\n}\n.left-0 {\n  left: 0px;\n}\n.left-20 {\n  left: 5rem;\n}\n.left-24 {\n  left: 6rem;\n}\n.left-5 {\n  left: 1.25rem;\n}\n.right-0 {\n  right: 0px;\n}\n.right-64 {\n  right: 16rem;\n}\n.top-12 {\n  top: 3rem;\n}\n.top-20 {\n  top: 5rem;\n}\n.top-24 {\n  top: 6rem;\n}\n.top-32 {\n  top: 8rem;\n}\n.-z-20 {\n  z-index: -20;\n}\n.z-10 {\n  z-index: 10;\n}\n.z-20 {\n  z-index: 20;\n}\n.z-30 {\n  z-index: 30;\n}\n.m-auto {\n  margin: auto;\n}\n.mx-2 {\n  margin-left: 0.5rem;\n  margin-right: 0.5rem;\n}\n.ml-auto {\n  margin-left: auto;\n}\n.mr-4 {\n  margin-right: 1rem;\n}\n.mr-auto {\n  margin-right: auto;\n}\n.mt-2 {\n  margin-top: 0.5rem;\n}\n.block {\n  display: block;\n}\n.inline {\n  display: inline;\n}\n.flex {\n  display: flex;\n}\n.hidden {\n  display: none;\n}\n.h-24 {\n  height: 6rem;\n}\n.h-4 {\n  height: 1rem;\n}\n.h-40 {\n  height: 10rem;\n}\n.h-6 {\n  height: 1.5rem;\n}\n.h-64 {\n  height: 16rem;\n}\n.h-full {\n  height: 100%;\n}\n.min-h-custom {\n  min-height: 32px;\n}\n.w-0 {\n  width: 0px;\n}\n.w-0\\.5 {\n  width: 0.125rem;\n}\n.w-16 {\n  width: 4rem;\n}\n.w-20 {\n  width: 5rem;\n}\n.w-24 {\n  width: 6rem;\n}\n.w-4 {\n  width: 1rem;\n}\n.w-40 {\n  width: 10rem;\n}\n.w-6 {\n  width: 1.5rem;\n}\n.w-60 {\n  width: 15rem;\n}\n.w-64 {\n  width: 16rem;\n}\n.w-80 {\n  width: 20rem;\n}\n.w-full {\n  width: 100%;\n}\n.origin-top-left {\n  transform-origin: top left;\n}\n.transform {\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n.cursor-pointer {\n  cursor: pointer;\n}\n.resize {\n  resize: both;\n}\n.place-content-around {\n  place-content: space-around;\n}\n.items-center {\n  align-items: center;\n}\n.justify-center {\n  justify-content: center;\n}\n.justify-between {\n  justify-content: space-between;\n}\n.gap-x-2 {\n  -moz-column-gap: 0.5rem;\n       column-gap: 0.5rem;\n}\n.overflow-hidden {\n  overflow: hidden;\n}\n.overflow-x-auto {\n  overflow-x: auto;\n}\n.overflow-y-auto {\n  overflow-y: auto;\n}\n.truncate {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.whitespace-nowrap {\n  white-space: nowrap;\n}\n.break-all {\n  word-break: break-all;\n}\n.rounded-full {\n  border-radius: 9999px;\n}\n.rounded-md {\n  border-radius: 0.375rem;\n}\n.border-2 {\n  border-width: 2px;\n}\n.border-stone-400 {\n  --tw-border-opacity: 1;\n  border-color: rgb(168 162 158 / var(--tw-border-opacity));\n}\n.bg-gray-300 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(209 213 219 / var(--tw-bg-opacity));\n}\n.bg-slate-100 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(241 245 249 / var(--tw-bg-opacity));\n}\n.bg-stone-300 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(214 211 209 / var(--tw-bg-opacity));\n}\n.bg-stone-400 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(168 162 158 / var(--tw-bg-opacity));\n}\n.bg-white {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n}\n.bg-opacity-50 {\n  --tw-bg-opacity: 0.5;\n}\n.p-1 {\n  padding: 0.25rem;\n}\n.p-4 {\n  padding: 1rem;\n}\n.px-4 {\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n.py-1 {\n  padding-top: 0.25rem;\n  padding-bottom: 0.25rem;\n}\n.pb-1 {\n  padding-bottom: 0.25rem;\n}\n.text-center {\n  text-align: center;\n}\n.text-xs {\n  font-size: 0.75rem;\n  line-height: 1rem;\n}\n.text-black {\n  --tw-text-opacity: 1;\n  color: rgb(0 0 0 / var(--tw-text-opacity));\n}\n.text-gray-500 {\n  --tw-text-opacity: 1;\n  color: rgb(107 114 128 / var(--tw-text-opacity));\n}\n.line-through {\n  text-decoration-line: line-through;\n}\n.transition-all {\n  transition-property: all;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n.duration-300 {\n  transition-duration: 300ms;\n}\n.ease-in-out {\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n}\n.hover\\:opacity-10:hover {\n  opacity: 0.1;\n}\n.hover\\:shadow-md:hover {\n  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}";
-styleInject(css_248z);
-
-const ColorLegendItem = ({ color, selected, screenshot, text, onClick, }) => {
-    return (React__default.createElement("div", { onClick: onClick, className: "flex gap-x-2 min-h-custom selection:border-r-1 items-center cursor-pointer" },
-        React__default.createElement("div", { className: `w-4 h-4 rounded-full`, style: {
-                backgroundColor: color,
-            } }),
-        React__default.createElement("p", { className: `${selected
-                ? "text-black"
-                : screenshot
-                    ? "text-gray-500"
-                    : "text-gray-500 line-through"} w-60 break-all` }, text)));
-};
-
-const ColorLegend = ({ screenshot, colorKey, colorParamList, colorParam, setColorParam, colorList, }) => {
-    const [closed, setClosed] = useState(false);
-    return (React__default.createElement("div", { className: "block bg-slate-100 rounded-md mr-4 w-full mt-2" },
-        React__default.createElement("div", { className: "flex items-center justify-between w-80 p-4 cursor-pointer", onClick: () => {
-                setClosed(!closed);
-            } },
-            React__default.createElement("p", null, (colorKey !== null && colorKey !== void 0 ? colorKey : "").toUpperCase()),
-            closed ? (React__default.createElement(ArrowDownIcon$1, { className: "w-4 cursor-pointer", onClick: () => {
-                    setClosed(!closed);
-                } })) : (React__default.createElement(XMarkIcon$1, { className: "w-4 cursor-pointer", onClick: () => {
-                    setClosed(!closed);
-                } }))),
-        React__default.createElement("ul", { style: {
-                maxHeight: `${window.innerHeight - 330}px`,
-            }, className: closed
-                ? "hidden"
-                : screenshot
-                    ? "h-full px-4 overflow-hidden"
-                    : "h-full overflow-y-auto px-4 transition-all duration-300 ease-in-out" }, colorParamList === null || colorParamList === void 0 ? void 0 : colorParamList.sort((a, b) => {
-            if (a === "NaN") {
-                return 1;
-            }
-            else if (b === "NaN") {
-                return -1;
-            }
-            else {
-                return a.localeCompare(b);
-            }
-        }).map((value, index) => (React__default.createElement("li", { key: value, className: "hover:shadow-md w-full overflow-x-auto cursor-pointer transition-all duration-300 ease-in-out" },
-            React__default.createElement(ColorLegendItem, { color: value === "NaN"
-                    ? "#85b0da"
-                    : colorList[index % colorList.length], text: value, screenshot: screenshot, selected: colorParam === "" || value === colorParam, onClick: () => {
-                    if (value === colorParam) {
-                        setColorParam("");
-                    }
-                    else {
-                        setColorParam(value);
-                    }
-                } })))))));
-};
-
 const ShapeLegendItem = ({ onClick, shape, selected, screenshot, text }) => {
     const textStyle = selected
         ? 'text-black'
@@ -171,20 +272,20 @@ const ShapeLegend = ({ screenshot, shapeKey, shapeParamList, shapeParam, setShap
                 } })))))));
 };
 
-const Controller = ({ controllerShown, onVisualizeClicked, onCompareClicked }) => {
+const Controller = ({ controllerShown, onVisualizeClicked, onCompareClicked, }) => {
     const angles = [60, 180, 300];
     return (React__default.createElement("div", { className: controllerShown
-            ? 'flex w-40 h-40 absolute rounded-full bg-stone-300 border-2 border-stone-400 over' +
-                'flow-hidden'
-            : 'hidden' },
+            ? "flex w-40 h-40 absolute rounded-full bg-stone-300 border-2 border-stone-400 over" +
+                "flow-hidden"
+            : "hidden" },
         angles.map((angle, index) => (React__default.createElement("div", { key: index },
             React__default.createElement("hr", { className: "w-0.5 h-full absolute top-20 left-20 transform origin-top-left bg-stone-400", style: {
-                    transform: `rotate(${angle}deg)`
+                    transform: `rotate(${angle}deg)`,
                 } })))),
         React__default.createElement("div", { className: "h-6 w-6 bg-white rounded-full m-auto z-10 border-stone-400 border-2" }),
         React__default.createElement("div", { className: "w-full absolute z-20 top-12 text-xs flex place-content-around" },
-            React__default.createElement("p", { onClick: onVisualizeClicked, className: "w-16 text-center hover:shadow-md py-1" }, "Visualize"),
-            React__default.createElement("p", { onClick: onCompareClicked, className: "w-16 text-center hover:shadow-md py-1" }, "Compare"))));
+            React__default.createElement("p", { onClick: onVisualizeClicked, className: "w-16 text-center hover:shadow-md py-1 text-black" }, "Visualize"),
+            React__default.createElement("p", { onClick: onCompareClicked, className: "w-16 text-center hover:shadow-md py-1 text-black" }, "Compare"))));
 };
 
 /******************************************************************************
@@ -218,6 +319,1017 @@ typeof SuppressedError === "function" ? SuppressedError : function (error, suppr
     var e = new Error(message);
     return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
 };
+
+function resolveUrl(url, baseUrl) {
+    // url is absolute already
+    if (url.match(/^[a-z]+:\/\//i)) {
+        return url;
+    }
+    // url is absolute already, without protocol
+    if (url.match(/^\/\//)) {
+        return window.location.protocol + url;
+    }
+    // dataURI, mailto:, tel:, etc.
+    if (url.match(/^[a-z]+:/i)) {
+        return url;
+    }
+    const doc = document.implementation.createHTMLDocument();
+    const base = doc.createElement('base');
+    const a = doc.createElement('a');
+    doc.head.appendChild(base);
+    doc.body.appendChild(a);
+    if (baseUrl) {
+        base.href = baseUrl;
+    }
+    a.href = url;
+    return a.href;
+}
+const uuid = (() => {
+    // generate uuid for className of pseudo elements.
+    // We should not use GUIDs, otherwise pseudo elements sometimes cannot be captured.
+    let counter = 0;
+    // ref: http://stackoverflow.com/a/6248722/2519373
+    const random = () => 
+    // eslint-disable-next-line no-bitwise
+    `0000${((Math.random() * 36 ** 4) << 0).toString(36)}`.slice(-4);
+    return () => {
+        counter += 1;
+        return `u${random()}${counter}`;
+    };
+})();
+function toArray(arrayLike) {
+    const arr = [];
+    for (let i = 0, l = arrayLike.length; i < l; i++) {
+        arr.push(arrayLike[i]);
+    }
+    return arr;
+}
+function px$1(node, styleProperty) {
+    const win = node.ownerDocument.defaultView || window;
+    const val = win.getComputedStyle(node).getPropertyValue(styleProperty);
+    return val ? parseFloat(val.replace('px', '')) : 0;
+}
+function getNodeWidth(node) {
+    const leftBorder = px$1(node, 'border-left-width');
+    const rightBorder = px$1(node, 'border-right-width');
+    return node.clientWidth + leftBorder + rightBorder;
+}
+function getNodeHeight(node) {
+    const topBorder = px$1(node, 'border-top-width');
+    const bottomBorder = px$1(node, 'border-bottom-width');
+    return node.clientHeight + topBorder + bottomBorder;
+}
+function getImageSize(targetNode, options = {}) {
+    const width = options.width || getNodeWidth(targetNode);
+    const height = options.height || getNodeHeight(targetNode);
+    return { width, height };
+}
+function getPixelRatio() {
+    let ratio;
+    let FINAL_PROCESS;
+    try {
+        FINAL_PROCESS = process;
+    }
+    catch (e) {
+        // pass
+    }
+    const val = FINAL_PROCESS && FINAL_PROCESS.env
+        ? FINAL_PROCESS.env.devicePixelRatio
+        : null;
+    if (val) {
+        ratio = parseInt(val, 10);
+        if (Number.isNaN(ratio)) {
+            ratio = 1;
+        }
+    }
+    return ratio || window.devicePixelRatio || 1;
+}
+// @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas#maximum_canvas_size
+const canvasDimensionLimit = 16384;
+function checkCanvasDimensions(canvas) {
+    if (canvas.width > canvasDimensionLimit ||
+        canvas.height > canvasDimensionLimit) {
+        if (canvas.width > canvasDimensionLimit &&
+            canvas.height > canvasDimensionLimit) {
+            if (canvas.width > canvas.height) {
+                canvas.height *= canvasDimensionLimit / canvas.width;
+                canvas.width = canvasDimensionLimit;
+            }
+            else {
+                canvas.width *= canvasDimensionLimit / canvas.height;
+                canvas.height = canvasDimensionLimit;
+            }
+        }
+        else if (canvas.width > canvasDimensionLimit) {
+            canvas.height *= canvasDimensionLimit / canvas.width;
+            canvas.width = canvasDimensionLimit;
+        }
+        else {
+            canvas.width *= canvasDimensionLimit / canvas.height;
+            canvas.height = canvasDimensionLimit;
+        }
+    }
+}
+function createImage(url) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.decode = () => resolve(img);
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        img.crossOrigin = 'anonymous';
+        img.decoding = 'async';
+        img.src = url;
+    });
+}
+async function svgToDataURL(svg) {
+    return Promise.resolve()
+        .then(() => new XMLSerializer().serializeToString(svg))
+        .then(encodeURIComponent)
+        .then((html) => `data:image/svg+xml;charset=utf-8,${html}`);
+}
+async function nodeToDataURL(node, width, height) {
+    const xmlns = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(xmlns, 'svg');
+    const foreignObject = document.createElementNS(xmlns, 'foreignObject');
+    svg.setAttribute('width', `${width}`);
+    svg.setAttribute('height', `${height}`);
+    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+    foreignObject.setAttribute('width', '100%');
+    foreignObject.setAttribute('height', '100%');
+    foreignObject.setAttribute('x', '0');
+    foreignObject.setAttribute('y', '0');
+    foreignObject.setAttribute('externalResourcesRequired', 'true');
+    svg.appendChild(foreignObject);
+    foreignObject.appendChild(node);
+    return svgToDataURL(svg);
+}
+const isInstanceOfElement = (node, instance) => {
+    if (node instanceof instance)
+        return true;
+    const nodePrototype = Object.getPrototypeOf(node);
+    if (nodePrototype === null)
+        return false;
+    return (nodePrototype.constructor.name === instance.name ||
+        isInstanceOfElement(nodePrototype, instance));
+};
+
+function formatCSSText(style) {
+    const content = style.getPropertyValue('content');
+    return `${style.cssText} content: '${content.replace(/'|"/g, '')}';`;
+}
+function formatCSSProperties(style) {
+    return toArray(style)
+        .map((name) => {
+        const value = style.getPropertyValue(name);
+        const priority = style.getPropertyPriority(name);
+        return `${name}: ${value}${priority ? ' !important' : ''};`;
+    })
+        .join(' ');
+}
+function getPseudoElementStyle(className, pseudo, style) {
+    const selector = `.${className}:${pseudo}`;
+    const cssText = style.cssText
+        ? formatCSSText(style)
+        : formatCSSProperties(style);
+    return document.createTextNode(`${selector}{${cssText}}`);
+}
+function clonePseudoElement(nativeNode, clonedNode, pseudo) {
+    const style = window.getComputedStyle(nativeNode, pseudo);
+    const content = style.getPropertyValue('content');
+    if (content === '' || content === 'none') {
+        return;
+    }
+    const className = uuid();
+    try {
+        clonedNode.className = `${clonedNode.className} ${className}`;
+    }
+    catch (err) {
+        return;
+    }
+    const styleElement = document.createElement('style');
+    styleElement.appendChild(getPseudoElementStyle(className, pseudo, style));
+    clonedNode.appendChild(styleElement);
+}
+function clonePseudoElements(nativeNode, clonedNode) {
+    clonePseudoElement(nativeNode, clonedNode, ':before');
+    clonePseudoElement(nativeNode, clonedNode, ':after');
+}
+
+const WOFF = 'application/font-woff';
+const JPEG = 'image/jpeg';
+const mimes = {
+    woff: WOFF,
+    woff2: WOFF,
+    ttf: 'application/font-truetype',
+    eot: 'application/vnd.ms-fontobject',
+    png: 'image/png',
+    jpg: JPEG,
+    jpeg: JPEG,
+    gif: 'image/gif',
+    tiff: 'image/tiff',
+    svg: 'image/svg+xml',
+    webp: 'image/webp',
+};
+function getExtension(url) {
+    const match = /\.([^./]*?)$/g.exec(url);
+    return match ? match[1] : '';
+}
+function getMimeType(url) {
+    const extension = getExtension(url).toLowerCase();
+    return mimes[extension] || '';
+}
+
+function getContentFromDataUrl(dataURL) {
+    return dataURL.split(/,/)[1];
+}
+function isDataUrl(url) {
+    return url.search(/^(data:)/) !== -1;
+}
+function makeDataUrl(content, mimeType) {
+    return `data:${mimeType};base64,${content}`;
+}
+async function fetchAsDataURL(url, init, process) {
+    const res = await fetch(url, init);
+    if (res.status === 404) {
+        throw new Error(`Resource "${res.url}" not found`);
+    }
+    const blob = await res.blob();
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onerror = reject;
+        reader.onloadend = () => {
+            try {
+                resolve(process({ res, result: reader.result }));
+            }
+            catch (error) {
+                reject(error);
+            }
+        };
+        reader.readAsDataURL(blob);
+    });
+}
+const cache = {};
+function getCacheKey(url, contentType, includeQueryParams) {
+    let key = url.replace(/\?.*/, '');
+    if (includeQueryParams) {
+        key = url;
+    }
+    // font resource
+    if (/ttf|otf|eot|woff2?/i.test(key)) {
+        key = key.replace(/.*\//, '');
+    }
+    return contentType ? `[${contentType}]${key}` : key;
+}
+async function resourceToDataURL(resourceUrl, contentType, options) {
+    const cacheKey = getCacheKey(resourceUrl, contentType, options.includeQueryParams);
+    if (cache[cacheKey] != null) {
+        return cache[cacheKey];
+    }
+    // ref: https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest#Bypassing_the_cache
+    if (options.cacheBust) {
+        // eslint-disable-next-line no-param-reassign
+        resourceUrl += (/\?/.test(resourceUrl) ? '&' : '?') + new Date().getTime();
+    }
+    let dataURL;
+    try {
+        const content = await fetchAsDataURL(resourceUrl, options.fetchRequestInit, ({ res, result }) => {
+            if (!contentType) {
+                // eslint-disable-next-line no-param-reassign
+                contentType = res.headers.get('Content-Type') || '';
+            }
+            return getContentFromDataUrl(result);
+        });
+        dataURL = makeDataUrl(content, contentType);
+    }
+    catch (error) {
+        dataURL = options.imagePlaceholder || '';
+        let msg = `Failed to fetch resource: ${resourceUrl}`;
+        if (error) {
+            msg = typeof error === 'string' ? error : error.message;
+        }
+        if (msg) {
+            console.warn(msg);
+        }
+    }
+    cache[cacheKey] = dataURL;
+    return dataURL;
+}
+
+async function cloneCanvasElement(canvas) {
+    const dataURL = canvas.toDataURL();
+    if (dataURL === 'data:,') {
+        return canvas.cloneNode(false);
+    }
+    return createImage(dataURL);
+}
+async function cloneVideoElement(video, options) {
+    if (video.currentSrc) {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = video.clientWidth;
+        canvas.height = video.clientHeight;
+        ctx === null || ctx === void 0 ? void 0 : ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const dataURL = canvas.toDataURL();
+        return createImage(dataURL);
+    }
+    const poster = video.poster;
+    const contentType = getMimeType(poster);
+    const dataURL = await resourceToDataURL(poster, contentType, options);
+    return createImage(dataURL);
+}
+async function cloneIFrameElement(iframe) {
+    var _a;
+    try {
+        if ((_a = iframe === null || iframe === void 0 ? void 0 : iframe.contentDocument) === null || _a === void 0 ? void 0 : _a.body) {
+            return (await cloneNode(iframe.contentDocument.body, {}, true));
+        }
+    }
+    catch (_b) {
+        // Failed to clone iframe
+    }
+    return iframe.cloneNode(false);
+}
+async function cloneSingleNode(node, options) {
+    if (isInstanceOfElement(node, HTMLCanvasElement)) {
+        return cloneCanvasElement(node);
+    }
+    if (isInstanceOfElement(node, HTMLVideoElement)) {
+        return cloneVideoElement(node, options);
+    }
+    if (isInstanceOfElement(node, HTMLIFrameElement)) {
+        return cloneIFrameElement(node);
+    }
+    return node.cloneNode(false);
+}
+const isSlotElement$1 = (node) => node.tagName != null && node.tagName.toUpperCase() === 'SLOT';
+async function cloneChildren(nativeNode, clonedNode, options) {
+    var _a, _b;
+    let children = [];
+    if (isSlotElement$1(nativeNode) && nativeNode.assignedNodes) {
+        children = toArray(nativeNode.assignedNodes());
+    }
+    else if (isInstanceOfElement(nativeNode, HTMLIFrameElement) &&
+        ((_a = nativeNode.contentDocument) === null || _a === void 0 ? void 0 : _a.body)) {
+        children = toArray(nativeNode.contentDocument.body.childNodes);
+    }
+    else {
+        children = toArray(((_b = nativeNode.shadowRoot) !== null && _b !== void 0 ? _b : nativeNode).childNodes);
+    }
+    if (children.length === 0 ||
+        isInstanceOfElement(nativeNode, HTMLVideoElement)) {
+        return clonedNode;
+    }
+    await children.reduce((deferred, child) => deferred
+        .then(() => cloneNode(child, options))
+        .then((clonedChild) => {
+        if (clonedChild) {
+            clonedNode.appendChild(clonedChild);
+        }
+    }), Promise.resolve());
+    return clonedNode;
+}
+function cloneCSSStyle(nativeNode, clonedNode) {
+    const targetStyle = clonedNode.style;
+    if (!targetStyle) {
+        return;
+    }
+    const sourceStyle = window.getComputedStyle(nativeNode);
+    if (sourceStyle.cssText) {
+        targetStyle.cssText = sourceStyle.cssText;
+        targetStyle.transformOrigin = sourceStyle.transformOrigin;
+    }
+    else {
+        toArray(sourceStyle).forEach((name) => {
+            let value = sourceStyle.getPropertyValue(name);
+            if (name === 'font-size' && value.endsWith('px')) {
+                const reducedFont = Math.floor(parseFloat(value.substring(0, value.length - 2))) - 0.1;
+                value = `${reducedFont}px`;
+            }
+            if (isInstanceOfElement(nativeNode, HTMLIFrameElement) &&
+                name === 'display' &&
+                value === 'inline') {
+                value = 'block';
+            }
+            if (name === 'd' && clonedNode.getAttribute('d')) {
+                value = `path(${clonedNode.getAttribute('d')})`;
+            }
+            targetStyle.setProperty(name, value, sourceStyle.getPropertyPriority(name));
+        });
+    }
+}
+function cloneInputValue(nativeNode, clonedNode) {
+    if (isInstanceOfElement(nativeNode, HTMLTextAreaElement)) {
+        clonedNode.innerHTML = nativeNode.value;
+    }
+    if (isInstanceOfElement(nativeNode, HTMLInputElement)) {
+        clonedNode.setAttribute('value', nativeNode.value);
+    }
+}
+function cloneSelectValue(nativeNode, clonedNode) {
+    if (isInstanceOfElement(nativeNode, HTMLSelectElement)) {
+        const clonedSelect = clonedNode;
+        const selectedOption = Array.from(clonedSelect.children).find((child) => nativeNode.value === child.getAttribute('value'));
+        if (selectedOption) {
+            selectedOption.setAttribute('selected', '');
+        }
+    }
+}
+function decorate(nativeNode, clonedNode) {
+    if (isInstanceOfElement(clonedNode, Element)) {
+        cloneCSSStyle(nativeNode, clonedNode);
+        clonePseudoElements(nativeNode, clonedNode);
+        cloneInputValue(nativeNode, clonedNode);
+        cloneSelectValue(nativeNode, clonedNode);
+    }
+    return clonedNode;
+}
+async function ensureSVGSymbols(clone, options) {
+    const uses = clone.querySelectorAll ? clone.querySelectorAll('use') : [];
+    if (uses.length === 0) {
+        return clone;
+    }
+    const processedDefs = {};
+    for (let i = 0; i < uses.length; i++) {
+        const use = uses[i];
+        const id = use.getAttribute('xlink:href');
+        if (id) {
+            const exist = clone.querySelector(id);
+            const definition = document.querySelector(id);
+            if (!exist && definition && !processedDefs[id]) {
+                // eslint-disable-next-line no-await-in-loop
+                processedDefs[id] = (await cloneNode(definition, options, true));
+            }
+        }
+    }
+    const nodes = Object.values(processedDefs);
+    if (nodes.length) {
+        const ns = 'http://www.w3.org/1999/xhtml';
+        const svg = document.createElementNS(ns, 'svg');
+        svg.setAttribute('xmlns', ns);
+        svg.style.position = 'absolute';
+        svg.style.width = '0';
+        svg.style.height = '0';
+        svg.style.overflow = 'hidden';
+        svg.style.display = 'none';
+        const defs = document.createElementNS(ns, 'defs');
+        svg.appendChild(defs);
+        for (let i = 0; i < nodes.length; i++) {
+            defs.appendChild(nodes[i]);
+        }
+        clone.appendChild(svg);
+    }
+    return clone;
+}
+async function cloneNode(node, options, isRoot) {
+    if (!isRoot && options.filter && !options.filter(node)) {
+        return null;
+    }
+    return Promise.resolve(node)
+        .then((clonedNode) => cloneSingleNode(clonedNode, options))
+        .then((clonedNode) => cloneChildren(node, clonedNode, options))
+        .then((clonedNode) => decorate(node, clonedNode))
+        .then((clonedNode) => ensureSVGSymbols(clonedNode, options));
+}
+
+const URL_REGEX = /url\((['"]?)([^'"]+?)\1\)/g;
+const URL_WITH_FORMAT_REGEX = /url\([^)]+\)\s*format\((["']?)([^"']+)\1\)/g;
+const FONT_SRC_REGEX = /src:\s*(?:url\([^)]+\)\s*format\([^)]+\)[,;]\s*)+/g;
+function toRegex(url) {
+    // eslint-disable-next-line no-useless-escape
+    const escaped = url.replace(/([.*+?^${}()|\[\]\/\\])/g, '\\$1');
+    return new RegExp(`(url\\(['"]?)(${escaped})(['"]?\\))`, 'g');
+}
+function parseURLs(cssText) {
+    const urls = [];
+    cssText.replace(URL_REGEX, (raw, quotation, url) => {
+        urls.push(url);
+        return raw;
+    });
+    return urls.filter((url) => !isDataUrl(url));
+}
+async function embed(cssText, resourceURL, baseURL, options, getContentFromUrl) {
+    try {
+        const resolvedURL = baseURL ? resolveUrl(resourceURL, baseURL) : resourceURL;
+        const contentType = getMimeType(resourceURL);
+        let dataURL;
+        if (getContentFromUrl) {
+            const content = await getContentFromUrl(resolvedURL);
+            dataURL = makeDataUrl(content, contentType);
+        }
+        else {
+            dataURL = await resourceToDataURL(resolvedURL, contentType, options);
+        }
+        return cssText.replace(toRegex(resourceURL), `$1${dataURL}$3`);
+    }
+    catch (error) {
+        // pass
+    }
+    return cssText;
+}
+function filterPreferredFontFormat(str, { preferredFontFormat }) {
+    return !preferredFontFormat
+        ? str
+        : str.replace(FONT_SRC_REGEX, (match) => {
+            // eslint-disable-next-line no-constant-condition
+            while (true) {
+                const [src, , format] = URL_WITH_FORMAT_REGEX.exec(match) || [];
+                if (!format) {
+                    return '';
+                }
+                if (format === preferredFontFormat) {
+                    return `src: ${src};`;
+                }
+            }
+        });
+}
+function shouldEmbed(url) {
+    return url.search(URL_REGEX) !== -1;
+}
+async function embedResources(cssText, baseUrl, options) {
+    if (!shouldEmbed(cssText)) {
+        return cssText;
+    }
+    const filteredCSSText = filterPreferredFontFormat(cssText, options);
+    const urls = parseURLs(filteredCSSText);
+    return urls.reduce((deferred, url) => deferred.then((css) => embed(css, url, baseUrl, options)), Promise.resolve(filteredCSSText));
+}
+
+async function embedProp(propName, node, options) {
+    var _a;
+    const propValue = (_a = node.style) === null || _a === void 0 ? void 0 : _a.getPropertyValue(propName);
+    if (propValue) {
+        const cssString = await embedResources(propValue, null, options);
+        node.style.setProperty(propName, cssString, node.style.getPropertyPriority(propName));
+        return true;
+    }
+    return false;
+}
+async function embedBackground(clonedNode, options) {
+    if (!(await embedProp('background', clonedNode, options))) {
+        await embedProp('background-image', clonedNode, options);
+    }
+    if (!(await embedProp('mask', clonedNode, options))) {
+        await embedProp('mask-image', clonedNode, options);
+    }
+}
+async function embedImageNode(clonedNode, options) {
+    const isImageElement = isInstanceOfElement(clonedNode, HTMLImageElement);
+    if (!(isImageElement && !isDataUrl(clonedNode.src)) &&
+        !(isInstanceOfElement(clonedNode, SVGImageElement) &&
+            !isDataUrl(clonedNode.href.baseVal))) {
+        return;
+    }
+    const url = isImageElement ? clonedNode.src : clonedNode.href.baseVal;
+    const dataURL = await resourceToDataURL(url, getMimeType(url), options);
+    await new Promise((resolve, reject) => {
+        clonedNode.onload = resolve;
+        clonedNode.onerror = reject;
+        const image = clonedNode;
+        if (image.decode) {
+            image.decode = resolve;
+        }
+        if (image.loading === 'lazy') {
+            image.loading = 'eager';
+        }
+        if (isImageElement) {
+            clonedNode.srcset = '';
+            clonedNode.src = dataURL;
+        }
+        else {
+            clonedNode.href.baseVal = dataURL;
+        }
+    });
+}
+async function embedChildren(clonedNode, options) {
+    const children = toArray(clonedNode.childNodes);
+    const deferreds = children.map((child) => embedImages(child, options));
+    await Promise.all(deferreds).then(() => clonedNode);
+}
+async function embedImages(clonedNode, options) {
+    if (isInstanceOfElement(clonedNode, Element)) {
+        await embedBackground(clonedNode, options);
+        await embedImageNode(clonedNode, options);
+        await embedChildren(clonedNode, options);
+    }
+}
+
+function applyStyle(node, options) {
+    const { style } = node;
+    if (options.backgroundColor) {
+        style.backgroundColor = options.backgroundColor;
+    }
+    if (options.width) {
+        style.width = `${options.width}px`;
+    }
+    if (options.height) {
+        style.height = `${options.height}px`;
+    }
+    const manual = options.style;
+    if (manual != null) {
+        Object.keys(manual).forEach((key) => {
+            style[key] = manual[key];
+        });
+    }
+    return node;
+}
+
+const cssFetchCache = {};
+async function fetchCSS(url) {
+    let cache = cssFetchCache[url];
+    if (cache != null) {
+        return cache;
+    }
+    const res = await fetch(url);
+    const cssText = await res.text();
+    cache = { url, cssText };
+    cssFetchCache[url] = cache;
+    return cache;
+}
+async function embedFonts(data, options) {
+    let cssText = data.cssText;
+    const regexUrl = /url\(["']?([^"')]+)["']?\)/g;
+    const fontLocs = cssText.match(/url\([^)]+\)/g) || [];
+    const loadFonts = fontLocs.map(async (loc) => {
+        let url = loc.replace(regexUrl, '$1');
+        if (!url.startsWith('https://')) {
+            url = new URL(url, data.url).href;
+        }
+        return fetchAsDataURL(url, options.fetchRequestInit, ({ result }) => {
+            cssText = cssText.replace(loc, `url(${result})`);
+            return [loc, result];
+        });
+    });
+    return Promise.all(loadFonts).then(() => cssText);
+}
+function parseCSS(source) {
+    if (source == null) {
+        return [];
+    }
+    const result = [];
+    const commentsRegex = /(\/\*[\s\S]*?\*\/)/gi;
+    // strip out comments
+    let cssText = source.replace(commentsRegex, '');
+    // eslint-disable-next-line prefer-regex-literals
+    const keyframesRegex = new RegExp('((@.*?keyframes [\\s\\S]*?){([\\s\\S]*?}\\s*?)})', 'gi');
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+        const matches = keyframesRegex.exec(cssText);
+        if (matches === null) {
+            break;
+        }
+        result.push(matches[0]);
+    }
+    cssText = cssText.replace(keyframesRegex, '');
+    const importRegex = /@import[\s\S]*?url\([^)]*\)[\s\S]*?;/gi;
+    // to match css & media queries together
+    const combinedCSSRegex = '((\\s*?(?:\\/\\*[\\s\\S]*?\\*\\/)?\\s*?@media[\\s\\S]' +
+        '*?){([\\s\\S]*?)}\\s*?})|(([\\s\\S]*?){([\\s\\S]*?)})';
+    // unified regex
+    const unifiedRegex = new RegExp(combinedCSSRegex, 'gi');
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+        let matches = importRegex.exec(cssText);
+        if (matches === null) {
+            matches = unifiedRegex.exec(cssText);
+            if (matches === null) {
+                break;
+            }
+            else {
+                importRegex.lastIndex = unifiedRegex.lastIndex;
+            }
+        }
+        else {
+            unifiedRegex.lastIndex = importRegex.lastIndex;
+        }
+        result.push(matches[0]);
+    }
+    return result;
+}
+async function getCSSRules(styleSheets, options) {
+    const ret = [];
+    const deferreds = [];
+    // First loop inlines imports
+    styleSheets.forEach((sheet) => {
+        if ('cssRules' in sheet) {
+            try {
+                toArray(sheet.cssRules || []).forEach((item, index) => {
+                    if (item.type === CSSRule.IMPORT_RULE) {
+                        let importIndex = index + 1;
+                        const url = item.href;
+                        const deferred = fetchCSS(url)
+                            .then((metadata) => embedFonts(metadata, options))
+                            .then((cssText) => parseCSS(cssText).forEach((rule) => {
+                            try {
+                                sheet.insertRule(rule, rule.startsWith('@import')
+                                    ? (importIndex += 1)
+                                    : sheet.cssRules.length);
+                            }
+                            catch (error) {
+                                console.error('Error inserting rule from remote css', {
+                                    rule,
+                                    error,
+                                });
+                            }
+                        }))
+                            .catch((e) => {
+                            console.error('Error loading remote css', e.toString());
+                        });
+                        deferreds.push(deferred);
+                    }
+                });
+            }
+            catch (e) {
+                const inline = styleSheets.find((a) => a.href == null) || document.styleSheets[0];
+                if (sheet.href != null) {
+                    deferreds.push(fetchCSS(sheet.href)
+                        .then((metadata) => embedFonts(metadata, options))
+                        .then((cssText) => parseCSS(cssText).forEach((rule) => {
+                        inline.insertRule(rule, sheet.cssRules.length);
+                    }))
+                        .catch((err) => {
+                        console.error('Error loading remote stylesheet', err);
+                    }));
+                }
+                console.error('Error inlining remote css file', e);
+            }
+        }
+    });
+    return Promise.all(deferreds).then(() => {
+        // Second loop parses rules
+        styleSheets.forEach((sheet) => {
+            if ('cssRules' in sheet) {
+                try {
+                    toArray(sheet.cssRules || []).forEach((item) => {
+                        ret.push(item);
+                    });
+                }
+                catch (e) {
+                    console.error(`Error while reading CSS rules from ${sheet.href}`, e);
+                }
+            }
+        });
+        return ret;
+    });
+}
+function getWebFontRules(cssRules) {
+    return cssRules
+        .filter((rule) => rule.type === CSSRule.FONT_FACE_RULE)
+        .filter((rule) => shouldEmbed(rule.style.getPropertyValue('src')));
+}
+async function parseWebFontRules(node, options) {
+    if (node.ownerDocument == null) {
+        throw new Error('Provided element is not within a Document');
+    }
+    const styleSheets = toArray(node.ownerDocument.styleSheets);
+    const cssRules = await getCSSRules(styleSheets, options);
+    return getWebFontRules(cssRules);
+}
+async function getWebFontCSS(node, options) {
+    const rules = await parseWebFontRules(node, options);
+    const cssTexts = await Promise.all(rules.map((rule) => {
+        const baseUrl = rule.parentStyleSheet ? rule.parentStyleSheet.href : null;
+        return embedResources(rule.cssText, baseUrl, options);
+    }));
+    return cssTexts.join('\n');
+}
+async function embedWebFonts(clonedNode, options) {
+    const cssText = options.fontEmbedCSS != null
+        ? options.fontEmbedCSS
+        : options.skipFonts
+            ? null
+            : await getWebFontCSS(clonedNode, options);
+    if (cssText) {
+        const styleNode = document.createElement('style');
+        const sytleContent = document.createTextNode(cssText);
+        styleNode.appendChild(sytleContent);
+        if (clonedNode.firstChild) {
+            clonedNode.insertBefore(styleNode, clonedNode.firstChild);
+        }
+        else {
+            clonedNode.appendChild(styleNode);
+        }
+    }
+}
+
+async function toSvg(node, options = {}) {
+    const { width, height } = getImageSize(node, options);
+    const clonedNode = (await cloneNode(node, options, true));
+    await embedWebFonts(clonedNode, options);
+    await embedImages(clonedNode, options);
+    applyStyle(clonedNode, options);
+    const datauri = await nodeToDataURL(clonedNode, width, height);
+    return datauri;
+}
+async function toCanvas(node, options = {}) {
+    const { width, height } = getImageSize(node, options);
+    const svg = await toSvg(node, options);
+    const img = await createImage(svg);
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    const ratio = options.pixelRatio || getPixelRatio();
+    const canvasWidth = options.canvasWidth || width;
+    const canvasHeight = options.canvasHeight || height;
+    canvas.width = canvasWidth * ratio;
+    canvas.height = canvasHeight * ratio;
+    if (!options.skipAutoScale) {
+        checkCanvasDimensions(canvas);
+    }
+    canvas.style.width = `${canvasWidth}`;
+    canvas.style.height = `${canvasHeight}`;
+    if (options.backgroundColor) {
+        context.fillStyle = options.backgroundColor;
+        context.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    context.drawImage(img, 0, 0, canvas.width, canvas.height);
+    return canvas;
+}
+async function toPng(node, options = {}) {
+    const canvas = await toCanvas(node, options);
+    return canvas.toDataURL();
+}
+
+var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+var PropagateLoader$1 = {};
+
+var unitConverter = {};
+
+Object.defineProperty(unitConverter, "__esModule", { value: true });
+unitConverter.cssValue = unitConverter.parseLengthAndUnit = void 0;
+var cssUnit = {
+    cm: true,
+    mm: true,
+    in: true,
+    px: true,
+    pt: true,
+    pc: true,
+    em: true,
+    ex: true,
+    ch: true,
+    rem: true,
+    vw: true,
+    vh: true,
+    vmin: true,
+    vmax: true,
+    "%": true,
+};
+/**
+ * If size is a number, append px to the value as default unit.
+ * If size is a string, validate against list of valid units.
+ * If unit is valid, return size as is.
+ * If unit is invalid, console warn issue, replace with px as the unit.
+ *
+ * @param {(number | string)} size
+ * @return {LengthObject} LengthObject
+ */
+function parseLengthAndUnit(size) {
+    if (typeof size === "number") {
+        return {
+            value: size,
+            unit: "px",
+        };
+    }
+    var value;
+    var valueString = (size.match(/^[0-9.]*/) || "").toString();
+    if (valueString.includes(".")) {
+        value = parseFloat(valueString);
+    }
+    else {
+        value = parseInt(valueString, 10);
+    }
+    var unit = (size.match(/[^0-9]*$/) || "").toString();
+    if (cssUnit[unit]) {
+        return {
+            value: value,
+            unit: unit,
+        };
+    }
+    console.warn("React Spinners: ".concat(size, " is not a valid css value. Defaulting to ").concat(value, "px."));
+    return {
+        value: value,
+        unit: "px",
+    };
+}
+unitConverter.parseLengthAndUnit = parseLengthAndUnit;
+/**
+ * Take value as an input and return valid css value
+ *
+ * @param {(number | string)} value
+ * @return {string} valid css value
+ */
+function cssValue(value) {
+    var lengthWithunit = parseLengthAndUnit(value);
+    return "".concat(lengthWithunit.value).concat(lengthWithunit.unit);
+}
+unitConverter.cssValue = cssValue;
+
+var animation = {};
+
+Object.defineProperty(animation, "__esModule", { value: true });
+animation.createAnimation = void 0;
+var createAnimation = function (loaderName, frames, suffix) {
+    var animationName = "react-spinners-".concat(loaderName, "-").concat(suffix);
+    if (typeof window == "undefined" || !window.document) {
+        return animationName;
+    }
+    var styleEl = document.createElement("style");
+    document.head.appendChild(styleEl);
+    var styleSheet = styleEl.sheet;
+    var keyFrames = "\n    @keyframes ".concat(animationName, " {\n      ").concat(frames, "\n    }\n  ");
+    if (styleSheet) {
+        styleSheet.insertRule(keyFrames, 0);
+    }
+    return animationName;
+};
+animation.createAnimation = createAnimation;
+
+var __assign$1 = (commonjsGlobal && commonjsGlobal.__assign) || function () {
+    __assign$1 = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign$1.apply(this, arguments);
+};
+var __createBinding = (commonjsGlobal && commonjsGlobal.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (commonjsGlobal && commonjsGlobal.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (commonjsGlobal && commonjsGlobal.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __rest = (commonjsGlobal && commonjsGlobal.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
+Object.defineProperty(PropagateLoader$1, "__esModule", { value: true });
+var React = __importStar(React__default);
+var unitConverter_1 = unitConverter;
+var animation_1 = animation;
+// 1.5 4.5 7.5
+var distance$1 = [1, 3, 5];
+var propagate = [
+    (0, animation_1.createAnimation)("PropagateLoader", "25% {transform: translateX(-".concat(distance$1[0], "rem) scale(0.75)}\n    50% {transform: translateX(-").concat(distance$1[1], "rem) scale(0.6)}\n    75% {transform: translateX(-").concat(distance$1[2], "rem) scale(0.5)}\n    95% {transform: translateX(0rem) scale(1)}"), "propogate-0"),
+    (0, animation_1.createAnimation)("PropagateLoader", "25% {transform: translateX(-".concat(distance$1[0], "rem) scale(0.75)}\n    50% {transform: translateX(-").concat(distance$1[1], "rem) scale(0.6)}\n    75% {transform: translateX(-").concat(distance$1[1], "rem) scale(0.6)}\n    95% {transform: translateX(0rem) scale(1)}"), "propogate-1"),
+    (0, animation_1.createAnimation)("PropagateLoader", "25% {transform: translateX(-".concat(distance$1[0], "rem) scale(0.75)}\n    75% {transform: translateX(-").concat(distance$1[0], "rem) scale(0.75)}\n    95% {transform: translateX(0rem) scale(1)}"), "propogate-2"),
+    (0, animation_1.createAnimation)("PropagateLoader", "25% {transform: translateX(".concat(distance$1[0], "rem) scale(0.75)}\n    75% {transform: translateX(").concat(distance$1[0], "rem) scale(0.75)}\n    95% {transform: translateX(0rem) scale(1)}"), "propogate-3"),
+    (0, animation_1.createAnimation)("PropagateLoader", "25% {transform: translateX(".concat(distance$1[0], "rem) scale(0.75)}\n    50% {transform: translateX(").concat(distance$1[1], "rem) scale(0.6)}\n    75% {transform: translateX(").concat(distance$1[1], "rem) scale(0.6)}\n    95% {transform: translateX(0rem) scale(1)}"), "propogate-4"),
+    (0, animation_1.createAnimation)("PropagateLoader", "25% {transform: translateX(".concat(distance$1[0], "rem) scale(0.75)}\n    50% {transform: translateX(").concat(distance$1[1], "rem) scale(0.6)}\n    75% {transform: translateX(").concat(distance$1[2], "rem) scale(0.5)}\n    95% {transform: translateX(0rem) scale(1)}"), "propogate-5"),
+];
+function PropagateLoader(_a) {
+    var _b = _a.loading, loading = _b === void 0 ? true : _b, _c = _a.color, color = _c === void 0 ? "#000000" : _c, _d = _a.speedMultiplier, speedMultiplier = _d === void 0 ? 1 : _d, _e = _a.cssOverride, cssOverride = _e === void 0 ? {} : _e, _f = _a.size, size = _f === void 0 ? 15 : _f, additionalprops = __rest(_a, ["loading", "color", "speedMultiplier", "cssOverride", "size"]);
+    var _g = (0, unitConverter_1.parseLengthAndUnit)(size), value = _g.value, unit = _g.unit;
+    var wrapper = __assign$1({ display: "inherit", position: "relative" }, cssOverride);
+    var style = function (i) {
+        return {
+            position: "absolute",
+            fontSize: "".concat(value / 3).concat(unit),
+            width: "".concat(value).concat(unit),
+            height: "".concat(value).concat(unit),
+            background: color,
+            borderRadius: "50%",
+            animation: "".concat(propagate[i], " ").concat(1.5 / speedMultiplier, "s infinite"),
+            animationFillMode: "forwards",
+        };
+    };
+    if (!loading) {
+        return null;
+    }
+    return (React.createElement("span", __assign$1({ style: wrapper }, additionalprops),
+        React.createElement("span", { style: style(0) }),
+        React.createElement("span", { style: style(1) }),
+        React.createElement("span", { style: style(2) }),
+        React.createElement("span", { style: style(3) }),
+        React.createElement("span", { style: style(4) }),
+        React.createElement("span", { style: style(5) })));
+}
+var _default = PropagateLoader$1.default = PropagateLoader;
 
 /**
  * @license
@@ -30420,6 +31532,56 @@ class Line extends Object3D {
 
 }
 
+const _start = /*@__PURE__*/ new Vector3();
+const _end = /*@__PURE__*/ new Vector3();
+
+class LineSegments extends Line {
+
+	constructor( geometry, material ) {
+
+		super( geometry, material );
+
+		this.isLineSegments = true;
+
+		this.type = 'LineSegments';
+
+	}
+
+	computeLineDistances() {
+
+		const geometry = this.geometry;
+
+		// we assume non-indexed geometry
+
+		if ( geometry.index === null ) {
+
+			const positionAttribute = geometry.attributes.position;
+			const lineDistances = [];
+
+			for ( let i = 0, l = positionAttribute.count; i < l; i += 2 ) {
+
+				_start.fromBufferAttribute( positionAttribute, i );
+				_end.fromBufferAttribute( positionAttribute, i + 1 );
+
+				lineDistances[ i ] = ( i === 0 ) ? 0 : lineDistances[ i - 1 ];
+				lineDistances[ i + 1 ] = lineDistances[ i ] + _start.distanceTo( _end );
+
+			}
+
+			geometry.setAttribute( 'lineDistance', new Float32BufferAttribute( lineDistances, 1 ) );
+
+		} else {
+
+			console.warn( 'THREE.LineSegments.computeLineDistances(): Computation only possible with non-indexed BufferGeometry.' );
+
+		}
+
+		return this;
+
+	}
+
+}
+
 /**
  * Extensible curve object.
  *
@@ -33295,194 +34457,6 @@ function addContour( vertices, contour ) {
 
 }
 
-class ShapeGeometry extends BufferGeometry {
-
-	constructor( shapes = new Shape( [ new Vector2( 0, 0.5 ), new Vector2( - 0.5, - 0.5 ), new Vector2( 0.5, - 0.5 ) ] ), curveSegments = 12 ) {
-
-		super();
-
-		this.type = 'ShapeGeometry';
-
-		this.parameters = {
-			shapes: shapes,
-			curveSegments: curveSegments
-		};
-
-		// buffers
-
-		const indices = [];
-		const vertices = [];
-		const normals = [];
-		const uvs = [];
-
-		// helper variables
-
-		let groupStart = 0;
-		let groupCount = 0;
-
-		// allow single and array values for "shapes" parameter
-
-		if ( Array.isArray( shapes ) === false ) {
-
-			addShape( shapes );
-
-		} else {
-
-			for ( let i = 0; i < shapes.length; i ++ ) {
-
-				addShape( shapes[ i ] );
-
-				this.addGroup( groupStart, groupCount, i ); // enables MultiMaterial support
-
-				groupStart += groupCount;
-				groupCount = 0;
-
-			}
-
-		}
-
-		// build geometry
-
-		this.setIndex( indices );
-		this.setAttribute( 'position', new Float32BufferAttribute( vertices, 3 ) );
-		this.setAttribute( 'normal', new Float32BufferAttribute( normals, 3 ) );
-		this.setAttribute( 'uv', new Float32BufferAttribute( uvs, 2 ) );
-
-
-		// helper functions
-
-		function addShape( shape ) {
-
-			const indexOffset = vertices.length / 3;
-			const points = shape.extractPoints( curveSegments );
-
-			let shapeVertices = points.shape;
-			const shapeHoles = points.holes;
-
-			// check direction of vertices
-
-			if ( ShapeUtils.isClockWise( shapeVertices ) === false ) {
-
-				shapeVertices = shapeVertices.reverse();
-
-			}
-
-			for ( let i = 0, l = shapeHoles.length; i < l; i ++ ) {
-
-				const shapeHole = shapeHoles[ i ];
-
-				if ( ShapeUtils.isClockWise( shapeHole ) === true ) {
-
-					shapeHoles[ i ] = shapeHole.reverse();
-
-				}
-
-			}
-
-			const faces = ShapeUtils.triangulateShape( shapeVertices, shapeHoles );
-
-			// join vertices of inner and outer paths to a single array
-
-			for ( let i = 0, l = shapeHoles.length; i < l; i ++ ) {
-
-				const shapeHole = shapeHoles[ i ];
-				shapeVertices = shapeVertices.concat( shapeHole );
-
-			}
-
-			// vertices, normals, uvs
-
-			for ( let i = 0, l = shapeVertices.length; i < l; i ++ ) {
-
-				const vertex = shapeVertices[ i ];
-
-				vertices.push( vertex.x, vertex.y, 0 );
-				normals.push( 0, 0, 1 );
-				uvs.push( vertex.x, vertex.y ); // world uvs
-
-			}
-
-			// indices
-
-			for ( let i = 0, l = faces.length; i < l; i ++ ) {
-
-				const face = faces[ i ];
-
-				const a = face[ 0 ] + indexOffset;
-				const b = face[ 1 ] + indexOffset;
-				const c = face[ 2 ] + indexOffset;
-
-				indices.push( a, b, c );
-				groupCount += 3;
-
-			}
-
-		}
-
-	}
-
-	copy( source ) {
-
-		super.copy( source );
-
-		this.parameters = Object.assign( {}, source.parameters );
-
-		return this;
-
-	}
-
-	toJSON() {
-
-		const data = super.toJSON();
-
-		const shapes = this.parameters.shapes;
-
-		return toJSON( shapes, data );
-
-	}
-
-	static fromJSON( data, shapes ) {
-
-		const geometryShapes = [];
-
-		for ( let j = 0, jl = data.shapes.length; j < jl; j ++ ) {
-
-			const shape = shapes[ data.shapes[ j ] ];
-
-			geometryShapes.push( shape );
-
-		}
-
-		return new ShapeGeometry( geometryShapes, data.curveSegments );
-
-	}
-
-}
-
-function toJSON( shapes, data ) {
-
-	data.shapes = [];
-
-	if ( Array.isArray( shapes ) ) {
-
-		for ( let i = 0, l = shapes.length; i < l; i ++ ) {
-
-			const shape = shapes[ i ];
-
-			data.shapes.push( shape.uuid );
-
-		}
-
-	} else {
-
-		data.shapes.push( shapes.uuid );
-
-	}
-
-	return data;
-
-}
-
 class SphereGeometry extends BufferGeometry {
 
 	constructor( radius = 1, widthSegments = 32, heightSegments = 16, phiStart = 0, phiLength = Math.PI * 2, thetaStart = 0, thetaLength = Math.PI ) {
@@ -36223,6 +37197,3153 @@ class OrbitControls extends EventDispatcher {
 
 }
 
+const COLOR_SPACE_SVG = SRGBColorSpace;
+
+class SVGLoader extends Loader {
+
+	constructor( manager ) {
+
+		super( manager );
+
+		// Default dots per inch
+		this.defaultDPI = 90;
+
+		// Accepted units: 'mm', 'cm', 'in', 'pt', 'pc', 'px'
+		this.defaultUnit = 'px';
+
+	}
+
+	load( url, onLoad, onProgress, onError ) {
+
+		const scope = this;
+
+		const loader = new FileLoader( scope.manager );
+		loader.setPath( scope.path );
+		loader.setRequestHeader( scope.requestHeader );
+		loader.setWithCredentials( scope.withCredentials );
+		loader.load( url, function ( text ) {
+
+			try {
+
+				onLoad( scope.parse( text ) );
+
+			} catch ( e ) {
+
+				if ( onError ) {
+
+					onError( e );
+
+				} else {
+
+					console.error( e );
+
+				}
+
+				scope.manager.itemError( url );
+
+			}
+
+		}, onProgress, onError );
+
+	}
+
+	parse( text ) {
+
+		const scope = this;
+
+		function parseNode( node, style ) {
+
+			if ( node.nodeType !== 1 ) return;
+
+			const transform = getNodeTransform( node );
+
+			let isDefsNode = false;
+
+			let path = null;
+
+			switch ( node.nodeName ) {
+
+				case 'svg':
+					style = parseStyle( node, style );
+					break;
+
+				case 'style':
+					parseCSSStylesheet( node );
+					break;
+
+				case 'g':
+					style = parseStyle( node, style );
+					break;
+
+				case 'path':
+					style = parseStyle( node, style );
+					if ( node.hasAttribute( 'd' ) ) path = parsePathNode( node );
+					break;
+
+				case 'rect':
+					style = parseStyle( node, style );
+					path = parseRectNode( node );
+					break;
+
+				case 'polygon':
+					style = parseStyle( node, style );
+					path = parsePolygonNode( node );
+					break;
+
+				case 'polyline':
+					style = parseStyle( node, style );
+					path = parsePolylineNode( node );
+					break;
+
+				case 'circle':
+					style = parseStyle( node, style );
+					path = parseCircleNode( node );
+					break;
+
+				case 'ellipse':
+					style = parseStyle( node, style );
+					path = parseEllipseNode( node );
+					break;
+
+				case 'line':
+					style = parseStyle( node, style );
+					path = parseLineNode( node );
+					break;
+
+				case 'defs':
+					isDefsNode = true;
+					break;
+
+				case 'use':
+					style = parseStyle( node, style );
+
+					const href = node.getAttributeNS( 'http://www.w3.org/1999/xlink', 'href' ) || '';
+					const usedNodeId = href.substring( 1 );
+					const usedNode = node.viewportElement.getElementById( usedNodeId );
+					if ( usedNode ) {
+
+						parseNode( usedNode, style );
+
+					} else {
+
+						console.warn( 'SVGLoader: \'use node\' references non-existent node id: ' + usedNodeId );
+
+					}
+
+					break;
+					// console.log( node );
+
+			}
+
+			if ( path ) {
+
+				if ( style.fill !== undefined && style.fill !== 'none' ) {
+
+					path.color.setStyle( style.fill, COLOR_SPACE_SVG );
+
+				}
+
+				transformPath( path, currentTransform );
+
+				paths.push( path );
+
+				path.userData = { node: node, style: style };
+
+			}
+
+			const childNodes = node.childNodes;
+
+			for ( let i = 0; i < childNodes.length; i ++ ) {
+
+				const node = childNodes[ i ];
+
+				if ( isDefsNode && node.nodeName !== 'style' && node.nodeName !== 'defs' ) {
+
+					// Ignore everything in defs except CSS style definitions
+					// and nested defs, because it is OK by the standard to have
+					// <style/> there.
+					continue;
+
+				}
+
+				parseNode( node, style );
+
+			}
+
+
+			if ( transform ) {
+
+				transformStack.pop();
+
+				if ( transformStack.length > 0 ) {
+
+					currentTransform.copy( transformStack[ transformStack.length - 1 ] );
+
+				} else {
+
+					currentTransform.identity();
+
+				}
+
+			}
+
+		}
+
+		function parsePathNode( node ) {
+
+			const path = new ShapePath();
+
+			const point = new Vector2();
+			const control = new Vector2();
+
+			const firstPoint = new Vector2();
+			let isFirstPoint = true;
+			let doSetFirstPoint = false;
+
+			const d = node.getAttribute( 'd' );
+
+			if ( d === '' || d === 'none' ) return null;
+
+			// console.log( d );
+
+			const commands = d.match( /[a-df-z][^a-df-z]*/ig );
+
+			for ( let i = 0, l = commands.length; i < l; i ++ ) {
+
+				const command = commands[ i ];
+
+				const type = command.charAt( 0 );
+				const data = command.slice( 1 ).trim();
+
+				if ( isFirstPoint === true ) {
+
+					doSetFirstPoint = true;
+					isFirstPoint = false;
+
+				}
+
+				let numbers;
+
+				switch ( type ) {
+
+					case 'M':
+						numbers = parseFloats( data );
+						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
+
+							point.x = numbers[ j + 0 ];
+							point.y = numbers[ j + 1 ];
+							control.x = point.x;
+							control.y = point.y;
+
+							if ( j === 0 ) {
+
+								path.moveTo( point.x, point.y );
+
+							} else {
+
+								path.lineTo( point.x, point.y );
+
+							}
+
+							if ( j === 0 ) firstPoint.copy( point );
+
+						}
+
+						break;
+
+					case 'H':
+						numbers = parseFloats( data );
+
+						for ( let j = 0, jl = numbers.length; j < jl; j ++ ) {
+
+							point.x = numbers[ j ];
+							control.x = point.x;
+							control.y = point.y;
+							path.lineTo( point.x, point.y );
+
+							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+						}
+
+						break;
+
+					case 'V':
+						numbers = parseFloats( data );
+
+						for ( let j = 0, jl = numbers.length; j < jl; j ++ ) {
+
+							point.y = numbers[ j ];
+							control.x = point.x;
+							control.y = point.y;
+							path.lineTo( point.x, point.y );
+
+							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+						}
+
+						break;
+
+					case 'L':
+						numbers = parseFloats( data );
+
+						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
+
+							point.x = numbers[ j + 0 ];
+							point.y = numbers[ j + 1 ];
+							control.x = point.x;
+							control.y = point.y;
+							path.lineTo( point.x, point.y );
+
+							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+						}
+
+						break;
+
+					case 'C':
+						numbers = parseFloats( data );
+
+						for ( let j = 0, jl = numbers.length; j < jl; j += 6 ) {
+
+							path.bezierCurveTo(
+								numbers[ j + 0 ],
+								numbers[ j + 1 ],
+								numbers[ j + 2 ],
+								numbers[ j + 3 ],
+								numbers[ j + 4 ],
+								numbers[ j + 5 ]
+							);
+							control.x = numbers[ j + 2 ];
+							control.y = numbers[ j + 3 ];
+							point.x = numbers[ j + 4 ];
+							point.y = numbers[ j + 5 ];
+
+							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+						}
+
+						break;
+
+					case 'S':
+						numbers = parseFloats( data );
+
+						for ( let j = 0, jl = numbers.length; j < jl; j += 4 ) {
+
+							path.bezierCurveTo(
+								getReflection( point.x, control.x ),
+								getReflection( point.y, control.y ),
+								numbers[ j + 0 ],
+								numbers[ j + 1 ],
+								numbers[ j + 2 ],
+								numbers[ j + 3 ]
+							);
+							control.x = numbers[ j + 0 ];
+							control.y = numbers[ j + 1 ];
+							point.x = numbers[ j + 2 ];
+							point.y = numbers[ j + 3 ];
+
+							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+						}
+
+						break;
+
+					case 'Q':
+						numbers = parseFloats( data );
+
+						for ( let j = 0, jl = numbers.length; j < jl; j += 4 ) {
+
+							path.quadraticCurveTo(
+								numbers[ j + 0 ],
+								numbers[ j + 1 ],
+								numbers[ j + 2 ],
+								numbers[ j + 3 ]
+							);
+							control.x = numbers[ j + 0 ];
+							control.y = numbers[ j + 1 ];
+							point.x = numbers[ j + 2 ];
+							point.y = numbers[ j + 3 ];
+
+							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+						}
+
+						break;
+
+					case 'T':
+						numbers = parseFloats( data );
+
+						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
+
+							const rx = getReflection( point.x, control.x );
+							const ry = getReflection( point.y, control.y );
+							path.quadraticCurveTo(
+								rx,
+								ry,
+								numbers[ j + 0 ],
+								numbers[ j + 1 ]
+							);
+							control.x = rx;
+							control.y = ry;
+							point.x = numbers[ j + 0 ];
+							point.y = numbers[ j + 1 ];
+
+							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+						}
+
+						break;
+
+					case 'A':
+						numbers = parseFloats( data, [ 3, 4 ], 7 );
+
+						for ( let j = 0, jl = numbers.length; j < jl; j += 7 ) {
+
+							// skip command if start point == end point
+							if ( numbers[ j + 5 ] == point.x && numbers[ j + 6 ] == point.y ) continue;
+
+							const start = point.clone();
+							point.x = numbers[ j + 5 ];
+							point.y = numbers[ j + 6 ];
+							control.x = point.x;
+							control.y = point.y;
+							parseArcCommand(
+								path, numbers[ j ], numbers[ j + 1 ], numbers[ j + 2 ], numbers[ j + 3 ], numbers[ j + 4 ], start, point
+							);
+
+							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+						}
+
+						break;
+
+					case 'm':
+						numbers = parseFloats( data );
+
+						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
+
+							point.x += numbers[ j + 0 ];
+							point.y += numbers[ j + 1 ];
+							control.x = point.x;
+							control.y = point.y;
+
+							if ( j === 0 ) {
+
+								path.moveTo( point.x, point.y );
+
+							} else {
+
+								path.lineTo( point.x, point.y );
+
+							}
+
+							if ( j === 0 ) firstPoint.copy( point );
+
+						}
+
+						break;
+
+					case 'h':
+						numbers = parseFloats( data );
+
+						for ( let j = 0, jl = numbers.length; j < jl; j ++ ) {
+
+							point.x += numbers[ j ];
+							control.x = point.x;
+							control.y = point.y;
+							path.lineTo( point.x, point.y );
+
+							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+						}
+
+						break;
+
+					case 'v':
+						numbers = parseFloats( data );
+
+						for ( let j = 0, jl = numbers.length; j < jl; j ++ ) {
+
+							point.y += numbers[ j ];
+							control.x = point.x;
+							control.y = point.y;
+							path.lineTo( point.x, point.y );
+
+							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+						}
+
+						break;
+
+					case 'l':
+						numbers = parseFloats( data );
+
+						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
+
+							point.x += numbers[ j + 0 ];
+							point.y += numbers[ j + 1 ];
+							control.x = point.x;
+							control.y = point.y;
+							path.lineTo( point.x, point.y );
+
+							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+						}
+
+						break;
+
+					case 'c':
+						numbers = parseFloats( data );
+
+						for ( let j = 0, jl = numbers.length; j < jl; j += 6 ) {
+
+							path.bezierCurveTo(
+								point.x + numbers[ j + 0 ],
+								point.y + numbers[ j + 1 ],
+								point.x + numbers[ j + 2 ],
+								point.y + numbers[ j + 3 ],
+								point.x + numbers[ j + 4 ],
+								point.y + numbers[ j + 5 ]
+							);
+							control.x = point.x + numbers[ j + 2 ];
+							control.y = point.y + numbers[ j + 3 ];
+							point.x += numbers[ j + 4 ];
+							point.y += numbers[ j + 5 ];
+
+							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+						}
+
+						break;
+
+					case 's':
+						numbers = parseFloats( data );
+
+						for ( let j = 0, jl = numbers.length; j < jl; j += 4 ) {
+
+							path.bezierCurveTo(
+								getReflection( point.x, control.x ),
+								getReflection( point.y, control.y ),
+								point.x + numbers[ j + 0 ],
+								point.y + numbers[ j + 1 ],
+								point.x + numbers[ j + 2 ],
+								point.y + numbers[ j + 3 ]
+							);
+							control.x = point.x + numbers[ j + 0 ];
+							control.y = point.y + numbers[ j + 1 ];
+							point.x += numbers[ j + 2 ];
+							point.y += numbers[ j + 3 ];
+
+							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+						}
+
+						break;
+
+					case 'q':
+						numbers = parseFloats( data );
+
+						for ( let j = 0, jl = numbers.length; j < jl; j += 4 ) {
+
+							path.quadraticCurveTo(
+								point.x + numbers[ j + 0 ],
+								point.y + numbers[ j + 1 ],
+								point.x + numbers[ j + 2 ],
+								point.y + numbers[ j + 3 ]
+							);
+							control.x = point.x + numbers[ j + 0 ];
+							control.y = point.y + numbers[ j + 1 ];
+							point.x += numbers[ j + 2 ];
+							point.y += numbers[ j + 3 ];
+
+							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+						}
+
+						break;
+
+					case 't':
+						numbers = parseFloats( data );
+
+						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
+
+							const rx = getReflection( point.x, control.x );
+							const ry = getReflection( point.y, control.y );
+							path.quadraticCurveTo(
+								rx,
+								ry,
+								point.x + numbers[ j + 0 ],
+								point.y + numbers[ j + 1 ]
+							);
+							control.x = rx;
+							control.y = ry;
+							point.x = point.x + numbers[ j + 0 ];
+							point.y = point.y + numbers[ j + 1 ];
+
+							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+						}
+
+						break;
+
+					case 'a':
+						numbers = parseFloats( data, [ 3, 4 ], 7 );
+
+						for ( let j = 0, jl = numbers.length; j < jl; j += 7 ) {
+
+							// skip command if no displacement
+							if ( numbers[ j + 5 ] == 0 && numbers[ j + 6 ] == 0 ) continue;
+
+							const start = point.clone();
+							point.x += numbers[ j + 5 ];
+							point.y += numbers[ j + 6 ];
+							control.x = point.x;
+							control.y = point.y;
+							parseArcCommand(
+								path, numbers[ j ], numbers[ j + 1 ], numbers[ j + 2 ], numbers[ j + 3 ], numbers[ j + 4 ], start, point
+							);
+
+							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
+
+						}
+
+						break;
+
+					case 'Z':
+					case 'z':
+						path.currentPath.autoClose = true;
+
+						if ( path.currentPath.curves.length > 0 ) {
+
+							// Reset point to beginning of Path
+							point.copy( firstPoint );
+							path.currentPath.currentPoint.copy( point );
+							isFirstPoint = true;
+
+						}
+
+						break;
+
+					default:
+						console.warn( command );
+
+				}
+
+				// console.log( type, parseFloats( data ), parseFloats( data ).length  )
+
+				doSetFirstPoint = false;
+
+			}
+
+			return path;
+
+		}
+
+		function parseCSSStylesheet( node ) {
+
+			if ( ! node.sheet || ! node.sheet.cssRules || ! node.sheet.cssRules.length ) return;
+
+			for ( let i = 0; i < node.sheet.cssRules.length; i ++ ) {
+
+				const stylesheet = node.sheet.cssRules[ i ];
+
+				if ( stylesheet.type !== 1 ) continue;
+
+				const selectorList = stylesheet.selectorText
+					.split( /,/gm )
+					.filter( Boolean )
+					.map( i => i.trim() );
+
+				for ( let j = 0; j < selectorList.length; j ++ ) {
+
+					// Remove empty rules
+					const definitions = Object.fromEntries(
+						Object.entries( stylesheet.style ).filter( ( [ , v ] ) => v !== '' )
+					);
+
+					stylesheets[ selectorList[ j ] ] = Object.assign(
+						stylesheets[ selectorList[ j ] ] || {},
+						definitions
+					);
+
+				}
+
+			}
+
+		}
+
+		/**
+		 * https://www.w3.org/TR/SVG/implnote.html#ArcImplementationNotes
+		 * https://mortoray.com/2017/02/16/rendering-an-svg-elliptical-arc-as-bezier-curves/ Appendix: Endpoint to center arc conversion
+		 * From
+		 * rx ry x-axis-rotation large-arc-flag sweep-flag x y
+		 * To
+		 * aX, aY, xRadius, yRadius, aStartAngle, aEndAngle, aClockwise, aRotation
+		 */
+
+		function parseArcCommand( path, rx, ry, x_axis_rotation, large_arc_flag, sweep_flag, start, end ) {
+
+			if ( rx == 0 || ry == 0 ) {
+
+				// draw a line if either of the radii == 0
+				path.lineTo( end.x, end.y );
+				return;
+
+			}
+
+			x_axis_rotation = x_axis_rotation * Math.PI / 180;
+
+			// Ensure radii are positive
+			rx = Math.abs( rx );
+			ry = Math.abs( ry );
+
+			// Compute (x1', y1')
+			const dx2 = ( start.x - end.x ) / 2.0;
+			const dy2 = ( start.y - end.y ) / 2.0;
+			const x1p = Math.cos( x_axis_rotation ) * dx2 + Math.sin( x_axis_rotation ) * dy2;
+			const y1p = - Math.sin( x_axis_rotation ) * dx2 + Math.cos( x_axis_rotation ) * dy2;
+
+			// Compute (cx', cy')
+			let rxs = rx * rx;
+			let rys = ry * ry;
+			const x1ps = x1p * x1p;
+			const y1ps = y1p * y1p;
+
+			// Ensure radii are large enough
+			const cr = x1ps / rxs + y1ps / rys;
+
+			if ( cr > 1 ) {
+
+				// scale up rx,ry equally so cr == 1
+				const s = Math.sqrt( cr );
+				rx = s * rx;
+				ry = s * ry;
+				rxs = rx * rx;
+				rys = ry * ry;
+
+			}
+
+			const dq = ( rxs * y1ps + rys * x1ps );
+			const pq = ( rxs * rys - dq ) / dq;
+			let q = Math.sqrt( Math.max( 0, pq ) );
+			if ( large_arc_flag === sweep_flag ) q = - q;
+			const cxp = q * rx * y1p / ry;
+			const cyp = - q * ry * x1p / rx;
+
+			// Step 3: Compute (cx, cy) from (cx', cy')
+			const cx = Math.cos( x_axis_rotation ) * cxp - Math.sin( x_axis_rotation ) * cyp + ( start.x + end.x ) / 2;
+			const cy = Math.sin( x_axis_rotation ) * cxp + Math.cos( x_axis_rotation ) * cyp + ( start.y + end.y ) / 2;
+
+			// Step 4: Compute θ1 and Δθ
+			const theta = svgAngle( 1, 0, ( x1p - cxp ) / rx, ( y1p - cyp ) / ry );
+			const delta = svgAngle( ( x1p - cxp ) / rx, ( y1p - cyp ) / ry, ( - x1p - cxp ) / rx, ( - y1p - cyp ) / ry ) % ( Math.PI * 2 );
+
+			path.currentPath.absellipse( cx, cy, rx, ry, theta, theta + delta, sweep_flag === 0, x_axis_rotation );
+
+		}
+
+		function svgAngle( ux, uy, vx, vy ) {
+
+			const dot = ux * vx + uy * vy;
+			const len = Math.sqrt( ux * ux + uy * uy ) * Math.sqrt( vx * vx + vy * vy );
+			let ang = Math.acos( Math.max( - 1, Math.min( 1, dot / len ) ) ); // floating point precision, slightly over values appear
+			if ( ( ux * vy - uy * vx ) < 0 ) ang = - ang;
+			return ang;
+
+		}
+
+		/*
+		* According to https://www.w3.org/TR/SVG/shapes.html#RectElementRXAttribute
+		* rounded corner should be rendered to elliptical arc, but bezier curve does the job well enough
+		*/
+		function parseRectNode( node ) {
+
+			const x = parseFloatWithUnits( node.getAttribute( 'x' ) || 0 );
+			const y = parseFloatWithUnits( node.getAttribute( 'y' ) || 0 );
+			const rx = parseFloatWithUnits( node.getAttribute( 'rx' ) || node.getAttribute( 'ry' ) || 0 );
+			const ry = parseFloatWithUnits( node.getAttribute( 'ry' ) || node.getAttribute( 'rx' ) || 0 );
+			const w = parseFloatWithUnits( node.getAttribute( 'width' ) );
+			const h = parseFloatWithUnits( node.getAttribute( 'height' ) );
+
+			// Ellipse arc to Bezier approximation Coefficient (Inversed). See:
+			// https://spencermortensen.com/articles/bezier-circle/
+			const bci = 1 - 0.551915024494;
+
+			const path = new ShapePath();
+
+			// top left
+			path.moveTo( x + rx, y );
+
+			// top right
+			path.lineTo( x + w - rx, y );
+			if ( rx !== 0 || ry !== 0 ) {
+
+				path.bezierCurveTo(
+					x + w - rx * bci,
+					y,
+					x + w,
+					y + ry * bci,
+					x + w,
+					y + ry
+				);
+
+			}
+
+			// bottom right
+			path.lineTo( x + w, y + h - ry );
+			if ( rx !== 0 || ry !== 0 ) {
+
+				path.bezierCurveTo(
+					x + w,
+					y + h - ry * bci,
+					x + w - rx * bci,
+					y + h,
+					x + w - rx,
+					y + h
+				);
+
+			}
+
+			// bottom left
+			path.lineTo( x + rx, y + h );
+			if ( rx !== 0 || ry !== 0 ) {
+
+				path.bezierCurveTo(
+					x + rx * bci,
+					y + h,
+					x,
+					y + h - ry * bci,
+					x,
+					y + h - ry
+				);
+
+			}
+
+			// back to top left
+			path.lineTo( x, y + ry );
+			if ( rx !== 0 || ry !== 0 ) {
+
+				path.bezierCurveTo( x, y + ry * bci, x + rx * bci, y, x + rx, y );
+
+			}
+
+			return path;
+
+		}
+
+		function parsePolygonNode( node ) {
+
+			function iterator( match, a, b ) {
+
+				const x = parseFloatWithUnits( a );
+				const y = parseFloatWithUnits( b );
+
+				if ( index === 0 ) {
+
+					path.moveTo( x, y );
+
+				} else {
+
+					path.lineTo( x, y );
+
+				}
+
+				index ++;
+
+			}
+
+			const regex = /([+-]?\d*\.?\d+(?:e[+-]?\d+)?)(?:,|\s)([+-]?\d*\.?\d+(?:e[+-]?\d+)?)/g;
+
+			const path = new ShapePath();
+
+			let index = 0;
+
+			node.getAttribute( 'points' ).replace( regex, iterator );
+
+			path.currentPath.autoClose = true;
+
+			return path;
+
+		}
+
+		function parsePolylineNode( node ) {
+
+			function iterator( match, a, b ) {
+
+				const x = parseFloatWithUnits( a );
+				const y = parseFloatWithUnits( b );
+
+				if ( index === 0 ) {
+
+					path.moveTo( x, y );
+
+				} else {
+
+					path.lineTo( x, y );
+
+				}
+
+				index ++;
+
+			}
+
+			const regex = /([+-]?\d*\.?\d+(?:e[+-]?\d+)?)(?:,|\s)([+-]?\d*\.?\d+(?:e[+-]?\d+)?)/g;
+
+			const path = new ShapePath();
+
+			let index = 0;
+
+			node.getAttribute( 'points' ).replace( regex, iterator );
+
+			path.currentPath.autoClose = false;
+
+			return path;
+
+		}
+
+		function parseCircleNode( node ) {
+
+			const x = parseFloatWithUnits( node.getAttribute( 'cx' ) || 0 );
+			const y = parseFloatWithUnits( node.getAttribute( 'cy' ) || 0 );
+			const r = parseFloatWithUnits( node.getAttribute( 'r' ) || 0 );
+
+			const subpath = new Path();
+			subpath.absarc( x, y, r, 0, Math.PI * 2 );
+
+			const path = new ShapePath();
+			path.subPaths.push( subpath );
+
+			return path;
+
+		}
+
+		function parseEllipseNode( node ) {
+
+			const x = parseFloatWithUnits( node.getAttribute( 'cx' ) || 0 );
+			const y = parseFloatWithUnits( node.getAttribute( 'cy' ) || 0 );
+			const rx = parseFloatWithUnits( node.getAttribute( 'rx' ) || 0 );
+			const ry = parseFloatWithUnits( node.getAttribute( 'ry' ) || 0 );
+
+			const subpath = new Path();
+			subpath.absellipse( x, y, rx, ry, 0, Math.PI * 2 );
+
+			const path = new ShapePath();
+			path.subPaths.push( subpath );
+
+			return path;
+
+		}
+
+		function parseLineNode( node ) {
+
+			const x1 = parseFloatWithUnits( node.getAttribute( 'x1' ) || 0 );
+			const y1 = parseFloatWithUnits( node.getAttribute( 'y1' ) || 0 );
+			const x2 = parseFloatWithUnits( node.getAttribute( 'x2' ) || 0 );
+			const y2 = parseFloatWithUnits( node.getAttribute( 'y2' ) || 0 );
+
+			const path = new ShapePath();
+			path.moveTo( x1, y1 );
+			path.lineTo( x2, y2 );
+			path.currentPath.autoClose = false;
+
+			return path;
+
+		}
+
+		//
+
+		function parseStyle( node, style ) {
+
+			style = Object.assign( {}, style ); // clone style
+
+			let stylesheetStyles = {};
+
+			if ( node.hasAttribute( 'class' ) ) {
+
+				const classSelectors = node.getAttribute( 'class' )
+					.split( /\s/ )
+					.filter( Boolean )
+					.map( i => i.trim() );
+
+				for ( let i = 0; i < classSelectors.length; i ++ ) {
+
+					stylesheetStyles = Object.assign( stylesheetStyles, stylesheets[ '.' + classSelectors[ i ] ] );
+
+				}
+
+			}
+
+			if ( node.hasAttribute( 'id' ) ) {
+
+				stylesheetStyles = Object.assign( stylesheetStyles, stylesheets[ '#' + node.getAttribute( 'id' ) ] );
+
+			}
+
+			function addStyle( svgName, jsName, adjustFunction ) {
+
+				if ( adjustFunction === undefined ) adjustFunction = function copy( v ) {
+
+					if ( v.startsWith( 'url' ) ) console.warn( 'SVGLoader: url access in attributes is not implemented.' );
+
+					return v;
+
+				};
+
+				if ( node.hasAttribute( svgName ) ) style[ jsName ] = adjustFunction( node.getAttribute( svgName ) );
+				if ( stylesheetStyles[ svgName ] ) style[ jsName ] = adjustFunction( stylesheetStyles[ svgName ] );
+				if ( node.style && node.style[ svgName ] !== '' ) style[ jsName ] = adjustFunction( node.style[ svgName ] );
+
+			}
+
+			function clamp( v ) {
+
+				return Math.max( 0, Math.min( 1, parseFloatWithUnits( v ) ) );
+
+			}
+
+			function positive( v ) {
+
+				return Math.max( 0, parseFloatWithUnits( v ) );
+
+			}
+
+			addStyle( 'fill', 'fill' );
+			addStyle( 'fill-opacity', 'fillOpacity', clamp );
+			addStyle( 'fill-rule', 'fillRule' );
+			addStyle( 'opacity', 'opacity', clamp );
+			addStyle( 'stroke', 'stroke' );
+			addStyle( 'stroke-opacity', 'strokeOpacity', clamp );
+			addStyle( 'stroke-width', 'strokeWidth', positive );
+			addStyle( 'stroke-linejoin', 'strokeLineJoin' );
+			addStyle( 'stroke-linecap', 'strokeLineCap' );
+			addStyle( 'stroke-miterlimit', 'strokeMiterLimit', positive );
+			addStyle( 'visibility', 'visibility' );
+
+			return style;
+
+		}
+
+		// http://www.w3.org/TR/SVG11/implnote.html#PathElementImplementationNotes
+
+		function getReflection( a, b ) {
+
+			return a - ( b - a );
+
+		}
+
+		// from https://github.com/ppvg/svg-numbers (MIT License)
+
+		function parseFloats( input, flags, stride ) {
+
+			if ( typeof input !== 'string' ) {
+
+				throw new TypeError( 'Invalid input: ' + typeof input );
+
+			}
+
+			// Character groups
+			const RE = {
+				SEPARATOR: /[ \t\r\n\,.\-+]/,
+				WHITESPACE: /[ \t\r\n]/,
+				DIGIT: /[\d]/,
+				SIGN: /[-+]/,
+				POINT: /\./,
+				COMMA: /,/,
+				EXP: /e/i,
+				FLAGS: /[01]/
+			};
+
+			// States
+			const SEP = 0;
+			const INT = 1;
+			const FLOAT = 2;
+			const EXP = 3;
+
+			let state = SEP;
+			let seenComma = true;
+			let number = '', exponent = '';
+			const result = [];
+
+			function throwSyntaxError( current, i, partial ) {
+
+				const error = new SyntaxError( 'Unexpected character "' + current + '" at index ' + i + '.' );
+				error.partial = partial;
+				throw error;
+
+			}
+
+			function newNumber() {
+
+				if ( number !== '' ) {
+
+					if ( exponent === '' ) result.push( Number( number ) );
+					else result.push( Number( number ) * Math.pow( 10, Number( exponent ) ) );
+
+				}
+
+				number = '';
+				exponent = '';
+
+			}
+
+			let current;
+			const length = input.length;
+
+			for ( let i = 0; i < length; i ++ ) {
+
+				current = input[ i ];
+
+				// check for flags
+				if ( Array.isArray( flags ) && flags.includes( result.length % stride ) && RE.FLAGS.test( current ) ) {
+
+					state = INT;
+					number = current;
+					newNumber();
+					continue;
+
+				}
+
+				// parse until next number
+				if ( state === SEP ) {
+
+					// eat whitespace
+					if ( RE.WHITESPACE.test( current ) ) {
+
+						continue;
+
+					}
+
+					// start new number
+					if ( RE.DIGIT.test( current ) || RE.SIGN.test( current ) ) {
+
+						state = INT;
+						number = current;
+						continue;
+
+					}
+
+					if ( RE.POINT.test( current ) ) {
+
+						state = FLOAT;
+						number = current;
+						continue;
+
+					}
+
+					// throw on double commas (e.g. "1, , 2")
+					if ( RE.COMMA.test( current ) ) {
+
+						if ( seenComma ) {
+
+							throwSyntaxError( current, i, result );
+
+						}
+
+						seenComma = true;
+
+					}
+
+				}
+
+				// parse integer part
+				if ( state === INT ) {
+
+					if ( RE.DIGIT.test( current ) ) {
+
+						number += current;
+						continue;
+
+					}
+
+					if ( RE.POINT.test( current ) ) {
+
+						number += current;
+						state = FLOAT;
+						continue;
+
+					}
+
+					if ( RE.EXP.test( current ) ) {
+
+						state = EXP;
+						continue;
+
+					}
+
+					// throw on double signs ("-+1"), but not on sign as separator ("-1-2")
+					if ( RE.SIGN.test( current )
+							&& number.length === 1
+							&& RE.SIGN.test( number[ 0 ] ) ) {
+
+						throwSyntaxError( current, i, result );
+
+					}
+
+				}
+
+				// parse decimal part
+				if ( state === FLOAT ) {
+
+					if ( RE.DIGIT.test( current ) ) {
+
+						number += current;
+						continue;
+
+					}
+
+					if ( RE.EXP.test( current ) ) {
+
+						state = EXP;
+						continue;
+
+					}
+
+					// throw on double decimal points (e.g. "1..2")
+					if ( RE.POINT.test( current ) && number[ number.length - 1 ] === '.' ) {
+
+						throwSyntaxError( current, i, result );
+
+					}
+
+				}
+
+				// parse exponent part
+				if ( state === EXP ) {
+
+					if ( RE.DIGIT.test( current ) ) {
+
+						exponent += current;
+						continue;
+
+					}
+
+					if ( RE.SIGN.test( current ) ) {
+
+						if ( exponent === '' ) {
+
+							exponent += current;
+							continue;
+
+						}
+
+						if ( exponent.length === 1 && RE.SIGN.test( exponent ) ) {
+
+							throwSyntaxError( current, i, result );
+
+						}
+
+					}
+
+				}
+
+
+				// end of number
+				if ( RE.WHITESPACE.test( current ) ) {
+
+					newNumber();
+					state = SEP;
+					seenComma = false;
+
+				} else if ( RE.COMMA.test( current ) ) {
+
+					newNumber();
+					state = SEP;
+					seenComma = true;
+
+				} else if ( RE.SIGN.test( current ) ) {
+
+					newNumber();
+					state = INT;
+					number = current;
+
+				} else if ( RE.POINT.test( current ) ) {
+
+					newNumber();
+					state = FLOAT;
+					number = current;
+
+				} else {
+
+					throwSyntaxError( current, i, result );
+
+				}
+
+			}
+
+			// add the last number found (if any)
+			newNumber();
+
+			return result;
+
+		}
+
+		// Units
+
+		const units = [ 'mm', 'cm', 'in', 'pt', 'pc', 'px' ];
+
+		// Conversion: [ fromUnit ][ toUnit ] (-1 means dpi dependent)
+		const unitConversion = {
+
+			'mm': {
+				'mm': 1,
+				'cm': 0.1,
+				'in': 1 / 25.4,
+				'pt': 72 / 25.4,
+				'pc': 6 / 25.4,
+				'px': - 1
+			},
+			'cm': {
+				'mm': 10,
+				'cm': 1,
+				'in': 1 / 2.54,
+				'pt': 72 / 2.54,
+				'pc': 6 / 2.54,
+				'px': - 1
+			},
+			'in': {
+				'mm': 25.4,
+				'cm': 2.54,
+				'in': 1,
+				'pt': 72,
+				'pc': 6,
+				'px': - 1
+			},
+			'pt': {
+				'mm': 25.4 / 72,
+				'cm': 2.54 / 72,
+				'in': 1 / 72,
+				'pt': 1,
+				'pc': 6 / 72,
+				'px': - 1
+			},
+			'pc': {
+				'mm': 25.4 / 6,
+				'cm': 2.54 / 6,
+				'in': 1 / 6,
+				'pt': 72 / 6,
+				'pc': 1,
+				'px': - 1
+			},
+			'px': {
+				'px': 1
+			}
+
+		};
+
+		function parseFloatWithUnits( string ) {
+
+			let theUnit = 'px';
+
+			if ( typeof string === 'string' || string instanceof String ) {
+
+				for ( let i = 0, n = units.length; i < n; i ++ ) {
+
+					const u = units[ i ];
+
+					if ( string.endsWith( u ) ) {
+
+						theUnit = u;
+						string = string.substring( 0, string.length - u.length );
+						break;
+
+					}
+
+				}
+
+			}
+
+			let scale = undefined;
+
+			if ( theUnit === 'px' && scope.defaultUnit !== 'px' ) {
+
+				// Conversion scale from  pixels to inches, then to default units
+
+				scale = unitConversion[ 'in' ][ scope.defaultUnit ] / scope.defaultDPI;
+
+			} else {
+
+				scale = unitConversion[ theUnit ][ scope.defaultUnit ];
+
+				if ( scale < 0 ) {
+
+					// Conversion scale to pixels
+
+					scale = unitConversion[ theUnit ][ 'in' ] * scope.defaultDPI;
+
+				}
+
+			}
+
+			return scale * parseFloat( string );
+
+		}
+
+		// Transforms
+
+		function getNodeTransform( node ) {
+
+			if ( ! ( node.hasAttribute( 'transform' ) || ( node.nodeName === 'use' && ( node.hasAttribute( 'x' ) || node.hasAttribute( 'y' ) ) ) ) ) {
+
+				return null;
+
+			}
+
+			const transform = parseNodeTransform( node );
+
+			if ( transformStack.length > 0 ) {
+
+				transform.premultiply( transformStack[ transformStack.length - 1 ] );
+
+			}
+
+			currentTransform.copy( transform );
+			transformStack.push( transform );
+
+			return transform;
+
+		}
+
+		function parseNodeTransform( node ) {
+
+			const transform = new Matrix3();
+			const currentTransform = tempTransform0;
+
+			if ( node.nodeName === 'use' && ( node.hasAttribute( 'x' ) || node.hasAttribute( 'y' ) ) ) {
+
+				const tx = parseFloatWithUnits( node.getAttribute( 'x' ) );
+				const ty = parseFloatWithUnits( node.getAttribute( 'y' ) );
+
+				transform.translate( tx, ty );
+
+			}
+
+			if ( node.hasAttribute( 'transform' ) ) {
+
+				const transformsTexts = node.getAttribute( 'transform' ).split( ')' );
+
+				for ( let tIndex = transformsTexts.length - 1; tIndex >= 0; tIndex -- ) {
+
+					const transformText = transformsTexts[ tIndex ].trim();
+
+					if ( transformText === '' ) continue;
+
+					const openParPos = transformText.indexOf( '(' );
+					const closeParPos = transformText.length;
+
+					if ( openParPos > 0 && openParPos < closeParPos ) {
+
+						const transformType = transformText.slice( 0, openParPos );
+
+						const array = parseFloats( transformText.slice( openParPos + 1 ) );
+
+						currentTransform.identity();
+
+						switch ( transformType ) {
+
+							case 'translate':
+
+								if ( array.length >= 1 ) {
+
+									const tx = array[ 0 ];
+									let ty = 0;
+
+									if ( array.length >= 2 ) {
+
+										ty = array[ 1 ];
+
+									}
+
+									currentTransform.translate( tx, ty );
+
+								}
+
+								break;
+
+							case 'rotate':
+
+								if ( array.length >= 1 ) {
+
+									let angle = 0;
+									let cx = 0;
+									let cy = 0;
+
+									// Angle
+									angle = array[ 0 ] * Math.PI / 180;
+
+									if ( array.length >= 3 ) {
+
+										// Center x, y
+										cx = array[ 1 ];
+										cy = array[ 2 ];
+
+									}
+
+									// Rotate around center (cx, cy)
+									tempTransform1.makeTranslation( - cx, - cy );
+									tempTransform2.makeRotation( angle );
+									tempTransform3.multiplyMatrices( tempTransform2, tempTransform1 );
+									tempTransform1.makeTranslation( cx, cy );
+									currentTransform.multiplyMatrices( tempTransform1, tempTransform3 );
+
+								}
+
+								break;
+
+							case 'scale':
+
+								if ( array.length >= 1 ) {
+
+									const scaleX = array[ 0 ];
+									let scaleY = scaleX;
+
+									if ( array.length >= 2 ) {
+
+										scaleY = array[ 1 ];
+
+									}
+
+									currentTransform.scale( scaleX, scaleY );
+
+								}
+
+								break;
+
+							case 'skewX':
+
+								if ( array.length === 1 ) {
+
+									currentTransform.set(
+										1, Math.tan( array[ 0 ] * Math.PI / 180 ), 0,
+										0, 1, 0,
+										0, 0, 1
+									);
+
+								}
+
+								break;
+
+							case 'skewY':
+
+								if ( array.length === 1 ) {
+
+									currentTransform.set(
+										1, 0, 0,
+										Math.tan( array[ 0 ] * Math.PI / 180 ), 1, 0,
+										0, 0, 1
+									);
+
+								}
+
+								break;
+
+							case 'matrix':
+
+								if ( array.length === 6 ) {
+
+									currentTransform.set(
+										array[ 0 ], array[ 2 ], array[ 4 ],
+										array[ 1 ], array[ 3 ], array[ 5 ],
+										0, 0, 1
+									);
+
+								}
+
+								break;
+
+						}
+
+					}
+
+					transform.premultiply( currentTransform );
+
+				}
+
+			}
+
+			return transform;
+
+		}
+
+		function transformPath( path, m ) {
+
+			function transfVec2( v2 ) {
+
+				tempV3.set( v2.x, v2.y, 1 ).applyMatrix3( m );
+
+				v2.set( tempV3.x, tempV3.y );
+
+			}
+
+			function transfEllipseGeneric( curve ) {
+
+				// For math description see:
+				// https://math.stackexchange.com/questions/4544164
+
+				const a = curve.xRadius;
+				const b = curve.yRadius;
+
+				const cosTheta = Math.cos( curve.aRotation );
+				const sinTheta = Math.sin( curve.aRotation );
+
+				const v1 = new Vector3( a * cosTheta, a * sinTheta, 0 );
+				const v2 = new Vector3( - b * sinTheta, b * cosTheta, 0 );
+
+				const f1 = v1.applyMatrix3( m );
+				const f2 = v2.applyMatrix3( m );
+
+				const mF = tempTransform0.set(
+					f1.x, f2.x, 0,
+					f1.y, f2.y, 0,
+					0, 0, 1,
+				);
+
+				const mFInv = tempTransform1.copy( mF ).invert();
+				const mFInvT = tempTransform2.copy( mFInv ).transpose();
+				const mQ = mFInvT.multiply( mFInv );
+				const mQe = mQ.elements;
+
+				const ed = eigenDecomposition( mQe[ 0 ], mQe[ 1 ], mQe[ 4 ] );
+				const rt1sqrt = Math.sqrt( ed.rt1 );
+				const rt2sqrt = Math.sqrt( ed.rt2 );
+
+				curve.xRadius = 1 / rt1sqrt;
+				curve.yRadius = 1 / rt2sqrt;
+				curve.aRotation = Math.atan2( ed.sn, ed.cs );
+
+				const isFullEllipse =
+					( curve.aEndAngle - curve.aStartAngle ) % ( 2 * Math.PI ) < Number.EPSILON;
+
+				// Do not touch angles of a full ellipse because after transformation they
+				// would converge to a sinle value effectively removing the whole curve
+
+				if ( ! isFullEllipse ) {
+
+					const mDsqrt = tempTransform1.set(
+						rt1sqrt, 0, 0,
+						0, rt2sqrt, 0,
+						0, 0, 1,
+					);
+
+					const mRT = tempTransform2.set(
+						ed.cs, ed.sn, 0,
+						- ed.sn, ed.cs, 0,
+						0, 0, 1,
+					);
+
+					const mDRF = mDsqrt.multiply( mRT ).multiply( mF );
+
+					const transformAngle = phi => {
+
+						const { x: cosR, y: sinR } =
+							new Vector3( Math.cos( phi ), Math.sin( phi ), 0 ).applyMatrix3( mDRF );
+
+						return Math.atan2( sinR, cosR );
+
+					};
+
+					curve.aStartAngle = transformAngle( curve.aStartAngle );
+					curve.aEndAngle = transformAngle( curve.aEndAngle );
+
+					if ( isTransformFlipped( m ) ) {
+
+						curve.aClockwise = ! curve.aClockwise;
+
+					}
+
+				}
+
+			}
+
+			function transfEllipseNoSkew( curve ) {
+
+				// Faster shortcut if no skew is applied
+				// (e.g, a euclidean transform of a group containing the ellipse)
+
+				const sx = getTransformScaleX( m );
+				const sy = getTransformScaleY( m );
+
+				curve.xRadius *= sx;
+				curve.yRadius *= sy;
+
+				// Extract rotation angle from the matrix of form:
+				//
+				//  | cosθ sx   -sinθ sy |
+				//  | sinθ sx    cosθ sy |
+				//
+				// Remembering that tanθ = sinθ / cosθ; and that
+				// `sx`, `sy`, or both might be zero.
+				const theta =
+					sx > Number.EPSILON
+						? Math.atan2( m.elements[ 1 ], m.elements[ 0 ] )
+						: Math.atan2( - m.elements[ 3 ], m.elements[ 4 ] );
+
+				curve.aRotation += theta;
+
+				if ( isTransformFlipped( m ) ) {
+
+					curve.aStartAngle *= - 1;
+					curve.aEndAngle *= - 1;
+					curve.aClockwise = ! curve.aClockwise;
+
+				}
+
+			}
+
+			const subPaths = path.subPaths;
+
+			for ( let i = 0, n = subPaths.length; i < n; i ++ ) {
+
+				const subPath = subPaths[ i ];
+				const curves = subPath.curves;
+
+				for ( let j = 0; j < curves.length; j ++ ) {
+
+					const curve = curves[ j ];
+
+					if ( curve.isLineCurve ) {
+
+						transfVec2( curve.v1 );
+						transfVec2( curve.v2 );
+
+					} else if ( curve.isCubicBezierCurve ) {
+
+						transfVec2( curve.v0 );
+						transfVec2( curve.v1 );
+						transfVec2( curve.v2 );
+						transfVec2( curve.v3 );
+
+					} else if ( curve.isQuadraticBezierCurve ) {
+
+						transfVec2( curve.v0 );
+						transfVec2( curve.v1 );
+						transfVec2( curve.v2 );
+
+					} else if ( curve.isEllipseCurve ) {
+
+						// Transform ellipse center point
+
+						tempV2.set( curve.aX, curve.aY );
+						transfVec2( tempV2 );
+						curve.aX = tempV2.x;
+						curve.aY = tempV2.y;
+
+						// Transform ellipse shape parameters
+
+						if ( isTransformSkewed( m ) ) {
+
+							transfEllipseGeneric( curve );
+
+						} else {
+
+							transfEllipseNoSkew( curve );
+
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+
+		function isTransformFlipped( m ) {
+
+			const te = m.elements;
+			return te[ 0 ] * te[ 4 ] - te[ 1 ] * te[ 3 ] < 0;
+
+		}
+
+		function isTransformSkewed( m ) {
+
+			const te = m.elements;
+			const basisDot = te[ 0 ] * te[ 3 ] + te[ 1 ] * te[ 4 ];
+
+			// Shortcut for trivial rotations and transformations
+			if ( basisDot === 0 ) return false;
+
+			const sx = getTransformScaleX( m );
+			const sy = getTransformScaleY( m );
+
+			return Math.abs( basisDot / ( sx * sy ) ) > Number.EPSILON;
+
+		}
+
+		function getTransformScaleX( m ) {
+
+			const te = m.elements;
+			return Math.sqrt( te[ 0 ] * te[ 0 ] + te[ 1 ] * te[ 1 ] );
+
+		}
+
+		function getTransformScaleY( m ) {
+
+			const te = m.elements;
+			return Math.sqrt( te[ 3 ] * te[ 3 ] + te[ 4 ] * te[ 4 ] );
+
+		}
+
+		// Calculates the eigensystem of a real symmetric 2x2 matrix
+		//    [ A  B ]
+		//    [ B  C ]
+		// in the form
+		//    [ A  B ]  =  [ cs  -sn ] [ rt1   0  ] [  cs  sn ]
+		//    [ B  C ]     [ sn   cs ] [  0   rt2 ] [ -sn  cs ]
+		// where rt1 >= rt2.
+		//
+		// Adapted from: https://www.mpi-hd.mpg.de/personalhomes/globes/3x3/index.html
+		// -> Algorithms for real symmetric matrices -> Analytical (2x2 symmetric)
+		function eigenDecomposition( A, B, C ) {
+
+			let rt1, rt2, cs, sn, t;
+			const sm = A + C;
+			const df = A - C;
+			const rt = Math.sqrt( df * df + 4 * B * B );
+
+			if ( sm > 0 ) {
+
+				rt1 = 0.5 * ( sm + rt );
+				t = 1 / rt1;
+				rt2 = A * t * C - B * t * B;
+
+			} else if ( sm < 0 ) {
+
+				rt2 = 0.5 * ( sm - rt );
+
+			} else {
+
+				// This case needs to be treated separately to avoid div by 0
+
+				rt1 = 0.5 * rt;
+				rt2 = - 0.5 * rt;
+
+			}
+
+			// Calculate eigenvectors
+
+			if ( df > 0 ) {
+
+				cs = df + rt;
+
+			} else {
+
+				cs = df - rt;
+
+			}
+
+			if ( Math.abs( cs ) > 2 * Math.abs( B ) ) {
+
+				t = - 2 * B / cs;
+				sn = 1 / Math.sqrt( 1 + t * t );
+				cs = t * sn;
+
+			} else if ( Math.abs( B ) === 0 ) {
+
+				cs = 1;
+				sn = 0;
+
+			} else {
+
+				t = - 0.5 * cs / B;
+				cs = 1 / Math.sqrt( 1 + t * t );
+				sn = t * cs;
+
+			}
+
+			if ( df > 0 ) {
+
+				t = cs;
+				cs = - sn;
+				sn = t;
+
+			}
+
+			return { rt1, rt2, cs, sn };
+
+		}
+
+		//
+
+		const paths = [];
+		const stylesheets = {};
+
+		const transformStack = [];
+
+		const tempTransform0 = new Matrix3();
+		const tempTransform1 = new Matrix3();
+		const tempTransform2 = new Matrix3();
+		const tempTransform3 = new Matrix3();
+		const tempV2 = new Vector2();
+		const tempV3 = new Vector3();
+
+		const currentTransform = new Matrix3();
+
+		const xml = new DOMParser().parseFromString( text, 'image/svg+xml' ); // application/xml
+
+		parseNode( xml.documentElement, {
+			fill: '#000',
+			fillOpacity: 1,
+			strokeOpacity: 1,
+			strokeWidth: 1,
+			strokeLineJoin: 'miter',
+			strokeLineCap: 'butt',
+			strokeMiterLimit: 4
+		} );
+
+		const data = { paths: paths, xml: xml.documentElement };
+
+		// console.log( paths );
+		return data;
+
+	}
+
+	static createShapes( shapePath ) {
+
+		// Param shapePath: a shapepath as returned by the parse function of this class
+		// Returns Shape object
+
+		const BIGNUMBER = 999999999;
+
+		const IntersectionLocationType = {
+			ORIGIN: 0,
+			DESTINATION: 1,
+			BETWEEN: 2,
+			LEFT: 3,
+			RIGHT: 4,
+			BEHIND: 5,
+			BEYOND: 6
+		};
+
+		const classifyResult = {
+			loc: IntersectionLocationType.ORIGIN,
+			t: 0
+		};
+
+		function findEdgeIntersection( a0, a1, b0, b1 ) {
+
+			const x1 = a0.x;
+			const x2 = a1.x;
+			const x3 = b0.x;
+			const x4 = b1.x;
+			const y1 = a0.y;
+			const y2 = a1.y;
+			const y3 = b0.y;
+			const y4 = b1.y;
+			const nom1 = ( x4 - x3 ) * ( y1 - y3 ) - ( y4 - y3 ) * ( x1 - x3 );
+			const nom2 = ( x2 - x1 ) * ( y1 - y3 ) - ( y2 - y1 ) * ( x1 - x3 );
+			const denom = ( y4 - y3 ) * ( x2 - x1 ) - ( x4 - x3 ) * ( y2 - y1 );
+			const t1 = nom1 / denom;
+			const t2 = nom2 / denom;
+
+			if ( ( ( denom === 0 ) && ( nom1 !== 0 ) ) || ( t1 <= 0 ) || ( t1 >= 1 ) || ( t2 < 0 ) || ( t2 > 1 ) ) {
+
+				//1. lines are parallel or edges don't intersect
+
+				return null;
+
+			} else if ( ( nom1 === 0 ) && ( denom === 0 ) ) {
+
+				//2. lines are colinear
+
+				//check if endpoints of edge2 (b0-b1) lies on edge1 (a0-a1)
+				for ( let i = 0; i < 2; i ++ ) {
+
+					classifyPoint( i === 0 ? b0 : b1, a0, a1 );
+					//find position of this endpoints relatively to edge1
+					if ( classifyResult.loc == IntersectionLocationType.ORIGIN ) {
+
+						const point = ( i === 0 ? b0 : b1 );
+						return { x: point.x, y: point.y, t: classifyResult.t };
+
+					} else if ( classifyResult.loc == IntersectionLocationType.BETWEEN ) {
+
+						const x = + ( ( x1 + classifyResult.t * ( x2 - x1 ) ).toPrecision( 10 ) );
+						const y = + ( ( y1 + classifyResult.t * ( y2 - y1 ) ).toPrecision( 10 ) );
+						return { x: x, y: y, t: classifyResult.t, };
+
+					}
+
+				}
+
+				return null;
+
+			} else {
+
+				//3. edges intersect
+
+				for ( let i = 0; i < 2; i ++ ) {
+
+					classifyPoint( i === 0 ? b0 : b1, a0, a1 );
+
+					if ( classifyResult.loc == IntersectionLocationType.ORIGIN ) {
+
+						const point = ( i === 0 ? b0 : b1 );
+						return { x: point.x, y: point.y, t: classifyResult.t };
+
+					}
+
+				}
+
+				const x = + ( ( x1 + t1 * ( x2 - x1 ) ).toPrecision( 10 ) );
+				const y = + ( ( y1 + t1 * ( y2 - y1 ) ).toPrecision( 10 ) );
+				return { x: x, y: y, t: t1 };
+
+			}
+
+		}
+
+		function classifyPoint( p, edgeStart, edgeEnd ) {
+
+			const ax = edgeEnd.x - edgeStart.x;
+			const ay = edgeEnd.y - edgeStart.y;
+			const bx = p.x - edgeStart.x;
+			const by = p.y - edgeStart.y;
+			const sa = ax * by - bx * ay;
+
+			if ( ( p.x === edgeStart.x ) && ( p.y === edgeStart.y ) ) {
+
+				classifyResult.loc = IntersectionLocationType.ORIGIN;
+				classifyResult.t = 0;
+				return;
+
+			}
+
+			if ( ( p.x === edgeEnd.x ) && ( p.y === edgeEnd.y ) ) {
+
+				classifyResult.loc = IntersectionLocationType.DESTINATION;
+				classifyResult.t = 1;
+				return;
+
+			}
+
+			if ( sa < - Number.EPSILON ) {
+
+				classifyResult.loc = IntersectionLocationType.LEFT;
+				return;
+
+			}
+
+			if ( sa > Number.EPSILON ) {
+
+				classifyResult.loc = IntersectionLocationType.RIGHT;
+				return;
+
+
+			}
+
+			if ( ( ( ax * bx ) < 0 ) || ( ( ay * by ) < 0 ) ) {
+
+				classifyResult.loc = IntersectionLocationType.BEHIND;
+				return;
+
+			}
+
+			if ( ( Math.sqrt( ax * ax + ay * ay ) ) < ( Math.sqrt( bx * bx + by * by ) ) ) {
+
+				classifyResult.loc = IntersectionLocationType.BEYOND;
+				return;
+
+			}
+
+			let t;
+
+			if ( ax !== 0 ) {
+
+				t = bx / ax;
+
+			} else {
+
+				t = by / ay;
+
+			}
+
+			classifyResult.loc = IntersectionLocationType.BETWEEN;
+			classifyResult.t = t;
+
+		}
+
+		function getIntersections( path1, path2 ) {
+
+			const intersectionsRaw = [];
+			const intersections = [];
+
+			for ( let index = 1; index < path1.length; index ++ ) {
+
+				const path1EdgeStart = path1[ index - 1 ];
+				const path1EdgeEnd = path1[ index ];
+
+				for ( let index2 = 1; index2 < path2.length; index2 ++ ) {
+
+					const path2EdgeStart = path2[ index2 - 1 ];
+					const path2EdgeEnd = path2[ index2 ];
+
+					const intersection = findEdgeIntersection( path1EdgeStart, path1EdgeEnd, path2EdgeStart, path2EdgeEnd );
+
+					if ( intersection !== null && intersectionsRaw.find( i => i.t <= intersection.t + Number.EPSILON && i.t >= intersection.t - Number.EPSILON ) === undefined ) {
+
+						intersectionsRaw.push( intersection );
+						intersections.push( new Vector2( intersection.x, intersection.y ) );
+
+					}
+
+				}
+
+			}
+
+			return intersections;
+
+		}
+
+		function getScanlineIntersections( scanline, boundingBox, paths ) {
+
+			const center = new Vector2();
+			boundingBox.getCenter( center );
+
+			const allIntersections = [];
+
+			paths.forEach( path => {
+
+				// check if the center of the bounding box is in the bounding box of the paths.
+				// this is a pruning method to limit the search of intersections in paths that can't envelop of the current path.
+				// if a path envelops another path. The center of that oter path, has to be inside the bounding box of the enveloping path.
+				if ( path.boundingBox.containsPoint( center ) ) {
+
+					const intersections = getIntersections( scanline, path.points );
+
+					intersections.forEach( p => {
+
+						allIntersections.push( { identifier: path.identifier, isCW: path.isCW, point: p } );
+
+					} );
+
+				}
+
+			} );
+
+			allIntersections.sort( ( i1, i2 ) => {
+
+				return i1.point.x - i2.point.x;
+
+			} );
+
+			return allIntersections;
+
+		}
+
+		function isHoleTo( simplePath, allPaths, scanlineMinX, scanlineMaxX, _fillRule ) {
+
+			if ( _fillRule === null || _fillRule === undefined || _fillRule === '' ) {
+
+				_fillRule = 'nonzero';
+
+			}
+
+			const centerBoundingBox = new Vector2();
+			simplePath.boundingBox.getCenter( centerBoundingBox );
+
+			const scanline = [ new Vector2( scanlineMinX, centerBoundingBox.y ), new Vector2( scanlineMaxX, centerBoundingBox.y ) ];
+
+			const scanlineIntersections = getScanlineIntersections( scanline, simplePath.boundingBox, allPaths );
+
+			scanlineIntersections.sort( ( i1, i2 ) => {
+
+				return i1.point.x - i2.point.x;
+
+			} );
+
+			const baseIntersections = [];
+			const otherIntersections = [];
+
+			scanlineIntersections.forEach( i => {
+
+				if ( i.identifier === simplePath.identifier ) {
+
+					baseIntersections.push( i );
+
+				} else {
+
+					otherIntersections.push( i );
+
+				}
+
+			} );
+
+			const firstXOfPath = baseIntersections[ 0 ].point.x;
+
+			// build up the path hierarchy
+			const stack = [];
+			let i = 0;
+
+			while ( i < otherIntersections.length && otherIntersections[ i ].point.x < firstXOfPath ) {
+
+				if ( stack.length > 0 && stack[ stack.length - 1 ] === otherIntersections[ i ].identifier ) {
+
+					stack.pop();
+
+				} else {
+
+					stack.push( otherIntersections[ i ].identifier );
+
+				}
+
+				i ++;
+
+			}
+
+			stack.push( simplePath.identifier );
+
+			if ( _fillRule === 'evenodd' ) {
+
+				const isHole = stack.length % 2 === 0 ? true : false;
+				const isHoleFor = stack[ stack.length - 2 ];
+
+				return { identifier: simplePath.identifier, isHole: isHole, for: isHoleFor };
+
+			} else if ( _fillRule === 'nonzero' ) {
+
+				// check if path is a hole by counting the amount of paths with alternating rotations it has to cross.
+				let isHole = true;
+				let isHoleFor = null;
+				let lastCWValue = null;
+
+				for ( let i = 0; i < stack.length; i ++ ) {
+
+					const identifier = stack[ i ];
+					if ( isHole ) {
+
+						lastCWValue = allPaths[ identifier ].isCW;
+						isHole = false;
+						isHoleFor = identifier;
+
+					} else if ( lastCWValue !== allPaths[ identifier ].isCW ) {
+
+						lastCWValue = allPaths[ identifier ].isCW;
+						isHole = true;
+
+					}
+
+				}
+
+				return { identifier: simplePath.identifier, isHole: isHole, for: isHoleFor };
+
+			} else {
+
+				console.warn( 'fill-rule: "' + _fillRule + '" is currently not implemented.' );
+
+			}
+
+		}
+
+		// check for self intersecting paths
+		// TODO
+
+		// check intersecting paths
+		// TODO
+
+		// prepare paths for hole detection
+		let scanlineMinX = BIGNUMBER;
+		let scanlineMaxX = - BIGNUMBER;
+
+		let simplePaths = shapePath.subPaths.map( p => {
+
+			const points = p.getPoints();
+			let maxY = - BIGNUMBER;
+			let minY = BIGNUMBER;
+			let maxX = - BIGNUMBER;
+			let minX = BIGNUMBER;
+
+	      	//points.forEach(p => p.y *= -1);
+
+			for ( let i = 0; i < points.length; i ++ ) {
+
+				const p = points[ i ];
+
+				if ( p.y > maxY ) {
+
+					maxY = p.y;
+
+				}
+
+				if ( p.y < minY ) {
+
+					minY = p.y;
+
+				}
+
+				if ( p.x > maxX ) {
+
+					maxX = p.x;
+
+				}
+
+				if ( p.x < minX ) {
+
+					minX = p.x;
+
+				}
+
+			}
+
+			//
+			if ( scanlineMaxX <= maxX ) {
+
+				scanlineMaxX = maxX + 1;
+
+			}
+
+			if ( scanlineMinX >= minX ) {
+
+				scanlineMinX = minX - 1;
+
+			}
+
+			return { curves: p.curves, points: points, isCW: ShapeUtils.isClockWise( points ), identifier: - 1, boundingBox: new Box2( new Vector2( minX, minY ), new Vector2( maxX, maxY ) ) };
+
+		} );
+
+		simplePaths = simplePaths.filter( sp => sp.points.length > 1 );
+
+		for ( let identifier = 0; identifier < simplePaths.length; identifier ++ ) {
+
+			simplePaths[ identifier ].identifier = identifier;
+
+		}
+
+		// check if path is solid or a hole
+		const isAHole = simplePaths.map( p => isHoleTo( p, simplePaths, scanlineMinX, scanlineMaxX, ( shapePath.userData ? shapePath.userData.style.fillRule : undefined ) ) );
+
+
+		const shapesToReturn = [];
+		simplePaths.forEach( p => {
+
+			const amIAHole = isAHole[ p.identifier ];
+
+			if ( ! amIAHole.isHole ) {
+
+				const shape = new Shape();
+				shape.curves = p.curves;
+				const holes = isAHole.filter( h => h.isHole && h.for === p.identifier );
+				holes.forEach( h => {
+
+					const hole = simplePaths[ h.identifier ];
+					const path = new Path();
+					path.curves = hole.curves;
+					shape.holes.push( path );
+
+				} );
+				shapesToReturn.push( shape );
+
+			}
+
+		} );
+
+		return shapesToReturn;
+
+	}
+
+	static getStrokeStyle( width, color, lineJoin, lineCap, miterLimit ) {
+
+		// Param width: Stroke width
+		// Param color: As returned by THREE.Color.getStyle()
+		// Param lineJoin: One of "round", "bevel", "miter" or "miter-limit"
+		// Param lineCap: One of "round", "square" or "butt"
+		// Param miterLimit: Maximum join length, in multiples of the "width" parameter (join is truncated if it exceeds that distance)
+		// Returns style object
+
+		width = width !== undefined ? width : 1;
+		color = color !== undefined ? color : '#000';
+		lineJoin = lineJoin !== undefined ? lineJoin : 'miter';
+		lineCap = lineCap !== undefined ? lineCap : 'butt';
+		miterLimit = miterLimit !== undefined ? miterLimit : 4;
+
+		return {
+			strokeColor: color,
+			strokeWidth: width,
+			strokeLineJoin: lineJoin,
+			strokeLineCap: lineCap,
+			strokeMiterLimit: miterLimit
+		};
+
+	}
+
+	static pointsToStroke( points, style, arcDivisions, minDistance ) {
+
+		// Generates a stroke with some width around the given path.
+		// The path can be open or closed (last point equals to first point)
+		// Param points: Array of Vector2D (the path). Minimum 2 points.
+		// Param style: Object with SVG properties as returned by SVGLoader.getStrokeStyle(), or SVGLoader.parse() in the path.userData.style object
+		// Params arcDivisions: Arc divisions for round joins and endcaps. (Optional)
+		// Param minDistance: Points closer to this distance will be merged. (Optional)
+		// Returns BufferGeometry with stroke triangles (In plane z = 0). UV coordinates are generated ('u' along path. 'v' across it, from left to right)
+
+		const vertices = [];
+		const normals = [];
+		const uvs = [];
+
+		if ( SVGLoader.pointsToStrokeWithBuffers( points, style, arcDivisions, minDistance, vertices, normals, uvs ) === 0 ) {
+
+			return null;
+
+		}
+
+		const geometry = new BufferGeometry();
+		geometry.setAttribute( 'position', new Float32BufferAttribute( vertices, 3 ) );
+		geometry.setAttribute( 'normal', new Float32BufferAttribute( normals, 3 ) );
+		geometry.setAttribute( 'uv', new Float32BufferAttribute( uvs, 2 ) );
+
+		return geometry;
+
+	}
+
+	static pointsToStrokeWithBuffers( points, style, arcDivisions, minDistance, vertices, normals, uvs, vertexOffset ) {
+
+		// This function can be called to update existing arrays or buffers.
+		// Accepts same parameters as pointsToStroke, plus the buffers and optional offset.
+		// Param vertexOffset: Offset vertices to start writing in the buffers (3 elements/vertex for vertices and normals, and 2 elements/vertex for uvs)
+		// Returns number of written vertices / normals / uvs pairs
+		// if 'vertices' parameter is undefined no triangles will be generated, but the returned vertices count will still be valid (useful to preallocate the buffers)
+		// 'normals' and 'uvs' buffers are optional
+
+		const tempV2_1 = new Vector2();
+		const tempV2_2 = new Vector2();
+		const tempV2_3 = new Vector2();
+		const tempV2_4 = new Vector2();
+		const tempV2_5 = new Vector2();
+		const tempV2_6 = new Vector2();
+		const tempV2_7 = new Vector2();
+		const lastPointL = new Vector2();
+		const lastPointR = new Vector2();
+		const point0L = new Vector2();
+		const point0R = new Vector2();
+		const currentPointL = new Vector2();
+		const currentPointR = new Vector2();
+		const nextPointL = new Vector2();
+		const nextPointR = new Vector2();
+		const innerPoint = new Vector2();
+		const outerPoint = new Vector2();
+
+		arcDivisions = arcDivisions !== undefined ? arcDivisions : 12;
+		minDistance = minDistance !== undefined ? minDistance : 0.001;
+		vertexOffset = vertexOffset !== undefined ? vertexOffset : 0;
+
+		// First ensure there are no duplicated points
+		points = removeDuplicatedPoints( points );
+
+		const numPoints = points.length;
+
+		if ( numPoints < 2 ) return 0;
+
+		const isClosed = points[ 0 ].equals( points[ numPoints - 1 ] );
+
+		let currentPoint;
+		let previousPoint = points[ 0 ];
+		let nextPoint;
+
+		const strokeWidth2 = style.strokeWidth / 2;
+
+		const deltaU = 1 / ( numPoints - 1 );
+		let u0 = 0, u1;
+
+		let innerSideModified;
+		let joinIsOnLeftSide;
+		let isMiter;
+		let initialJoinIsOnLeftSide = false;
+
+		let numVertices = 0;
+		let currentCoordinate = vertexOffset * 3;
+		let currentCoordinateUV = vertexOffset * 2;
+
+		// Get initial left and right stroke points
+		getNormal( points[ 0 ], points[ 1 ], tempV2_1 ).multiplyScalar( strokeWidth2 );
+		lastPointL.copy( points[ 0 ] ).sub( tempV2_1 );
+		lastPointR.copy( points[ 0 ] ).add( tempV2_1 );
+		point0L.copy( lastPointL );
+		point0R.copy( lastPointR );
+
+		for ( let iPoint = 1; iPoint < numPoints; iPoint ++ ) {
+
+			currentPoint = points[ iPoint ];
+
+			// Get next point
+			if ( iPoint === numPoints - 1 ) {
+
+				if ( isClosed ) {
+
+					// Skip duplicated initial point
+					nextPoint = points[ 1 ];
+
+				} else nextPoint = undefined;
+
+			} else {
+
+				nextPoint = points[ iPoint + 1 ];
+
+			}
+
+			// Normal of previous segment in tempV2_1
+			const normal1 = tempV2_1;
+			getNormal( previousPoint, currentPoint, normal1 );
+
+			tempV2_3.copy( normal1 ).multiplyScalar( strokeWidth2 );
+			currentPointL.copy( currentPoint ).sub( tempV2_3 );
+			currentPointR.copy( currentPoint ).add( tempV2_3 );
+
+			u1 = u0 + deltaU;
+
+			innerSideModified = false;
+
+			if ( nextPoint !== undefined ) {
+
+				// Normal of next segment in tempV2_2
+				getNormal( currentPoint, nextPoint, tempV2_2 );
+
+				tempV2_3.copy( tempV2_2 ).multiplyScalar( strokeWidth2 );
+				nextPointL.copy( currentPoint ).sub( tempV2_3 );
+				nextPointR.copy( currentPoint ).add( tempV2_3 );
+
+				joinIsOnLeftSide = true;
+				tempV2_3.subVectors( nextPoint, previousPoint );
+				if ( normal1.dot( tempV2_3 ) < 0 ) {
+
+					joinIsOnLeftSide = false;
+
+				}
+
+				if ( iPoint === 1 ) initialJoinIsOnLeftSide = joinIsOnLeftSide;
+
+				tempV2_3.subVectors( nextPoint, currentPoint );
+				tempV2_3.normalize();
+				const dot = Math.abs( normal1.dot( tempV2_3 ) );
+
+				// If path is straight, don't create join
+				if ( dot > Number.EPSILON ) {
+
+					// Compute inner and outer segment intersections
+					const miterSide = strokeWidth2 / dot;
+					tempV2_3.multiplyScalar( - miterSide );
+					tempV2_4.subVectors( currentPoint, previousPoint );
+					tempV2_5.copy( tempV2_4 ).setLength( miterSide ).add( tempV2_3 );
+					innerPoint.copy( tempV2_5 ).negate();
+					const miterLength2 = tempV2_5.length();
+					const segmentLengthPrev = tempV2_4.length();
+					tempV2_4.divideScalar( segmentLengthPrev );
+					tempV2_6.subVectors( nextPoint, currentPoint );
+					const segmentLengthNext = tempV2_6.length();
+					tempV2_6.divideScalar( segmentLengthNext );
+					// Check that previous and next segments doesn't overlap with the innerPoint of intersection
+					if ( tempV2_4.dot( innerPoint ) < segmentLengthPrev && tempV2_6.dot( innerPoint ) < segmentLengthNext ) {
+
+						innerSideModified = true;
+
+					}
+
+					outerPoint.copy( tempV2_5 ).add( currentPoint );
+					innerPoint.add( currentPoint );
+
+					isMiter = false;
+
+					if ( innerSideModified ) {
+
+						if ( joinIsOnLeftSide ) {
+
+							nextPointR.copy( innerPoint );
+							currentPointR.copy( innerPoint );
+
+						} else {
+
+							nextPointL.copy( innerPoint );
+							currentPointL.copy( innerPoint );
+
+						}
+
+					} else {
+
+						// The segment triangles are generated here if there was overlapping
+
+						makeSegmentTriangles();
+
+					}
+
+					switch ( style.strokeLineJoin ) {
+
+						case 'bevel':
+
+							makeSegmentWithBevelJoin( joinIsOnLeftSide, innerSideModified, u1 );
+
+							break;
+
+						case 'round':
+
+							// Segment triangles
+
+							createSegmentTrianglesWithMiddleSection( joinIsOnLeftSide, innerSideModified );
+
+							// Join triangles
+
+							if ( joinIsOnLeftSide ) {
+
+								makeCircularSector( currentPoint, currentPointL, nextPointL, u1, 0 );
+
+							} else {
+
+								makeCircularSector( currentPoint, nextPointR, currentPointR, u1, 1 );
+
+							}
+
+							break;
+
+						case 'miter':
+						case 'miter-clip':
+						default:
+
+							const miterFraction = ( strokeWidth2 * style.strokeMiterLimit ) / miterLength2;
+
+							if ( miterFraction < 1 ) {
+
+								// The join miter length exceeds the miter limit
+
+								if ( style.strokeLineJoin !== 'miter-clip' ) {
+
+									makeSegmentWithBevelJoin( joinIsOnLeftSide, innerSideModified, u1 );
+									break;
+
+								} else {
+
+									// Segment triangles
+
+									createSegmentTrianglesWithMiddleSection( joinIsOnLeftSide, innerSideModified );
+
+									// Miter-clip join triangles
+
+									if ( joinIsOnLeftSide ) {
+
+										tempV2_6.subVectors( outerPoint, currentPointL ).multiplyScalar( miterFraction ).add( currentPointL );
+										tempV2_7.subVectors( outerPoint, nextPointL ).multiplyScalar( miterFraction ).add( nextPointL );
+
+										addVertex( currentPointL, u1, 0 );
+										addVertex( tempV2_6, u1, 0 );
+										addVertex( currentPoint, u1, 0.5 );
+
+										addVertex( currentPoint, u1, 0.5 );
+										addVertex( tempV2_6, u1, 0 );
+										addVertex( tempV2_7, u1, 0 );
+
+										addVertex( currentPoint, u1, 0.5 );
+										addVertex( tempV2_7, u1, 0 );
+										addVertex( nextPointL, u1, 0 );
+
+									} else {
+
+										tempV2_6.subVectors( outerPoint, currentPointR ).multiplyScalar( miterFraction ).add( currentPointR );
+										tempV2_7.subVectors( outerPoint, nextPointR ).multiplyScalar( miterFraction ).add( nextPointR );
+
+										addVertex( currentPointR, u1, 1 );
+										addVertex( tempV2_6, u1, 1 );
+										addVertex( currentPoint, u1, 0.5 );
+
+										addVertex( currentPoint, u1, 0.5 );
+										addVertex( tempV2_6, u1, 1 );
+										addVertex( tempV2_7, u1, 1 );
+
+										addVertex( currentPoint, u1, 0.5 );
+										addVertex( tempV2_7, u1, 1 );
+										addVertex( nextPointR, u1, 1 );
+
+									}
+
+								}
+
+							} else {
+
+								// Miter join segment triangles
+
+								if ( innerSideModified ) {
+
+									// Optimized segment + join triangles
+
+									if ( joinIsOnLeftSide ) {
+
+										addVertex( lastPointR, u0, 1 );
+										addVertex( lastPointL, u0, 0 );
+										addVertex( outerPoint, u1, 0 );
+
+										addVertex( lastPointR, u0, 1 );
+										addVertex( outerPoint, u1, 0 );
+										addVertex( innerPoint, u1, 1 );
+
+									} else {
+
+										addVertex( lastPointR, u0, 1 );
+										addVertex( lastPointL, u0, 0 );
+										addVertex( outerPoint, u1, 1 );
+
+										addVertex( lastPointL, u0, 0 );
+										addVertex( innerPoint, u1, 0 );
+										addVertex( outerPoint, u1, 1 );
+
+									}
+
+
+									if ( joinIsOnLeftSide ) {
+
+										nextPointL.copy( outerPoint );
+
+									} else {
+
+										nextPointR.copy( outerPoint );
+
+									}
+
+
+								} else {
+
+									// Add extra miter join triangles
+
+									if ( joinIsOnLeftSide ) {
+
+										addVertex( currentPointL, u1, 0 );
+										addVertex( outerPoint, u1, 0 );
+										addVertex( currentPoint, u1, 0.5 );
+
+										addVertex( currentPoint, u1, 0.5 );
+										addVertex( outerPoint, u1, 0 );
+										addVertex( nextPointL, u1, 0 );
+
+									} else {
+
+										addVertex( currentPointR, u1, 1 );
+										addVertex( outerPoint, u1, 1 );
+										addVertex( currentPoint, u1, 0.5 );
+
+										addVertex( currentPoint, u1, 0.5 );
+										addVertex( outerPoint, u1, 1 );
+										addVertex( nextPointR, u1, 1 );
+
+									}
+
+								}
+
+								isMiter = true;
+
+							}
+
+							break;
+
+					}
+
+				} else {
+
+					// The segment triangles are generated here when two consecutive points are collinear
+
+					makeSegmentTriangles();
+
+				}
+
+			} else {
+
+				// The segment triangles are generated here if it is the ending segment
+
+				makeSegmentTriangles();
+
+			}
+
+			if ( ! isClosed && iPoint === numPoints - 1 ) {
+
+				// Start line endcap
+				addCapGeometry( points[ 0 ], point0L, point0R, joinIsOnLeftSide, true, u0 );
+
+			}
+
+			// Increment loop variables
+
+			u0 = u1;
+
+			previousPoint = currentPoint;
+
+			lastPointL.copy( nextPointL );
+			lastPointR.copy( nextPointR );
+
+		}
+
+		if ( ! isClosed ) {
+
+			// Ending line endcap
+			addCapGeometry( currentPoint, currentPointL, currentPointR, joinIsOnLeftSide, false, u1 );
+
+		} else if ( innerSideModified && vertices ) {
+
+			// Modify path first segment vertices to adjust to the segments inner and outer intersections
+
+			let lastOuter = outerPoint;
+			let lastInner = innerPoint;
+
+			if ( initialJoinIsOnLeftSide !== joinIsOnLeftSide ) {
+
+				lastOuter = innerPoint;
+				lastInner = outerPoint;
+
+			}
+
+			if ( joinIsOnLeftSide ) {
+
+				if ( isMiter || initialJoinIsOnLeftSide ) {
+
+					lastInner.toArray( vertices, 0 * 3 );
+					lastInner.toArray( vertices, 3 * 3 );
+
+					if ( isMiter ) {
+
+						lastOuter.toArray( vertices, 1 * 3 );
+
+					}
+
+				}
+
+			} else {
+
+				if ( isMiter || ! initialJoinIsOnLeftSide ) {
+
+					lastInner.toArray( vertices, 1 * 3 );
+					lastInner.toArray( vertices, 3 * 3 );
+
+					if ( isMiter ) {
+
+						lastOuter.toArray( vertices, 0 * 3 );
+
+					}
+
+				}
+
+			}
+
+		}
+
+		return numVertices;
+
+		// -- End of algorithm
+
+		// -- Functions
+
+		function getNormal( p1, p2, result ) {
+
+			result.subVectors( p2, p1 );
+			return result.set( - result.y, result.x ).normalize();
+
+		}
+
+		function addVertex( position, u, v ) {
+
+			if ( vertices ) {
+
+				vertices[ currentCoordinate ] = position.x;
+				vertices[ currentCoordinate + 1 ] = position.y;
+				vertices[ currentCoordinate + 2 ] = 0;
+
+				if ( normals ) {
+
+					normals[ currentCoordinate ] = 0;
+					normals[ currentCoordinate + 1 ] = 0;
+					normals[ currentCoordinate + 2 ] = 1;
+
+				}
+
+				currentCoordinate += 3;
+
+				if ( uvs ) {
+
+					uvs[ currentCoordinateUV ] = u;
+					uvs[ currentCoordinateUV + 1 ] = v;
+
+					currentCoordinateUV += 2;
+
+				}
+
+			}
+
+			numVertices += 3;
+
+		}
+
+		function makeCircularSector( center, p1, p2, u, v ) {
+
+			// param p1, p2: Points in the circle arc.
+			// p1 and p2 are in clockwise direction.
+
+			tempV2_1.copy( p1 ).sub( center ).normalize();
+			tempV2_2.copy( p2 ).sub( center ).normalize();
+
+			let angle = Math.PI;
+			const dot = tempV2_1.dot( tempV2_2 );
+			if ( Math.abs( dot ) < 1 ) angle = Math.abs( Math.acos( dot ) );
+
+			angle /= arcDivisions;
+
+			tempV2_3.copy( p1 );
+
+			for ( let i = 0, il = arcDivisions - 1; i < il; i ++ ) {
+
+				tempV2_4.copy( tempV2_3 ).rotateAround( center, angle );
+
+				addVertex( tempV2_3, u, v );
+				addVertex( tempV2_4, u, v );
+				addVertex( center, u, 0.5 );
+
+				tempV2_3.copy( tempV2_4 );
+
+			}
+
+			addVertex( tempV2_4, u, v );
+			addVertex( p2, u, v );
+			addVertex( center, u, 0.5 );
+
+		}
+
+		function makeSegmentTriangles() {
+
+			addVertex( lastPointR, u0, 1 );
+			addVertex( lastPointL, u0, 0 );
+			addVertex( currentPointL, u1, 0 );
+
+			addVertex( lastPointR, u0, 1 );
+			addVertex( currentPointL, u1, 1 );
+			addVertex( currentPointR, u1, 0 );
+
+		}
+
+		function makeSegmentWithBevelJoin( joinIsOnLeftSide, innerSideModified, u ) {
+
+			if ( innerSideModified ) {
+
+				// Optimized segment + bevel triangles
+
+				if ( joinIsOnLeftSide ) {
+
+					// Path segments triangles
+
+					addVertex( lastPointR, u0, 1 );
+					addVertex( lastPointL, u0, 0 );
+					addVertex( currentPointL, u1, 0 );
+
+					addVertex( lastPointR, u0, 1 );
+					addVertex( currentPointL, u1, 0 );
+					addVertex( innerPoint, u1, 1 );
+
+					// Bevel join triangle
+
+					addVertex( currentPointL, u, 0 );
+					addVertex( nextPointL, u, 0 );
+					addVertex( innerPoint, u, 0.5 );
+
+				} else {
+
+					// Path segments triangles
+
+					addVertex( lastPointR, u0, 1 );
+					addVertex( lastPointL, u0, 0 );
+					addVertex( currentPointR, u1, 1 );
+
+					addVertex( lastPointL, u0, 0 );
+					addVertex( innerPoint, u1, 0 );
+					addVertex( currentPointR, u1, 1 );
+
+					// Bevel join triangle
+
+					addVertex( currentPointR, u, 1 );
+					addVertex( nextPointR, u, 0 );
+					addVertex( innerPoint, u, 0.5 );
+
+				}
+
+			} else {
+
+				// Bevel join triangle. The segment triangles are done in the main loop
+
+				if ( joinIsOnLeftSide ) {
+
+					addVertex( currentPointL, u, 0 );
+					addVertex( nextPointL, u, 0 );
+					addVertex( currentPoint, u, 0.5 );
+
+				} else {
+
+					addVertex( currentPointR, u, 1 );
+					addVertex( nextPointR, u, 0 );
+					addVertex( currentPoint, u, 0.5 );
+
+				}
+
+			}
+
+		}
+
+		function createSegmentTrianglesWithMiddleSection( joinIsOnLeftSide, innerSideModified ) {
+
+			if ( innerSideModified ) {
+
+				if ( joinIsOnLeftSide ) {
+
+					addVertex( lastPointR, u0, 1 );
+					addVertex( lastPointL, u0, 0 );
+					addVertex( currentPointL, u1, 0 );
+
+					addVertex( lastPointR, u0, 1 );
+					addVertex( currentPointL, u1, 0 );
+					addVertex( innerPoint, u1, 1 );
+
+					addVertex( currentPointL, u0, 0 );
+					addVertex( currentPoint, u1, 0.5 );
+					addVertex( innerPoint, u1, 1 );
+
+					addVertex( currentPoint, u1, 0.5 );
+					addVertex( nextPointL, u0, 0 );
+					addVertex( innerPoint, u1, 1 );
+
+				} else {
+
+					addVertex( lastPointR, u0, 1 );
+					addVertex( lastPointL, u0, 0 );
+					addVertex( currentPointR, u1, 1 );
+
+					addVertex( lastPointL, u0, 0 );
+					addVertex( innerPoint, u1, 0 );
+					addVertex( currentPointR, u1, 1 );
+
+					addVertex( currentPointR, u0, 1 );
+					addVertex( innerPoint, u1, 0 );
+					addVertex( currentPoint, u1, 0.5 );
+
+					addVertex( currentPoint, u1, 0.5 );
+					addVertex( innerPoint, u1, 0 );
+					addVertex( nextPointR, u0, 1 );
+
+				}
+
+			}
+
+		}
+
+		function addCapGeometry( center, p1, p2, joinIsOnLeftSide, start, u ) {
+
+			// param center: End point of the path
+			// param p1, p2: Left and right cap points
+
+			switch ( style.strokeLineCap ) {
+
+				case 'round':
+
+					if ( start ) {
+
+						makeCircularSector( center, p2, p1, u, 0.5 );
+
+					} else {
+
+						makeCircularSector( center, p1, p2, u, 0.5 );
+
+					}
+
+					break;
+
+				case 'square':
+
+					if ( start ) {
+
+						tempV2_1.subVectors( p1, center );
+						tempV2_2.set( tempV2_1.y, - tempV2_1.x );
+
+						tempV2_3.addVectors( tempV2_1, tempV2_2 ).add( center );
+						tempV2_4.subVectors( tempV2_2, tempV2_1 ).add( center );
+
+						// Modify already existing vertices
+						if ( joinIsOnLeftSide ) {
+
+							tempV2_3.toArray( vertices, 1 * 3 );
+							tempV2_4.toArray( vertices, 0 * 3 );
+							tempV2_4.toArray( vertices, 3 * 3 );
+
+						} else {
+
+							tempV2_3.toArray( vertices, 1 * 3 );
+							tempV2_3.toArray( vertices, 3 * 3 );
+							tempV2_4.toArray( vertices, 0 * 3 );
+
+						}
+
+					} else {
+
+						tempV2_1.subVectors( p2, center );
+						tempV2_2.set( tempV2_1.y, - tempV2_1.x );
+
+						tempV2_3.addVectors( tempV2_1, tempV2_2 ).add( center );
+						tempV2_4.subVectors( tempV2_2, tempV2_1 ).add( center );
+
+						const vl = vertices.length;
+
+						// Modify already existing vertices
+						if ( joinIsOnLeftSide ) {
+
+							tempV2_3.toArray( vertices, vl - 1 * 3 );
+							tempV2_4.toArray( vertices, vl - 2 * 3 );
+							tempV2_4.toArray( vertices, vl - 4 * 3 );
+
+						} else {
+
+							tempV2_3.toArray( vertices, vl - 2 * 3 );
+							tempV2_4.toArray( vertices, vl - 1 * 3 );
+							tempV2_4.toArray( vertices, vl - 4 * 3 );
+
+						}
+
+					}
+
+					break;
+
+			}
+
+		}
+
+		function removeDuplicatedPoints( points ) {
+
+			// Creates a new array if necessary with duplicated points removed.
+			// This does not remove duplicated initial and ending points of a closed path.
+
+			let dupPoints = false;
+			for ( let i = 1, n = points.length - 1; i < n; i ++ ) {
+
+				if ( points[ i ].distanceTo( points[ i + 1 ] ) < minDistance ) {
+
+					dupPoints = true;
+					break;
+
+				}
+
+			}
+
+			if ( ! dupPoints ) return points;
+
+			const newPoints = [];
+			newPoints.push( points[ 0 ] );
+
+			for ( let i = 1, n = points.length - 1; i < n; i ++ ) {
+
+				if ( points[ i ].distanceTo( points[ i + 1 ] ) >= minDistance ) {
+
+					newPoints.push( points[ i ] );
+
+				}
+
+			}
+
+			newPoints.push( points[ points.length - 1 ] );
+
+			return newPoints;
+
+		}
+
+	}
+
+
+}
+
 /*!
  * html2canvas 1.4.1 <https://html2canvas.hertzen.com>
  * Copyright (c) 2022 Niklas von Hertzen <https://hertzen.com>
@@ -36259,15 +40380,15 @@ function __extends(d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 }
 
-var __assign$1 = function() {
-    __assign$1 = Object.assign || function __assign(t) {
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
             s = arguments[i];
             for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
         }
         return t;
     };
-    return __assign$1.apply(this, arguments);
+    return __assign.apply(this, arguments);
 };
 
 function __awaiter(thisArg, _arguments, P, generator) {
@@ -38314,7 +42435,7 @@ var calculateGradientDirection = function (angle, width, height) {
     var xDiff = Math.cos(radian - Math.PI / 2) * halfLineLength;
     return [lineLength, halfWidth - xDiff, halfWidth + xDiff, halfHeight - yDiff, halfHeight + yDiff];
 };
-var distance$1 = function (a, b) { return Math.sqrt(a * a + b * b); };
+var distance = function (a, b) { return Math.sqrt(a * a + b * b); };
 var findCorner = function (width, height, x, y, closest) {
     var corners = [
         [0, 0],
@@ -38324,7 +42445,7 @@ var findCorner = function (width, height, x, y, closest) {
     ];
     return corners.reduce(function (stat, corner) {
         var cx = corner[0], cy = corner[1];
-        var d = distance$1(x - cx, y - cy);
+        var d = distance(x - cx, y - cy);
         if (closest ? d < stat.optimumDistance : d > stat.optimumDistance) {
             return {
                 optimumCorner: corner,
@@ -38356,13 +42477,13 @@ var calculateRadius = function (gradient, x, y, width, height) {
             // The ending shape is sized so that that it passes through the corner of the gradient box closest to the gradient’s center.
             // If the shape is an ellipse, the ending shape is given the same aspect-ratio it would have if closest-side were specified.
             if (gradient.shape === 0 /* CIRCLE */) {
-                rx = ry = Math.min(distance$1(x, y), distance$1(x, y - height), distance$1(x - width, y), distance$1(x - width, y - height));
+                rx = ry = Math.min(distance(x, y), distance(x, y - height), distance(x - width, y), distance(x - width, y - height));
             }
             else if (gradient.shape === 1 /* ELLIPSE */) {
                 // Compute the ratio ry/rx (which is to be the same as for "closest-side")
                 var c = Math.min(Math.abs(y), Math.abs(y - height)) / Math.min(Math.abs(x), Math.abs(x - width));
                 var _a = findCorner(width, height, x, y, true), cx = _a[0], cy = _a[1];
-                rx = distance$1(cx - x, (cy - y) / c);
+                rx = distance(cx - x, (cy - y) / c);
                 ry = c * rx;
             }
             break;
@@ -38380,13 +42501,13 @@ var calculateRadius = function (gradient, x, y, width, height) {
             // Same as closest-corner, except the ending shape is sized based on the farthest corner.
             // If the shape is an ellipse, the ending shape is given the same aspect ratio it would have if farthest-side were specified.
             if (gradient.shape === 0 /* CIRCLE */) {
-                rx = ry = Math.max(distance$1(x, y), distance$1(x, y - height), distance$1(x - width, y), distance$1(x - width, y - height));
+                rx = ry = Math.max(distance(x, y), distance(x, y - height), distance(x - width, y), distance(x - width, y - height));
             }
             else if (gradient.shape === 1 /* ELLIPSE */) {
                 // Compute the ratio ry/rx (which is to be the same as for "farthest-side")
                 var c = Math.max(Math.abs(y), Math.abs(y - height)) / Math.max(Math.abs(x), Math.abs(x - width));
                 var _b = findCorner(width, height, x, y, false), cx = _b[0], cy = _b[1];
-                rx = distance$1(cx - x, (cy - y) / c);
+                rx = distance(cx - x, (cy - y) / c);
                 ry = c * rx;
             }
             break;
@@ -43950,7 +48071,7 @@ var renderElement = function (element, opts) { return __awaiter(void 0, void 0, 
                     proxy: opts.proxy,
                     useCORS: (_d = opts.useCORS) !== null && _d !== void 0 ? _d : false
                 };
-                contextOptions = __assign$1({ logging: (_e = opts.logging) !== null && _e !== void 0 ? _e : true, cache: opts.cache }, resourceOptions);
+                contextOptions = __assign({ logging: (_e = opts.logging) !== null && _e !== void 0 ? _e : true, cache: opts.cache }, resourceOptions);
                 windowOptions = {
                     windowWidth: (_f = opts.windowWidth) !== null && _f !== void 0 ? _f : defaultView.innerWidth,
                     windowHeight: (_g = opts.windowHeight) !== null && _g !== void 0 ? _g : defaultView.innerHeight,
@@ -44183,3343 +48304,7 @@ var createFileName = function createFileName() {
   return "".concat(names.join(''), ".").concat(extension);
 };
 
-var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
-
-var PropagateLoader$1 = {};
-
-var unitConverter = {};
-
-Object.defineProperty(unitConverter, "__esModule", { value: true });
-unitConverter.cssValue = unitConverter.parseLengthAndUnit = void 0;
-var cssUnit = {
-    cm: true,
-    mm: true,
-    in: true,
-    px: true,
-    pt: true,
-    pc: true,
-    em: true,
-    ex: true,
-    ch: true,
-    rem: true,
-    vw: true,
-    vh: true,
-    vmin: true,
-    vmax: true,
-    "%": true,
-};
-/**
- * If size is a number, append px to the value as default unit.
- * If size is a string, validate against list of valid units.
- * If unit is valid, return size as is.
- * If unit is invalid, console warn issue, replace with px as the unit.
- *
- * @param {(number | string)} size
- * @return {LengthObject} LengthObject
- */
-function parseLengthAndUnit(size) {
-    if (typeof size === "number") {
-        return {
-            value: size,
-            unit: "px",
-        };
-    }
-    var value;
-    var valueString = (size.match(/^[0-9.]*/) || "").toString();
-    if (valueString.includes(".")) {
-        value = parseFloat(valueString);
-    }
-    else {
-        value = parseInt(valueString, 10);
-    }
-    var unit = (size.match(/[^0-9]*$/) || "").toString();
-    if (cssUnit[unit]) {
-        return {
-            value: value,
-            unit: unit,
-        };
-    }
-    console.warn("React Spinners: ".concat(size, " is not a valid css value. Defaulting to ").concat(value, "px."));
-    return {
-        value: value,
-        unit: "px",
-    };
-}
-unitConverter.parseLengthAndUnit = parseLengthAndUnit;
-/**
- * Take value as an input and return valid css value
- *
- * @param {(number | string)} value
- * @return {string} valid css value
- */
-function cssValue(value) {
-    var lengthWithunit = parseLengthAndUnit(value);
-    return "".concat(lengthWithunit.value).concat(lengthWithunit.unit);
-}
-unitConverter.cssValue = cssValue;
-
-var animation = {};
-
-Object.defineProperty(animation, "__esModule", { value: true });
-animation.createAnimation = void 0;
-var createAnimation = function (loaderName, frames, suffix) {
-    var animationName = "react-spinners-".concat(loaderName, "-").concat(suffix);
-    if (typeof window == "undefined" || !window.document) {
-        return animationName;
-    }
-    var styleEl = document.createElement("style");
-    document.head.appendChild(styleEl);
-    var styleSheet = styleEl.sheet;
-    var keyFrames = "\n    @keyframes ".concat(animationName, " {\n      ").concat(frames, "\n    }\n  ");
-    if (styleSheet) {
-        styleSheet.insertRule(keyFrames, 0);
-    }
-    return animationName;
-};
-animation.createAnimation = createAnimation;
-
-var __assign = (commonjsGlobal && commonjsGlobal.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __createBinding = (commonjsGlobal && commonjsGlobal.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (commonjsGlobal && commonjsGlobal.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (commonjsGlobal && commonjsGlobal.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __rest = (commonjsGlobal && commonjsGlobal.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
-Object.defineProperty(PropagateLoader$1, "__esModule", { value: true });
-var React = __importStar(React__default);
-var unitConverter_1 = unitConverter;
-var animation_1 = animation;
-// 1.5 4.5 7.5
-var distance = [1, 3, 5];
-var propagate = [
-    (0, animation_1.createAnimation)("PropagateLoader", "25% {transform: translateX(-".concat(distance[0], "rem) scale(0.75)}\n    50% {transform: translateX(-").concat(distance[1], "rem) scale(0.6)}\n    75% {transform: translateX(-").concat(distance[2], "rem) scale(0.5)}\n    95% {transform: translateX(0rem) scale(1)}"), "propogate-0"),
-    (0, animation_1.createAnimation)("PropagateLoader", "25% {transform: translateX(-".concat(distance[0], "rem) scale(0.75)}\n    50% {transform: translateX(-").concat(distance[1], "rem) scale(0.6)}\n    75% {transform: translateX(-").concat(distance[1], "rem) scale(0.6)}\n    95% {transform: translateX(0rem) scale(1)}"), "propogate-1"),
-    (0, animation_1.createAnimation)("PropagateLoader", "25% {transform: translateX(-".concat(distance[0], "rem) scale(0.75)}\n    75% {transform: translateX(-").concat(distance[0], "rem) scale(0.75)}\n    95% {transform: translateX(0rem) scale(1)}"), "propogate-2"),
-    (0, animation_1.createAnimation)("PropagateLoader", "25% {transform: translateX(".concat(distance[0], "rem) scale(0.75)}\n    75% {transform: translateX(").concat(distance[0], "rem) scale(0.75)}\n    95% {transform: translateX(0rem) scale(1)}"), "propogate-3"),
-    (0, animation_1.createAnimation)("PropagateLoader", "25% {transform: translateX(".concat(distance[0], "rem) scale(0.75)}\n    50% {transform: translateX(").concat(distance[1], "rem) scale(0.6)}\n    75% {transform: translateX(").concat(distance[1], "rem) scale(0.6)}\n    95% {transform: translateX(0rem) scale(1)}"), "propogate-4"),
-    (0, animation_1.createAnimation)("PropagateLoader", "25% {transform: translateX(".concat(distance[0], "rem) scale(0.75)}\n    50% {transform: translateX(").concat(distance[1], "rem) scale(0.6)}\n    75% {transform: translateX(").concat(distance[2], "rem) scale(0.5)}\n    95% {transform: translateX(0rem) scale(1)}"), "propogate-5"),
-];
-function PropagateLoader(_a) {
-    var _b = _a.loading, loading = _b === void 0 ? true : _b, _c = _a.color, color = _c === void 0 ? "#000000" : _c, _d = _a.speedMultiplier, speedMultiplier = _d === void 0 ? 1 : _d, _e = _a.cssOverride, cssOverride = _e === void 0 ? {} : _e, _f = _a.size, size = _f === void 0 ? 15 : _f, additionalprops = __rest(_a, ["loading", "color", "speedMultiplier", "cssOverride", "size"]);
-    var _g = (0, unitConverter_1.parseLengthAndUnit)(size), value = _g.value, unit = _g.unit;
-    var wrapper = __assign({ display: "inherit", position: "relative" }, cssOverride);
-    var style = function (i) {
-        return {
-            position: "absolute",
-            fontSize: "".concat(value / 3).concat(unit),
-            width: "".concat(value).concat(unit),
-            height: "".concat(value).concat(unit),
-            background: color,
-            borderRadius: "50%",
-            animation: "".concat(propagate[i], " ").concat(1.5 / speedMultiplier, "s infinite"),
-            animationFillMode: "forwards",
-        };
-    };
-    if (!loading) {
-        return null;
-    }
-    return (React.createElement("span", __assign({ style: wrapper }, additionalprops),
-        React.createElement("span", { style: style(0) }),
-        React.createElement("span", { style: style(1) }),
-        React.createElement("span", { style: style(2) }),
-        React.createElement("span", { style: style(3) }),
-        React.createElement("span", { style: style(4) }),
-        React.createElement("span", { style: style(5) })));
-}
-var _default = PropagateLoader$1.default = PropagateLoader;
-
-function truncate(str, n) {
-    return (str.length > n)
-        ? str.slice(0, n - 1) + '...'
-        : str;
-}
-
-const COLOR_SPACE_SVG = SRGBColorSpace;
-
-class SVGLoader extends Loader {
-
-	constructor( manager ) {
-
-		super( manager );
-
-		// Default dots per inch
-		this.defaultDPI = 90;
-
-		// Accepted units: 'mm', 'cm', 'in', 'pt', 'pc', 'px'
-		this.defaultUnit = 'px';
-
-	}
-
-	load( url, onLoad, onProgress, onError ) {
-
-		const scope = this;
-
-		const loader = new FileLoader( scope.manager );
-		loader.setPath( scope.path );
-		loader.setRequestHeader( scope.requestHeader );
-		loader.setWithCredentials( scope.withCredentials );
-		loader.load( url, function ( text ) {
-
-			try {
-
-				onLoad( scope.parse( text ) );
-
-			} catch ( e ) {
-
-				if ( onError ) {
-
-					onError( e );
-
-				} else {
-
-					console.error( e );
-
-				}
-
-				scope.manager.itemError( url );
-
-			}
-
-		}, onProgress, onError );
-
-	}
-
-	parse( text ) {
-
-		const scope = this;
-
-		function parseNode( node, style ) {
-
-			if ( node.nodeType !== 1 ) return;
-
-			const transform = getNodeTransform( node );
-
-			let isDefsNode = false;
-
-			let path = null;
-
-			switch ( node.nodeName ) {
-
-				case 'svg':
-					style = parseStyle( node, style );
-					break;
-
-				case 'style':
-					parseCSSStylesheet( node );
-					break;
-
-				case 'g':
-					style = parseStyle( node, style );
-					break;
-
-				case 'path':
-					style = parseStyle( node, style );
-					if ( node.hasAttribute( 'd' ) ) path = parsePathNode( node );
-					break;
-
-				case 'rect':
-					style = parseStyle( node, style );
-					path = parseRectNode( node );
-					break;
-
-				case 'polygon':
-					style = parseStyle( node, style );
-					path = parsePolygonNode( node );
-					break;
-
-				case 'polyline':
-					style = parseStyle( node, style );
-					path = parsePolylineNode( node );
-					break;
-
-				case 'circle':
-					style = parseStyle( node, style );
-					path = parseCircleNode( node );
-					break;
-
-				case 'ellipse':
-					style = parseStyle( node, style );
-					path = parseEllipseNode( node );
-					break;
-
-				case 'line':
-					style = parseStyle( node, style );
-					path = parseLineNode( node );
-					break;
-
-				case 'defs':
-					isDefsNode = true;
-					break;
-
-				case 'use':
-					style = parseStyle( node, style );
-
-					const href = node.getAttributeNS( 'http://www.w3.org/1999/xlink', 'href' ) || '';
-					const usedNodeId = href.substring( 1 );
-					const usedNode = node.viewportElement.getElementById( usedNodeId );
-					if ( usedNode ) {
-
-						parseNode( usedNode, style );
-
-					} else {
-
-						console.warn( 'SVGLoader: \'use node\' references non-existent node id: ' + usedNodeId );
-
-					}
-
-					break;
-					// console.log( node );
-
-			}
-
-			if ( path ) {
-
-				if ( style.fill !== undefined && style.fill !== 'none' ) {
-
-					path.color.setStyle( style.fill, COLOR_SPACE_SVG );
-
-				}
-
-				transformPath( path, currentTransform );
-
-				paths.push( path );
-
-				path.userData = { node: node, style: style };
-
-			}
-
-			const childNodes = node.childNodes;
-
-			for ( let i = 0; i < childNodes.length; i ++ ) {
-
-				const node = childNodes[ i ];
-
-				if ( isDefsNode && node.nodeName !== 'style' && node.nodeName !== 'defs' ) {
-
-					// Ignore everything in defs except CSS style definitions
-					// and nested defs, because it is OK by the standard to have
-					// <style/> there.
-					continue;
-
-				}
-
-				parseNode( node, style );
-
-			}
-
-
-			if ( transform ) {
-
-				transformStack.pop();
-
-				if ( transformStack.length > 0 ) {
-
-					currentTransform.copy( transformStack[ transformStack.length - 1 ] );
-
-				} else {
-
-					currentTransform.identity();
-
-				}
-
-			}
-
-		}
-
-		function parsePathNode( node ) {
-
-			const path = new ShapePath();
-
-			const point = new Vector2();
-			const control = new Vector2();
-
-			const firstPoint = new Vector2();
-			let isFirstPoint = true;
-			let doSetFirstPoint = false;
-
-			const d = node.getAttribute( 'd' );
-
-			if ( d === '' || d === 'none' ) return null;
-
-			// console.log( d );
-
-			const commands = d.match( /[a-df-z][^a-df-z]*/ig );
-
-			for ( let i = 0, l = commands.length; i < l; i ++ ) {
-
-				const command = commands[ i ];
-
-				const type = command.charAt( 0 );
-				const data = command.slice( 1 ).trim();
-
-				if ( isFirstPoint === true ) {
-
-					doSetFirstPoint = true;
-					isFirstPoint = false;
-
-				}
-
-				let numbers;
-
-				switch ( type ) {
-
-					case 'M':
-						numbers = parseFloats( data );
-						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
-
-							point.x = numbers[ j + 0 ];
-							point.y = numbers[ j + 1 ];
-							control.x = point.x;
-							control.y = point.y;
-
-							if ( j === 0 ) {
-
-								path.moveTo( point.x, point.y );
-
-							} else {
-
-								path.lineTo( point.x, point.y );
-
-							}
-
-							if ( j === 0 ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'H':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j ++ ) {
-
-							point.x = numbers[ j ];
-							control.x = point.x;
-							control.y = point.y;
-							path.lineTo( point.x, point.y );
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'V':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j ++ ) {
-
-							point.y = numbers[ j ];
-							control.x = point.x;
-							control.y = point.y;
-							path.lineTo( point.x, point.y );
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'L':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
-
-							point.x = numbers[ j + 0 ];
-							point.y = numbers[ j + 1 ];
-							control.x = point.x;
-							control.y = point.y;
-							path.lineTo( point.x, point.y );
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'C':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 6 ) {
-
-							path.bezierCurveTo(
-								numbers[ j + 0 ],
-								numbers[ j + 1 ],
-								numbers[ j + 2 ],
-								numbers[ j + 3 ],
-								numbers[ j + 4 ],
-								numbers[ j + 5 ]
-							);
-							control.x = numbers[ j + 2 ];
-							control.y = numbers[ j + 3 ];
-							point.x = numbers[ j + 4 ];
-							point.y = numbers[ j + 5 ];
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'S':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 4 ) {
-
-							path.bezierCurveTo(
-								getReflection( point.x, control.x ),
-								getReflection( point.y, control.y ),
-								numbers[ j + 0 ],
-								numbers[ j + 1 ],
-								numbers[ j + 2 ],
-								numbers[ j + 3 ]
-							);
-							control.x = numbers[ j + 0 ];
-							control.y = numbers[ j + 1 ];
-							point.x = numbers[ j + 2 ];
-							point.y = numbers[ j + 3 ];
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'Q':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 4 ) {
-
-							path.quadraticCurveTo(
-								numbers[ j + 0 ],
-								numbers[ j + 1 ],
-								numbers[ j + 2 ],
-								numbers[ j + 3 ]
-							);
-							control.x = numbers[ j + 0 ];
-							control.y = numbers[ j + 1 ];
-							point.x = numbers[ j + 2 ];
-							point.y = numbers[ j + 3 ];
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'T':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
-
-							const rx = getReflection( point.x, control.x );
-							const ry = getReflection( point.y, control.y );
-							path.quadraticCurveTo(
-								rx,
-								ry,
-								numbers[ j + 0 ],
-								numbers[ j + 1 ]
-							);
-							control.x = rx;
-							control.y = ry;
-							point.x = numbers[ j + 0 ];
-							point.y = numbers[ j + 1 ];
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'A':
-						numbers = parseFloats( data, [ 3, 4 ], 7 );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 7 ) {
-
-							// skip command if start point == end point
-							if ( numbers[ j + 5 ] == point.x && numbers[ j + 6 ] == point.y ) continue;
-
-							const start = point.clone();
-							point.x = numbers[ j + 5 ];
-							point.y = numbers[ j + 6 ];
-							control.x = point.x;
-							control.y = point.y;
-							parseArcCommand(
-								path, numbers[ j ], numbers[ j + 1 ], numbers[ j + 2 ], numbers[ j + 3 ], numbers[ j + 4 ], start, point
-							);
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'm':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
-
-							point.x += numbers[ j + 0 ];
-							point.y += numbers[ j + 1 ];
-							control.x = point.x;
-							control.y = point.y;
-
-							if ( j === 0 ) {
-
-								path.moveTo( point.x, point.y );
-
-							} else {
-
-								path.lineTo( point.x, point.y );
-
-							}
-
-							if ( j === 0 ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'h':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j ++ ) {
-
-							point.x += numbers[ j ];
-							control.x = point.x;
-							control.y = point.y;
-							path.lineTo( point.x, point.y );
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'v':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j ++ ) {
-
-							point.y += numbers[ j ];
-							control.x = point.x;
-							control.y = point.y;
-							path.lineTo( point.x, point.y );
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'l':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
-
-							point.x += numbers[ j + 0 ];
-							point.y += numbers[ j + 1 ];
-							control.x = point.x;
-							control.y = point.y;
-							path.lineTo( point.x, point.y );
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'c':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 6 ) {
-
-							path.bezierCurveTo(
-								point.x + numbers[ j + 0 ],
-								point.y + numbers[ j + 1 ],
-								point.x + numbers[ j + 2 ],
-								point.y + numbers[ j + 3 ],
-								point.x + numbers[ j + 4 ],
-								point.y + numbers[ j + 5 ]
-							);
-							control.x = point.x + numbers[ j + 2 ];
-							control.y = point.y + numbers[ j + 3 ];
-							point.x += numbers[ j + 4 ];
-							point.y += numbers[ j + 5 ];
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 's':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 4 ) {
-
-							path.bezierCurveTo(
-								getReflection( point.x, control.x ),
-								getReflection( point.y, control.y ),
-								point.x + numbers[ j + 0 ],
-								point.y + numbers[ j + 1 ],
-								point.x + numbers[ j + 2 ],
-								point.y + numbers[ j + 3 ]
-							);
-							control.x = point.x + numbers[ j + 0 ];
-							control.y = point.y + numbers[ j + 1 ];
-							point.x += numbers[ j + 2 ];
-							point.y += numbers[ j + 3 ];
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'q':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 4 ) {
-
-							path.quadraticCurveTo(
-								point.x + numbers[ j + 0 ],
-								point.y + numbers[ j + 1 ],
-								point.x + numbers[ j + 2 ],
-								point.y + numbers[ j + 3 ]
-							);
-							control.x = point.x + numbers[ j + 0 ];
-							control.y = point.y + numbers[ j + 1 ];
-							point.x += numbers[ j + 2 ];
-							point.y += numbers[ j + 3 ];
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 't':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
-
-							const rx = getReflection( point.x, control.x );
-							const ry = getReflection( point.y, control.y );
-							path.quadraticCurveTo(
-								rx,
-								ry,
-								point.x + numbers[ j + 0 ],
-								point.y + numbers[ j + 1 ]
-							);
-							control.x = rx;
-							control.y = ry;
-							point.x = point.x + numbers[ j + 0 ];
-							point.y = point.y + numbers[ j + 1 ];
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'a':
-						numbers = parseFloats( data, [ 3, 4 ], 7 );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 7 ) {
-
-							// skip command if no displacement
-							if ( numbers[ j + 5 ] == 0 && numbers[ j + 6 ] == 0 ) continue;
-
-							const start = point.clone();
-							point.x += numbers[ j + 5 ];
-							point.y += numbers[ j + 6 ];
-							control.x = point.x;
-							control.y = point.y;
-							parseArcCommand(
-								path, numbers[ j ], numbers[ j + 1 ], numbers[ j + 2 ], numbers[ j + 3 ], numbers[ j + 4 ], start, point
-							);
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'Z':
-					case 'z':
-						path.currentPath.autoClose = true;
-
-						if ( path.currentPath.curves.length > 0 ) {
-
-							// Reset point to beginning of Path
-							point.copy( firstPoint );
-							path.currentPath.currentPoint.copy( point );
-							isFirstPoint = true;
-
-						}
-
-						break;
-
-					default:
-						console.warn( command );
-
-				}
-
-				// console.log( type, parseFloats( data ), parseFloats( data ).length  )
-
-				doSetFirstPoint = false;
-
-			}
-
-			return path;
-
-		}
-
-		function parseCSSStylesheet( node ) {
-
-			if ( ! node.sheet || ! node.sheet.cssRules || ! node.sheet.cssRules.length ) return;
-
-			for ( let i = 0; i < node.sheet.cssRules.length; i ++ ) {
-
-				const stylesheet = node.sheet.cssRules[ i ];
-
-				if ( stylesheet.type !== 1 ) continue;
-
-				const selectorList = stylesheet.selectorText
-					.split( /,/gm )
-					.filter( Boolean )
-					.map( i => i.trim() );
-
-				for ( let j = 0; j < selectorList.length; j ++ ) {
-
-					// Remove empty rules
-					const definitions = Object.fromEntries(
-						Object.entries( stylesheet.style ).filter( ( [ , v ] ) => v !== '' )
-					);
-
-					stylesheets[ selectorList[ j ] ] = Object.assign(
-						stylesheets[ selectorList[ j ] ] || {},
-						definitions
-					);
-
-				}
-
-			}
-
-		}
-
-		/**
-		 * https://www.w3.org/TR/SVG/implnote.html#ArcImplementationNotes
-		 * https://mortoray.com/2017/02/16/rendering-an-svg-elliptical-arc-as-bezier-curves/ Appendix: Endpoint to center arc conversion
-		 * From
-		 * rx ry x-axis-rotation large-arc-flag sweep-flag x y
-		 * To
-		 * aX, aY, xRadius, yRadius, aStartAngle, aEndAngle, aClockwise, aRotation
-		 */
-
-		function parseArcCommand( path, rx, ry, x_axis_rotation, large_arc_flag, sweep_flag, start, end ) {
-
-			if ( rx == 0 || ry == 0 ) {
-
-				// draw a line if either of the radii == 0
-				path.lineTo( end.x, end.y );
-				return;
-
-			}
-
-			x_axis_rotation = x_axis_rotation * Math.PI / 180;
-
-			// Ensure radii are positive
-			rx = Math.abs( rx );
-			ry = Math.abs( ry );
-
-			// Compute (x1', y1')
-			const dx2 = ( start.x - end.x ) / 2.0;
-			const dy2 = ( start.y - end.y ) / 2.0;
-			const x1p = Math.cos( x_axis_rotation ) * dx2 + Math.sin( x_axis_rotation ) * dy2;
-			const y1p = - Math.sin( x_axis_rotation ) * dx2 + Math.cos( x_axis_rotation ) * dy2;
-
-			// Compute (cx', cy')
-			let rxs = rx * rx;
-			let rys = ry * ry;
-			const x1ps = x1p * x1p;
-			const y1ps = y1p * y1p;
-
-			// Ensure radii are large enough
-			const cr = x1ps / rxs + y1ps / rys;
-
-			if ( cr > 1 ) {
-
-				// scale up rx,ry equally so cr == 1
-				const s = Math.sqrt( cr );
-				rx = s * rx;
-				ry = s * ry;
-				rxs = rx * rx;
-				rys = ry * ry;
-
-			}
-
-			const dq = ( rxs * y1ps + rys * x1ps );
-			const pq = ( rxs * rys - dq ) / dq;
-			let q = Math.sqrt( Math.max( 0, pq ) );
-			if ( large_arc_flag === sweep_flag ) q = - q;
-			const cxp = q * rx * y1p / ry;
-			const cyp = - q * ry * x1p / rx;
-
-			// Step 3: Compute (cx, cy) from (cx', cy')
-			const cx = Math.cos( x_axis_rotation ) * cxp - Math.sin( x_axis_rotation ) * cyp + ( start.x + end.x ) / 2;
-			const cy = Math.sin( x_axis_rotation ) * cxp + Math.cos( x_axis_rotation ) * cyp + ( start.y + end.y ) / 2;
-
-			// Step 4: Compute θ1 and Δθ
-			const theta = svgAngle( 1, 0, ( x1p - cxp ) / rx, ( y1p - cyp ) / ry );
-			const delta = svgAngle( ( x1p - cxp ) / rx, ( y1p - cyp ) / ry, ( - x1p - cxp ) / rx, ( - y1p - cyp ) / ry ) % ( Math.PI * 2 );
-
-			path.currentPath.absellipse( cx, cy, rx, ry, theta, theta + delta, sweep_flag === 0, x_axis_rotation );
-
-		}
-
-		function svgAngle( ux, uy, vx, vy ) {
-
-			const dot = ux * vx + uy * vy;
-			const len = Math.sqrt( ux * ux + uy * uy ) * Math.sqrt( vx * vx + vy * vy );
-			let ang = Math.acos( Math.max( - 1, Math.min( 1, dot / len ) ) ); // floating point precision, slightly over values appear
-			if ( ( ux * vy - uy * vx ) < 0 ) ang = - ang;
-			return ang;
-
-		}
-
-		/*
-		* According to https://www.w3.org/TR/SVG/shapes.html#RectElementRXAttribute
-		* rounded corner should be rendered to elliptical arc, but bezier curve does the job well enough
-		*/
-		function parseRectNode( node ) {
-
-			const x = parseFloatWithUnits( node.getAttribute( 'x' ) || 0 );
-			const y = parseFloatWithUnits( node.getAttribute( 'y' ) || 0 );
-			const rx = parseFloatWithUnits( node.getAttribute( 'rx' ) || node.getAttribute( 'ry' ) || 0 );
-			const ry = parseFloatWithUnits( node.getAttribute( 'ry' ) || node.getAttribute( 'rx' ) || 0 );
-			const w = parseFloatWithUnits( node.getAttribute( 'width' ) );
-			const h = parseFloatWithUnits( node.getAttribute( 'height' ) );
-
-			// Ellipse arc to Bezier approximation Coefficient (Inversed). See:
-			// https://spencermortensen.com/articles/bezier-circle/
-			const bci = 1 - 0.551915024494;
-
-			const path = new ShapePath();
-
-			// top left
-			path.moveTo( x + rx, y );
-
-			// top right
-			path.lineTo( x + w - rx, y );
-			if ( rx !== 0 || ry !== 0 ) {
-
-				path.bezierCurveTo(
-					x + w - rx * bci,
-					y,
-					x + w,
-					y + ry * bci,
-					x + w,
-					y + ry
-				);
-
-			}
-
-			// bottom right
-			path.lineTo( x + w, y + h - ry );
-			if ( rx !== 0 || ry !== 0 ) {
-
-				path.bezierCurveTo(
-					x + w,
-					y + h - ry * bci,
-					x + w - rx * bci,
-					y + h,
-					x + w - rx,
-					y + h
-				);
-
-			}
-
-			// bottom left
-			path.lineTo( x + rx, y + h );
-			if ( rx !== 0 || ry !== 0 ) {
-
-				path.bezierCurveTo(
-					x + rx * bci,
-					y + h,
-					x,
-					y + h - ry * bci,
-					x,
-					y + h - ry
-				);
-
-			}
-
-			// back to top left
-			path.lineTo( x, y + ry );
-			if ( rx !== 0 || ry !== 0 ) {
-
-				path.bezierCurveTo( x, y + ry * bci, x + rx * bci, y, x + rx, y );
-
-			}
-
-			return path;
-
-		}
-
-		function parsePolygonNode( node ) {
-
-			function iterator( match, a, b ) {
-
-				const x = parseFloatWithUnits( a );
-				const y = parseFloatWithUnits( b );
-
-				if ( index === 0 ) {
-
-					path.moveTo( x, y );
-
-				} else {
-
-					path.lineTo( x, y );
-
-				}
-
-				index ++;
-
-			}
-
-			const regex = /([+-]?\d*\.?\d+(?:e[+-]?\d+)?)(?:,|\s)([+-]?\d*\.?\d+(?:e[+-]?\d+)?)/g;
-
-			const path = new ShapePath();
-
-			let index = 0;
-
-			node.getAttribute( 'points' ).replace( regex, iterator );
-
-			path.currentPath.autoClose = true;
-
-			return path;
-
-		}
-
-		function parsePolylineNode( node ) {
-
-			function iterator( match, a, b ) {
-
-				const x = parseFloatWithUnits( a );
-				const y = parseFloatWithUnits( b );
-
-				if ( index === 0 ) {
-
-					path.moveTo( x, y );
-
-				} else {
-
-					path.lineTo( x, y );
-
-				}
-
-				index ++;
-
-			}
-
-			const regex = /([+-]?\d*\.?\d+(?:e[+-]?\d+)?)(?:,|\s)([+-]?\d*\.?\d+(?:e[+-]?\d+)?)/g;
-
-			const path = new ShapePath();
-
-			let index = 0;
-
-			node.getAttribute( 'points' ).replace( regex, iterator );
-
-			path.currentPath.autoClose = false;
-
-			return path;
-
-		}
-
-		function parseCircleNode( node ) {
-
-			const x = parseFloatWithUnits( node.getAttribute( 'cx' ) || 0 );
-			const y = parseFloatWithUnits( node.getAttribute( 'cy' ) || 0 );
-			const r = parseFloatWithUnits( node.getAttribute( 'r' ) || 0 );
-
-			const subpath = new Path();
-			subpath.absarc( x, y, r, 0, Math.PI * 2 );
-
-			const path = new ShapePath();
-			path.subPaths.push( subpath );
-
-			return path;
-
-		}
-
-		function parseEllipseNode( node ) {
-
-			const x = parseFloatWithUnits( node.getAttribute( 'cx' ) || 0 );
-			const y = parseFloatWithUnits( node.getAttribute( 'cy' ) || 0 );
-			const rx = parseFloatWithUnits( node.getAttribute( 'rx' ) || 0 );
-			const ry = parseFloatWithUnits( node.getAttribute( 'ry' ) || 0 );
-
-			const subpath = new Path();
-			subpath.absellipse( x, y, rx, ry, 0, Math.PI * 2 );
-
-			const path = new ShapePath();
-			path.subPaths.push( subpath );
-
-			return path;
-
-		}
-
-		function parseLineNode( node ) {
-
-			const x1 = parseFloatWithUnits( node.getAttribute( 'x1' ) || 0 );
-			const y1 = parseFloatWithUnits( node.getAttribute( 'y1' ) || 0 );
-			const x2 = parseFloatWithUnits( node.getAttribute( 'x2' ) || 0 );
-			const y2 = parseFloatWithUnits( node.getAttribute( 'y2' ) || 0 );
-
-			const path = new ShapePath();
-			path.moveTo( x1, y1 );
-			path.lineTo( x2, y2 );
-			path.currentPath.autoClose = false;
-
-			return path;
-
-		}
-
-		//
-
-		function parseStyle( node, style ) {
-
-			style = Object.assign( {}, style ); // clone style
-
-			let stylesheetStyles = {};
-
-			if ( node.hasAttribute( 'class' ) ) {
-
-				const classSelectors = node.getAttribute( 'class' )
-					.split( /\s/ )
-					.filter( Boolean )
-					.map( i => i.trim() );
-
-				for ( let i = 0; i < classSelectors.length; i ++ ) {
-
-					stylesheetStyles = Object.assign( stylesheetStyles, stylesheets[ '.' + classSelectors[ i ] ] );
-
-				}
-
-			}
-
-			if ( node.hasAttribute( 'id' ) ) {
-
-				stylesheetStyles = Object.assign( stylesheetStyles, stylesheets[ '#' + node.getAttribute( 'id' ) ] );
-
-			}
-
-			function addStyle( svgName, jsName, adjustFunction ) {
-
-				if ( adjustFunction === undefined ) adjustFunction = function copy( v ) {
-
-					if ( v.startsWith( 'url' ) ) console.warn( 'SVGLoader: url access in attributes is not implemented.' );
-
-					return v;
-
-				};
-
-				if ( node.hasAttribute( svgName ) ) style[ jsName ] = adjustFunction( node.getAttribute( svgName ) );
-				if ( stylesheetStyles[ svgName ] ) style[ jsName ] = adjustFunction( stylesheetStyles[ svgName ] );
-				if ( node.style && node.style[ svgName ] !== '' ) style[ jsName ] = adjustFunction( node.style[ svgName ] );
-
-			}
-
-			function clamp( v ) {
-
-				return Math.max( 0, Math.min( 1, parseFloatWithUnits( v ) ) );
-
-			}
-
-			function positive( v ) {
-
-				return Math.max( 0, parseFloatWithUnits( v ) );
-
-			}
-
-			addStyle( 'fill', 'fill' );
-			addStyle( 'fill-opacity', 'fillOpacity', clamp );
-			addStyle( 'fill-rule', 'fillRule' );
-			addStyle( 'opacity', 'opacity', clamp );
-			addStyle( 'stroke', 'stroke' );
-			addStyle( 'stroke-opacity', 'strokeOpacity', clamp );
-			addStyle( 'stroke-width', 'strokeWidth', positive );
-			addStyle( 'stroke-linejoin', 'strokeLineJoin' );
-			addStyle( 'stroke-linecap', 'strokeLineCap' );
-			addStyle( 'stroke-miterlimit', 'strokeMiterLimit', positive );
-			addStyle( 'visibility', 'visibility' );
-
-			return style;
-
-		}
-
-		// http://www.w3.org/TR/SVG11/implnote.html#PathElementImplementationNotes
-
-		function getReflection( a, b ) {
-
-			return a - ( b - a );
-
-		}
-
-		// from https://github.com/ppvg/svg-numbers (MIT License)
-
-		function parseFloats( input, flags, stride ) {
-
-			if ( typeof input !== 'string' ) {
-
-				throw new TypeError( 'Invalid input: ' + typeof input );
-
-			}
-
-			// Character groups
-			const RE = {
-				SEPARATOR: /[ \t\r\n\,.\-+]/,
-				WHITESPACE: /[ \t\r\n]/,
-				DIGIT: /[\d]/,
-				SIGN: /[-+]/,
-				POINT: /\./,
-				COMMA: /,/,
-				EXP: /e/i,
-				FLAGS: /[01]/
-			};
-
-			// States
-			const SEP = 0;
-			const INT = 1;
-			const FLOAT = 2;
-			const EXP = 3;
-
-			let state = SEP;
-			let seenComma = true;
-			let number = '', exponent = '';
-			const result = [];
-
-			function throwSyntaxError( current, i, partial ) {
-
-				const error = new SyntaxError( 'Unexpected character "' + current + '" at index ' + i + '.' );
-				error.partial = partial;
-				throw error;
-
-			}
-
-			function newNumber() {
-
-				if ( number !== '' ) {
-
-					if ( exponent === '' ) result.push( Number( number ) );
-					else result.push( Number( number ) * Math.pow( 10, Number( exponent ) ) );
-
-				}
-
-				number = '';
-				exponent = '';
-
-			}
-
-			let current;
-			const length = input.length;
-
-			for ( let i = 0; i < length; i ++ ) {
-
-				current = input[ i ];
-
-				// check for flags
-				if ( Array.isArray( flags ) && flags.includes( result.length % stride ) && RE.FLAGS.test( current ) ) {
-
-					state = INT;
-					number = current;
-					newNumber();
-					continue;
-
-				}
-
-				// parse until next number
-				if ( state === SEP ) {
-
-					// eat whitespace
-					if ( RE.WHITESPACE.test( current ) ) {
-
-						continue;
-
-					}
-
-					// start new number
-					if ( RE.DIGIT.test( current ) || RE.SIGN.test( current ) ) {
-
-						state = INT;
-						number = current;
-						continue;
-
-					}
-
-					if ( RE.POINT.test( current ) ) {
-
-						state = FLOAT;
-						number = current;
-						continue;
-
-					}
-
-					// throw on double commas (e.g. "1, , 2")
-					if ( RE.COMMA.test( current ) ) {
-
-						if ( seenComma ) {
-
-							throwSyntaxError( current, i, result );
-
-						}
-
-						seenComma = true;
-
-					}
-
-				}
-
-				// parse integer part
-				if ( state === INT ) {
-
-					if ( RE.DIGIT.test( current ) ) {
-
-						number += current;
-						continue;
-
-					}
-
-					if ( RE.POINT.test( current ) ) {
-
-						number += current;
-						state = FLOAT;
-						continue;
-
-					}
-
-					if ( RE.EXP.test( current ) ) {
-
-						state = EXP;
-						continue;
-
-					}
-
-					// throw on double signs ("-+1"), but not on sign as separator ("-1-2")
-					if ( RE.SIGN.test( current )
-							&& number.length === 1
-							&& RE.SIGN.test( number[ 0 ] ) ) {
-
-						throwSyntaxError( current, i, result );
-
-					}
-
-				}
-
-				// parse decimal part
-				if ( state === FLOAT ) {
-
-					if ( RE.DIGIT.test( current ) ) {
-
-						number += current;
-						continue;
-
-					}
-
-					if ( RE.EXP.test( current ) ) {
-
-						state = EXP;
-						continue;
-
-					}
-
-					// throw on double decimal points (e.g. "1..2")
-					if ( RE.POINT.test( current ) && number[ number.length - 1 ] === '.' ) {
-
-						throwSyntaxError( current, i, result );
-
-					}
-
-				}
-
-				// parse exponent part
-				if ( state === EXP ) {
-
-					if ( RE.DIGIT.test( current ) ) {
-
-						exponent += current;
-						continue;
-
-					}
-
-					if ( RE.SIGN.test( current ) ) {
-
-						if ( exponent === '' ) {
-
-							exponent += current;
-							continue;
-
-						}
-
-						if ( exponent.length === 1 && RE.SIGN.test( exponent ) ) {
-
-							throwSyntaxError( current, i, result );
-
-						}
-
-					}
-
-				}
-
-
-				// end of number
-				if ( RE.WHITESPACE.test( current ) ) {
-
-					newNumber();
-					state = SEP;
-					seenComma = false;
-
-				} else if ( RE.COMMA.test( current ) ) {
-
-					newNumber();
-					state = SEP;
-					seenComma = true;
-
-				} else if ( RE.SIGN.test( current ) ) {
-
-					newNumber();
-					state = INT;
-					number = current;
-
-				} else if ( RE.POINT.test( current ) ) {
-
-					newNumber();
-					state = FLOAT;
-					number = current;
-
-				} else {
-
-					throwSyntaxError( current, i, result );
-
-				}
-
-			}
-
-			// add the last number found (if any)
-			newNumber();
-
-			return result;
-
-		}
-
-		// Units
-
-		const units = [ 'mm', 'cm', 'in', 'pt', 'pc', 'px' ];
-
-		// Conversion: [ fromUnit ][ toUnit ] (-1 means dpi dependent)
-		const unitConversion = {
-
-			'mm': {
-				'mm': 1,
-				'cm': 0.1,
-				'in': 1 / 25.4,
-				'pt': 72 / 25.4,
-				'pc': 6 / 25.4,
-				'px': - 1
-			},
-			'cm': {
-				'mm': 10,
-				'cm': 1,
-				'in': 1 / 2.54,
-				'pt': 72 / 2.54,
-				'pc': 6 / 2.54,
-				'px': - 1
-			},
-			'in': {
-				'mm': 25.4,
-				'cm': 2.54,
-				'in': 1,
-				'pt': 72,
-				'pc': 6,
-				'px': - 1
-			},
-			'pt': {
-				'mm': 25.4 / 72,
-				'cm': 2.54 / 72,
-				'in': 1 / 72,
-				'pt': 1,
-				'pc': 6 / 72,
-				'px': - 1
-			},
-			'pc': {
-				'mm': 25.4 / 6,
-				'cm': 2.54 / 6,
-				'in': 1 / 6,
-				'pt': 72 / 6,
-				'pc': 1,
-				'px': - 1
-			},
-			'px': {
-				'px': 1
-			}
-
-		};
-
-		function parseFloatWithUnits( string ) {
-
-			let theUnit = 'px';
-
-			if ( typeof string === 'string' || string instanceof String ) {
-
-				for ( let i = 0, n = units.length; i < n; i ++ ) {
-
-					const u = units[ i ];
-
-					if ( string.endsWith( u ) ) {
-
-						theUnit = u;
-						string = string.substring( 0, string.length - u.length );
-						break;
-
-					}
-
-				}
-
-			}
-
-			let scale = undefined;
-
-			if ( theUnit === 'px' && scope.defaultUnit !== 'px' ) {
-
-				// Conversion scale from  pixels to inches, then to default units
-
-				scale = unitConversion[ 'in' ][ scope.defaultUnit ] / scope.defaultDPI;
-
-			} else {
-
-				scale = unitConversion[ theUnit ][ scope.defaultUnit ];
-
-				if ( scale < 0 ) {
-
-					// Conversion scale to pixels
-
-					scale = unitConversion[ theUnit ][ 'in' ] * scope.defaultDPI;
-
-				}
-
-			}
-
-			return scale * parseFloat( string );
-
-		}
-
-		// Transforms
-
-		function getNodeTransform( node ) {
-
-			if ( ! ( node.hasAttribute( 'transform' ) || ( node.nodeName === 'use' && ( node.hasAttribute( 'x' ) || node.hasAttribute( 'y' ) ) ) ) ) {
-
-				return null;
-
-			}
-
-			const transform = parseNodeTransform( node );
-
-			if ( transformStack.length > 0 ) {
-
-				transform.premultiply( transformStack[ transformStack.length - 1 ] );
-
-			}
-
-			currentTransform.copy( transform );
-			transformStack.push( transform );
-
-			return transform;
-
-		}
-
-		function parseNodeTransform( node ) {
-
-			const transform = new Matrix3();
-			const currentTransform = tempTransform0;
-
-			if ( node.nodeName === 'use' && ( node.hasAttribute( 'x' ) || node.hasAttribute( 'y' ) ) ) {
-
-				const tx = parseFloatWithUnits( node.getAttribute( 'x' ) );
-				const ty = parseFloatWithUnits( node.getAttribute( 'y' ) );
-
-				transform.translate( tx, ty );
-
-			}
-
-			if ( node.hasAttribute( 'transform' ) ) {
-
-				const transformsTexts = node.getAttribute( 'transform' ).split( ')' );
-
-				for ( let tIndex = transformsTexts.length - 1; tIndex >= 0; tIndex -- ) {
-
-					const transformText = transformsTexts[ tIndex ].trim();
-
-					if ( transformText === '' ) continue;
-
-					const openParPos = transformText.indexOf( '(' );
-					const closeParPos = transformText.length;
-
-					if ( openParPos > 0 && openParPos < closeParPos ) {
-
-						const transformType = transformText.slice( 0, openParPos );
-
-						const array = parseFloats( transformText.slice( openParPos + 1 ) );
-
-						currentTransform.identity();
-
-						switch ( transformType ) {
-
-							case 'translate':
-
-								if ( array.length >= 1 ) {
-
-									const tx = array[ 0 ];
-									let ty = 0;
-
-									if ( array.length >= 2 ) {
-
-										ty = array[ 1 ];
-
-									}
-
-									currentTransform.translate( tx, ty );
-
-								}
-
-								break;
-
-							case 'rotate':
-
-								if ( array.length >= 1 ) {
-
-									let angle = 0;
-									let cx = 0;
-									let cy = 0;
-
-									// Angle
-									angle = array[ 0 ] * Math.PI / 180;
-
-									if ( array.length >= 3 ) {
-
-										// Center x, y
-										cx = array[ 1 ];
-										cy = array[ 2 ];
-
-									}
-
-									// Rotate around center (cx, cy)
-									tempTransform1.makeTranslation( - cx, - cy );
-									tempTransform2.makeRotation( angle );
-									tempTransform3.multiplyMatrices( tempTransform2, tempTransform1 );
-									tempTransform1.makeTranslation( cx, cy );
-									currentTransform.multiplyMatrices( tempTransform1, tempTransform3 );
-
-								}
-
-								break;
-
-							case 'scale':
-
-								if ( array.length >= 1 ) {
-
-									const scaleX = array[ 0 ];
-									let scaleY = scaleX;
-
-									if ( array.length >= 2 ) {
-
-										scaleY = array[ 1 ];
-
-									}
-
-									currentTransform.scale( scaleX, scaleY );
-
-								}
-
-								break;
-
-							case 'skewX':
-
-								if ( array.length === 1 ) {
-
-									currentTransform.set(
-										1, Math.tan( array[ 0 ] * Math.PI / 180 ), 0,
-										0, 1, 0,
-										0, 0, 1
-									);
-
-								}
-
-								break;
-
-							case 'skewY':
-
-								if ( array.length === 1 ) {
-
-									currentTransform.set(
-										1, 0, 0,
-										Math.tan( array[ 0 ] * Math.PI / 180 ), 1, 0,
-										0, 0, 1
-									);
-
-								}
-
-								break;
-
-							case 'matrix':
-
-								if ( array.length === 6 ) {
-
-									currentTransform.set(
-										array[ 0 ], array[ 2 ], array[ 4 ],
-										array[ 1 ], array[ 3 ], array[ 5 ],
-										0, 0, 1
-									);
-
-								}
-
-								break;
-
-						}
-
-					}
-
-					transform.premultiply( currentTransform );
-
-				}
-
-			}
-
-			return transform;
-
-		}
-
-		function transformPath( path, m ) {
-
-			function transfVec2( v2 ) {
-
-				tempV3.set( v2.x, v2.y, 1 ).applyMatrix3( m );
-
-				v2.set( tempV3.x, tempV3.y );
-
-			}
-
-			function transfEllipseGeneric( curve ) {
-
-				// For math description see:
-				// https://math.stackexchange.com/questions/4544164
-
-				const a = curve.xRadius;
-				const b = curve.yRadius;
-
-				const cosTheta = Math.cos( curve.aRotation );
-				const sinTheta = Math.sin( curve.aRotation );
-
-				const v1 = new Vector3( a * cosTheta, a * sinTheta, 0 );
-				const v2 = new Vector3( - b * sinTheta, b * cosTheta, 0 );
-
-				const f1 = v1.applyMatrix3( m );
-				const f2 = v2.applyMatrix3( m );
-
-				const mF = tempTransform0.set(
-					f1.x, f2.x, 0,
-					f1.y, f2.y, 0,
-					0, 0, 1,
-				);
-
-				const mFInv = tempTransform1.copy( mF ).invert();
-				const mFInvT = tempTransform2.copy( mFInv ).transpose();
-				const mQ = mFInvT.multiply( mFInv );
-				const mQe = mQ.elements;
-
-				const ed = eigenDecomposition( mQe[ 0 ], mQe[ 1 ], mQe[ 4 ] );
-				const rt1sqrt = Math.sqrt( ed.rt1 );
-				const rt2sqrt = Math.sqrt( ed.rt2 );
-
-				curve.xRadius = 1 / rt1sqrt;
-				curve.yRadius = 1 / rt2sqrt;
-				curve.aRotation = Math.atan2( ed.sn, ed.cs );
-
-				const isFullEllipse =
-					( curve.aEndAngle - curve.aStartAngle ) % ( 2 * Math.PI ) < Number.EPSILON;
-
-				// Do not touch angles of a full ellipse because after transformation they
-				// would converge to a sinle value effectively removing the whole curve
-
-				if ( ! isFullEllipse ) {
-
-					const mDsqrt = tempTransform1.set(
-						rt1sqrt, 0, 0,
-						0, rt2sqrt, 0,
-						0, 0, 1,
-					);
-
-					const mRT = tempTransform2.set(
-						ed.cs, ed.sn, 0,
-						- ed.sn, ed.cs, 0,
-						0, 0, 1,
-					);
-
-					const mDRF = mDsqrt.multiply( mRT ).multiply( mF );
-
-					const transformAngle = phi => {
-
-						const { x: cosR, y: sinR } =
-							new Vector3( Math.cos( phi ), Math.sin( phi ), 0 ).applyMatrix3( mDRF );
-
-						return Math.atan2( sinR, cosR );
-
-					};
-
-					curve.aStartAngle = transformAngle( curve.aStartAngle );
-					curve.aEndAngle = transformAngle( curve.aEndAngle );
-
-					if ( isTransformFlipped( m ) ) {
-
-						curve.aClockwise = ! curve.aClockwise;
-
-					}
-
-				}
-
-			}
-
-			function transfEllipseNoSkew( curve ) {
-
-				// Faster shortcut if no skew is applied
-				// (e.g, a euclidean transform of a group containing the ellipse)
-
-				const sx = getTransformScaleX( m );
-				const sy = getTransformScaleY( m );
-
-				curve.xRadius *= sx;
-				curve.yRadius *= sy;
-
-				// Extract rotation angle from the matrix of form:
-				//
-				//  | cosθ sx   -sinθ sy |
-				//  | sinθ sx    cosθ sy |
-				//
-				// Remembering that tanθ = sinθ / cosθ; and that
-				// `sx`, `sy`, or both might be zero.
-				const theta =
-					sx > Number.EPSILON
-						? Math.atan2( m.elements[ 1 ], m.elements[ 0 ] )
-						: Math.atan2( - m.elements[ 3 ], m.elements[ 4 ] );
-
-				curve.aRotation += theta;
-
-				if ( isTransformFlipped( m ) ) {
-
-					curve.aStartAngle *= - 1;
-					curve.aEndAngle *= - 1;
-					curve.aClockwise = ! curve.aClockwise;
-
-				}
-
-			}
-
-			const subPaths = path.subPaths;
-
-			for ( let i = 0, n = subPaths.length; i < n; i ++ ) {
-
-				const subPath = subPaths[ i ];
-				const curves = subPath.curves;
-
-				for ( let j = 0; j < curves.length; j ++ ) {
-
-					const curve = curves[ j ];
-
-					if ( curve.isLineCurve ) {
-
-						transfVec2( curve.v1 );
-						transfVec2( curve.v2 );
-
-					} else if ( curve.isCubicBezierCurve ) {
-
-						transfVec2( curve.v0 );
-						transfVec2( curve.v1 );
-						transfVec2( curve.v2 );
-						transfVec2( curve.v3 );
-
-					} else if ( curve.isQuadraticBezierCurve ) {
-
-						transfVec2( curve.v0 );
-						transfVec2( curve.v1 );
-						transfVec2( curve.v2 );
-
-					} else if ( curve.isEllipseCurve ) {
-
-						// Transform ellipse center point
-
-						tempV2.set( curve.aX, curve.aY );
-						transfVec2( tempV2 );
-						curve.aX = tempV2.x;
-						curve.aY = tempV2.y;
-
-						// Transform ellipse shape parameters
-
-						if ( isTransformSkewed( m ) ) {
-
-							transfEllipseGeneric( curve );
-
-						} else {
-
-							transfEllipseNoSkew( curve );
-
-						}
-
-					}
-
-				}
-
-			}
-
-		}
-
-		function isTransformFlipped( m ) {
-
-			const te = m.elements;
-			return te[ 0 ] * te[ 4 ] - te[ 1 ] * te[ 3 ] < 0;
-
-		}
-
-		function isTransformSkewed( m ) {
-
-			const te = m.elements;
-			const basisDot = te[ 0 ] * te[ 3 ] + te[ 1 ] * te[ 4 ];
-
-			// Shortcut for trivial rotations and transformations
-			if ( basisDot === 0 ) return false;
-
-			const sx = getTransformScaleX( m );
-			const sy = getTransformScaleY( m );
-
-			return Math.abs( basisDot / ( sx * sy ) ) > Number.EPSILON;
-
-		}
-
-		function getTransformScaleX( m ) {
-
-			const te = m.elements;
-			return Math.sqrt( te[ 0 ] * te[ 0 ] + te[ 1 ] * te[ 1 ] );
-
-		}
-
-		function getTransformScaleY( m ) {
-
-			const te = m.elements;
-			return Math.sqrt( te[ 3 ] * te[ 3 ] + te[ 4 ] * te[ 4 ] );
-
-		}
-
-		// Calculates the eigensystem of a real symmetric 2x2 matrix
-		//    [ A  B ]
-		//    [ B  C ]
-		// in the form
-		//    [ A  B ]  =  [ cs  -sn ] [ rt1   0  ] [  cs  sn ]
-		//    [ B  C ]     [ sn   cs ] [  0   rt2 ] [ -sn  cs ]
-		// where rt1 >= rt2.
-		//
-		// Adapted from: https://www.mpi-hd.mpg.de/personalhomes/globes/3x3/index.html
-		// -> Algorithms for real symmetric matrices -> Analytical (2x2 symmetric)
-		function eigenDecomposition( A, B, C ) {
-
-			let rt1, rt2, cs, sn, t;
-			const sm = A + C;
-			const df = A - C;
-			const rt = Math.sqrt( df * df + 4 * B * B );
-
-			if ( sm > 0 ) {
-
-				rt1 = 0.5 * ( sm + rt );
-				t = 1 / rt1;
-				rt2 = A * t * C - B * t * B;
-
-			} else if ( sm < 0 ) {
-
-				rt2 = 0.5 * ( sm - rt );
-
-			} else {
-
-				// This case needs to be treated separately to avoid div by 0
-
-				rt1 = 0.5 * rt;
-				rt2 = - 0.5 * rt;
-
-			}
-
-			// Calculate eigenvectors
-
-			if ( df > 0 ) {
-
-				cs = df + rt;
-
-			} else {
-
-				cs = df - rt;
-
-			}
-
-			if ( Math.abs( cs ) > 2 * Math.abs( B ) ) {
-
-				t = - 2 * B / cs;
-				sn = 1 / Math.sqrt( 1 + t * t );
-				cs = t * sn;
-
-			} else if ( Math.abs( B ) === 0 ) {
-
-				cs = 1;
-				sn = 0;
-
-			} else {
-
-				t = - 0.5 * cs / B;
-				cs = 1 / Math.sqrt( 1 + t * t );
-				sn = t * cs;
-
-			}
-
-			if ( df > 0 ) {
-
-				t = cs;
-				cs = - sn;
-				sn = t;
-
-			}
-
-			return { rt1, rt2, cs, sn };
-
-		}
-
-		//
-
-		const paths = [];
-		const stylesheets = {};
-
-		const transformStack = [];
-
-		const tempTransform0 = new Matrix3();
-		const tempTransform1 = new Matrix3();
-		const tempTransform2 = new Matrix3();
-		const tempTransform3 = new Matrix3();
-		const tempV2 = new Vector2();
-		const tempV3 = new Vector3();
-
-		const currentTransform = new Matrix3();
-
-		const xml = new DOMParser().parseFromString( text, 'image/svg+xml' ); // application/xml
-
-		parseNode( xml.documentElement, {
-			fill: '#000',
-			fillOpacity: 1,
-			strokeOpacity: 1,
-			strokeWidth: 1,
-			strokeLineJoin: 'miter',
-			strokeLineCap: 'butt',
-			strokeMiterLimit: 4
-		} );
-
-		const data = { paths: paths, xml: xml.documentElement };
-
-		// console.log( paths );
-		return data;
-
-	}
-
-	static createShapes( shapePath ) {
-
-		// Param shapePath: a shapepath as returned by the parse function of this class
-		// Returns Shape object
-
-		const BIGNUMBER = 999999999;
-
-		const IntersectionLocationType = {
-			ORIGIN: 0,
-			DESTINATION: 1,
-			BETWEEN: 2,
-			LEFT: 3,
-			RIGHT: 4,
-			BEHIND: 5,
-			BEYOND: 6
-		};
-
-		const classifyResult = {
-			loc: IntersectionLocationType.ORIGIN,
-			t: 0
-		};
-
-		function findEdgeIntersection( a0, a1, b0, b1 ) {
-
-			const x1 = a0.x;
-			const x2 = a1.x;
-			const x3 = b0.x;
-			const x4 = b1.x;
-			const y1 = a0.y;
-			const y2 = a1.y;
-			const y3 = b0.y;
-			const y4 = b1.y;
-			const nom1 = ( x4 - x3 ) * ( y1 - y3 ) - ( y4 - y3 ) * ( x1 - x3 );
-			const nom2 = ( x2 - x1 ) * ( y1 - y3 ) - ( y2 - y1 ) * ( x1 - x3 );
-			const denom = ( y4 - y3 ) * ( x2 - x1 ) - ( x4 - x3 ) * ( y2 - y1 );
-			const t1 = nom1 / denom;
-			const t2 = nom2 / denom;
-
-			if ( ( ( denom === 0 ) && ( nom1 !== 0 ) ) || ( t1 <= 0 ) || ( t1 >= 1 ) || ( t2 < 0 ) || ( t2 > 1 ) ) {
-
-				//1. lines are parallel or edges don't intersect
-
-				return null;
-
-			} else if ( ( nom1 === 0 ) && ( denom === 0 ) ) {
-
-				//2. lines are colinear
-
-				//check if endpoints of edge2 (b0-b1) lies on edge1 (a0-a1)
-				for ( let i = 0; i < 2; i ++ ) {
-
-					classifyPoint( i === 0 ? b0 : b1, a0, a1 );
-					//find position of this endpoints relatively to edge1
-					if ( classifyResult.loc == IntersectionLocationType.ORIGIN ) {
-
-						const point = ( i === 0 ? b0 : b1 );
-						return { x: point.x, y: point.y, t: classifyResult.t };
-
-					} else if ( classifyResult.loc == IntersectionLocationType.BETWEEN ) {
-
-						const x = + ( ( x1 + classifyResult.t * ( x2 - x1 ) ).toPrecision( 10 ) );
-						const y = + ( ( y1 + classifyResult.t * ( y2 - y1 ) ).toPrecision( 10 ) );
-						return { x: x, y: y, t: classifyResult.t, };
-
-					}
-
-				}
-
-				return null;
-
-			} else {
-
-				//3. edges intersect
-
-				for ( let i = 0; i < 2; i ++ ) {
-
-					classifyPoint( i === 0 ? b0 : b1, a0, a1 );
-
-					if ( classifyResult.loc == IntersectionLocationType.ORIGIN ) {
-
-						const point = ( i === 0 ? b0 : b1 );
-						return { x: point.x, y: point.y, t: classifyResult.t };
-
-					}
-
-				}
-
-				const x = + ( ( x1 + t1 * ( x2 - x1 ) ).toPrecision( 10 ) );
-				const y = + ( ( y1 + t1 * ( y2 - y1 ) ).toPrecision( 10 ) );
-				return { x: x, y: y, t: t1 };
-
-			}
-
-		}
-
-		function classifyPoint( p, edgeStart, edgeEnd ) {
-
-			const ax = edgeEnd.x - edgeStart.x;
-			const ay = edgeEnd.y - edgeStart.y;
-			const bx = p.x - edgeStart.x;
-			const by = p.y - edgeStart.y;
-			const sa = ax * by - bx * ay;
-
-			if ( ( p.x === edgeStart.x ) && ( p.y === edgeStart.y ) ) {
-
-				classifyResult.loc = IntersectionLocationType.ORIGIN;
-				classifyResult.t = 0;
-				return;
-
-			}
-
-			if ( ( p.x === edgeEnd.x ) && ( p.y === edgeEnd.y ) ) {
-
-				classifyResult.loc = IntersectionLocationType.DESTINATION;
-				classifyResult.t = 1;
-				return;
-
-			}
-
-			if ( sa < - Number.EPSILON ) {
-
-				classifyResult.loc = IntersectionLocationType.LEFT;
-				return;
-
-			}
-
-			if ( sa > Number.EPSILON ) {
-
-				classifyResult.loc = IntersectionLocationType.RIGHT;
-				return;
-
-
-			}
-
-			if ( ( ( ax * bx ) < 0 ) || ( ( ay * by ) < 0 ) ) {
-
-				classifyResult.loc = IntersectionLocationType.BEHIND;
-				return;
-
-			}
-
-			if ( ( Math.sqrt( ax * ax + ay * ay ) ) < ( Math.sqrt( bx * bx + by * by ) ) ) {
-
-				classifyResult.loc = IntersectionLocationType.BEYOND;
-				return;
-
-			}
-
-			let t;
-
-			if ( ax !== 0 ) {
-
-				t = bx / ax;
-
-			} else {
-
-				t = by / ay;
-
-			}
-
-			classifyResult.loc = IntersectionLocationType.BETWEEN;
-			classifyResult.t = t;
-
-		}
-
-		function getIntersections( path1, path2 ) {
-
-			const intersectionsRaw = [];
-			const intersections = [];
-
-			for ( let index = 1; index < path1.length; index ++ ) {
-
-				const path1EdgeStart = path1[ index - 1 ];
-				const path1EdgeEnd = path1[ index ];
-
-				for ( let index2 = 1; index2 < path2.length; index2 ++ ) {
-
-					const path2EdgeStart = path2[ index2 - 1 ];
-					const path2EdgeEnd = path2[ index2 ];
-
-					const intersection = findEdgeIntersection( path1EdgeStart, path1EdgeEnd, path2EdgeStart, path2EdgeEnd );
-
-					if ( intersection !== null && intersectionsRaw.find( i => i.t <= intersection.t + Number.EPSILON && i.t >= intersection.t - Number.EPSILON ) === undefined ) {
-
-						intersectionsRaw.push( intersection );
-						intersections.push( new Vector2( intersection.x, intersection.y ) );
-
-					}
-
-				}
-
-			}
-
-			return intersections;
-
-		}
-
-		function getScanlineIntersections( scanline, boundingBox, paths ) {
-
-			const center = new Vector2();
-			boundingBox.getCenter( center );
-
-			const allIntersections = [];
-
-			paths.forEach( path => {
-
-				// check if the center of the bounding box is in the bounding box of the paths.
-				// this is a pruning method to limit the search of intersections in paths that can't envelop of the current path.
-				// if a path envelops another path. The center of that oter path, has to be inside the bounding box of the enveloping path.
-				if ( path.boundingBox.containsPoint( center ) ) {
-
-					const intersections = getIntersections( scanline, path.points );
-
-					intersections.forEach( p => {
-
-						allIntersections.push( { identifier: path.identifier, isCW: path.isCW, point: p } );
-
-					} );
-
-				}
-
-			} );
-
-			allIntersections.sort( ( i1, i2 ) => {
-
-				return i1.point.x - i2.point.x;
-
-			} );
-
-			return allIntersections;
-
-		}
-
-		function isHoleTo( simplePath, allPaths, scanlineMinX, scanlineMaxX, _fillRule ) {
-
-			if ( _fillRule === null || _fillRule === undefined || _fillRule === '' ) {
-
-				_fillRule = 'nonzero';
-
-			}
-
-			const centerBoundingBox = new Vector2();
-			simplePath.boundingBox.getCenter( centerBoundingBox );
-
-			const scanline = [ new Vector2( scanlineMinX, centerBoundingBox.y ), new Vector2( scanlineMaxX, centerBoundingBox.y ) ];
-
-			const scanlineIntersections = getScanlineIntersections( scanline, simplePath.boundingBox, allPaths );
-
-			scanlineIntersections.sort( ( i1, i2 ) => {
-
-				return i1.point.x - i2.point.x;
-
-			} );
-
-			const baseIntersections = [];
-			const otherIntersections = [];
-
-			scanlineIntersections.forEach( i => {
-
-				if ( i.identifier === simplePath.identifier ) {
-
-					baseIntersections.push( i );
-
-				} else {
-
-					otherIntersections.push( i );
-
-				}
-
-			} );
-
-			const firstXOfPath = baseIntersections[ 0 ].point.x;
-
-			// build up the path hierarchy
-			const stack = [];
-			let i = 0;
-
-			while ( i < otherIntersections.length && otherIntersections[ i ].point.x < firstXOfPath ) {
-
-				if ( stack.length > 0 && stack[ stack.length - 1 ] === otherIntersections[ i ].identifier ) {
-
-					stack.pop();
-
-				} else {
-
-					stack.push( otherIntersections[ i ].identifier );
-
-				}
-
-				i ++;
-
-			}
-
-			stack.push( simplePath.identifier );
-
-			if ( _fillRule === 'evenodd' ) {
-
-				const isHole = stack.length % 2 === 0 ? true : false;
-				const isHoleFor = stack[ stack.length - 2 ];
-
-				return { identifier: simplePath.identifier, isHole: isHole, for: isHoleFor };
-
-			} else if ( _fillRule === 'nonzero' ) {
-
-				// check if path is a hole by counting the amount of paths with alternating rotations it has to cross.
-				let isHole = true;
-				let isHoleFor = null;
-				let lastCWValue = null;
-
-				for ( let i = 0; i < stack.length; i ++ ) {
-
-					const identifier = stack[ i ];
-					if ( isHole ) {
-
-						lastCWValue = allPaths[ identifier ].isCW;
-						isHole = false;
-						isHoleFor = identifier;
-
-					} else if ( lastCWValue !== allPaths[ identifier ].isCW ) {
-
-						lastCWValue = allPaths[ identifier ].isCW;
-						isHole = true;
-
-					}
-
-				}
-
-				return { identifier: simplePath.identifier, isHole: isHole, for: isHoleFor };
-
-			} else {
-
-				console.warn( 'fill-rule: "' + _fillRule + '" is currently not implemented.' );
-
-			}
-
-		}
-
-		// check for self intersecting paths
-		// TODO
-
-		// check intersecting paths
-		// TODO
-
-		// prepare paths for hole detection
-		let scanlineMinX = BIGNUMBER;
-		let scanlineMaxX = - BIGNUMBER;
-
-		let simplePaths = shapePath.subPaths.map( p => {
-
-			const points = p.getPoints();
-			let maxY = - BIGNUMBER;
-			let minY = BIGNUMBER;
-			let maxX = - BIGNUMBER;
-			let minX = BIGNUMBER;
-
-	      	//points.forEach(p => p.y *= -1);
-
-			for ( let i = 0; i < points.length; i ++ ) {
-
-				const p = points[ i ];
-
-				if ( p.y > maxY ) {
-
-					maxY = p.y;
-
-				}
-
-				if ( p.y < minY ) {
-
-					minY = p.y;
-
-				}
-
-				if ( p.x > maxX ) {
-
-					maxX = p.x;
-
-				}
-
-				if ( p.x < minX ) {
-
-					minX = p.x;
-
-				}
-
-			}
-
-			//
-			if ( scanlineMaxX <= maxX ) {
-
-				scanlineMaxX = maxX + 1;
-
-			}
-
-			if ( scanlineMinX >= minX ) {
-
-				scanlineMinX = minX - 1;
-
-			}
-
-			return { curves: p.curves, points: points, isCW: ShapeUtils.isClockWise( points ), identifier: - 1, boundingBox: new Box2( new Vector2( minX, minY ), new Vector2( maxX, maxY ) ) };
-
-		} );
-
-		simplePaths = simplePaths.filter( sp => sp.points.length > 1 );
-
-		for ( let identifier = 0; identifier < simplePaths.length; identifier ++ ) {
-
-			simplePaths[ identifier ].identifier = identifier;
-
-		}
-
-		// check if path is solid or a hole
-		const isAHole = simplePaths.map( p => isHoleTo( p, simplePaths, scanlineMinX, scanlineMaxX, ( shapePath.userData ? shapePath.userData.style.fillRule : undefined ) ) );
-
-
-		const shapesToReturn = [];
-		simplePaths.forEach( p => {
-
-			const amIAHole = isAHole[ p.identifier ];
-
-			if ( ! amIAHole.isHole ) {
-
-				const shape = new Shape();
-				shape.curves = p.curves;
-				const holes = isAHole.filter( h => h.isHole && h.for === p.identifier );
-				holes.forEach( h => {
-
-					const hole = simplePaths[ h.identifier ];
-					const path = new Path();
-					path.curves = hole.curves;
-					shape.holes.push( path );
-
-				} );
-				shapesToReturn.push( shape );
-
-			}
-
-		} );
-
-		return shapesToReturn;
-
-	}
-
-	static getStrokeStyle( width, color, lineJoin, lineCap, miterLimit ) {
-
-		// Param width: Stroke width
-		// Param color: As returned by THREE.Color.getStyle()
-		// Param lineJoin: One of "round", "bevel", "miter" or "miter-limit"
-		// Param lineCap: One of "round", "square" or "butt"
-		// Param miterLimit: Maximum join length, in multiples of the "width" parameter (join is truncated if it exceeds that distance)
-		// Returns style object
-
-		width = width !== undefined ? width : 1;
-		color = color !== undefined ? color : '#000';
-		lineJoin = lineJoin !== undefined ? lineJoin : 'miter';
-		lineCap = lineCap !== undefined ? lineCap : 'butt';
-		miterLimit = miterLimit !== undefined ? miterLimit : 4;
-
-		return {
-			strokeColor: color,
-			strokeWidth: width,
-			strokeLineJoin: lineJoin,
-			strokeLineCap: lineCap,
-			strokeMiterLimit: miterLimit
-		};
-
-	}
-
-	static pointsToStroke( points, style, arcDivisions, minDistance ) {
-
-		// Generates a stroke with some width around the given path.
-		// The path can be open or closed (last point equals to first point)
-		// Param points: Array of Vector2D (the path). Minimum 2 points.
-		// Param style: Object with SVG properties as returned by SVGLoader.getStrokeStyle(), or SVGLoader.parse() in the path.userData.style object
-		// Params arcDivisions: Arc divisions for round joins and endcaps. (Optional)
-		// Param minDistance: Points closer to this distance will be merged. (Optional)
-		// Returns BufferGeometry with stroke triangles (In plane z = 0). UV coordinates are generated ('u' along path. 'v' across it, from left to right)
-
-		const vertices = [];
-		const normals = [];
-		const uvs = [];
-
-		if ( SVGLoader.pointsToStrokeWithBuffers( points, style, arcDivisions, minDistance, vertices, normals, uvs ) === 0 ) {
-
-			return null;
-
-		}
-
-		const geometry = new BufferGeometry();
-		geometry.setAttribute( 'position', new Float32BufferAttribute( vertices, 3 ) );
-		geometry.setAttribute( 'normal', new Float32BufferAttribute( normals, 3 ) );
-		geometry.setAttribute( 'uv', new Float32BufferAttribute( uvs, 2 ) );
-
-		return geometry;
-
-	}
-
-	static pointsToStrokeWithBuffers( points, style, arcDivisions, minDistance, vertices, normals, uvs, vertexOffset ) {
-
-		// This function can be called to update existing arrays or buffers.
-		// Accepts same parameters as pointsToStroke, plus the buffers and optional offset.
-		// Param vertexOffset: Offset vertices to start writing in the buffers (3 elements/vertex for vertices and normals, and 2 elements/vertex for uvs)
-		// Returns number of written vertices / normals / uvs pairs
-		// if 'vertices' parameter is undefined no triangles will be generated, but the returned vertices count will still be valid (useful to preallocate the buffers)
-		// 'normals' and 'uvs' buffers are optional
-
-		const tempV2_1 = new Vector2();
-		const tempV2_2 = new Vector2();
-		const tempV2_3 = new Vector2();
-		const tempV2_4 = new Vector2();
-		const tempV2_5 = new Vector2();
-		const tempV2_6 = new Vector2();
-		const tempV2_7 = new Vector2();
-		const lastPointL = new Vector2();
-		const lastPointR = new Vector2();
-		const point0L = new Vector2();
-		const point0R = new Vector2();
-		const currentPointL = new Vector2();
-		const currentPointR = new Vector2();
-		const nextPointL = new Vector2();
-		const nextPointR = new Vector2();
-		const innerPoint = new Vector2();
-		const outerPoint = new Vector2();
-
-		arcDivisions = arcDivisions !== undefined ? arcDivisions : 12;
-		minDistance = minDistance !== undefined ? minDistance : 0.001;
-		vertexOffset = vertexOffset !== undefined ? vertexOffset : 0;
-
-		// First ensure there are no duplicated points
-		points = removeDuplicatedPoints( points );
-
-		const numPoints = points.length;
-
-		if ( numPoints < 2 ) return 0;
-
-		const isClosed = points[ 0 ].equals( points[ numPoints - 1 ] );
-
-		let currentPoint;
-		let previousPoint = points[ 0 ];
-		let nextPoint;
-
-		const strokeWidth2 = style.strokeWidth / 2;
-
-		const deltaU = 1 / ( numPoints - 1 );
-		let u0 = 0, u1;
-
-		let innerSideModified;
-		let joinIsOnLeftSide;
-		let isMiter;
-		let initialJoinIsOnLeftSide = false;
-
-		let numVertices = 0;
-		let currentCoordinate = vertexOffset * 3;
-		let currentCoordinateUV = vertexOffset * 2;
-
-		// Get initial left and right stroke points
-		getNormal( points[ 0 ], points[ 1 ], tempV2_1 ).multiplyScalar( strokeWidth2 );
-		lastPointL.copy( points[ 0 ] ).sub( tempV2_1 );
-		lastPointR.copy( points[ 0 ] ).add( tempV2_1 );
-		point0L.copy( lastPointL );
-		point0R.copy( lastPointR );
-
-		for ( let iPoint = 1; iPoint < numPoints; iPoint ++ ) {
-
-			currentPoint = points[ iPoint ];
-
-			// Get next point
-			if ( iPoint === numPoints - 1 ) {
-
-				if ( isClosed ) {
-
-					// Skip duplicated initial point
-					nextPoint = points[ 1 ];
-
-				} else nextPoint = undefined;
-
-			} else {
-
-				nextPoint = points[ iPoint + 1 ];
-
-			}
-
-			// Normal of previous segment in tempV2_1
-			const normal1 = tempV2_1;
-			getNormal( previousPoint, currentPoint, normal1 );
-
-			tempV2_3.copy( normal1 ).multiplyScalar( strokeWidth2 );
-			currentPointL.copy( currentPoint ).sub( tempV2_3 );
-			currentPointR.copy( currentPoint ).add( tempV2_3 );
-
-			u1 = u0 + deltaU;
-
-			innerSideModified = false;
-
-			if ( nextPoint !== undefined ) {
-
-				// Normal of next segment in tempV2_2
-				getNormal( currentPoint, nextPoint, tempV2_2 );
-
-				tempV2_3.copy( tempV2_2 ).multiplyScalar( strokeWidth2 );
-				nextPointL.copy( currentPoint ).sub( tempV2_3 );
-				nextPointR.copy( currentPoint ).add( tempV2_3 );
-
-				joinIsOnLeftSide = true;
-				tempV2_3.subVectors( nextPoint, previousPoint );
-				if ( normal1.dot( tempV2_3 ) < 0 ) {
-
-					joinIsOnLeftSide = false;
-
-				}
-
-				if ( iPoint === 1 ) initialJoinIsOnLeftSide = joinIsOnLeftSide;
-
-				tempV2_3.subVectors( nextPoint, currentPoint );
-				tempV2_3.normalize();
-				const dot = Math.abs( normal1.dot( tempV2_3 ) );
-
-				// If path is straight, don't create join
-				if ( dot > Number.EPSILON ) {
-
-					// Compute inner and outer segment intersections
-					const miterSide = strokeWidth2 / dot;
-					tempV2_3.multiplyScalar( - miterSide );
-					tempV2_4.subVectors( currentPoint, previousPoint );
-					tempV2_5.copy( tempV2_4 ).setLength( miterSide ).add( tempV2_3 );
-					innerPoint.copy( tempV2_5 ).negate();
-					const miterLength2 = tempV2_5.length();
-					const segmentLengthPrev = tempV2_4.length();
-					tempV2_4.divideScalar( segmentLengthPrev );
-					tempV2_6.subVectors( nextPoint, currentPoint );
-					const segmentLengthNext = tempV2_6.length();
-					tempV2_6.divideScalar( segmentLengthNext );
-					// Check that previous and next segments doesn't overlap with the innerPoint of intersection
-					if ( tempV2_4.dot( innerPoint ) < segmentLengthPrev && tempV2_6.dot( innerPoint ) < segmentLengthNext ) {
-
-						innerSideModified = true;
-
-					}
-
-					outerPoint.copy( tempV2_5 ).add( currentPoint );
-					innerPoint.add( currentPoint );
-
-					isMiter = false;
-
-					if ( innerSideModified ) {
-
-						if ( joinIsOnLeftSide ) {
-
-							nextPointR.copy( innerPoint );
-							currentPointR.copy( innerPoint );
-
-						} else {
-
-							nextPointL.copy( innerPoint );
-							currentPointL.copy( innerPoint );
-
-						}
-
-					} else {
-
-						// The segment triangles are generated here if there was overlapping
-
-						makeSegmentTriangles();
-
-					}
-
-					switch ( style.strokeLineJoin ) {
-
-						case 'bevel':
-
-							makeSegmentWithBevelJoin( joinIsOnLeftSide, innerSideModified, u1 );
-
-							break;
-
-						case 'round':
-
-							// Segment triangles
-
-							createSegmentTrianglesWithMiddleSection( joinIsOnLeftSide, innerSideModified );
-
-							// Join triangles
-
-							if ( joinIsOnLeftSide ) {
-
-								makeCircularSector( currentPoint, currentPointL, nextPointL, u1, 0 );
-
-							} else {
-
-								makeCircularSector( currentPoint, nextPointR, currentPointR, u1, 1 );
-
-							}
-
-							break;
-
-						case 'miter':
-						case 'miter-clip':
-						default:
-
-							const miterFraction = ( strokeWidth2 * style.strokeMiterLimit ) / miterLength2;
-
-							if ( miterFraction < 1 ) {
-
-								// The join miter length exceeds the miter limit
-
-								if ( style.strokeLineJoin !== 'miter-clip' ) {
-
-									makeSegmentWithBevelJoin( joinIsOnLeftSide, innerSideModified, u1 );
-									break;
-
-								} else {
-
-									// Segment triangles
-
-									createSegmentTrianglesWithMiddleSection( joinIsOnLeftSide, innerSideModified );
-
-									// Miter-clip join triangles
-
-									if ( joinIsOnLeftSide ) {
-
-										tempV2_6.subVectors( outerPoint, currentPointL ).multiplyScalar( miterFraction ).add( currentPointL );
-										tempV2_7.subVectors( outerPoint, nextPointL ).multiplyScalar( miterFraction ).add( nextPointL );
-
-										addVertex( currentPointL, u1, 0 );
-										addVertex( tempV2_6, u1, 0 );
-										addVertex( currentPoint, u1, 0.5 );
-
-										addVertex( currentPoint, u1, 0.5 );
-										addVertex( tempV2_6, u1, 0 );
-										addVertex( tempV2_7, u1, 0 );
-
-										addVertex( currentPoint, u1, 0.5 );
-										addVertex( tempV2_7, u1, 0 );
-										addVertex( nextPointL, u1, 0 );
-
-									} else {
-
-										tempV2_6.subVectors( outerPoint, currentPointR ).multiplyScalar( miterFraction ).add( currentPointR );
-										tempV2_7.subVectors( outerPoint, nextPointR ).multiplyScalar( miterFraction ).add( nextPointR );
-
-										addVertex( currentPointR, u1, 1 );
-										addVertex( tempV2_6, u1, 1 );
-										addVertex( currentPoint, u1, 0.5 );
-
-										addVertex( currentPoint, u1, 0.5 );
-										addVertex( tempV2_6, u1, 1 );
-										addVertex( tempV2_7, u1, 1 );
-
-										addVertex( currentPoint, u1, 0.5 );
-										addVertex( tempV2_7, u1, 1 );
-										addVertex( nextPointR, u1, 1 );
-
-									}
-
-								}
-
-							} else {
-
-								// Miter join segment triangles
-
-								if ( innerSideModified ) {
-
-									// Optimized segment + join triangles
-
-									if ( joinIsOnLeftSide ) {
-
-										addVertex( lastPointR, u0, 1 );
-										addVertex( lastPointL, u0, 0 );
-										addVertex( outerPoint, u1, 0 );
-
-										addVertex( lastPointR, u0, 1 );
-										addVertex( outerPoint, u1, 0 );
-										addVertex( innerPoint, u1, 1 );
-
-									} else {
-
-										addVertex( lastPointR, u0, 1 );
-										addVertex( lastPointL, u0, 0 );
-										addVertex( outerPoint, u1, 1 );
-
-										addVertex( lastPointL, u0, 0 );
-										addVertex( innerPoint, u1, 0 );
-										addVertex( outerPoint, u1, 1 );
-
-									}
-
-
-									if ( joinIsOnLeftSide ) {
-
-										nextPointL.copy( outerPoint );
-
-									} else {
-
-										nextPointR.copy( outerPoint );
-
-									}
-
-
-								} else {
-
-									// Add extra miter join triangles
-
-									if ( joinIsOnLeftSide ) {
-
-										addVertex( currentPointL, u1, 0 );
-										addVertex( outerPoint, u1, 0 );
-										addVertex( currentPoint, u1, 0.5 );
-
-										addVertex( currentPoint, u1, 0.5 );
-										addVertex( outerPoint, u1, 0 );
-										addVertex( nextPointL, u1, 0 );
-
-									} else {
-
-										addVertex( currentPointR, u1, 1 );
-										addVertex( outerPoint, u1, 1 );
-										addVertex( currentPoint, u1, 0.5 );
-
-										addVertex( currentPoint, u1, 0.5 );
-										addVertex( outerPoint, u1, 1 );
-										addVertex( nextPointR, u1, 1 );
-
-									}
-
-								}
-
-								isMiter = true;
-
-							}
-
-							break;
-
-					}
-
-				} else {
-
-					// The segment triangles are generated here when two consecutive points are collinear
-
-					makeSegmentTriangles();
-
-				}
-
-			} else {
-
-				// The segment triangles are generated here if it is the ending segment
-
-				makeSegmentTriangles();
-
-			}
-
-			if ( ! isClosed && iPoint === numPoints - 1 ) {
-
-				// Start line endcap
-				addCapGeometry( points[ 0 ], point0L, point0R, joinIsOnLeftSide, true, u0 );
-
-			}
-
-			// Increment loop variables
-
-			u0 = u1;
-
-			previousPoint = currentPoint;
-
-			lastPointL.copy( nextPointL );
-			lastPointR.copy( nextPointR );
-
-		}
-
-		if ( ! isClosed ) {
-
-			// Ending line endcap
-			addCapGeometry( currentPoint, currentPointL, currentPointR, joinIsOnLeftSide, false, u1 );
-
-		} else if ( innerSideModified && vertices ) {
-
-			// Modify path first segment vertices to adjust to the segments inner and outer intersections
-
-			let lastOuter = outerPoint;
-			let lastInner = innerPoint;
-
-			if ( initialJoinIsOnLeftSide !== joinIsOnLeftSide ) {
-
-				lastOuter = innerPoint;
-				lastInner = outerPoint;
-
-			}
-
-			if ( joinIsOnLeftSide ) {
-
-				if ( isMiter || initialJoinIsOnLeftSide ) {
-
-					lastInner.toArray( vertices, 0 * 3 );
-					lastInner.toArray( vertices, 3 * 3 );
-
-					if ( isMiter ) {
-
-						lastOuter.toArray( vertices, 1 * 3 );
-
-					}
-
-				}
-
-			} else {
-
-				if ( isMiter || ! initialJoinIsOnLeftSide ) {
-
-					lastInner.toArray( vertices, 1 * 3 );
-					lastInner.toArray( vertices, 3 * 3 );
-
-					if ( isMiter ) {
-
-						lastOuter.toArray( vertices, 0 * 3 );
-
-					}
-
-				}
-
-			}
-
-		}
-
-		return numVertices;
-
-		// -- End of algorithm
-
-		// -- Functions
-
-		function getNormal( p1, p2, result ) {
-
-			result.subVectors( p2, p1 );
-			return result.set( - result.y, result.x ).normalize();
-
-		}
-
-		function addVertex( position, u, v ) {
-
-			if ( vertices ) {
-
-				vertices[ currentCoordinate ] = position.x;
-				vertices[ currentCoordinate + 1 ] = position.y;
-				vertices[ currentCoordinate + 2 ] = 0;
-
-				if ( normals ) {
-
-					normals[ currentCoordinate ] = 0;
-					normals[ currentCoordinate + 1 ] = 0;
-					normals[ currentCoordinate + 2 ] = 1;
-
-				}
-
-				currentCoordinate += 3;
-
-				if ( uvs ) {
-
-					uvs[ currentCoordinateUV ] = u;
-					uvs[ currentCoordinateUV + 1 ] = v;
-
-					currentCoordinateUV += 2;
-
-				}
-
-			}
-
-			numVertices += 3;
-
-		}
-
-		function makeCircularSector( center, p1, p2, u, v ) {
-
-			// param p1, p2: Points in the circle arc.
-			// p1 and p2 are in clockwise direction.
-
-			tempV2_1.copy( p1 ).sub( center ).normalize();
-			tempV2_2.copy( p2 ).sub( center ).normalize();
-
-			let angle = Math.PI;
-			const dot = tempV2_1.dot( tempV2_2 );
-			if ( Math.abs( dot ) < 1 ) angle = Math.abs( Math.acos( dot ) );
-
-			angle /= arcDivisions;
-
-			tempV2_3.copy( p1 );
-
-			for ( let i = 0, il = arcDivisions - 1; i < il; i ++ ) {
-
-				tempV2_4.copy( tempV2_3 ).rotateAround( center, angle );
-
-				addVertex( tempV2_3, u, v );
-				addVertex( tempV2_4, u, v );
-				addVertex( center, u, 0.5 );
-
-				tempV2_3.copy( tempV2_4 );
-
-			}
-
-			addVertex( tempV2_4, u, v );
-			addVertex( p2, u, v );
-			addVertex( center, u, 0.5 );
-
-		}
-
-		function makeSegmentTriangles() {
-
-			addVertex( lastPointR, u0, 1 );
-			addVertex( lastPointL, u0, 0 );
-			addVertex( currentPointL, u1, 0 );
-
-			addVertex( lastPointR, u0, 1 );
-			addVertex( currentPointL, u1, 1 );
-			addVertex( currentPointR, u1, 0 );
-
-		}
-
-		function makeSegmentWithBevelJoin( joinIsOnLeftSide, innerSideModified, u ) {
-
-			if ( innerSideModified ) {
-
-				// Optimized segment + bevel triangles
-
-				if ( joinIsOnLeftSide ) {
-
-					// Path segments triangles
-
-					addVertex( lastPointR, u0, 1 );
-					addVertex( lastPointL, u0, 0 );
-					addVertex( currentPointL, u1, 0 );
-
-					addVertex( lastPointR, u0, 1 );
-					addVertex( currentPointL, u1, 0 );
-					addVertex( innerPoint, u1, 1 );
-
-					// Bevel join triangle
-
-					addVertex( currentPointL, u, 0 );
-					addVertex( nextPointL, u, 0 );
-					addVertex( innerPoint, u, 0.5 );
-
-				} else {
-
-					// Path segments triangles
-
-					addVertex( lastPointR, u0, 1 );
-					addVertex( lastPointL, u0, 0 );
-					addVertex( currentPointR, u1, 1 );
-
-					addVertex( lastPointL, u0, 0 );
-					addVertex( innerPoint, u1, 0 );
-					addVertex( currentPointR, u1, 1 );
-
-					// Bevel join triangle
-
-					addVertex( currentPointR, u, 1 );
-					addVertex( nextPointR, u, 0 );
-					addVertex( innerPoint, u, 0.5 );
-
-				}
-
-			} else {
-
-				// Bevel join triangle. The segment triangles are done in the main loop
-
-				if ( joinIsOnLeftSide ) {
-
-					addVertex( currentPointL, u, 0 );
-					addVertex( nextPointL, u, 0 );
-					addVertex( currentPoint, u, 0.5 );
-
-				} else {
-
-					addVertex( currentPointR, u, 1 );
-					addVertex( nextPointR, u, 0 );
-					addVertex( currentPoint, u, 0.5 );
-
-				}
-
-			}
-
-		}
-
-		function createSegmentTrianglesWithMiddleSection( joinIsOnLeftSide, innerSideModified ) {
-
-			if ( innerSideModified ) {
-
-				if ( joinIsOnLeftSide ) {
-
-					addVertex( lastPointR, u0, 1 );
-					addVertex( lastPointL, u0, 0 );
-					addVertex( currentPointL, u1, 0 );
-
-					addVertex( lastPointR, u0, 1 );
-					addVertex( currentPointL, u1, 0 );
-					addVertex( innerPoint, u1, 1 );
-
-					addVertex( currentPointL, u0, 0 );
-					addVertex( currentPoint, u1, 0.5 );
-					addVertex( innerPoint, u1, 1 );
-
-					addVertex( currentPoint, u1, 0.5 );
-					addVertex( nextPointL, u0, 0 );
-					addVertex( innerPoint, u1, 1 );
-
-				} else {
-
-					addVertex( lastPointR, u0, 1 );
-					addVertex( lastPointL, u0, 0 );
-					addVertex( currentPointR, u1, 1 );
-
-					addVertex( lastPointL, u0, 0 );
-					addVertex( innerPoint, u1, 0 );
-					addVertex( currentPointR, u1, 1 );
-
-					addVertex( currentPointR, u0, 1 );
-					addVertex( innerPoint, u1, 0 );
-					addVertex( currentPoint, u1, 0.5 );
-
-					addVertex( currentPoint, u1, 0.5 );
-					addVertex( innerPoint, u1, 0 );
-					addVertex( nextPointR, u0, 1 );
-
-				}
-
-			}
-
-		}
-
-		function addCapGeometry( center, p1, p2, joinIsOnLeftSide, start, u ) {
-
-			// param center: End point of the path
-			// param p1, p2: Left and right cap points
-
-			switch ( style.strokeLineCap ) {
-
-				case 'round':
-
-					if ( start ) {
-
-						makeCircularSector( center, p2, p1, u, 0.5 );
-
-					} else {
-
-						makeCircularSector( center, p1, p2, u, 0.5 );
-
-					}
-
-					break;
-
-				case 'square':
-
-					if ( start ) {
-
-						tempV2_1.subVectors( p1, center );
-						tempV2_2.set( tempV2_1.y, - tempV2_1.x );
-
-						tempV2_3.addVectors( tempV2_1, tempV2_2 ).add( center );
-						tempV2_4.subVectors( tempV2_2, tempV2_1 ).add( center );
-
-						// Modify already existing vertices
-						if ( joinIsOnLeftSide ) {
-
-							tempV2_3.toArray( vertices, 1 * 3 );
-							tempV2_4.toArray( vertices, 0 * 3 );
-							tempV2_4.toArray( vertices, 3 * 3 );
-
-						} else {
-
-							tempV2_3.toArray( vertices, 1 * 3 );
-							tempV2_3.toArray( vertices, 3 * 3 );
-							tempV2_4.toArray( vertices, 0 * 3 );
-
-						}
-
-					} else {
-
-						tempV2_1.subVectors( p2, center );
-						tempV2_2.set( tempV2_1.y, - tempV2_1.x );
-
-						tempV2_3.addVectors( tempV2_1, tempV2_2 ).add( center );
-						tempV2_4.subVectors( tempV2_2, tempV2_1 ).add( center );
-
-						const vl = vertices.length;
-
-						// Modify already existing vertices
-						if ( joinIsOnLeftSide ) {
-
-							tempV2_3.toArray( vertices, vl - 1 * 3 );
-							tempV2_4.toArray( vertices, vl - 2 * 3 );
-							tempV2_4.toArray( vertices, vl - 4 * 3 );
-
-						} else {
-
-							tempV2_3.toArray( vertices, vl - 2 * 3 );
-							tempV2_4.toArray( vertices, vl - 1 * 3 );
-							tempV2_4.toArray( vertices, vl - 4 * 3 );
-
-						}
-
-					}
-
-					break;
-
-			}
-
-		}
-
-		function removeDuplicatedPoints( points ) {
-
-			// Creates a new array if necessary with duplicated points removed.
-			// This does not remove duplicated initial and ending points of a closed path.
-
-			let dupPoints = false;
-			for ( let i = 1, n = points.length - 1; i < n; i ++ ) {
-
-				if ( points[ i ].distanceTo( points[ i + 1 ] ) < minDistance ) {
-
-					dupPoints = true;
-					break;
-
-				}
-
-			}
-
-			if ( ! dupPoints ) return points;
-
-			const newPoints = [];
-			newPoints.push( points[ 0 ] );
-
-			for ( let i = 1, n = points.length - 1; i < n; i ++ ) {
-
-				if ( points[ i ].distanceTo( points[ i + 1 ] ) >= minDistance ) {
-
-					newPoints.push( points[ i ] );
-
-				}
-
-			}
-
-			newPoints.push( points[ points.length - 1 ] );
-
-			return newPoints;
-
-		}
-
-	}
-
-
-}
-
-const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShapeParam, twoLegend, isLegendOpen, searchItems, dataItems, colorKey, colorParam, shapeKey, shapeParam, threeD, data, technique, shapeParamList, colorParamList, cameraPosition, cameraRotation, colorList, shapeList, setErrorMessage, onVisualizeClicked, onCompareClicked, }, ref) => {
+const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorParam, setShapeParam, keyList, setListParam, twoLegend, isLegendOpen, searchItems, dataItems, colorKey, colorParam, shapeKey, shapeParam, threeD, data, technique, shapeParamList, colorParamList, cameraPosition, cameraRotation, colorList, setCustomFeatures, shapeList, setErrorMessage, onVisualizeClicked, onCompareClicked, customFeatures, }, ref) => {
     const containerRef = useRef();
     const legendRef = useRef();
     const miniContainerRef = useRef();
@@ -47534,18 +48319,22 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
     const raycaster = new Raycaster();
     const pointer = new Vector2();
     const [info, setInfo] = useState("");
+    const [identifierName, setIdentifierName] = useState("");
     const [controllerShown, setControllerShown] = useState(false);
     const [controllerPosition, setControllerPosition] = useState({});
     const [imageSrc, takeScreenshot] = useScreenshot();
     const [entityName, setEntityName] = useState("");
     const objArr = useRef([]);
-    // const renderer = new THREE.WebGLRenderer({ antialias: true });
+    const [minX, setMinX] = useState(0);
+    const [maxX, setMaxX] = useState(0);
+    const [minY, setMinY] = useState(0);
+    const [maxY, setMaxY] = useState(0);
+    const [minZ, setMinZ] = useState(0);
+    const [maxZ, setMaxZ] = useState(0);
     const legendRefFull = (React__default.createElement("div", { className: "absolute h-full w-full -z-20", ref: legendRef },
         React__default.createElement("div", { className: "inline" },
-            twoLegend && (React__default.createElement("div", { className: "flex absolute right-64" },
-                React__default.createElement(ShapeLegend, { screenshot: true, shapeKey: shapeKey, shapeParamList: shapeParamList, shapeParam: shapeParam, setShapeParam: (param) => setShapeParam(param), shapeList: shapeList }))),
             React__default.createElement("div", { className: "flex absolute right-0" },
-                React__default.createElement(ColorLegend, { screenshot: true, colorKey: colorKey, colorParamList: colorParamList, colorParam: colorParam, setColorParam: (param) => setColorParam(param), colorList: colorList })))));
+                React__default.createElement(ColorLegend, { keyList: keyList, screenshot: true, setListParam: (param) => setListParam(param), colorKey: colorKey, colorParamList: colorParamList, colorParam: colorParam, setColorParam: (param) => setColorParam(param), colorList: colorList, setCustomFeatures: setCustomFeatures, customizations: customFeatures, lightMode: lightMode })))));
     useImperativeHandle(ref, () => ({
         downloadScreenshot() {
             createScreenshot();
@@ -47554,9 +48343,21 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
             downloadSVG();
         },
     }));
+    const removeObjectByName = (name) => {
+        const selectedObject = sceneRef.current.getObjectByName(name);
+        if (selectedObject) {
+            sceneRef.current.remove(selectedObject);
+        }
+    };
     function createScreenshot() {
         return __awaiter$1(this, void 0, void 0, function* () {
             setLoading(true);
+            toPng(document.getElementById("pngFile"), { backgroundColor: "white" })
+                .then(function (dataUrl) {
+                download(dataUrl, {
+                    name: "legend",
+                });
+            });
             rendererRef.current.render(sceneRef.current, cameraRef.current);
             const imageLegend = yield takeScreenshot(rendererRef.current.domElement);
             yield download(imageLegend);
@@ -47595,24 +48396,29 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
                 var xOffset = (width - targetWidth) / 2;
                 var yOffset = (height - targetHeight) / 2;
                 mergedContext.drawImage(base_image, xOffset, yOffset, targetWidth, targetHeight);
-                if (isLegendOpen) {
-                    const legend = yield html2canvas(legendRef.current, {
-                        backgroundColor: null,
-                    });
-                    const aspectRatio = legend.width / legend.height;
-                    let targetWidth = window.innerWidth;
-                    let targetHeight = window.innerHeight;
-                    if (width / height > aspectRatio) {
-                        targetWidth = height * aspectRatio;
-                    }
-                    else {
-                        targetHeight = width / aspectRatio;
-                    }
-                    // Calculate the position to center the image
-                    const xOffset = (width - targetWidth) / 2;
-                    const yOffset = (height - targetHeight) / 2;
-                    mergedContext.drawImage(legend, xOffset, yOffset, targetWidth, targetHeight);
-                }
+                // if (isLegendOpen) {
+                //   const legend = await html2canvas(legendRef.current, {
+                //     backgroundColor: null,
+                //   });
+                //   const aspectRatio = legend.width / legend.height;
+                //   let targetWidth = window.innerWidth;
+                //   let targetHeight = window.innerHeight;
+                //   if (width / height > aspectRatio) {
+                //     targetWidth = height * aspectRatio;
+                //   } else {
+                //     targetHeight = width / aspectRatio;
+                //   }
+                //   // Calculate the position to center the image
+                //   const xOffset = (width - targetWidth) / 2;
+                //   const yOffset = (height - targetHeight) / 2;
+                //   mergedContext.drawImage(
+                //     legend,
+                //     xOffset,
+                //     yOffset,
+                //     targetWidth,
+                //     targetHeight
+                //   );
+                // }
                 a.href = mergedCanvas.toDataURL();
                 a.download = createFileName(extension, name);
                 a.click();
@@ -47623,95 +48429,110 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
             });
         };
     });
-    function createShape(twoLegend, path, coordinates, colorInScene, opacity, userData) {
-        const loader = new SVGLoader();
-        let group;
+    function drawBoxEdges(minX, maxX, minY, maxY, minZ, maxZ, svgContainer, camera) {
+        const tempObj = new Object3D();
+        const corners = [
+            new Vector3(minX, minY, minZ),
+            new Vector3(maxX, minY, minZ),
+            new Vector3(maxX, maxY, minZ),
+            new Vector3(minX, maxY, minZ),
+            new Vector3(minX, minY, maxZ),
+            new Vector3(maxX, minY, maxZ),
+            new Vector3(maxX, maxY, maxZ),
+            new Vector3(minX, maxY, maxZ),
+        ];
+        const edges = [
+            [0, 1],
+            [1, 2],
+            [2, 3],
+            [3, 0], // Bottom edges
+            [4, 5],
+            [5, 6],
+            [6, 7],
+            [7, 4], // Top edges
+            [0, 4],
+            [1, 5],
+            [2, 6],
+            [3, 7], // Side edges
+        ];
+        edges.forEach(([start, end]) => {
+            // Set the position of the temp object to the start corner for projection
+            tempObj.position.copy(corners[start]);
+            const startProj = toScreenPosition(tempObj, camera);
+            // Set the position of the temp object to the end corner for projection
+            tempObj.position.copy(corners[end]);
+            const endProj = toScreenPosition(tempObj, camera);
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", startProj.x.toString());
+            line.setAttribute("y1", startProj.y.toString());
+            line.setAttribute("x2", endProj.x.toString());
+            line.setAttribute("y2", endProj.y.toString());
+            line.style.stroke = "grey"; // Color of the box edges
+            line.style.strokeWidth = "1"; // Thickness of the box edges
+            svgContainer.appendChild(line);
+        });
+    }
+    function createShape(dataLength, twoLegend, scaledCoordinates, colorInScene, opacity, userData) {
+        var _a;
+        new SVGLoader();
         // const divElement = document.createElement("div");
         // divElement.innerHTML = "Info about " + userData[dataItems[0].category];
         // divElement.style.background = "red";
         // divElement.className = "info-div"; // Add a class for styling
         // document.body.appendChild(divElement);
-        let svgContainer = document.getElementById("svg-container");
-        if (!svgContainer) {
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'createElementNS' does not exist on type 'Document'.
-            svgContainer = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-            svgContainer.id = "svg-container";
-            svgContainer.style.position = "absolute";
-            svgContainer.style.width = "100%";
-            svgContainer.style.height = "100%";
-            svgContainer.style.top = "0";
-            svgContainer.style.left = "0";
-            svgContainer.style.zIndex = "-1";
-            document.body.appendChild(svgContainer);
-        }
-        // Create an SVG circle element
-        const svgCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        // svgCircle.setAttribute("r", `${coordinates.z}`); // Radius of the circle
-        svgCircle.setAttribute("cx", "100"); // Center the circle horizontally
-        svgCircle.setAttribute("cy", "200"); // Center the circle vertically
-        svgCircle.style.fill = userData.color; // Color from userData
-        svgCircle.style.position = "absolute";
-        svgContainer.appendChild(svgCircle);
-        loader.load(
-        // resource URL
-        path, 
-        // called when the resource is loaded
-        function (data) {
-            var _a, _b;
-            if (twoLegend) {
-                const paths = data.paths;
-                group = new Group();
-                for (let i = 0; i < paths.length; i++) {
-                    const path = paths[i];
-                    const material = new MeshBasicMaterial({
-                        transparent: true,
-                        color: colorInScene,
-                        side: FrontSide,
-                        depthTest: false,
-                        opacity: opacity,
-                    });
-                    const shapes = SVGLoader.createShapes(path);
-                    for (let j = 0; j < shapes.length; j++) {
-                        const shape = shapes[j];
-                        const geometry = new ShapeGeometry(shape);
-                        // Apply scaling transformation to the geometry
-                        geometry.scale(0.01, 0.01, 1);
-                        const mesh = new Mesh(geometry, material);
-                        mesh.scale.y = -mesh.scale.y;
-                        mesh.userData = userData;
-                        group.add(mesh);
-                    }
-                }
-                group.position.set(coordinates.x, coordinates.y, (_a = coordinates.z) !== null && _a !== void 0 ? _a : 0);
-                group.rotation.set(0, 0, 0);
-                sceneRef.current.add(group);
-            }
-            else {
-                const geometry = new SphereGeometry(0.1);
-                const material = new MeshBasicMaterial({
-                    transparent: true,
-                    color: colorInScene,
-                    side: FrontSide,
-                    depthTest: false,
-                    opacity: opacity,
-                });
-                const mesh = new Mesh(geometry, material);
-                mesh.userData = userData;
-                mesh.position.set(coordinates.x, coordinates.y, (_b = coordinates.z) !== null && _b !== void 0 ? _b : 0);
-                // objArr.current.push({ divObj: mesh, divElem: divElement });
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-                objArr.current.push({ divObj: mesh, svgElem: svgCircle });
-                sceneRef.current.add(mesh);
-            }
+        // let svgContainer = document.getElementById("svg-container");
+        // if (!svgContainer) {
+        //   // @ts-expect-error ts-migrate(2339) FIXME: Property 'createElementNS' does not exist on type 'Document'.
+        //   svgContainer = document.createElementNS(
+        //     "http://www.w3.org/2000/svg",
+        //     "svg"
+        //   );
+        //   svgContainer!.id = "svg-container";
+        //   svgContainer!.style.position = "absolute";
+        //   svgContainer!.style.width = "100%";
+        //   svgContainer!.style.height = "100%";
+        //   svgContainer!.style.top = "0";
+        //   svgContainer!.style.left = "0";
+        //   svgContainer!.style.zIndex = "-1";
+        //   document.body.appendChild(svgContainer!);
+        // }
+        // // Create an SVG circle element
+        // const svgCircle = document.createElementNS(
+        //   "http://www.w3.org/2000/svg",
+        //   "circle"
+        // );
+        // // svgCircle.setAttribute("r", `${coordinates.z}`); // Radius of the circle
+        // svgCircle.setAttribute("cx", "100"); // Center the circle horizontally
+        // svgCircle.setAttribute("cy", "200"); // Center the circle vertically
+        // svgCircle.style.fill = userData.color; // Color from userData
+        // svgCircle.style.position = "absolute";
+        // svgContainer!.appendChild(svgCircle);
+        const geometry = new SphereGeometry(dataLength < 500 ? 0.3 : 0.2);
+        const material = new MeshBasicMaterial({
+            transparent: true,
+            color: colorInScene,
+            side: FrontSide,
+            depthTest: false,
+            opacity: opacity,
         });
+        const mesh = new Mesh(geometry, material);
+        mesh.userData = userData;
+        mesh.position.set(scaledCoordinates.x, scaledCoordinates.y, (_a = scaledCoordinates.z) !== null && _a !== void 0 ? _a : 0);
+        // objArr.current.push({ divObj: mesh, divElem: divElement });
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+        objArr.current.push({ divObj: mesh });
+        sceneRef.current.add(mesh);
     }
     function calculateScaleFactor(distance) {
-        const maxDistance = 40; // Adjust as per your scene's size
-        return 1.5 - Math.min(distance / maxDistance, 1);
+        // Simple linear scaling based on distance
+        // You may need to adjust the formula to get the desired effect
+        const minScale = 0.5; // Minimum scale at maximum distance
+        const maxDistance = 60; // Adjust as per your scene's size
+        return 1 - Math.min(distance / maxDistance, 1) * (1 - minScale);
     }
     useEffect(() => {
         colorReset();
-    }, [data, colorParam, shapeParam, searchItems]);
+    }, [data, colorParam, shapeParam, searchItems, customFeatures]);
     function toScreenPosition(obj, camera) {
         var vector = new Vector3();
         // TODO: need to update this when resize window
@@ -47754,7 +48575,7 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
                 obj.geometry.type !== "BufferGeometry") {
                 obj.material.color.set("#FD1C03");
                 obj.material.opacity = 1;
-                setEntityName(obj.userData[dataItems[0].category]);
+                setEntityName(obj.userData.identifier); // should change with structure at some point
                 setControllerShown(true);
                 return;
             }
@@ -47763,57 +48584,58 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
     }
     function colorReset() {
         objArr.current.forEach((objData) => {
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-            let color = objData.divObj.userData.color;
-            let opacity = 0.8;
-            let svgOpacity = 1.0; // SVGs use a 0-1 range for opacity
-            // Apply the same logic for determining color and opacity
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
+            let color = objData.divObj.userData.color; // Default color from userData
+            let opacity = 0.8; // Default opacity
+            // Apply customizations as baseline
+            const customization = customFeatures.find((feature) => feature.featureName ===
+                // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
+                objData.divObj.userData.features[colorKey] &&
+                feature.category === colorKey);
+            // Dim colors for non-matching colorParam
             if (colorParam !== "" &&
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-                colorParam !== objData.divObj.userData[colorKey]) {
+                // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
+                colorParam !== objData.divObj.userData.features[colorKey]) {
                 color = "#EEEEEE";
                 opacity = 0.4;
-                svgOpacity = 0.4;
             }
-            if (shapeParam !== "" &&
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-                shapeParam !== objData.divObj.userData[shapeKey]) {
-                color = "#EEEEEE";
-                opacity = 0.4;
-                svgOpacity = 0.4;
+            // Highlight or dim based on searchItems
+            const isMatched = searchItems.some((item) => {
+                // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
+                return Object.values(objData.divObj.userData.features).includes(item.name);
+            });
+            if (isMatched) {
+                // Apply search item color, unless already set by customization
+                // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
+                color = customization ? color : objData.divObj.userData.color; // Keep customization color if exists
             }
-            if (searchItems.length &&
-                !searchItems.find((item) => {
-                    // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-                    for (const key in objData.divObj.userData) {
-                        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-                        if (item.name == objData.divObj.userData[key]) {
-                            return true;
-                        }
-                    }
-                    return false;
-                })) {
-                color = "#EEEEEE";
+            else if (searchItems.length) {
+                color = "#EEEEEE"; // Dim color if there are search items but no match
                 opacity = 0.4;
-                svgOpacity = 0.4;
             }
             if (dataItems[0] &&
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-                objData.divObj.userData[dataItems[0].category] === entityName) {
-                color = "#FD1C03";
+                // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
+                objData.divObj.userData.features[dataItems[0].category] === entityName) {
+                color = "#0400ff"; // Highlight color
                 opacity = 1;
-                svgOpacity = 1.0;
             }
-            // Update 3D object
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+            if (customization) {
+                const isCustomizationIncludeSearch = searchItems.some((item) => {
+                    // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
+                    return Object.values(customization).includes(item.name);
+                });
+                if (isCustomizationIncludeSearch) {
+                    color = customization.color;
+                    opacity = 1;
+                }
+            }
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
             objData.divObj.material.color.set(color);
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
             objData.divObj.material.opacity = opacity;
-            // Update SVG element
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-            objData.svgElem.style.fill = color;
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-            objData.svgElem.style.opacity = svgOpacity;
+            // Assuming objData also has a way to directly set SVG element styles, if needed
+            // objData.svgElem.style.fill = color; // Uncomment and adjust if applicable
+            // objData.svgElem.style.opacity = svgOpacity; // Uncomment and adjust if applicable
         });
     }
     function onPointerMove(event) {
@@ -47827,23 +48649,23 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
         colorReset();
         const intersects = raycaster.intersectObjects(sceneRef.current.children);
         setInfo("");
+        setIdentifierName("");
         for (let i = 0; i < intersects.length; i++) {
             const obj = intersects[i].object;
             if (obj instanceof Mesh &&
                 obj.geometry.type !== "BufferGeometry") {
                 obj.material.color.set("#16FF00");
                 obj.material.opacity = 0.8;
-                if (twoLegend) {
-                    setInfo(truncate(obj.userData[shapeKey], 30) +
-                        " " +
-                        truncate(obj.userData[colorKey], 30));
+                if (obj.geometry.type !== "BufferGeometry") {
+                    const customFeature = customFeatures.find((feature) => feature.featureName === obj.userData.features[colorKey]);
+                    if (customFeature) {
+                        setInfo(customFeature.customName);
+                    }
+                    else {
+                        setInfo(obj.userData.features[colorKey]);
+                    }
+                    setIdentifierName(obj.userData.identifier);
                 }
-                else {
-                    setInfo(obj.userData.identifier +
-                        " | " +
-                        truncate(obj.userData[colorKey], 30));
-                }
-                break;
             }
         }
     }
@@ -47966,7 +48788,130 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
         cube.add(planeFront, planeBack, planeLeft, planeRight, planeTop, planeBottom);
         return cube;
     }
+    function createBigCube(minX, maxX, minY, maxY, minZ, maxZ) {
+        // Calculate the size and position of the cube
+        const width = maxX - minX;
+        const height = maxY - minY;
+        const depth = maxZ - minZ;
+        const centerX = (minX + maxX) / 2;
+        const centerY = (minY + maxY) / 2;
+        const centerZ = (minZ + maxZ) / 2;
+        // Create the cube
+        // const geometry = new THREE.BoxGeometry(width, height, depth);
+        // const material = new THREE.MeshBasicMaterial({
+        //   color: 0x000000,
+        //   wireframe: true,
+        //   side: THREE.FrontSide,
+        // });
+        // const cube = new THREE.Mesh(geometry, material);
+        // cube.position.set(centerX, centerY, centerZ);
+        const edgesGeometry = new BufferGeometry();
+        // Define the vertices for the edges
+        const vertices = new Float32Array([
+            // Bottom rectangle
+            -width / 2,
+            -height / 2,
+            -depth / 2,
+            width / 2,
+            -height / 2,
+            -depth / 2,
+            width / 2,
+            -height / 2,
+            -depth / 2,
+            width / 2,
+            -height / 2,
+            depth / 2,
+            width / 2,
+            -height / 2,
+            depth / 2,
+            -width / 2,
+            -height / 2,
+            depth / 2,
+            -width / 2,
+            -height / 2,
+            depth / 2,
+            -width / 2,
+            -height / 2,
+            -depth / 2,
+            // Top rectangle
+            -width / 2,
+            height / 2,
+            -depth / 2,
+            width / 2,
+            height / 2,
+            -depth / 2,
+            width / 2,
+            height / 2,
+            -depth / 2,
+            width / 2,
+            height / 2,
+            depth / 2,
+            width / 2,
+            height / 2,
+            depth / 2,
+            -width / 2,
+            height / 2,
+            depth / 2,
+            -width / 2,
+            height / 2,
+            depth / 2,
+            -width / 2,
+            height / 2,
+            -depth / 2,
+            // Vertical lines
+            -width / 2,
+            -height / 2,
+            -depth / 2,
+            -width / 2,
+            height / 2,
+            -depth / 2,
+            width / 2,
+            -height / 2,
+            -depth / 2,
+            width / 2,
+            height / 2,
+            -depth / 2,
+            width / 2,
+            -height / 2,
+            depth / 2,
+            width / 2,
+            height / 2,
+            depth / 2,
+            -width / 2,
+            -height / 2,
+            depth / 2,
+            -width / 2,
+            height / 2,
+            depth / 2,
+        ]);
+        // Add vertices to geometry
+        edgesGeometry.setAttribute("position", new BufferAttribute(vertices, 3));
+        // Create a material for the edges
+        const material = new LineBasicMaterial({ color: 0xadd8e6 });
+        // Create a line segments object to represent the edges
+        const cubeEdges = new LineSegments(edgesGeometry, material);
+        // Set the position of the cube
+        cubeEdges.position.set(centerX, centerY, centerZ);
+        cubeEdges.name = "cube";
+        return cubeEdges;
+        // return cube;
+    }
+    function getFeatureColor(featureValue, customizations, colorList, colorParamList) {
+        // Check if the feature value has a customization
+        const customization = Object.keys(customizations).length !== 0 &&
+            customizations.find((c) => c.featureName === featureValue && c.category === colorKey);
+        if (customization) {
+            return customization.color;
+        }
+        else {
+            // Otherwise, fall back to the original logic
+            return featureValue === "NaN" || featureValue === ""
+                ? "#000000"
+                : colorList[colorParamList.indexOf(featureValue) % colorList.length];
+        }
+    }
     useEffect(() => {
+        objArr.current = [];
         const miniScene = new Scene();
         miniSceneRef.current = miniScene;
         const miniCamera = new PerspectiveCamera(60, 1, 0.1, 1000);
@@ -48019,6 +48964,9 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
         miniContainerRef.current.appendChild(miniRenderer.domElement);
         miniCamera.position.z = 30;
         const scene = new Scene();
+        scene.background = lightMode
+            ? new Color(0xffffff)
+            : new Color(0x2e2e3a);
         const camera = new PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new WebGLRenderer({ antialias: true });
         sceneRef.current = scene;
@@ -48026,81 +48974,36 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
         renderer.setClearColor(0xffffff);
         containerRef.current.appendChild(renderer.domElement);
         rendererRef.current = renderer;
-        var xAxisMaterial = new LineBasicMaterial({ color: 0xff0000 });
-        var xAxisGeometry = new BufferGeometry().setFromPoints([
-            new Vector3(0, 0, 0),
-            new Vector3(20, 0, 0),
-        ]);
-        var xAxis = new Line(xAxisGeometry, xAxisMaterial);
-        scene.add(xAxis);
-        // Create the Y-axis line segment
-        var yAxisMaterial = new LineBasicMaterial({ color: 0x00ff00 });
-        var yAxisGeometry = new BufferGeometry().setFromPoints([
-            new Vector3(0, 0, 0),
-            new Vector3(0, 20, 0),
-        ]);
-        var yAxis = new Line(yAxisGeometry, yAxisMaterial);
-        scene.add(yAxis);
-        if (threeD) {
-            // Create the Z-axis line segment
-            var zAxisMaterial = new LineBasicMaterial({ color: 0x0000ff });
-            var zAxisGeometry = new BufferGeometry().setFromPoints([
-                new Vector3(0, 0, 0),
-                new Vector3(0, 0, 20),
-            ]);
-            var zAxis = new Line(zAxisGeometry, zAxisMaterial);
-            scene.add(zAxis);
-        }
         const middle = {
             x: 0,
             y: 0,
             z: 0,
         };
+        var coordinates = {
+            x: 0,
+            y: 0,
+            z: 0,
+        };
+        var minX = Infinity;
+        var maxX = -Infinity;
+        var minY = Infinity;
+        var maxY = -Infinity;
+        var minZ = Infinity;
+        var maxZ = -Infinity;
         data.forEach((point, index) => __awaiter$1(void 0, void 0, void 0, function* () {
-            var _a;
-            let coordinates;
+            var _a, _b;
             if (threeD) {
-                if (technique === "umap") {
-                    coordinates = {
-                        x: point.x_umap_3D,
-                        y: point.y_umap_3D,
-                        z: point.z_umap_3D,
-                    };
-                }
-                else if (technique === "pca") {
-                    coordinates = {
-                        x: point.x_pca_3D,
-                        y: point.y_pca_3D,
-                        z: point.z_pca_3D,
-                    };
-                }
-                else {
-                    coordinates = {
-                        x: point.x_tsne_3D,
-                        y: point.y_tsne_3D,
-                        z: point.z_tsne_3D,
-                    };
-                }
+                coordinates = {
+                    x: point.coordinates.x,
+                    y: point.coordinates.y,
+                    z: point.coordinates.z,
+                };
             }
             else {
-                if (technique === "umap") {
-                    coordinates = {
-                        x: point.x_umap_3D,
-                        y: point.y_umap_3D,
-                    };
-                }
-                else if (technique === "pca") {
-                    coordinates = {
-                        x: point.x_pca_3D,
-                        y: point.x_pca_3D,
-                    };
-                }
-                else {
-                    coordinates = {
-                        x: point.x_tsne_2D,
-                        y: point.y_tsne_2D,
-                    };
-                }
+                coordinates = {
+                    x: point.coordinates.x,
+                    y: point.coordinates.y,
+                };
             }
             if ((typeof coordinates.x === "undefined") == undefined ||
                 typeof coordinates.y === "undefined") {
@@ -48108,25 +49011,102 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
                     setErrorMessage("Could not find the coordinates. Please check the CSV file.");
                 return;
             }
-            let shape = shapeList[shapeParamList.indexOf(point[shapeKey]) % shapeList.length];
-            let color = point[colorKey] === "NaN"
-                ? "#9CB4CC"
-                : colorList[colorParamList.indexOf(point[colorKey]) % colorList.length];
-            if (coordinates.x && coordinates.y) {
-                let colorInScene = color;
+            minX = Math.min(minX !== null && minX !== void 0 ? minX : Infinity, coordinates.x);
+            maxX = Math.max(maxX !== null && maxX !== void 0 ? maxX : -Infinity, coordinates.x);
+            minY = Math.min(minY !== null && minY !== void 0 ? minY : Infinity, coordinates.y);
+            maxY = Math.max(maxY !== null && maxY !== void 0 ? maxY : -Infinity, coordinates.y);
+            minZ = Math.min(minZ !== null && minZ !== void 0 ? minZ : Infinity, (_a = coordinates.z) !== null && _a !== void 0 ? _a : 0);
+            maxZ = Math.max(maxZ !== null && maxZ !== void 0 ? maxZ : -Infinity, (_b = coordinates.z) !== null && _b !== void 0 ? _b : 0);
+        }));
+        var localMinX = Infinity;
+        var localMaxX = -Infinity;
+        var localMinY = Infinity;
+        var localMaxY = -Infinity;
+        var localMinZ = Infinity;
+        var localMaxZ = -Infinity;
+        var scaledCoordinates = {
+            x: 0,
+            y: 0,
+            z: 0,
+        };
+        data.forEach((point, index) => __awaiter$1(void 0, void 0, void 0, function* () {
+            if (threeD) {
+                coordinates = {
+                    x: point.coordinates.x,
+                    y: point.coordinates.y,
+                    z: point.coordinates.z,
+                };
+            }
+            else {
+                coordinates = {
+                    x: point.coordinates.x,
+                    y: point.coordinates.y,
+                };
+            }
+            if ((typeof coordinates.x === "undefined") == undefined ||
+                typeof coordinates.y === "undefined") {
+                setErrorMessage &&
+                    setErrorMessage("Could not find the coordinates. Please check the CSV file.");
+                return;
+            }
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+            const scalePoint = (point, min, max, newMin, newMax) => {
+                const result = ((point - min) / (max - min)) * (newMax - newMin) + newMin;
+                return result;
+            };
+            const scaledX = scalePoint(coordinates.x, minX, maxX, -20, 20);
+            const scaledY = scalePoint(coordinates.y, minY, maxY, -20, 20);
+            const scaledZ = threeD
+                ? scalePoint(coordinates.z, minZ, maxZ, -20, 20)
+                : 0;
+            localMinX = Math.min(localMinX !== null && localMinX !== void 0 ? localMinX : Infinity, scaledX);
+            localMaxX = Math.max(localMaxX !== null && localMaxX !== void 0 ? localMaxX : -Infinity, scaledX);
+            localMinY = Math.min(localMinY !== null && localMinY !== void 0 ? localMinY : Infinity, scaledY);
+            localMaxY = Math.max(localMaxY !== null && localMaxY !== void 0 ? localMaxY : -Infinity, scaledY);
+            localMinZ = Math.min(localMinZ !== null && localMinZ !== void 0 ? localMinZ : Infinity, scaledZ !== null && scaledZ !== void 0 ? scaledZ : 0);
+            localMaxZ = Math.max(localMaxZ !== null && localMaxZ !== void 0 ? localMaxZ : -Infinity, scaledZ !== null && scaledZ !== void 0 ? scaledZ : 0);
+        }));
+        data.forEach((point, index) => __awaiter$1(void 0, void 0, void 0, function* () {
+            var _c, _d, _e;
+            if (threeD) {
+                coordinates = {
+                    x: point.coordinates.x,
+                    y: point.coordinates.y,
+                    z: point.coordinates.z,
+                };
+            }
+            else {
+                coordinates = {
+                    x: point.coordinates.x,
+                    y: point.coordinates.y,
+                };
+            }
+            if ((typeof point.coordinates.x === "undefined") == undefined ||
+                typeof point.coordinates.y === "undefined") {
+                setErrorMessage &&
+                    setErrorMessage("Could not find the coordinates. Please check the CSV file.");
+                return;
+            }
+            let color = getFeatureColor(point.features[colorKey], customFeatures, colorList, colorParamList);
+            // let color =
+            //   point.features[colorKey] === "NaN" || point.features[colorKey] === ""
+            //     ? "#000000"
+            //     : colorList[
+            //         colorParamList.indexOf(point.features[colorKey]) %
+            //           colorList.length
+            //       ];
+            var colorInScene = "";
+            if (point.coordinates.x && point.coordinates.y) {
+                colorInScene = color;
                 let opacity = 0.8;
-                if (colorParam !== "" && colorParam !== point[colorKey]) {
-                    colorInScene = "#EEEEEE";
-                    opacity = 0.4;
-                }
-                if (shapeParam !== "" && shapeParam !== point[shapeKey]) {
+                if (colorParam !== "" && colorParam !== point.features[colorKey]) {
                     colorInScene = "#EEEEEE";
                     opacity = 0.4;
                 }
                 if (searchItems.length &&
                     !searchItems.find((item) => {
-                        for (const key in point) {
-                            if (item.name == point[key]) {
+                        for (const key in point.features) {
+                            if (item.name == point.features[key]) {
                                 return true;
                             }
                         }
@@ -48135,21 +49115,54 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
                     colorInScene = "#EEEEEE";
                     opacity = 0.4;
                 }
-                createShape(twoLegend, shape, coordinates, colorInScene, opacity, Object.assign({ color: color, index: index }, point));
-                let maxX = -Infinity;
-                if (objArr.current && objArr.current.length > 0) {
-                    maxX = Math.max(
-                    // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-                    ...objArr.current.map((objData) => objData.position.x));
-                }
-                console.log("Maximum X coordinate:", maxX);
+                // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+                const scalePoint = (point, min, max, newMin, newMax) => {
+                    const result = ((point - min) / (max - min)) * (newMax - newMin) + newMin;
+                    return result;
+                };
+                const maxExtent = 20;
+                const deltaX = maxX - minX;
+                const deltaY = maxY - minY;
+                const deltaZ = maxZ - minZ;
+                var maxDelta = Math.max(deltaX, deltaY, deltaZ);
+                const scaledX = scalePoint(coordinates.x, minX, maxX, -((deltaX / maxDelta) * maxExtent), (deltaX / maxDelta) * maxExtent);
+                const scaledY = scalePoint(coordinates.y, minY, maxY, -((deltaY / maxDelta) * maxExtent), (deltaY / maxDelta) * maxExtent);
+                const scaledZ = threeD
+                    ? scalePoint(coordinates.z, minZ, maxZ, -((deltaZ / maxDelta) * maxExtent), (deltaZ / maxDelta) * maxExtent)
+                    : 0;
+                scaledCoordinates.x = scaledX;
+                scaledCoordinates.y = scaledY;
+                scaledCoordinates.z = scaledZ;
+                const dataLength = data.length;
+                createShape(dataLength, twoLegend, (scaledCoordinates = {
+                    x: scaledX,
+                    y: scaledY,
+                    z: scaledZ,
+                }), colorInScene, opacity, Object.assign({ color: color, index: index }, point));
             }
             middle.x += coordinates.x;
             middle.y += coordinates.y;
-            middle.z += (_a = coordinates.z) !== null && _a !== void 0 ? _a : 0;
+            middle.z += (_c = coordinates.z) !== null && _c !== void 0 ? _c : 0;
+            minX = Math.min(minX !== null && minX !== void 0 ? minX : Infinity, coordinates.x);
+            maxX = Math.max(maxX !== null && maxX !== void 0 ? maxX : -Infinity, coordinates.x);
+            minY = Math.min(minY !== null && minY !== void 0 ? minY : Infinity, coordinates.y);
+            maxY = Math.max(maxY !== null && maxY !== void 0 ? maxY : -Infinity, coordinates.y);
+            minZ = Math.min(minZ !== null && minZ !== void 0 ? minZ : Infinity, (_d = coordinates.z) !== null && _d !== void 0 ? _d : 0);
+            maxZ = Math.max(maxZ !== null && maxZ !== void 0 ? maxZ : -Infinity, (_e = coordinates.z) !== null && _e !== void 0 ? _e : 0);
+            if (index === data.length - 1) {
+                const cubeBig = createBigCube(localMinX, localMaxX, localMinY, localMaxY, localMinZ, localMaxZ);
+                setMinX(localMinX);
+                setMaxX(localMaxX);
+                setMinY(localMinY);
+                setMaxY(localMaxY);
+                setMinZ(localMinZ);
+                setMaxZ(localMaxZ);
+                sceneRef.current.add(cubeBig);
+            }
+            else {
+                removeObjectByName("cube");
+            }
         }));
-        // const bigCube = middle.x !== 0 ? createBigCube() : null;
-        // bigCube && scene.add(bigCube);
         middle.x /= data.length;
         middle.y /= data.length;
         middle.z /= data.length;
@@ -48176,7 +49189,7 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
         //   console.log(controls);
         // });
         controls.minDistance = 0;
-        controls.maxDistance = 40;
+        controls.maxDistance = 60;
         // controls.addEventListener("change", () => {
         //   objArr.current.forEach(function (objData) {
         //     const proj = toScreenPosition(
@@ -48217,9 +49230,6 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
             requestAnimationFrame(animate);
             camera.position.copy(miniCamera.position);
             camera.rotation.copy(miniCamera.rotation);
-            // if (cubeBig) {
-            //   cubeBig.lookAt(camera.position);
-            // }
             controls.update();
             controls.target.distanceTo(controls.object.position);
             sceneRef.current.traverse((obj) => {
@@ -48260,113 +49270,84 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
         shapeKey,
         twoLegend,
         threeD,
+        colorList,
+        customFeatures,
+        lightMode,
+        // setColorList,
     ]);
-    // function downloadSVG() {
-    //   updateSvgAxes(cameraRef.current, rendererRef.current);
-    //   objArr.current.forEach(function (objData) {
-    //     const proj = toScreenPosition(
-    //       // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-    //       objData.divObj,
-    //       cameraRef.current
-    //       // rendererRef.current
-    //     );
-    //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-    //     objData.svgElem.setAttribute("cx", proj.x);
-    //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-    //     objData.svgElem.setAttribute("cy", proj.y);
-    //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-    //     const distance = objData.divObj.position.distanceTo(
-    //       cameraRef.current.position
-    //     );
-    //     const scaleFactor = calculateScaleFactor(distance);
-    //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-    //     objData.svgElem.setAttribute("r", 5 * scaleFactor);
-    //   });
-    //   const svgContainer = document.getElementById("svg-container");
-    //   if (!svgContainer) {
-    //     console.error("SVG container not found");
-    //     return;
-    //   }
-    //   // Serialize the SVG content
-    //   const serializer = new XMLSerializer();
-    //   const svgString = serializer.serializeToString(svgContainer);
-    //   // Create a Blob from the SVG string
-    //   const blob = new Blob([svgString], { type: "image/svg+xml" });
-    //   // Create a download link
-    //   const downloadLink = document.createElement("a");
-    //   downloadLink.href = URL.createObjectURL(blob);
-    //   downloadLink.download = "scatterplot.svg";
-    //   // Append the link to the body, click it, and then remove it
-    //   document.body.appendChild(downloadLink);
-    //   downloadLink.click();
-    //   document.body.removeChild(downloadLink);
-    // }
-    function drawSVG() {
+    function drawSVG(svgContainer) {
         objArr.current.forEach(function (objData) {
+            // Create an SVG circle element
+            const svgCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            // svgCircle.setAttribute("r", `${coordinates.z}`); // Radius of the circle
+            svgCircle.setAttribute("cx", "100"); // Center the circle horizontally
+            svgCircle.setAttribute("cy", "200"); // Center the circle vertically
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+            svgCircle.style.fill = objData.divObj.userData.color;
+            svgCircle.style.position = "absolute";
             const proj = toScreenPosition(
             // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
             objData.divObj, cameraRef.current
             // rendererRef.current
             );
             // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-            objData.svgElem.setAttribute("cx", proj.x);
+            svgCircle.setAttribute("cx", proj.x);
             // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-            objData.svgElem.setAttribute("cy", proj.y);
+            svgCircle.setAttribute("cy", proj.y);
             // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
             const distance = objData.divObj.position.distanceTo(cameraRef.current.position);
             const scaleFactor = calculateScaleFactor(distance);
             // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-            objData.svgElem.setAttribute("r", 5 * scaleFactor);
+            svgCircle.setAttribute("r", 5 * scaleFactor);
+            svgContainer.appendChild(svgCircle);
         });
     }
     function downloadSVG() {
-        // Clear existing SVG content
         let svgContainer = document.getElementById("svg-container");
-        // Function to project 3D coordinates to 2D
-        function projectToScreen(obj3D) {
-            const vector = new Vector3();
-            const widthHalf = 0.5 * window.innerWidth;
-            const heightHalf = 0.5 * window.innerHeight;
-            // Assuming obj3D is a THREE.Vector3 representing a position in 3D space
-            vector.copy(obj3D);
-            vector.project(cameraRef.current);
-            vector.x = vector.x * widthHalf + widthHalf;
-            vector.y = -(vector.y * heightHalf) + heightHalf;
-            return { x: vector.x, y: vector.y };
+        if (!svgContainer) {
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'createElementNS' does not exist on type 'Document'.
+            svgContainer = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svgContainer.id = "svg-container";
+            svgContainer.style.position = "absolute";
+            svgContainer.style.width = "100%";
+            svgContainer.style.height = "100%";
+            svgContainer.style.top = "0";
+            svgContainer.style.left = "0";
+            svgContainer.style.zIndex = "-1";
+            document.body.appendChild(svgContainer);
         }
-        // Create and add SVG lines for axes
-        const axesPoints = {
-            x: [new Vector3(0, 0, 0), new Vector3(20, 0, 0)],
-            y: [new Vector3(0, 0, 0), new Vector3(0, 20, 0)],
-            z: [new Vector3(0, 0, 0), new Vector3(0, 0, 20)],
-        };
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-        Object.entries(axesPoints).forEach(([axis, points]) => {
-            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-            const start = projectToScreen(points[0]);
-            const end = projectToScreen(points[1]);
-            line.setAttribute("x1", start.x.toString());
-            line.setAttribute("y1", start.y.toString());
-            line.setAttribute("x2", end.x.toString());
-            line.setAttribute("y2", end.y.toString());
-            line.style.stroke =
-                axis === "x" ? "red" : axis === "y" ? "green" : "blue";
-            line.style.strokeWidth = "2";
-            // svgContainer!.appendChild(line);
-        });
-        // Create and add SVG circles for each 3D object
-        drawSVG();
-        // Serialize and download the SVG
-        const serializer = new XMLSerializer();
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-        const svgString = serializer.serializeToString(svgContainer);
-        const blob = new Blob([svgString], { type: "image/svg+xml" });
-        const downloadLink = document.createElement("a");
-        downloadLink.href = URL.createObjectURL(blob);
-        downloadLink.download = "scatterplot.svg";
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
+        if (svgContainer) {
+            svgContainer.innerHTML = "";
+            drawSVG(svgContainer);
+            drawBoxEdges(minX, maxX, minY, maxY, minZ, maxZ, svgContainer, cameraRef.current);
+            // Serialize and download the SVG
+            const serializer = new XMLSerializer();
+            const svgString = serializer.serializeToString(svgContainer);
+            const blob = new Blob([svgString], { type: "image/svg+xml" });
+            const downloadLink = document.createElement("a");
+            downloadLink.href = URL.createObjectURL(blob);
+            downloadLink.download = "scatterplot.svg";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        }
+        else {
+            drawSVG();
+            drawBoxEdges(minX, maxX, minY, maxY, minZ, maxZ, 
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+            svgContainer, cameraRef.current);
+            // Serialize and download the SVG
+            const serializer = new XMLSerializer();
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+            const svgString = serializer.serializeToString(svgContainer);
+            const blob = new Blob([svgString], { type: "image/svg+xml" });
+            const downloadLink = document.createElement("a");
+            downloadLink.href = URL.createObjectURL(blob);
+            downloadLink.download = "scatterplot.svg";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        }
     }
     return (React__default.createElement("div", { className: "relative h-full flex overflow-hidden" },
         React__default.createElement("div", { className: loading
@@ -48379,15 +49360,23 @@ const ScatterBoard = forwardRef(({ cameraRef = useRef(), setColorParam, setShape
             twoLegend && (React__default.createElement("div", { className: "flex absolute right-64 top-24" },
                 React__default.createElement(ShapeLegend, { screenshot: false, shapeKey: shapeKey, shapeParamList: shapeParamList, shapeParam: shapeParam, setShapeParam: (param) => setShapeParam(param), shapeList: shapeList }))),
             React__default.createElement("div", { className: "flex absolute right-0 top-32" },
-                React__default.createElement(ColorLegend, { screenshot: false, colorKey: colorKey, colorParamList: colorParamList, colorParam: colorParam, setColorParam: (param) => setColorParam(param), colorList: colorList }))),
+                React__default.createElement(ColorLegend, { lightMode: lightMode, keyList: keyList, setListParam: (param) => setListParam(param), screenshot: false, colorKey: colorKey, colorParamList: colorParamList, colorParam: colorParam, setColorParam: (param) => setColorParam(param), colorList: colorList, setCustomFeatures: (list) => setCustomFeatures(list), customizations: customFeatures }))),
         React__default.createElement("div", { className: "absolute z-20", style: {
                 top: controllerPosition.top,
                 left: controllerPosition.left,
             } },
             React__default.createElement(Controller, { controllerShown: controllerShown, onVisualizeClicked: () => onVisualizeClicked && onVisualizeClicked(entityName), onCompareClicked: () => onCompareClicked && onCompareClicked(entityName) })),
-        React__default.createElement("div", { className: threeD ? "absolute z-20 left-0 bottom-96 flex" : "hidden" },
+        React__default.createElement("div", { className: threeD ? "absolute z-0 left-0 bottom-16 flex" : "hidden" },
             React__default.createElement("div", { className: "h-24 w-24", onClick: onClickMini, onPointerMove: onPointerMoveMini, ref: miniContainerRef }),
-            React__default.createElement("p", { className: "absolute bottom-12 left-24 w-20" }, axisName))));
+            React__default.createElement("p", { className: "absolute bottom-12 left-24 w-20" }, axisName)),
+        React__default.createElement("div", { className: "flex absolute bottom-8 right-0 m-8 z-20" },
+            React__default.createElement("div", { className: "flex flex-col" },
+                identifierName && (React__default.createElement("p", { className: `${lightMode ? "text-black" : "text-white"}` },
+                    "ID: ",
+                    identifierName)),
+                info && (React__default.createElement("p", { className: `${lightMode ? "text-black" : "text-white"}` },
+                    "Label: ",
+                    info))))));
 });
 
 export { ColorLegend, Controller, ScatterBoard, ShapeLegend };
