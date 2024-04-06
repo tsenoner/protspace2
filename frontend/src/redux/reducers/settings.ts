@@ -11,9 +11,11 @@ import {
   SET_CAMERA_ROTATION,
   SET_COLOR_AND_SHAPE_KEY,
   SET_COLOR_KEY,
+  SET_COLOR_LIST,
   SET_COLOR_PARAM,
   SET_COLOR_PARAM_LIST,
   SET_CSV_FILE_PATH,
+  SET_CUSTOM_FEATURE,
   SET_DATA,
   SET_DATA_ITEMS,
   SET_DEFAULT_COLOR_SCHEME,
@@ -39,6 +41,7 @@ import {
   SET_TECHNIQUE,
   SET_THREE_D,
   SET_TWO_LEGEND,
+  SET_LIGHT_MODE,
 } from "../actionTypes";
 
 // Default styles
@@ -85,6 +88,7 @@ const initialAtomStyleState: AtomStyleSpec = {
 };
 
 interface SettingsState {
+  lightMode: boolean;
   colorKey: string;
   shapeKey: string;
   twoLegend: boolean;
@@ -96,6 +100,7 @@ interface SettingsState {
   colorParam: string;
   shapeParam: string;
   moleculeShown: boolean;
+  colorList: string[];
   data: any[];
   shapeParamList: string[];
   colorParamList: string[];
@@ -118,13 +123,15 @@ interface SettingsState {
   projections: any;
   structures: any;
   protein_data: any;
+  customFeatures: any;
 }
 
 const initialState: SettingsState = {
+  lightMode: false,
   colorKey: "",
   shapeKey: "",
   twoLegend: false,
-  technique: 0,
+  technique: 3,
   threeD: true,
   atomStyle: initialAtomStyleState,
   searchAtomStyle: initialAtomStyleState,
@@ -133,6 +140,7 @@ const initialState: SettingsState = {
   shapeParam: "",
   moleculeShown: false,
   data: [],
+  colorList: [],
   shapeParamList: [],
   colorParamList: [],
   csvFilePath: "df_3FTx_mature_esm2.csv",
@@ -154,6 +162,7 @@ const initialState: SettingsState = {
   projections: {},
   structures: {},
   protein_data: {},
+  customFeatures: [],
 };
 
 const settingsReducer = (
@@ -193,6 +202,11 @@ const settingsReducer = (
         ...state,
         cameraRotation: action.payload,
       };
+    case SET_COLOR_LIST:
+      return {
+        ...state,
+        colorList: action.payload,
+      };
     case SET_SHAPE_PARAM_LIST:
       return {
         ...state,
@@ -217,6 +231,16 @@ const settingsReducer = (
       return {
         ...state,
         dataItems: action.payload,
+      };
+    case SET_CUSTOM_FEATURE:
+      return {
+        ...state,
+        customFeatures: action.payload.customization,
+      };
+    case SET_LIGHT_MODE:
+      return {
+        ...state,
+        lightMode: action.payload,
       };
     case SET_COLOR_PARAM:
       return {
@@ -337,7 +361,7 @@ const settingsReducer = (
       };
     case SET_TECHNIQUE:
       const selectedProjection = state.projections[action.payload];
-      selectedProjection.data.forEach((element: any) => {
+      selectedProjection.data.forEach((element: any, index: number) => {
         element = Object.assign(
           element,
           state.protein_data[element.identifier]
@@ -354,13 +378,9 @@ const settingsReducer = (
         const newItem = {
           ...item,
         }; // Create a copy of the current item
-        for (const key in newItem) {
-          if (
-            newItem.hasOwnProperty(key) &&
-            typeof newItem[key] === "string" &&
-            newItem[key] === ""
-          ) {
-            newItem[key] = "NaN";
+        for (const key in newItem.features) {
+          if (newItem.features[key] === "") {
+            newItem.features[key] = "NaN";
           }
         }
         return newItem;
@@ -370,7 +390,6 @@ const settingsReducer = (
         for (const key in element.features) {
           const value = element.features[key];
           if (
-            typeof value === "string" &&
             itemsLocal.filter((e) => e.category === key && e.name === value)
               .length === 0
           ) {
@@ -394,6 +413,7 @@ const settingsReducer = (
         data: selectedProjection.data,
         threeD: selectedProjection.dimensions === 3,
         technique: action.payload,
+        dataItems: itemsLocal,
       };
     case SET_MOLECULE_NAME:
       return {

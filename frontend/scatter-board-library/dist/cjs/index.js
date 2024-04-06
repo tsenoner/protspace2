@@ -21,83 +21,6 @@ function _interopNamespaceDefault(e) {
 
 var React__namespace = /*#__PURE__*/_interopNamespaceDefault(React$1);
 
-function styleInject(css, ref) {
-  if ( ref === void 0 ) ref = {};
-  var insertAt = ref.insertAt;
-
-  if (!css || typeof document === 'undefined') { return; }
-
-  var head = document.head || document.getElementsByTagName('head')[0];
-  var style = document.createElement('style');
-  style.type = 'text/css';
-
-  if (insertAt === 'top') {
-    if (head.firstChild) {
-      head.insertBefore(style, head.firstChild);
-    } else {
-      head.appendChild(style);
-    }
-  } else {
-    head.appendChild(style);
-  }
-
-  if (style.styleSheet) {
-    style.styleSheet.cssText = css;
-  } else {
-    style.appendChild(document.createTextNode(css));
-  }
-}
-
-var css_248z = "/*\n! tailwindcss v3.3.5 | MIT License | https://tailwindcss.com\n*//*\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\n*/\n\n*,\n::before,\n::after {\n  box-sizing: border-box; /* 1 */\n  border-width: 0; /* 2 */\n  border-style: solid; /* 2 */\n  border-color: #e5e7eb; /* 2 */\n}\n\n::before,\n::after {\n  --tw-content: '';\n}\n\n/*\n1. Use a consistent sensible line-height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n3. Use a more readable tab size.\n4. Use the user's configured `sans` font-family by default.\n5. Use the user's configured `sans` font-feature-settings by default.\n6. Use the user's configured `sans` font-variation-settings by default.\n*/\n\nhtml {\n  line-height: 1.5; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n  -moz-tab-size: 4; /* 3 */\n  -o-tab-size: 4;\n     tab-size: 4; /* 3 */\n  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"; /* 4 */\n  font-feature-settings: normal; /* 5 */\n  font-variation-settings: normal; /* 6 */\n}\n\n/*\n1. Remove the margin in all browsers.\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\n*/\n\nbody {\n  margin: 0; /* 1 */\n  line-height: inherit; /* 2 */\n}\n\n/*\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n3. Ensure horizontal rules are visible by default.\n*/\n\nhr {\n  height: 0; /* 1 */\n  color: inherit; /* 2 */\n  border-top-width: 1px; /* 3 */\n}\n\n/*\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\n\nabbr:where([title]) {\n  -webkit-text-decoration: underline dotted;\n          text-decoration: underline dotted;\n}\n\n/*\nRemove the default font size and weight for headings.\n*/\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/*\nReset links to optimize for opt-in styling instead of opt-out.\n*/\n\na {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/*\nAdd the correct font weight in Edge and Safari.\n*/\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/*\n1. Use the user's configured `mono` font family by default.\n2. Correct the odd `em` font sizing in all browsers.\n*/\n\ncode,\nkbd,\nsamp,\npre {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/*\nAdd the correct font size in all browsers.\n*/\n\nsmall {\n  font-size: 80%;\n}\n\n/*\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\n*/\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/*\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n3. Remove gaps between table borders by default.\n*/\n\ntable {\n  text-indent: 0; /* 1 */\n  border-color: inherit; /* 2 */\n  border-collapse: collapse; /* 3 */\n}\n\n/*\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n3. Remove default padding in all browsers.\n*/\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-feature-settings: inherit; /* 1 */\n  font-variation-settings: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  font-weight: inherit; /* 1 */\n  line-height: inherit; /* 1 */\n  color: inherit; /* 1 */\n  margin: 0; /* 2 */\n  padding: 0; /* 3 */\n}\n\n/*\nRemove the inheritance of text transform in Edge and Firefox.\n*/\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Remove default button styles.\n*/\n\nbutton,\n[type='button'],\n[type='reset'],\n[type='submit'] {\n  -webkit-appearance: button; /* 1 */\n  background-color: transparent; /* 2 */\n  background-image: none; /* 2 */\n}\n\n/*\nUse the modern Firefox focus style for all focusable elements.\n*/\n\n:-moz-focusring {\n  outline: auto;\n}\n\n/*\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\n*/\n\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\n/*\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\n\nprogress {\n  vertical-align: baseline;\n}\n\n/*\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n\n::-webkit-inner-spin-button,\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/*\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n\n[type='search'] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/*\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to `inherit` in Safari.\n*/\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\n\nsummary {\n  display: list-item;\n}\n\n/*\nRemoves the default spacing and border for appropriate elements.\n*/\n\nblockquote,\ndl,\ndd,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\nfigure,\np,\npre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol,\nul,\nmenu {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/*\nReset default styling for dialogs.\n*/\ndialog {\n  padding: 0;\n}\n\n/*\nPrevent resizing textareas horizontally by default.\n*/\n\ntextarea {\n  resize: vertical;\n}\n\n/*\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\n2. Set the default placeholder color to the user's configured gray 400 color.\n*/\n\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\ninput::placeholder,\ntextarea::placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\n/*\nSet the default cursor for buttons.\n*/\n\nbutton,\n[role=\"button\"] {\n  cursor: pointer;\n}\n\n/*\nMake sure disabled buttons don't get the pointer cursor.\n*/\n:disabled {\n  cursor: default;\n}\n\n/*\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\n   This can trigger a poorly considered lint error in some tools but is included by design.\n*/\n\nimg,\nsvg,\nvideo,\ncanvas,\naudio,\niframe,\nembed,\nobject {\n  display: block; /* 1 */\n  vertical-align: middle; /* 2 */\n}\n\n/*\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\n*/\n\nimg,\nvideo {\n  max-width: 100%;\n  height: auto;\n}\n\n/* Make elements with the HTML hidden attribute stay hidden by default */\n[hidden] {\n  display: none;\n}\n\n*, ::before, ::after {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n\n::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n.container {\n  width: 100%;\n}\n@media (min-width: 640px) {\n\n  .container {\n    max-width: 640px;\n  }\n}\n@media (min-width: 768px) {\n\n  .container {\n    max-width: 768px;\n  }\n}\n@media (min-width: 1024px) {\n\n  .container {\n    max-width: 1024px;\n  }\n}\n@media (min-width: 1280px) {\n\n  .container {\n    max-width: 1280px;\n  }\n}\n@media (min-width: 1536px) {\n\n  .container {\n    max-width: 1536px;\n  }\n}\n.absolute {\n  position: absolute;\n}\n.relative {\n  position: relative;\n}\n.inset-0 {\n  inset: 0px;\n}\n.bottom-12 {\n  bottom: 3rem;\n}\n.bottom-16 {\n  bottom: 4rem;\n}\n.left-0 {\n  left: 0px;\n}\n.left-20 {\n  left: 5rem;\n}\n.left-24 {\n  left: 6rem;\n}\n.left-5 {\n  left: 1.25rem;\n}\n.right-0 {\n  right: 0px;\n}\n.right-64 {\n  right: 16rem;\n}\n.top-12 {\n  top: 3rem;\n}\n.top-20 {\n  top: 5rem;\n}\n.top-24 {\n  top: 6rem;\n}\n.top-32 {\n  top: 8rem;\n}\n.-z-20 {\n  z-index: -20;\n}\n.z-0 {\n  z-index: 0;\n}\n.z-10 {\n  z-index: 10;\n}\n.z-20 {\n  z-index: 20;\n}\n.z-30 {\n  z-index: 30;\n}\n.m-8 {\n  margin: 2rem;\n}\n.m-auto {\n  margin: auto;\n}\n.mx-2 {\n  margin-left: 0.5rem;\n  margin-right: 0.5rem;\n}\n.ml-auto {\n  margin-left: auto;\n}\n.mr-4 {\n  margin-right: 1rem;\n}\n.mr-auto {\n  margin-right: auto;\n}\n.mt-2 {\n  margin-top: 0.5rem;\n}\n.block {\n  display: block;\n}\n.inline {\n  display: inline;\n}\n.flex {\n  display: flex;\n}\n.hidden {\n  display: none;\n}\n.h-24 {\n  height: 6rem;\n}\n.h-4 {\n  height: 1rem;\n}\n.h-40 {\n  height: 10rem;\n}\n.h-6 {\n  height: 1.5rem;\n}\n.h-64 {\n  height: 16rem;\n}\n.h-full {\n  height: 100%;\n}\n.min-h-custom {\n  min-height: 32px;\n}\n.w-0 {\n  width: 0px;\n}\n.w-0\\.5 {\n  width: 0.125rem;\n}\n.w-16 {\n  width: 4rem;\n}\n.w-20 {\n  width: 5rem;\n}\n.w-24 {\n  width: 6rem;\n}\n.w-4 {\n  width: 1rem;\n}\n.w-40 {\n  width: 10rem;\n}\n.w-6 {\n  width: 1.5rem;\n}\n.w-60 {\n  width: 15rem;\n}\n.w-64 {\n  width: 16rem;\n}\n.w-full {\n  width: 100%;\n}\n.origin-top-left {\n  transform-origin: top left;\n}\n.transform {\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n.cursor-pointer {\n  cursor: pointer;\n}\n.resize {\n  resize: both;\n}\n.place-content-around {\n  place-content: space-around;\n}\n.items-center {\n  align-items: center;\n}\n.justify-center {\n  justify-content: center;\n}\n.gap-x-2 {\n  -moz-column-gap: 0.5rem;\n       column-gap: 0.5rem;\n}\n.overflow-hidden {\n  overflow: hidden;\n}\n.overflow-x-auto {\n  overflow-x: auto;\n}\n.overflow-y-auto {\n  overflow-y: auto;\n}\n.truncate {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.whitespace-nowrap {\n  white-space: nowrap;\n}\n.break-all {\n  word-break: break-all;\n}\n.rounded-full {\n  border-radius: 9999px;\n}\n.rounded-md {\n  border-radius: 0.375rem;\n}\n.border {\n  border-width: 1px;\n}\n.border-2 {\n  border-width: 2px;\n}\n.border-gray-300 {\n  --tw-border-opacity: 1;\n  border-color: rgb(209 213 219 / var(--tw-border-opacity));\n}\n.border-stone-400 {\n  --tw-border-opacity: 1;\n  border-color: rgb(168 162 158 / var(--tw-border-opacity));\n}\n.bg-gray-300 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(209 213 219 / var(--tw-bg-opacity));\n}\n.bg-gray-50 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(249 250 251 / var(--tw-bg-opacity));\n}\n.bg-slate-100 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(241 245 249 / var(--tw-bg-opacity));\n}\n.bg-stone-300 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(214 211 209 / var(--tw-bg-opacity));\n}\n.bg-stone-400 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(168 162 158 / var(--tw-bg-opacity));\n}\n.bg-white {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n}\n.bg-opacity-50 {\n  --tw-bg-opacity: 0.5;\n}\n.p-1 {\n  padding: 0.25rem;\n}\n.p-2 {\n  padding: 0.5rem;\n}\n.p-2\\.5 {\n  padding: 0.625rem;\n}\n.px-3 {\n  padding-left: 0.75rem;\n  padding-right: 0.75rem;\n}\n.px-4 {\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n.py-1 {\n  padding-top: 0.25rem;\n  padding-bottom: 0.25rem;\n}\n.pb-1 {\n  padding-bottom: 0.25rem;\n}\n.text-center {\n  text-align: center;\n}\n.text-sm {\n  font-size: 0.875rem;\n  line-height: 1.25rem;\n}\n.text-xs {\n  font-size: 0.75rem;\n  line-height: 1rem;\n}\n.text-black {\n  --tw-text-opacity: 1;\n  color: rgb(0 0 0 / var(--tw-text-opacity));\n}\n.text-gray-500 {\n  --tw-text-opacity: 1;\n  color: rgb(107 114 128 / var(--tw-text-opacity));\n}\n.text-gray-900 {\n  --tw-text-opacity: 1;\n  color: rgb(17 24 39 / var(--tw-text-opacity));\n}\n.text-white {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity));\n}\n.line-through {\n  text-decoration-line: line-through;\n}\n.transition-all {\n  transition-property: all;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n.duration-300 {\n  transition-duration: 300ms;\n}\n.ease-in-out {\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n}\n.hover\\:opacity-10:hover {\n  opacity: 0.1;\n}\n.hover\\:shadow-md:hover {\n  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n.focus\\:border-blue-500:focus {\n  --tw-border-opacity: 1;\n  border-color: rgb(59 130 246 / var(--tw-border-opacity));\n}\n.focus\\:ring-blue-500:focus {\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity));\n}\n@media (prefers-color-scheme: dark) {\n\n  .dark\\:border-gray-600 {\n    --tw-border-opacity: 1;\n    border-color: rgb(75 85 99 / var(--tw-border-opacity));\n  }\n\n  .dark\\:bg-gray-700 {\n    --tw-bg-opacity: 1;\n    background-color: rgb(55 65 81 / var(--tw-bg-opacity));\n  }\n\n  .dark\\:text-white {\n    --tw-text-opacity: 1;\n    color: rgb(255 255 255 / var(--tw-text-opacity));\n  }\n\n  .dark\\:placeholder-gray-400::-moz-placeholder {\n    --tw-placeholder-opacity: 1;\n    color: rgb(156 163 175 / var(--tw-placeholder-opacity));\n  }\n\n  .dark\\:placeholder-gray-400::placeholder {\n    --tw-placeholder-opacity: 1;\n    color: rgb(156 163 175 / var(--tw-placeholder-opacity));\n  }\n\n  .dark\\:focus\\:border-blue-500:focus {\n    --tw-border-opacity: 1;\n    border-color: rgb(59 130 246 / var(--tw-border-opacity));\n  }\n\n  .dark\\:focus\\:ring-blue-500:focus {\n    --tw-ring-opacity: 1;\n    --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity));\n  }\n}";
-styleInject(css_248z);
-
-const ColorLegendItem = ({ color, selected, screenshot, text, onClick, }) => {
-    return (React$1.createElement("div", null,
-        React$1.createElement("div", { onClick: onClick, className: "flex gap-x-2 min-h-custom selection:border-r-1 items-center cursor-pointer" },
-            React$1.createElement("div", { className: `w-4 h-4 rounded-full`, style: {
-                    backgroundColor: color,
-                } }),
-            React$1.createElement("p", { className: `${selected
-                    ? "text-black"
-                    : screenshot
-                        ? "text-gray-500"
-                        : "text-gray-500 line-through"} w-60 break-all` }, text)),
-        React$1.createElement("div", null)));
-};
-
-const ColorLegend = ({ screenshot, colorKey, keyList, setListParam, colorParamList, colorParam, setColorParam, colorList, }) => {
-    const [closed, setClosed] = React$1.useState(false);
-    return (React$1.createElement("div", { className: "block bg-slate-100 rounded-md mr-4 w-full mt-2 legend" },
-        React$1.createElement("select", { className: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", value: colorKey, onChange: (e) => setListParam(e.target.value) }, keyList.map((option, index) => (React$1.createElement("option", { key: index, value: option }, option.toUpperCase())))),
-        React$1.createElement("ul", { style: {
-                maxHeight: `${window.innerHeight - 330}px`,
-            }, className: closed
-                ? "hidden"
-                : screenshot
-                    ? "h-full px-3 overflow-hidden"
-                    : "h-full overflow-y-auto px-3 transition-all duration-300 ease-in-out" }, colorParamList === null || colorParamList === void 0 ? void 0 : colorParamList.sort((a, b) => {
-            if (a === "NaN") {
-                return 1;
-            }
-            else if (b === "NaN") {
-                return -1;
-            }
-            else {
-                return a.localeCompare(b);
-            }
-        }).map((value, index) => (React$1.createElement("li", { key: value, className: "hover:shadow-md w-full overflow-x-auto cursor-pointer transition-all duration-300 ease-in-out" },
-            React$1.createElement(ColorLegendItem, { color: value === "NaN"
-                    ? "#85b0da"
-                    : colorList[index % colorList.length], text: value, screenshot: screenshot, selected: colorParam === "" || value === colorParam, onClick: () => {
-                    if (value === colorParam) {
-                        setColorParam("");
-                    }
-                    else {
-                        setColorParam(value);
-                    }
-                } })))))));
-};
-
 function ArrowDownIcon({
   title,
   titleId,
@@ -143,6 +66,89 @@ function XMarkIcon({
 }
 const ForwardRef = React__namespace.forwardRef(XMarkIcon);
 var XMarkIcon$1 = ForwardRef;
+
+function styleInject(css, ref) {
+  if ( ref === void 0 ) ref = {};
+  var insertAt = ref.insertAt;
+
+  if (!css || typeof document === 'undefined') { return; }
+
+  var head = document.head || document.getElementsByTagName('head')[0];
+  var style = document.createElement('style');
+  style.type = 'text/css';
+
+  if (insertAt === 'top') {
+    if (head.firstChild) {
+      head.insertBefore(style, head.firstChild);
+    } else {
+      head.appendChild(style);
+    }
+  } else {
+    head.appendChild(style);
+  }
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
+}
+
+var css_248z = "/*\n! tailwindcss v3.3.5 | MIT License | https://tailwindcss.com\n*//*\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\n*/\n\n*,\n::before,\n::after {\n  box-sizing: border-box; /* 1 */\n  border-width: 0; /* 2 */\n  border-style: solid; /* 2 */\n  border-color: #e5e7eb; /* 2 */\n}\n\n::before,\n::after {\n  --tw-content: '';\n}\n\n/*\n1. Use a consistent sensible line-height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n3. Use a more readable tab size.\n4. Use the user's configured `sans` font-family by default.\n5. Use the user's configured `sans` font-feature-settings by default.\n6. Use the user's configured `sans` font-variation-settings by default.\n*/\n\nhtml {\n  line-height: 1.5; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n  -moz-tab-size: 4; /* 3 */\n  -o-tab-size: 4;\n     tab-size: 4; /* 3 */\n  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"; /* 4 */\n  font-feature-settings: normal; /* 5 */\n  font-variation-settings: normal; /* 6 */\n}\n\n/*\n1. Remove the margin in all browsers.\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\n*/\n\nbody {\n  margin: 0; /* 1 */\n  line-height: inherit; /* 2 */\n}\n\n/*\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n3. Ensure horizontal rules are visible by default.\n*/\n\nhr {\n  height: 0; /* 1 */\n  color: inherit; /* 2 */\n  border-top-width: 1px; /* 3 */\n}\n\n/*\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\n\nabbr:where([title]) {\n  -webkit-text-decoration: underline dotted;\n          text-decoration: underline dotted;\n}\n\n/*\nRemove the default font size and weight for headings.\n*/\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/*\nReset links to optimize for opt-in styling instead of opt-out.\n*/\n\na {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/*\nAdd the correct font weight in Edge and Safari.\n*/\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/*\n1. Use the user's configured `mono` font family by default.\n2. Correct the odd `em` font sizing in all browsers.\n*/\n\ncode,\nkbd,\nsamp,\npre {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/*\nAdd the correct font size in all browsers.\n*/\n\nsmall {\n  font-size: 80%;\n}\n\n/*\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\n*/\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/*\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n3. Remove gaps between table borders by default.\n*/\n\ntable {\n  text-indent: 0; /* 1 */\n  border-color: inherit; /* 2 */\n  border-collapse: collapse; /* 3 */\n}\n\n/*\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n3. Remove default padding in all browsers.\n*/\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-feature-settings: inherit; /* 1 */\n  font-variation-settings: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  font-weight: inherit; /* 1 */\n  line-height: inherit; /* 1 */\n  color: inherit; /* 1 */\n  margin: 0; /* 2 */\n  padding: 0; /* 3 */\n}\n\n/*\nRemove the inheritance of text transform in Edge and Firefox.\n*/\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Remove default button styles.\n*/\n\nbutton,\n[type='button'],\n[type='reset'],\n[type='submit'] {\n  -webkit-appearance: button; /* 1 */\n  background-color: transparent; /* 2 */\n  background-image: none; /* 2 */\n}\n\n/*\nUse the modern Firefox focus style for all focusable elements.\n*/\n\n:-moz-focusring {\n  outline: auto;\n}\n\n/*\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\n*/\n\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\n/*\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\n\nprogress {\n  vertical-align: baseline;\n}\n\n/*\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n\n::-webkit-inner-spin-button,\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/*\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n\n[type='search'] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/*\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to `inherit` in Safari.\n*/\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\n\nsummary {\n  display: list-item;\n}\n\n/*\nRemoves the default spacing and border for appropriate elements.\n*/\n\nblockquote,\ndl,\ndd,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\nfigure,\np,\npre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol,\nul,\nmenu {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/*\nReset default styling for dialogs.\n*/\ndialog {\n  padding: 0;\n}\n\n/*\nPrevent resizing textareas horizontally by default.\n*/\n\ntextarea {\n  resize: vertical;\n}\n\n/*\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\n2. Set the default placeholder color to the user's configured gray 400 color.\n*/\n\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\ninput::placeholder,\ntextarea::placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\n/*\nSet the default cursor for buttons.\n*/\n\nbutton,\n[role=\"button\"] {\n  cursor: pointer;\n}\n\n/*\nMake sure disabled buttons don't get the pointer cursor.\n*/\n:disabled {\n  cursor: default;\n}\n\n/*\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\n   This can trigger a poorly considered lint error in some tools but is included by design.\n*/\n\nimg,\nsvg,\nvideo,\ncanvas,\naudio,\niframe,\nembed,\nobject {\n  display: block; /* 1 */\n  vertical-align: middle; /* 2 */\n}\n\n/*\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\n*/\n\nimg,\nvideo {\n  max-width: 100%;\n  height: auto;\n}\n\n/* Make elements with the HTML hidden attribute stay hidden by default */\n[hidden] {\n  display: none;\n}\n\n*, ::before, ::after {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n\n::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n.container {\n  width: 100%;\n}\n@media (min-width: 640px) {\n\n  .container {\n    max-width: 640px;\n  }\n}\n@media (min-width: 768px) {\n\n  .container {\n    max-width: 768px;\n  }\n}\n@media (min-width: 1024px) {\n\n  .container {\n    max-width: 1024px;\n  }\n}\n@media (min-width: 1280px) {\n\n  .container {\n    max-width: 1280px;\n  }\n}\n@media (min-width: 1536px) {\n\n  .container {\n    max-width: 1536px;\n  }\n}\n.absolute {\n  position: absolute;\n}\n.relative {\n  position: relative;\n}\n.inset-0 {\n  inset: 0px;\n}\n.bottom-12 {\n  bottom: 3rem;\n}\n.bottom-96 {\n  bottom: 24rem;\n}\n.left-0 {\n  left: 0px;\n}\n.left-20 {\n  left: 5rem;\n}\n.left-24 {\n  left: 6rem;\n}\n.left-5 {\n  left: 1.25rem;\n}\n.right-0 {\n  right: 0px;\n}\n.right-64 {\n  right: 16rem;\n}\n.top-12 {\n  top: 3rem;\n}\n.top-20 {\n  top: 5rem;\n}\n.top-24 {\n  top: 6rem;\n}\n.top-32 {\n  top: 8rem;\n}\n.-z-20 {\n  z-index: -20;\n}\n.z-10 {\n  z-index: 10;\n}\n.z-20 {\n  z-index: 20;\n}\n.z-30 {\n  z-index: 30;\n}\n.m-auto {\n  margin: auto;\n}\n.mx-2 {\n  margin-left: 0.5rem;\n  margin-right: 0.5rem;\n}\n.ml-auto {\n  margin-left: auto;\n}\n.mr-4 {\n  margin-right: 1rem;\n}\n.mr-auto {\n  margin-right: auto;\n}\n.mt-2 {\n  margin-top: 0.5rem;\n}\n.block {\n  display: block;\n}\n.inline {\n  display: inline;\n}\n.flex {\n  display: flex;\n}\n.hidden {\n  display: none;\n}\n.h-24 {\n  height: 6rem;\n}\n.h-4 {\n  height: 1rem;\n}\n.h-40 {\n  height: 10rem;\n}\n.h-6 {\n  height: 1.5rem;\n}\n.h-64 {\n  height: 16rem;\n}\n.h-full {\n  height: 100%;\n}\n.min-h-custom {\n  min-height: 32px;\n}\n.w-0 {\n  width: 0px;\n}\n.w-0\\.5 {\n  width: 0.125rem;\n}\n.w-16 {\n  width: 4rem;\n}\n.w-20 {\n  width: 5rem;\n}\n.w-24 {\n  width: 6rem;\n}\n.w-4 {\n  width: 1rem;\n}\n.w-40 {\n  width: 10rem;\n}\n.w-6 {\n  width: 1.5rem;\n}\n.w-60 {\n  width: 15rem;\n}\n.w-64 {\n  width: 16rem;\n}\n.w-80 {\n  width: 20rem;\n}\n.w-full {\n  width: 100%;\n}\n.origin-top-left {\n  transform-origin: top left;\n}\n.transform {\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n.cursor-pointer {\n  cursor: pointer;\n}\n.resize {\n  resize: both;\n}\n.place-content-around {\n  place-content: space-around;\n}\n.items-center {\n  align-items: center;\n}\n.justify-center {\n  justify-content: center;\n}\n.justify-between {\n  justify-content: space-between;\n}\n.gap-x-2 {\n  -moz-column-gap: 0.5rem;\n       column-gap: 0.5rem;\n}\n.overflow-hidden {\n  overflow: hidden;\n}\n.overflow-x-auto {\n  overflow-x: auto;\n}\n.overflow-y-auto {\n  overflow-y: auto;\n}\n.truncate {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.whitespace-nowrap {\n  white-space: nowrap;\n}\n.break-all {\n  word-break: break-all;\n}\n.rounded-full {\n  border-radius: 9999px;\n}\n.rounded-md {\n  border-radius: 0.375rem;\n}\n.border-2 {\n  border-width: 2px;\n}\n.border-stone-400 {\n  --tw-border-opacity: 1;\n  border-color: rgb(168 162 158 / var(--tw-border-opacity));\n}\n.bg-gray-300 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(209 213 219 / var(--tw-bg-opacity));\n}\n.bg-slate-100 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(241 245 249 / var(--tw-bg-opacity));\n}\n.bg-stone-300 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(214 211 209 / var(--tw-bg-opacity));\n}\n.bg-stone-400 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(168 162 158 / var(--tw-bg-opacity));\n}\n.bg-white {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n}\n.bg-opacity-50 {\n  --tw-bg-opacity: 0.5;\n}\n.p-1 {\n  padding: 0.25rem;\n}\n.p-4 {\n  padding: 1rem;\n}\n.px-4 {\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n.py-1 {\n  padding-top: 0.25rem;\n  padding-bottom: 0.25rem;\n}\n.pb-1 {\n  padding-bottom: 0.25rem;\n}\n.text-center {\n  text-align: center;\n}\n.text-xs {\n  font-size: 0.75rem;\n  line-height: 1rem;\n}\n.text-black {\n  --tw-text-opacity: 1;\n  color: rgb(0 0 0 / var(--tw-text-opacity));\n}\n.text-gray-500 {\n  --tw-text-opacity: 1;\n  color: rgb(107 114 128 / var(--tw-text-opacity));\n}\n.line-through {\n  text-decoration-line: line-through;\n}\n.transition-all {\n  transition-property: all;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n.duration-300 {\n  transition-duration: 300ms;\n}\n.ease-in-out {\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n}\n.hover\\:opacity-10:hover {\n  opacity: 0.1;\n}\n.hover\\:shadow-md:hover {\n  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}";
+styleInject(css_248z);
+
+const ColorLegendItem = ({ color, selected, screenshot, text, onClick, }) => {
+    return (React$1.createElement("div", { onClick: onClick, className: "flex gap-x-2 min-h-custom selection:border-r-1 items-center cursor-pointer" },
+        React$1.createElement("div", { className: `w-4 h-4 rounded-full`, style: {
+                backgroundColor: color,
+            } }),
+        React$1.createElement("p", { className: `${selected
+                ? "text-black"
+                : screenshot
+                    ? "text-gray-500"
+                    : "text-gray-500 line-through"} w-60 break-all` }, text)));
+};
+
+const ColorLegend = ({ screenshot, colorKey, colorParamList, colorParam, setColorParam, colorList, }) => {
+    const [closed, setClosed] = React$1.useState(false);
+    return (React$1.createElement("div", { className: "block bg-slate-100 rounded-md mr-4 w-full mt-2" },
+        React$1.createElement("div", { className: "flex items-center justify-between w-80 p-4 cursor-pointer", onClick: () => {
+                setClosed(!closed);
+            } },
+            React$1.createElement("p", null, (colorKey !== null && colorKey !== void 0 ? colorKey : "").toUpperCase()),
+            closed ? (React$1.createElement(ArrowDownIcon$1, { className: "w-4 cursor-pointer", onClick: () => {
+                    setClosed(!closed);
+                } })) : (React$1.createElement(XMarkIcon$1, { className: "w-4 cursor-pointer", onClick: () => {
+                    setClosed(!closed);
+                } }))),
+        React$1.createElement("ul", { style: {
+                maxHeight: `${window.innerHeight - 330}px`,
+            }, className: closed
+                ? "hidden"
+                : screenshot
+                    ? "h-full px-4 overflow-hidden"
+                    : "h-full overflow-y-auto px-4 transition-all duration-300 ease-in-out" }, colorParamList === null || colorParamList === void 0 ? void 0 : colorParamList.sort((a, b) => {
+            if (a === "NaN") {
+                return 1;
+            }
+            else if (b === "NaN") {
+                return -1;
+            }
+            else {
+                return a.localeCompare(b);
+            }
+        }).map((value, index) => (React$1.createElement("li", { key: value, className: "hover:shadow-md w-full overflow-x-auto cursor-pointer transition-all duration-300 ease-in-out" },
+            React$1.createElement(ColorLegendItem, { color: value === "NaN"
+                    ? "#85b0da"
+                    : colorList[index % colorList.length], text: value, screenshot: screenshot, selected: colorParam === "" || value === colorParam, onClick: () => {
+                    if (value === colorParam) {
+                        setColorParam("");
+                    }
+                    else {
+                        setColorParam(value);
+                    }
+                } })))))));
+};
 
 const ShapeLegendItem = ({ onClick, shape, selected, screenshot, text }) => {
     const textStyle = selected
@@ -30434,56 +30440,6 @@ class Line extends Object3D {
 
 }
 
-const _start = /*@__PURE__*/ new Vector3();
-const _end = /*@__PURE__*/ new Vector3();
-
-class LineSegments extends Line {
-
-	constructor( geometry, material ) {
-
-		super( geometry, material );
-
-		this.isLineSegments = true;
-
-		this.type = 'LineSegments';
-
-	}
-
-	computeLineDistances() {
-
-		const geometry = this.geometry;
-
-		// we assume non-indexed geometry
-
-		if ( geometry.index === null ) {
-
-			const positionAttribute = geometry.attributes.position;
-			const lineDistances = [];
-
-			for ( let i = 0, l = positionAttribute.count; i < l; i += 2 ) {
-
-				_start.fromBufferAttribute( positionAttribute, i );
-				_end.fromBufferAttribute( positionAttribute, i + 1 );
-
-				lineDistances[ i ] = ( i === 0 ) ? 0 : lineDistances[ i - 1 ];
-				lineDistances[ i + 1 ] = lineDistances[ i ] + _start.distanceTo( _end );
-
-			}
-
-			geometry.setAttribute( 'lineDistance', new Float32BufferAttribute( lineDistances, 1 ) );
-
-		} else {
-
-			console.warn( 'THREE.LineSegments.computeLineDistances(): Computation only possible with non-indexed BufferGeometry.' );
-
-		}
-
-		return this;
-
-	}
-
-}
-
 /**
  * Extensible curve object.
  *
@@ -33356,6 +33312,194 @@ function addContour( vertices, contour ) {
 		vertices.push( contour[ i ].y );
 
 	}
+
+}
+
+class ShapeGeometry extends BufferGeometry {
+
+	constructor( shapes = new Shape( [ new Vector2( 0, 0.5 ), new Vector2( - 0.5, - 0.5 ), new Vector2( 0.5, - 0.5 ) ] ), curveSegments = 12 ) {
+
+		super();
+
+		this.type = 'ShapeGeometry';
+
+		this.parameters = {
+			shapes: shapes,
+			curveSegments: curveSegments
+		};
+
+		// buffers
+
+		const indices = [];
+		const vertices = [];
+		const normals = [];
+		const uvs = [];
+
+		// helper variables
+
+		let groupStart = 0;
+		let groupCount = 0;
+
+		// allow single and array values for "shapes" parameter
+
+		if ( Array.isArray( shapes ) === false ) {
+
+			addShape( shapes );
+
+		} else {
+
+			for ( let i = 0; i < shapes.length; i ++ ) {
+
+				addShape( shapes[ i ] );
+
+				this.addGroup( groupStart, groupCount, i ); // enables MultiMaterial support
+
+				groupStart += groupCount;
+				groupCount = 0;
+
+			}
+
+		}
+
+		// build geometry
+
+		this.setIndex( indices );
+		this.setAttribute( 'position', new Float32BufferAttribute( vertices, 3 ) );
+		this.setAttribute( 'normal', new Float32BufferAttribute( normals, 3 ) );
+		this.setAttribute( 'uv', new Float32BufferAttribute( uvs, 2 ) );
+
+
+		// helper functions
+
+		function addShape( shape ) {
+
+			const indexOffset = vertices.length / 3;
+			const points = shape.extractPoints( curveSegments );
+
+			let shapeVertices = points.shape;
+			const shapeHoles = points.holes;
+
+			// check direction of vertices
+
+			if ( ShapeUtils.isClockWise( shapeVertices ) === false ) {
+
+				shapeVertices = shapeVertices.reverse();
+
+			}
+
+			for ( let i = 0, l = shapeHoles.length; i < l; i ++ ) {
+
+				const shapeHole = shapeHoles[ i ];
+
+				if ( ShapeUtils.isClockWise( shapeHole ) === true ) {
+
+					shapeHoles[ i ] = shapeHole.reverse();
+
+				}
+
+			}
+
+			const faces = ShapeUtils.triangulateShape( shapeVertices, shapeHoles );
+
+			// join vertices of inner and outer paths to a single array
+
+			for ( let i = 0, l = shapeHoles.length; i < l; i ++ ) {
+
+				const shapeHole = shapeHoles[ i ];
+				shapeVertices = shapeVertices.concat( shapeHole );
+
+			}
+
+			// vertices, normals, uvs
+
+			for ( let i = 0, l = shapeVertices.length; i < l; i ++ ) {
+
+				const vertex = shapeVertices[ i ];
+
+				vertices.push( vertex.x, vertex.y, 0 );
+				normals.push( 0, 0, 1 );
+				uvs.push( vertex.x, vertex.y ); // world uvs
+
+			}
+
+			// indices
+
+			for ( let i = 0, l = faces.length; i < l; i ++ ) {
+
+				const face = faces[ i ];
+
+				const a = face[ 0 ] + indexOffset;
+				const b = face[ 1 ] + indexOffset;
+				const c = face[ 2 ] + indexOffset;
+
+				indices.push( a, b, c );
+				groupCount += 3;
+
+			}
+
+		}
+
+	}
+
+	copy( source ) {
+
+		super.copy( source );
+
+		this.parameters = Object.assign( {}, source.parameters );
+
+		return this;
+
+	}
+
+	toJSON() {
+
+		const data = super.toJSON();
+
+		const shapes = this.parameters.shapes;
+
+		return toJSON( shapes, data );
+
+	}
+
+	static fromJSON( data, shapes ) {
+
+		const geometryShapes = [];
+
+		for ( let j = 0, jl = data.shapes.length; j < jl; j ++ ) {
+
+			const shape = shapes[ data.shapes[ j ] ];
+
+			geometryShapes.push( shape );
+
+		}
+
+		return new ShapeGeometry( geometryShapes, data.curveSegments );
+
+	}
+
+}
+
+function toJSON( shapes, data ) {
+
+	data.shapes = [];
+
+	if ( Array.isArray( shapes ) ) {
+
+		for ( let i = 0, l = shapes.length; i < l; i ++ ) {
+
+			const shape = shapes[ i ];
+
+			data.shapes.push( shape.uuid );
+
+		}
+
+	} else {
+
+		data.shapes.push( shapes.uuid );
+
+	}
+
+	return data;
 
 }
 
@@ -47395,7 +47539,7 @@ class SVGLoader extends Loader {
 
 }
 
-const ScatterBoard = React$1.forwardRef(({ cameraRef = React$1.useRef(), setColorParam, setShapeParam, keyList, setListParam, twoLegend, isLegendOpen, searchItems, dataItems, colorKey, colorParam, shapeKey, shapeParam, threeD, data, technique, shapeParamList, colorParamList, cameraPosition, cameraRotation, colorList, shapeList, setErrorMessage, onVisualizeClicked, onCompareClicked, }, ref) => {
+const ScatterBoard = React$1.forwardRef(({ cameraRef = React$1.useRef(), setColorParam, setShapeParam, twoLegend, isLegendOpen, searchItems, dataItems, colorKey, colorParam, shapeKey, shapeParam, threeD, data, technique, shapeParamList, colorParamList, cameraPosition, cameraRotation, colorList, shapeList, setErrorMessage, onVisualizeClicked, onCompareClicked, }, ref) => {
     const containerRef = React$1.useRef();
     const legendRef = React$1.useRef();
     const miniContainerRef = React$1.useRef();
@@ -47421,7 +47565,7 @@ const ScatterBoard = React$1.forwardRef(({ cameraRef = React$1.useRef(), setColo
             twoLegend && (React$1.createElement("div", { className: "flex absolute right-64" },
                 React$1.createElement(ShapeLegend, { screenshot: true, shapeKey: shapeKey, shapeParamList: shapeParamList, shapeParam: shapeParam, setShapeParam: (param) => setShapeParam(param), shapeList: shapeList }))),
             React$1.createElement("div", { className: "flex absolute right-0" },
-                React$1.createElement(ColorLegend, { keyList: keyList, screenshot: true, setListParam: (param) => setListParam(param), colorKey: colorKey, colorParamList: colorParamList, colorParam: colorParam, setColorParam: (param) => setColorParam(param), colorList: colorList })))));
+                React$1.createElement(ColorLegend, { screenshot: true, colorKey: colorKey, colorParamList: colorParamList, colorParam: colorParam, setColorParam: (param) => setColorParam(param), colorList: colorList })))));
     React$1.useImperativeHandle(ref, () => ({
         downloadScreenshot() {
             createScreenshot();
@@ -47430,12 +47574,6 @@ const ScatterBoard = React$1.forwardRef(({ cameraRef = React$1.useRef(), setColo
             downloadSVG();
         },
     }));
-    const removeObjectByName = (name) => {
-        const selectedObject = sceneRef.current.getObjectByName(name);
-        if (selectedObject) {
-            sceneRef.current.remove(selectedObject);
-        }
-    };
     function createScreenshot() {
         return __awaiter$1(this, void 0, void 0, function* () {
             setLoading(true);
@@ -47505,9 +47643,9 @@ const ScatterBoard = React$1.forwardRef(({ cameraRef = React$1.useRef(), setColo
             });
         };
     });
-    function createShape(dataLength, twoLegend, scaledCoordinates, colorInScene, opacity, userData) {
-        var _a;
-        new SVGLoader();
+    function createShape(twoLegend, path, coordinates, colorInScene, opacity, userData) {
+        const loader = new SVGLoader();
+        let group;
         // const divElement = document.createElement("div");
         // divElement.innerHTML = "Info about " + userData[dataItems[0].category];
         // divElement.style.background = "red";
@@ -47534,28 +47672,62 @@ const ScatterBoard = React$1.forwardRef(({ cameraRef = React$1.useRef(), setColo
         svgCircle.style.fill = userData.color; // Color from userData
         svgCircle.style.position = "absolute";
         svgContainer.appendChild(svgCircle);
-        const geometry = new SphereGeometry(dataLength < 500 ? 0.3 : 0.2);
-        const material = new MeshBasicMaterial({
-            transparent: true,
-            color: colorInScene,
-            side: FrontSide,
-            depthTest: false,
-            opacity: opacity,
+        loader.load(
+        // resource URL
+        path, 
+        // called when the resource is loaded
+        function (data) {
+            var _a, _b;
+            if (twoLegend) {
+                const paths = data.paths;
+                group = new Group();
+                for (let i = 0; i < paths.length; i++) {
+                    const path = paths[i];
+                    const material = new MeshBasicMaterial({
+                        transparent: true,
+                        color: colorInScene,
+                        side: FrontSide,
+                        depthTest: false,
+                        opacity: opacity,
+                    });
+                    const shapes = SVGLoader.createShapes(path);
+                    for (let j = 0; j < shapes.length; j++) {
+                        const shape = shapes[j];
+                        const geometry = new ShapeGeometry(shape);
+                        // Apply scaling transformation to the geometry
+                        geometry.scale(0.01, 0.01, 1);
+                        const mesh = new Mesh(geometry, material);
+                        mesh.scale.y = -mesh.scale.y;
+                        mesh.userData = userData;
+                        group.add(mesh);
+                    }
+                }
+                group.position.set(coordinates.x, coordinates.y, (_a = coordinates.z) !== null && _a !== void 0 ? _a : 0);
+                group.rotation.set(0, 0, 0);
+                sceneRef.current.add(group);
+            }
+            else {
+                const geometry = new SphereGeometry(0.1);
+                const material = new MeshBasicMaterial({
+                    transparent: true,
+                    color: colorInScene,
+                    side: FrontSide,
+                    depthTest: false,
+                    opacity: opacity,
+                });
+                const mesh = new Mesh(geometry, material);
+                mesh.userData = userData;
+                mesh.position.set(coordinates.x, coordinates.y, (_b = coordinates.z) !== null && _b !== void 0 ? _b : 0);
+                // objArr.current.push({ divObj: mesh, divElem: divElement });
+                // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+                objArr.current.push({ divObj: mesh, svgElem: svgCircle });
+                sceneRef.current.add(mesh);
+            }
         });
-        const mesh = new Mesh(geometry, material);
-        mesh.userData = userData;
-        mesh.position.set(scaledCoordinates.x, scaledCoordinates.y, (_a = scaledCoordinates.z) !== null && _a !== void 0 ? _a : 0);
-        // objArr.current.push({ divObj: mesh, divElem: divElement });
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-        objArr.current.push({ divObj: mesh, svgElem: svgCircle });
-        sceneRef.current.add(mesh);
     }
     function calculateScaleFactor(distance) {
-        // Simple linear scaling based on distance
-        // You may need to adjust the formula to get the desired effect
-        const minScale = 0.5; // Minimum scale at maximum distance
-        const maxDistance = 60; // Adjust as per your scene's size
-        return 1 - Math.min(distance / maxDistance, 1) * (1 - minScale);
+        const maxDistance = 40; // Adjust as per your scene's size
+        return 1.5 - Math.min(distance / maxDistance, 1);
     }
     React$1.useEffect(() => {
         colorReset();
@@ -47618,7 +47790,14 @@ const ScatterBoard = React$1.forwardRef(({ cameraRef = React$1.useRef(), setColo
             // Apply the same logic for determining color and opacity
             if (colorParam !== "" &&
                 // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-                colorParam !== objData.divObj.userData.features[colorKey]) {
+                colorParam !== objData.divObj.userData[colorKey]) {
+                color = "#EEEEEE";
+                opacity = 0.4;
+                svgOpacity = 0.4;
+            }
+            if (shapeParam !== "" &&
+                // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+                shapeParam !== objData.divObj.userData[shapeKey]) {
                 color = "#EEEEEE";
                 opacity = 0.4;
                 svgOpacity = 0.4;
@@ -47626,9 +47805,9 @@ const ScatterBoard = React$1.forwardRef(({ cameraRef = React$1.useRef(), setColo
             if (searchItems.length &&
                 !searchItems.find((item) => {
                     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-                    for (const key in objData.divObj.userData.features) {
+                    for (const key in objData.divObj.userData) {
                         // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-                        if (item.name == objData.divObj.userData.features[key]) {
+                        if (item.name == objData.divObj.userData[key]) {
                             return true;
                         }
                     }
@@ -47640,7 +47819,7 @@ const ScatterBoard = React$1.forwardRef(({ cameraRef = React$1.useRef(), setColo
             }
             if (dataItems[0] &&
                 // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-                objData.divObj.userData.features[dataItems[0].category] === entityName) {
+                objData.divObj.userData[dataItems[0].category] === entityName) {
                 color = "#FD1C03";
                 opacity = 1;
                 svgOpacity = 1.0;
@@ -47674,10 +47853,17 @@ const ScatterBoard = React$1.forwardRef(({ cameraRef = React$1.useRef(), setColo
                 obj.geometry.type !== "BufferGeometry") {
                 obj.material.color.set("#16FF00");
                 obj.material.opacity = 0.8;
-                obj.geometry.type !== "BufferGeometry" &&
+                if (twoLegend) {
+                    setInfo(truncate(obj.userData[shapeKey], 30) +
+                        " " +
+                        truncate(obj.userData[colorKey], 30));
+                }
+                else {
                     setInfo(obj.userData.identifier +
                         " | " +
-                        truncate(obj.userData.features[colorKey], 30));
+                        truncate(obj.userData[colorKey], 30));
+                }
+                break;
             }
         }
     }
@@ -47800,114 +47986,6 @@ const ScatterBoard = React$1.forwardRef(({ cameraRef = React$1.useRef(), setColo
         cube.add(planeFront, planeBack, planeLeft, planeRight, planeTop, planeBottom);
         return cube;
     }
-    function createBigCube(minX, maxX, minY, maxY, minZ, maxZ) {
-        // Calculate the size and position of the cube
-        const width = maxX - minX;
-        const height = maxY - minY;
-        const depth = maxZ - minZ;
-        const centerX = (minX + maxX) / 2;
-        const centerY = (minY + maxY) / 2;
-        const centerZ = (minZ + maxZ) / 2;
-        // Create the cube
-        // const geometry = new THREE.BoxGeometry(width, height, depth);
-        // const material = new THREE.MeshBasicMaterial({
-        //   color: 0x000000,
-        //   wireframe: true,
-        //   side: THREE.FrontSide,
-        // });
-        // const cube = new THREE.Mesh(geometry, material);
-        // cube.position.set(centerX, centerY, centerZ);
-        const edgesGeometry = new BufferGeometry();
-        // Define the vertices for the edges
-        const vertices = new Float32Array([
-            // Bottom rectangle
-            -width / 2,
-            -height / 2,
-            -depth / 2,
-            width / 2,
-            -height / 2,
-            -depth / 2,
-            width / 2,
-            -height / 2,
-            -depth / 2,
-            width / 2,
-            -height / 2,
-            depth / 2,
-            width / 2,
-            -height / 2,
-            depth / 2,
-            -width / 2,
-            -height / 2,
-            depth / 2,
-            -width / 2,
-            -height / 2,
-            depth / 2,
-            -width / 2,
-            -height / 2,
-            -depth / 2,
-            // Top rectangle
-            -width / 2,
-            height / 2,
-            -depth / 2,
-            width / 2,
-            height / 2,
-            -depth / 2,
-            width / 2,
-            height / 2,
-            -depth / 2,
-            width / 2,
-            height / 2,
-            depth / 2,
-            width / 2,
-            height / 2,
-            depth / 2,
-            -width / 2,
-            height / 2,
-            depth / 2,
-            -width / 2,
-            height / 2,
-            depth / 2,
-            -width / 2,
-            height / 2,
-            -depth / 2,
-            // Vertical lines
-            -width / 2,
-            -height / 2,
-            -depth / 2,
-            -width / 2,
-            height / 2,
-            -depth / 2,
-            width / 2,
-            -height / 2,
-            -depth / 2,
-            width / 2,
-            height / 2,
-            -depth / 2,
-            width / 2,
-            -height / 2,
-            depth / 2,
-            width / 2,
-            height / 2,
-            depth / 2,
-            -width / 2,
-            -height / 2,
-            depth / 2,
-            -width / 2,
-            height / 2,
-            depth / 2,
-        ]);
-        // Add vertices to geometry
-        edgesGeometry.setAttribute("position", new BufferAttribute(vertices, 3));
-        // Create a material for the edges
-        const material = new LineBasicMaterial({ color: 0xadd8e6 });
-        // Create a line segments object to represent the edges
-        const cubeEdges = new LineSegments(edgesGeometry, material);
-        // Set the position of the cube
-        cubeEdges.position.set(centerX, centerY, centerZ);
-        cubeEdges.name = "cube";
-        return cubeEdges;
-        // return cube;
-    }
     React$1.useEffect(() => {
         const miniScene = new Scene();
         miniSceneRef.current = miniScene;
@@ -47961,7 +48039,6 @@ const ScatterBoard = React$1.forwardRef(({ cameraRef = React$1.useRef(), setColo
         miniContainerRef.current.appendChild(miniRenderer.domElement);
         miniCamera.position.z = 30;
         const scene = new Scene();
-        scene.background = new Color(0x2e2e3a);
         const camera = new PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new WebGLRenderer({ antialias: true });
         sceneRef.current = scene;
@@ -47969,36 +48046,81 @@ const ScatterBoard = React$1.forwardRef(({ cameraRef = React$1.useRef(), setColo
         renderer.setClearColor(0xffffff);
         containerRef.current.appendChild(renderer.domElement);
         rendererRef.current = renderer;
+        var xAxisMaterial = new LineBasicMaterial({ color: 0xff0000 });
+        var xAxisGeometry = new BufferGeometry().setFromPoints([
+            new Vector3(0, 0, 0),
+            new Vector3(20, 0, 0),
+        ]);
+        var xAxis = new Line(xAxisGeometry, xAxisMaterial);
+        scene.add(xAxis);
+        // Create the Y-axis line segment
+        var yAxisMaterial = new LineBasicMaterial({ color: 0x00ff00 });
+        var yAxisGeometry = new BufferGeometry().setFromPoints([
+            new Vector3(0, 0, 0),
+            new Vector3(0, 20, 0),
+        ]);
+        var yAxis = new Line(yAxisGeometry, yAxisMaterial);
+        scene.add(yAxis);
+        if (threeD) {
+            // Create the Z-axis line segment
+            var zAxisMaterial = new LineBasicMaterial({ color: 0x0000ff });
+            var zAxisGeometry = new BufferGeometry().setFromPoints([
+                new Vector3(0, 0, 0),
+                new Vector3(0, 0, 20),
+            ]);
+            var zAxis = new Line(zAxisGeometry, zAxisMaterial);
+            scene.add(zAxis);
+        }
         const middle = {
             x: 0,
             y: 0,
             z: 0,
         };
-        var coordinates = {
-            x: 0,
-            y: 0,
-            z: 0,
-        };
-        var minX = Infinity;
-        var maxX = -Infinity;
-        var minY = Infinity;
-        var maxY = -Infinity;
-        var minZ = Infinity;
-        var maxZ = -Infinity;
         data.forEach((point, index) => __awaiter$1(void 0, void 0, void 0, function* () {
-            var _a, _b;
+            var _a;
+            let coordinates;
             if (threeD) {
-                coordinates = {
-                    x: point.coordinates.x,
-                    y: point.coordinates.y,
-                    z: point.coordinates.z,
-                };
+                if (technique === "umap") {
+                    coordinates = {
+                        x: point.x_umap_3D,
+                        y: point.y_umap_3D,
+                        z: point.z_umap_3D,
+                    };
+                }
+                else if (technique === "pca") {
+                    coordinates = {
+                        x: point.x_pca_3D,
+                        y: point.y_pca_3D,
+                        z: point.z_pca_3D,
+                    };
+                }
+                else {
+                    coordinates = {
+                        x: point.x_tsne_3D,
+                        y: point.y_tsne_3D,
+                        z: point.z_tsne_3D,
+                    };
+                }
             }
             else {
-                coordinates = {
-                    x: point.coordinates.x,
-                    y: point.coordinates.y,
-                };
+                if (technique === "umap") {
+                    coordinates = {
+                        x: point.x_umap_3D,
+                        y: point.y_umap_3D,
+                    };
+                }
+                else if (technique === "pca") {
+                    coordinates = {
+                        x: point.x_pca_3D,
+                        y: point.x_pca_3D,
+                    };
+                }
+                else {
+                    coordinates = {
+                        x: point.x_tsne_2D,
+                        y: point.y_tsne_2D,
+                    };
+                }
             }
             if ((typeof coordinates.x === "undefined") == undefined ||
                 typeof coordinates.y === "undefined") {
@@ -48006,98 +48128,25 @@ const ScatterBoard = React$1.forwardRef(({ cameraRef = React$1.useRef(), setColo
                     setErrorMessage("Could not find the coordinates. Please check the CSV file.");
                 return;
             }
-            minX = Math.min(minX !== null && minX !== void 0 ? minX : Infinity, coordinates.x);
-            maxX = Math.max(maxX !== null && maxX !== void 0 ? maxX : -Infinity, coordinates.x);
-            minY = Math.min(minY !== null && minY !== void 0 ? minY : Infinity, coordinates.y);
-            maxY = Math.max(maxY !== null && maxY !== void 0 ? maxY : -Infinity, coordinates.y);
-            minZ = Math.min(minZ !== null && minZ !== void 0 ? minZ : Infinity, (_a = coordinates.z) !== null && _a !== void 0 ? _a : 0);
-            maxZ = Math.max(maxZ !== null && maxZ !== void 0 ? maxZ : -Infinity, (_b = coordinates.z) !== null && _b !== void 0 ? _b : 0);
-        }));
-        var localMinX = Infinity;
-        var localMaxX = -Infinity;
-        var localMinY = Infinity;
-        var localMaxY = -Infinity;
-        var localMinZ = Infinity;
-        var localMaxZ = -Infinity;
-        var scaledCoordinates = {
-            x: 0,
-            y: 0,
-            z: 0,
-        };
-        data.forEach((point, index) => __awaiter$1(void 0, void 0, void 0, function* () {
-            if (threeD) {
-                coordinates = {
-                    x: point.coordinates.x,
-                    y: point.coordinates.y,
-                    z: point.coordinates.z,
-                };
-            }
-            else {
-                coordinates = {
-                    x: point.coordinates.x,
-                    y: point.coordinates.y,
-                };
-            }
-            if ((typeof coordinates.x === "undefined") == undefined ||
-                typeof coordinates.y === "undefined") {
-                setErrorMessage &&
-                    setErrorMessage("Could not find the coordinates. Please check the CSV file.");
-                return;
-            }
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-            const scalePoint = (point, min, max, newMin, newMax) => {
-                const result = ((point - min) / (max - min)) * (newMax - newMin) + newMin;
-                return result;
-            };
-            const scaledX = scalePoint(coordinates.x, minX, maxX, -20, 20);
-            const scaledY = scalePoint(coordinates.y, minY, maxY, -20, 20);
-            const scaledZ = threeD
-                ? scalePoint(coordinates.z, minZ, maxZ, -20, 20)
-                : 0;
-            localMinX = Math.min(localMinX !== null && localMinX !== void 0 ? localMinX : Infinity, scaledX);
-            localMaxX = Math.max(localMaxX !== null && localMaxX !== void 0 ? localMaxX : -Infinity, scaledX);
-            localMinY = Math.min(localMinY !== null && localMinY !== void 0 ? localMinY : Infinity, scaledY);
-            localMaxY = Math.max(localMaxY !== null && localMaxY !== void 0 ? localMaxY : -Infinity, scaledY);
-            localMinZ = Math.min(localMinZ !== null && localMinZ !== void 0 ? localMinZ : Infinity, scaledZ !== null && scaledZ !== void 0 ? scaledZ : 0);
-            localMaxZ = Math.max(localMaxZ !== null && localMaxZ !== void 0 ? localMaxZ : -Infinity, scaledZ !== null && scaledZ !== void 0 ? scaledZ : 0);
-        }));
-        data.forEach((point, index) => __awaiter$1(void 0, void 0, void 0, function* () {
-            var _c, _d, _e;
-            if (threeD) {
-                coordinates = {
-                    x: point.coordinates.x,
-                    y: point.coordinates.y,
-                    z: point.coordinates.z,
-                };
-            }
-            else {
-                coordinates = {
-                    x: point.coordinates.x,
-                    y: point.coordinates.y,
-                };
-            }
-            if ((typeof point.coordinates.x === "undefined") == undefined ||
-                typeof point.coordinates.y === "undefined") {
-                setErrorMessage &&
-                    setErrorMessage("Could not find the coordinates. Please check the CSV file.");
-                return;
-            }
-            let color = point.features[colorKey] === "NaN"
+            let shape = shapeList[shapeParamList.indexOf(point[shapeKey]) % shapeList.length];
+            let color = point[colorKey] === "NaN"
                 ? "#9CB4CC"
-                : colorList[colorParamList.indexOf(point.features[colorKey]) %
-                    colorList.length];
-            var colorInScene = "";
-            if (point.coordinates.x && point.coordinates.y) {
-                colorInScene = color;
+                : colorList[colorParamList.indexOf(point[colorKey]) % colorList.length];
+            if (coordinates.x && coordinates.y) {
+                let colorInScene = color;
                 let opacity = 0.8;
-                if (colorParam !== "" && colorParam !== point.features[colorKey]) {
+                if (colorParam !== "" && colorParam !== point[colorKey]) {
+                    colorInScene = "#EEEEEE";
+                    opacity = 0.4;
+                }
+                if (shapeParam !== "" && shapeParam !== point[shapeKey]) {
                     colorInScene = "#EEEEEE";
                     opacity = 0.4;
                 }
                 if (searchItems.length &&
                     !searchItems.find((item) => {
-                        for (const key in point.features) {
-                            if (item.name == point.features[key]) {
+                        for (const key in point) {
+                            if (item.name == point[key]) {
                                 return true;
                             }
                         }
@@ -48106,48 +48155,21 @@ const ScatterBoard = React$1.forwardRef(({ cameraRef = React$1.useRef(), setColo
                     colorInScene = "#EEEEEE";
                     opacity = 0.4;
                 }
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-                const scalePoint = (point, min, max, newMin, newMax) => {
-                    const result = ((point - min) / (max - min)) * (newMax - newMin) + newMin;
-                    return result;
-                };
-                const maxExtent = 20;
-                const deltaX = maxX - minX;
-                const deltaY = maxY - minY;
-                const deltaZ = maxZ - minZ;
-                var maxDelta = Math.max(deltaX, deltaY, deltaZ);
-                const scaledX = scalePoint(coordinates.x, minX, maxX, -((deltaX / maxDelta) * maxExtent), (deltaX / maxDelta) * maxExtent);
-                const scaledY = scalePoint(coordinates.y, minY, maxY, -((deltaY / maxDelta) * maxExtent), (deltaY / maxDelta) * maxExtent);
-                const scaledZ = threeD
-                    ? scalePoint(coordinates.z, minZ, maxZ, -((deltaZ / maxDelta) * maxExtent), (deltaZ / maxDelta) * maxExtent)
-                    : 0;
-                scaledCoordinates.x = scaledX;
-                scaledCoordinates.y = scaledY;
-                scaledCoordinates.z = scaledZ;
-                const dataLength = data.length;
-                createShape(dataLength, twoLegend, (scaledCoordinates = {
-                    x: scaledX,
-                    y: scaledY,
-                    z: scaledZ,
-                }), colorInScene, opacity, Object.assign({ color: color, index: index }, point));
+                createShape(twoLegend, shape, coordinates, colorInScene, opacity, Object.assign({ color: color, index: index }, point));
+                let maxX = -Infinity;
+                if (objArr.current && objArr.current.length > 0) {
+                    maxX = Math.max(
+                    // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+                    ...objArr.current.map((objData) => objData.position.x));
+                }
+                console.log("Maximum X coordinate:", maxX);
             }
             middle.x += coordinates.x;
             middle.y += coordinates.y;
-            middle.z += (_c = coordinates.z) !== null && _c !== void 0 ? _c : 0;
-            minX = Math.min(minX !== null && minX !== void 0 ? minX : Infinity, coordinates.x);
-            maxX = Math.max(maxX !== null && maxX !== void 0 ? maxX : -Infinity, coordinates.x);
-            minY = Math.min(minY !== null && minY !== void 0 ? minY : Infinity, coordinates.y);
-            maxY = Math.max(maxY !== null && maxY !== void 0 ? maxY : -Infinity, coordinates.y);
-            minZ = Math.min(minZ !== null && minZ !== void 0 ? minZ : Infinity, (_d = coordinates.z) !== null && _d !== void 0 ? _d : 0);
-            maxZ = Math.max(maxZ !== null && maxZ !== void 0 ? maxZ : -Infinity, (_e = coordinates.z) !== null && _e !== void 0 ? _e : 0);
-            if (index === data.length - 1) {
-                const cubeBig = createBigCube(localMinX, localMaxX, localMinY, localMaxY, localMinZ, localMaxZ);
-                sceneRef.current.add(cubeBig);
-            }
-            else {
-                removeObjectByName("cube");
-            }
+            middle.z += (_a = coordinates.z) !== null && _a !== void 0 ? _a : 0;
         }));
+        // const bigCube = middle.x !== 0 ? createBigCube() : null;
+        // bigCube && scene.add(bigCube);
         middle.x /= data.length;
         middle.y /= data.length;
         middle.z /= data.length;
@@ -48174,7 +48196,7 @@ const ScatterBoard = React$1.forwardRef(({ cameraRef = React$1.useRef(), setColo
         //   console.log(controls);
         // });
         controls.minDistance = 0;
-        controls.maxDistance = 60;
+        controls.maxDistance = 40;
         // controls.addEventListener("change", () => {
         //   objArr.current.forEach(function (objData) {
         //     const proj = toScreenPosition(
@@ -48215,6 +48237,9 @@ const ScatterBoard = React$1.forwardRef(({ cameraRef = React$1.useRef(), setColo
             requestAnimationFrame(animate);
             camera.position.copy(miniCamera.position);
             camera.rotation.copy(miniCamera.rotation);
+            // if (cubeBig) {
+            //   cubeBig.lookAt(camera.position);
+            // }
             controls.update();
             controls.target.distanceTo(controls.object.position);
             sceneRef.current.traverse((obj) => {
@@ -48256,6 +48281,46 @@ const ScatterBoard = React$1.forwardRef(({ cameraRef = React$1.useRef(), setColo
         twoLegend,
         threeD,
     ]);
+    // function downloadSVG() {
+    //   updateSvgAxes(cameraRef.current, rendererRef.current);
+    //   objArr.current.forEach(function (objData) {
+    //     const proj = toScreenPosition(
+    //       // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+    //       objData.divObj,
+    //       cameraRef.current
+    //       // rendererRef.current
+    //     );
+    //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+    //     objData.svgElem.setAttribute("cx", proj.x);
+    //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+    //     objData.svgElem.setAttribute("cy", proj.y);
+    //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+    //     const distance = objData.divObj.position.distanceTo(
+    //       cameraRef.current.position
+    //     );
+    //     const scaleFactor = calculateScaleFactor(distance);
+    //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+    //     objData.svgElem.setAttribute("r", 5 * scaleFactor);
+    //   });
+    //   const svgContainer = document.getElementById("svg-container");
+    //   if (!svgContainer) {
+    //     console.error("SVG container not found");
+    //     return;
+    //   }
+    //   // Serialize the SVG content
+    //   const serializer = new XMLSerializer();
+    //   const svgString = serializer.serializeToString(svgContainer);
+    //   // Create a Blob from the SVG string
+    //   const blob = new Blob([svgString], { type: "image/svg+xml" });
+    //   // Create a download link
+    //   const downloadLink = document.createElement("a");
+    //   downloadLink.href = URL.createObjectURL(blob);
+    //   downloadLink.download = "scatterplot.svg";
+    //   // Append the link to the body, click it, and then remove it
+    //   document.body.appendChild(downloadLink);
+    //   downloadLink.click();
+    //   document.body.removeChild(downloadLink);
+    // }
     function drawSVG() {
         objArr.current.forEach(function (objData) {
             const proj = toScreenPosition(
@@ -48334,18 +48399,15 @@ const ScatterBoard = React$1.forwardRef(({ cameraRef = React$1.useRef(), setColo
             twoLegend && (React$1.createElement("div", { className: "flex absolute right-64 top-24" },
                 React$1.createElement(ShapeLegend, { screenshot: false, shapeKey: shapeKey, shapeParamList: shapeParamList, shapeParam: shapeParam, setShapeParam: (param) => setShapeParam(param), shapeList: shapeList }))),
             React$1.createElement("div", { className: "flex absolute right-0 top-32" },
-                React$1.createElement(ColorLegend, { keyList: keyList, setListParam: (param) => setListParam(param), screenshot: false, colorKey: colorKey, colorParamList: colorParamList, colorParam: colorParam, setColorParam: (param) => setColorParam(param), colorList: colorList }))),
+                React$1.createElement(ColorLegend, { screenshot: false, colorKey: colorKey, colorParamList: colorParamList, colorParam: colorParam, setColorParam: (param) => setColorParam(param), colorList: colorList }))),
         React$1.createElement("div", { className: "absolute z-20", style: {
                 top: controllerPosition.top,
                 left: controllerPosition.left,
             } },
             React$1.createElement(Controller, { controllerShown: controllerShown, onVisualizeClicked: () => onVisualizeClicked && onVisualizeClicked(entityName), onCompareClicked: () => onCompareClicked && onCompareClicked(entityName) })),
-        React$1.createElement("div", { className: threeD ? "absolute z-0 left-0 bottom-16 flex" : "hidden" },
+        React$1.createElement("div", { className: threeD ? "absolute z-20 left-0 bottom-96 flex" : "hidden" },
             React$1.createElement("div", { className: "h-24 w-24", onClick: onClickMini, onPointerMove: onPointerMoveMini, ref: miniContainerRef }),
-            React$1.createElement("p", { className: "absolute bottom-12 left-24 w-20" }, axisName)),
-        React$1.createElement("div", { className: "flex absolute bottom-12 right-0 m-8 z-20" },
-            React$1.createElement("div", null,
-                React$1.createElement("p", { className: "text-white" }, info)))));
+            React$1.createElement("p", { className: "absolute bottom-12 left-24 w-20" }, axisName))));
 });
 
 exports.ColorLegend = ColorLegend;

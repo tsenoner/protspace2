@@ -1,4 +1,4 @@
-import { Box, Spinner } from "@chakra-ui/react";
+import { Box, Spinner, useColorMode } from "@chakra-ui/react";
 import { ArrowDownIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import React, { useState } from "react";
 import { Item } from "../data";
@@ -49,6 +49,7 @@ function SearchItem({ item, clickHandler }: SearchItemProps) {
 }
 
 export default function EntitySearch() {
+  const { colorMode } = useColorMode();
   const dispatch = useAppDispatch();
   const searchItems = useAppSelector((state) => state.settings.searchItems);
   const keyList = useAppSelector((state) => state.settings.keyList);
@@ -61,14 +62,27 @@ export default function EntitySearch() {
   return (
     <main
       className="z-20 absolute top-20 w-82 bg-white"
-      style={{ left: "8px", background: "#f1f5f9", borderRadius: "8px" }}
+      style={{
+        left: "8px",
+        borderRadius: "8px",
+      }}
     >
-      <div className="p-1">
+      <div
+        className="p-1 rounded-md shadow-md"
+        style={{
+          backgroundColor: colorMode === "light" ? "#F0F2F5" : "#101827",
+        }}
+      >
         <div
           className="flex w-80 cursor-pointer"
           onClick={() => setClosed(!closed)}
         >
-          <p className={closed ? "p-2" : "p-2 mr-auto pl-0"}>Search</p>
+          <p
+            className={closed ? "p-2" : "p-2 mr-auto pl-0"}
+            style={{ color: colorMode === "light" ? "#1F2937" : "white" }}
+          >
+            Search
+          </p>
           {closed ? (
             <ArrowDownIcon
               className="w-4 mx-2"

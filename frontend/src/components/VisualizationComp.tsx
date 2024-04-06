@@ -1,5 +1,4 @@
 import {
-  ArrowDownOnSquareIcon,
   ArrowsPointingInIcon,
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
@@ -15,7 +14,8 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { BsFiletypeSvg } from "react-icons/bs";
+import { BsFiletypePng, BsFiletypeSvg } from "react-icons/bs";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { PropagateLoader } from "react-spinners";
 import { CSSTransition } from "react-transition-group";
 
@@ -25,22 +25,30 @@ import { colorList, shapeList } from "../helpers/constants";
 import { useAppDispatch, useAppSelector } from "../helpers/hooks";
 import {
   fetchAndSetData,
+  setCSVFilePath,
   setCameraPosition,
   setCameraRotation,
   setColorAndShapeKey,
   setColorKey,
+  setColorList,
   setColorParam,
   setColorParamList,
+  setCustomFeature,
   setData,
+  setDataItems,
   setErrorMessage,
   setIsLegendOpen,
   setIsLoading,
   setKeyList,
+  setPdbExists,
   setProjections,
   setProteinData,
   setSearchItems,
   setSelectedMols,
+  setShapeKey,
   setShapeParam,
+  setShapeParamList,
+  setTechnique,
   setThreeD,
 } from "../redux/actions/settings";
 import EntitySearch from "./EntitySearch";
@@ -48,14 +56,17 @@ import ErrorModal from "./ErrorModal";
 import { FileUploadFormModal } from "./FileUploadFormModal";
 import Nav from "./Nav";
 // import MoleculeViewer, { MoleculeViewerRef } from "./MoleculeViewer";
+import { useColorMode } from "@chakra-ui/react";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { TransitionChildren } from "react-transition-group/Transition";
 import { Item } from "../data";
+import { csvToJson } from "../helpers/csvToJson";
 import MolstarViewer from "./MolstarViewer";
 // import Reader from "./Reader";
 
 const VisualizationComp = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
   const cameraRef = useRef() as MutableRefObject<THREE.PerspectiveCamera>;
   const scatterRef = createRef<ScatterBoardRef>();
   // const moleculeViewerRef = createRef<MoleculeViewerRef>();
@@ -74,7 +85,7 @@ const VisualizationComp = () => {
   function exportFileV2() {
     const jsonData = {
       visualization_state: {
-        default_color_scheme: "",
+        default_color_scheme: settings.default_color_scheme,
         camera: [
           {
             position: {
@@ -94,8 +105,10 @@ const VisualizationComp = () => {
         colorParamList: settings.colorParamList,
         colorParam: settings.colorParam,
         colorKey: settings.colorKey,
+        colorList: settings.colorList,
         keyList: settings.keyList,
         technique: settings.technique,
+        customFeatures: settings.customFeatures,
         legend: {
           selected_feature: "settings.legend.selected_feature",
           mapping: "settings.legend.mapping",
@@ -104,7 +117,6 @@ const VisualizationComp = () => {
         projection: settings.highlighting.selectedProjection,
         structures: settings.highlighting.shownStructures,
       },
-
       protein_data: settings.protein_data,
       projections: settings.projections,
     };
@@ -115,7 +127,7 @@ const VisualizationComp = () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "customData.json"; // You can customize the filename here
+    link.download = "protspace.json";
     link.click();
 
     // Clean up
@@ -170,14 +182,6 @@ const VisualizationComp = () => {
     }
   };
 
-  // const handleFileChangeCSV = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = event.target.files?.[0];
-  //   if (file) {
-  //     dispatch(setIsLoading(true));
-  //     fetchDataFromFile(file);
-  //   }
-  // };
-
   const readFileContentsJSON = (file: File) => {
     const reader = new FileReader();
     reader.onload = (event) => {
@@ -195,90 +199,90 @@ const VisualizationComp = () => {
     reader.readAsText(file);
   };
 
-  // const fetchDataFromFile = async (file: File) => {
-  //   const reader = new FileReader();
+  const fetchDataFromFile = async (file: File) => {
+    const reader = new FileReader();
 
-  //   reader.onload = async (event) => {
-  //     const fileContents = event.target?.result;
-  //     if (fileContents) {
-  //       try {
-  //         const json = csvToJson(fileContents as string);
-  //         const data = JSON.parse(JSON.stringify(json, null, 2));
-  //         console.log("data: ", data);
-  //         const items: Item[] = [];
-  //         const colorParamList: string[] = [];
-  //         const shapeParamList: string[] = [];
-  //         const keys = Object.keys(data[0]).filter(
-  //           (item: any) => !Number(data[0][item])
-  //         );
-  //         const colorKey = keys[1];
-  //         const shapeKey = keys[2];
-  //         const newData = data.map((item: any) => {
-  //           const newItem = {
-  //             ...item,
-  //           }; // Create a copy of the current item
-  //           for (const key in newItem) {
-  //             if (
-  //               newItem.hasOwnProperty(key) &&
-  //               typeof newItem[key] === "string" &&
-  //               newItem[key] === ""
-  //             ) {
-  //               newItem[key] = "NaN";
-  //             }
-  //           }
-  //           return newItem;
-  //         });
+    reader.onload = async (event) => {
+      const fileContents = event.target?.result;
+      if (fileContents) {
+        try {
+          const json = csvToJson(fileContents as string);
+          const data = JSON.parse(JSON.stringify(json, null, 2));
+          console.log("data: ", data);
+          const items: Item[] = [];
+          const colorParamList: string[] = [];
+          const shapeParamList: string[] = [];
+          const keys = Object.keys(data[0]).filter(
+            (item: any) => !Number(data[0][item])
+          );
+          const colorKey = keys[1];
+          const shapeKey = keys[2];
+          const newData = data.map((item: any) => {
+            const newItem = {
+              ...item,
+            }; // Create a copy of the current item
+            for (const key in newItem) {
+              if (
+                newItem.hasOwnProperty(key) &&
+                typeof newItem[key] === "string" &&
+                newItem[key] === ""
+              ) {
+                newItem[key] = "NaN";
+              }
+            }
+            return newItem;
+          });
 
-  //         newData.forEach((element: any) => {
-  //           for (const key in element) {
-  //             const value = element[key];
-  //             if (
-  //               typeof value === "string" &&
-  //               items.filter((e) => e.category === key && e.name === value)
-  //                 .length === 0
-  //             ) {
-  //               if (key === colorKey) {
-  //                 items.push({
-  //                   category: key,
-  //                   color: colorList[colorParamList.length % colorList.length],
-  //                   name: value,
-  //                 });
-  //                 colorParamList.push(value);
-  //               } else if (key === shapeKey) {
-  //                 items.push({
-  //                   category: key,
-  //                   img: shapeList[shapeParamList.length % shapeList.length],
-  //                   name: value,
-  //                 });
-  //                 shapeParamList.push(value);
-  //               } else {
-  //                 items.push({ category: key, name: value });
-  //               }
-  //             }
-  //           }
-  //         });
-  //         dispatch(setCSVFilePath(""));
-  //         dispatch(setData(newData));
-  //         dispatch(setDataItems(items));
-  //         dispatch(setShapeParamList(shapeParamList));
-  //         dispatch(setColorParamList(colorParamList));
-  //         dispatch(setKeyList(keys));
-  //         dispatch(setColorKey(colorKey));
-  //         dispatch(setShapeKey(shapeKey));
-  //         dispatch(setColorParam(""));
-  //         dispatch(setShapeParam(""));
-  //         dispatch(setSelectedMols([]));
-  //         dispatch(setPdbExists(false));
-  //         dispatch(setSearchItems([]));
-  //         dispatch(setIsLoading(false));
-  //       } catch (error) {
-  //         console.error("Error parsing CSV:", error);
-  //         dispatch(setIsLoading(false));
-  //       }
-  //     }
-  //   };
-  //   reader.readAsText(file);
-  // };
+          newData.forEach((element: any) => {
+            for (const key in element) {
+              const value = element[key];
+              if (
+                typeof value === "string" &&
+                items.filter((e) => e.category === key && e.name === value)
+                  .length === 0
+              ) {
+                if (key === colorKey) {
+                  items.push({
+                    category: key,
+                    color: colorList[colorParamList.length % colorList.length],
+                    name: value,
+                  });
+                  colorParamList.push(value);
+                } else if (key === shapeKey) {
+                  items.push({
+                    category: key,
+                    img: shapeList[shapeParamList.length % shapeList.length],
+                    name: value,
+                  });
+                  shapeParamList.push(value);
+                } else {
+                  items.push({ category: key, name: value });
+                }
+              }
+            }
+          });
+          dispatch(setCSVFilePath(""));
+          dispatch(setData(newData));
+          dispatch(setDataItems(items));
+          dispatch(setShapeParamList(shapeParamList));
+          dispatch(setColorParamList(colorParamList));
+          dispatch(setKeyList(keys));
+          dispatch(setColorKey(colorKey));
+          dispatch(setShapeKey(shapeKey));
+          dispatch(setColorParam(""));
+          dispatch(setShapeParam(""));
+          dispatch(setSelectedMols([]));
+          dispatch(setPdbExists(false));
+          dispatch(setSearchItems([]));
+          dispatch(setIsLoading(false));
+        } catch (error) {
+          console.error("Error parsing CSV:", error);
+          dispatch(setIsLoading(false));
+        }
+      }
+    };
+    reader.readAsText(file);
+  };
 
   // function importFile(parsedObject: any) {
   //   dispatch(setTechnique(parsedObject.technique ?? ""));
@@ -319,7 +323,23 @@ const VisualizationComp = () => {
   // }
 
   function importFileV2(parsedObject: any) {
-    const selectedProjection = parsedObject.visualization_state.technique ?? 0;
+    dispatch(setIsLoading(true));
+    dispatch(setData([]));
+    dispatch(setKeyList([]));
+    dispatch(setThreeD(false));
+    dispatch(setColorKey(""));
+    dispatch(setColorParam(""));
+    dispatch(setColorParamList([]));
+    dispatch(setSearchItems([]));
+    dispatch(setColorList(colorList));
+
+    dispatch(setProjections([]));
+    dispatch(setProteinData([]));
+
+    const selectedProjection =
+      (parsedObject.visualization_state &&
+        parsedObject.visualization_state.technique) ??
+      0;
     parsedObject.projections[selectedProjection].data.forEach(
       (element: any) => {
         element = Object.assign(
@@ -329,9 +349,15 @@ const VisualizationComp = () => {
       }
     );
 
+    let ifColorParamListEmpty = false;
     const items: Item[] = [];
+    if (!parsedObject.visualization_state) {
+      ifColorParamListEmpty = true;
+    }
     const colorParamList: string[] =
-      parsedObject.visualization_state.colorParamList ?? [];
+      (parsedObject.visualization_state &&
+        parsedObject.visualization_state.colorParamList) ??
+      [];
     const keys = Object.keys(
       parsedObject.projections[selectedProjection].data[0].features
     ).filter(
@@ -346,13 +372,9 @@ const VisualizationComp = () => {
         const newItem = {
           ...item,
         }; // Create a copy of the current item
-        for (const key in newItem) {
-          if (
-            newItem.hasOwnProperty(key) &&
-            typeof newItem[key] === "string" &&
-            newItem[key] === ""
-          ) {
-            newItem[key] = "NaN";
+        for (const key in newItem.features) {
+          if (newItem.features[key] === "") {
+            newItem.features[key] = "NaN";
           }
         }
         return newItem;
@@ -363,9 +385,8 @@ const VisualizationComp = () => {
       for (const key in element.features) {
         const value = element.features[key];
         if (
-          typeof value === "string" &&
           items.filter((e) => e.category === key && e.name === value).length ===
-            0
+          0
         ) {
           if (key === colorKey) {
             items.push({
@@ -373,13 +394,32 @@ const VisualizationComp = () => {
               color: colorList[colorParamList.length % colorList.length],
               name: value,
             });
-            colorParamList.push(value);
+            ifColorParamListEmpty && colorParamList.push(value);
           } else {
             items.push({ category: key, name: value });
           }
         }
       }
     });
+
+    const updatedDataItems = parsedObject.visualization_state?.customFeatures
+      ? settings.dataItems.map((item: { name: any; category: any }) => {
+          const customization =
+            parsedObject.visualization_state?.customFeatures.find(
+              (custom: { featureName: any; category: any }) =>
+                custom.featureName === item.name &&
+                custom.category === item.category
+            );
+          if (customization) {
+            return {
+              ...item,
+              name: customization.customName,
+              color: customization.color,
+            };
+          }
+          return item;
+        })
+      : null;
 
     dispatch(setData(parsedObject.projections[selectedProjection].data));
     dispatch(
@@ -393,35 +433,92 @@ const VisualizationComp = () => {
       setThreeD(parsedObject.projections[selectedProjection].dimensions === 3)
     );
     dispatch(
-      setColorKey(parsedObject.visualization_state.colorKey ?? "major_group")
+      setColorKey(
+        (parsedObject.visualization_state &&
+          parsedObject.visualization_state.colorKey) ??
+          "major_group"
+      )
     );
-    dispatch(setColorParam(parsedObject.visualization_state.colorParam ?? ""));
-    dispatch(setColorParamList(colorParamList));
+    dispatch(setColorParam(parsedObject.visualization_state?.colorParam ?? ""));
     dispatch(
-      setSearchItems(parsedObject.visualization_state.searchItems ?? [])
+      setSearchItems(parsedObject.visualization_state?.searchItems ?? [])
     );
 
     dispatch(setProjections(parsedObject.projections));
     dispatch(setProteinData(parsedObject.protein_data));
+    dispatch(setTechnique(parsedObject.visualization_state?.technique ?? 0));
+
+    let customFeatures = parsedObject.visualization_state?.customFeatures;
+    const sortedCustomFeatures = Array.isArray(customFeatures)
+      ? customFeatures.sort(
+          (a: { customName: string }, b: { customName: any }) =>
+            a.customName.localeCompare(b.customName)
+        )
+      : [];
+
+    dispatch(setCustomFeature(sortedCustomFeatures));
+
+    const filteredColorParamList = sortedCustomFeatures.filter(
+      (feature: { category: string }) =>
+        feature.category === parsedObject.visualization_state?.colorKey
+    );
+
+    const orderedColorParamList = filteredColorParamList.map(
+      (feature: { featureName: string }) => feature.featureName
+    );
 
     dispatch(
-      setCameraPosition(
-        new Vector3(
-          parsedObject.visualization_state.camera[0].position.x,
-          parsedObject.visualization_state.camera[0].position.y,
-          parsedObject.visualization_state.camera[0].position.z
-        )
+      setColorParamList(
+        filteredColorParamList.length > 0
+          ? orderedColorParamList
+          : colorParamList
       )
     );
-    dispatch(
-      setCameraRotation(
-        new Vector3(
-          parsedObject.visualization_state.camera[0].position.x,
-          parsedObject.visualization_state.camera[0].position.y,
-          parsedObject.visualization_state.camera[0].position.z
+    // dispatch(
+    //   setColorList(
+    //     (parsedObject.visualization_state &&
+    //       parsedObject.visualization_state.colorList) ??
+    //       settings.colorList
+    //   )
+    // );
+    dispatch(setDataItems(updatedDataItems ?? []));
+
+    if (!parsedObject.visualization_state) {
+      dispatch(
+        setCameraPosition(
+          new Vector3(0.05273795378094992, 3.473258577458065, 59.89936304805207)
         )
-      )
-    );
+      );
+
+      dispatch(
+        setCameraRotation(
+          new Vector3(
+            -0.05792004425389763,
+            0.0008789660095279366,
+            0.00005096674957453894
+          )
+        )
+      );
+    } else {
+      dispatch(
+        setCameraPosition(
+          new Vector3(
+            parsedObject.visualization_state.camera[0].position.x,
+            parsedObject.visualization_state.camera[0].position.y,
+            parsedObject.visualization_state.camera[0].position.z
+          )
+        )
+      );
+      dispatch(
+        setCameraRotation(
+          new Vector3(
+            parsedObject.visualization_state.camera[0].position.x,
+            parsedObject.visualization_state.camera[0].position.y,
+            parsedObject.visualization_state.camera[0].position.z
+          )
+        )
+      );
+    }
     // dispatch(
     //   setSearchItems(
     //     parsedObject.visualization_state.highlighting.search_selection ?? []
@@ -430,12 +527,23 @@ const VisualizationComp = () => {
     dispatch(setIsLoading(false));
   }
 
-  // const { colorKey, keyList } = useAppSelector((state) => state.settings);
+  useEffect(() => {
+    const handleMessage = (event: any) => {
+      if (event.data.source === "colab") {
+        // Assuming `event.data.content` contains your JSON object
+        const parsedObject = event.data.content;
+        processColabData(parsedObject); // Process the data as needed
+      }
+    };
 
-  // const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
-  //   const selectedValue = event.target.value;
-  //   dispatch(setColorAndShapeKey(selectedValue, ""));
-  // };
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
+
+  const processColabData = (parsedObject: any) => {
+    dispatch(setIsLoading(true));
+    importFileV2(parsedObject.data);
+  };
 
   return (
     <div className="h-screen w-screen overflow-hidden">
@@ -463,7 +571,9 @@ const VisualizationComp = () => {
               paddingBottom: "24px",
             }}
           >
-            <span style={{ fontSize: "20px" }}>Analysis in progress...</span>
+            <span style={{ fontSize: "20px", color: "black" }}>
+              Analysis in progress...
+            </span>
             <div
               style={{
                 width: "240px",
@@ -474,46 +584,25 @@ const VisualizationComp = () => {
             >
               <PropagateLoader color={"#0066bd"} loading={true} />
             </div>
-            {/* <Progress
-              color={"#0066bd"}
-              isIndeterminate
-              height={4}
-              width={300}
-              borderRadius={10}
-              marginTop={4}
-              marginBottom={4}
-            /> */}
+
             <span
-              style={{ display: "flex", width: "100%", placeContent: "center" }}
+              style={{
+                display: "flex",
+                width: "100%",
+                placeContent: "center",
+                color: "black",
+              }}
             >
               Time Remaining: <strong> &nbsp;1 minute</strong>
             </span>
-            {/* <div className="cancelButton">
-              <button onClick={() => dispatch(setIsLoading(false))}>
-                Cancel Analysis
-              </button>
-            </div> */}
           </div>
         </div>
         <EntitySearch />
-        {/* <Reader /> */}
-        {/* <Box className="z-20 absolute top-16 w-80 m-4 right-0">
-          <Select
-            variant="filled"
-            value={colorKey}
-            onChange={handleSelectChange}
-          >
-            {keyList.map((option: string, index: number) => (
-              <option key={index} value={option}>
-                {option.toUpperCase()}
-              </option>
-            ))}
-          </Select>
-        </Box> */}
         <div className="h-full">
           <div className="bg-white h-full">
             <div className="absolute z-0 top-0 left-0">
               <ScatterBoard
+                lightMode={colorMode === "light"}
                 cameraRef={cameraRef}
                 setColorParam={(param: string) =>
                   dispatch(setColorParam(param))
@@ -536,11 +625,76 @@ const VisualizationComp = () => {
                 data={settings.data}
                 technique={settings.technique}
                 shapeParamList={settings.shapeParamList}
-                colorParamList={settings.colorParamList}
+                colorParamList={
+                  settings.colorParamList &&
+                  settings.colorParamList.sort((a: string, b: any) =>
+                    a.localeCompare(b)
+                  )
+                }
                 cameraPosition={settings.cameraPosition}
                 cameraRotation={settings.cameraRotation}
                 dataItems={settings.dataItems}
-                colorList={colorList}
+                colorList={settings.colorList}
+                customFeatures={settings.customFeatures}
+                setCustomFeatures={(value: any) => {
+                  const mergedCustomFeatures = [...settings.customFeatures];
+
+                  value.forEach(
+                    (newFeature: { featureName: string; category: string }) => {
+                      const index = mergedCustomFeatures.findIndex(
+                        (feature) =>
+                          feature.featureName === newFeature.featureName &&
+                          feature.category === newFeature.category
+                      );
+                      if (index !== -1) {
+                        // Update existing feature
+                        mergedCustomFeatures[index] = newFeature;
+                      } else {
+                        // Add new feature
+                        mergedCustomFeatures.push(newFeature);
+                      }
+                    }
+                  );
+                  dispatch(setCustomFeature(mergedCustomFeatures));
+                  const updatedDataItems = settings.dataItems.map(
+                    (item: { name: any; category: any }) => {
+                      const customization = mergedCustomFeatures.find(
+                        (custom) =>
+                          custom.featureName === item.name &&
+                          custom.category === item.category
+                      );
+                      if (customization) {
+                        return {
+                          ...item,
+                          name: customization.customName,
+                          color: customization.color,
+                        };
+                      }
+                      return item;
+                    }
+                  );
+
+                  const updatedSearchItems = settings.searchItems.map(
+                    (item: { name: any; category: any }) => {
+                      const customization = mergedCustomFeatures.find(
+                        (custom) =>
+                          custom.featureName === item.name &&
+                          custom.category === item.category
+                      );
+                      if (customization) {
+                        return {
+                          ...item,
+                          name: customization.customName,
+                          color: customization.color,
+                        };
+                      }
+                      return item;
+                    }
+                  );
+
+                  dispatch(setDataItems(updatedDataItems));
+                  dispatch(setSearchItems(updatedSearchItems));
+                }}
                 shapeList={shapeList}
                 setErrorMessage={function (value: string): void {
                   dispatch(setErrorMessage(value));
@@ -559,9 +713,6 @@ const VisualizationComp = () => {
                   }
                 }}
               />
-              {/* {settings.selectedMols && (
-                <MoleculeViewer ref={moleculeViewerRef} />
-              )} */}
               {settings.selectedMols.length !== 0 && <MolstarViewer />}
             </div>
             <div className="absolute z-20 top-4 right-2 m-2 flex">
@@ -582,7 +733,48 @@ const VisualizationComp = () => {
                   )}
                 </div>
               </div>
-
+              <CSSTransition
+                in={isFABOpen}
+                timeout={300}
+                classNames="fade"
+                unmountOnExit
+              >
+                {
+                  (
+                    <div className="has-tooltip">
+                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
+                        {colorMode === "light" ? "Light Mode" : "Dark Mode"}
+                      </span>
+                      <div
+                        className={`rounded-full w-12 h-12 m-1 flex items-center cursor-pointer shadow-md ${
+                          colorMode === "light" ? "bg-gray-400" : "bg-gray-900"
+                        }`}
+                        onClick={toggleColorMode}
+                      >
+                        {colorMode === "light" ? (
+                          <MdLightMode
+                            style={{
+                              color: "white",
+                              fontSize: "1.5rem",
+                              fontWeight: "bold",
+                            }}
+                            className="w-6 m-auto text-white"
+                          />
+                        ) : (
+                          <MdDarkMode
+                            style={{
+                              color: "white",
+                              fontSize: "1.5rem",
+                              fontWeight: "bold",
+                            }}
+                            className="w-6 m-auto text-white"
+                          />
+                        )}
+                      </div>
+                    </div>
+                  ) as TransitionChildren
+                }
+              </CSSTransition>
               <CSSTransition
                 in={isFABOpen}
                 timeout={300}
@@ -596,12 +788,21 @@ const VisualizationComp = () => {
                         Download Plot
                       </span>
                       <div
-                        className="rounded-full bg-yellow-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
-                        onClick={() =>
-                          scatterRef?.current?.downloadScreenshot()
-                        }
+                        className="rounded-full bg-yellow-700 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
+                        onClick={() => {
+                          setIsLegendOpen(true);
+                          scatterRef?.current?.downloadScreenshot();
+                          setIsLegendOpen(false);
+                        }}
                       >
-                        <ArrowDownOnSquareIcon className="w-6 m-auto text-white" />
+                        <BsFiletypePng
+                          style={{
+                            color: "white",
+                            fontSize: "1.5rem",
+                            fontWeight: "bold",
+                          }}
+                          className="w-6 m-auto text-white"
+                        />
                       </div>
                     </div>
                   ) as TransitionChildren
@@ -697,11 +898,11 @@ const VisualizationComp = () => {
                       </span>
 
                       <input
+                        id="file-upload-json"
                         type="file"
                         accept=".json"
                         onChange={handleFileChangeJSON}
                         className="hidden"
-                        id="file-upload-json"
                       />
                       <label className="file-label" htmlFor="file-upload-json">
                         <div className="rounded-full bg-purple-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md">

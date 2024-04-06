@@ -27,8 +27,6 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       cameraRef = useRef() as MutableRefObject<THREE.PerspectiveCamera>,
       setColorParam,
       setShapeParam,
-      keyList,
-      setListParam,
       twoLegend,
       isLegendOpen,
       searchItems,
@@ -74,8 +72,8 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
     const [imageSrc, takeScreenshot] = useScreenshot();
     const [entityName, setEntityName] = useState("");
     const objArr = useRef([]);
-
     // const renderer = new THREE.WebGLRenderer({ antialias: true });
+
     const legendRefFull = (
       <div className="absolute h-full w-full -z-20" ref={legendRef}>
         <div className={"inline"}>
@@ -93,9 +91,7 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
           )}
           <div className="flex absolute right-0">
             <ColorLegend
-              keyList={keyList}
               screenshot={true}
-              setListParam={(param: string) => setListParam(param)}
               colorKey={colorKey}
               colorParamList={colorParamList}
               colorParam={colorParam}
@@ -115,13 +111,6 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
         downloadSVG();
       },
     }));
-
-    const removeObjectByName = (name: string) => {
-      const selectedObject = sceneRef.current.getObjectByName(name);
-      if (selectedObject) {
-        sceneRef.current.remove(selectedObject);
-      }
-    };
 
     async function createScreenshot() {
       setLoading(true);
@@ -262,10 +251,11 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       yAxisSvg?.setAttribute("x2", yAxis2D.x.toString());
       yAxisSvg?.setAttribute("y2", yAxis2D.y.toString());
     }
+
     function createShape(
-      dataLength: number,
       twoLegend: boolean,
-      scaledCoordinates: {
+      path: string,
+      coordinates: {
         x: number;
         y: number;
         z?: number;
@@ -275,8 +265,8 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       userData: any
     ) {
       const loader = new SVGLoader();
-
       let group;
+
       // const divElement = document.createElement("div");
       // divElement.innerHTML = "Info about " + userData[dataItems[0].category];
       // divElement.style.background = "red";
@@ -311,36 +301,75 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       svgCircle.style.position = "absolute";
       svgContainer!.appendChild(svgCircle);
 
-      const geometry = new THREE.SphereGeometry(dataLength < 500 ? 0.3 : 0.2);
-      const material = new THREE.MeshBasicMaterial({
-        transparent: true,
-        color: colorInScene,
-        side: THREE.FrontSide,
-        depthTest: false,
-        opacity: opacity,
-      });
+      loader.load(
+        // resource URL
+        path,
+        // called when the resource is loaded
+        function (data: any) {
+          if (twoLegend) {
+            const paths = data.paths;
+            group = new THREE.Group();
 
-      const mesh = new THREE.Mesh(geometry, material);
-      mesh.userData = userData;
+            for (let i = 0; i < paths.length; i++) {
+              const path = paths[i];
+              const material = new THREE.MeshBasicMaterial({
+                transparent: true,
+                color: colorInScene,
+                side: THREE.FrontSide,
+                depthTest: false,
+                opacity: opacity,
+              });
 
-      mesh.position.set(
-        scaledCoordinates.x,
-        scaledCoordinates.y,
-        scaledCoordinates.z ?? 0
+              const shapes = SVGLoader.createShapes(path);
+
+              for (let j = 0; j < shapes.length; j++) {
+                const shape = shapes[j];
+                const geometry = new THREE.ShapeGeometry(shape);
+                // Apply scaling transformation to the geometry
+                geometry.scale(0.01, 0.01, 1);
+
+                const mesh = new THREE.Mesh(geometry, material);
+                mesh.scale.y = -mesh.scale.y;
+                mesh.userData = userData;
+                group.add(mesh);
+              }
+            }
+            group.position.set(
+              coordinates.x,
+              coordinates.y,
+              coordinates.z ?? 0
+            );
+            group.rotation.set(0, 0, 0);
+            sceneRef.current.add(group);
+          } else {
+            const geometry = new THREE.SphereGeometry(0.1);
+            const material = new THREE.MeshBasicMaterial({
+              transparent: true,
+              color: colorInScene,
+              side: THREE.FrontSide,
+              depthTest: false,
+              opacity: opacity,
+            });
+
+            const mesh = new THREE.Mesh(geometry, material);
+            mesh.userData = userData;
+            mesh.position.set(coordinates.x, coordinates.y, coordinates.z ?? 0);
+            // objArr.current.push({ divObj: mesh, divElem: divElement });
+            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+            objArr.current.push({ divObj: mesh, svgElem: svgCircle });
+
+            sceneRef.current.add(mesh);
+          }
+        }
       );
-      // objArr.current.push({ divObj: mesh, divElem: divElement });
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-      objArr.current.push({ divObj: mesh, svgElem: svgCircle });
-
-      sceneRef.current.add(mesh);
     }
 
     function calculateScaleFactor(distance: number) {
       // Simple linear scaling based on distance
       // You may need to adjust the formula to get the desired effect
       const minScale = 0.5; // Minimum scale at maximum distance
-      const maxDistance = 60; // Adjust as per your scene's size
-      return 1 - Math.min(distance / maxDistance, 1) * (1 - minScale);
+      const maxDistance = 40; // Adjust as per your scene's size
+      return 1.5 - Math.min(distance / maxDistance, 1);
     }
 
     useEffect(() => {
@@ -421,7 +450,16 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
         if (
           colorParam !== "" &&
           // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-          colorParam !== objData.divObj.userData.features[colorKey]
+          colorParam !== objData.divObj.userData[colorKey]
+        ) {
+          color = "#EEEEEE";
+          opacity = 0.4;
+          svgOpacity = 0.4;
+        }
+        if (
+          shapeParam !== "" &&
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+          shapeParam !== objData.divObj.userData[shapeKey]
         ) {
           color = "#EEEEEE";
           opacity = 0.4;
@@ -431,9 +469,9 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
           searchItems.length &&
           !searchItems.find((item) => {
             // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-            for (const key in objData.divObj.userData.features) {
+            for (const key in objData.divObj.userData) {
               // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-              if (item.name == objData.divObj.userData.features[key]) {
+              if (item.name == objData.divObj.userData[key]) {
                 return true;
               }
             }
@@ -444,10 +482,11 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
           opacity = 0.4;
           svgOpacity = 0.4;
         }
+
         if (
           dataItems[0] &&
           // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-          objData.divObj.userData.features[dataItems[0].category] === entityName
+          objData.divObj.userData[dataItems[0].category] === entityName
         ) {
           color = "#FD1C03";
           opacity = 1;
@@ -490,12 +529,20 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
         ) {
           obj.material.color.set("#16FF00");
           obj.material.opacity = 0.8;
-          obj.geometry.type !== "BufferGeometry" &&
+          if (twoLegend) {
+            setInfo(
+              truncate(obj.userData[shapeKey], 30) +
+                " " +
+                truncate(obj.userData[colorKey], 30)
+            );
+          } else {
             setInfo(
               obj.userData.identifier +
                 " | " +
-                truncate(obj.userData.features[colorKey], 30)
+                truncate(obj.userData[colorKey], 30)
             );
+          }
+          break;
         }
       }
     }
@@ -652,14 +699,27 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       return cube;
     }
 
-    function createBigCube(
-      minX: number,
-      maxX: number,
-      minY: number,
-      maxY: number,
-      minZ: number,
-      maxZ: number
-    ) {
+    function createBigCube() {
+      let minX = Infinity,
+        maxX = -Infinity,
+        minY = Infinity,
+        maxY = -Infinity,
+        minZ = Infinity,
+        maxZ = -Infinity;
+
+      // Iterate over your circle objects to find the min and max bounds
+      objArr &&
+        objArr.current.forEach((objData) => {
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+          const position = objData.divObj.position;
+          minX = Math.min(minX, position.x);
+          maxX = Math.max(maxX, position.x);
+          minY = Math.min(minY, position.y);
+          maxY = Math.max(maxY, position.y);
+          minZ = Math.min(minZ, position.z);
+          maxZ = Math.max(maxZ, position.z);
+        });
+
       // Calculate the size and position of the cube
       const width = maxX - minX;
       const height = maxY - minY;
@@ -667,117 +727,17 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       const centerX = (minX + maxX) / 2;
       const centerY = (minY + maxY) / 2;
       const centerZ = (minZ + maxZ) / 2;
+
       // Create the cube
-      // const geometry = new THREE.BoxGeometry(width, height, depth);
-      // const material = new THREE.MeshBasicMaterial({
-      //   color: 0x000000,
-      //   wireframe: true,
-      //   side: THREE.FrontSide,
-      // });
-      // const cube = new THREE.Mesh(geometry, material);
-      // cube.position.set(centerX, centerY, centerZ);
+      const geometry = new THREE.BoxGeometry(width, height, depth);
+      const material = new THREE.MeshBasicMaterial({
+        color: 0x00ff00,
+        wireframe: true,
+      });
+      const cube = new THREE.Mesh(geometry, material);
+      cube.position.set(centerX, centerY, centerZ);
 
-      const edgesGeometry = new THREE.BufferGeometry();
-
-      // Define the vertices for the edges
-      const vertices = new Float32Array([
-        // Bottom rectangle
-        -width / 2,
-        -height / 2,
-        -depth / 2,
-        width / 2,
-        -height / 2,
-        -depth / 2,
-        width / 2,
-        -height / 2,
-        -depth / 2,
-        width / 2,
-        -height / 2,
-        depth / 2,
-        width / 2,
-        -height / 2,
-        depth / 2,
-        -width / 2,
-        -height / 2,
-        depth / 2,
-        -width / 2,
-        -height / 2,
-        depth / 2,
-        -width / 2,
-        -height / 2,
-        -depth / 2,
-
-        // Top rectangle
-        -width / 2,
-        height / 2,
-        -depth / 2,
-        width / 2,
-        height / 2,
-        -depth / 2,
-        width / 2,
-        height / 2,
-        -depth / 2,
-        width / 2,
-        height / 2,
-        depth / 2,
-        width / 2,
-        height / 2,
-        depth / 2,
-        -width / 2,
-        height / 2,
-        depth / 2,
-        -width / 2,
-        height / 2,
-        depth / 2,
-        -width / 2,
-        height / 2,
-        -depth / 2,
-
-        // Vertical lines
-        -width / 2,
-        -height / 2,
-        -depth / 2,
-        -width / 2,
-        height / 2,
-        -depth / 2,
-        width / 2,
-        -height / 2,
-        -depth / 2,
-        width / 2,
-        height / 2,
-        -depth / 2,
-        width / 2,
-        -height / 2,
-        depth / 2,
-        width / 2,
-        height / 2,
-        depth / 2,
-        -width / 2,
-        -height / 2,
-        depth / 2,
-        -width / 2,
-        height / 2,
-        depth / 2,
-      ]);
-
-      // Add vertices to geometry
-      edgesGeometry.setAttribute(
-        "position",
-        new THREE.BufferAttribute(vertices, 3)
-      );
-
-      // Create a material for the edges
-      const material = new THREE.LineBasicMaterial({ color: 0xadd8e6 });
-
-      // Create a line segments object to represent the edges
-      const cubeEdges = new THREE.LineSegments(edgesGeometry, material);
-
-      // Set the position of the cube
-      cubeEdges.position.set(centerX, centerY, centerZ);
-      cubeEdges.name = "cube";
-      return cubeEdges;
-
-      // return cube;
+      return cube;
     }
 
     useEffect(() => {
@@ -836,12 +796,12 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       const cubeColor = 0xff0000;
       const cube = createCube(cubeSize, cubeColor);
       miniScene.add(cube);
+
       miniContainerRef.current.appendChild(miniRenderer.domElement);
 
       miniCamera.position.z = 30;
 
       const scene = new THREE.Scene();
-      scene.background = new THREE.Color(0x2e2e3a);
       const camera = new THREE.PerspectiveCamera(
         60,
         window.innerWidth / window.innerHeight,
@@ -855,39 +815,78 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       containerRef.current.appendChild(renderer.domElement);
       rendererRef.current = renderer;
 
+      var xAxisMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
+      var xAxisGeometry = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(0, 0, 0),
+        new THREE.Vector3(20, 0, 0),
+      ]);
+      var xAxis = new THREE.Line(xAxisGeometry, xAxisMaterial);
+
+      scene.add(xAxis);
+
+      // Create the Y-axis line segment
+      var yAxisMaterial = new THREE.LineBasicMaterial({ color: 0x00ff00 });
+      var yAxisGeometry = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(0, 0, 0),
+        new THREE.Vector3(0, 20, 0),
+      ]);
+      var yAxis = new THREE.Line(yAxisGeometry, yAxisMaterial);
+      scene.add(yAxis);
+
+      if (threeD) {
+        // Create the Z-axis line segment
+        var zAxisMaterial = new THREE.LineBasicMaterial({ color: 0x0000ff });
+        var zAxisGeometry = new THREE.BufferGeometry().setFromPoints([
+          new THREE.Vector3(0, 0, 0),
+          new THREE.Vector3(0, 0, 20),
+        ]);
+        var zAxis = new THREE.Line(zAxisGeometry, zAxisMaterial);
+        scene.add(zAxis);
+      }
       const middle = {
         x: 0,
         y: 0,
         z: 0,
       };
-      var coordinates: {
-        x: number;
-        y: number;
-        z?: number;
-      } = {
-        x: 0,
-        y: 0,
-        z: 0,
-      };
-      var minX: number = Infinity;
-      var maxX: number = -Infinity;
-      var minY: number = Infinity;
-      var maxY: number = -Infinity;
-      var minZ: number = Infinity;
-      var maxZ: number = -Infinity;
-
       data.forEach(async (point: any, index: any) => {
+        let coordinates;
         if (threeD) {
-          coordinates = {
-            x: point.coordinates.x,
-            y: point.coordinates.y,
-            z: point.coordinates.z,
-          };
+          if (technique === "umap") {
+            coordinates = {
+              x: point.x_umap_3D,
+              y: point.y_umap_3D,
+              z: point.z_umap_3D,
+            };
+          } else if (technique === "pca") {
+            coordinates = {
+              x: point.x_pca_3D,
+              y: point.y_pca_3D,
+              z: point.z_pca_3D,
+            };
+          } else {
+            coordinates = {
+              x: point.x_tsne_3D,
+              y: point.y_tsne_3D,
+              z: point.z_tsne_3D,
+            };
+          }
         } else {
-          coordinates = {
-            x: point.coordinates.x,
-            y: point.coordinates.y,
-          };
+          if (technique === "umap") {
+            coordinates = {
+              x: point.x_umap_3D,
+              y: point.y_umap_3D,
+            };
+          } else if (technique === "pca") {
+            coordinates = {
+              x: point.x_pca_3D,
+              y: point.x_pca_3D,
+            };
+          } else {
+            coordinates = {
+              x: point.x_tsne_2D,
+              y: point.y_tsne_2D,
+            };
+          }
         }
         if (
           (typeof coordinates.x === "undefined") == undefined ||
@@ -900,120 +899,32 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
           return;
         }
 
-        minX = Math.min(minX ?? Infinity, coordinates.x);
-        maxX = Math.max(maxX ?? -Infinity, coordinates.x);
-        minY = Math.min(minY ?? Infinity, coordinates.y);
-        maxY = Math.max(maxY ?? -Infinity, coordinates.y);
-        minZ = Math.min(minZ ?? Infinity, coordinates.z ?? 0);
-        maxZ = Math.max(maxZ ?? -Infinity, coordinates.z ?? 0);
-      });
+        let shape =
+          shapeList[shapeParamList.indexOf(point[shapeKey]) % shapeList.length];
 
-      var localMinX = Infinity;
-      var localMaxX = -Infinity;
-      var localMinY = Infinity;
-      var localMaxY = -Infinity;
-      var localMinZ = Infinity;
-      var localMaxZ = -Infinity;
-
-      var scaledCoordinates: {
-        x: number;
-        y: number;
-        z?: number;
-      } = {
-        x: 0,
-        y: 0,
-        z: 0,
-      };
-
-      data.forEach(async (point: any, index: any) => {
-        if (threeD) {
-          coordinates = {
-            x: point.coordinates.x,
-            y: point.coordinates.y,
-            z: point.coordinates.z,
-          };
-        } else {
-          coordinates = {
-            x: point.coordinates.x,
-            y: point.coordinates.y,
-          };
-        }
-        if (
-          (typeof coordinates.x === "undefined") == undefined ||
-          typeof coordinates.y === "undefined"
-        ) {
-          setErrorMessage &&
-            setErrorMessage(
-              "Could not find the coordinates. Please check the CSV file."
-            );
-          return;
-        }
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-        const scalePoint = (point, min, max, newMin, newMax) => {
-          const result =
-            ((point - min) / (max - min)) * (newMax - newMin) + newMin;
-          return result;
-        };
-
-        const scaledX = scalePoint(coordinates.x, minX, maxX, -20, 20);
-
-        const scaledY = scalePoint(coordinates.y, minY, maxY, -20, 20);
-        const scaledZ = threeD
-          ? scalePoint(coordinates.z, minZ, maxZ, -20, 20)
-          : 0;
-
-        localMinX = Math.min(localMinX ?? Infinity, scaledX);
-        localMaxX = Math.max(localMaxX ?? -Infinity, scaledX);
-        localMinY = Math.min(localMinY ?? Infinity, scaledY);
-        localMaxY = Math.max(localMaxY ?? -Infinity, scaledY);
-        localMinZ = Math.min(localMinZ ?? Infinity, scaledZ ?? 0);
-        localMaxZ = Math.max(localMaxZ ?? -Infinity, scaledZ ?? 0);
-      });
-
-      data.forEach(async (point: any, index: any) => {
-        if (threeD) {
-          coordinates = {
-            x: point.coordinates.x,
-            y: point.coordinates.y,
-            z: point.coordinates.z,
-          };
-        } else {
-          coordinates = {
-            x: point.coordinates.x,
-            y: point.coordinates.y,
-          };
-        }
-        if (
-          (typeof point.coordinates.x === "undefined") == undefined ||
-          typeof point.coordinates.y === "undefined"
-        ) {
-          setErrorMessage &&
-            setErrorMessage(
-              "Could not find the coordinates. Please check the CSV file."
-            );
-          return;
-        }
         let color =
-          point.features[colorKey] === "NaN"
+          point[colorKey] === "NaN"
             ? "#9CB4CC"
             : colorList[
-                colorParamList.indexOf(point.features[colorKey]) %
-                  colorList.length
+                colorParamList.indexOf(point[colorKey]) % colorList.length
               ];
 
-        var colorInScene = "";
-        if (point.coordinates.x && point.coordinates.y) {
-          colorInScene = color;
+        if (coordinates.x && coordinates.y) {
+          let colorInScene = color;
           let opacity = 0.8;
-          if (colorParam !== "" && colorParam !== point.features[colorKey]) {
+          if (colorParam !== "" && colorParam !== point[colorKey]) {
+            colorInScene = "#EEEEEE";
+            opacity = 0.4;
+          }
+          if (shapeParam !== "" && shapeParam !== point[shapeKey]) {
             colorInScene = "#EEEEEE";
             opacity = 0.4;
           }
           if (
             searchItems.length &&
             !searchItems.find((item: Item) => {
-              for (const key in point.features) {
-                if (item.name == point.features[key]) {
+              for (const key in point) {
+                if (item.name == point[key]) {
                   return true;
                 }
               }
@@ -1023,91 +934,28 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
             colorInScene = "#EEEEEE";
             opacity = 0.4;
           }
+          createShape(twoLegend, shape, coordinates, colorInScene, opacity, {
+            color: color,
+            index: index,
+            ...point,
+          });
+          let maxX = -Infinity;
+          if (objArr.current && objArr.current.length > 0) {
+            maxX = Math.max(
+              // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+              ...objArr.current.map((objData) => objData.position.x)
+            );
+          }
 
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-          const scalePoint = (point, min, max, newMin, newMax) => {
-            const result =
-              ((point - min) / (max - min)) * (newMax - newMin) + newMin;
-            return result;
-          };
-
-          const maxExtent = 20;
-
-          const deltaX = maxX - minX;
-          const deltaY = maxY - minY;
-          const deltaZ = maxZ - minZ;
-          var maxDelta = Math.max(deltaX, deltaY, deltaZ);
-
-          const scaledX = scalePoint(
-            coordinates.x,
-            minX,
-            maxX,
-            -((deltaX / maxDelta) * maxExtent),
-            (deltaX / maxDelta) * maxExtent
-          );
-          const scaledY = scalePoint(
-            coordinates.y,
-            minY,
-            maxY,
-            -((deltaY / maxDelta) * maxExtent),
-            (deltaY / maxDelta) * maxExtent
-          );
-          const scaledZ = threeD
-            ? scalePoint(
-                coordinates.z,
-                minZ,
-                maxZ,
-                -((deltaZ / maxDelta) * maxExtent),
-                (deltaZ / maxDelta) * maxExtent
-              )
-            : 0;
-
-          scaledCoordinates.x = scaledX;
-          scaledCoordinates.y = scaledY;
-          scaledCoordinates.z = scaledZ;
-          const dataLength = data.length;
-          createShape(
-            dataLength,
-            twoLegend,
-            (scaledCoordinates = {
-              x: scaledX,
-              y: scaledY,
-              z: scaledZ,
-            }),
-            colorInScene,
-            opacity,
-            {
-              color: color,
-              index: index,
-              ...point,
-            }
-          );
+          console.log("Maximum X coordinate:", maxX);
         }
         middle.x += coordinates.x;
         middle.y += coordinates.y;
         middle.z += coordinates.z ?? 0;
-
-        minX = Math.min(minX ?? Infinity, coordinates.x);
-        maxX = Math.max(maxX ?? -Infinity, coordinates.x);
-        minY = Math.min(minY ?? Infinity, coordinates.y);
-        maxY = Math.max(maxY ?? -Infinity, coordinates.y);
-        minZ = Math.min(minZ ?? Infinity, coordinates.z ?? 0);
-        maxZ = Math.max(maxZ ?? -Infinity, coordinates.z ?? 0);
-
-        if (index === data.length - 1) {
-          const cubeBig = createBigCube(
-            localMinX,
-            localMaxX,
-            localMinY,
-            localMaxY,
-            localMinZ,
-            localMaxZ
-          );
-          sceneRef.current.add(cubeBig);
-        } else {
-          removeObjectByName("cube");
-        }
       });
+
+      // const bigCube = middle.x !== 0 ? createBigCube() : null;
+      // bigCube && scene.add(bigCube);
 
       middle.x /= data.length;
       middle.y /= data.length;
@@ -1143,7 +991,7 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       //   console.log(controls);
       // });
       controls.minDistance = 0;
-      controls.maxDistance = 60;
+      controls.maxDistance = 40;
       // controls.addEventListener("change", () => {
       //   objArr.current.forEach(function (objData) {
       //     const proj = toScreenPosition(
@@ -1192,6 +1040,9 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
         requestAnimationFrame(animate);
         camera.position.copy(miniCamera.position);
         camera.rotation.copy(miniCamera.rotation);
+        // if (cubeBig) {
+        //   cubeBig.lookAt(camera.position);
+        // }
         controls.update();
         const currentDistance = controls.target.distanceTo(
           controls.object.position
@@ -1250,6 +1101,52 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       twoLegend,
       threeD,
     ]);
+
+    // function downloadSVG() {
+    //   updateSvgAxes(cameraRef.current, rendererRef.current);
+    //   objArr.current.forEach(function (objData) {
+    //     const proj = toScreenPosition(
+    //       // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+    //       objData.divObj,
+    //       cameraRef.current
+
+    //       // rendererRef.current
+    //     );
+    //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+    //     objData.svgElem.setAttribute("cx", proj.x);
+    //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+    //     objData.svgElem.setAttribute("cy", proj.y);
+    //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+    //     const distance = objData.divObj.position.distanceTo(
+    //       cameraRef.current.position
+    //     );
+    //     const scaleFactor = calculateScaleFactor(distance);
+    //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+    //     objData.svgElem.setAttribute("r", 5 * scaleFactor);
+    //   });
+
+    //   const svgContainer = document.getElementById("svg-container");
+    //   if (!svgContainer) {
+    //     console.error("SVG container not found");
+    //     return;
+    //   }
+    //   // Serialize the SVG content
+    //   const serializer = new XMLSerializer();
+    //   const svgString = serializer.serializeToString(svgContainer);
+
+    //   // Create a Blob from the SVG string
+    //   const blob = new Blob([svgString], { type: "image/svg+xml" });
+
+    //   // Create a download link
+    //   const downloadLink = document.createElement("a");
+    //   downloadLink.href = URL.createObjectURL(blob);
+    //   downloadLink.download = "scatterplot.svg";
+
+    //   // Append the link to the body, click it, and then remove it
+    //   document.body.appendChild(downloadLink);
+    //   downloadLink.click();
+    //   document.body.removeChild(downloadLink);
+    // }
 
     function drawSVG() {
       objArr.current.forEach(function (objData) {
@@ -1334,7 +1231,6 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       downloadLink.click();
       document.body.removeChild(downloadLink);
     }
-
     return (
       <div className="relative h-full flex overflow-hidden">
         <div
@@ -1369,8 +1265,6 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
           )}
           <div className="flex absolute right-0 top-32">
             <ColorLegend
-              keyList={keyList}
-              setListParam={(param: string) => setListParam(param)}
               screenshot={false}
               colorKey={colorKey}
               colorParamList={colorParamList}
@@ -1398,7 +1292,7 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
           />
         </div>
         <div
-          className={threeD ? "absolute z-0 left-0 bottom-16 flex" : "hidden"}
+          className={threeD ? "absolute z-20 left-0 bottom-96 flex" : "hidden"}
         >
           <div
             className="h-24 w-24"
@@ -1410,7 +1304,7 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
         </div>
         <div className="flex absolute bottom-12 right-0 m-8 z-20">
           <div>
-            <p className="text-white">{info}</p>
+            <p>{info}</p>
           </div>
         </div>
       </div>

@@ -1,10 +1,8 @@
 export interface ColorLegendProps {
-  screenshot: boolean;
-  colorKey: string | null;
-  colorParamList: string[];
-  colorParam: string;
-  setColorParam: (colorParam: string) => void;
-  colorList: string[];
-  keyList: string[];
-  setListParam: (listParam: string) => void;
+    screenshot : boolean;
+    colorKey : string | null;
+    colorParamList : string[];
+    colorParam : string;
+    setColorParam : (colorParam : string) => void;
+    colorList : string[]
 }

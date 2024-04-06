@@ -7,28 +7,38 @@ import "../../styles/tailwind.css";
 const ColorLegend: React.FC<ColorLegendProps> = ({
   screenshot,
   colorKey,
-  keyList,
-  setListParam,
   colorParamList,
   colorParam,
   setColorParam,
   colorList,
 }) => {
   const [closed, setClosed] = useState(false);
-
   return (
-    <div className="block bg-slate-100 rounded-md mr-4 w-full mt-2 legend">
-      <select
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        value={colorKey as string}
-        onChange={(e) => setListParam(e.target.value)}
+    <div className="block bg-slate-100 rounded-md mr-4 w-full mt-2">
+      <div
+        className="flex items-center justify-between w-80 p-4 cursor-pointer"
+        onClick={() => {
+          setClosed(!closed);
+        }}
       >
-        {keyList.map((option: string, index: number) => (
-          <option key={index} value={option}>
-            {option.toUpperCase()}
-          </option>
-        ))}
-      </select>
+        <p>{(colorKey ?? "").toUpperCase()}</p>
+        {closed ? (
+          <ArrowDownIcon
+            className="w-4 cursor-pointer"
+            onClick={() => {
+              setClosed(!closed);
+            }}
+          />
+        ) : (
+          <XMarkIcon
+            className="w-4 cursor-pointer"
+            onClick={() => {
+              setClosed(!closed);
+            }}
+          />
+        )}
+      </div>
+
       <ul
         style={{
           maxHeight: `${window.innerHeight - 330}px`,
@@ -37,8 +47,8 @@ const ColorLegend: React.FC<ColorLegendProps> = ({
           closed
             ? "hidden"
             : screenshot
-            ? "h-full px-3 overflow-hidden"
-            : "h-full overflow-y-auto px-3 transition-all duration-300 ease-in-out"
+            ? "h-full px-4 overflow-hidden"
+            : "h-full overflow-y-auto px-4 transition-all duration-300 ease-in-out"
         }
       >
         {colorParamList

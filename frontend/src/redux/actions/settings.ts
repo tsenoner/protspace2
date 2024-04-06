@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { Vector3 } from "three/src/Three.js";
+import { Vector3 } from "three";
 import { fetchData } from "../../api/api";
 import { AtomStyleSpec, Item } from "../../data";
 import { colorList } from "../../helpers/constants";
@@ -13,15 +13,18 @@ import {
   SET_CAMERA_ROTATION,
   SET_COLOR_AND_SHAPE_KEY,
   SET_COLOR_KEY,
+  SET_COLOR_LIST,
   SET_COLOR_PARAM,
   SET_COLOR_PARAM_LIST,
   SET_CSV_FILE_PATH,
+  SET_CUSTOM_FEATURE,
   SET_DATA,
   SET_DATA_ITEMS,
   SET_ERROR_MESSAGE,
   SET_IS_LEGEND_OPEN,
   SET_IS_LOADING,
   SET_KEY_LIST,
+  SET_LIGHT_MODE,
   SET_MOLECULE_NAME,
   SET_MOLECULE_SHOWN,
   SET_PDB,
@@ -51,6 +54,10 @@ export const removeFromAtomStyle = (payload: keyof AtomStyleSpec) => {
 export const addToSearchAtomStyle = (payload: keyof AtomStyleSpec) => {
   return { type: ADD_TO_SEARCH_ATOM_STYLE, payload };
 };
+
+export function setColorList(colorList: any) {
+  return { type: SET_COLOR_LIST, payload: colorList };
+}
 
 export const removeFromSearchAtomStyle = (payload: keyof AtomStyleSpec) => {
   return { type: REMOVE_FROM_SEARCH_ATOM_STYLE, payload };
@@ -136,6 +143,10 @@ export function setDataItems(dataItems: Item[]) {
   return { type: SET_DATA_ITEMS, payload: dataItems };
 }
 
+export function setLightMode(lightMode: boolean) {
+  return { type: SET_LIGHT_MODE, payload: lightMode };
+}
+
 export function setCSVFilePath(csvFilePath: string) {
   return { type: SET_CSV_FILE_PATH, payload: csvFilePath };
 }
@@ -170,6 +181,10 @@ export function setColorAndShapeKey(colorKey: string, shapeKey: string) {
   };
 }
 
+export function setCustomFeature(customization: any) {
+  return { type: SET_CUSTOM_FEATURE, payload: { customization } };
+}
+
 export function setProjections(projections: any) {
   return { type: SET_PROJECTIONS, payload: projections };
 }
@@ -186,7 +201,7 @@ export const fetchAndSetData = createAsyncThunk<
   try {
     const data =
       Object.keys(localData).length === 0 ? await fetchData() : localData;
-    const selectedProjection = data.visualization_state.technique ?? 0;
+    const selectedProjection = data.visualization_state.technique ?? 3;
     data.projections[selectedProjection].data.forEach((element: any) => {
       element = Object.assign(element, data.protein_data[element.identifier]);
     });
@@ -206,13 +221,9 @@ export const fetchAndSetData = createAsyncThunk<
         const newItem = {
           ...item,
         }; // Create a copy of the current item
-        for (const key in newItem) {
-          if (
-            newItem.hasOwnProperty(key) &&
-            typeof newItem[key] === "string" &&
-            newItem[key] === ""
-          ) {
-            newItem[key] = "NaN";
+        for (const key in newItem.features) {
+          if (newItem.features[key] === "") {
+            newItem.features[key] = "NaN";
           }
         }
         return newItem;
@@ -223,9 +234,8 @@ export const fetchAndSetData = createAsyncThunk<
       for (const key in element.features) {
         const value = element.features[key];
         if (
-          typeof value === "string" &&
           items.filter((e) => e.category === key && e.name === value).length ===
-            0
+          0
         ) {
           if (key === colorKey) {
             items.push({
@@ -240,7 +250,8 @@ export const fetchAndSetData = createAsyncThunk<
         }
       }
     });
-
+    thunkAPI.dispatch(setColorList(colorList));
+    thunkAPI.dispatch(setDataItems(items));
     thunkAPI.dispatch(setData(data.projections[selectedProjection].data));
     thunkAPI.dispatch(
       setKeyList(
