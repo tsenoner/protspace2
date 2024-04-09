@@ -87,7 +87,7 @@ const initialAtomStyleState: AtomStyleSpec = {
   },
 };
 
-interface SettingsState {
+export interface SettingsState {
   lightMode: boolean;
   colorKey: string;
   shapeKey: string;

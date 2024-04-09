@@ -58,6 +58,8 @@ import { useDispatch } from "react-redux";
 import { TransitionChildren } from "react-transition-group/Transition";
 import { Item } from "../data";
 import MolstarViewer from "./MolstarViewer";
+import VisualizationWaitingModal from "./WaitingModal";
+import { useLocation, useNavigate } from "react-router-dom";
 // import Reader from "./Reader";
 
 const VisualizationComp = () => {
@@ -70,6 +72,17 @@ const VisualizationComp = () => {
   const settings = useAppSelector((state) => state.settings);
   const dispatch = useAppDispatch();
   const dispatchThunk = useDispatch<ThunkDispatch<any, any, any>>();
+  const [isWaitingForData, setIsWaitingForData] = useState(true);
+  const [fromColab, setFromColab] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    // Check if the current route is /colab
+    if (location.pathname === "/colab") {
+      // Implement your logic when /colab is accessed
+      setFromColab(true);
+    }
+  }, [location]);
 
   useEffect(() => {
     if (settings.csvFilePath !== "") {
@@ -115,6 +128,11 @@ const VisualizationComp = () => {
       protein_data: settings.protein_data,
       projections: settings.projections,
     };
+    localStorage.setItem("protspace", JSON.stringify(jsonData));
+
+    const test = JSON.stringify(jsonData);
+    const dataSizeInBytes = new Blob([test]).size;
+    console.log("Size of JSON data in bytes:", dataSizeInBytes);
 
     const jsonString = JSON.stringify(jsonData, null, 2);
     const blob = new Blob([jsonString], { type: "application/json" });
@@ -186,7 +204,8 @@ const VisualizationComp = () => {
           const parsedObject = JSON.parse(fileContents as string);
           importFileV2(parsedObject);
         } catch (error) {
-          setErrorMessage("JSON could not be parsed. Please check the file.");
+          dispatch(setIsLoading(false));
+          dispatch(setErrorMessage("JSON could not be parsed."));
           console.error("Error parsing JSON:", error);
         }
       }
@@ -442,6 +461,7 @@ const VisualizationComp = () => {
       if (event.data.source === "colab") {
         // Assuming `event.data.content` contains your JSON object
         const parsedObject = event.data.content;
+        setIsWaitingForData(false);
         processColabData(parsedObject); // Process the data as needed
       }
     };
@@ -454,404 +474,425 @@ const VisualizationComp = () => {
     dispatch(setIsLoading(true));
     importFileV2(parsedObject.data);
   };
-
+  const navigate = useNavigate();
+  console.log(settings.errorMessage);
   return (
     <div className="h-screen w-screen overflow-hidden">
       <div className="absolute z-10 left-0 top-0 w-screen">
         <Nav />
       </div>
-      <main className="h-full">
-        <FileUploadFormModal
-          fileUploadShown={fileUploadShown}
-          setFileUploadShown={setFileUploadShown}
+      {isWaitingForData && fromColab ? (
+        <VisualizationWaitingModal
+          isOpen={isWaitingForData}
+          onClose={() => {
+            setIsWaitingForData(false);
+            navigate("/");
+          }}
         />
-        <div
-          className={
-            settings.isLoading
-              ? "absolute inset-0 z-40 flex justify-center items-center bg-opacity-50 bg-gray-300"
-              : "hidden"
-          }
-        >
+      ) : (
+        <main className="h-full">
+          <FileUploadFormModal
+            fileUploadShown={fileUploadShown}
+            setFileUploadShown={setFileUploadShown}
+          />
           <div
-            style={{
-              background: "white",
-              padding: "32px",
-              borderRadius: "16px",
-              fontSize: "16px",
-              paddingBottom: "24px",
-            }}
+            className={
+              settings.isLoading
+                ? "absolute inset-0 z-40 flex justify-center items-center bg-opacity-50 bg-gray-300"
+                : "hidden"
+            }
           >
-            <span style={{ fontSize: "20px", color: "black" }}>
-              Analysis in progress...
-            </span>
             <div
               style={{
-                width: "240px",
-                height: "36px",
-                textAlign: "center",
-                marginTop: "24px",
+                background: "white",
+                padding: "32px",
+                borderRadius: "16px",
+                fontSize: "16px",
+                paddingBottom: "24px",
               }}
             >
-              <PropagateLoader color={"#0066bd"} loading={true} />
-            </div>
-
-            <span
-              style={{
-                display: "flex",
-                width: "100%",
-                placeContent: "center",
-                color: "black",
-              }}
-            >
-              Time Remaining: <strong> &nbsp;1 minute</strong>
-            </span>
-          </div>
-        </div>
-        <EntitySearch />
-        <div className="h-full">
-          <div className="bg-white h-full">
-            <div className="absolute z-0 top-0 left-0">
-              <ScatterBoard
-                lightMode={colorMode === "light"}
-                cameraRef={cameraRef}
-                setColorParam={(param: string) =>
-                  dispatch(setColorParam(param))
-                }
-                setShapeParam={(param: string) =>
-                  dispatch(setShapeParam(param))
-                }
-                keyList={settings.keyList}
-                setListParam={(param: string) =>
-                  dispatch(setColorAndShapeKey(param, ""))
-                }
-                twoLegend={settings.twoLegend}
-                isLegendOpen={settings.isLegendOpen}
-                searchItems={settings.searchItems}
-                colorKey={settings.colorKey}
-                colorParam={settings.colorParam}
-                shapeKey={settings.shapeKey}
-                shapeParam={settings.shapeParam}
-                threeD={settings.threeD}
-                data={settings.data}
-                technique={settings.technique}
-                shapeParamList={settings.shapeParamList}
-                colorParamList={
-                  settings.colorParamList &&
-                  settings.colorParamList.sort((a: string, b: any) =>
-                    a.localeCompare(b)
-                  )
-                }
-                cameraPosition={settings.cameraPosition}
-                cameraRotation={settings.cameraRotation}
-                dataItems={settings.dataItems}
-                colorList={settings.colorList}
-                customFeatures={settings.customFeatures}
-                setCustomFeatures={(value: any) => {
-                  const mergedCustomFeatures = [...settings.customFeatures];
-
-                  value.forEach(
-                    (newFeature: { featureName: string; category: string }) => {
-                      const index = mergedCustomFeatures.findIndex(
-                        (feature) =>
-                          feature.featureName === newFeature.featureName &&
-                          feature.category === newFeature.category
-                      );
-                      if (index !== -1) {
-                        // Update existing feature
-                        mergedCustomFeatures[index] = newFeature;
-                      } else {
-                        // Add new feature
-                        mergedCustomFeatures.push(newFeature);
-                      }
-                    }
-                  );
-                  dispatch(setCustomFeature(mergedCustomFeatures));
-                  const updatedDataItems = settings.dataItems.map(
-                    (item: { name: any; category: any }) => {
-                      const customization = mergedCustomFeatures.find(
-                        (custom) =>
-                          custom.featureName === item.name &&
-                          custom.category === item.category
-                      );
-                      if (customization) {
-                        return {
-                          ...item,
-                          name: customization.customName,
-                          color: customization.color,
-                        };
-                      }
-                      return item;
-                    }
-                  );
-
-                  const updatedSearchItems = settings.searchItems.map(
-                    (item: { name: any; category: any }) => {
-                      const customization = mergedCustomFeatures.find(
-                        (custom) =>
-                          custom.featureName === item.name &&
-                          custom.category === item.category
-                      );
-                      if (customization) {
-                        return {
-                          ...item,
-                          name: customization.customName,
-                          color: customization.color,
-                        };
-                      }
-                      return item;
-                    }
-                  );
-
-                  dispatch(setDataItems(updatedDataItems));
-                  dispatch(setSearchItems(updatedSearchItems));
+              <span style={{ fontSize: "20px", color: "black" }}>
+                Analysis in progress...
+              </span>
+              <div
+                style={{
+                  width: "240px",
+                  height: "36px",
+                  textAlign: "center",
+                  marginTop: "24px",
                 }}
-                shapeList={shapeList}
-                setErrorMessage={function (value: string): void {
-                  dispatch(setErrorMessage(value));
-                }}
-                ref={scatterRef}
-                onVisualizeClicked={(value: string) => {
-                  if (!(value in settings.selectedMols)) {
-                    dispatch(setSelectedMols([value]));
-                  }
-                }}
-                onCompareClicked={(value: string) => {
-                  if (!settings.selectedMols.includes(value)) {
-                    dispatch(
-                      setSelectedMols([...settings.selectedMols, value])
-                    );
-                  }
-                }}
-              />
-              {settings.selectedMols.length !== 0 && <MolstarViewer />}
-            </div>
-            <div className="absolute z-20 top-4 right-2 m-2 flex">
-              <div className="has-tooltip">
-                <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
-                  {isFABOpen ? "Collapse" : "Expand"}
-                </span>
-                <div
-                  className={`m-1 rounded-full w-12 h-12 bg-blue-700 flex items-center shadow-md cursor-pointer ${
-                    isFABOpen ? "-translate-x" : ""
-                  } transition-transform`}
-                  onClick={() => setIsFABOpen(!isFABOpen)}
-                >
-                  {isFABOpen ? (
-                    <ChevronDoubleRightIcon className="w-6 m-auto text-white" />
-                  ) : (
-                    <ChevronDoubleLeftIcon className="w-6 m-auto text-white" />
-                  )}
-                </div>
+              >
+                <PropagateLoader color={"#0066bd"} loading={true} />
               </div>
-              <CSSTransition
-                in={isFABOpen}
-                timeout={300}
-                classNames="fade"
-                unmountOnExit
-              >
-                {
-                  (
-                    <div className="has-tooltip">
-                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
-                        {colorMode === "light" ? "Light Mode" : "Dark Mode"}
-                      </span>
-                      <div
-                        className={`rounded-full w-12 h-12 m-1 flex items-center cursor-pointer shadow-md ${
-                          colorMode === "light" ? "bg-gray-400" : "bg-gray-900"
-                        }`}
-                        onClick={toggleColorMode}
-                      >
-                        {colorMode === "light" ? (
-                          <MdLightMode
-                            style={{
-                              color: "white",
-                              fontSize: "1.5rem",
-                              fontWeight: "bold",
-                            }}
-                            className="w-6 m-auto text-white"
-                          />
-                        ) : (
-                          <MdDarkMode
-                            style={{
-                              color: "white",
-                              fontSize: "1.5rem",
-                              fontWeight: "bold",
-                            }}
-                            className="w-6 m-auto text-white"
-                          />
-                        )}
-                      </div>
-                    </div>
-                  ) as TransitionChildren
-                }
-              </CSSTransition>
-              <CSSTransition
-                in={isFABOpen}
-                timeout={300}
-                classNames="fade"
-                unmountOnExit
-              >
-                {
-                  (
-                    <div className="has-tooltip">
-                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
-                        Download Plot
-                      </span>
-                      <div
-                        className="rounded-full bg-yellow-700 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
-                        onClick={() => {
-                          setIsLegendOpen(true);
-                          scatterRef?.current?.downloadScreenshot();
-                          setIsLegendOpen(false);
-                        }}
-                      >
-                        <BsFiletypePng
-                          style={{
-                            color: "white",
-                            fontSize: "1.5rem",
-                            fontWeight: "bold",
-                          }}
-                          className="w-6 m-auto text-white"
-                        />
-                      </div>
-                    </div>
-                  ) as TransitionChildren
-                }
-              </CSSTransition>
-              <CSSTransition
-                in={isFABOpen}
-                timeout={300}
-                classNames="fade"
-                unmountOnExit
-              >
-                {
-                  (
-                    <div className="has-tooltip">
-                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
-                        Download as SVG
-                      </span>
-                      <div
-                        onClick={() => scatterRef?.current?.downloadSVG()}
-                        className="rounded-full bg-blue-200 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
-                      >
-                        <BsFiletypeSvg
-                          style={{ color: "blue", fontSize: "1.5rem" }}
-                          className="w-6 m-auto text-white"
-                        />
-                      </div>
-                    </div>
-                  ) as TransitionChildren
-                }
-              </CSSTransition>
 
-              <CSSTransition
-                in={isFABOpen}
-                timeout={300}
-                classNames="fade"
-                unmountOnExit
+              <span
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  placeContent: "center",
+                  color: "black",
+                }}
               >
-                {
-                  (
-                    <div className="has-tooltip">
-                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
-                        {settings.isLegendOpen ? "Hide Legend" : "Show Legend"}
-                      </span>
-                      <div
-                        className="rounded-full bg-green-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
-                        onClick={() =>
-                          dispatch(setIsLegendOpen(!settings.isLegendOpen))
-                        }
-                      >
-                        {settings.isLegendOpen ? (
-                          <ArrowsPointingInIcon className="w-6 m-auto text-white" />
-                        ) : (
-                          <MapIcon className="w-6 m-auto text-white" />
-                        )}
-                      </div>
-                    </div>
-                  ) as TransitionChildren
-                }
-              </CSSTransition>
-              <CSSTransition
-                in={isFABOpen}
-                timeout={300}
-                classNames="fade"
-                unmountOnExit
-              >
-                {
-                  (
-                    <div className="has-tooltip">
-                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
-                        Export Project
-                      </span>
-                      <div
-                        className="rounded-full bg-pink-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
-                        onClick={() => exportFileV2()}
-                      >
-                        <DocumentArrowUpIcon className="w-6 m-auto text-white" />
-                      </div>
-                    </div>
-                  ) as TransitionChildren
-                }
-              </CSSTransition>
-              <CSSTransition
-                in={isFABOpen}
-                timeout={300}
-                classNames="fade"
-                unmountOnExit
-              >
-                {
-                  (
-                    <div className="has-tooltip">
-                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
-                        Import Project
-                      </span>
-
-                      <input
-                        id="file-upload-json"
-                        type="file"
-                        accept=".json"
-                        onChange={handleFileChangeJSON}
-                        className="hidden"
-                      />
-                      <label className="file-label" htmlFor="file-upload-json">
-                        <div className="rounded-full bg-purple-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md">
-                          <DocumentArrowDownIcon className="w-6 m-auto text-white" />
-                        </div>
-                      </label>
-                    </div>
-                  ) as TransitionChildren
-                }
-              </CSSTransition>
-              <CSSTransition
-                in={isFABOpen}
-                timeout={300}
-                classNames="fade"
-                unmountOnExit
-              >
-                {
-                  (
-                    <div className="has-tooltip">
-                      <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
-                        Settings
-                      </span>
-                      <div
-                        onClick={() => {
-                          setFileUploadShown(true);
-                        }}
-                        className="rounded-full bg-gray-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
-                      >
-                        <CogIcon className="w-6 m-auto text-white" />
-                      </div>
-                    </div>
-                  ) as TransitionChildren
-                }
-              </CSSTransition>
+                Time Remaining: <strong> &nbsp;1 minute</strong>
+              </span>
             </div>
           </div>
-        </div>
-        {settings.errorMessage !== "" && <ErrorModal />}
-      </main>
+          <EntitySearch />
+          <div className="h-full">
+            <div className="bg-white h-full">
+              <div className="absolute z-0 top-0 left-0">
+                <ScatterBoard
+                  lightMode={colorMode === "light"}
+                  cameraRef={cameraRef}
+                  setColorParam={(param: string) =>
+                    dispatch(setColorParam(param))
+                  }
+                  setShapeParam={(param: string) =>
+                    dispatch(setShapeParam(param))
+                  }
+                  keyList={settings.keyList}
+                  setListParam={(param: string) =>
+                    dispatch(setColorAndShapeKey(param, ""))
+                  }
+                  twoLegend={settings.twoLegend}
+                  isLegendOpen={settings.isLegendOpen}
+                  searchItems={settings.searchItems}
+                  colorKey={settings.colorKey}
+                  colorParam={settings.colorParam}
+                  shapeKey={settings.shapeKey}
+                  shapeParam={settings.shapeParam}
+                  threeD={settings.threeD}
+                  data={settings.data}
+                  technique={settings.technique}
+                  shapeParamList={settings.shapeParamList}
+                  colorParamList={
+                    settings.colorParamList &&
+                    settings.colorParamList.sort((a: string, b: any) =>
+                      a.localeCompare(b)
+                    )
+                  }
+                  cameraPosition={settings.cameraPosition}
+                  cameraRotation={settings.cameraRotation}
+                  dataItems={settings.dataItems}
+                  colorList={settings.colorList}
+                  customFeatures={settings.customFeatures}
+                  setCustomFeatures={(value: any) => {
+                    const mergedCustomFeatures = [...settings.customFeatures];
+
+                    value.forEach(
+                      (newFeature: {
+                        featureName: string;
+                        category: string;
+                      }) => {
+                        const index = mergedCustomFeatures.findIndex(
+                          (feature) =>
+                            feature.featureName === newFeature.featureName &&
+                            feature.category === newFeature.category
+                        );
+                        if (index !== -1) {
+                          // Update existing feature
+                          mergedCustomFeatures[index] = newFeature;
+                        } else {
+                          // Add new feature
+                          mergedCustomFeatures.push(newFeature);
+                        }
+                      }
+                    );
+                    dispatch(setCustomFeature(mergedCustomFeatures));
+                    const updatedDataItems = settings.dataItems.map(
+                      (item: { name: any; category: any }) => {
+                        const customization = mergedCustomFeatures.find(
+                          (custom) =>
+                            custom.featureName === item.name &&
+                            custom.category === item.category
+                        );
+                        if (customization) {
+                          return {
+                            ...item,
+                            name: customization.customName,
+                            color: customization.color,
+                          };
+                        }
+                        return item;
+                      }
+                    );
+
+                    const updatedSearchItems = settings.searchItems.map(
+                      (item: { name: any; category: any }) => {
+                        const customization = mergedCustomFeatures.find(
+                          (custom) =>
+                            custom.featureName === item.name &&
+                            custom.category === item.category
+                        );
+                        if (customization) {
+                          return {
+                            ...item,
+                            name: customization.customName,
+                            color: customization.color,
+                          };
+                        }
+                        return item;
+                      }
+                    );
+
+                    dispatch(setDataItems(updatedDataItems));
+                    dispatch(setSearchItems(updatedSearchItems));
+                  }}
+                  shapeList={shapeList}
+                  setErrorMessage={function (value: string): void {
+                    dispatch(setErrorMessage(value));
+                  }}
+                  ref={scatterRef}
+                  onVisualizeClicked={(value: string) => {
+                    if (!(value in settings.selectedMols)) {
+                      dispatch(setSelectedMols([value]));
+                    }
+                  }}
+                  onCompareClicked={(value: string) => {
+                    if (!settings.selectedMols.includes(value)) {
+                      dispatch(
+                        setSelectedMols([...settings.selectedMols, value])
+                      );
+                    }
+                  }}
+                />
+                {settings.selectedMols.length !== 0 && <MolstarViewer />}
+              </div>
+              <div className="absolute z-20 top-4 right-2 m-2 flex flex-col sm:flex-row">
+                <div className="has-tooltip">
+                  <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
+                    {isFABOpen ? "Collapse" : "Expand"}
+                  </span>
+                  <div
+                    className={`m-1 rounded-full w-12 h-12 bg-blue-700 flex items-center shadow-md cursor-pointer ${
+                      isFABOpen ? "-translate-x" : ""
+                    } transition-transform`}
+                    onClick={() => setIsFABOpen(!isFABOpen)}
+                  >
+                    {isFABOpen ? (
+                      <ChevronDoubleRightIcon className="w-6 m-auto text-white" />
+                    ) : (
+                      <ChevronDoubleLeftIcon className="w-6 m-auto text-white" />
+                    )}
+                  </div>
+                </div>
+                <CSSTransition
+                  in={isFABOpen}
+                  timeout={300}
+                  classNames="fade"
+                  unmountOnExit
+                >
+                  {
+                    (
+                      <div className="has-tooltip">
+                        <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
+                          {colorMode === "light" ? "Light Mode" : "Dark Mode"}
+                        </span>
+                        <div
+                          className={`rounded-full w-12 h-12 m-1 flex items-center cursor-pointer shadow-md ${
+                            colorMode === "light"
+                              ? "bg-gray-400"
+                              : "bg-gray-900"
+                          }`}
+                          onClick={toggleColorMode}
+                        >
+                          {colorMode === "light" ? (
+                            <MdLightMode
+                              style={{
+                                color: "white",
+                                fontSize: "1.5rem",
+                                fontWeight: "bold",
+                              }}
+                              className="w-6 m-auto text-white"
+                            />
+                          ) : (
+                            <MdDarkMode
+                              style={{
+                                color: "white",
+                                fontSize: "1.5rem",
+                                fontWeight: "bold",
+                              }}
+                              className="w-6 m-auto text-white"
+                            />
+                          )}
+                        </div>
+                      </div>
+                    ) as TransitionChildren
+                  }
+                </CSSTransition>
+                <CSSTransition
+                  in={isFABOpen}
+                  timeout={300}
+                  classNames="fade"
+                  unmountOnExit
+                >
+                  {
+                    (
+                      <div className="has-tooltip">
+                        <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
+                          Download Plot
+                        </span>
+                        <div
+                          className="rounded-full bg-yellow-700 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
+                          onClick={() => {
+                            setIsLegendOpen(true);
+                            scatterRef?.current?.downloadScreenshot();
+                            setIsLegendOpen(false);
+                          }}
+                        >
+                          <BsFiletypePng
+                            style={{
+                              color: "white",
+                              fontSize: "1.5rem",
+                              fontWeight: "bold",
+                            }}
+                            className="w-6 m-auto text-white"
+                          />
+                        </div>
+                      </div>
+                    ) as TransitionChildren
+                  }
+                </CSSTransition>
+                <CSSTransition
+                  in={isFABOpen}
+                  timeout={300}
+                  classNames="fade"
+                  unmountOnExit
+                >
+                  {
+                    (
+                      <div className="has-tooltip">
+                        <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
+                          Download as SVG
+                        </span>
+                        <div
+                          onClick={() => scatterRef?.current?.downloadSVG()}
+                          className="rounded-full bg-blue-200 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
+                        >
+                          <BsFiletypeSvg
+                            style={{ color: "blue", fontSize: "1.5rem" }}
+                            className="w-6 m-auto text-white"
+                          />
+                        </div>
+                      </div>
+                    ) as TransitionChildren
+                  }
+                </CSSTransition>
+
+                <CSSTransition
+                  in={isFABOpen}
+                  timeout={300}
+                  classNames="fade"
+                  unmountOnExit
+                >
+                  {
+                    (
+                      <div className="has-tooltip">
+                        <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
+                          {settings.isLegendOpen
+                            ? "Hide Legend"
+                            : "Show Legend"}
+                        </span>
+                        <div
+                          className="rounded-full bg-green-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
+                          onClick={() =>
+                            dispatch(setIsLegendOpen(!settings.isLegendOpen))
+                          }
+                        >
+                          {settings.isLegendOpen ? (
+                            <ArrowsPointingInIcon className="w-6 m-auto text-white" />
+                          ) : (
+                            <MapIcon className="w-6 m-auto text-white" />
+                          )}
+                        </div>
+                      </div>
+                    ) as TransitionChildren
+                  }
+                </CSSTransition>
+                <CSSTransition
+                  in={isFABOpen}
+                  timeout={300}
+                  classNames="fade"
+                  unmountOnExit
+                >
+                  {
+                    (
+                      <div className="has-tooltip">
+                        <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
+                          Export Project
+                        </span>
+                        <div
+                          className="rounded-full bg-pink-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
+                          onClick={() => exportFileV2()}
+                        >
+                          <DocumentArrowUpIcon className="w-6 m-auto text-white" />
+                        </div>
+                      </div>
+                    ) as TransitionChildren
+                  }
+                </CSSTransition>
+                <CSSTransition
+                  in={isFABOpen}
+                  timeout={300}
+                  classNames="fade"
+                  unmountOnExit
+                >
+                  {
+                    (
+                      <div className="has-tooltip">
+                        <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
+                          Import Project
+                        </span>
+
+                        <input
+                          id="file-upload-json"
+                          type="file"
+                          accept=".json"
+                          onChange={handleFileChangeJSON}
+                          className="hidden"
+                        />
+                        <label
+                          className="file-label"
+                          htmlFor="file-upload-json"
+                        >
+                          <div className="rounded-full bg-purple-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md">
+                            <DocumentArrowDownIcon className="w-6 m-auto text-white" />
+                          </div>
+                        </label>
+                      </div>
+                    ) as TransitionChildren
+                  }
+                </CSSTransition>
+                <CSSTransition
+                  in={isFABOpen}
+                  timeout={300}
+                  classNames="fade"
+                  unmountOnExit
+                >
+                  {
+                    (
+                      <div className="has-tooltip">
+                        <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
+                          Settings
+                        </span>
+                        <div
+                          onClick={() => {
+                            setFileUploadShown(true);
+                          }}
+                          className="rounded-full bg-gray-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
+                        >
+                          <CogIcon className="w-6 m-auto text-white" />
+                        </div>
+                      </div>
+                    ) as TransitionChildren
+                  }
+                </CSSTransition>
+              </div>
+            </div>
+          </div>
+          {settings.errorMessage !== "" && <ErrorModal />}
+        </main>
+      )}
     </div>
   );
 };

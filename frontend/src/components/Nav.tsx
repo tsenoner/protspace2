@@ -7,15 +7,17 @@ export default function Nav() {
   return (
     <nav className="nav-bg mt-4">
       <div className="flex items-center">
-        <SiMoleculer color={colorMode === "light" ? "black" : "white"} />
-        <h1
-          className={`mx-2 text-md font-bold ${
-            colorMode === "light" ? "text-black" : "text-white"
-          }
+        <a href={"/"} className="flex items-center">
+          <SiMoleculer color={colorMode === "light" ? "black" : "white"} />
+          <h1
+            className={`mx-2 text-md font-bold ${
+              colorMode === "light" ? "text-black" : "text-white"
+            }
             `}
-        >
-          ProtSpace
-        </h1>
+          >
+            ProtSpace
+          </h1>
+        </a>
       </div>
       <div>
         <a href={"https://rostlab.org/"} className="flex text-sm">

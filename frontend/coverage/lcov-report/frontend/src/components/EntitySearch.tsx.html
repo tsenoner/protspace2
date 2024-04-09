@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">49.39% </span>
+                <span class="strong">50.59% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>81/164</span>
+                <span class='fraction'>85/168</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">61.9% </span>
+                <span class="strong">60.86% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>13/21</span>
+                <span class='fraction'>14/23</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">49.39% </span>
+                <span class="strong">50.59% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>81/164</span>
+                <span class='fraction'>85/168</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -227,7 +227,11 @@
 <a name='L162'></a><a href='#L162'>162</a>
 <a name='L163'></a><a href='#L163'>163</a>
 <a name='L164'></a><a href='#L164'>164</a>
-<a name='L165'></a><a href='#L165'>165</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L165'></a><a href='#L165'>165</a>
+<a name='L166'></a><a href='#L166'>166</a>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -313,15 +317,19 @@
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">12x</span>
@@ -450,7 +458,7 @@ export default function EntitySearch() {
   const { data, loading } = useQuery({ query });
   const groupedResults =
     data &amp;&amp; data.length &gt; 0 <span class="branch-0 cbranch-no" title="branch not covered" >? GroupBy(data, "category") </span>: undefined;
-  const [closed, setClosed] = useState(false);
+  const [closed, setClosed] = useState(true);
 &nbsp;
   return (
     &lt;main
@@ -467,28 +475,32 @@ export default function EntitySearch() {
         }}
       &gt;
         &lt;div
-          className="flex w-80 cursor-pointer"
+          className={
+            closed
+              ? "flex w-32 justify-between cursor-pointer transition-all duration-300 ease-in-out"
+<span class="branch-0 cbranch-no" title="branch not covered" >              : "flex w-80 transition-all duration-300 ease-in-out"</span>
+          }
           onClick={<span class="fstat-no" title="function not covered" >() =&gt; setClosed(!closed)}</span>
         &gt;
           &lt;p
-            className={closed <span class="branch-0 cbranch-no" title="branch not covered" >? "p-2" </span>: "p-2 mr-auto pl-0"}
+            className={closed ? "p-2" <span class="branch-0 cbranch-no" title="branch not covered" >: "p-2 mr-auto pl-0"}</span>
             style={{ color: colorMode === "light" ? "#1F2937" <span class="branch-0 cbranch-no" title="branch not covered" >: "white" </span>}}
           &gt;
             Search
           &lt;/p&gt;
-          {closed <span class="branch-0 cbranch-no" title="branch not covered" >? (</span>
-<span class="cstat-no" title="statement not covered" >            &lt;ArrowDownIcon</span>
-<span class="cstat-no" title="statement not covered" >              className="w-4 mx-2"</span>
-<span class="cstat-no" title="statement not covered" >              onClick={<span class="fstat-no" title="function not covered" >() =&gt; setClosed(!closed)}</span></span>
-<span class="cstat-no" title="statement not covered" >            /&gt;</span>
-          ) : (
-            &lt;XMarkIcon
+          {closed ? (
+            &lt;ArrowDownIcon
               className="w-4 mx-2"
               onClick={<span class="fstat-no" title="function not covered" >() =&gt; setClosed(!closed)}</span>
             /&gt;
+          ) <span class="branch-0 cbranch-no" title="branch not covered" >: (</span>
+<span class="cstat-no" title="statement not covered" >            &lt;XMarkIcon</span>
+<span class="cstat-no" title="statement not covered" >              className="w-4 mx-2 cursor-pointer"</span>
+<span class="cstat-no" title="statement not covered" >              onClick={<span class="fstat-no" title="function not covered" >() =&gt; setClosed(!closed)}</span></span>
+<span class="cstat-no" title="statement not covered" >            /&gt;</span>
           )}
         &lt;/div&gt;
-        &lt;div className={closed <span class="branch-0 cbranch-no" title="branch not covered" >? "hidden" </span>: "inline-block"}&gt;
+        &lt;div className={closed ? "hidden" <span class="branch-0 cbranch-no" title="branch not covered" >: "inline-block"}</span>&gt;
           &lt;div className="flex w-80 overflow-x-auto"&gt;
             {searchItems.map((item: Item, ix: number) =&gt; (
 <span class="cstat-no" title="statement not covered" >              &lt;Tag</span>
@@ -562,7 +574,7 @@ export default function EntitySearch() {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-06T09:30:27.331Z
+                at 2024-04-09T09:09:57.348Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

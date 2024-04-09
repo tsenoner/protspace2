@@ -49369,6 +49369,7 @@ const ScatterBoard = React$1.forwardRef(({ lightMode, cameraRef = React$1.useRef
             document.body.removeChild(downloadLink);
         }
     }
+    console.log("LOGGING");
     return (React$1.createElement("div", { className: "relative h-full flex overflow-hidden" },
         React$1.createElement("div", { className: loading
                 ? "absolute inset-0 z-30 flex justify-center items-center bg-opacity-50 bg-gray-300"

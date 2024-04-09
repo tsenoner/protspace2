@@ -16,6 +16,10 @@ export function FileUploadFormModal({
     dispatch(setTechnique(event.target.value));
   };
 
+  if (!fileUploadShown) {
+    return null;
+  }
+
   return (
     <div className={fileUploadShown ? "flex" : "hidden"}>
       <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -25,6 +29,7 @@ export function FileUploadFormModal({
             <div className="flex justify-between items-center pb-3">
               <p className="text-2xl font-bold text-gray-700">File Settings</p>
               <button
+                aria-label="Close"
                 className="modal-close cursor-pointer z-50 p-1 rounded-full bg-gray-200 hover:bg-gray-300"
                 onClick={() => setFileUploadShown(false)}
               >

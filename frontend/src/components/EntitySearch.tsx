@@ -57,7 +57,7 @@ export default function EntitySearch() {
   const { data, loading } = useQuery({ query });
   const groupedResults =
     data && data.length > 0 ? GroupBy(data, "category") : undefined;
-  const [closed, setClosed] = useState(false);
+  const [closed, setClosed] = useState(true);
 
   return (
     <main
@@ -74,7 +74,11 @@ export default function EntitySearch() {
         }}
       >
         <div
-          className="flex w-80 cursor-pointer"
+          className={
+            closed
+              ? "flex w-32 justify-between cursor-pointer transition-all duration-300 ease-in-out"
+              : "flex w-80 transition-all duration-300 ease-in-out"
+          }
           onClick={() => setClosed(!closed)}
         >
           <p
@@ -90,7 +94,7 @@ export default function EntitySearch() {
             />
           ) : (
             <XMarkIcon
-              className="w-4 mx-2"
+              className="w-4 mx-2 cursor-pointer"
               onClick={() => setClosed(!closed)}
             />
           )}
