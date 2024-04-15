@@ -371,9 +371,9 @@ const settingsReducer = (
       const itemsLocal: Item[] = [];
       const colorParamListLocal: string[] = [];
       const keys = Object.keys(selectedProjection.data[0].features).filter(
-        (item: any) => !Number(selectedProjection.data[0].features[item])
+        (item: any) => selectedProjection.data[0].features[item]
       );
-      const colorKey = keys[1];
+      const colorKey = keys[0];
       const newData = selectedProjection.data.map((item: any) => {
         const newItem = {
           ...item,
@@ -414,6 +414,7 @@ const settingsReducer = (
         threeD: selectedProjection.dimensions === 3,
         technique: action.payload,
         dataItems: itemsLocal,
+        colorKey: colorKey,
       };
     case SET_MOLECULE_NAME:
       return {

@@ -287,15 +287,15 @@ const VisualizationComp = () => {
       (parsedObject.visualization_state &&
         parsedObject.visualization_state.colorParamList) ??
       [];
+
     const keys = Object.keys(
       parsedObject.projections[selectedProjection].data[0].features
     ).filter(
       (item: any) =>
-        !Number(
-          parsedObject.projections[selectedProjection].data[0].features[item]
-        )
+        parsedObject.projections[selectedProjection].data[0].features[item]
     );
-    const colorKey = keys[1];
+
+    const colorKey = keys[0];
     const newData = parsedObject.projections[selectedProjection].data.map(
       (item: any) => {
         const newItem = {
@@ -365,7 +365,7 @@ const VisualizationComp = () => {
       setColorKey(
         (parsedObject.visualization_state &&
           parsedObject.visualization_state.colorKey) ??
-          "major_group"
+          colorKey
       )
     );
     dispatch(setColorParam(parsedObject.visualization_state?.colorParam ?? ""));
@@ -475,7 +475,6 @@ const VisualizationComp = () => {
     importFileV2(parsedObject.data);
   };
   const navigate = useNavigate();
-  console.log(settings.errorMessage);
   return (
     <div className="h-screen w-screen overflow-hidden">
       <div className="absolute z-10 left-0 top-0 w-screen">
