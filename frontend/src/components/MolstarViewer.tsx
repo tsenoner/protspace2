@@ -23,7 +23,7 @@ import { ColorNames } from "molstar/lib/mol-util/color/names";
 import { ParamDefinition as PD } from "molstar/lib/mol-util/param-definition";
 import { MdFullscreen } from "react-icons/md";
 import { useAppDispatch, useAppSelector } from "../helpers/hooks";
-import { setErrorMessage, setSelectedMols } from "../redux/actions/settings";
+import { setSelectedMols } from "../redux/actions/settings";
 
 declare global {
   interface Window {
@@ -76,7 +76,6 @@ const MySpec: PluginUISpec = {
 const MolstarViewer = () => {
   const parent = createRef<HTMLDivElement>();
   const selectedMols = useAppSelector((state) => state.settings.selectedMols);
-  const setting = useAppSelector((state) => state.settings);
   const dispatch = useAppDispatch();
   // @ts-expect-error ts-migrate(2532) FIXME: use URL.
   const [url, setURl] = useState("");
