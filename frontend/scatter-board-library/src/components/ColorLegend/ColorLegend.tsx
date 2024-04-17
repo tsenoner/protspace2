@@ -289,7 +289,7 @@ const ColorLegend: React.FC<ColorLegendProps> = ({
                     if (value === colorParam) {
                       setColorParam("");
                     } else {
-                      setColorParam(value);
+                      setColorParam(`${value}`);
                     }
                   }}
                   lightMode={lightMode}

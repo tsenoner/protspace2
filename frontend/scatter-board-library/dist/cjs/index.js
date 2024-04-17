@@ -194,7 +194,7 @@ const ColorLegend = ({ screenshot, colorKey, keyList, setListParam, colorParamLi
                                 setColorParam("");
                             }
                             else {
-                                setColorParam(value);
+                                setColorParam(`${value}`);
                             }
                         }, lightMode: lightMode })));
             }))),
@@ -48615,7 +48615,7 @@ const ScatterBoard = React$1.forwardRef(({ lightMode, cameraRef = React$1.useRef
             // Dim colors for non-matching colorParam
             if (colorParam !== "" &&
                 // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-                colorParam !== objData.divObj.userData.features[colorKey]) {
+                colorParam != objData.divObj.userData.features[colorKey]) {
                 color = "#EEEEEE";
                 opacity = 0.4;
             }
@@ -48927,7 +48927,7 @@ const ScatterBoard = React$1.forwardRef(({ lightMode, cameraRef = React$1.useRef
             // Otherwise, fall back to the original logic
             return featureValue === "NaN" || featureValue === ""
                 ? "#000000"
-                : colorList[colorParamList.indexOf(featureValue) % colorList.length];
+                : colorList[colorParamList.indexOf(`${featureValue}`) % colorList.length];
         }
     }
     React$1.useEffect(() => {
@@ -49369,7 +49369,6 @@ const ScatterBoard = React$1.forwardRef(({ lightMode, cameraRef = React$1.useRef
             document.body.removeChild(downloadLink);
         }
     }
-    console.log("LOGGING");
     return (React$1.createElement("div", { className: "relative h-full flex overflow-hidden" },
         React$1.createElement("div", { className: loading
                 ? "absolute inset-0 z-30 flex justify-center items-center bg-opacity-50 bg-gray-300"

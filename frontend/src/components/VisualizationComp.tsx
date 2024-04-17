@@ -271,10 +271,12 @@ const VisualizationComp = () => {
       0;
     parsedObject.projections[selectedProjection].data.forEach(
       (element: any) => {
-        element = Object.assign(
-          element,
-          parsedObject.protein_data[element.identifier]
-        );
+        element = element = parsedObject.protein_data
+          ? Object.assign(
+              element,
+              parsedObject.protein_data[element.identifier]
+            )
+          : element;
       }
     );
 
@@ -288,48 +290,51 @@ const VisualizationComp = () => {
         parsedObject.visualization_state.colorParamList) ??
       [];
 
-    const keys = Object.keys(
-      parsedObject.projections[selectedProjection].data[0].features
-    ).filter(
-      (item: any) =>
-        parsedObject.projections[selectedProjection].data[0].features[item]
-    );
+    const keys = parsedObject.protein_data
+      ? Object.keys(
+          parsedObject.projections[selectedProjection].data[0].features
+        ).filter(
+          (item: any) =>
+            parsedObject.projections[selectedProjection].data[0].features[item]
+        )
+      : ["NaN"];
 
     const colorKey = keys[0];
-    const newData = parsedObject.projections[selectedProjection].data.map(
-      (item: any) => {
-        const newItem = {
-          ...item,
-        }; // Create a copy of the current item
-        for (const key in newItem.features) {
-          if (newItem.features[key] === "") {
-            newItem.features[key] = "NaN";
+    const newData = parsedObject.protein_data
+      ? parsedObject.projections[selectedProjection].data.map((item: any) => {
+          const newItem = {
+            ...item,
+          }; // Create a copy of the current item
+          for (const key in newItem.features) {
+            if (newItem.features[key] === "") {
+              newItem.features[key] = "NaN";
+            }
           }
-        }
-        return newItem;
-      }
-    );
+          return newItem;
+        })
+      : [];
 
-    newData.forEach((element: any) => {
-      for (const key in element.features) {
-        const value = element.features[key];
-        if (
-          items.filter((e) => e.category === key && e.name === value).length ===
-          0
-        ) {
-          if (key === colorKey) {
-            items.push({
-              category: key,
-              color: colorList[colorParamList.length % colorList.length],
-              name: value,
-            });
-            ifColorParamListEmpty && colorParamList.push(value);
-          } else {
-            items.push({ category: key, name: value });
+    parsedObject.protein_data &&
+      newData.forEach((element: any) => {
+        for (const key in element.features) {
+          const value = element.features[key];
+          if (
+            items.filter((e) => e.category === key && e.name === value)
+              .length === 0
+          ) {
+            if (key === colorKey) {
+              items.push({
+                category: key,
+                color: colorList[colorParamList.length % colorList.length],
+                name: value,
+              });
+              ifColorParamListEmpty && colorParamList.push(value);
+            } else {
+              items.push({ category: key, name: value });
+            }
           }
         }
-      }
-    });
+      });
 
     const updatedDataItems = parsedObject.visualization_state?.customFeatures
       ? settings.dataItems.map((item: { name: any; category: any }) => {
@@ -353,21 +358,17 @@ const VisualizationComp = () => {
     dispatch(setData(parsedObject.projections[selectedProjection].data));
     dispatch(
       setKeyList(
-        Object.keys(
-          parsedObject.projections[selectedProjection].data[0].features
-        )
+        parsedObject.protein_data
+          ? Object.keys(
+              parsedObject.projections[selectedProjection].data[0].features
+            )
+          : ["NaN"]
       )
     );
     dispatch(
       setThreeD(parsedObject.projections[selectedProjection].dimensions === 3)
     );
-    dispatch(
-      setColorKey(
-        (parsedObject.visualization_state &&
-          parsedObject.visualization_state.colorKey) ??
-          colorKey
-      )
-    );
+
     dispatch(setColorParam(parsedObject.visualization_state?.colorParam ?? ""));
     dispatch(
       setSearchItems(parsedObject.visualization_state?.searchItems ?? [])
@@ -377,6 +378,13 @@ const VisualizationComp = () => {
     dispatch(setProteinData(parsedObject.protein_data));
     dispatch(setTechnique(parsedObject.visualization_state?.technique ?? 0));
 
+    dispatch(
+      setColorKey(
+        (parsedObject.visualization_state &&
+          parsedObject.visualization_state.colorKey) ??
+          colorKey
+      )
+    );
     let customFeatures = parsedObject.visualization_state?.customFeatures;
     const sortedCustomFeatures = Array.isArray(customFeatures)
       ? customFeatures.sort(
@@ -657,7 +665,7 @@ const VisualizationComp = () => {
                 />
                 {settings.selectedMols.length !== 0 && <MolstarViewer />}
               </div>
-              <div className="absolute z-20 top-4 right-2 m-2 flex">
+              <div className="absolute z-20 top-4 right-2 m-2 flex flex-col sm:flex-row">
                 <div className="has-tooltip">
                   <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
                     {isFABOpen ? "Collapse" : "Expand"}
@@ -824,7 +832,7 @@ const VisualizationComp = () => {
                           className="rounded-full bg-pink-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md"
                           onClick={() => exportFileV2()}
                         >
-                          <DocumentArrowUpIcon className="w-6 m-auto text-white" />
+                          <DocumentArrowDownIcon className="w-6 m-auto text-white" />
                         </div>
                       </div>
                     ) as TransitionChildren
@@ -855,7 +863,7 @@ const VisualizationComp = () => {
                           htmlFor="file-upload-json"
                         >
                           <div className="rounded-full bg-purple-500 w-12 h-12 m-1 flex items-center cursor-pointer shadow-md">
-                            <DocumentArrowDownIcon className="w-6 m-auto text-white" />
+                            <DocumentArrowUpIcon className="w-6 m-auto text-white" />
                           </div>
                         </label>
                       </div>

@@ -3,12 +3,13 @@ import { MouseEvent } from "react";
 import { colorList } from "../helpers/constants";
 
 interface TagProps {
+  role?: string;
   text: string;
   onClick: () => void;
   index: number;
 }
 
-function Tag({ text, onClick, index }: TagProps) {
+function Tag({ role, text, onClick, index }: TagProps) {
   const color = colorList[index % colorList.length];
 
   const handleTagClick = (event: MouseEvent) => {
@@ -18,6 +19,7 @@ function Tag({ text, onClick, index }: TagProps) {
 
   return (
     <div
+      role={role}
       className="badge badge-info gap-2 m-1 w-32 p-1 h-6 cursor-pointer"
       style={{
         backgroundColor: color,

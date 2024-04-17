@@ -9,18 +9,22 @@ import { setSearchItems } from "../redux/actions/settings";
 import Tag from "./Tag";
 
 type SearchItemProps = {
+  role?: string;
   item: Item;
   clickHandler: (item: Item) => void;
 };
 
-function SearchItem({ item, clickHandler }: SearchItemProps) {
+export function SearchItem({ role, item, clickHandler }: SearchItemProps) {
   return (
     <div
+      role={role}
+      data-testid="search-item"
       className="flex items-center border-r-1 hover:shadow-md w-80"
       onClick={() => clickHandler(item)}
     >
       {item.img && (
         <div
+          data-testid="item-image"
           className="w-4 h-4 mr-2"
           style={{
             backgroundImage: `url('${item.img}')`,
@@ -30,6 +34,7 @@ function SearchItem({ item, clickHandler }: SearchItemProps) {
       )}
       {item.color && (
         <div
+          data-testid="item-color"
           className="w-4 h-4 mx-1"
           style={{
             backgroundColor: item.color,
@@ -66,8 +71,10 @@ export default function EntitySearch() {
         left: "8px",
         borderRadius: "8px",
       }}
+      id="Search"
     >
       <div
+        aria-label="search-toggle"
         className="p-1 rounded-md shadow-md"
         style={{
           backgroundColor: colorMode === "light" ? "#F0F2F5" : "#101827",
@@ -82,6 +89,7 @@ export default function EntitySearch() {
           onClick={() => setClosed(!closed)}
         >
           <p
+            data-testid="search-label"
             className={closed ? "p-2" : "p-2 mr-auto pl-0"}
             style={{ color: colorMode === "light" ? "#1F2937" : "white" }}
           >
@@ -94,15 +102,17 @@ export default function EntitySearch() {
             />
           ) : (
             <XMarkIcon
+              data-testid="close-icon"
               className="w-4 mx-2 cursor-pointer"
               onClick={() => setClosed(!closed)}
             />
           )}
         </div>
-        <div className={closed ? "hidden" : "inline-block"}>
+        <div className={closed ? "hidden" : "inline-block"} data-testid="tag">
           <div className="flex w-80 overflow-x-auto">
             {searchItems.map((item: Item, ix: number) => (
               <Tag
+                role="button"
                 key={ix}
                 text={item.name}
                 index={keyList.indexOf(item.category)}
@@ -129,38 +139,41 @@ export default function EntitySearch() {
             value={query}
             placeholder="Search through features"
           />
-          {loading ? (
-            <Box mt={1}>
-              <Spinner color="blue.500" />
-            </Box>
-          ) : query && groupedResults ? (
-            <div className="pt-2 h-72 overflow-x-auto cursor-pointer">
-              {Array.from(groupedResults.entries()).map(
-                ([category, data], ix) => (
-                  <div key={ix}>
-                    <h1 className="font-bold">{category.toUpperCase()}</h1>
-                    {data.map((item: Item, index: number) => (
-                      <SearchItem
-                        key={index}
-                        item={item}
-                        clickHandler={(item) => {
-                          if (
-                            !searchItems.find(
-                              (o: { name: string; category: string }) =>
-                                o.name === item.name &&
-                                o.category === item.category
-                            )
-                          ) {
-                            dispatch(setSearchItems([...searchItems, item]));
-                          }
-                        }}
-                      />
-                    ))}
-                  </div>
-                )
-              )}
-            </div>
-          ) : null}
+          <div data-testid="progress">
+            {loading ? (
+              <Box mt={1}>
+                <Spinner role="progressbar" color="blue.500" />
+              </Box>
+            ) : query && groupedResults ? (
+              <div className="pt-2 h-72 overflow-x-auto cursor-pointer">
+                {Array.from(groupedResults.entries()).map(
+                  ([category, data], ix) => (
+                    <div key={ix}>
+                      <h1 className="font-bold">{category.toUpperCase()}</h1>
+                      {data.map((item: Item, index: number) => (
+                        <SearchItem
+                          role="button"
+                          key={index}
+                          item={item}
+                          clickHandler={(item) => {
+                            if (
+                              !searchItems.find(
+                                (o: { name: string; category: string }) =>
+                                  o.name === item.name &&
+                                  o.category === item.category
+                              )
+                            ) {
+                              dispatch(setSearchItems([...searchItems, item]));
+                            }
+                          }}
+                        />
+                      ))}
+                    </div>
+                  )
+                )}
+              </div>
+            ) : null}
+          </div>
         </div>
       </div>
     </main>

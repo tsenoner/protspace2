@@ -463,7 +463,7 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
         if (
           colorParam !== "" &&
           // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-          colorParam !== objData.divObj.userData.features[colorKey]
+          colorParam != objData.divObj.userData.features[colorKey]
         ) {
           color = "#EEEEEE";
           opacity = 0.4;
@@ -866,7 +866,9 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
         // Otherwise, fall back to the original logic
         return featureValue === "NaN" || featureValue === ""
           ? "#000000"
-          : colorList[colorParamList.indexOf(featureValue) % colorList.length];
+          : colorList[
+              colorParamList.indexOf(`${featureValue}`) % colorList.length
+            ];
       }
     }
 

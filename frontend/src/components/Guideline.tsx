@@ -1,5 +1,3 @@
-// src/components/GuidelineComp.tsx
-
 import React from "react";
 import Nav from "./Nav";
 

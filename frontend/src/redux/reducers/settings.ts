@@ -257,7 +257,6 @@ const settingsReducer = (
         for (const key in element.features) {
           const value = element.features[key];
           if (
-            typeof value === "string" &&
             items.filter((e) => e.category === key && e.name === value)
               .length === 0
           ) {
@@ -265,15 +264,17 @@ const settingsReducer = (
               items.push({
                 category: key,
                 color: colorList[colorParamList.length % colorList.length],
-                name: value,
+                name: value as string,
               });
-              colorParamList.push(value);
+
+              colorParamList.push(`${value}` as string);
             } else {
-              items.push({ category: key, name: value });
+              items.push({ category: key, name: value as string });
             }
           }
         }
       });
+
       return {
         ...state,
         colorParamList: colorParamList,
@@ -362,50 +363,57 @@ const settingsReducer = (
     case SET_TECHNIQUE:
       const selectedProjection = state.projections[action.payload];
       selectedProjection.data.forEach((element: any) => {
-        element = Object.assign(
-          element,
-          state.protein_data[element.identifier]
-        );
+        if (state.protein_data) {
+          Object.assign(element, state.protein_data[element.identifier]);
+        } else {
+          element.features = "NaN";
+        }
       });
 
       const itemsLocal: Item[] = [];
       const colorParamListLocal: string[] = [];
-      const keys = Object.keys(selectedProjection.data[0].features).filter(
-        (item: any) => selectedProjection.data[0].features[item]
-      );
-      const colorKey = keys[0];
-      const newData = selectedProjection.data.map((item: any) => {
-        const newItem = {
-          ...item,
-        }; // Create a copy of the current item
-        for (const key in newItem.features) {
-          if (newItem.features[key] === "") {
-            newItem.features[key] = "NaN";
-          }
-        }
-        return newItem;
-      });
+      const keys = state.protein_data
+        ? Object.keys(selectedProjection.data[0].features).filter(
+            (item: any) => selectedProjection.data[0].features[item]
+          )
+        : ["NaN"];
+      const colorKey = state.colorKey ?? keys[0];
+      const newData = state.protein_data
+        ? selectedProjection.data.map((item: any) => {
+            const newItem = {
+              ...item,
+            }; // Create a copy of the current item
+            for (const key in newItem.features) {
+              if (newItem.features[key] === "") {
+                newItem.features[key] = "NaN";
+              }
+            }
+            return newItem;
+          })
+        : [];
 
-      newData.forEach((element: any) => {
-        for (const key in element.features) {
-          const value = element.features[key];
-          if (
-            itemsLocal.filter((e) => e.category === key && e.name === value)
-              .length === 0
-          ) {
-            if (key === colorKey) {
-              itemsLocal.push({
-                category: key,
-                color: colorList[colorParamListLocal.length % colorList.length],
-                name: value,
-              });
-              colorParamListLocal.push(value);
-            } else {
-              itemsLocal.push({ category: key, name: value });
+      state.protein_data &&
+        newData.forEach((element: any) => {
+          for (const key in element.features) {
+            const value = element.features[key];
+            if (
+              itemsLocal.filter((e) => e.category === key && e.name === value)
+                .length === 0
+            ) {
+              if (key === colorKey) {
+                itemsLocal.push({
+                  category: key,
+                  color:
+                    colorList[colorParamListLocal.length % colorList.length],
+                  name: value,
+                });
+                colorParamListLocal.push(value);
+              } else {
+                itemsLocal.push({ category: key, name: value });
+              }
             }
           }
-        }
-      });
+        });
 
       return {
         ...state,
@@ -414,7 +422,6 @@ const settingsReducer = (
         threeD: selectedProjection.dimensions === 3,
         technique: action.payload,
         dataItems: itemsLocal,
-        colorKey: colorKey,
       };
     case SET_MOLECULE_NAME:
       return {
