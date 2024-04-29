@@ -10,6 +10,7 @@ import {
   DrawerContent,
   DrawerCloseButton,
   IconButton,
+  Tooltip,
 } from "@chakra-ui/react";
 import { VscFeedback } from "react-icons/vsc";
 
@@ -19,14 +20,16 @@ const Feedback: React.FC = () => {
 
   return (
     <>
-      <IconButton
-        aria-label="Open Feedback"
-        icon={<VscFeedback />}
-        colorScheme="teal"
-        onClick={onOpen}
-        ref={btnRef}
-        style={{ position: "fixed", bottom: "20px", right: "20px" }}
-      />
+      <Tooltip label="Feedback" hasArrow placement="top">
+        <IconButton
+          aria-label="Open Feedback"
+          icon={<VscFeedback />}
+          colorScheme="teal"
+          onClick={onOpen}
+          ref={btnRef}
+          style={{ position: "fixed", bottom: "20px", right: "20px" }}
+        />
+      </Tooltip>
       <Drawer
         size={"lg"}
         isOpen={isOpen}

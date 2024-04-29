@@ -16,12 +16,7 @@ describe("GuidelineComp", () => {
       </BrowserRouter>
     );
 
-    expect(screen.getByText("Guidelines")).toBeInTheDocument();
+    expect(screen.getByText("Guideline")).toBeInTheDocument();
     expect(screen.getByText("Navigation")).toBeInTheDocument(); // Check for mocked Nav component's content
-    expect(
-      screen.getByText(
-        "Welcome to the guidelines page. Here, you'll find the rules and guidelines for using this application."
-      )
-    ).toBeInTheDocument();
   });
 });

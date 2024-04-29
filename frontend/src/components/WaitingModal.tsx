@@ -5,9 +5,9 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
-  Spinner,
   Text,
 } from "@chakra-ui/react";
+import SvgSpinner from "./SvgSpinner";
 
 const VisualizationWaitingModal = ({
   isOpen,
@@ -28,7 +28,7 @@ const VisualizationWaitingModal = ({
           alignItems="center"
           justifyContent="center"
         >
-          <Spinner size="xl" mb={4} />
+          <SvgSpinner />
           <Text textAlign="center">
             Please wait while we're fetching the visualization data from Colab.
           </Text>

@@ -32,7 +32,7 @@ export function SearchItem({ role, item, clickHandler }: SearchItemProps) {
           }}
         />
       )}
-      {item.color && (
+      {/* {item.color && (
         <div
           data-testid="item-color"
           className="w-4 h-4 mx-1"
@@ -40,7 +40,7 @@ export function SearchItem({ role, item, clickHandler }: SearchItemProps) {
             backgroundColor: item.color,
           }}
         />
-      )}
+      )} */}
       <span
         style={{
           textOverflow: "ellipsis",

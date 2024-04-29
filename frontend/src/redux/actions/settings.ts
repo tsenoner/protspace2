@@ -217,7 +217,7 @@ export const fetchAndSetData = createAsyncThunk<
           if (key === colorKey) {
             items.push({
               category: key,
-              color: colorList[colorParamList.length % colorList.length],
+              color: colorList[(colorParamList.length % colorList.length) + 1],
               name: value,
             });
             colorParamList.push(value);

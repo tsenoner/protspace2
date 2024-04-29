@@ -16,7 +16,6 @@ import React, {
 } from "react";
 import { BsFiletypePng, BsFiletypeSvg } from "react-icons/bs";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
-import { PropagateLoader } from "react-spinners";
 import { CSSTransition } from "react-transition-group";
 
 import { ScatterBoard, type ScatterBoardRef } from "scatter-board-library";
@@ -55,12 +54,14 @@ import Nav from "./Nav";
 import { useColorMode } from "@chakra-ui/react";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import { TransitionChildren } from "react-transition-group/Transition";
 import { Item } from "../data";
-import MolstarViewer from "./MolstarViewer";
-import VisualizationWaitingModal from "./WaitingModal";
-import { useLocation, useNavigate } from "react-router-dom";
 import Feedback from "./Feedback";
+import MolstarViewer from "./MolstarViewer";
+import QuickAccessLinks from "./QuickAccessLinks";
+import SvgSpinner from "./SvgSpinner";
+import VisualizationWaitingModal from "./WaitingModal";
 
 const VisualizationComp = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -128,11 +129,6 @@ const VisualizationComp = () => {
       protein_data: settings.protein_data,
       projections: settings.projections,
     };
-    localStorage.setItem("protspace", JSON.stringify(jsonData));
-
-    const test = JSON.stringify(jsonData);
-    const dataSizeInBytes = new Blob([test]).size;
-    console.log("Size of JSON data in bytes:", dataSizeInBytes);
 
     const jsonString = JSON.stringify(jsonData, null, 2);
     const blob = new Blob([jsonString], { type: "application/json" });
@@ -486,6 +482,7 @@ const VisualizationComp = () => {
       <div className="absolute z-10 left-0 top-0 w-screen">
         <Nav />
         <Feedback />
+        <QuickAccessLinks />
       </div>
       {isWaitingForData && fromColab ? (
         <VisualizationWaitingModal
@@ -522,13 +519,12 @@ const VisualizationComp = () => {
               </span>
               <div
                 style={{
-                  width: "240px",
-                  height: "36px",
                   textAlign: "center",
-                  marginTop: "24px",
+                  display: "flex",
+                  placeContent: "center",
                 }}
               >
-                <PropagateLoader color={"#0066bd"} loading={true} />
+                <SvgSpinner />
               </div>
 
               <span
@@ -539,7 +535,7 @@ const VisualizationComp = () => {
                   color: "black",
                 }}
               >
-                Time Remaining: <strong> &nbsp;1 minute</strong>
+                Time Remaining: <strong> &nbsp; {"<"} 1 minute</strong>
               </span>
             </div>
           </div>

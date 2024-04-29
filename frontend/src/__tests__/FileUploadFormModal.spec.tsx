@@ -58,7 +58,7 @@ describe("FileUploadFormModal", () => {
       </Provider>
     );
     fireEvent.change(screen.getByRole("combobox"), { target: { value: "0" } });
-    userEvent.click(screen.getByText("Save"));
+    userEvent.click(screen.getByText("Save Changes"));
     expect(store.dispatch).toHaveBeenCalledWith(setTechnique("0"));
   });
 

@@ -162,10 +162,6 @@ describe("SearchItem Component", () => {
     // Check for image style
     const imgDiv = screen.getByTestId("item-image");
     expect(imgDiv).toHaveStyle(`backgroundImage: url('path/to/img.jpg')`);
-
-    // Check for color style
-    const colorDiv = screen.getByTestId("item-color");
-    expect(colorDiv).toHaveStyle("backgroundColor: #FF6347");
   });
 
   it("calls the click handler when clicked", () => {
@@ -186,7 +182,7 @@ describe("SearchItem Component", () => {
     expect(imgDiv).not.toBeNull();
 
     const colorDiv = screen.queryByTestId("item-color");
-    expect(colorDiv).not.toBeNull();
+    expect(colorDiv).toBeNull();
   });
 });
 
