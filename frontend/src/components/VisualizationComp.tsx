@@ -60,7 +60,7 @@ import { Item } from "../data";
 import MolstarViewer from "./MolstarViewer";
 import VisualizationWaitingModal from "./WaitingModal";
 import { useLocation, useNavigate } from "react-router-dom";
-// import Reader from "./Reader";
+import Feedback from "./Feedback";
 
 const VisualizationComp = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -222,7 +222,6 @@ const VisualizationComp = () => {
   //   dispatch(setTwoLegend(parsedObject.twoLegend ?? false));
   //   dispatch(setCSVFilePath(parsedObject.csvFilePath ?? ""));
   //   dispatch(setColorKey(parsedObject.colorKey ?? ""));
-  //   dispatch(setShapeKey(parsedObject.shapeKey ?? ""));
   //   dispatch(setData(parsedObject.data ?? []));
   //   dispatch(setKeyList(parsedObject.keyList ?? []));
   //   dispatch(setColorParamList(parsedObject.colorParamList ?? []));
@@ -377,7 +376,6 @@ const VisualizationComp = () => {
     dispatch(setProjections(parsedObject.projections));
     dispatch(setProteinData(parsedObject.protein_data));
     dispatch(setTechnique(parsedObject.visualization_state?.technique ?? 0));
-
     dispatch(
       setColorKey(
         (parsedObject.visualization_state &&
@@ -487,6 +485,7 @@ const VisualizationComp = () => {
     <div className="h-screen w-screen overflow-hidden">
       <div className="absolute z-10 left-0 top-0 w-screen">
         <Nav />
+        <Feedback />
       </div>
       {isWaitingForData && fromColab ? (
         <VisualizationWaitingModal

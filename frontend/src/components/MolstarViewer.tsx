@@ -4,7 +4,7 @@ import "molstar/lib/mol-plugin-ui/skin/light.scss";
 import { createRef, useEffect, useState } from "react";
 // import Reader from "./Reader";
 import { CloseIcon } from "@chakra-ui/icons";
-import { Tooltip } from "@chakra-ui/react";
+import { Tooltip, useColorMode } from "@chakra-ui/react";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
 import { PostprocessingParams } from "molstar/lib/mol-canvas3d/passes/postprocessing";
@@ -74,6 +74,7 @@ const MySpec: PluginUISpec = {
 };
 
 const MolstarViewer = () => {
+  const { colorMode } = useColorMode();
   const parent = createRef<HTMLDivElement>();
   const selectedMols = useAppSelector((state) => state.settings.selectedMols);
   const dispatch = useAppDispatch();
@@ -190,7 +191,10 @@ const MolstarViewer = () => {
             onClick={() => dispatch(setSelectedMols([]))}
             style={{ zIndex: 9999, right: 12, bottom: 18 }}
           >
-            <CloseIcon boxSize={"12px"} />
+            <CloseIcon
+              boxSize={"12px"}
+              color={colorMode === "light" ? "black" : "black"}
+            />
           </button>
         </Tooltip>
         <Tooltip label="Full Screen">
@@ -198,7 +202,10 @@ const MolstarViewer = () => {
             className="absolute bottom-12 right-4 z-10 w-4 h-4 cursor-pointer"
             onClick={handleFullScreen}
           >
-            <MdFullscreen size="24px" />
+            <MdFullscreen
+              size="24px"
+              color={colorMode === "light" ? "black" : "black"}
+            />
           </button>
         </Tooltip>
 

@@ -15720,7 +15720,11 @@
     {
       "name": "Umap 2D",
       "dimensions": 2,
-      "info": {},
+      "info": {
+        "n_neighbors": 25,
+        "min_dist": 0.5,
+        "metric": "euclidean"
+      },
       "data": [
         {
           "identifier": "None|Xetr_1|Xenopus_tropicalis",
@@ -25716,7 +25720,7 @@
     {
       "name": "Tsne 2D",
       "dimensions": 2,
-      "info": {},
+      "info": {"n_components": 2, "perplexity": 30, "learning_rate": 200, "n_iter": 1000, "metric": "euclidean"},
       "data": [
         {
           "identifier": "None|Xetr_1|Xenopus_tropicalis",
@@ -35712,7 +35716,10 @@
     {
       "name": "Umap 3D",
       "dimensions": 3,
-      "info": {},
+      "info": {
+      "metric": "euclidean",
+      "n_components":3
+    },
       "data": [
         {
           "identifier": "None|Xetr_1|Xenopus_tropicalis",

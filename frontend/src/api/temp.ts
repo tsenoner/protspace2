@@ -39,6 +39,7 @@ function getDefaultState(): SettingsState {
     structures: {},
     protein_data: {},
     customFeatures: [],
+    items: [],
   };
 }
 

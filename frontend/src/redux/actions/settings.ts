@@ -1,14 +1,9 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { Action, ThunkDispatch, createAsyncThunk } from "@reduxjs/toolkit";
 import { Vector3 } from "three";
 import { fetchData } from "../../api/api";
-import { AtomStyleSpec, Item } from "../../data";
+import { Item } from "../../data";
 import { colorList } from "../../helpers/constants";
 import {
-  ADD_TO_ATOM_STYLE,
-  ADD_TO_SEARCH_ATOM_STYLE,
-  REMOVE_FROM_ATOM_STYLE,
-  REMOVE_FROM_SEARCH_ATOM_STYLE,
-  SET_ATOM_STYLE,
   SET_CAMERA_POSITION,
   SET_CAMERA_ROTATION,
   SET_COLOR_AND_SHAPE_KEY,
@@ -31,44 +26,24 @@ import {
   SET_PDB_EXISTS,
   SET_PROJECTIONS,
   SET_PROTEIN_DATA,
-  SET_SEARCH_ATOM_STYLE,
   SET_SEARCH_ITEMS,
   SET_SELECTED_MOLS,
-  SET_SHAPE_KEY,
   SET_SHAPE_PARAM,
   SET_SHAPE_PARAM_LIST,
+  SET_STRUCTURES,
   SET_TECHNIQUE,
   SET_THREE_D,
   SET_TWO_LEGEND,
 } from "../actionTypes";
-import { AppDispatch, RootState } from "../store";
-
-export const addToAtomStyle = (payload: keyof AtomStyleSpec) => {
-  return { type: ADD_TO_ATOM_STYLE, payload };
-};
-
-export const removeFromAtomStyle = (payload: keyof AtomStyleSpec) => {
-  return { type: REMOVE_FROM_ATOM_STYLE, payload };
-};
-
-export const addToSearchAtomStyle = (payload: keyof AtomStyleSpec) => {
-  return { type: ADD_TO_SEARCH_ATOM_STYLE, payload };
-};
+import { SettingsState } from "../reducers/settings";
+import { RootState } from "../store";
 
 export function setColorList(colorList: any) {
   return { type: SET_COLOR_LIST, payload: colorList };
 }
 
-export const removeFromSearchAtomStyle = (payload: keyof AtomStyleSpec) => {
-  return { type: REMOVE_FROM_SEARCH_ATOM_STYLE, payload };
-};
-
 export function setColorKey(colorKey: string) {
   return { type: SET_COLOR_KEY, payload: colorKey };
-}
-
-export function setShapeKey(shapeKey: string) {
-  return { type: SET_SHAPE_KEY, payload: shapeKey };
 }
 
 export function setColorParam(colorParam: string) {
@@ -101,14 +76,6 @@ export function setTechnique(technique: string) {
 
 export function setThreeD(threeD: boolean) {
   return { type: SET_THREE_D, payload: threeD };
-}
-
-export function setAtomStyle(atomStyle: AtomStyleSpec) {
-  return { type: SET_ATOM_STYLE, payload: atomStyle };
-}
-
-export function setSearchAtomStyle(atomStyle: AtomStyleSpec) {
-  return { type: SET_SEARCH_ATOM_STYLE, payload: atomStyle };
 }
 
 export function setSearchItems(searchItems: Item[]) {
@@ -192,6 +159,16 @@ export function setProjections(projections: any) {
 export function setProteinData(proteinData: any) {
   return { type: SET_PROTEIN_DATA, payload: proteinData };
 }
+
+export function setStructures(structures: any) {
+  return { type: SET_STRUCTURES, payload: structures };
+}
+
+interface PayloadAction<T = any> extends Action {
+  payload: T;
+}
+
+type AppDispatch = ThunkDispatch<SettingsState, unknown, PayloadAction>;
 
 export const fetchAndSetData = createAsyncThunk<
   void,
