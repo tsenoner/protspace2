@@ -34,10 +34,19 @@
   align-items: flex-start !important;
   height: auto !important;
 }
-/* .msp-layout-region .msp-layout-bottom {
-  display: none;
+
+.controller-menu {
+  position: absolute;
+  z-index: 20;
+  top: 1rem;
+  right: 0.5rem;
+  margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
 }
-*/
-/* .msp-plugin .msp-viewport-controls-buttons .msp-btn-link-toggle-off {
-  display: none;
-} */
+
+@media (min-width: 640px) {
+  .controller-menu {
+    flex-direction: row;
+  }
+}

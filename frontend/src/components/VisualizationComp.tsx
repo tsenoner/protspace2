@@ -664,7 +664,7 @@ const VisualizationComp = () => {
                 />
                 {settings.selectedMols.length !== 0 && <MolstarViewer />}
               </div>
-              <div className="absolute z-20 top-4 right-2 m-2 flex flex-col sm:flex-row">
+              <div className="controller-menu">
                 <div className="has-tooltip">
                   <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
                     {isFABOpen ? "Collapse" : "Expand"}
