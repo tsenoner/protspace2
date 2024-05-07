@@ -477,6 +477,7 @@ const VisualizationComp = () => {
     importFileV2(parsedObject.data);
   };
   const navigate = useNavigate();
+
   return (
     <div className="h-screen w-screen overflow-hidden">
       <div className="absolute z-10 left-0 top-0 w-screen">

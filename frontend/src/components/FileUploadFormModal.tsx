@@ -36,7 +36,9 @@ export function FileUploadFormModal({
       <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
         <div className="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded-lg shadow-lg z-50 overflow-y-auto max-h-[90%] p-6">
           <div className="flex justify-between items-center pb-4">
-            <h2 className="text-2xl font-bold text-gray-800">File Settings</h2>
+            <h2 className="text-2xl font-bold text-gray-800">
+              Projection Settings
+            </h2>
             <button
               aria-label="Close"
               className="modal-close cursor-pointer rounded-full p-2 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500"

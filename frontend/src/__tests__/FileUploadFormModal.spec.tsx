@@ -33,7 +33,7 @@ describe("FileUploadFormModal", () => {
         />
       </Provider>
     );
-    expect(screen.getByText("File Settings")).toBeInTheDocument();
+    expect(screen.getByText("Projection Settings")).toBeInTheDocument();
   });
 
   it("does not render when fileUploadShown is false", () => {
@@ -45,7 +45,7 @@ describe("FileUploadFormModal", () => {
         />
       </Provider>
     );
-    expect(screen.queryByText("File Settings")).not.toBeInTheDocument();
+    expect(screen.queryByText("Projection Settings")).not.toBeInTheDocument();
   });
 
   it("dispatches setTechnique action with selected technique on save", () => {
