@@ -49192,7 +49192,7 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
         //   console.log(controls);
         // });
         controls.minDistance = 0;
-        controls.maxDistance = 60;
+        controls.maxDistance = 70;
         // controls.addEventListener("change", () => {
         //   objArr.current.forEach(function (objData) {
         //     const proj = toScreenPosition(

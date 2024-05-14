@@ -49212,7 +49212,7 @@ const ScatterBoard = React$1.forwardRef(({ lightMode, cameraRef = React$1.useRef
         //   console.log(controls);
         // });
         controls.minDistance = 0;
-        controls.maxDistance = 60;
+        controls.maxDistance = 70;
         // controls.addEventListener("change", () => {
         //   objArr.current.forEach(function (objData) {
         //     const proj = toScreenPosition(
