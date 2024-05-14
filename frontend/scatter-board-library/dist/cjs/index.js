@@ -167,9 +167,12 @@ const ColorLegend = ({ screenshot, colorKey, keyList, setListParam, colorParamLi
         const newSortedList = sortLogicBasedOnCustomFeatures(customizations);
         setSortedList(newSortedList);
     }, [customizations]);
-    return (React$1.createElement("div", { id: "color-legend", className: "block rounded-md mr-4 w-full mt-2 legend p-2", style: { background: lightMode ? "#F0F2F5" : "#101827" } },
+    return (React$1.createElement("div", { id: "color-legend", className: "block rounded-md mr-4 w-full mt-2 legend p-2", style: {
+            background: lightMode ? "#F0F2F5" : "#101827",
+            color: lightMode ? "#101827" : "#F0F2F5",
+        } },
         React$1.createElement("div", { className: "flex items-center" },
-            React$1.createElement("select", { className: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", value: colorKey, onChange: (e) => setListParam(e.target.value) }, keyList.map((option, index) => (React$1.createElement("option", { key: index, value: option }, option.toUpperCase())))),
+            React$1.createElement("select", { style: { background: lightMode ? "#101827" : "#101827" }, className: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", value: colorKey, onChange: (e) => setListParam(e.target.value) }, keyList.map((option, index) => (React$1.createElement("option", { key: index, value: option }, option.toUpperCase())))),
             React$1.createElement("div", { className: "cursor-pointer pl-2", onClick: () => setIsEditModalOpen(true) },
                 React$1.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: "1.5", stroke: "currentColor", className: "w-6 h-6", style: { marginTop: "-8px", color: lightMode ? "black" : "white" } },
                     React$1.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" }),
@@ -48324,174 +48327,6 @@ var createFileName = function createFileName() {
   return "".concat(names.join(''), ".").concat(extension);
 };
 
-var Stats = function () {
-
-	var mode = 0;
-
-	var container = document.createElement( 'div' );
-	container.style.cssText = 'position:fixed;top:0;left:0;cursor:pointer;opacity:0.9;z-index:10000';
-	container.addEventListener( 'click', function ( event ) {
-
-		event.preventDefault();
-		showPanel( ++ mode % container.children.length );
-
-	}, false );
-
-	//
-
-	function addPanel( panel ) {
-
-		container.appendChild( panel.dom );
-		return panel;
-
-	}
-
-	function showPanel( id ) {
-
-		for ( var i = 0; i < container.children.length; i ++ ) {
-
-			container.children[ i ].style.display = i === id ? 'block' : 'none';
-
-		}
-
-		mode = id;
-
-	}
-
-	//
-
-	var beginTime = ( performance || Date ).now(), prevTime = beginTime, frames = 0;
-
-	var fpsPanel = addPanel( new Stats.Panel( 'FPS', '#0ff', '#002' ) );
-	var msPanel = addPanel( new Stats.Panel( 'MS', '#0f0', '#020' ) );
-
-	if ( self.performance && self.performance.memory ) {
-
-		var memPanel = addPanel( new Stats.Panel( 'MB', '#f08', '#201' ) );
-
-	}
-
-	showPanel( 0 );
-
-	return {
-
-		REVISION: 16,
-
-		dom: container,
-
-		addPanel: addPanel,
-		showPanel: showPanel,
-
-		begin: function () {
-
-			beginTime = ( performance || Date ).now();
-
-		},
-
-		end: function () {
-
-			frames ++;
-
-			var time = ( performance || Date ).now();
-
-			msPanel.update( time - beginTime, 200 );
-
-			if ( time >= prevTime + 1000 ) {
-
-				fpsPanel.update( ( frames * 1000 ) / ( time - prevTime ), 100 );
-
-				prevTime = time;
-				frames = 0;
-
-				if ( memPanel ) {
-
-					var memory = performance.memory;
-					memPanel.update( memory.usedJSHeapSize / 1048576, memory.jsHeapSizeLimit / 1048576 );
-
-				}
-
-			}
-
-			return time;
-
-		},
-
-		update: function () {
-
-			beginTime = this.end();
-
-		},
-
-		// Backwards Compatibility
-
-		domElement: container,
-		setMode: showPanel
-
-	};
-
-};
-
-Stats.Panel = function ( name, fg, bg ) {
-
-	var min = Infinity, max = 0, round = Math.round;
-	var PR = round( window.devicePixelRatio || 1 );
-
-	var WIDTH = 80 * PR, HEIGHT = 48 * PR,
-		TEXT_X = 3 * PR, TEXT_Y = 2 * PR,
-		GRAPH_X = 3 * PR, GRAPH_Y = 15 * PR,
-		GRAPH_WIDTH = 74 * PR, GRAPH_HEIGHT = 30 * PR;
-
-	var canvas = document.createElement( 'canvas' );
-	canvas.width = WIDTH;
-	canvas.height = HEIGHT;
-	canvas.style.cssText = 'width:80px;height:48px';
-
-	var context = canvas.getContext( '2d' );
-	context.font = 'bold ' + ( 9 * PR ) + 'px Helvetica,Arial,sans-serif';
-	context.textBaseline = 'top';
-
-	context.fillStyle = bg;
-	context.fillRect( 0, 0, WIDTH, HEIGHT );
-
-	context.fillStyle = fg;
-	context.fillText( name, TEXT_X, TEXT_Y );
-	context.fillRect( GRAPH_X, GRAPH_Y, GRAPH_WIDTH, GRAPH_HEIGHT );
-
-	context.fillStyle = bg;
-	context.globalAlpha = 0.9;
-	context.fillRect( GRAPH_X, GRAPH_Y, GRAPH_WIDTH, GRAPH_HEIGHT );
-
-	return {
-
-		dom: canvas,
-
-		update: function ( value, maxValue ) {
-
-			min = Math.min( min, value );
-			max = Math.max( max, value );
-
-			context.fillStyle = bg;
-			context.globalAlpha = 1;
-			context.fillRect( 0, 0, WIDTH, GRAPH_Y );
-			context.fillStyle = fg;
-			context.fillText( round( value ) + ' ' + name + ' (' + round( min ) + '-' + round( max ) + ')', TEXT_X, TEXT_Y );
-
-			context.drawImage( canvas, GRAPH_X + PR, GRAPH_Y, GRAPH_WIDTH - PR, GRAPH_HEIGHT, GRAPH_X, GRAPH_Y, GRAPH_WIDTH - PR, GRAPH_HEIGHT );
-
-			context.fillRect( GRAPH_X + GRAPH_WIDTH - PR, GRAPH_Y, PR, GRAPH_HEIGHT );
-
-			context.fillStyle = bg;
-			context.globalAlpha = 0.9;
-			context.fillRect( GRAPH_X + GRAPH_WIDTH - PR, GRAPH_Y, PR, round( ( 1 - ( value / maxValue ) ) * GRAPH_HEIGHT ) );
-
-		}
-
-	};
-
-};
-
-var Stats$1 = Stats;
-
 const ScatterBoard = React$1.forwardRef(({ lightMode, cameraRef = React$1.useRef(), setColorParam, setShapeParam, keyList, setListParam, twoLegend, isLegendOpen, searchItems, dataItems, colorKey, colorParam, shapeKey, shapeParam, threeD, data, technique, shapeParamList, colorParamList, cameraPosition, cameraRotation, colorList, setCustomFeatures, shapeList, setErrorMessage, onVisualizeClicked, onCompareClicked, customFeatures, }, ref) => {
     const containerRef = React$1.useRef();
     const legendRef = React$1.useRef();
@@ -49377,7 +49212,7 @@ const ScatterBoard = React$1.forwardRef(({ lightMode, cameraRef = React$1.useRef
         //   console.log(controls);
         // });
         controls.minDistance = 0;
-        controls.maxDistance = 70;
+        controls.maxDistance = 60;
         // controls.addEventListener("change", () => {
         //   objArr.current.forEach(function (objData) {
         //     const proj = toScreenPosition(
@@ -49413,12 +49248,12 @@ const ScatterBoard = React$1.forwardRef(({ lightMode, cameraRef = React$1.useRef
             controls.enablePan = true; // Enable panning
         }
         controls.target.distanceTo(controls.object.position);
-        const stats = new Stats$1();
-        stats.showPanel(0);
-        document.body.appendChild(stats.dom);
+        // const stats = new Stats();
+        // stats.showPanel(0);
+        // document.body.appendChild(stats.dom);
         // Animation loop
         const animate = () => {
-            stats.begin();
+            // stats.begin();
             requestAnimationFrame(animate);
             camera.position.copy(miniCamera.position);
             camera.rotation.copy(miniCamera.rotation);
@@ -49430,7 +49265,7 @@ const ScatterBoard = React$1.forwardRef(({ lightMode, cameraRef = React$1.useRef
                 }
             });
             renderer.render(scene, camera);
-            stats.end();
+            // stats.end();
         };
         function animateMini() {
             requestAnimationFrame(animateMini);

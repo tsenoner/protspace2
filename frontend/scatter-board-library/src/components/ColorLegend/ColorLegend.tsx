@@ -217,10 +217,14 @@ const ColorLegend: React.FC<ColorLegendProps> = ({
     <div
       id="color-legend"
       className="block rounded-md mr-4 w-full mt-2 legend p-2"
-      style={{ background: lightMode ? "#F0F2F5" : "#101827" }}
+      style={{
+        background: lightMode ? "#F0F2F5" : "#101827",
+        color: lightMode ? "#101827" : "#F0F2F5",
+      }}
     >
       <div className="flex items-center">
         <select
+          style={{ background: lightMode ? "#101827" : "#101827" }}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           value={colorKey as string}
           onChange={(e) => setListParam(e.target.value)}

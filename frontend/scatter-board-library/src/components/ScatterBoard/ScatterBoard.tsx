@@ -18,7 +18,7 @@ import ColorLegend from "../ColorLegend/ColorLegend";
 import Controller from "../Controller/Controller";
 import ShapeLegend from "../ShapeLegend/ShapeLegend";
 import { ScatterBoardProps, ScatterBoardRef } from "./ScatterBoard.types";
-import Stats from "three/examples/jsm/libs/stats.module.js";
+// import Stats from "three/examples/jsm/libs/stats.module.js";
 import "../../styles/tailwind.css";
 
 const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
@@ -1251,7 +1251,7 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       //   console.log(controls);
       // });
       controls.minDistance = 0;
-      controls.maxDistance = 70;
+      controls.maxDistance = 60;
       // controls.addEventListener("change", () => {
       //   objArr.current.forEach(function (objData) {
       //     const proj = toScreenPosition(
@@ -1295,12 +1295,12 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
         controls.object.position
       );
 
-      const stats = new Stats();
-      stats.showPanel(0);
-      document.body.appendChild(stats.dom);
+      // const stats = new Stats();
+      // stats.showPanel(0);
+      // document.body.appendChild(stats.dom);
       // Animation loop
       const animate = () => {
-        stats.begin();
+        // stats.begin();
         requestAnimationFrame(animate);
         camera.position.copy(miniCamera.position);
         camera.rotation.copy(miniCamera.rotation);
@@ -1325,7 +1325,7 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
           }
         });
         renderer.render(scene, camera);
-        stats.end();
+        // stats.end();
       };
 
       function animateMini() {
