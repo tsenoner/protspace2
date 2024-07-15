@@ -25,6 +25,7 @@ import { useAppDispatch, useAppSelector } from "../helpers/hooks";
 import {
   fetchAndSetData,
   setCameraPosition,
+  setCamera,
   setCameraRotation,
   setColorAndShapeKey,
   setColorKey,
@@ -62,6 +63,7 @@ import MolstarViewer from "./MolstarViewer";
 import QuickAccessLinks from "./QuickAccessLinks";
 import SvgSpinner from "./SvgSpinner";
 import VisualizationWaitingModal from "./WaitingModal";
+import { transformCoordinates } from "./utils";
 
 const VisualizationComp = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -350,7 +352,11 @@ const VisualizationComp = () => {
         })
       : null;
 
-    dispatch(setData(parsedObject.projections[selectedProjection].data));
+    dispatch(
+      setData(
+        transformCoordinates(parsedObject.projections[selectedProjection].data)
+      )
+    );
     dispatch(
       setKeyList(
         parsedObject.protein_data
@@ -414,7 +420,10 @@ const VisualizationComp = () => {
     // );
     dispatch(setDataItems(updatedDataItems ?? []));
 
-    if (!parsedObject.visualization_state) {
+    if (
+      !parsedObject.visualization_state ||
+      parsedObject.projections[selectedProjection].dimensions === 2
+    ) {
       dispatch(
         setCameraPosition(
           new Vector3(0.05273795378094992, 3.473258577458065, 59.89936304805207)
@@ -449,6 +458,7 @@ const VisualizationComp = () => {
           )
         )
       );
+      dispatch(setCamera(parsedObject.visualization_state.camera[0]));
     }
     // dispatch(
     //   setSearchItems(
@@ -477,7 +487,6 @@ const VisualizationComp = () => {
     importFileV2(parsedObject.data);
   };
   const navigate = useNavigate();
-
   return (
     <div className="h-screen w-screen overflow-hidden">
       <div className="absolute z-10 left-0 top-0 w-screen">
@@ -571,7 +580,7 @@ const VisualizationComp = () => {
                   colorParamList={
                     settings.colorParamList &&
                     settings.colorParamList.sort((a: string, b: any) =>
-                      a.localeCompare(b)
+                      a.toString().localeCompare(b.toString())
                     )
                   }
                   cameraPosition={settings.cameraPosition}
@@ -689,17 +698,17 @@ const VisualizationComp = () => {
                     (
                       <div className="has-tooltip">
                         <span className="tooltip rounded shadow-lg p-1 bg-black bg-opacity-50 text-white mt-14">
-                          {colorMode === "light" ? "Light Mode" : "Dark Mode"}
+                          {colorMode !== "light" ? "Light Mode" : "Dark Mode"}
                         </span>
                         <div
                           className={`rounded-full w-12 h-12 m-1 flex items-center cursor-pointer shadow-md ${
-                            colorMode === "light"
+                            colorMode !== "light"
                               ? "bg-gray-400"
                               : "bg-gray-900"
                           }`}
                           onClick={toggleColorMode}
                         >
-                          {colorMode === "light" ? (
+                          {colorMode !== "light" ? (
                             <MdLightMode
                               style={{
                                 color: "white",

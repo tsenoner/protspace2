@@ -1,6 +1,8 @@
+import { Vector3 } from "three";
 import { AtomStyleSpec, Item } from "../../data";
 import { colorList, shapeList } from "../../helpers/constants";
 import {
+  SET_CAMERA,
   SET_CAMERA_POSITION,
   SET_CAMERA_ROTATION,
   SET_COLOR_AND_SHAPE_KEY,
@@ -32,6 +34,7 @@ import {
   SET_THREE_D,
   SET_TWO_LEGEND,
 } from "../actionTypes";
+import { transformCoordinates } from "../../components/utils";
 
 const initialAtomStyleState: AtomStyleSpec = {
   cartoon: {
@@ -77,7 +80,7 @@ export interface SettingsState {
   isLoading: boolean;
   pdb: { relativePath: string; fileData: string }[];
   default_color_scheme: any[];
-  camera: any[];
+  camera: any;
   legend: any;
   highlighting: any;
   projections: any;
@@ -117,7 +120,7 @@ const initialState: SettingsState = {
   isLoading: false,
   pdb: [],
   default_color_scheme: [],
-  camera: [],
+  camera: {},
   legend: {},
   highlighting: {},
   projections: {},
@@ -202,6 +205,11 @@ const settingsReducer = (
       return {
         ...state,
         lightMode: action.payload,
+      };
+    case SET_CAMERA:
+      return {
+        ...state,
+        camera: action.payload,
       };
     case SET_COLOR_PARAM:
       return {
@@ -288,13 +296,41 @@ const settingsReducer = (
     case SET_TECHNIQUE:
       const selectedProjection = state.projections[action.payload];
       if (!selectedProjection) return state;
-      selectedProjection.data.forEach((element: any) => {
+      const transformData = transformCoordinates(selectedProjection.data);
+      transformData.forEach((element: any) => {
         if (state.protein_data) {
           Object.assign(element, state.protein_data[element.identifier]);
         } else {
           element.features = "NaN";
         }
       });
+
+      if (selectedProjection.dimensions === 2) {
+        state.cameraPosition = new Vector3(
+          0.05273795378094992,
+          3.473258577458065,
+          59.89936304805207
+        );
+        state.cameraRotation = new Vector3(
+          -0.05792004425389763,
+          0.0008789660095279366,
+          0.00005096674957453894
+        );
+      } else {
+        if (state.camera.position !== undefined) {
+          state.cameraPosition = new Vector3(
+            state.camera.position.x,
+            state.camera.position.y,
+            state.camera.position.z
+          );
+
+          state.cameraRotation = new Vector3(
+            state.camera.rotation.x,
+            state.camera.rotation.y,
+            state.camera.rotation.z
+          );
+        }
+      }
 
       const itemsLocal: Item[] = [];
       const colorParamListLocal: string[] = [];
@@ -305,7 +341,7 @@ const settingsReducer = (
         : ["NaN"];
       const colorKey = state.colorKey ?? keys[0];
       const newData = state.protein_data
-        ? selectedProjection.data.map((item: any) => {
+        ? transformData.map((item: any) => {
             const newItem = {
               ...item,
             }; // Create a copy of the current item
@@ -343,8 +379,8 @@ const settingsReducer = (
 
       return {
         ...state,
-        colorParamList: colorParamListLocal,
-        data: selectedProjection.data,
+        colorParamList: colorParamListLocal.map((item) => String(item)),
+        data: transformData,
         threeD: selectedProjection.dimensions === 3,
         technique: action.payload,
         dataItems: itemsLocal,

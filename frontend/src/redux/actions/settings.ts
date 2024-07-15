@@ -4,6 +4,7 @@ import { fetchData } from "../../api/api";
 import { Item } from "../../data";
 import { colorList } from "../../helpers/constants";
 import {
+  SET_CAMERA,
   SET_CAMERA_POSITION,
   SET_CAMERA_ROTATION,
   SET_COLOR_AND_SHAPE_KEY,
@@ -96,6 +97,10 @@ export function setErrorMessage(errorMessage: string) {
 
 export function setCameraPosition(cameraPosition: any) {
   return { type: SET_CAMERA_POSITION, payload: cameraPosition };
+}
+
+export function setCamera(camera: any) {
+  return { type: SET_CAMERA, payload: camera };
 }
 
 export function setCameraRotation(cameraRotation: any) {

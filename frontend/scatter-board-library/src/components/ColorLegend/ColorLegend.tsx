@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { ArrowDownIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import React, { useEffect, useRef, useState } from "react";
+import { HexAlphaColorPicker, RgbaStringColorPicker } from "react-colorful";
+import "../../styles/tailwind.css";
 import ColorLegendItem from "../ColorLegendItem/ColorLegendItem";
 import { ColorLegendProps } from "./ColorLegend.types";
-import "../../styles/tailwind.css";
 
 type ParamCustomization = {
   featureName: string; // Original feature name, immutable
   customName: string; // Customizable name
   color: string; // Customizable color
   category: string; // Category of the feature
+  opacity?: number; // Customizable opacity
 };
 
 type EditColorModalProps = {
@@ -51,13 +52,43 @@ const EditColorModal: React.FC<EditColorModalProps> = ({
       };
     });
   };
+  const [initialEditList, setInitialEditList] = useState<ParamCustomization[]>(
+    []
+  );
 
   const [editList, setEditList] =
     useState<ParamCustomization[]>(initializeEditList);
+  const [activeColorPickerIndex, setActiveColorPickerIndex] = useState<
+    number | null
+  >(null);
+  const pickerRef = useRef(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      const initialList = initializeEditList();
+      setEditList(initialList);
+      setInitialEditList(initialList); // Save the initial list when modal opens
+    }
+  }, [isOpen, colorList, colorParamList, existingCustomizations]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: { target: any }) => {
+      // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
+      if (pickerRef.current && !pickerRef.current.contains(event.target)) {
+        setActiveColorPickerIndex(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [pickerRef]);
 
   useEffect(() => {
     setEditList(initializeEditList());
   }, [colorList, colorParamList, existingCustomizations]);
+
   // Handle changes in color
   const handleColorChange = (color: string, index: number) => {
     const newEditList = [...editList];
@@ -77,6 +108,11 @@ const EditColorModal: React.FC<EditColorModalProps> = ({
       a.customName.localeCompare(b.customName)
     );
     onSave(sortedEditList);
+  };
+
+  const handleCancel = () => {
+    setEditList(initialEditList); // Reset to initial values on cancel
+    onClose(); // Close modal
   };
 
   // Component render
@@ -101,6 +137,9 @@ const EditColorModal: React.FC<EditColorModalProps> = ({
         >
           Edit Labels and Colors
         </h2>
+        {/* <div>
+          <HexAlphaColorPicker color="red" />
+        </div>
         {editList.map((item, index) => (
           <div className="flex items-center justify-between my-4" key={index}>
             <input
@@ -139,6 +178,46 @@ const EditColorModal: React.FC<EditColorModalProps> = ({
               style={{ border: "1px solid #33333338", width: "87%" }}
             />
           </div>
+        ))} */}
+        {editList.map((item, index) => (
+          <div className="flex items-center justify-between my-4" key={index}>
+            <div
+              style={{
+                width: "24px",
+                height: "24px",
+                borderRadius: "50%",
+                background: item.color,
+                cursor: "pointer",
+                position: "relative",
+              }}
+              onClick={() => setActiveColorPickerIndex(index)}
+            >
+              {activeColorPickerIndex === index && (
+                <div
+                  ref={pickerRef}
+                  style={{ position: "absolute", zIndex: 2 }}
+                >
+                  <HexAlphaColorPicker
+                    color={item.color}
+                    onChange={(color) => handleColorChange(color, index)}
+                  />
+                  <input
+                    type="text"
+                    value={item.color}
+                    onChange={(e) => handleColorChange(e.target.value, index)}
+                    className="mt-2 p-1 text-center bg-white text-blue-700 border-b-2 border-gray-300"
+                  />
+                </div>
+              )}
+            </div>
+            <input
+              type="text"
+              value={item.customName}
+              onChange={(e) => handleNameChange(e.target.value, index)}
+              className="text-black p-1 rounded bg-gray-100"
+              style={{ border: "1px solid #33333338", width: "87%" }}
+            />
+          </div>
         ))}
         <div
           className="flex justify-between mt-4"
@@ -151,7 +230,7 @@ const EditColorModal: React.FC<EditColorModalProps> = ({
             Save
           </button>
           <button
-            onClick={onClose}
+            onClick={handleCancel}
             className="bg-red-500 text-white p-2 rounded hover:bg-red-700 transition duration-300 ease-in-out"
           >
             Cancel

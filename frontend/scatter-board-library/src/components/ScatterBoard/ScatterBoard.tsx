@@ -443,11 +443,27 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       setControllerShown(false);
     }
 
+    function parseHex(hex: string | any[]) {
+      let colorCode = hex.slice(0, 7); // Standard hex color
+      let opacity = 1; // Default opacity
+
+      if (hex.length === 9) {
+        // Extract opacity from the last two characters
+        let opacityHex = hex.slice(7, 9);
+        // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
+        opacity = parseInt(opacityHex, 16) / 255;
+      }
+
+      return { colorCode, opacity };
+    }
+
     function colorReset() {
       objArr.current.forEach((objData) => {
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-        let color = objData.divObj.userData.color; // Default color from userData
-        let opacity = 0.8; // Default opacity
+        let color = objData.divObj.userData.color.slice(0, 7); // Default color from userData
+        let opacity =
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
+          parseInt(objData.divObj.userData.color.slice(7, 9), 16) / 255 || 0.8; // Default opacity
         let svgOpacity = 1.0; // SVGs use a 0-1 range for opacity
 
         // Apply customizations as baseline
@@ -508,25 +524,18 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
             opacity = 1;
           }
         }
+
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
         objData.divObj.material.color.set(color);
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
 
         objData.divObj.material.opacity = opacity;
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
+        objData.divObj.material.transparent = opacity < 1;
         // Assuming objData also has a way to directly set SVG element styles, if needed
         // objData.svgElem.style.fill = color; // Uncomment and adjust if applicable
         // objData.svgElem.style.opacity = svgOpacity; // Uncomment and adjust if applicable
       });
-    }
-
-    function rgbToHex(r: any, g: any, b: any) {
-      // Convert each component to an integer, then to a hex string
-      const toHex = (component: number) => {
-        const hex = Math.round(component * 255).toString(16);
-        return hex.length === 1 ? "0" + hex : hex; // Manually pad with zero if necessary
-      };
-
-      return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
     }
 
     function onPointerMove(event: { clientX: number; clientY: number }) {
