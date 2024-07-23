@@ -3,23 +3,43 @@ import React, {
   MouseEvent,
   MutableRefObject,
   forwardRef,
+  useCallback,
   useEffect,
   useImperativeHandle,
+  useMemo,
   useRef,
   useState,
 } from "react";
 import PropagateLoader from "react-spinners/PropagateLoader";
+import Stats from "stats.js";
 import * as THREE from "three";
+import {
+  acceleratedRaycast,
+  computeBoundsTree,
+  disposeBoundsTree,
+} from "three-mesh-bvh";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader.js";
-import { createFileName, useScreenshot } from "use-react-screenshot";
-import { Item, truncate } from "../../helpers/data";
+import { useScreenshot } from "use-react-screenshot";
+import { Item } from "../../helpers/data";
+import {
+  createBigCube,
+  createCube,
+  downloadImage,
+  drawBoxEdges,
+} from "../../helpers/utils";
+import "../../styles/tailwind.css";
 import ColorLegend from "../ColorLegend/ColorLegend";
 import Controller from "../Controller/Controller";
 import ShapeLegend from "../ShapeLegend/ShapeLegend";
 import { ScatterBoardProps, ScatterBoardRef } from "./ScatterBoard.types";
-// import Stats from "three/examples/jsm/libs/stats.module.js";
-import "../../styles/tailwind.css";
+
+THREE.BufferGeometry.prototype.computeBoundsTree = computeBoundsTree;
+THREE.BufferGeometry.prototype.disposeBoundsTree = disposeBoundsTree;
+THREE.Mesh.prototype.raycast = acceleratedRaycast;
+
+var stats = new Stats();
+stats.showPanel(1); // 0: fps, 1: ms, 2: mb, 3+: custom
+document.body.appendChild(stats.dom);
 
 const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
   (
@@ -66,8 +86,8 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
     const miniControlsRef = useRef() as MutableRefObject<OrbitControls>;
     const [loading, setLoading] = useState(false);
     const [axisName, setAxisName] = useState("");
-    const raycaster = new THREE.Raycaster();
-    const pointer = new THREE.Vector2();
+    const raycaster = useMemo(() => new THREE.Raycaster(), []);
+    const pointer = useMemo(() => new THREE.Vector2(), []);
     const [info, setInfo] = useState("");
     const [identifierName, setIdentifierName] = useState("");
     const [controllerShown, setControllerShown] = useState(false);
@@ -84,26 +104,39 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
     const [maxY, setMaxY] = useState(0);
     const [minZ, setMinZ] = useState(0);
     const [maxZ, setMaxZ] = useState(0);
-    const legendRefFull = (
-      <div className="absolute h-full w-full -z-20" ref={legendRef}>
-        <div className={"inline"}>
-          <div className="flex absolute right-0">
-            <ColorLegend
-              keyList={keyList}
-              screenshot={true}
-              setListParam={(param: string) => setListParam(param)}
-              colorKey={colorKey}
-              colorParamList={colorParamList}
-              colorParam={colorParam}
-              setColorParam={(param: string) => setColorParam(param)}
-              colorList={colorList}
-              setCustomFeatures={setCustomFeatures}
-              customizations={customFeatures}
-              lightMode={lightMode}
-            />
+
+    const legendRefFull = useMemo(
+      () => (
+        <div className="absolute h-full w-full -z-20" ref={legendRef}>
+          <div className={"inline"}>
+            <div className="flex absolute right-0">
+              <ColorLegend
+                keyList={keyList}
+                screenshot={true}
+                setListParam={(param: string) => setListParam(param)}
+                colorKey={colorKey}
+                colorParamList={colorParamList}
+                colorParam={colorParam}
+                setColorParam={(param: string) => setColorParam(param)}
+                colorList={colorList}
+                setCustomFeatures={setCustomFeatures}
+                customizations={customFeatures}
+                lightMode={lightMode}
+              />
+            </div>
           </div>
         </div>
-      </div>
+      ),
+      [
+        keyList,
+        colorKey,
+        colorParamList,
+        colorParam,
+        colorList,
+        setCustomFeatures,
+        customFeatures,
+        lightMode,
+      ]
     );
 
     useImperativeHandle(ref, () => ({
@@ -115,284 +148,46 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       },
     }));
 
-    const removeObjectByName = (name: string) => {
+    const removeObjectByName = useCallback((name: string) => {
       const selectedObject = sceneRef.current.getObjectByName(name);
+
       if (selectedObject) {
         sceneRef.current.remove(selectedObject);
       }
-    };
+    }, []);
 
-    async function createScreenshot() {
+    const createScreenshot = useCallback(async () => {
       setLoading(true);
       htmlToImage
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'toPng' does not exist on type 'typeof import("html-to-image")'.
+        // @ts-ignore
         .toPng(document.getElementById("pngFile"), { backgroundColor: "white" })
         .then(function (dataUrl) {
-          download(dataUrl, {
-            name: "legend",
-          });
+          downloadImage(
+            dataUrl,
+            {
+              name: "legend",
+            },
+            setLoading
+          );
         });
       rendererRef.current.render(sceneRef.current, cameraRef.current);
       const imageLegend = await takeScreenshot(rendererRef.current.domElement);
-      await download(imageLegend);
-    }
+      await downloadImage(imageLegend, {}, setLoading);
+    }, [takeScreenshot]);
 
-    const download = async (
-      image: any,
-      { name = "scatter-plot", extension = "png" } = {}
-    ) => {
-      const a = document.createElement("a");
-      a.id = "a";
-      const mergedCanvas = document.createElement("canvas");
-      mergedCanvas.id = "mergedCanvas";
-      mergedCanvas.width = window.innerWidth;
-      mergedCanvas.height = window.innerHeight;
-
-      const mergedContext = mergedCanvas.getContext("2d");
-      if (!mergedContext) {
-        setLoading(false);
-        return;
-      }
-      let base_image = new Image();
-      base_image.src = image;
-      base_image.onload = async function () {
-        // Calculate the scaled dimensions while maintaining aspect ratio
-        var aspectRatio = base_image.width / base_image.height;
-        var width = window.innerWidth;
-        var height = window.innerHeight;
-        var targetWidth = width;
-        var targetHeight = height;
-
-        if (width / height > aspectRatio) {
-          targetWidth = height * aspectRatio;
-        } else {
-          targetHeight = width / aspectRatio;
-        }
-
-        // Calculate the position to center the image
-        var xOffset = (width - targetWidth) / 2;
-        var yOffset = (height - targetHeight) / 2;
-
-        mergedContext.drawImage(
-          base_image,
-          xOffset,
-          yOffset,
-          targetWidth,
-          targetHeight
-        );
-        // if (isLegendOpen) {
-        //   const legend = await html2canvas(legendRef.current, {
-        //     backgroundColor: null,
-        //   });
-
-        //   const aspectRatio = legend.width / legend.height;
-
-        //   let targetWidth = window.innerWidth;
-        //   let targetHeight = window.innerHeight;
-
-        //   if (width / height > aspectRatio) {
-        //     targetWidth = height * aspectRatio;
-        //   } else {
-        //     targetHeight = width / aspectRatio;
-        //   }
-
-        //   // Calculate the position to center the image
-        //   const xOffset = (width - targetWidth) / 2;
-        //   const yOffset = (height - targetHeight) / 2;
-        //   mergedContext.drawImage(
-        //     legend,
-        //     xOffset,
-        //     yOffset,
-        //     targetWidth,
-        //     targetHeight
-        //   );
-        // }
-        a.href = mergedCanvas.toDataURL();
-        a.download = createFileName(extension, name);
-        a.click();
-        setLoading(false);
-
-        document.getElementById("mergedCanvas")?.remove();
-        document.getElementById("a")?.remove();
-        URL.revokeObjectURL(imageSrc);
-      };
-    };
-
-    function projectToScreen(
-      obj3D: { project: (arg0: any) => void; x: number; y: number },
-      camera: any
-    ) {
-      const vector = new THREE.Vector3();
-      const widthHalf = 0.5 * rendererRef.current.domElement.clientWidth;
-      const heightHalf = 0.5 * rendererRef.current.domElement.clientHeight;
-
-      obj3D.project(camera);
-
-      vector.x = obj3D.x * widthHalf + widthHalf;
-      vector.y = -(obj3D.y * heightHalf) + heightHalf;
-
-      return { x: vector.x, y: vector.y };
-    }
-
-    function drawBoxEdges(
-      minX: number,
-      maxX: number,
-      minY: number,
-      maxY: number,
-      minZ: number,
-      maxZ: number,
-      svgContainer: { appendChild: (arg0: SVGElement) => void },
-      camera: THREE.Camera
-    ) {
-      const tempObj = new THREE.Object3D();
-
-      const corners = [
-        new THREE.Vector3(minX, minY, minZ),
-        new THREE.Vector3(maxX, minY, minZ),
-        new THREE.Vector3(maxX, maxY, minZ),
-        new THREE.Vector3(minX, maxY, minZ),
-        new THREE.Vector3(minX, minY, maxZ),
-        new THREE.Vector3(maxX, minY, maxZ),
-        new THREE.Vector3(maxX, maxY, maxZ),
-        new THREE.Vector3(minX, maxY, maxZ),
-      ];
-
-      const edges = [
-        [0, 1],
-        [1, 2],
-        [2, 3],
-        [3, 0], // Bottom edges
-        [4, 5],
-        [5, 6],
-        [6, 7],
-        [7, 4], // Top edges
-        [0, 4],
-        [1, 5],
-        [2, 6],
-        [3, 7], // Side edges
-      ];
-
-      edges.forEach(([start, end]) => {
-        // Set the position of the temp object to the start corner for projection
-        tempObj.position.copy(corners[start]);
-        const startProj = toScreenPosition(tempObj, camera);
-
-        // Set the position of the temp object to the end corner for projection
-        tempObj.position.copy(corners[end]);
-        const endProj = toScreenPosition(tempObj, camera);
-
-        const line = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "line"
-        );
-        line.setAttribute("x1", startProj.x.toString());
-        line.setAttribute("y1", startProj.y.toString());
-        line.setAttribute("x2", endProj.x.toString());
-        line.setAttribute("y2", endProj.y.toString());
-        line.style.stroke = "grey"; // Color of the box edges
-        line.style.strokeWidth = "1"; // Thickness of the box edges
-
-        svgContainer.appendChild(line);
-      });
-    }
-
-    function createShape(
-      dataLength: number,
-      twoLegend: boolean,
-      scaledCoordinates: {
-        x: number;
-        y: number;
-        z?: number;
-      },
-      colorInScene: string,
-      opacity: number,
-      userData: any
-    ) {
-      const loader = new SVGLoader();
-
-      let group;
-      // const divElement = document.createElement("div");
-      // divElement.innerHTML = "Info about " + userData[dataItems[0].category];
-      // divElement.style.background = "red";
-      // divElement.className = "info-div"; // Add a class for styling
-      // document.body.appendChild(divElement);
-      // let svgContainer = document.getElementById("svg-container");
-      // if (!svgContainer) {
-      //   // @ts-expect-error ts-migrate(2339) FIXME: Property 'createElementNS' does not exist on type 'Document'.
-      //   svgContainer = document.createElementNS(
-      //     "http://www.w3.org/2000/svg",
-      //     "svg"
-      //   );
-      //   svgContainer!.id = "svg-container";
-      //   svgContainer!.style.position = "absolute";
-      //   svgContainer!.style.width = "100%";
-      //   svgContainer!.style.height = "100%";
-      //   svgContainer!.style.top = "0";
-      //   svgContainer!.style.left = "0";
-      //   svgContainer!.style.zIndex = "-1";
-      //   document.body.appendChild(svgContainer!);
-      // }
-
-      // // Create an SVG circle element
-      // const svgCircle = document.createElementNS(
-      //   "http://www.w3.org/2000/svg",
-      //   "circle"
-      // );
-      // // svgCircle.setAttribute("r", `${coordinates.z}`); // Radius of the circle
-      // svgCircle.setAttribute("cx", "100"); // Center the circle horizontally
-      // svgCircle.setAttribute("cy", "200"); // Center the circle vertically
-      // svgCircle.style.fill = userData.color; // Color from userData
-      // svgCircle.style.position = "absolute";
-      // svgContainer!.appendChild(svgCircle);
-
-      const geometry = new THREE.SphereGeometry(dataLength < 500 ? 0.3 : 0.25);
-      const material = new THREE.MeshBasicMaterial({
-        transparent: true,
-        color: colorInScene,
-        side: THREE.FrontSide,
-        depthTest: false,
-        opacity: opacity,
-      });
-
-      const mesh = new THREE.Mesh(geometry, material);
-      mesh.userData = userData;
-
-      mesh.position.set(
-        scaledCoordinates.x,
-        scaledCoordinates.y,
-        scaledCoordinates.z ?? 0
-      );
-      // objArr.current.push({ divObj: mesh, divElem: divElement });
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-      objArr.current.push({ divObj: mesh });
-      sceneRef.current.add(mesh);
-    }
-
-    function calculateScaleFactor(distance: number) {
-      // Simple linear scaling based on distance
-      // You may need to adjust the formula to get the desired effect
-      const minScale = 0.5; // Minimum scale at maximum distance
-      const maxDistance = 60; // Adjust as per your scene's size
+    const calculateScaleFactor = useCallback((distance: number) => {
+      const minScale = 0.5;
+      const maxDistance = 60;
       return 1 - Math.min(distance / maxDistance, 1) * (1 - minScale);
-    }
+    }, []);
 
-    useEffect(() => {
-      colorReset();
-    }, [data, colorParam, shapeParam, searchItems, customFeatures]);
-
-    function toScreenPosition(
-      obj: { updateMatrixWorld: () => void; matrixWorld: THREE.Matrix4 },
-      camera: THREE.Camera
-    ) {
-      var vector = new THREE.Vector3();
-
-      // TODO: need to update this when resize window
-      var widthHalf = 0.5 * window.innerWidth;
-      var heightHalf = 0.5 * window.innerHeight;
-
-      obj.updateMatrixWorld();
-      vector.setFromMatrixPosition(obj.matrixWorld);
-      vector.project(camera);
+    function toScreenPosition(position: THREE.Vector3, camera: THREE.Camera) {
+      const widthHalf = 0.5 * window.innerWidth;
+      const heightHalf = 0.5 * window.innerHeight;
+      const vector =
+        position.x !== 0 && position.y !== 0 && position.x !== undefined
+          ? position.clone().project(camera)
+          : position.clone();
 
       vector.x = vector.x * widthHalf + widthHalf;
       vector.y = -(vector.y * heightHalf) + heightHalf;
@@ -403,486 +198,384 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       };
     }
 
-    function onClick(event: MouseEvent<HTMLElement>): void {
-      if (event.detail === 1) {
-        setControllerShown(false);
-        return;
-      }
-      // calculate pointer position in normalized device coordinates (-1 to +1) for
-      // both components
-      pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-      pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-      // Calculate the container's position relative to the viewport
-      const containerRect = containerRef.current.getBoundingClientRect();
-
-      // Calculate the mouse down position relative to the container
-      const containerX = event.clientX - containerRect.left;
-      const containerY = event.clientY - containerRect.top;
-      setControllerPosition({
-        top: containerY + "px",
-        left: containerX + "px",
-      });
-
-      // update the picking ray with the camera and pointer position
-      raycaster.setFromCamera(pointer, cameraRef.current);
-      const intersects = raycaster.intersectObjects(sceneRef.current.children);
-      for (let i = 0; i < intersects.length; i++) {
-        const obj = intersects[i].object;
-        if (
-          obj instanceof THREE.Mesh &&
-          obj.geometry.type !== "BufferGeometry"
-        ) {
-          obj.material.color.set("#FD1C03");
-          obj.material.opacity = 1;
-          setEntityName(obj.userData.identifier); // should change with structure at some point
-          setControllerShown(true);
+    const onClick = useCallback(
+      (event: MouseEvent<HTMLElement>): void => {
+        if (event.detail === 1) {
+          setControllerShown(false);
           return;
         }
-      }
-      setControllerShown(false);
-    }
+        pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+        pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-    function parseHex(hex: string | any[]) {
-      let colorCode = hex.slice(0, 7); // Standard hex color
-      let opacity = 1; // Default opacity
+        const containerRect = containerRef.current.getBoundingClientRect();
+        const containerX = event.clientX - containerRect.left;
+        const containerY = event.clientY - containerRect.top;
+        setControllerPosition({
+          top: containerY + "px",
+          left: containerX + "px",
+        });
+
+        raycaster.setFromCamera(pointer, cameraRef.current);
+        const intersects = raycaster.intersectObjects(
+          sceneRef.current.children
+        );
+        for (let i = 0; i < intersects.length; i++) {
+          const obj = intersects[i].object;
+          if (
+            obj instanceof THREE.Mesh &&
+            obj.geometry.type !== "BufferGeometry"
+          ) {
+            obj.material.color.set("#FD1C03");
+            obj.material.opacity = 1;
+            setEntityName(obj.userData.identifier);
+            setControllerShown(true);
+            return;
+          }
+        }
+        setControllerShown(false);
+      },
+      [raycaster, pointer]
+    );
+
+    const parseHex = useCallback((hex: string | any[]) => {
+      let colorCode = hex.slice(0, 7);
+      let opacity = 1;
 
       if (hex.length === 9) {
-        // Extract opacity from the last two characters
         let opacityHex = hex.slice(7, 9);
-        // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
+        // @ts-ignore
         opacity = parseInt(opacityHex, 16) / 255;
       }
 
       return { colorCode, opacity };
-    }
+    }, []);
 
-    function colorReset() {
-      objArr.current.forEach((objData) => {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-        let color = objData.divObj.userData.color.slice(0, 7); // Default color from userData
-        let opacity =
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-          parseInt(objData.divObj.userData.color.slice(7, 9), 16) / 255 || 0.8; // Default opacity
-        let svgOpacity = 1.0; // SVGs use a 0-1 range for opacity
+    const updateVisibility = useCallback(
+      (keyToRemove: string | null, onlyShowKey: string | null = null) => {
+        objArr.current.forEach((objData) => {
+          // @ts-ignore
+          const mesh = objData.divObj as THREE.InstancedMesh;
+          const matrix = new THREE.Matrix4();
+          const dummyMatrix = new THREE.Matrix4();
+          const dummyPosition = new THREE.Vector3(10000, 10000, 10000);
+          const instanceUserData = mesh.userData.instanceUserData;
 
-        // Apply customizations as baseline
-        const customization = customFeatures.find(
-          (feature: { featureName: any; customName: any; category: string }) =>
-            feature.featureName ===
-              // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-              objData.divObj.userData.features[colorKey] &&
-            feature.category === colorKey
-        );
+          instanceUserData.forEach((data: any, index: number) => {
+            if (onlyShowKey) {
+              // Only show instances matching the onlyShowKey
+              if (data.features[colorKey] === onlyShowKey) {
+                matrix.setPosition(
+                  parseFloat(data.coordinates.x || 0),
+                  parseFloat(data.coordinates.y || 0),
+                  parseFloat(data.coordinates.z || 0)
+                );
+                mesh.setMatrixAt(index, matrix);
+              } else {
+                dummyMatrix.setPosition(dummyPosition);
+                mesh.setMatrixAt(index, dummyMatrix);
+              }
+            } else if (keyToRemove && data.features[colorKey] === keyToRemove) {
+              dummyMatrix.setPosition(dummyPosition);
+              mesh.setMatrixAt(index, dummyMatrix);
+            } else {
+              matrix.setPosition(
+                parseFloat(data.coordinates.x || 0),
+                parseFloat(data.coordinates.y || 0),
+                parseFloat(data.coordinates.z || 0)
+              );
+              mesh.setMatrixAt(index, matrix);
+            }
+          });
 
-        // Dim colors for non-matching colorParam
-        if (
-          colorParam !== "" &&
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-          colorParam != objData.divObj.userData.features[colorKey]
-        ) {
-          color = "#EEEEEE";
-          opacity = 0.4;
-          svgOpacity = 0.4;
-        }
-
-        // Highlight or dim based on searchItems
-        const isMatched = searchItems.some((item) => {
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-          return Object.values(objData.divObj.userData.features).includes(
-            item.name
-          );
+          mesh.instanceMatrix.needsUpdate = true;
         });
 
-        if (isMatched) {
-          // Apply search item color, unless already set by customization
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-          color = customization ? color : objData.divObj.userData.color; // Keep customization color if exists
-        } else if (searchItems.length) {
-          color = "#EEEEEE"; // Dim color if there are search items but no match
-          opacity = 0.4;
-          svgOpacity = 0.4;
-        }
+        // Force render the scene to reflect changes
+        rendererRef.current &&
+          rendererRef.current.render(sceneRef.current, cameraRef.current);
+      },
+      [colorKey]
+    );
 
-        if (
-          dataItems[0] &&
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-          objData.divObj.userData.features[dataItems[0].category] === entityName
-        ) {
-          color = "#0400ff"; // Highlight color
-          opacity = 1;
-          svgOpacity = 1.0;
-        }
-
-        if (customization) {
-          const isCustomizationIncludeSearch = searchItems.some((item) => {
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-            return Object.values(customization).includes(item.name);
-          });
-          if (isCustomizationIncludeSearch) {
-            color = customization.color;
-            opacity = 1;
-          }
-        }
-
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-        objData.divObj.material.color.set(color);
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-
-        objData.divObj.material.opacity = opacity;
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-        objData.divObj.material.transparent = opacity < 1;
-        // Assuming objData also has a way to directly set SVG element styles, if needed
-        // objData.svgElem.style.fill = color; // Uncomment and adjust if applicable
-        // objData.svgElem.style.opacity = svgOpacity; // Uncomment and adjust if applicable
-      });
-    }
-
-    function onPointerMove(event: { clientX: number; clientY: number }) {
-      // calculate pointer position in normalized device coordinates (-1 to +1) for
-      // both components
-      pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-      pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-      // update the picking ray with the camera and pointer position
-      raycaster.setFromCamera(pointer, cameraRef.current);
-
-      // calculate objects intersecting the picking ray
-      colorReset();
-
-      const intersects = raycaster.intersectObjects(sceneRef.current.children);
-      setInfo("");
-      setIdentifierName("");
-      for (let i = 0; i < intersects.length; i++) {
-        const obj = intersects[i].object;
-        if (
-          obj instanceof THREE.Mesh &&
-          obj.geometry.type !== "BufferGeometry"
-        ) {
-          obj.material.color.set("#16FF00");
-          obj.material.opacity = 0.8;
-          if (obj.geometry.type !== "BufferGeometry") {
-            const customFeature = customFeatures.find(
-              (feature: { featureName: any }) =>
-                feature.featureName === obj.userData.features[colorKey]
-            );
-            if (customFeature) {
-              setInfo(customFeature.customName);
-            } else {
-              setInfo(obj.userData.features[colorKey]);
-            }
-            setIdentifierName(obj.userData.identifier);
-          }
-        }
-      }
-    }
-
-    function onPointerDown() {
-      setEntityName("");
-      setControllerShown(false);
-    }
-
-    function onClickMini(event: { clientX: number; clientY: number }) {
-      const miniContainerRect =
-        miniContainerRef.current.getBoundingClientRect();
-
-      // Calculate the mouse position relative to the miniContainerRef
-      const containerX = event.clientX - miniContainerRect.left;
-      const containerY = event.clientY - miniContainerRect.top;
-
-      // Calculate the normalized device coordinates (-1 to +1) for both components
-      pointer.x = (containerX / miniContainerRect.width) * 2 - 1;
-      pointer.y = -(containerY / miniContainerRect.height) * 2 + 1;
-      // update the picking ray with the camera and pointer position
-
-      raycaster.setFromCamera(pointer, miniCameraRef.current);
-
-      const intersects = raycaster.intersectObjects(
-        miniSceneRef.current.children
-      );
-
-      for (let i = 0; i < intersects.length; i++) {
-        const obj = intersects[i].object;
-        if (obj instanceof THREE.Mesh) {
-          if (obj.userData.name === "XY Plane") {
-            miniCameraRef.current.position.set(0, 0, 30);
-            cameraRef.current.position.set(0, 0, 30);
-          } else if (obj.userData.name === "YZ Plane") {
-            miniCameraRef.current.position.set(30, 0, 0);
-            cameraRef.current.position.set(30, 0, 0);
-          } else if (obj.userData.name === "XZ Plane") {
-            miniCameraRef.current.position.set(0, 30, 0);
-            cameraRef.current.position.set(0, 30, 0);
-          }
-          controlsRef.current.update();
-          miniControlsRef.current.update();
-          return;
-        } else {
-          if (obj.userData.name === "X Axis") {
-            miniCameraRef.current.position.set(30, 0, 0);
-            cameraRef.current.position.set(30, 0, 0);
-          } else if (obj.userData.name === "Y Axis") {
-            miniCameraRef.current.position.set(0, 30, 0);
-            cameraRef.current.position.set(0, 30, 0);
-          } else if (obj.userData.name === "Z Axis") {
-            miniCameraRef.current.position.set(0, 0, 30);
-            cameraRef.current.position.set(0, 0, 30);
-          }
-          controlsRef.current.update();
-          miniControlsRef.current.update();
-          return;
-        }
-      }
-    }
-
-    function onPointerMoveMini(event: { clientX: number; clientY: number }) {
-      const miniContainerRect =
-        miniContainerRef.current.getBoundingClientRect();
-
-      // Calculate the mouse position relative to the miniContainerRef
-      const containerX = event.clientX - miniContainerRect.left;
-      const containerY = event.clientY - miniContainerRect.top;
-
-      // Calculate the normalized device coordinates (-1 to +1) for both components
-      pointer.x = (containerX / miniContainerRect.width) * 2 - 1;
-      pointer.y = -(containerY / miniContainerRect.height) * 2 + 1;
-      // update the picking ray with the camera and pointer position
-
-      miniSceneRef.current.traverse((obj: any) => {
-        if (obj instanceof THREE.Line || obj instanceof THREE.Mesh) {
-          obj.material.color.set(obj.userData.color);
-        }
-      });
-      raycaster.setFromCamera(pointer, miniCameraRef.current);
-
-      // calculate objects intersecting the picking ray
-
-      const intersects = raycaster.intersectObjects(
-        miniSceneRef.current.children
-      );
-      var name = "";
-      for (let i = 0; i < intersects.length; i++) {
-        const obj = intersects[i].object;
-        if (obj instanceof THREE.Line || obj instanceof THREE.Mesh) {
-          obj.material.color.set("#16FF00");
-          name = obj.userData.name;
-          if (obj instanceof THREE.Mesh) {
-            break;
-          }
-        }
-      }
-      setAxisName(name);
-    }
-
-    function createPlane(
-      width: number | undefined,
-      height: number | undefined,
-      color: any,
-      name: string
-    ) {
-      const geometry = new THREE.PlaneGeometry(width, height);
-      const material = new THREE.MeshBasicMaterial({
-        color: color,
-        side: THREE.DoubleSide,
-      });
-      const plane = new THREE.Mesh(geometry, material);
-
-      // Set the userData for the plane
-      plane.userData.name = name;
-      plane.userData.color = color;
-
-      return plane;
-    }
-    function createCube(size: number, color: number) {
-      const cube = new THREE.Object3D();
-
-      // Create planes for each side of the cube
-      const planeFront = createPlane(size, size, color, "XY Plane");
-      const planeBack = createPlane(size, size, color, "XY Plane");
-      const planeLeft = createPlane(size, size, color, "YZ Plane");
-      const planeRight = createPlane(size, size, color, "YZ Plane");
-      const planeTop = createPlane(size, size, color, "XZ Plane");
-      const planeBottom = createPlane(size, size, color, "XZ Plane");
-
-      // Position the planes to form a cube
-      planeLeft.rotation.y = Math.PI / 2;
-      planeRight.rotation.y = Math.PI / 2;
-      planeTop.rotation.x = Math.PI / 2;
-      planeBottom.rotation.x = Math.PI / 2;
-      planeFront.position.set(size / 2, size / 2, size);
-      planeBack.position.set(size / 2, size / 2, 0);
-      planeLeft.position.set(0, size / 2, size / 2);
-      planeRight.position.set(size, size / 2, size / 2);
-      planeTop.position.set(size / 2, size, size / 2);
-      planeBottom.position.set(size / 2, 0, size / 2);
-
-      // Add the planes to the cube object
-      cube.add(
-        planeFront,
-        planeBack,
-        planeLeft,
-        planeRight,
-        planeTop,
-        planeBottom
-      );
-
-      return cube;
-    }
-
-    function createBigCube(
-      minX: number,
-      maxX: number,
-      minY: number,
-      maxY: number,
-      minZ: number,
-      maxZ: number
-    ) {
-      // Calculate the size and position of the cube
-      const width = maxX - minX;
-      const height = maxY - minY;
-      const depth = maxZ - minZ;
-      const centerX = (minX + maxX) / 2;
-      const centerY = (minY + maxY) / 2;
-      const centerZ = (minZ + maxZ) / 2;
-      // Create the cube
-      // const geometry = new THREE.BoxGeometry(width, height, depth);
-      // const material = new THREE.MeshBasicMaterial({
-      //   color: 0x000000,
-      //   wireframe: true,
-      //   side: THREE.FrontSide,
-      // });
-      // const cube = new THREE.Mesh(geometry, material);
-      // cube.position.set(centerX, centerY, centerZ);
-
-      const edgesGeometry = new THREE.BufferGeometry();
-
-      // Define the vertices for the edges
-      const vertices = new Float32Array([
-        // Bottom rectangle
-        -width / 2,
-        -height / 2,
-        -depth / 2,
-        width / 2,
-        -height / 2,
-        -depth / 2,
-        width / 2,
-        -height / 2,
-        -depth / 2,
-        width / 2,
-        -height / 2,
-        depth / 2,
-        width / 2,
-        -height / 2,
-        depth / 2,
-        -width / 2,
-        -height / 2,
-        depth / 2,
-        -width / 2,
-        -height / 2,
-        depth / 2,
-        -width / 2,
-        -height / 2,
-        -depth / 2,
-
-        // Top rectangle
-        -width / 2,
-        height / 2,
-        -depth / 2,
-        width / 2,
-        height / 2,
-        -depth / 2,
-        width / 2,
-        height / 2,
-        -depth / 2,
-        width / 2,
-        height / 2,
-        depth / 2,
-        width / 2,
-        height / 2,
-        depth / 2,
-        -width / 2,
-        height / 2,
-        depth / 2,
-        -width / 2,
-        height / 2,
-        depth / 2,
-        -width / 2,
-        height / 2,
-        -depth / 2,
-
-        // Vertical lines
-        -width / 2,
-        -height / 2,
-        -depth / 2,
-        -width / 2,
-        height / 2,
-        -depth / 2,
-        width / 2,
-        -height / 2,
-        -depth / 2,
-        width / 2,
-        height / 2,
-        -depth / 2,
-        width / 2,
-        -height / 2,
-        depth / 2,
-        width / 2,
-        height / 2,
-        depth / 2,
-        -width / 2,
-        -height / 2,
-        depth / 2,
-        -width / 2,
-        height / 2,
-        depth / 2,
-      ]);
-
-      // Add vertices to geometry
-      edgesGeometry.setAttribute(
-        "position",
-        new THREE.BufferAttribute(vertices, 3)
-      );
-
-      // Create a material for the edges
-      const material = new THREE.LineBasicMaterial({ color: 0xadd8e6 });
-
-      // Create a line segments object to represent the edges
-      const cubeEdges = new THREE.LineSegments(edgesGeometry, material);
-      // Set the position of the cube
-      cubeEdges.position.set(centerX, centerY, centerZ);
-      cubeEdges.name = "cube";
-      return cubeEdges;
-
-      // return cube;
-    }
-
-    function getFeatureColor(
-      featureValue: string,
-      customizations: any[],
-      colorList: string | any[],
-      colorParamList: string | any[]
-    ) {
-      // Check if the feature value has a customization
-      const customization =
-        Object.keys(customizations).length !== 0 &&
-        customizations.find(
-          (c) => c.featureName === featureValue && c.category === colorKey
-        );
-
-      if (customization) {
-        return customization.color;
+    const colorReset = () => {
+      if (colorParam) {
+        updateVisibility(colorParam);
       } else {
-        // Otherwise, fall back to the original logic
-        return featureValue === "NaN" || featureValue === ""
-          ? "#000000"
-          : colorList[
-              colorParamList.indexOf(`${featureValue}`) % colorList.length
-            ];
+        updateVisibility(null);
       }
-    }
+      // objArr.current.forEach((objData: any) => {
+      //   const mesh = objData.divObj as THREE.InstancedMesh;
+      //   const colorInstance = new THREE.Color();
+      //   mesh.setColorAt(0, colorInstance.set(objData.color));
+      //   // Check if the mesh has the instanceColor attribute
+      //   if (!mesh.instanceColor) {
+      //     console.error("InstanceColor attribute is missing");
+      //     return;
+      //   }
+
+      //   // Iterate over each instance's userData
+      //   mesh.userData.instanceUserData.forEach(
+      //     (instanceUserData: any, index: number) => {
+      //       let color = new THREE.Color(instanceUserData.color.slice(0, 7));
+      //       let opacity =
+      //         parseInt(instanceUserData.color.slice(7, 9), 16) / 255 || 0.8;
+      //       let svgOpacity = 1.0;
+
+      //       const customization = customFeatures.find(
+      //         (feature: {
+      //           featureName: any;
+      //           customName: any;
+      //           category: string;
+      //         }) =>
+      //           feature.featureName === instanceUserData.features[colorKey] &&
+      //           feature.category === colorKey
+      //       );
+
+      //       if (
+      //         colorParam !== "" &&
+      //         colorParam !== instanceUserData.features[colorKey]
+      //       ) {
+      //         color.set("#EEEEEE");
+      //         opacity = 0.4;
+      //         svgOpacity = 0.4;
+      //       }
+
+      //       const isMatched = searchItems.some((item) => {
+      //         return Object.values(instanceUserData.features).includes(
+      //           item.name
+      //         );
+      //       });
+
+      //       if (isMatched) {
+      //         color.set(
+      //           customization ? customization.color : instanceUserData.color
+      //         );
+      //       } else if (searchItems.length) {
+      //         color.set("#EEEEEE");
+      //         opacity = 0.4;
+      //         svgOpacity = 0.4;
+      //       }
+
+      //       if (
+      //         dataItems[0] &&
+      //         instanceUserData.features[dataItems[0].category] === entityName
+      //       ) {
+      //         color.set("#0400ff");
+      //         opacity = 1;
+      //         svgOpacity = 1.0;
+      //       }
+
+      //       if (customization) {
+      //         const isCustomizationIncludeSearch = searchItems.some((item) => {
+      //           return Object.values(customization).includes(item.name);
+      //         });
+      //         if (isCustomizationIncludeSearch) {
+      //           color.set(customization.color);
+      //           opacity = 1;
+      //         }
+      //       }
+
+      //       mesh.setColorAt(index, colorInstance.set(color));
+      //     }
+      //   );
+
+      //   // Ensure instanceColor is updated
+      //   mesh.instanceColor.needsUpdate = true;
+      // });
+
+      rendererRef.current &&
+        rendererRef.current.render(sceneRef.current, cameraRef.current);
+    };
 
     useEffect(() => {
-      objArr.current = [];
+      colorReset();
+    }, [data, colorParam, searchItems, dataItems]);
+
+    const throttle = (func: (...args: any[]) => void, limit: number) => {
+      let inThrottle: boolean;
+      return function (...args: any[]) {
+        if (!inThrottle) {
+          // @ts-ignore
+          func.apply(this, args);
+          inThrottle = true;
+          setTimeout(() => (inThrottle = false), limit);
+        }
+      };
+    };
+
+    const onPointerMove = useCallback(
+      throttle((event: { clientX: number; clientY: number }) => {
+        pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+        pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+        raycaster.setFromCamera(pointer, cameraRef.current);
+
+        const intersects = raycaster.intersectObjects(
+          sceneRef.current.children
+        );
+        let newInfo = "";
+        let newIdentifierName = "";
+
+        for (let i = 0; i < intersects.length; i++) {
+          const intersection = intersects[i];
+          const obj = intersection.object;
+
+          if (obj instanceof THREE.InstancedMesh) {
+            const instanceId = intersection.instanceId;
+            if (instanceId !== undefined) {
+              const color = new THREE.Color(0x16ff00); // green color
+              obj.setColorAt(instanceId, color);
+              obj.instanceColor!.needsUpdate = true;
+
+              const userData = obj.userData.instanceUserData[instanceId];
+              const customFeature = customFeatures.find(
+                (feature: { featureName: any }) =>
+                  feature.featureName === userData.features[colorKey]
+              );
+              if (customFeature) {
+                newInfo = customFeature.customName;
+              } else {
+                newInfo = userData.features[colorKey];
+              }
+              newIdentifierName = userData.identifier;
+              break; // exit loop early as we only need the first intersection
+            }
+          }
+        }
+
+        setInfo(newInfo);
+        setIdentifierName(newIdentifierName);
+      }, 50), // adjust the throttle limit as needed
+      [raycaster, pointer, customFeatures, colorKey]
+    );
+    const onPointerDown = useCallback(() => {
+      setEntityName("");
+      setControllerShown(false);
+    }, []);
+
+    const onClickMini = useCallback(
+      (event: { clientX: number; clientY: number }) => {
+        const miniContainerRect =
+          miniContainerRef.current.getBoundingClientRect();
+
+        const containerX = event.clientX - miniContainerRect.left;
+        const containerY = event.clientY - miniContainerRect.top;
+
+        pointer.x = (containerX / miniContainerRect.width) * 2 - 1;
+        pointer.y = -(containerY / miniContainerRect.height) * 2 + 1;
+
+        raycaster.setFromCamera(pointer, miniCameraRef.current);
+
+        const intersects = raycaster.intersectObjects(
+          miniSceneRef.current.children
+        );
+
+        for (let i = 0; i < intersects.length; i++) {
+          const obj = intersects[i].object;
+          if (obj instanceof THREE.Mesh) {
+            if (obj.userData.name === "XY Plane") {
+              miniCameraRef.current.position.set(0, 0, 30);
+              cameraRef.current.position.set(0, 0, 30);
+            } else if (obj.userData.name === "YZ Plane") {
+              miniCameraRef.current.position.set(30, 0, 0);
+              cameraRef.current.position.set(30, 0, 0);
+            } else if (obj.userData.name === "XZ Plane") {
+              miniCameraRef.current.position.set(0, 30, 0);
+              cameraRef.current.position.set(0, 30, 0);
+            }
+            controlsRef.current.update();
+            miniControlsRef.current.update();
+            return;
+          } else {
+            if (obj.userData.name === "X Axis") {
+              miniCameraRef.current.position.set(30, 0, 0);
+              cameraRef.current.position.set(30, 0, 0);
+            } else if (obj.userData.name === "Y Axis") {
+              miniCameraRef.current.position.set(0, 30, 0);
+              cameraRef.current.position.set(0, 30, 0);
+            } else if (obj.userData.name === "Z Axis") {
+              miniCameraRef.current.position.set(0, 0, 30);
+              cameraRef.current.position.set(0, 0, 30);
+            }
+            controlsRef.current.update();
+            miniControlsRef.current.update();
+            return;
+          }
+        }
+      },
+      [raycaster, pointer]
+    );
+
+    const onPointerMoveMini = useCallback(
+      (event: { clientX: number; clientY: number }) => {
+        const miniContainerRect =
+          miniContainerRef.current.getBoundingClientRect();
+
+        const containerX = event.clientX - miniContainerRect.left;
+        const containerY = event.clientY - miniContainerRect.top;
+
+        pointer.x = (containerX / miniContainerRect.width) * 2 - 1;
+        pointer.y = -(containerY / miniContainerRect.height) * 2 + 1;
+
+        miniSceneRef.current.traverse((obj: any) => {
+          if (obj instanceof THREE.Line || obj instanceof THREE.Mesh) {
+            obj.material.color.set(obj.userData.color);
+          }
+        });
+        raycaster.setFromCamera(pointer, miniCameraRef.current);
+
+        const intersects = raycaster.intersectObjects(
+          miniSceneRef.current.children
+        );
+        var name = "";
+        for (let i = 0; i < intersects.length; i++) {
+          const obj = intersects[i].object;
+          if (obj instanceof THREE.Line || obj instanceof THREE.Mesh) {
+            obj.material.color.set("#16FF00");
+            name = obj.userData.name;
+            if (obj instanceof THREE.Mesh) {
+              break;
+            }
+          }
+        }
+        setAxisName(name);
+      },
+      [raycaster, pointer]
+    );
+
+    const getFeatureColor = (
+      featureValue: string,
+      customFeatures: any[],
+      colorList: string[],
+      colorParamList: string[]
+    ): string => {
+      const customization = customFeatures.find(
+        (c) => c.featureName === featureValue && c.category === colorKey
+      );
+      if (customization && customization.color) {
+        return customization.color;
+      }
+
+      const index = colorParamList.indexOf(featureValue);
+      if (index !== -1) {
+        return colorList[index];
+      }
+
+      return "#ff0000";
+    };
+
+    const scalePoint = (
+      point: number,
+      min: number,
+      max: number,
+      newMin: number,
+      newMax: number
+    ) => {
+      const result = ((point - min) / (max - min)) * (newMax - newMin) + newMin;
+      return result;
+    };
+
+    useEffect(() => {
       const miniScene = new THREE.Scene();
       miniSceneRef.current = miniScene;
       const miniCamera = new THREE.PerspectiveCamera(60, 1, 0.1, 1000);
@@ -952,7 +645,14 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
         0.1,
         1000
       );
-      const renderer = new THREE.WebGLRenderer({ antialias: true });
+
+      let light = new THREE.DirectionalLight(0xffffff, 1);
+      light.position.setScalar(1);
+      scene.add(light, new THREE.AmbientLight(0xffffff, 0.5));
+
+      const renderer = new THREE.WebGLRenderer({
+        powerPreference: "high-performance",
+      });
       sceneRef.current = scene;
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setClearColor(0xffffff);
@@ -980,7 +680,7 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       var minZ: number = Infinity;
       var maxZ: number = -Infinity;
 
-      data.forEach(async (point: any, index: any) => {
+      data.forEach((point: any) => {
         if (threeD) {
           coordinates = {
             x: point.coordinates.x,
@@ -1029,7 +729,7 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
         z: 0,
       };
 
-      data.forEach(async (point: any, index: any) => {
+      data.forEach((point: any) => {
         if (threeD) {
           coordinates = {
             x: point.coordinates.x,
@@ -1052,18 +752,12 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
             );
           return;
         }
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-        const scalePoint = (point, min, max, newMin, newMax) => {
-          const result =
-            ((point - min) / (max - min)) * (newMax - newMin) + newMin;
-          return result;
-        };
 
-        const scaledX = scalePoint(coordinates.x, minX, maxX, -20, 20);
+        const scaledX = scalePoint(coordinates.x, minX, maxX, -40, 40);
 
-        const scaledY = scalePoint(coordinates.y, minY, maxY, -20, 20);
+        const scaledY = scalePoint(coordinates.y, minY, maxY, -40, 40);
         const scaledZ = threeD
-          ? scalePoint(coordinates.z, minZ, maxZ, -20, 20)
+          ? scalePoint(coordinates.z || 0, minZ, maxZ, -40, 40)
           : 0;
 
         localMinX = Math.min(localMinX ?? Infinity, scaledX);
@@ -1073,8 +767,8 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
         localMinZ = Math.min(localMinZ ?? Infinity, scaledZ ?? 0);
         localMaxZ = Math.max(localMaxZ ?? -Infinity, scaledZ ?? 0);
       });
-
-      data.forEach(async (point: any, index: any) => {
+      var colorInScene = "";
+      data.forEach((point: any, index: any) => {
         if (threeD) {
           coordinates = {
             x: point.coordinates.x,
@@ -1097,23 +791,15 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
             );
           return;
         }
+        // let color = getFeatureColor(
+        //   point.features[colorKey],
+        //   customFeatures,
+        //   colorList,
+        //   colorParamList
+        // );
 
-        let color = getFeatureColor(
-          point.features[colorKey],
-          customFeatures,
-          colorList,
-          colorParamList
-        );
-        // let color =
-        //   point.features[colorKey] === "NaN" || point.features[colorKey] === ""
-        //     ? "#000000"
-        //     : colorList[
-        //         colorParamList.indexOf(point.features[colorKey]) %
-        //           colorList.length
-        //       ];
-        var colorInScene = "";
         if (point.coordinates.x && point.coordinates.y) {
-          colorInScene = color;
+          colorInScene = "#FF0000";
           let opacity = 0.8;
           if (colorParam !== "" && colorParam !== point.features[colorKey]) {
             colorInScene = "#EEEEEE";
@@ -1134,14 +820,19 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
             opacity = 0.4;
           }
 
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-          const scalePoint = (point, min, max, newMin, newMax) => {
+          const scalePoint = (
+            point: number,
+            min: number,
+            max: number,
+            newMin: number,
+            newMax: number
+          ) => {
             const result =
               ((point - min) / (max - min)) * (newMax - newMin) + newMin;
             return result;
           };
 
-          const maxExtent = 20;
+          const maxExtent = 40;
 
           const deltaX = maxX - minX;
           const deltaY = maxY - minY;
@@ -1164,7 +855,7 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
           );
           const scaledZ = threeD
             ? scalePoint(
-                coordinates.z,
+                coordinates.z || 0,
                 minZ,
                 maxZ,
                 -((deltaZ / maxDelta) * maxExtent),
@@ -1175,23 +866,6 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
           scaledCoordinates.x = scaledX;
           scaledCoordinates.y = scaledY;
           scaledCoordinates.z = scaledZ;
-          const dataLength = data.length;
-          createShape(
-            dataLength,
-            twoLegend,
-            (scaledCoordinates = {
-              x: scaledX,
-              y: scaledY,
-              z: scaledZ,
-            }),
-            colorInScene,
-            opacity,
-            {
-              color: color,
-              index: index,
-              ...point,
-            }
-          );
         }
         middle.x += coordinates.x;
         middle.y += coordinates.y;
@@ -1253,36 +927,7 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       }
       cameraRef.current = camera;
 
-      // set up orbit controls
-
       const controls = new OrbitControls(camera, renderer.domElement);
-      // controls.addEventListener("change", () => {
-      //   console.log(controls);
-      // });
-      controls.minDistance = 0;
-      controls.maxDistance = 70;
-      // controls.addEventListener("change", () => {
-      //   objArr.current.forEach(function (objData) {
-      //     const proj = toScreenPosition(
-      //       // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-      //       objData.divObj,
-      //       cameraRef.current
-
-      //       // rendererRef.current
-      //     );
-      //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-      //     objData.svgElem.setAttribute("cx", proj.x);
-      //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-      //     objData.svgElem.setAttribute("cy", proj.y);
-      //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-      //     const distance = objData.divObj.position.distanceTo(
-      //       cameraRef.current.position
-      //     );
-      //     const scaleFactor = calculateScaleFactor(distance);
-      //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-      //     objData.svgElem.setAttribute("r", 5 * scaleFactor);
-      //   });
-      // });
       const miniControls = new OrbitControls(
         miniCamera,
         miniRenderer.domElement
@@ -1296,36 +941,75 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       controls.enableDamping = true;
       controls.dampingFactor = 0.25;
       controls.enablePan = true;
+      controls.addEventListener("change", () => {
+        loadVisibleData(camera);
+      });
       if (!threeD) {
-        controls.enableRotate = false; // Disable rotation
-        controls.enablePan = true; // Enable panning
+        controls.enableRotate = false;
+        controls.enablePan = true;
       }
       let previousDistance = controls.target.distanceTo(
         controls.object.position
       );
 
-      // const stats = new Stats();
-      // stats.showPanel(0);
-      // document.body.appendChild(stats.dom);
-      // Animation loop
+      let shapeMesh: THREE.InstancedMesh | null = null;
+
+      const loadVisibleData = (camera: THREE.PerspectiveCamera): void => {
+        if (!shapeMesh) {
+          shapeMesh = createShape(
+            data,
+            colorInScene,
+            data.length,
+            colorList,
+            customFeatures,
+            colorParamList,
+            colorKey,
+            minX,
+            maxX,
+            minY,
+            maxY,
+            minZ,
+            maxZ,
+            threeD
+          );
+
+          sceneRef.current.add(shapeMesh);
+        } else {
+          // Update existing mesh if needed
+          // For example, update colors or visibility
+          updateMesh(shapeMesh);
+        }
+      };
+
+      const updateMesh = (mesh: THREE.InstancedMesh) => {
+        const colorInstance = new THREE.Color();
+        for (let i = 0; i < mesh.count; i++) {
+          const userData = mesh.userData.instanceUserData[i];
+          let newColor = getFeatureColor(
+            userData.features[colorKey],
+            customFeatures,
+            colorList,
+            colorParamList
+          );
+          mesh.setColorAt(i, colorInstance.set(newColor));
+        }
+        mesh.instanceColor!.needsUpdate = true;
+      };
+
       const animate = () => {
-        // stats.begin();
+        stats.begin();
+
         requestAnimationFrame(animate);
         camera.position.copy(miniCamera.position);
         camera.rotation.copy(miniCamera.rotation);
         controls.update();
+        if (shapeMesh) {
+          updateMesh(shapeMesh);
+        }
         const currentDistance = controls.target.distanceTo(
           controls.object.position
         );
 
-        // // Check if the user zoomed in or out
-        // if (currentDistance < previousDistance) {
-        //   // Trigger an event for zooming in
-        //   // Call your function or dispatch an action, etc.
-        // } else if (currentDistance > previousDistance) {
-        //   // Trigger an event for zooming out
-        //   // Call your function or dispatch an action, etc.
-        // }
         previousDistance = currentDistance;
 
         sceneRef.current.traverse((obj: any) => {
@@ -1334,23 +1018,27 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
           }
         });
         renderer.render(scene, camera);
-        // stats.end();
+        stats.end();
       };
 
-      function animateMini() {
+      const animateMini = () => {
         requestAnimationFrame(animateMini);
         miniCamera.position.copy(camera.position);
         miniCamera.rotation.copy(camera.rotation);
 
         miniControls.update();
         miniRenderer.render(miniScene, miniCamera);
-      }
+      };
       animateMini();
 
       animate();
 
-      // Clean up on unmount
       return () => {
+        controls.removeEventListener("change", () => loadVisibleData(camera));
+        if (shapeMesh) {
+          sceneRef.current.remove(shapeMesh);
+          shapeMesh.geometry.dispose();
+        }
         if (containerRef.current) {
           containerRef.current.removeChild(renderer.domElement);
         }
@@ -1374,48 +1062,56 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       colorList,
       customFeatures,
       lightMode,
-      // setColorList,
     ]);
 
-    function drawSVG(svgContainer?: HTMLElement | null) {
-      objArr.current.forEach(function (objData) {
-        // Create an SVG circle element
-        const svgCircle = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "circle"
-        );
-        // svgCircle.setAttribute("r", `${coordinates.z}`); // Radius of the circle
-        svgCircle.setAttribute("cx", "100"); // Center the circle horizontally
-        svgCircle.setAttribute("cy", "200"); // Center the circle vertically
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-        svgCircle.style.fill = objData.divObj.userData.color;
-        svgCircle.style.position = "absolute";
-        const proj = toScreenPosition(
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-          objData.divObj,
-          cameraRef.current
+    const drawSVG = useCallback(
+      (svgContainer?: HTMLElement | null) => {
+        objArr.current.forEach(function (objData) {
+          const svgCircle = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "circle"
+          );
+          // @ts-ignore
+          const instanceMesh = objData.divObj;
+          // @ts-ignore
+          const instanceId = objData.instanceId; // Assuming instanceId is stored in objData
 
-          // rendererRef.current
-        );
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-        svgCircle.setAttribute("cx", proj.x);
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-        svgCircle.setAttribute("cy", proj.y);
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-        const distance = objData.divObj.position.distanceTo(
-          cameraRef.current.position
-        );
-        const scaleFactor = calculateScaleFactor(distance);
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-        svgCircle.setAttribute("r", 5 * scaleFactor);
-        svgContainer!.appendChild(svgCircle);
-      });
-    }
+          if (!(instanceMesh instanceof THREE.Object3D)) {
+            console.error(
+              "objData.divObj is not an instance of THREE.Object3D"
+            );
+            return;
+          }
+          // @ts-ignore
+          const matrixWorld = instanceMesh.instanceMatrix;
+          const position = new THREE.Vector3();
+          const matrix = new THREE.Matrix4();
+          matrix.fromArray(matrixWorld.array, instanceId * 16);
+          position.setFromMatrixPosition(matrix);
 
-    function downloadSVG() {
+          svgCircle.setAttribute("cx", "100");
+          svgCircle.setAttribute("cy", "200");
+
+          svgCircle.style.fill = instanceMesh.userData.color;
+          svgCircle.style.position = "absolute";
+
+          const proj = toScreenPosition(position, cameraRef.current);
+          svgCircle.setAttribute("cx", proj.x.toString());
+          svgCircle.setAttribute("cy", proj.y.toString());
+
+          const distance = position.distanceTo(cameraRef.current.position);
+          const scaleFactor = calculateScaleFactor(distance);
+          svgCircle.setAttribute("r", (5 * scaleFactor).toString());
+          svgContainer!.appendChild(svgCircle);
+        });
+      },
+      [calculateScaleFactor, toScreenPosition]
+    );
+
+    const downloadSVG = useCallback(() => {
       let svgContainer = document.getElementById("svg-container");
       if (!svgContainer) {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'createElementNS' does not exist on type 'Document'.
+        // @ts-ignore
         svgContainer = document.createElementNS(
           "http://www.w3.org/2000/svg",
           "svg"
@@ -1441,10 +1137,10 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
           minZ,
           maxZ,
           svgContainer,
-          cameraRef.current
+          cameraRef.current,
+          toScreenPosition
         );
 
-        // Serialize and download the SVG
         const serializer = new XMLSerializer();
         const svgString = serializer.serializeToString(svgContainer);
         const blob = new Blob([svgString], { type: "image/svg+xml" });
@@ -1463,13 +1159,13 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
           maxY,
           minZ,
           maxZ,
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+          // @ts-ignore
           svgContainer,
-          cameraRef.current
+          cameraRef.current,
+          toScreenPosition
         );
-        // Serialize and download the SVG
         const serializer = new XMLSerializer();
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+        // @ts-ignore
         const svgString = serializer.serializeToString(svgContainer);
         const blob = new Blob([svgString], { type: "image/svg+xml" });
         const downloadLink = document.createElement("a");
@@ -1479,7 +1175,108 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
         downloadLink.click();
         document.body.removeChild(downloadLink);
       }
-    }
+    }, [drawSVG, drawBoxEdges, minX, maxX, minY, maxY, minZ, maxZ]);
+
+    const createShape = useCallback(
+      (
+        cluster: any,
+        color: string,
+        length: number,
+        _colorList: string[],
+        _customFeatures: any[],
+        _colorParamList: string[],
+        _colorKey: string,
+        minX: number,
+        maxX: number,
+        minY: number,
+        maxY: number,
+        minZ: number,
+        maxZ: number,
+        isThreeD: boolean
+      ): THREE.InstancedMesh => {
+        objArr.current = [];
+        const geometry = new THREE.SphereGeometry(0.3);
+        const material = new THREE.MeshBasicMaterial({
+          transparent: true,
+        });
+        const mesh = new THREE.InstancedMesh(geometry, material, length);
+        mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+        mesh.setColorAt(0, new THREE.Color());
+        const colorInstance = new THREE.Color();
+
+        const dummyMatrix = new THREE.Object3D();
+        const matrix = new THREE.Matrix4();
+        const instanceUserData = [];
+
+        for (let i = 0; i < length; i++) {
+          const point = cluster[i];
+
+          let newColor = getFeatureColor(
+            point.features[_colorKey],
+            _customFeatures,
+            _colorList,
+            _colorParamList
+          );
+
+          const maxExtent = 40;
+
+          const deltaX = maxX - minX;
+          const deltaY = maxY - minY;
+          const deltaZ = maxZ - minZ;
+          var maxDelta = Math.max(deltaX, deltaY, deltaZ);
+
+          const scaledX = scalePoint(
+            parseFloat(point.coordinates.x),
+            minX,
+            maxX,
+            -((deltaX / maxDelta) * maxExtent),
+            (deltaX / maxDelta) * maxExtent
+          );
+          const scaledY = scalePoint(
+            parseFloat(point.coordinates.y),
+            minY,
+            maxY,
+            -((deltaY / maxDelta) * maxExtent),
+            (deltaY / maxDelta) * maxExtent
+          );
+          const scaledZ = isThreeD
+            ? scalePoint(
+                parseFloat(point.coordinates.z) || 0,
+                minZ,
+                maxZ,
+                -((deltaZ / maxDelta) * maxExtent),
+                (deltaZ / maxDelta) * maxExtent
+              )
+            : 0;
+          dummyMatrix.position.set(scaledX, scaledY, scaledZ || 0);
+          dummyMatrix.updateMatrix();
+          mesh.setMatrixAt(i, dummyMatrix.matrix);
+          mesh.setColorAt(i, colorInstance.set(newColor));
+          instanceUserData.push({
+            ...point,
+            identifier: point.identifier,
+            features: point.features,
+            color: newColor,
+            coordinates: { x: scaledX, y: scaledY, z: scaledZ },
+          });
+          // @ts-ignore
+          objArr.current.push({ divObj: mesh, instanceId: i });
+        }
+
+        mesh.userData.instanceUserData = instanceUserData;
+        mesh.instanceMatrix.needsUpdate = true;
+        mesh.instanceColor!.needsUpdate = true;
+        return mesh;
+      },
+      []
+    );
+
+    const onColorKeyDoubleClick = (
+      selectedColorKey: string | null | undefined
+    ) => {
+      updateVisibility(null, selectedColorKey);
+    };
+
     return (
       <div className="relative h-full flex overflow-hidden">
         <div
@@ -1514,6 +1311,7 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
           )}
           <div className="flex absolute right-0 top-32">
             <ColorLegend
+              onDoubleClick={onColorKeyDoubleClick}
               lightMode={lightMode}
               keyList={keyList}
               setListParam={(param: string) => setListParam(param)}

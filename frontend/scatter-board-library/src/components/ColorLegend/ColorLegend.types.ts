@@ -10,6 +10,7 @@ export interface ColorLegendProps {
   setCustomFeatures: (customFeatures: string[]) => void;
   customizations: ParamCustomization[];
   lightMode: boolean;
+  onDoubleClick?: (color: string) => void;
 }
 
 type ParamCustomization = {

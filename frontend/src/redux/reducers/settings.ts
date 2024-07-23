@@ -34,7 +34,6 @@ import {
   SET_THREE_D,
   SET_TWO_LEGEND,
 } from "../actionTypes";
-import { transformCoordinates } from "../../components/utils";
 
 const initialAtomStyleState: AtomStyleSpec = {
   cartoon: {
@@ -296,8 +295,7 @@ const settingsReducer = (
     case SET_TECHNIQUE:
       const selectedProjection = state.projections[action.payload];
       if (!selectedProjection) return state;
-      const transformData = transformCoordinates(selectedProjection.data);
-      transformData.forEach((element: any) => {
+      selectedProjection.data.forEach((element: any) => {
         if (state.protein_data) {
           Object.assign(element, state.protein_data[element.identifier]);
         } else {
@@ -341,7 +339,7 @@ const settingsReducer = (
         : ["NaN"];
       const colorKey = state.colorKey ?? keys[0];
       const newData = state.protein_data
-        ? transformData.map((item: any) => {
+        ? selectedProjection.data.map((item: any) => {
             const newItem = {
               ...item,
             }; // Create a copy of the current item
@@ -376,11 +374,11 @@ const settingsReducer = (
             }
           }
         });
-
+      console.log("RENDERED");
       return {
         ...state,
-        colorParamList: colorParamListLocal.map((item) => String(item)),
-        data: transformData,
+        colorParamList: colorParamListLocal,
+        data: selectedProjection.data,
         threeD: selectedProjection.dimensions === 3,
         technique: action.payload,
         dataItems: itemsLocal,

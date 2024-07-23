@@ -47,6 +47,8 @@
     "types": "dist/index.d.ts",
     "dependencies": {
         "html-to-image": "^1.11.11",
-        "react-colorful": "^5.6.1"
+        "react-colorful": "^5.6.1",
+        "stats.js": "^0.17.0",
+        "three-mesh-bvh": "^0.7.6"
     }
 }

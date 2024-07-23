@@ -4,5 +4,6 @@ export interface ColorLegendItemProps {
   screenshot: boolean;
   text: string;
   onClick: () => void;
+  onDoubleClick: () => void;
   lightMode: boolean;
 }

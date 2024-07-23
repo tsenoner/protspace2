@@ -8,6 +8,7 @@ const ColorLegendItem: React.FC<ColorLegendItemProps> = ({
   screenshot,
   text,
   onClick,
+  onDoubleClick,
   lightMode,
 }) => {
   const textColor = lightMode ? "black" : "white";
@@ -15,6 +16,7 @@ const ColorLegendItem: React.FC<ColorLegendItemProps> = ({
     <div>
       <div
         onClick={onClick}
+        onDoubleClick={onDoubleClick}
         className="flex gap-x-2 min-h-custom selection:border-r-1 items-center cursor-pointer"
       >
         <div

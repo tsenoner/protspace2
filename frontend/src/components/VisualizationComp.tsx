@@ -24,8 +24,8 @@ import { colorList, shapeList } from "../helpers/constants";
 import { useAppDispatch, useAppSelector } from "../helpers/hooks";
 import {
   fetchAndSetData,
-  setCameraPosition,
   setCamera,
+  setCameraPosition,
   setCameraRotation,
   setColorAndShapeKey,
   setColorKey,
@@ -63,7 +63,6 @@ import MolstarViewer from "./MolstarViewer";
 import QuickAccessLinks from "./QuickAccessLinks";
 import SvgSpinner from "./SvgSpinner";
 import VisualizationWaitingModal from "./WaitingModal";
-import { transformCoordinates } from "./utils";
 
 const VisualizationComp = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -192,23 +191,61 @@ const VisualizationComp = () => {
       readFileContentsJSON(file);
     }
   };
-
   const readFileContentsJSON = (file: File) => {
     const reader = new FileReader();
-    reader.onload = (event) => {
-      const fileContents = event.target?.result;
-      if (fileContents) {
-        try {
-          const parsedObject = JSON.parse(fileContents as string);
-          importFileV2(parsedObject);
-        } catch (error) {
-          dispatch(setIsLoading(false));
-          dispatch(setErrorMessage("JSON could not be parsed."));
-          console.error("Error parsing JSON:", error);
+    const chunkSize = 4 * 1024 * 1024; // 1MB chunks
+    let offset = 0;
+    let buffer = "";
+
+    const readChunk = () => {
+      const slice = file.slice(offset, offset + chunkSize);
+      reader.readAsText(slice);
+    };
+
+    const processBuffer = () => {
+      try {
+        // Attempt to parse the current buffer as JSON
+        const parsedData = JSON.parse(buffer);
+        // If successful, process the parsed data
+        importFileV2(parsedData);
+        // Clear the buffer
+        buffer = "";
+      } catch (error) {
+        // If parsing fails, continue accumulating chunks
+        if (error instanceof SyntaxError) {
+          console.log("SyntaxError: Incomplete JSON, waiting for more data.");
+        } else {
+          throw error;
         }
       }
     };
-    reader.readAsText(file);
+
+    reader.onload = (event) => {
+      if (event.target?.result) {
+        buffer += event.target.result; // Accumulate chunks in buffer
+        offset += chunkSize;
+
+        // Try to process the buffer if it contains complete JSON
+        processBuffer();
+
+        if (offset < file.size) {
+          readChunk();
+        } else {
+          // Final attempt to process remaining buffer after reading all chunks
+          processBuffer();
+          dispatch(setIsLoading(false));
+        }
+      }
+    };
+
+    reader.onerror = (error) => {
+      dispatch(setIsLoading(false));
+      dispatch(setErrorMessage("Error reading file."));
+      console.error("Error reading file:", error);
+    };
+
+    dispatch(setIsLoading(true));
+    readChunk();
   };
 
   // function importFile(parsedObject: any) {
@@ -352,11 +389,7 @@ const VisualizationComp = () => {
         })
       : null;
 
-    dispatch(
-      setData(
-        transformCoordinates(parsedObject.projections[selectedProjection].data)
-      )
-    );
+    dispatch(setData(parsedObject.projections[selectedProjection].data));
     dispatch(
       setKeyList(
         parsedObject.protein_data
@@ -487,6 +520,7 @@ const VisualizationComp = () => {
     importFileV2(parsedObject.data);
   };
   const navigate = useNavigate();
+
   return (
     <div className="h-screen w-screen overflow-hidden">
       <div className="absolute z-10 left-0 top-0 w-screen">

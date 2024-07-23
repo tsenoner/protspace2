@@ -253,6 +253,7 @@ const ColorLegend: React.FC<ColorLegendProps> = ({
   setCustomFeatures,
   customizations,
   lightMode,
+  onDoubleClick,
 }) => {
   const [closed, setClosed] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -364,6 +365,7 @@ const ColorLegend: React.FC<ColorLegendProps> = ({
             return (
               <li key={value}>
                 <ColorLegendItem
+                  onDoubleClick={() => onDoubleClick && onDoubleClick(value)}
                   color={value === "NaN" ? "#000000" : displayColor}
                   text={displayName}
                   screenshot={screenshot}

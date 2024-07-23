@@ -30,13 +30,13 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = "/*\n! tailwindcss v3.3.5 | MIT License | https://tailwindcss.com\n*//*\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\n*/\n\n*,\n::before,\n::after {\n  box-sizing: border-box; /* 1 */\n  border-width: 0; /* 2 */\n  border-style: solid; /* 2 */\n  border-color: #e5e7eb; /* 2 */\n}\n\n::before,\n::after {\n  --tw-content: '';\n}\n\n/*\n1. Use a consistent sensible line-height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n3. Use a more readable tab size.\n4. Use the user's configured `sans` font-family by default.\n5. Use the user's configured `sans` font-feature-settings by default.\n6. Use the user's configured `sans` font-variation-settings by default.\n*/\n\nhtml {\n  line-height: 1.5; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n  -moz-tab-size: 4; /* 3 */\n  -o-tab-size: 4;\n     tab-size: 4; /* 3 */\n  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"; /* 4 */\n  font-feature-settings: normal; /* 5 */\n  font-variation-settings: normal; /* 6 */\n}\n\n/*\n1. Remove the margin in all browsers.\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\n*/\n\nbody {\n  margin: 0; /* 1 */\n  line-height: inherit; /* 2 */\n}\n\n/*\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n3. Ensure horizontal rules are visible by default.\n*/\n\nhr {\n  height: 0; /* 1 */\n  color: inherit; /* 2 */\n  border-top-width: 1px; /* 3 */\n}\n\n/*\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\n\nabbr:where([title]) {\n  -webkit-text-decoration: underline dotted;\n          text-decoration: underline dotted;\n}\n\n/*\nRemove the default font size and weight for headings.\n*/\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/*\nReset links to optimize for opt-in styling instead of opt-out.\n*/\n\na {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/*\nAdd the correct font weight in Edge and Safari.\n*/\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/*\n1. Use the user's configured `mono` font family by default.\n2. Correct the odd `em` font sizing in all browsers.\n*/\n\ncode,\nkbd,\nsamp,\npre {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/*\nAdd the correct font size in all browsers.\n*/\n\nsmall {\n  font-size: 80%;\n}\n\n/*\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\n*/\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/*\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n3. Remove gaps between table borders by default.\n*/\n\ntable {\n  text-indent: 0; /* 1 */\n  border-color: inherit; /* 2 */\n  border-collapse: collapse; /* 3 */\n}\n\n/*\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n3. Remove default padding in all browsers.\n*/\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-feature-settings: inherit; /* 1 */\n  font-variation-settings: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  font-weight: inherit; /* 1 */\n  line-height: inherit; /* 1 */\n  color: inherit; /* 1 */\n  margin: 0; /* 2 */\n  padding: 0; /* 3 */\n}\n\n/*\nRemove the inheritance of text transform in Edge and Firefox.\n*/\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Remove default button styles.\n*/\n\nbutton,\n[type='button'],\n[type='reset'],\n[type='submit'] {\n  -webkit-appearance: button; /* 1 */\n  background-color: transparent; /* 2 */\n  background-image: none; /* 2 */\n}\n\n/*\nUse the modern Firefox focus style for all focusable elements.\n*/\n\n:-moz-focusring {\n  outline: auto;\n}\n\n/*\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\n*/\n\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\n/*\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\n\nprogress {\n  vertical-align: baseline;\n}\n\n/*\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n\n::-webkit-inner-spin-button,\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/*\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n\n[type='search'] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/*\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to `inherit` in Safari.\n*/\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\n\nsummary {\n  display: list-item;\n}\n\n/*\nRemoves the default spacing and border for appropriate elements.\n*/\n\nblockquote,\ndl,\ndd,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\nfigure,\np,\npre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol,\nul,\nmenu {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/*\nReset default styling for dialogs.\n*/\ndialog {\n  padding: 0;\n}\n\n/*\nPrevent resizing textareas horizontally by default.\n*/\n\ntextarea {\n  resize: vertical;\n}\n\n/*\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\n2. Set the default placeholder color to the user's configured gray 400 color.\n*/\n\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\ninput::placeholder,\ntextarea::placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\n/*\nSet the default cursor for buttons.\n*/\n\nbutton,\n[role=\"button\"] {\n  cursor: pointer;\n}\n\n/*\nMake sure disabled buttons don't get the pointer cursor.\n*/\n:disabled {\n  cursor: default;\n}\n\n/*\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\n   This can trigger a poorly considered lint error in some tools but is included by design.\n*/\n\nimg,\nsvg,\nvideo,\ncanvas,\naudio,\niframe,\nembed,\nobject {\n  display: block; /* 1 */\n  vertical-align: middle; /* 2 */\n}\n\n/*\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\n*/\n\nimg,\nvideo {\n  max-width: 100%;\n  height: auto;\n}\n\n/* Make elements with the HTML hidden attribute stay hidden by default */\n[hidden] {\n  display: none;\n}\n\n*, ::before, ::after {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n\n::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n.container {\n  width: 100%;\n}\n@media (min-width: 640px) {\n\n  .container {\n    max-width: 640px;\n  }\n}\n@media (min-width: 768px) {\n\n  .container {\n    max-width: 768px;\n  }\n}\n@media (min-width: 1024px) {\n\n  .container {\n    max-width: 1024px;\n  }\n}\n@media (min-width: 1280px) {\n\n  .container {\n    max-width: 1280px;\n  }\n}\n@media (min-width: 1536px) {\n\n  .container {\n    max-width: 1536px;\n  }\n}\n.fixed {\n  position: fixed;\n}\n.absolute {\n  position: absolute;\n}\n.relative {\n  position: relative;\n}\n.inset-0 {\n  inset: 0px;\n}\n.bottom-0 {\n  bottom: 0px;\n}\n.bottom-12 {\n  bottom: 3rem;\n}\n.bottom-16 {\n  bottom: 4rem;\n}\n.bottom-8 {\n  bottom: 2rem;\n}\n.left-0 {\n  left: 0px;\n}\n.left-20 {\n  left: 5rem;\n}\n.left-24 {\n  left: 6rem;\n}\n.left-5 {\n  left: 1.25rem;\n}\n.right-0 {\n  right: 0px;\n}\n.right-64 {\n  right: 16rem;\n}\n.top-0 {\n  top: 0px;\n}\n.top-12 {\n  top: 3rem;\n}\n.top-20 {\n  top: 5rem;\n}\n.top-24 {\n  top: 6rem;\n}\n.top-32 {\n  top: 8rem;\n}\n.-z-20 {\n  z-index: -20;\n}\n.z-0 {\n  z-index: 0;\n}\n.z-10 {\n  z-index: 10;\n}\n.z-20 {\n  z-index: 20;\n}\n.z-30 {\n  z-index: 30;\n}\n.m-8 {\n  margin: 2rem;\n}\n.m-auto {\n  margin: auto;\n}\n.mx-2 {\n  margin-left: 0.5rem;\n  margin-right: 0.5rem;\n}\n.my-4 {\n  margin-top: 1rem;\n  margin-bottom: 1rem;\n}\n.ml-auto {\n  margin-left: auto;\n}\n.mr-2 {\n  margin-right: 0.5rem;\n}\n.mr-4 {\n  margin-right: 1rem;\n}\n.mr-auto {\n  margin-right: auto;\n}\n.mt-2 {\n  margin-top: 0.5rem;\n}\n.mt-4 {\n  margin-top: 1rem;\n}\n.block {\n  display: block;\n}\n.inline {\n  display: inline;\n}\n.flex {\n  display: flex;\n}\n.hidden {\n  display: none;\n}\n.h-24 {\n  height: 6rem;\n}\n.h-4 {\n  height: 1rem;\n}\n.h-40 {\n  height: 10rem;\n}\n.h-6 {\n  height: 1.5rem;\n}\n.h-64 {\n  height: 16rem;\n}\n.h-full {\n  height: 100%;\n}\n.min-h-custom {\n  min-height: 32px;\n}\n.w-0 {\n  width: 0px;\n}\n.w-0\\.5 {\n  width: 0.125rem;\n}\n.w-16 {\n  width: 4rem;\n}\n.w-20 {\n  width: 5rem;\n}\n.w-24 {\n  width: 6rem;\n}\n.w-4 {\n  width: 1rem;\n}\n.w-40 {\n  width: 10rem;\n}\n.w-6 {\n  width: 1.5rem;\n}\n.w-60 {\n  width: 15rem;\n}\n.w-64 {\n  width: 16rem;\n}\n.w-full {\n  width: 100%;\n}\n.origin-top-left {\n  transform-origin: top left;\n}\n.transform {\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n.cursor-pointer {\n  cursor: pointer;\n}\n.resize {\n  resize: both;\n}\n.flex-col {\n  flex-direction: column;\n}\n.place-content-around {\n  place-content: space-around;\n}\n.items-center {\n  align-items: center;\n}\n.justify-center {\n  justify-content: center;\n}\n.justify-between {\n  justify-content: space-between;\n}\n.gap-x-2 {\n  -moz-column-gap: 0.5rem;\n       column-gap: 0.5rem;\n}\n.overflow-hidden {\n  overflow: hidden;\n}\n.overflow-x-auto {\n  overflow-x: auto;\n}\n.overflow-y-auto {\n  overflow-y: auto;\n}\n.truncate {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.whitespace-nowrap {\n  white-space: nowrap;\n}\n.break-all {\n  word-break: break-all;\n}\n.rounded {\n  border-radius: 0.25rem;\n}\n.rounded-full {\n  border-radius: 9999px;\n}\n.rounded-md {\n  border-radius: 0.375rem;\n}\n.border {\n  border-width: 1px;\n}\n.border-2 {\n  border-width: 2px;\n}\n.border-b-2 {\n  border-bottom-width: 2px;\n}\n.border-gray-300 {\n  --tw-border-opacity: 1;\n  border-color: rgb(209 213 219 / var(--tw-border-opacity));\n}\n.border-stone-400 {\n  --tw-border-opacity: 1;\n  border-color: rgb(168 162 158 / var(--tw-border-opacity));\n}\n.bg-black {\n  --tw-bg-opacity: 1;\n  background-color: rgb(0 0 0 / var(--tw-bg-opacity));\n}\n.bg-blue-500 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(59 130 246 / var(--tw-bg-opacity));\n}\n.bg-gray-100 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(243 244 246 / var(--tw-bg-opacity));\n}\n.bg-gray-300 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(209 213 219 / var(--tw-bg-opacity));\n}\n.bg-gray-50 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(249 250 251 / var(--tw-bg-opacity));\n}\n.bg-red-500 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(239 68 68 / var(--tw-bg-opacity));\n}\n.bg-stone-300 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(214 211 209 / var(--tw-bg-opacity));\n}\n.bg-stone-400 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(168 162 158 / var(--tw-bg-opacity));\n}\n.bg-white {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n}\n.bg-opacity-50 {\n  --tw-bg-opacity: 0.5;\n}\n.p-1 {\n  padding: 0.25rem;\n}\n.p-2 {\n  padding: 0.5rem;\n}\n.p-2\\.5 {\n  padding: 0.625rem;\n}\n.px-3 {\n  padding-left: 0.75rem;\n  padding-right: 0.75rem;\n}\n.px-4 {\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n.px-6 {\n  padding-left: 1.5rem;\n  padding-right: 1.5rem;\n}\n.py-1 {\n  padding-top: 0.25rem;\n  padding-bottom: 0.25rem;\n}\n.py-4 {\n  padding-top: 1rem;\n  padding-bottom: 1rem;\n}\n.pb-1 {\n  padding-bottom: 0.25rem;\n}\n.pl-2 {\n  padding-left: 0.5rem;\n}\n.text-center {\n  text-align: center;\n}\n.text-sm {\n  font-size: 0.875rem;\n  line-height: 1.25rem;\n}\n.text-xs {\n  font-size: 0.75rem;\n  line-height: 1rem;\n}\n.uppercase {\n  text-transform: uppercase;\n}\n.text-black {\n  --tw-text-opacity: 1;\n  color: rgb(0 0 0 / var(--tw-text-opacity));\n}\n.text-blue-700 {\n  --tw-text-opacity: 1;\n  color: rgb(29 78 216 / var(--tw-text-opacity));\n}\n.text-gray-500 {\n  --tw-text-opacity: 1;\n  color: rgb(107 114 128 / var(--tw-text-opacity));\n}\n.text-gray-900 {\n  --tw-text-opacity: 1;\n  color: rgb(17 24 39 / var(--tw-text-opacity));\n}\n.text-white {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity));\n}\n.line-through {\n  text-decoration-line: line-through;\n}\n.opacity-50 {\n  opacity: 0.5;\n}\n.transition {\n  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;\n  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;\n  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n.transition-all {\n  transition-property: all;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n.duration-300 {\n  transition-duration: 300ms;\n}\n.ease-in-out {\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n}\n.hover\\:bg-blue-700:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(29 78 216 / var(--tw-bg-opacity));\n}\n.hover\\:bg-red-700:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(185 28 28 / var(--tw-bg-opacity));\n}\n.hover\\:opacity-10:hover {\n  opacity: 0.1;\n}\n.hover\\:shadow-md:hover {\n  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n.focus\\:border-blue-500:focus {\n  --tw-border-opacity: 1;\n  border-color: rgb(59 130 246 / var(--tw-border-opacity));\n}\n.focus\\:ring-blue-500:focus {\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity));\n}\n@media (prefers-color-scheme: dark) {\n\n  .dark\\:border-gray-600 {\n    --tw-border-opacity: 1;\n    border-color: rgb(75 85 99 / var(--tw-border-opacity));\n  }\n\n  .dark\\:bg-gray-700 {\n    --tw-bg-opacity: 1;\n    background-color: rgb(55 65 81 / var(--tw-bg-opacity));\n  }\n\n  .dark\\:text-white {\n    --tw-text-opacity: 1;\n    color: rgb(255 255 255 / var(--tw-text-opacity));\n  }\n\n  .dark\\:placeholder-gray-400::-moz-placeholder {\n    --tw-placeholder-opacity: 1;\n    color: rgb(156 163 175 / var(--tw-placeholder-opacity));\n  }\n\n  .dark\\:placeholder-gray-400::placeholder {\n    --tw-placeholder-opacity: 1;\n    color: rgb(156 163 175 / var(--tw-placeholder-opacity));\n  }\n\n  .dark\\:focus\\:border-blue-500:focus {\n    --tw-border-opacity: 1;\n    border-color: rgb(59 130 246 / var(--tw-border-opacity));\n  }\n\n  .dark\\:focus\\:ring-blue-500:focus {\n    --tw-ring-opacity: 1;\n    --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity));\n  }\n}";
+var css_248z = "/*\n! tailwindcss v3.3.5 | MIT License | https://tailwindcss.com\n*//*\n1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)\n2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)\n*/\n\n*,\n::before,\n::after {\n  box-sizing: border-box; /* 1 */\n  border-width: 0; /* 2 */\n  border-style: solid; /* 2 */\n  border-color: #e5e7eb; /* 2 */\n}\n\n::before,\n::after {\n  --tw-content: '';\n}\n\n/*\n1. Use a consistent sensible line-height in all browsers.\n2. Prevent adjustments of font size after orientation changes in iOS.\n3. Use a more readable tab size.\n4. Use the user's configured `sans` font-family by default.\n5. Use the user's configured `sans` font-feature-settings by default.\n6. Use the user's configured `sans` font-variation-settings by default.\n*/\n\nhtml {\n  line-height: 1.5; /* 1 */\n  -webkit-text-size-adjust: 100%; /* 2 */\n  -moz-tab-size: 4; /* 3 */\n  -o-tab-size: 4;\n     tab-size: 4; /* 3 */\n  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"; /* 4 */\n  font-feature-settings: normal; /* 5 */\n  font-variation-settings: normal; /* 6 */\n}\n\n/*\n1. Remove the margin in all browsers.\n2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.\n*/\n\nbody {\n  margin: 0; /* 1 */\n  line-height: inherit; /* 2 */\n}\n\n/*\n1. Add the correct height in Firefox.\n2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)\n3. Ensure horizontal rules are visible by default.\n*/\n\nhr {\n  height: 0; /* 1 */\n  color: inherit; /* 2 */\n  border-top-width: 1px; /* 3 */\n}\n\n/*\nAdd the correct text decoration in Chrome, Edge, and Safari.\n*/\n\nabbr:where([title]) {\n  -webkit-text-decoration: underline dotted;\n          text-decoration: underline dotted;\n}\n\n/*\nRemove the default font size and weight for headings.\n*/\n\nh1,\nh2,\nh3,\nh4,\nh5,\nh6 {\n  font-size: inherit;\n  font-weight: inherit;\n}\n\n/*\nReset links to optimize for opt-in styling instead of opt-out.\n*/\n\na {\n  color: inherit;\n  text-decoration: inherit;\n}\n\n/*\nAdd the correct font weight in Edge and Safari.\n*/\n\nb,\nstrong {\n  font-weight: bolder;\n}\n\n/*\n1. Use the user's configured `mono` font family by default.\n2. Correct the odd `em` font sizing in all browsers.\n*/\n\ncode,\nkbd,\nsamp,\npre {\n  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace; /* 1 */\n  font-size: 1em; /* 2 */\n}\n\n/*\nAdd the correct font size in all browsers.\n*/\n\nsmall {\n  font-size: 80%;\n}\n\n/*\nPrevent `sub` and `sup` elements from affecting the line height in all browsers.\n*/\n\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline;\n}\n\nsub {\n  bottom: -0.25em;\n}\n\nsup {\n  top: -0.5em;\n}\n\n/*\n1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)\n2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)\n3. Remove gaps between table borders by default.\n*/\n\ntable {\n  text-indent: 0; /* 1 */\n  border-color: inherit; /* 2 */\n  border-collapse: collapse; /* 3 */\n}\n\n/*\n1. Change the font styles in all browsers.\n2. Remove the margin in Firefox and Safari.\n3. Remove default padding in all browsers.\n*/\n\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: inherit; /* 1 */\n  font-feature-settings: inherit; /* 1 */\n  font-variation-settings: inherit; /* 1 */\n  font-size: 100%; /* 1 */\n  font-weight: inherit; /* 1 */\n  line-height: inherit; /* 1 */\n  color: inherit; /* 1 */\n  margin: 0; /* 2 */\n  padding: 0; /* 3 */\n}\n\n/*\nRemove the inheritance of text transform in Edge and Firefox.\n*/\n\nbutton,\nselect {\n  text-transform: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Remove default button styles.\n*/\n\nbutton,\n[type='button'],\n[type='reset'],\n[type='submit'] {\n  -webkit-appearance: button; /* 1 */\n  background-color: transparent; /* 2 */\n  background-image: none; /* 2 */\n}\n\n/*\nUse the modern Firefox focus style for all focusable elements.\n*/\n\n:-moz-focusring {\n  outline: auto;\n}\n\n/*\nRemove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)\n*/\n\n:-moz-ui-invalid {\n  box-shadow: none;\n}\n\n/*\nAdd the correct vertical alignment in Chrome and Firefox.\n*/\n\nprogress {\n  vertical-align: baseline;\n}\n\n/*\nCorrect the cursor style of increment and decrement buttons in Safari.\n*/\n\n::-webkit-inner-spin-button,\n::-webkit-outer-spin-button {\n  height: auto;\n}\n\n/*\n1. Correct the odd appearance in Chrome and Safari.\n2. Correct the outline style in Safari.\n*/\n\n[type='search'] {\n  -webkit-appearance: textfield; /* 1 */\n  outline-offset: -2px; /* 2 */\n}\n\n/*\nRemove the inner padding in Chrome and Safari on macOS.\n*/\n\n::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/*\n1. Correct the inability to style clickable types in iOS and Safari.\n2. Change font properties to `inherit` in Safari.\n*/\n\n::-webkit-file-upload-button {\n  -webkit-appearance: button; /* 1 */\n  font: inherit; /* 2 */\n}\n\n/*\nAdd the correct display in Chrome and Safari.\n*/\n\nsummary {\n  display: list-item;\n}\n\n/*\nRemoves the default spacing and border for appropriate elements.\n*/\n\nblockquote,\ndl,\ndd,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\nhr,\nfigure,\np,\npre {\n  margin: 0;\n}\n\nfieldset {\n  margin: 0;\n  padding: 0;\n}\n\nlegend {\n  padding: 0;\n}\n\nol,\nul,\nmenu {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n\n/*\nReset default styling for dialogs.\n*/\ndialog {\n  padding: 0;\n}\n\n/*\nPrevent resizing textareas horizontally by default.\n*/\n\ntextarea {\n  resize: vertical;\n}\n\n/*\n1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)\n2. Set the default placeholder color to the user's configured gray 400 color.\n*/\n\ninput::-moz-placeholder, textarea::-moz-placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\ninput::placeholder,\ntextarea::placeholder {\n  opacity: 1; /* 1 */\n  color: #9ca3af; /* 2 */\n}\n\n/*\nSet the default cursor for buttons.\n*/\n\nbutton,\n[role=\"button\"] {\n  cursor: pointer;\n}\n\n/*\nMake sure disabled buttons don't get the pointer cursor.\n*/\n:disabled {\n  cursor: default;\n}\n\n/*\n1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)\n2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)\n   This can trigger a poorly considered lint error in some tools but is included by design.\n*/\n\nimg,\nsvg,\nvideo,\ncanvas,\naudio,\niframe,\nembed,\nobject {\n  display: block; /* 1 */\n  vertical-align: middle; /* 2 */\n}\n\n/*\nConstrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)\n*/\n\nimg,\nvideo {\n  max-width: 100%;\n  height: auto;\n}\n\n/* Make elements with the HTML hidden attribute stay hidden by default */\n[hidden] {\n  display: none;\n}\n\n*, ::before, ::after {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n\n::backdrop {\n  --tw-border-spacing-x: 0;\n  --tw-border-spacing-y: 0;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  --tw-pan-x:  ;\n  --tw-pan-y:  ;\n  --tw-pinch-zoom:  ;\n  --tw-scroll-snap-strictness: proximity;\n  --tw-gradient-from-position:  ;\n  --tw-gradient-via-position:  ;\n  --tw-gradient-to-position:  ;\n  --tw-ordinal:  ;\n  --tw-slashed-zero:  ;\n  --tw-numeric-figure:  ;\n  --tw-numeric-spacing:  ;\n  --tw-numeric-fraction:  ;\n  --tw-ring-inset:  ;\n  --tw-ring-offset-width: 0px;\n  --tw-ring-offset-color: #fff;\n  --tw-ring-color: rgb(59 130 246 / 0.5);\n  --tw-ring-offset-shadow: 0 0 #0000;\n  --tw-ring-shadow: 0 0 #0000;\n  --tw-shadow: 0 0 #0000;\n  --tw-shadow-colored: 0 0 #0000;\n  --tw-blur:  ;\n  --tw-brightness:  ;\n  --tw-contrast:  ;\n  --tw-grayscale:  ;\n  --tw-hue-rotate:  ;\n  --tw-invert:  ;\n  --tw-saturate:  ;\n  --tw-sepia:  ;\n  --tw-drop-shadow:  ;\n  --tw-backdrop-blur:  ;\n  --tw-backdrop-brightness:  ;\n  --tw-backdrop-contrast:  ;\n  --tw-backdrop-grayscale:  ;\n  --tw-backdrop-hue-rotate:  ;\n  --tw-backdrop-invert:  ;\n  --tw-backdrop-opacity:  ;\n  --tw-backdrop-saturate:  ;\n  --tw-backdrop-sepia:  ;\n}\n.fixed {\n  position: fixed;\n}\n.absolute {\n  position: absolute;\n}\n.relative {\n  position: relative;\n}\n.inset-0 {\n  inset: 0px;\n}\n.bottom-0 {\n  bottom: 0px;\n}\n.bottom-12 {\n  bottom: 3rem;\n}\n.bottom-16 {\n  bottom: 4rem;\n}\n.bottom-8 {\n  bottom: 2rem;\n}\n.left-0 {\n  left: 0px;\n}\n.left-20 {\n  left: 5rem;\n}\n.left-24 {\n  left: 6rem;\n}\n.left-5 {\n  left: 1.25rem;\n}\n.right-0 {\n  right: 0px;\n}\n.right-64 {\n  right: 16rem;\n}\n.top-0 {\n  top: 0px;\n}\n.top-12 {\n  top: 3rem;\n}\n.top-20 {\n  top: 5rem;\n}\n.top-24 {\n  top: 6rem;\n}\n.top-32 {\n  top: 8rem;\n}\n.-z-20 {\n  z-index: -20;\n}\n.z-0 {\n  z-index: 0;\n}\n.z-10 {\n  z-index: 10;\n}\n.z-20 {\n  z-index: 20;\n}\n.z-30 {\n  z-index: 30;\n}\n.m-8 {\n  margin: 2rem;\n}\n.m-auto {\n  margin: auto;\n}\n.mx-2 {\n  margin-left: 0.5rem;\n  margin-right: 0.5rem;\n}\n.my-4 {\n  margin-top: 1rem;\n  margin-bottom: 1rem;\n}\n.ml-auto {\n  margin-left: auto;\n}\n.mr-2 {\n  margin-right: 0.5rem;\n}\n.mr-4 {\n  margin-right: 1rem;\n}\n.mr-auto {\n  margin-right: auto;\n}\n.mt-2 {\n  margin-top: 0.5rem;\n}\n.mt-4 {\n  margin-top: 1rem;\n}\n.block {\n  display: block;\n}\n.inline {\n  display: inline;\n}\n.flex {\n  display: flex;\n}\n.hidden {\n  display: none;\n}\n.h-24 {\n  height: 6rem;\n}\n.h-4 {\n  height: 1rem;\n}\n.h-40 {\n  height: 10rem;\n}\n.h-6 {\n  height: 1.5rem;\n}\n.h-64 {\n  height: 16rem;\n}\n.h-full {\n  height: 100%;\n}\n.min-h-custom {\n  min-height: 32px;\n}\n.w-0 {\n  width: 0px;\n}\n.w-0\\.5 {\n  width: 0.125rem;\n}\n.w-16 {\n  width: 4rem;\n}\n.w-20 {\n  width: 5rem;\n}\n.w-24 {\n  width: 6rem;\n}\n.w-4 {\n  width: 1rem;\n}\n.w-40 {\n  width: 10rem;\n}\n.w-6 {\n  width: 1.5rem;\n}\n.w-60 {\n  width: 15rem;\n}\n.w-64 {\n  width: 16rem;\n}\n.w-full {\n  width: 100%;\n}\n.origin-top-left {\n  transform-origin: top left;\n}\n.transform {\n  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n}\n.cursor-pointer {\n  cursor: pointer;\n}\n.flex-col {\n  flex-direction: column;\n}\n.place-content-around {\n  place-content: space-around;\n}\n.items-center {\n  align-items: center;\n}\n.justify-center {\n  justify-content: center;\n}\n.justify-between {\n  justify-content: space-between;\n}\n.gap-x-2 {\n  -moz-column-gap: 0.5rem;\n       column-gap: 0.5rem;\n}\n.overflow-hidden {\n  overflow: hidden;\n}\n.overflow-x-auto {\n  overflow-x: auto;\n}\n.overflow-y-auto {\n  overflow-y: auto;\n}\n.truncate {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n.whitespace-nowrap {\n  white-space: nowrap;\n}\n.break-all {\n  word-break: break-all;\n}\n.rounded {\n  border-radius: 0.25rem;\n}\n.rounded-full {\n  border-radius: 9999px;\n}\n.rounded-md {\n  border-radius: 0.375rem;\n}\n.border {\n  border-width: 1px;\n}\n.border-2 {\n  border-width: 2px;\n}\n.border-b-2 {\n  border-bottom-width: 2px;\n}\n.border-gray-300 {\n  --tw-border-opacity: 1;\n  border-color: rgb(209 213 219 / var(--tw-border-opacity));\n}\n.border-stone-400 {\n  --tw-border-opacity: 1;\n  border-color: rgb(168 162 158 / var(--tw-border-opacity));\n}\n.bg-black {\n  --tw-bg-opacity: 1;\n  background-color: rgb(0 0 0 / var(--tw-bg-opacity));\n}\n.bg-blue-500 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(59 130 246 / var(--tw-bg-opacity));\n}\n.bg-gray-100 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(243 244 246 / var(--tw-bg-opacity));\n}\n.bg-gray-300 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(209 213 219 / var(--tw-bg-opacity));\n}\n.bg-gray-50 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(249 250 251 / var(--tw-bg-opacity));\n}\n.bg-red-500 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(239 68 68 / var(--tw-bg-opacity));\n}\n.bg-stone-300 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(214 211 209 / var(--tw-bg-opacity));\n}\n.bg-stone-400 {\n  --tw-bg-opacity: 1;\n  background-color: rgb(168 162 158 / var(--tw-bg-opacity));\n}\n.bg-white {\n  --tw-bg-opacity: 1;\n  background-color: rgb(255 255 255 / var(--tw-bg-opacity));\n}\n.bg-opacity-50 {\n  --tw-bg-opacity: 0.5;\n}\n.p-1 {\n  padding: 0.25rem;\n}\n.p-2 {\n  padding: 0.5rem;\n}\n.p-2\\.5 {\n  padding: 0.625rem;\n}\n.px-3 {\n  padding-left: 0.75rem;\n  padding-right: 0.75rem;\n}\n.px-4 {\n  padding-left: 1rem;\n  padding-right: 1rem;\n}\n.px-6 {\n  padding-left: 1.5rem;\n  padding-right: 1.5rem;\n}\n.py-1 {\n  padding-top: 0.25rem;\n  padding-bottom: 0.25rem;\n}\n.py-4 {\n  padding-top: 1rem;\n  padding-bottom: 1rem;\n}\n.pb-1 {\n  padding-bottom: 0.25rem;\n}\n.pl-2 {\n  padding-left: 0.5rem;\n}\n.text-center {\n  text-align: center;\n}\n.text-sm {\n  font-size: 0.875rem;\n  line-height: 1.25rem;\n}\n.text-xs {\n  font-size: 0.75rem;\n  line-height: 1rem;\n}\n.uppercase {\n  text-transform: uppercase;\n}\n.text-black {\n  --tw-text-opacity: 1;\n  color: rgb(0 0 0 / var(--tw-text-opacity));\n}\n.text-blue-700 {\n  --tw-text-opacity: 1;\n  color: rgb(29 78 216 / var(--tw-text-opacity));\n}\n.text-gray-500 {\n  --tw-text-opacity: 1;\n  color: rgb(107 114 128 / var(--tw-text-opacity));\n}\n.text-gray-900 {\n  --tw-text-opacity: 1;\n  color: rgb(17 24 39 / var(--tw-text-opacity));\n}\n.text-white {\n  --tw-text-opacity: 1;\n  color: rgb(255 255 255 / var(--tw-text-opacity));\n}\n.line-through {\n  text-decoration-line: line-through;\n}\n.opacity-50 {\n  opacity: 0.5;\n}\n.transition {\n  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;\n  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;\n  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n.transition-all {\n  transition-property: all;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n}\n.duration-300 {\n  transition-duration: 300ms;\n}\n.ease-in-out {\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n}\n.hover\\:bg-blue-700:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(29 78 216 / var(--tw-bg-opacity));\n}\n.hover\\:bg-red-700:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgb(185 28 28 / var(--tw-bg-opacity));\n}\n.hover\\:opacity-10:hover {\n  opacity: 0.1;\n}\n.hover\\:shadow-md:hover {\n  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);\n  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n.focus\\:border-blue-500:focus {\n  --tw-border-opacity: 1;\n  border-color: rgb(59 130 246 / var(--tw-border-opacity));\n}\n.focus\\:ring-blue-500:focus {\n  --tw-ring-opacity: 1;\n  --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity));\n}\n@media (prefers-color-scheme: dark) {\n\n  .dark\\:border-gray-600 {\n    --tw-border-opacity: 1;\n    border-color: rgb(75 85 99 / var(--tw-border-opacity));\n  }\n\n  .dark\\:bg-gray-700 {\n    --tw-bg-opacity: 1;\n    background-color: rgb(55 65 81 / var(--tw-bg-opacity));\n  }\n\n  .dark\\:text-white {\n    --tw-text-opacity: 1;\n    color: rgb(255 255 255 / var(--tw-text-opacity));\n  }\n\n  .dark\\:placeholder-gray-400::-moz-placeholder {\n    --tw-placeholder-opacity: 1;\n    color: rgb(156 163 175 / var(--tw-placeholder-opacity));\n  }\n\n  .dark\\:placeholder-gray-400::placeholder {\n    --tw-placeholder-opacity: 1;\n    color: rgb(156 163 175 / var(--tw-placeholder-opacity));\n  }\n\n  .dark\\:focus\\:border-blue-500:focus {\n    --tw-border-opacity: 1;\n    border-color: rgb(59 130 246 / var(--tw-border-opacity));\n  }\n\n  .dark\\:focus\\:ring-blue-500:focus {\n    --tw-ring-opacity: 1;\n    --tw-ring-color: rgb(59 130 246 / var(--tw-ring-opacity));\n  }\n}";
 styleInject(css_248z);
 
-const ColorLegendItem = ({ color, selected, screenshot, text, onClick, lightMode, }) => {
+const ColorLegendItem = ({ color, selected, screenshot, text, onClick, onDoubleClick, lightMode, }) => {
     const textColor = lightMode ? "black" : "white";
     return (React__default.createElement("div", null,
-        React__default.createElement("div", { onClick: onClick, className: "flex gap-x-2 min-h-custom selection:border-r-1 items-center cursor-pointer" },
+        React__default.createElement("div", { onClick: onClick, onDoubleClick: onDoubleClick, className: "flex gap-x-2 min-h-custom selection:border-r-1 items-center cursor-pointer" },
             React__default.createElement("div", { className: `w-4 h-4 rounded-full`, style: {
                     backgroundColor: color,
                 } }),
@@ -141,7 +141,7 @@ const EditColorModal = ({ isOpen, onClose, colorList, onSave, colorParamList, ex
                 React__default.createElement("button", { onClick: handleSave, className: "bg-blue-500 text-white p-2 rounded hover:bg-blue-700 transition duration-300 ease-in-out mr-2" }, "Save"),
                 React__default.createElement("button", { onClick: handleCancel, className: "bg-red-500 text-white p-2 rounded hover:bg-red-700 transition duration-300 ease-in-out" }, "Cancel"))))) : null;
 };
-const ColorLegend = ({ screenshot, colorKey, keyList, setListParam, colorParamList, colorParam, setColorParam, colorList, setCustomFeatures, customizations, lightMode, }) => {
+const ColorLegend = ({ screenshot, colorKey, keyList, setListParam, colorParamList, colorParam, setColorParam, colorList, setCustomFeatures, customizations, lightMode, onDoubleClick, }) => {
     const [closed, setClosed] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const findCustomization = (featureName) => {
@@ -193,7 +193,7 @@ const ColorLegend = ({ screenshot, colorKey, keyList, setListParam, colorParamLi
                 // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
                 const displayName = (customization === null || customization === void 0 ? void 0 : customization.customName) || value;
                 return (React__default.createElement("li", { key: value },
-                    React__default.createElement(ColorLegendItem, { color: value === "NaN" ? "#000000" : displayColor, text: displayName, screenshot: screenshot, selected: colorParam === "" || value === colorParam, onClick: () => {
+                    React__default.createElement(ColorLegendItem, { onDoubleClick: () => onDoubleClick && onDoubleClick(value), color: value === "NaN" ? "#000000" : displayColor, text: displayName, screenshot: screenshot, selected: colorParam === "" || value === colorParam, onClick: () => {
                             if (value === colorParam) {
                                 setColorParam("");
                             }
@@ -388,19 +388,19 @@ function toArray(arrayLike) {
     }
     return arr;
 }
-function px$1(node, styleProperty) {
+function px(node, styleProperty) {
     const win = node.ownerDocument.defaultView || window;
     const val = win.getComputedStyle(node).getPropertyValue(styleProperty);
     return val ? parseFloat(val.replace('px', '')) : 0;
 }
 function getNodeWidth(node) {
-    const leftBorder = px$1(node, 'border-left-width');
-    const rightBorder = px$1(node, 'border-right-width');
+    const leftBorder = px(node, 'border-left-width');
+    const rightBorder = px(node, 'border-right-width');
     return node.clientWidth + leftBorder + rightBorder;
 }
 function getNodeHeight(node) {
-    const topBorder = px$1(node, 'border-top-width');
-    const bottomBorder = px$1(node, 'border-bottom-width');
+    const topBorder = px(node, 'border-top-width');
+    const bottomBorder = px(node, 'border-bottom-width');
     return node.clientHeight + topBorder + bottomBorder;
 }
 function getImageSize(targetNode, options = {}) {
@@ -1174,6 +1174,10 @@ async function toPng(node, options = {}) {
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
+function getDefaultExportFromCjs (x) {
+	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+}
+
 var PropagateLoader$1 = {};
 
 var unitConverter = {};
@@ -1355,6 +1359,19 @@ function PropagateLoader(_a) {
 }
 var _default = PropagateLoader$1.default = PropagateLoader;
 
+var stats_min = {exports: {}};
+
+(function (module, exports) {
+	// stats.js - http://github.com/mrdoob/stats.js
+	(function(f,e){module.exports=e();})(commonjsGlobal,function(){var f=function(){function e(a){c.appendChild(a.dom);return a}function u(a){for(var d=0;d<c.children.length;d++)c.children[d].style.display=d===a?"block":"none";l=a;}var l=0,c=document.createElement("div");c.style.cssText="position:fixed;top:0;left:0;cursor:pointer;opacity:0.9;z-index:10000";c.addEventListener("click",function(a){a.preventDefault();
+	u(++l%c.children.length);},!1);var k=(performance||Date).now(),g=k,a=0,r=e(new f.Panel("FPS","#0ff","#002")),h=e(new f.Panel("MS","#0f0","#020"));if(self.performance&&self.performance.memory)var t=e(new f.Panel("MB","#f08","#201"));u(0);return {REVISION:16,dom:c,addPanel:e,showPanel:u,begin:function(){k=(performance||Date).now();},end:function(){a++;var c=(performance||Date).now();h.update(c-k,200);if(c>g+1E3&&(r.update(1E3*a/(c-g),100),g=c,a=0,t)){var d=performance.memory;t.update(d.usedJSHeapSize/
+	1048576,d.jsHeapSizeLimit/1048576);}return c},update:function(){k=this.end();},domElement:c,setMode:u}};f.Panel=function(e,f,l){var c=Infinity,k=0,g=Math.round,a=g(window.devicePixelRatio||1),r=80*a,h=48*a,t=3*a,v=2*a,d=3*a,m=15*a,n=74*a,p=30*a,q=document.createElement("canvas");q.width=r;q.height=h;q.style.cssText="width:80px;height:48px";var b=q.getContext("2d");b.font="bold "+9*a+"px Helvetica,Arial,sans-serif";b.textBaseline="top";b.fillStyle=l;b.fillRect(0,0,r,h);b.fillStyle=f;b.fillText(e,t,v);
+	b.fillRect(d,m,n,p);b.fillStyle=l;b.globalAlpha=.9;b.fillRect(d,m,n,p);return {dom:q,update:function(h,w){c=Math.min(c,h);k=Math.max(k,h);b.fillStyle=l;b.globalAlpha=1;b.fillRect(0,0,r,m);b.fillStyle=f;b.fillText(g(h)+" "+e+" ("+g(c)+"-"+g(k)+")",t,v);b.drawImage(q,d+a,m,n-a,p,d,m,n-a,p);b.fillRect(d+n-a,m,a,p);b.fillStyle=l;b.globalAlpha=.9;b.fillRect(d+n-a,m,a,g((1-h/w)*p));}}};return f}); 
+} (stats_min));
+
+var stats_minExports = stats_min.exports;
+var Stats = /*@__PURE__*/getDefaultExportFromCjs(stats_minExports);
+
 /**
  * @license
  * Copyright 2010-2023 Three.js Authors
@@ -1510,6 +1527,7 @@ const GreaterEqualCompare = 518;
 const AlwaysCompare = 519;
 
 const StaticDrawUsage = 35044;
+const DynamicDrawUsage = 35048;
 const GLSL3 = '300 es';
 
 const _SRGBAFormat = 1035; // fallback for WebGL 1
@@ -12238,11 +12256,11 @@ const _uvA$1 = /*@__PURE__*/ new Vector2();
 const _uvB$1 = /*@__PURE__*/ new Vector2();
 const _uvC$1 = /*@__PURE__*/ new Vector2();
 
-const _normalA = /*@__PURE__*/ new Vector3();
-const _normalB = /*@__PURE__*/ new Vector3();
-const _normalC = /*@__PURE__*/ new Vector3();
+const _normalA$1 = /*@__PURE__*/ new Vector3();
+const _normalB$1 = /*@__PURE__*/ new Vector3();
+const _normalC$1 = /*@__PURE__*/ new Vector3();
 
-const _intersectionPoint = /*@__PURE__*/ new Vector3();
+const _intersectionPoint$1 = /*@__PURE__*/ new Vector3();
 const _intersectionPointWorld = /*@__PURE__*/ new Vector3();
 
 class Mesh extends Object3D {
@@ -12543,7 +12561,7 @@ class Mesh extends Object3D {
 
 }
 
-function checkIntersection( object, material, raycaster, ray, pA, pB, pC, point ) {
+function checkIntersection$1( object, material, raycaster, ray, pA, pB, pC, point ) {
 
 	let intersect;
 
@@ -12580,7 +12598,7 @@ function checkGeometryIntersection( object, material, raycaster, ray, uv, uv1, n
 	object.getVertexPosition( b, _vB$1 );
 	object.getVertexPosition( c, _vC$1 );
 
-	const intersection = checkIntersection( object, material, raycaster, ray, _vA$1, _vB$1, _vC$1, _intersectionPoint );
+	const intersection = checkIntersection$1( object, material, raycaster, ray, _vA$1, _vB$1, _vC$1, _intersectionPoint$1 );
 
 	if ( intersection ) {
 
@@ -12590,7 +12608,7 @@ function checkGeometryIntersection( object, material, raycaster, ray, uv, uv1, n
 			_uvB$1.fromBufferAttribute( uv, b );
 			_uvC$1.fromBufferAttribute( uv, c );
 
-			intersection.uv = Triangle.getInterpolation( _intersectionPoint, _vA$1, _vB$1, _vC$1, _uvA$1, _uvB$1, _uvC$1, new Vector2() );
+			intersection.uv = Triangle.getInterpolation( _intersectionPoint$1, _vA$1, _vB$1, _vC$1, _uvA$1, _uvB$1, _uvC$1, new Vector2() );
 
 		}
 
@@ -12600,18 +12618,18 @@ function checkGeometryIntersection( object, material, raycaster, ray, uv, uv1, n
 			_uvB$1.fromBufferAttribute( uv1, b );
 			_uvC$1.fromBufferAttribute( uv1, c );
 
-			intersection.uv1 = Triangle.getInterpolation( _intersectionPoint, _vA$1, _vB$1, _vC$1, _uvA$1, _uvB$1, _uvC$1, new Vector2() );
+			intersection.uv1 = Triangle.getInterpolation( _intersectionPoint$1, _vA$1, _vB$1, _vC$1, _uvA$1, _uvB$1, _uvC$1, new Vector2() );
 			intersection.uv2 = intersection.uv1; // @deprecated, r152
 
 		}
 
 		if ( normal ) {
 
-			_normalA.fromBufferAttribute( normal, a );
-			_normalB.fromBufferAttribute( normal, b );
-			_normalC.fromBufferAttribute( normal, c );
+			_normalA$1.fromBufferAttribute( normal, a );
+			_normalB$1.fromBufferAttribute( normal, b );
+			_normalC$1.fromBufferAttribute( normal, c );
 
-			intersection.normal = Triangle.getInterpolation( _intersectionPoint, _vA$1, _vB$1, _vC$1, _normalA, _normalB, _normalC, new Vector3() );
+			intersection.normal = Triangle.getInterpolation( _intersectionPoint$1, _vA$1, _vB$1, _vC$1, _normalA$1, _normalB$1, _normalC$1, new Vector3() );
 
 			if ( intersection.normal.dot( ray.direction ) > 0 ) {
 
@@ -31299,6 +31317,249 @@ class Scene extends Object3D {
 
 }
 
+class InstancedBufferAttribute extends BufferAttribute {
+
+	constructor( array, itemSize, normalized, meshPerAttribute = 1 ) {
+
+		super( array, itemSize, normalized );
+
+		this.isInstancedBufferAttribute = true;
+
+		this.meshPerAttribute = meshPerAttribute;
+
+	}
+
+	copy( source ) {
+
+		super.copy( source );
+
+		this.meshPerAttribute = source.meshPerAttribute;
+
+		return this;
+
+	}
+
+	toJSON() {
+
+		const data = super.toJSON();
+
+		data.meshPerAttribute = this.meshPerAttribute;
+
+		data.isInstancedBufferAttribute = true;
+
+		return data;
+
+	}
+
+}
+
+const _instanceLocalMatrix = /*@__PURE__*/ new Matrix4();
+const _instanceWorldMatrix = /*@__PURE__*/ new Matrix4();
+
+const _instanceIntersects = [];
+
+const _box3 = /*@__PURE__*/ new Box3();
+const _identity = /*@__PURE__*/ new Matrix4();
+const _mesh = /*@__PURE__*/ new Mesh();
+const _sphere$2 = /*@__PURE__*/ new Sphere();
+
+class InstancedMesh extends Mesh {
+
+	constructor( geometry, material, count ) {
+
+		super( geometry, material );
+
+		this.isInstancedMesh = true;
+
+		this.instanceMatrix = new InstancedBufferAttribute( new Float32Array( count * 16 ), 16 );
+		this.instanceColor = null;
+
+		this.count = count;
+
+		this.boundingBox = null;
+		this.boundingSphere = null;
+
+		for ( let i = 0; i < count; i ++ ) {
+
+			this.setMatrixAt( i, _identity );
+
+		}
+
+	}
+
+	computeBoundingBox() {
+
+		const geometry = this.geometry;
+		const count = this.count;
+
+		if ( this.boundingBox === null ) {
+
+			this.boundingBox = new Box3();
+
+		}
+
+		if ( geometry.boundingBox === null ) {
+
+			geometry.computeBoundingBox();
+
+		}
+
+		this.boundingBox.makeEmpty();
+
+		for ( let i = 0; i < count; i ++ ) {
+
+			this.getMatrixAt( i, _instanceLocalMatrix );
+
+			_box3.copy( geometry.boundingBox ).applyMatrix4( _instanceLocalMatrix );
+
+			this.boundingBox.union( _box3 );
+
+		}
+
+	}
+
+	computeBoundingSphere() {
+
+		const geometry = this.geometry;
+		const count = this.count;
+
+		if ( this.boundingSphere === null ) {
+
+			this.boundingSphere = new Sphere();
+
+		}
+
+		if ( geometry.boundingSphere === null ) {
+
+			geometry.computeBoundingSphere();
+
+		}
+
+		this.boundingSphere.makeEmpty();
+
+		for ( let i = 0; i < count; i ++ ) {
+
+			this.getMatrixAt( i, _instanceLocalMatrix );
+
+			_sphere$2.copy( geometry.boundingSphere ).applyMatrix4( _instanceLocalMatrix );
+
+			this.boundingSphere.union( _sphere$2 );
+
+		}
+
+	}
+
+	copy( source, recursive ) {
+
+		super.copy( source, recursive );
+
+		this.instanceMatrix.copy( source.instanceMatrix );
+
+		if ( source.instanceColor !== null ) this.instanceColor = source.instanceColor.clone();
+
+		this.count = source.count;
+
+		if ( source.boundingBox !== null ) this.boundingBox = source.boundingBox.clone();
+		if ( source.boundingSphere !== null ) this.boundingSphere = source.boundingSphere.clone();
+
+		return this;
+
+	}
+
+	getColorAt( index, color ) {
+
+		color.fromArray( this.instanceColor.array, index * 3 );
+
+	}
+
+	getMatrixAt( index, matrix ) {
+
+		matrix.fromArray( this.instanceMatrix.array, index * 16 );
+
+	}
+
+	raycast( raycaster, intersects ) {
+
+		const matrixWorld = this.matrixWorld;
+		const raycastTimes = this.count;
+
+		_mesh.geometry = this.geometry;
+		_mesh.material = this.material;
+
+		if ( _mesh.material === undefined ) return;
+
+		// test with bounding sphere first
+
+		if ( this.boundingSphere === null ) this.computeBoundingSphere();
+
+		_sphere$2.copy( this.boundingSphere );
+		_sphere$2.applyMatrix4( matrixWorld );
+
+		if ( raycaster.ray.intersectsSphere( _sphere$2 ) === false ) return;
+
+		// now test each instance
+
+		for ( let instanceId = 0; instanceId < raycastTimes; instanceId ++ ) {
+
+			// calculate the world matrix for each instance
+
+			this.getMatrixAt( instanceId, _instanceLocalMatrix );
+
+			_instanceWorldMatrix.multiplyMatrices( matrixWorld, _instanceLocalMatrix );
+
+			// the mesh represents this single instance
+
+			_mesh.matrixWorld = _instanceWorldMatrix;
+
+			_mesh.raycast( raycaster, _instanceIntersects );
+
+			// process the result of raycast
+
+			for ( let i = 0, l = _instanceIntersects.length; i < l; i ++ ) {
+
+				const intersect = _instanceIntersects[ i ];
+				intersect.instanceId = instanceId;
+				intersect.object = this;
+				intersects.push( intersect );
+
+			}
+
+			_instanceIntersects.length = 0;
+
+		}
+
+	}
+
+	setColorAt( index, color ) {
+
+		if ( this.instanceColor === null ) {
+
+			this.instanceColor = new InstancedBufferAttribute( new Float32Array( this.instanceMatrix.count * 3 ), 3 );
+
+		}
+
+		color.toArray( this.instanceColor.array, index * 3 );
+
+	}
+
+	setMatrixAt( index, matrix ) {
+
+		matrix.toArray( this.instanceMatrix.array, index * 16 );
+
+	}
+
+	updateMorphTargets() {
+
+	}
+
+	dispose() {
+
+		this.dispatchEvent( { type: 'dispose' } );
+
+	}
+
+}
+
 class LineBasicMaterial extends Material {
 
 	constructor( parameters ) {
@@ -31606,2881 +31867,6 @@ class LineSegments extends Line {
 
 }
 
-/**
- * Extensible curve object.
- *
- * Some common of curve methods:
- * .getPoint( t, optionalTarget ), .getTangent( t, optionalTarget )
- * .getPointAt( u, optionalTarget ), .getTangentAt( u, optionalTarget )
- * .getPoints(), .getSpacedPoints()
- * .getLength()
- * .updateArcLengths()
- *
- * This following curves inherit from THREE.Curve:
- *
- * -- 2D curves --
- * THREE.ArcCurve
- * THREE.CubicBezierCurve
- * THREE.EllipseCurve
- * THREE.LineCurve
- * THREE.QuadraticBezierCurve
- * THREE.SplineCurve
- *
- * -- 3D curves --
- * THREE.CatmullRomCurve3
- * THREE.CubicBezierCurve3
- * THREE.LineCurve3
- * THREE.QuadraticBezierCurve3
- *
- * A series of curves can be represented as a THREE.CurvePath.
- *
- **/
-
-class Curve {
-
-	constructor() {
-
-		this.type = 'Curve';
-
-		this.arcLengthDivisions = 200;
-
-	}
-
-	// Virtual base class method to overwrite and implement in subclasses
-	//	- t [0 .. 1]
-
-	getPoint( /* t, optionalTarget */ ) {
-
-		console.warn( 'THREE.Curve: .getPoint() not implemented.' );
-		return null;
-
-	}
-
-	// Get point at relative position in curve according to arc length
-	// - u [0 .. 1]
-
-	getPointAt( u, optionalTarget ) {
-
-		const t = this.getUtoTmapping( u );
-		return this.getPoint( t, optionalTarget );
-
-	}
-
-	// Get sequence of points using getPoint( t )
-
-	getPoints( divisions = 5 ) {
-
-		const points = [];
-
-		for ( let d = 0; d <= divisions; d ++ ) {
-
-			points.push( this.getPoint( d / divisions ) );
-
-		}
-
-		return points;
-
-	}
-
-	// Get sequence of points using getPointAt( u )
-
-	getSpacedPoints( divisions = 5 ) {
-
-		const points = [];
-
-		for ( let d = 0; d <= divisions; d ++ ) {
-
-			points.push( this.getPointAt( d / divisions ) );
-
-		}
-
-		return points;
-
-	}
-
-	// Get total curve arc length
-
-	getLength() {
-
-		const lengths = this.getLengths();
-		return lengths[ lengths.length - 1 ];
-
-	}
-
-	// Get list of cumulative segment lengths
-
-	getLengths( divisions = this.arcLengthDivisions ) {
-
-		if ( this.cacheArcLengths &&
-			( this.cacheArcLengths.length === divisions + 1 ) &&
-			! this.needsUpdate ) {
-
-			return this.cacheArcLengths;
-
-		}
-
-		this.needsUpdate = false;
-
-		const cache = [];
-		let current, last = this.getPoint( 0 );
-		let sum = 0;
-
-		cache.push( 0 );
-
-		for ( let p = 1; p <= divisions; p ++ ) {
-
-			current = this.getPoint( p / divisions );
-			sum += current.distanceTo( last );
-			cache.push( sum );
-			last = current;
-
-		}
-
-		this.cacheArcLengths = cache;
-
-		return cache; // { sums: cache, sum: sum }; Sum is in the last element.
-
-	}
-
-	updateArcLengths() {
-
-		this.needsUpdate = true;
-		this.getLengths();
-
-	}
-
-	// Given u ( 0 .. 1 ), get a t to find p. This gives you points which are equidistant
-
-	getUtoTmapping( u, distance ) {
-
-		const arcLengths = this.getLengths();
-
-		let i = 0;
-		const il = arcLengths.length;
-
-		let targetArcLength; // The targeted u distance value to get
-
-		if ( distance ) {
-
-			targetArcLength = distance;
-
-		} else {
-
-			targetArcLength = u * arcLengths[ il - 1 ];
-
-		}
-
-		// binary search for the index with largest value smaller than target u distance
-
-		let low = 0, high = il - 1, comparison;
-
-		while ( low <= high ) {
-
-			i = Math.floor( low + ( high - low ) / 2 ); // less likely to overflow, though probably not issue here, JS doesn't really have integers, all numbers are floats
-
-			comparison = arcLengths[ i ] - targetArcLength;
-
-			if ( comparison < 0 ) {
-
-				low = i + 1;
-
-			} else if ( comparison > 0 ) {
-
-				high = i - 1;
-
-			} else {
-
-				high = i;
-				break;
-
-				// DONE
-
-			}
-
-		}
-
-		i = high;
-
-		if ( arcLengths[ i ] === targetArcLength ) {
-
-			return i / ( il - 1 );
-
-		}
-
-		// we could get finer grain at lengths, or use simple interpolation between two points
-
-		const lengthBefore = arcLengths[ i ];
-		const lengthAfter = arcLengths[ i + 1 ];
-
-		const segmentLength = lengthAfter - lengthBefore;
-
-		// determine where we are between the 'before' and 'after' points
-
-		const segmentFraction = ( targetArcLength - lengthBefore ) / segmentLength;
-
-		// add that fractional amount to t
-
-		const t = ( i + segmentFraction ) / ( il - 1 );
-
-		return t;
-
-	}
-
-	// Returns a unit vector tangent at t
-	// In case any sub curve does not implement its tangent derivation,
-	// 2 points a small delta apart will be used to find its gradient
-	// which seems to give a reasonable approximation
-
-	getTangent( t, optionalTarget ) {
-
-		const delta = 0.0001;
-		let t1 = t - delta;
-		let t2 = t + delta;
-
-		// Capping in case of danger
-
-		if ( t1 < 0 ) t1 = 0;
-		if ( t2 > 1 ) t2 = 1;
-
-		const pt1 = this.getPoint( t1 );
-		const pt2 = this.getPoint( t2 );
-
-		const tangent = optionalTarget || ( ( pt1.isVector2 ) ? new Vector2() : new Vector3() );
-
-		tangent.copy( pt2 ).sub( pt1 ).normalize();
-
-		return tangent;
-
-	}
-
-	getTangentAt( u, optionalTarget ) {
-
-		const t = this.getUtoTmapping( u );
-		return this.getTangent( t, optionalTarget );
-
-	}
-
-	computeFrenetFrames( segments, closed ) {
-
-		// see http://www.cs.indiana.edu/pub/techreports/TR425.pdf
-
-		const normal = new Vector3();
-
-		const tangents = [];
-		const normals = [];
-		const binormals = [];
-
-		const vec = new Vector3();
-		const mat = new Matrix4();
-
-		// compute the tangent vectors for each segment on the curve
-
-		for ( let i = 0; i <= segments; i ++ ) {
-
-			const u = i / segments;
-
-			tangents[ i ] = this.getTangentAt( u, new Vector3() );
-
-		}
-
-		// select an initial normal vector perpendicular to the first tangent vector,
-		// and in the direction of the minimum tangent xyz component
-
-		normals[ 0 ] = new Vector3();
-		binormals[ 0 ] = new Vector3();
-		let min = Number.MAX_VALUE;
-		const tx = Math.abs( tangents[ 0 ].x );
-		const ty = Math.abs( tangents[ 0 ].y );
-		const tz = Math.abs( tangents[ 0 ].z );
-
-		if ( tx <= min ) {
-
-			min = tx;
-			normal.set( 1, 0, 0 );
-
-		}
-
-		if ( ty <= min ) {
-
-			min = ty;
-			normal.set( 0, 1, 0 );
-
-		}
-
-		if ( tz <= min ) {
-
-			normal.set( 0, 0, 1 );
-
-		}
-
-		vec.crossVectors( tangents[ 0 ], normal ).normalize();
-
-		normals[ 0 ].crossVectors( tangents[ 0 ], vec );
-		binormals[ 0 ].crossVectors( tangents[ 0 ], normals[ 0 ] );
-
-
-		// compute the slowly-varying normal and binormal vectors for each segment on the curve
-
-		for ( let i = 1; i <= segments; i ++ ) {
-
-			normals[ i ] = normals[ i - 1 ].clone();
-
-			binormals[ i ] = binormals[ i - 1 ].clone();
-
-			vec.crossVectors( tangents[ i - 1 ], tangents[ i ] );
-
-			if ( vec.length() > Number.EPSILON ) {
-
-				vec.normalize();
-
-				const theta = Math.acos( clamp( tangents[ i - 1 ].dot( tangents[ i ] ), - 1, 1 ) ); // clamp for floating pt errors
-
-				normals[ i ].applyMatrix4( mat.makeRotationAxis( vec, theta ) );
-
-			}
-
-			binormals[ i ].crossVectors( tangents[ i ], normals[ i ] );
-
-		}
-
-		// if the curve is closed, postprocess the vectors so the first and last normal vectors are the same
-
-		if ( closed === true ) {
-
-			let theta = Math.acos( clamp( normals[ 0 ].dot( normals[ segments ] ), - 1, 1 ) );
-			theta /= segments;
-
-			if ( tangents[ 0 ].dot( vec.crossVectors( normals[ 0 ], normals[ segments ] ) ) > 0 ) {
-
-				theta = - theta;
-
-			}
-
-			for ( let i = 1; i <= segments; i ++ ) {
-
-				// twist a little...
-				normals[ i ].applyMatrix4( mat.makeRotationAxis( tangents[ i ], theta * i ) );
-				binormals[ i ].crossVectors( tangents[ i ], normals[ i ] );
-
-			}
-
-		}
-
-		return {
-			tangents: tangents,
-			normals: normals,
-			binormals: binormals
-		};
-
-	}
-
-	clone() {
-
-		return new this.constructor().copy( this );
-
-	}
-
-	copy( source ) {
-
-		this.arcLengthDivisions = source.arcLengthDivisions;
-
-		return this;
-
-	}
-
-	toJSON() {
-
-		const data = {
-			metadata: {
-				version: 4.6,
-				type: 'Curve',
-				generator: 'Curve.toJSON'
-			}
-		};
-
-		data.arcLengthDivisions = this.arcLengthDivisions;
-		data.type = this.type;
-
-		return data;
-
-	}
-
-	fromJSON( json ) {
-
-		this.arcLengthDivisions = json.arcLengthDivisions;
-
-		return this;
-
-	}
-
-}
-
-class EllipseCurve extends Curve {
-
-	constructor( aX = 0, aY = 0, xRadius = 1, yRadius = 1, aStartAngle = 0, aEndAngle = Math.PI * 2, aClockwise = false, aRotation = 0 ) {
-
-		super();
-
-		this.isEllipseCurve = true;
-
-		this.type = 'EllipseCurve';
-
-		this.aX = aX;
-		this.aY = aY;
-
-		this.xRadius = xRadius;
-		this.yRadius = yRadius;
-
-		this.aStartAngle = aStartAngle;
-		this.aEndAngle = aEndAngle;
-
-		this.aClockwise = aClockwise;
-
-		this.aRotation = aRotation;
-
-	}
-
-	getPoint( t, optionalTarget ) {
-
-		const point = optionalTarget || new Vector2();
-
-		const twoPi = Math.PI * 2;
-		let deltaAngle = this.aEndAngle - this.aStartAngle;
-		const samePoints = Math.abs( deltaAngle ) < Number.EPSILON;
-
-		// ensures that deltaAngle is 0 .. 2 PI
-		while ( deltaAngle < 0 ) deltaAngle += twoPi;
-		while ( deltaAngle > twoPi ) deltaAngle -= twoPi;
-
-		if ( deltaAngle < Number.EPSILON ) {
-
-			if ( samePoints ) {
-
-				deltaAngle = 0;
-
-			} else {
-
-				deltaAngle = twoPi;
-
-			}
-
-		}
-
-		if ( this.aClockwise === true && ! samePoints ) {
-
-			if ( deltaAngle === twoPi ) {
-
-				deltaAngle = - twoPi;
-
-			} else {
-
-				deltaAngle = deltaAngle - twoPi;
-
-			}
-
-		}
-
-		const angle = this.aStartAngle + t * deltaAngle;
-		let x = this.aX + this.xRadius * Math.cos( angle );
-		let y = this.aY + this.yRadius * Math.sin( angle );
-
-		if ( this.aRotation !== 0 ) {
-
-			const cos = Math.cos( this.aRotation );
-			const sin = Math.sin( this.aRotation );
-
-			const tx = x - this.aX;
-			const ty = y - this.aY;
-
-			// Rotate the point about the center of the ellipse.
-			x = tx * cos - ty * sin + this.aX;
-			y = tx * sin + ty * cos + this.aY;
-
-		}
-
-		return point.set( x, y );
-
-	}
-
-	copy( source ) {
-
-		super.copy( source );
-
-		this.aX = source.aX;
-		this.aY = source.aY;
-
-		this.xRadius = source.xRadius;
-		this.yRadius = source.yRadius;
-
-		this.aStartAngle = source.aStartAngle;
-		this.aEndAngle = source.aEndAngle;
-
-		this.aClockwise = source.aClockwise;
-
-		this.aRotation = source.aRotation;
-
-		return this;
-
-	}
-
-	toJSON() {
-
-		const data = super.toJSON();
-
-		data.aX = this.aX;
-		data.aY = this.aY;
-
-		data.xRadius = this.xRadius;
-		data.yRadius = this.yRadius;
-
-		data.aStartAngle = this.aStartAngle;
-		data.aEndAngle = this.aEndAngle;
-
-		data.aClockwise = this.aClockwise;
-
-		data.aRotation = this.aRotation;
-
-		return data;
-
-	}
-
-	fromJSON( json ) {
-
-		super.fromJSON( json );
-
-		this.aX = json.aX;
-		this.aY = json.aY;
-
-		this.xRadius = json.xRadius;
-		this.yRadius = json.yRadius;
-
-		this.aStartAngle = json.aStartAngle;
-		this.aEndAngle = json.aEndAngle;
-
-		this.aClockwise = json.aClockwise;
-
-		this.aRotation = json.aRotation;
-
-		return this;
-
-	}
-
-}
-
-class ArcCurve extends EllipseCurve {
-
-	constructor( aX, aY, aRadius, aStartAngle, aEndAngle, aClockwise ) {
-
-		super( aX, aY, aRadius, aRadius, aStartAngle, aEndAngle, aClockwise );
-
-		this.isArcCurve = true;
-
-		this.type = 'ArcCurve';
-
-	}
-
-}
-
-/**
- * Centripetal CatmullRom Curve - which is useful for avoiding
- * cusps and self-intersections in non-uniform catmull rom curves.
- * http://www.cemyuksel.com/research/catmullrom_param/catmullrom.pdf
- *
- * curve.type accepts centripetal(default), chordal and catmullrom
- * curve.tension is used for catmullrom which defaults to 0.5
- */
-
-
-/*
-Based on an optimized c++ solution in
- - http://stackoverflow.com/questions/9489736/catmull-rom-curve-with-no-cusps-and-no-self-intersections/
- - http://ideone.com/NoEbVM
-
-This CubicPoly class could be used for reusing some variables and calculations,
-but for three.js curve use, it could be possible inlined and flatten into a single function call
-which can be placed in CurveUtils.
-*/
-
-function CubicPoly() {
-
-	let c0 = 0, c1 = 0, c2 = 0, c3 = 0;
-
-	/*
-	 * Compute coefficients for a cubic polynomial
-	 *   p(s) = c0 + c1*s + c2*s^2 + c3*s^3
-	 * such that
-	 *   p(0) = x0, p(1) = x1
-	 *  and
-	 *   p'(0) = t0, p'(1) = t1.
-	 */
-	function init( x0, x1, t0, t1 ) {
-
-		c0 = x0;
-		c1 = t0;
-		c2 = - 3 * x0 + 3 * x1 - 2 * t0 - t1;
-		c3 = 2 * x0 - 2 * x1 + t0 + t1;
-
-	}
-
-	return {
-
-		initCatmullRom: function ( x0, x1, x2, x3, tension ) {
-
-			init( x1, x2, tension * ( x2 - x0 ), tension * ( x3 - x1 ) );
-
-		},
-
-		initNonuniformCatmullRom: function ( x0, x1, x2, x3, dt0, dt1, dt2 ) {
-
-			// compute tangents when parameterized in [t1,t2]
-			let t1 = ( x1 - x0 ) / dt0 - ( x2 - x0 ) / ( dt0 + dt1 ) + ( x2 - x1 ) / dt1;
-			let t2 = ( x2 - x1 ) / dt1 - ( x3 - x1 ) / ( dt1 + dt2 ) + ( x3 - x2 ) / dt2;
-
-			// rescale tangents for parametrization in [0,1]
-			t1 *= dt1;
-			t2 *= dt1;
-
-			init( x1, x2, t1, t2 );
-
-		},
-
-		calc: function ( t ) {
-
-			const t2 = t * t;
-			const t3 = t2 * t;
-			return c0 + c1 * t + c2 * t2 + c3 * t3;
-
-		}
-
-	};
-
-}
-
-//
-
-const tmp = /*@__PURE__*/ new Vector3();
-const px = /*@__PURE__*/ new CubicPoly();
-const py = /*@__PURE__*/ new CubicPoly();
-const pz = /*@__PURE__*/ new CubicPoly();
-
-class CatmullRomCurve3 extends Curve {
-
-	constructor( points = [], closed = false, curveType = 'centripetal', tension = 0.5 ) {
-
-		super();
-
-		this.isCatmullRomCurve3 = true;
-
-		this.type = 'CatmullRomCurve3';
-
-		this.points = points;
-		this.closed = closed;
-		this.curveType = curveType;
-		this.tension = tension;
-
-	}
-
-	getPoint( t, optionalTarget = new Vector3() ) {
-
-		const point = optionalTarget;
-
-		const points = this.points;
-		const l = points.length;
-
-		const p = ( l - ( this.closed ? 0 : 1 ) ) * t;
-		let intPoint = Math.floor( p );
-		let weight = p - intPoint;
-
-		if ( this.closed ) {
-
-			intPoint += intPoint > 0 ? 0 : ( Math.floor( Math.abs( intPoint ) / l ) + 1 ) * l;
-
-		} else if ( weight === 0 && intPoint === l - 1 ) {
-
-			intPoint = l - 2;
-			weight = 1;
-
-		}
-
-		let p0, p3; // 4 points (p1 & p2 defined below)
-
-		if ( this.closed || intPoint > 0 ) {
-
-			p0 = points[ ( intPoint - 1 ) % l ];
-
-		} else {
-
-			// extrapolate first point
-			tmp.subVectors( points[ 0 ], points[ 1 ] ).add( points[ 0 ] );
-			p0 = tmp;
-
-		}
-
-		const p1 = points[ intPoint % l ];
-		const p2 = points[ ( intPoint + 1 ) % l ];
-
-		if ( this.closed || intPoint + 2 < l ) {
-
-			p3 = points[ ( intPoint + 2 ) % l ];
-
-		} else {
-
-			// extrapolate last point
-			tmp.subVectors( points[ l - 1 ], points[ l - 2 ] ).add( points[ l - 1 ] );
-			p3 = tmp;
-
-		}
-
-		if ( this.curveType === 'centripetal' || this.curveType === 'chordal' ) {
-
-			// init Centripetal / Chordal Catmull-Rom
-			const pow = this.curveType === 'chordal' ? 0.5 : 0.25;
-			let dt0 = Math.pow( p0.distanceToSquared( p1 ), pow );
-			let dt1 = Math.pow( p1.distanceToSquared( p2 ), pow );
-			let dt2 = Math.pow( p2.distanceToSquared( p3 ), pow );
-
-			// safety check for repeated points
-			if ( dt1 < 1e-4 ) dt1 = 1.0;
-			if ( dt0 < 1e-4 ) dt0 = dt1;
-			if ( dt2 < 1e-4 ) dt2 = dt1;
-
-			px.initNonuniformCatmullRom( p0.x, p1.x, p2.x, p3.x, dt0, dt1, dt2 );
-			py.initNonuniformCatmullRom( p0.y, p1.y, p2.y, p3.y, dt0, dt1, dt2 );
-			pz.initNonuniformCatmullRom( p0.z, p1.z, p2.z, p3.z, dt0, dt1, dt2 );
-
-		} else if ( this.curveType === 'catmullrom' ) {
-
-			px.initCatmullRom( p0.x, p1.x, p2.x, p3.x, this.tension );
-			py.initCatmullRom( p0.y, p1.y, p2.y, p3.y, this.tension );
-			pz.initCatmullRom( p0.z, p1.z, p2.z, p3.z, this.tension );
-
-		}
-
-		point.set(
-			px.calc( weight ),
-			py.calc( weight ),
-			pz.calc( weight )
-		);
-
-		return point;
-
-	}
-
-	copy( source ) {
-
-		super.copy( source );
-
-		this.points = [];
-
-		for ( let i = 0, l = source.points.length; i < l; i ++ ) {
-
-			const point = source.points[ i ];
-
-			this.points.push( point.clone() );
-
-		}
-
-		this.closed = source.closed;
-		this.curveType = source.curveType;
-		this.tension = source.tension;
-
-		return this;
-
-	}
-
-	toJSON() {
-
-		const data = super.toJSON();
-
-		data.points = [];
-
-		for ( let i = 0, l = this.points.length; i < l; i ++ ) {
-
-			const point = this.points[ i ];
-			data.points.push( point.toArray() );
-
-		}
-
-		data.closed = this.closed;
-		data.curveType = this.curveType;
-		data.tension = this.tension;
-
-		return data;
-
-	}
-
-	fromJSON( json ) {
-
-		super.fromJSON( json );
-
-		this.points = [];
-
-		for ( let i = 0, l = json.points.length; i < l; i ++ ) {
-
-			const point = json.points[ i ];
-			this.points.push( new Vector3().fromArray( point ) );
-
-		}
-
-		this.closed = json.closed;
-		this.curveType = json.curveType;
-		this.tension = json.tension;
-
-		return this;
-
-	}
-
-}
-
-/**
- * Bezier Curves formulas obtained from
- * https://en.wikipedia.org/wiki/B%C3%A9zier_curve
- */
-
-function CatmullRom( t, p0, p1, p2, p3 ) {
-
-	const v0 = ( p2 - p0 ) * 0.5;
-	const v1 = ( p3 - p1 ) * 0.5;
-	const t2 = t * t;
-	const t3 = t * t2;
-	return ( 2 * p1 - 2 * p2 + v0 + v1 ) * t3 + ( - 3 * p1 + 3 * p2 - 2 * v0 - v1 ) * t2 + v0 * t + p1;
-
-}
-
-//
-
-function QuadraticBezierP0( t, p ) {
-
-	const k = 1 - t;
-	return k * k * p;
-
-}
-
-function QuadraticBezierP1( t, p ) {
-
-	return 2 * ( 1 - t ) * t * p;
-
-}
-
-function QuadraticBezierP2( t, p ) {
-
-	return t * t * p;
-
-}
-
-function QuadraticBezier( t, p0, p1, p2 ) {
-
-	return QuadraticBezierP0( t, p0 ) + QuadraticBezierP1( t, p1 ) +
-		QuadraticBezierP2( t, p2 );
-
-}
-
-//
-
-function CubicBezierP0( t, p ) {
-
-	const k = 1 - t;
-	return k * k * k * p;
-
-}
-
-function CubicBezierP1( t, p ) {
-
-	const k = 1 - t;
-	return 3 * k * k * t * p;
-
-}
-
-function CubicBezierP2( t, p ) {
-
-	return 3 * ( 1 - t ) * t * t * p;
-
-}
-
-function CubicBezierP3( t, p ) {
-
-	return t * t * t * p;
-
-}
-
-function CubicBezier( t, p0, p1, p2, p3 ) {
-
-	return CubicBezierP0( t, p0 ) + CubicBezierP1( t, p1 ) + CubicBezierP2( t, p2 ) +
-		CubicBezierP3( t, p3 );
-
-}
-
-class CubicBezierCurve extends Curve {
-
-	constructor( v0 = new Vector2(), v1 = new Vector2(), v2 = new Vector2(), v3 = new Vector2() ) {
-
-		super();
-
-		this.isCubicBezierCurve = true;
-
-		this.type = 'CubicBezierCurve';
-
-		this.v0 = v0;
-		this.v1 = v1;
-		this.v2 = v2;
-		this.v3 = v3;
-
-	}
-
-	getPoint( t, optionalTarget = new Vector2() ) {
-
-		const point = optionalTarget;
-
-		const v0 = this.v0, v1 = this.v1, v2 = this.v2, v3 = this.v3;
-
-		point.set(
-			CubicBezier( t, v0.x, v1.x, v2.x, v3.x ),
-			CubicBezier( t, v0.y, v1.y, v2.y, v3.y )
-		);
-
-		return point;
-
-	}
-
-	copy( source ) {
-
-		super.copy( source );
-
-		this.v0.copy( source.v0 );
-		this.v1.copy( source.v1 );
-		this.v2.copy( source.v2 );
-		this.v3.copy( source.v3 );
-
-		return this;
-
-	}
-
-	toJSON() {
-
-		const data = super.toJSON();
-
-		data.v0 = this.v0.toArray();
-		data.v1 = this.v1.toArray();
-		data.v2 = this.v2.toArray();
-		data.v3 = this.v3.toArray();
-
-		return data;
-
-	}
-
-	fromJSON( json ) {
-
-		super.fromJSON( json );
-
-		this.v0.fromArray( json.v0 );
-		this.v1.fromArray( json.v1 );
-		this.v2.fromArray( json.v2 );
-		this.v3.fromArray( json.v3 );
-
-		return this;
-
-	}
-
-}
-
-class CubicBezierCurve3 extends Curve {
-
-	constructor( v0 = new Vector3(), v1 = new Vector3(), v2 = new Vector3(), v3 = new Vector3() ) {
-
-		super();
-
-		this.isCubicBezierCurve3 = true;
-
-		this.type = 'CubicBezierCurve3';
-
-		this.v0 = v0;
-		this.v1 = v1;
-		this.v2 = v2;
-		this.v3 = v3;
-
-	}
-
-	getPoint( t, optionalTarget = new Vector3() ) {
-
-		const point = optionalTarget;
-
-		const v0 = this.v0, v1 = this.v1, v2 = this.v2, v3 = this.v3;
-
-		point.set(
-			CubicBezier( t, v0.x, v1.x, v2.x, v3.x ),
-			CubicBezier( t, v0.y, v1.y, v2.y, v3.y ),
-			CubicBezier( t, v0.z, v1.z, v2.z, v3.z )
-		);
-
-		return point;
-
-	}
-
-	copy( source ) {
-
-		super.copy( source );
-
-		this.v0.copy( source.v0 );
-		this.v1.copy( source.v1 );
-		this.v2.copy( source.v2 );
-		this.v3.copy( source.v3 );
-
-		return this;
-
-	}
-
-	toJSON() {
-
-		const data = super.toJSON();
-
-		data.v0 = this.v0.toArray();
-		data.v1 = this.v1.toArray();
-		data.v2 = this.v2.toArray();
-		data.v3 = this.v3.toArray();
-
-		return data;
-
-	}
-
-	fromJSON( json ) {
-
-		super.fromJSON( json );
-
-		this.v0.fromArray( json.v0 );
-		this.v1.fromArray( json.v1 );
-		this.v2.fromArray( json.v2 );
-		this.v3.fromArray( json.v3 );
-
-		return this;
-
-	}
-
-}
-
-class LineCurve extends Curve {
-
-	constructor( v1 = new Vector2(), v2 = new Vector2() ) {
-
-		super();
-
-		this.isLineCurve = true;
-
-		this.type = 'LineCurve';
-
-		this.v1 = v1;
-		this.v2 = v2;
-
-	}
-
-	getPoint( t, optionalTarget = new Vector2() ) {
-
-		const point = optionalTarget;
-
-		if ( t === 1 ) {
-
-			point.copy( this.v2 );
-
-		} else {
-
-			point.copy( this.v2 ).sub( this.v1 );
-			point.multiplyScalar( t ).add( this.v1 );
-
-		}
-
-		return point;
-
-	}
-
-	// Line curve is linear, so we can overwrite default getPointAt
-	getPointAt( u, optionalTarget ) {
-
-		return this.getPoint( u, optionalTarget );
-
-	}
-
-	getTangent( t, optionalTarget = new Vector2() ) {
-
-		return optionalTarget.subVectors( this.v2, this.v1 ).normalize();
-
-	}
-
-	getTangentAt( u, optionalTarget ) {
-
-		return this.getTangent( u, optionalTarget );
-
-	}
-
-	copy( source ) {
-
-		super.copy( source );
-
-		this.v1.copy( source.v1 );
-		this.v2.copy( source.v2 );
-
-		return this;
-
-	}
-
-	toJSON() {
-
-		const data = super.toJSON();
-
-		data.v1 = this.v1.toArray();
-		data.v2 = this.v2.toArray();
-
-		return data;
-
-	}
-
-	fromJSON( json ) {
-
-		super.fromJSON( json );
-
-		this.v1.fromArray( json.v1 );
-		this.v2.fromArray( json.v2 );
-
-		return this;
-
-	}
-
-}
-
-class LineCurve3 extends Curve {
-
-	constructor( v1 = new Vector3(), v2 = new Vector3() ) {
-
-		super();
-
-		this.isLineCurve3 = true;
-
-		this.type = 'LineCurve3';
-
-		this.v1 = v1;
-		this.v2 = v2;
-
-	}
-	getPoint( t, optionalTarget = new Vector3() ) {
-
-		const point = optionalTarget;
-
-		if ( t === 1 ) {
-
-			point.copy( this.v2 );
-
-		} else {
-
-			point.copy( this.v2 ).sub( this.v1 );
-			point.multiplyScalar( t ).add( this.v1 );
-
-		}
-
-		return point;
-
-	}
-	// Line curve is linear, so we can overwrite default getPointAt
-	getPointAt( u, optionalTarget ) {
-
-		return this.getPoint( u, optionalTarget );
-
-	}
-
-	getTangent( t, optionalTarget = new Vector3() ) {
-
-		return optionalTarget.subVectors( this.v2, this.v1 ).normalize();
-
-	}
-
-	getTangentAt( u, optionalTarget ) {
-
-		return this.getTangent( u, optionalTarget );
-
-	}
-
-	copy( source ) {
-
-		super.copy( source );
-
-		this.v1.copy( source.v1 );
-		this.v2.copy( source.v2 );
-
-		return this;
-
-	}
-	toJSON() {
-
-		const data = super.toJSON();
-
-		data.v1 = this.v1.toArray();
-		data.v2 = this.v2.toArray();
-
-		return data;
-
-	}
-	fromJSON( json ) {
-
-		super.fromJSON( json );
-
-		this.v1.fromArray( json.v1 );
-		this.v2.fromArray( json.v2 );
-
-		return this;
-
-	}
-
-}
-
-class QuadraticBezierCurve extends Curve {
-
-	constructor( v0 = new Vector2(), v1 = new Vector2(), v2 = new Vector2() ) {
-
-		super();
-
-		this.isQuadraticBezierCurve = true;
-
-		this.type = 'QuadraticBezierCurve';
-
-		this.v0 = v0;
-		this.v1 = v1;
-		this.v2 = v2;
-
-	}
-
-	getPoint( t, optionalTarget = new Vector2() ) {
-
-		const point = optionalTarget;
-
-		const v0 = this.v0, v1 = this.v1, v2 = this.v2;
-
-		point.set(
-			QuadraticBezier( t, v0.x, v1.x, v2.x ),
-			QuadraticBezier( t, v0.y, v1.y, v2.y )
-		);
-
-		return point;
-
-	}
-
-	copy( source ) {
-
-		super.copy( source );
-
-		this.v0.copy( source.v0 );
-		this.v1.copy( source.v1 );
-		this.v2.copy( source.v2 );
-
-		return this;
-
-	}
-
-	toJSON() {
-
-		const data = super.toJSON();
-
-		data.v0 = this.v0.toArray();
-		data.v1 = this.v1.toArray();
-		data.v2 = this.v2.toArray();
-
-		return data;
-
-	}
-
-	fromJSON( json ) {
-
-		super.fromJSON( json );
-
-		this.v0.fromArray( json.v0 );
-		this.v1.fromArray( json.v1 );
-		this.v2.fromArray( json.v2 );
-
-		return this;
-
-	}
-
-}
-
-class QuadraticBezierCurve3 extends Curve {
-
-	constructor( v0 = new Vector3(), v1 = new Vector3(), v2 = new Vector3() ) {
-
-		super();
-
-		this.isQuadraticBezierCurve3 = true;
-
-		this.type = 'QuadraticBezierCurve3';
-
-		this.v0 = v0;
-		this.v1 = v1;
-		this.v2 = v2;
-
-	}
-
-	getPoint( t, optionalTarget = new Vector3() ) {
-
-		const point = optionalTarget;
-
-		const v0 = this.v0, v1 = this.v1, v2 = this.v2;
-
-		point.set(
-			QuadraticBezier( t, v0.x, v1.x, v2.x ),
-			QuadraticBezier( t, v0.y, v1.y, v2.y ),
-			QuadraticBezier( t, v0.z, v1.z, v2.z )
-		);
-
-		return point;
-
-	}
-
-	copy( source ) {
-
-		super.copy( source );
-
-		this.v0.copy( source.v0 );
-		this.v1.copy( source.v1 );
-		this.v2.copy( source.v2 );
-
-		return this;
-
-	}
-
-	toJSON() {
-
-		const data = super.toJSON();
-
-		data.v0 = this.v0.toArray();
-		data.v1 = this.v1.toArray();
-		data.v2 = this.v2.toArray();
-
-		return data;
-
-	}
-
-	fromJSON( json ) {
-
-		super.fromJSON( json );
-
-		this.v0.fromArray( json.v0 );
-		this.v1.fromArray( json.v1 );
-		this.v2.fromArray( json.v2 );
-
-		return this;
-
-	}
-
-}
-
-class SplineCurve extends Curve {
-
-	constructor( points = [] ) {
-
-		super();
-
-		this.isSplineCurve = true;
-
-		this.type = 'SplineCurve';
-
-		this.points = points;
-
-	}
-
-	getPoint( t, optionalTarget = new Vector2() ) {
-
-		const point = optionalTarget;
-
-		const points = this.points;
-		const p = ( points.length - 1 ) * t;
-
-		const intPoint = Math.floor( p );
-		const weight = p - intPoint;
-
-		const p0 = points[ intPoint === 0 ? intPoint : intPoint - 1 ];
-		const p1 = points[ intPoint ];
-		const p2 = points[ intPoint > points.length - 2 ? points.length - 1 : intPoint + 1 ];
-		const p3 = points[ intPoint > points.length - 3 ? points.length - 1 : intPoint + 2 ];
-
-		point.set(
-			CatmullRom( weight, p0.x, p1.x, p2.x, p3.x ),
-			CatmullRom( weight, p0.y, p1.y, p2.y, p3.y )
-		);
-
-		return point;
-
-	}
-
-	copy( source ) {
-
-		super.copy( source );
-
-		this.points = [];
-
-		for ( let i = 0, l = source.points.length; i < l; i ++ ) {
-
-			const point = source.points[ i ];
-
-			this.points.push( point.clone() );
-
-		}
-
-		return this;
-
-	}
-
-	toJSON() {
-
-		const data = super.toJSON();
-
-		data.points = [];
-
-		for ( let i = 0, l = this.points.length; i < l; i ++ ) {
-
-			const point = this.points[ i ];
-			data.points.push( point.toArray() );
-
-		}
-
-		return data;
-
-	}
-
-	fromJSON( json ) {
-
-		super.fromJSON( json );
-
-		this.points = [];
-
-		for ( let i = 0, l = json.points.length; i < l; i ++ ) {
-
-			const point = json.points[ i ];
-			this.points.push( new Vector2().fromArray( point ) );
-
-		}
-
-		return this;
-
-	}
-
-}
-
-var Curves = /*#__PURE__*/Object.freeze({
-	__proto__: null,
-	ArcCurve: ArcCurve,
-	CatmullRomCurve3: CatmullRomCurve3,
-	CubicBezierCurve: CubicBezierCurve,
-	CubicBezierCurve3: CubicBezierCurve3,
-	EllipseCurve: EllipseCurve,
-	LineCurve: LineCurve,
-	LineCurve3: LineCurve3,
-	QuadraticBezierCurve: QuadraticBezierCurve,
-	QuadraticBezierCurve3: QuadraticBezierCurve3,
-	SplineCurve: SplineCurve
-});
-
-/**************************************************************
- *	Curved Path - a curve path is simply a array of connected
- *  curves, but retains the api of a curve
- **************************************************************/
-
-class CurvePath extends Curve {
-
-	constructor() {
-
-		super();
-
-		this.type = 'CurvePath';
-
-		this.curves = [];
-		this.autoClose = false; // Automatically closes the path
-
-	}
-
-	add( curve ) {
-
-		this.curves.push( curve );
-
-	}
-
-	closePath() {
-
-		// Add a line curve if start and end of lines are not connected
-		const startPoint = this.curves[ 0 ].getPoint( 0 );
-		const endPoint = this.curves[ this.curves.length - 1 ].getPoint( 1 );
-
-		if ( ! startPoint.equals( endPoint ) ) {
-
-			this.curves.push( new LineCurve( endPoint, startPoint ) );
-
-		}
-
-	}
-
-	// To get accurate point with reference to
-	// entire path distance at time t,
-	// following has to be done:
-
-	// 1. Length of each sub path have to be known
-	// 2. Locate and identify type of curve
-	// 3. Get t for the curve
-	// 4. Return curve.getPointAt(t')
-
-	getPoint( t, optionalTarget ) {
-
-		const d = t * this.getLength();
-		const curveLengths = this.getCurveLengths();
-		let i = 0;
-
-		// To think about boundaries points.
-
-		while ( i < curveLengths.length ) {
-
-			if ( curveLengths[ i ] >= d ) {
-
-				const diff = curveLengths[ i ] - d;
-				const curve = this.curves[ i ];
-
-				const segmentLength = curve.getLength();
-				const u = segmentLength === 0 ? 0 : 1 - diff / segmentLength;
-
-				return curve.getPointAt( u, optionalTarget );
-
-			}
-
-			i ++;
-
-		}
-
-		return null;
-
-		// loop where sum != 0, sum > d , sum+1 <d
-
-	}
-
-	// We cannot use the default THREE.Curve getPoint() with getLength() because in
-	// THREE.Curve, getLength() depends on getPoint() but in THREE.CurvePath
-	// getPoint() depends on getLength
-
-	getLength() {
-
-		const lens = this.getCurveLengths();
-		return lens[ lens.length - 1 ];
-
-	}
-
-	// cacheLengths must be recalculated.
-	updateArcLengths() {
-
-		this.needsUpdate = true;
-		this.cacheLengths = null;
-		this.getCurveLengths();
-
-	}
-
-	// Compute lengths and cache them
-	// We cannot overwrite getLengths() because UtoT mapping uses it.
-
-	getCurveLengths() {
-
-		// We use cache values if curves and cache array are same length
-
-		if ( this.cacheLengths && this.cacheLengths.length === this.curves.length ) {
-
-			return this.cacheLengths;
-
-		}
-
-		// Get length of sub-curve
-		// Push sums into cached array
-
-		const lengths = [];
-		let sums = 0;
-
-		for ( let i = 0, l = this.curves.length; i < l; i ++ ) {
-
-			sums += this.curves[ i ].getLength();
-			lengths.push( sums );
-
-		}
-
-		this.cacheLengths = lengths;
-
-		return lengths;
-
-	}
-
-	getSpacedPoints( divisions = 40 ) {
-
-		const points = [];
-
-		for ( let i = 0; i <= divisions; i ++ ) {
-
-			points.push( this.getPoint( i / divisions ) );
-
-		}
-
-		if ( this.autoClose ) {
-
-			points.push( points[ 0 ] );
-
-		}
-
-		return points;
-
-	}
-
-	getPoints( divisions = 12 ) {
-
-		const points = [];
-		let last;
-
-		for ( let i = 0, curves = this.curves; i < curves.length; i ++ ) {
-
-			const curve = curves[ i ];
-			const resolution = curve.isEllipseCurve ? divisions * 2
-				: ( curve.isLineCurve || curve.isLineCurve3 ) ? 1
-					: curve.isSplineCurve ? divisions * curve.points.length
-						: divisions;
-
-			const pts = curve.getPoints( resolution );
-
-			for ( let j = 0; j < pts.length; j ++ ) {
-
-				const point = pts[ j ];
-
-				if ( last && last.equals( point ) ) continue; // ensures no consecutive points are duplicates
-
-				points.push( point );
-				last = point;
-
-			}
-
-		}
-
-		if ( this.autoClose && points.length > 1 && ! points[ points.length - 1 ].equals( points[ 0 ] ) ) {
-
-			points.push( points[ 0 ] );
-
-		}
-
-		return points;
-
-	}
-
-	copy( source ) {
-
-		super.copy( source );
-
-		this.curves = [];
-
-		for ( let i = 0, l = source.curves.length; i < l; i ++ ) {
-
-			const curve = source.curves[ i ];
-
-			this.curves.push( curve.clone() );
-
-		}
-
-		this.autoClose = source.autoClose;
-
-		return this;
-
-	}
-
-	toJSON() {
-
-		const data = super.toJSON();
-
-		data.autoClose = this.autoClose;
-		data.curves = [];
-
-		for ( let i = 0, l = this.curves.length; i < l; i ++ ) {
-
-			const curve = this.curves[ i ];
-			data.curves.push( curve.toJSON() );
-
-		}
-
-		return data;
-
-	}
-
-	fromJSON( json ) {
-
-		super.fromJSON( json );
-
-		this.autoClose = json.autoClose;
-		this.curves = [];
-
-		for ( let i = 0, l = json.curves.length; i < l; i ++ ) {
-
-			const curve = json.curves[ i ];
-			this.curves.push( new Curves[ curve.type ]().fromJSON( curve ) );
-
-		}
-
-		return this;
-
-	}
-
-}
-
-class Path extends CurvePath {
-
-	constructor( points ) {
-
-		super();
-
-		this.type = 'Path';
-
-		this.currentPoint = new Vector2();
-
-		if ( points ) {
-
-			this.setFromPoints( points );
-
-		}
-
-	}
-
-	setFromPoints( points ) {
-
-		this.moveTo( points[ 0 ].x, points[ 0 ].y );
-
-		for ( let i = 1, l = points.length; i < l; i ++ ) {
-
-			this.lineTo( points[ i ].x, points[ i ].y );
-
-		}
-
-		return this;
-
-	}
-
-	moveTo( x, y ) {
-
-		this.currentPoint.set( x, y ); // TODO consider referencing vectors instead of copying?
-
-		return this;
-
-	}
-
-	lineTo( x, y ) {
-
-		const curve = new LineCurve( this.currentPoint.clone(), new Vector2( x, y ) );
-		this.curves.push( curve );
-
-		this.currentPoint.set( x, y );
-
-		return this;
-
-	}
-
-	quadraticCurveTo( aCPx, aCPy, aX, aY ) {
-
-		const curve = new QuadraticBezierCurve(
-			this.currentPoint.clone(),
-			new Vector2( aCPx, aCPy ),
-			new Vector2( aX, aY )
-		);
-
-		this.curves.push( curve );
-
-		this.currentPoint.set( aX, aY );
-
-		return this;
-
-	}
-
-	bezierCurveTo( aCP1x, aCP1y, aCP2x, aCP2y, aX, aY ) {
-
-		const curve = new CubicBezierCurve(
-			this.currentPoint.clone(),
-			new Vector2( aCP1x, aCP1y ),
-			new Vector2( aCP2x, aCP2y ),
-			new Vector2( aX, aY )
-		);
-
-		this.curves.push( curve );
-
-		this.currentPoint.set( aX, aY );
-
-		return this;
-
-	}
-
-	splineThru( pts /*Array of Vector*/ ) {
-
-		const npts = [ this.currentPoint.clone() ].concat( pts );
-
-		const curve = new SplineCurve( npts );
-		this.curves.push( curve );
-
-		this.currentPoint.copy( pts[ pts.length - 1 ] );
-
-		return this;
-
-	}
-
-	arc( aX, aY, aRadius, aStartAngle, aEndAngle, aClockwise ) {
-
-		const x0 = this.currentPoint.x;
-		const y0 = this.currentPoint.y;
-
-		this.absarc( aX + x0, aY + y0, aRadius,
-			aStartAngle, aEndAngle, aClockwise );
-
-		return this;
-
-	}
-
-	absarc( aX, aY, aRadius, aStartAngle, aEndAngle, aClockwise ) {
-
-		this.absellipse( aX, aY, aRadius, aRadius, aStartAngle, aEndAngle, aClockwise );
-
-		return this;
-
-	}
-
-	ellipse( aX, aY, xRadius, yRadius, aStartAngle, aEndAngle, aClockwise, aRotation ) {
-
-		const x0 = this.currentPoint.x;
-		const y0 = this.currentPoint.y;
-
-		this.absellipse( aX + x0, aY + y0, xRadius, yRadius, aStartAngle, aEndAngle, aClockwise, aRotation );
-
-		return this;
-
-	}
-
-	absellipse( aX, aY, xRadius, yRadius, aStartAngle, aEndAngle, aClockwise, aRotation ) {
-
-		const curve = new EllipseCurve( aX, aY, xRadius, yRadius, aStartAngle, aEndAngle, aClockwise, aRotation );
-
-		if ( this.curves.length > 0 ) {
-
-			// if a previous curve is present, attempt to join
-			const firstPoint = curve.getPoint( 0 );
-
-			if ( ! firstPoint.equals( this.currentPoint ) ) {
-
-				this.lineTo( firstPoint.x, firstPoint.y );
-
-			}
-
-		}
-
-		this.curves.push( curve );
-
-		const lastPoint = curve.getPoint( 1 );
-		this.currentPoint.copy( lastPoint );
-
-		return this;
-
-	}
-
-	copy( source ) {
-
-		super.copy( source );
-
-		this.currentPoint.copy( source.currentPoint );
-
-		return this;
-
-	}
-
-	toJSON() {
-
-		const data = super.toJSON();
-
-		data.currentPoint = this.currentPoint.toArray();
-
-		return data;
-
-	}
-
-	fromJSON( json ) {
-
-		super.fromJSON( json );
-
-		this.currentPoint.fromArray( json.currentPoint );
-
-		return this;
-
-	}
-
-}
-
-class Shape extends Path {
-
-	constructor( points ) {
-
-		super( points );
-
-		this.uuid = generateUUID();
-
-		this.type = 'Shape';
-
-		this.holes = [];
-
-	}
-
-	getPointsHoles( divisions ) {
-
-		const holesPts = [];
-
-		for ( let i = 0, l = this.holes.length; i < l; i ++ ) {
-
-			holesPts[ i ] = this.holes[ i ].getPoints( divisions );
-
-		}
-
-		return holesPts;
-
-	}
-
-	// get points of shape and holes (keypoints based on segments parameter)
-
-	extractPoints( divisions ) {
-
-		return {
-
-			shape: this.getPoints( divisions ),
-			holes: this.getPointsHoles( divisions )
-
-		};
-
-	}
-
-	copy( source ) {
-
-		super.copy( source );
-
-		this.holes = [];
-
-		for ( let i = 0, l = source.holes.length; i < l; i ++ ) {
-
-			const hole = source.holes[ i ];
-
-			this.holes.push( hole.clone() );
-
-		}
-
-		return this;
-
-	}
-
-	toJSON() {
-
-		const data = super.toJSON();
-
-		data.uuid = this.uuid;
-		data.holes = [];
-
-		for ( let i = 0, l = this.holes.length; i < l; i ++ ) {
-
-			const hole = this.holes[ i ];
-			data.holes.push( hole.toJSON() );
-
-		}
-
-		return data;
-
-	}
-
-	fromJSON( json ) {
-
-		super.fromJSON( json );
-
-		this.uuid = json.uuid;
-		this.holes = [];
-
-		for ( let i = 0, l = json.holes.length; i < l; i ++ ) {
-
-			const hole = json.holes[ i ];
-			this.holes.push( new Path().fromJSON( hole ) );
-
-		}
-
-		return this;
-
-	}
-
-}
-
-/**
- * Port from https://github.com/mapbox/earcut (v2.2.4)
- */
-
-const Earcut = {
-
-	triangulate: function ( data, holeIndices, dim = 2 ) {
-
-		const hasHoles = holeIndices && holeIndices.length;
-		const outerLen = hasHoles ? holeIndices[ 0 ] * dim : data.length;
-		let outerNode = linkedList( data, 0, outerLen, dim, true );
-		const triangles = [];
-
-		if ( ! outerNode || outerNode.next === outerNode.prev ) return triangles;
-
-		let minX, minY, maxX, maxY, x, y, invSize;
-
-		if ( hasHoles ) outerNode = eliminateHoles( data, holeIndices, outerNode, dim );
-
-		// if the shape is not too simple, we'll use z-order curve hash later; calculate polygon bbox
-		if ( data.length > 80 * dim ) {
-
-			minX = maxX = data[ 0 ];
-			minY = maxY = data[ 1 ];
-
-			for ( let i = dim; i < outerLen; i += dim ) {
-
-				x = data[ i ];
-				y = data[ i + 1 ];
-				if ( x < minX ) minX = x;
-				if ( y < minY ) minY = y;
-				if ( x > maxX ) maxX = x;
-				if ( y > maxY ) maxY = y;
-
-			}
-
-			// minX, minY and invSize are later used to transform coords into integers for z-order calculation
-			invSize = Math.max( maxX - minX, maxY - minY );
-			invSize = invSize !== 0 ? 32767 / invSize : 0;
-
-		}
-
-		earcutLinked( outerNode, triangles, dim, minX, minY, invSize, 0 );
-
-		return triangles;
-
-	}
-
-};
-
-// create a circular doubly linked list from polygon points in the specified winding order
-function linkedList( data, start, end, dim, clockwise ) {
-
-	let i, last;
-
-	if ( clockwise === ( signedArea( data, start, end, dim ) > 0 ) ) {
-
-		for ( i = start; i < end; i += dim ) last = insertNode( i, data[ i ], data[ i + 1 ], last );
-
-	} else {
-
-		for ( i = end - dim; i >= start; i -= dim ) last = insertNode( i, data[ i ], data[ i + 1 ], last );
-
-	}
-
-	if ( last && equals( last, last.next ) ) {
-
-		removeNode( last );
-		last = last.next;
-
-	}
-
-	return last;
-
-}
-
-// eliminate colinear or duplicate points
-function filterPoints( start, end ) {
-
-	if ( ! start ) return start;
-	if ( ! end ) end = start;
-
-	let p = start,
-		again;
-	do {
-
-		again = false;
-
-		if ( ! p.steiner && ( equals( p, p.next ) || area( p.prev, p, p.next ) === 0 ) ) {
-
-			removeNode( p );
-			p = end = p.prev;
-			if ( p === p.next ) break;
-			again = true;
-
-		} else {
-
-			p = p.next;
-
-		}
-
-	} while ( again || p !== end );
-
-	return end;
-
-}
-
-// main ear slicing loop which triangulates a polygon (given as a linked list)
-function earcutLinked( ear, triangles, dim, minX, minY, invSize, pass ) {
-
-	if ( ! ear ) return;
-
-	// interlink polygon nodes in z-order
-	if ( ! pass && invSize ) indexCurve( ear, minX, minY, invSize );
-
-	let stop = ear,
-		prev, next;
-
-	// iterate through ears, slicing them one by one
-	while ( ear.prev !== ear.next ) {
-
-		prev = ear.prev;
-		next = ear.next;
-
-		if ( invSize ? isEarHashed( ear, minX, minY, invSize ) : isEar( ear ) ) {
-
-			// cut off the triangle
-			triangles.push( prev.i / dim | 0 );
-			triangles.push( ear.i / dim | 0 );
-			triangles.push( next.i / dim | 0 );
-
-			removeNode( ear );
-
-			// skipping the next vertex leads to less sliver triangles
-			ear = next.next;
-			stop = next.next;
-
-			continue;
-
-		}
-
-		ear = next;
-
-		// if we looped through the whole remaining polygon and can't find any more ears
-		if ( ear === stop ) {
-
-			// try filtering points and slicing again
-			if ( ! pass ) {
-
-				earcutLinked( filterPoints( ear ), triangles, dim, minX, minY, invSize, 1 );
-
-				// if this didn't work, try curing all small self-intersections locally
-
-			} else if ( pass === 1 ) {
-
-				ear = cureLocalIntersections( filterPoints( ear ), triangles, dim );
-				earcutLinked( ear, triangles, dim, minX, minY, invSize, 2 );
-
-				// as a last resort, try splitting the remaining polygon into two
-
-			} else if ( pass === 2 ) {
-
-				splitEarcut( ear, triangles, dim, minX, minY, invSize );
-
-			}
-
-			break;
-
-		}
-
-	}
-
-}
-
-// check whether a polygon node forms a valid ear with adjacent nodes
-function isEar( ear ) {
-
-	const a = ear.prev,
-		b = ear,
-		c = ear.next;
-
-	if ( area( a, b, c ) >= 0 ) return false; // reflex, can't be an ear
-
-	// now make sure we don't have other points inside the potential ear
-	const ax = a.x, bx = b.x, cx = c.x, ay = a.y, by = b.y, cy = c.y;
-
-	// triangle bbox; min & max are calculated like this for speed
-	const x0 = ax < bx ? ( ax < cx ? ax : cx ) : ( bx < cx ? bx : cx ),
-		y0 = ay < by ? ( ay < cy ? ay : cy ) : ( by < cy ? by : cy ),
-		x1 = ax > bx ? ( ax > cx ? ax : cx ) : ( bx > cx ? bx : cx ),
-		y1 = ay > by ? ( ay > cy ? ay : cy ) : ( by > cy ? by : cy );
-
-	let p = c.next;
-	while ( p !== a ) {
-
-		if ( p.x >= x0 && p.x <= x1 && p.y >= y0 && p.y <= y1 &&
-			pointInTriangle( ax, ay, bx, by, cx, cy, p.x, p.y ) &&
-			area( p.prev, p, p.next ) >= 0 ) return false;
-		p = p.next;
-
-	}
-
-	return true;
-
-}
-
-function isEarHashed( ear, minX, minY, invSize ) {
-
-	const a = ear.prev,
-		b = ear,
-		c = ear.next;
-
-	if ( area( a, b, c ) >= 0 ) return false; // reflex, can't be an ear
-
-	const ax = a.x, bx = b.x, cx = c.x, ay = a.y, by = b.y, cy = c.y;
-
-	// triangle bbox; min & max are calculated like this for speed
-	const x0 = ax < bx ? ( ax < cx ? ax : cx ) : ( bx < cx ? bx : cx ),
-		y0 = ay < by ? ( ay < cy ? ay : cy ) : ( by < cy ? by : cy ),
-		x1 = ax > bx ? ( ax > cx ? ax : cx ) : ( bx > cx ? bx : cx ),
-		y1 = ay > by ? ( ay > cy ? ay : cy ) : ( by > cy ? by : cy );
-
-	// z-order range for the current triangle bbox;
-	const minZ = zOrder( x0, y0, minX, minY, invSize ),
-		maxZ = zOrder( x1, y1, minX, minY, invSize );
-
-	let p = ear.prevZ,
-		n = ear.nextZ;
-
-	// look for points inside the triangle in both directions
-	while ( p && p.z >= minZ && n && n.z <= maxZ ) {
-
-		if ( p.x >= x0 && p.x <= x1 && p.y >= y0 && p.y <= y1 && p !== a && p !== c &&
-			pointInTriangle( ax, ay, bx, by, cx, cy, p.x, p.y ) && area( p.prev, p, p.next ) >= 0 ) return false;
-		p = p.prevZ;
-
-		if ( n.x >= x0 && n.x <= x1 && n.y >= y0 && n.y <= y1 && n !== a && n !== c &&
-			pointInTriangle( ax, ay, bx, by, cx, cy, n.x, n.y ) && area( n.prev, n, n.next ) >= 0 ) return false;
-		n = n.nextZ;
-
-	}
-
-	// look for remaining points in decreasing z-order
-	while ( p && p.z >= minZ ) {
-
-		if ( p.x >= x0 && p.x <= x1 && p.y >= y0 && p.y <= y1 && p !== a && p !== c &&
-			pointInTriangle( ax, ay, bx, by, cx, cy, p.x, p.y ) && area( p.prev, p, p.next ) >= 0 ) return false;
-		p = p.prevZ;
-
-	}
-
-	// look for remaining points in increasing z-order
-	while ( n && n.z <= maxZ ) {
-
-		if ( n.x >= x0 && n.x <= x1 && n.y >= y0 && n.y <= y1 && n !== a && n !== c &&
-			pointInTriangle( ax, ay, bx, by, cx, cy, n.x, n.y ) && area( n.prev, n, n.next ) >= 0 ) return false;
-		n = n.nextZ;
-
-	}
-
-	return true;
-
-}
-
-// go through all polygon nodes and cure small local self-intersections
-function cureLocalIntersections( start, triangles, dim ) {
-
-	let p = start;
-	do {
-
-		const a = p.prev,
-			b = p.next.next;
-
-		if ( ! equals( a, b ) && intersects( a, p, p.next, b ) && locallyInside( a, b ) && locallyInside( b, a ) ) {
-
-			triangles.push( a.i / dim | 0 );
-			triangles.push( p.i / dim | 0 );
-			triangles.push( b.i / dim | 0 );
-
-			// remove two nodes involved
-			removeNode( p );
-			removeNode( p.next );
-
-			p = start = b;
-
-		}
-
-		p = p.next;
-
-	} while ( p !== start );
-
-	return filterPoints( p );
-
-}
-
-// try splitting polygon into two and triangulate them independently
-function splitEarcut( start, triangles, dim, minX, minY, invSize ) {
-
-	// look for a valid diagonal that divides the polygon into two
-	let a = start;
-	do {
-
-		let b = a.next.next;
-		while ( b !== a.prev ) {
-
-			if ( a.i !== b.i && isValidDiagonal( a, b ) ) {
-
-				// split the polygon in two by the diagonal
-				let c = splitPolygon( a, b );
-
-				// filter colinear points around the cuts
-				a = filterPoints( a, a.next );
-				c = filterPoints( c, c.next );
-
-				// run earcut on each half
-				earcutLinked( a, triangles, dim, minX, minY, invSize, 0 );
-				earcutLinked( c, triangles, dim, minX, minY, invSize, 0 );
-				return;
-
-			}
-
-			b = b.next;
-
-		}
-
-		a = a.next;
-
-	} while ( a !== start );
-
-}
-
-// link every hole into the outer loop, producing a single-ring polygon without holes
-function eliminateHoles( data, holeIndices, outerNode, dim ) {
-
-	const queue = [];
-	let i, len, start, end, list;
-
-	for ( i = 0, len = holeIndices.length; i < len; i ++ ) {
-
-		start = holeIndices[ i ] * dim;
-		end = i < len - 1 ? holeIndices[ i + 1 ] * dim : data.length;
-		list = linkedList( data, start, end, dim, false );
-		if ( list === list.next ) list.steiner = true;
-		queue.push( getLeftmost( list ) );
-
-	}
-
-	queue.sort( compareX );
-
-	// process holes from left to right
-	for ( i = 0; i < queue.length; i ++ ) {
-
-		outerNode = eliminateHole( queue[ i ], outerNode );
-
-	}
-
-	return outerNode;
-
-}
-
-function compareX( a, b ) {
-
-	return a.x - b.x;
-
-}
-
-// find a bridge between vertices that connects hole with an outer ring and link it
-function eliminateHole( hole, outerNode ) {
-
-	const bridge = findHoleBridge( hole, outerNode );
-	if ( ! bridge ) {
-
-		return outerNode;
-
-	}
-
-	const bridgeReverse = splitPolygon( bridge, hole );
-
-	// filter collinear points around the cuts
-	filterPoints( bridgeReverse, bridgeReverse.next );
-	return filterPoints( bridge, bridge.next );
-
-}
-
-// David Eberly's algorithm for finding a bridge between hole and outer polygon
-function findHoleBridge( hole, outerNode ) {
-
-	let p = outerNode,
-		qx = - Infinity,
-		m;
-
-	const hx = hole.x, hy = hole.y;
-
-	// find a segment intersected by a ray from the hole's leftmost point to the left;
-	// segment's endpoint with lesser x will be potential connection point
-	do {
-
-		if ( hy <= p.y && hy >= p.next.y && p.next.y !== p.y ) {
-
-			const x = p.x + ( hy - p.y ) * ( p.next.x - p.x ) / ( p.next.y - p.y );
-			if ( x <= hx && x > qx ) {
-
-				qx = x;
-				m = p.x < p.next.x ? p : p.next;
-				if ( x === hx ) return m; // hole touches outer segment; pick leftmost endpoint
-
-			}
-
-		}
-
-		p = p.next;
-
-	} while ( p !== outerNode );
-
-	if ( ! m ) return null;
-
-	// look for points inside the triangle of hole point, segment intersection and endpoint;
-	// if there are no points found, we have a valid connection;
-	// otherwise choose the point of the minimum angle with the ray as connection point
-
-	const stop = m,
-		mx = m.x,
-		my = m.y;
-	let tanMin = Infinity, tan;
-
-	p = m;
-
-	do {
-
-		if ( hx >= p.x && p.x >= mx && hx !== p.x &&
-				pointInTriangle( hy < my ? hx : qx, hy, mx, my, hy < my ? qx : hx, hy, p.x, p.y ) ) {
-
-			tan = Math.abs( hy - p.y ) / ( hx - p.x ); // tangential
-
-			if ( locallyInside( p, hole ) && ( tan < tanMin || ( tan === tanMin && ( p.x > m.x || ( p.x === m.x && sectorContainsSector( m, p ) ) ) ) ) ) {
-
-				m = p;
-				tanMin = tan;
-
-			}
-
-		}
-
-		p = p.next;
-
-	} while ( p !== stop );
-
-	return m;
-
-}
-
-// whether sector in vertex m contains sector in vertex p in the same coordinates
-function sectorContainsSector( m, p ) {
-
-	return area( m.prev, m, p.prev ) < 0 && area( p.next, m, m.next ) < 0;
-
-}
-
-// interlink polygon nodes in z-order
-function indexCurve( start, minX, minY, invSize ) {
-
-	let p = start;
-	do {
-
-		if ( p.z === 0 ) p.z = zOrder( p.x, p.y, minX, minY, invSize );
-		p.prevZ = p.prev;
-		p.nextZ = p.next;
-		p = p.next;
-
-	} while ( p !== start );
-
-	p.prevZ.nextZ = null;
-	p.prevZ = null;
-
-	sortLinked( p );
-
-}
-
-// Simon Tatham's linked list merge sort algorithm
-// http://www.chiark.greenend.org.uk/~sgtatham/algorithms/listsort.html
-function sortLinked( list ) {
-
-	let i, p, q, e, tail, numMerges, pSize, qSize,
-		inSize = 1;
-
-	do {
-
-		p = list;
-		list = null;
-		tail = null;
-		numMerges = 0;
-
-		while ( p ) {
-
-			numMerges ++;
-			q = p;
-			pSize = 0;
-			for ( i = 0; i < inSize; i ++ ) {
-
-				pSize ++;
-				q = q.nextZ;
-				if ( ! q ) break;
-
-			}
-
-			qSize = inSize;
-
-			while ( pSize > 0 || ( qSize > 0 && q ) ) {
-
-				if ( pSize !== 0 && ( qSize === 0 || ! q || p.z <= q.z ) ) {
-
-					e = p;
-					p = p.nextZ;
-					pSize --;
-
-				} else {
-
-					e = q;
-					q = q.nextZ;
-					qSize --;
-
-				}
-
-				if ( tail ) tail.nextZ = e;
-				else list = e;
-
-				e.prevZ = tail;
-				tail = e;
-
-			}
-
-			p = q;
-
-		}
-
-		tail.nextZ = null;
-		inSize *= 2;
-
-	} while ( numMerges > 1 );
-
-	return list;
-
-}
-
-// z-order of a point given coords and inverse of the longer side of data bbox
-function zOrder( x, y, minX, minY, invSize ) {
-
-	// coords are transformed into non-negative 15-bit integer range
-	x = ( x - minX ) * invSize | 0;
-	y = ( y - minY ) * invSize | 0;
-
-	x = ( x | ( x << 8 ) ) & 0x00FF00FF;
-	x = ( x | ( x << 4 ) ) & 0x0F0F0F0F;
-	x = ( x | ( x << 2 ) ) & 0x33333333;
-	x = ( x | ( x << 1 ) ) & 0x55555555;
-
-	y = ( y | ( y << 8 ) ) & 0x00FF00FF;
-	y = ( y | ( y << 4 ) ) & 0x0F0F0F0F;
-	y = ( y | ( y << 2 ) ) & 0x33333333;
-	y = ( y | ( y << 1 ) ) & 0x55555555;
-
-	return x | ( y << 1 );
-
-}
-
-// find the leftmost node of a polygon ring
-function getLeftmost( start ) {
-
-	let p = start,
-		leftmost = start;
-	do {
-
-		if ( p.x < leftmost.x || ( p.x === leftmost.x && p.y < leftmost.y ) ) leftmost = p;
-		p = p.next;
-
-	} while ( p !== start );
-
-	return leftmost;
-
-}
-
-// check if a point lies within a convex triangle
-function pointInTriangle( ax, ay, bx, by, cx, cy, px, py ) {
-
-	return ( cx - px ) * ( ay - py ) >= ( ax - px ) * ( cy - py ) &&
-           ( ax - px ) * ( by - py ) >= ( bx - px ) * ( ay - py ) &&
-           ( bx - px ) * ( cy - py ) >= ( cx - px ) * ( by - py );
-
-}
-
-// check if a diagonal between two polygon nodes is valid (lies in polygon interior)
-function isValidDiagonal( a, b ) {
-
-	return a.next.i !== b.i && a.prev.i !== b.i && ! intersectsPolygon( a, b ) && // dones't intersect other edges
-           ( locallyInside( a, b ) && locallyInside( b, a ) && middleInside( a, b ) && // locally visible
-            ( area( a.prev, a, b.prev ) || area( a, b.prev, b ) ) || // does not create opposite-facing sectors
-            equals( a, b ) && area( a.prev, a, a.next ) > 0 && area( b.prev, b, b.next ) > 0 ); // special zero-length case
-
-}
-
-// signed area of a triangle
-function area( p, q, r ) {
-
-	return ( q.y - p.y ) * ( r.x - q.x ) - ( q.x - p.x ) * ( r.y - q.y );
-
-}
-
-// check if two points are equal
-function equals( p1, p2 ) {
-
-	return p1.x === p2.x && p1.y === p2.y;
-
-}
-
-// check if two segments intersect
-function intersects( p1, q1, p2, q2 ) {
-
-	const o1 = sign( area( p1, q1, p2 ) );
-	const o2 = sign( area( p1, q1, q2 ) );
-	const o3 = sign( area( p2, q2, p1 ) );
-	const o4 = sign( area( p2, q2, q1 ) );
-
-	if ( o1 !== o2 && o3 !== o4 ) return true; // general case
-
-	if ( o1 === 0 && onSegment( p1, p2, q1 ) ) return true; // p1, q1 and p2 are collinear and p2 lies on p1q1
-	if ( o2 === 0 && onSegment( p1, q2, q1 ) ) return true; // p1, q1 and q2 are collinear and q2 lies on p1q1
-	if ( o3 === 0 && onSegment( p2, p1, q2 ) ) return true; // p2, q2 and p1 are collinear and p1 lies on p2q2
-	if ( o4 === 0 && onSegment( p2, q1, q2 ) ) return true; // p2, q2 and q1 are collinear and q1 lies on p2q2
-
-	return false;
-
-}
-
-// for collinear points p, q, r, check if point q lies on segment pr
-function onSegment( p, q, r ) {
-
-	return q.x <= Math.max( p.x, r.x ) && q.x >= Math.min( p.x, r.x ) && q.y <= Math.max( p.y, r.y ) && q.y >= Math.min( p.y, r.y );
-
-}
-
-function sign( num ) {
-
-	return num > 0 ? 1 : num < 0 ? - 1 : 0;
-
-}
-
-// check if a polygon diagonal intersects any polygon segments
-function intersectsPolygon( a, b ) {
-
-	let p = a;
-	do {
-
-		if ( p.i !== a.i && p.next.i !== a.i && p.i !== b.i && p.next.i !== b.i &&
-			intersects( p, p.next, a, b ) ) return true;
-		p = p.next;
-
-	} while ( p !== a );
-
-	return false;
-
-}
-
-// check if a polygon diagonal is locally inside the polygon
-function locallyInside( a, b ) {
-
-	return area( a.prev, a, a.next ) < 0 ?
-		area( a, b, a.next ) >= 0 && area( a, a.prev, b ) >= 0 :
-		area( a, b, a.prev ) < 0 || area( a, a.next, b ) < 0;
-
-}
-
-// check if the middle point of a polygon diagonal is inside the polygon
-function middleInside( a, b ) {
-
-	let p = a,
-		inside = false;
-	const px = ( a.x + b.x ) / 2,
-		py = ( a.y + b.y ) / 2;
-	do {
-
-		if ( ( ( p.y > py ) !== ( p.next.y > py ) ) && p.next.y !== p.y &&
-			( px < ( p.next.x - p.x ) * ( py - p.y ) / ( p.next.y - p.y ) + p.x ) )
-			inside = ! inside;
-		p = p.next;
-
-	} while ( p !== a );
-
-	return inside;
-
-}
-
-// link two polygon vertices with a bridge; if the vertices belong to the same ring, it splits polygon into two;
-// if one belongs to the outer ring and another to a hole, it merges it into a single ring
-function splitPolygon( a, b ) {
-
-	const a2 = new Node$1( a.i, a.x, a.y ),
-		b2 = new Node$1( b.i, b.x, b.y ),
-		an = a.next,
-		bp = b.prev;
-
-	a.next = b;
-	b.prev = a;
-
-	a2.next = an;
-	an.prev = a2;
-
-	b2.next = a2;
-	a2.prev = b2;
-
-	bp.next = b2;
-	b2.prev = bp;
-
-	return b2;
-
-}
-
-// create a node and optionally link it with previous one (in a circular doubly linked list)
-function insertNode( i, x, y, last ) {
-
-	const p = new Node$1( i, x, y );
-
-	if ( ! last ) {
-
-		p.prev = p;
-		p.next = p;
-
-	} else {
-
-		p.next = last.next;
-		p.prev = last;
-		last.next.prev = p;
-		last.next = p;
-
-	}
-
-	return p;
-
-}
-
-function removeNode( p ) {
-
-	p.next.prev = p.prev;
-	p.prev.next = p.next;
-
-	if ( p.prevZ ) p.prevZ.nextZ = p.nextZ;
-	if ( p.nextZ ) p.nextZ.prevZ = p.prevZ;
-
-}
-
-function Node$1( i, x, y ) {
-
-	// vertex index in coordinates array
-	this.i = i;
-
-	// vertex coordinates
-	this.x = x;
-	this.y = y;
-
-	// previous and next vertex nodes in a polygon ring
-	this.prev = null;
-	this.next = null;
-
-	// z-order curve value
-	this.z = 0;
-
-	// previous and next nodes in z-order
-	this.prevZ = null;
-	this.nextZ = null;
-
-	// indicates whether this is a steiner point
-	this.steiner = false;
-
-}
-
-function signedArea( data, start, end, dim ) {
-
-	let sum = 0;
-	for ( let i = start, j = end - dim; i < end; i += dim ) {
-
-		sum += ( data[ j ] - data[ i ] ) * ( data[ i + 1 ] + data[ j + 1 ] );
-		j = i;
-
-	}
-
-	return sum;
-
-}
-
-class ShapeUtils {
-
-	// calculate area of the contour polygon
-
-	static area( contour ) {
-
-		const n = contour.length;
-		let a = 0.0;
-
-		for ( let p = n - 1, q = 0; q < n; p = q ++ ) {
-
-			a += contour[ p ].x * contour[ q ].y - contour[ q ].x * contour[ p ].y;
-
-		}
-
-		return a * 0.5;
-
-	}
-
-	static isClockWise( pts ) {
-
-		return ShapeUtils.area( pts ) < 0;
-
-	}
-
-	static triangulateShape( contour, holes ) {
-
-		const vertices = []; // flat array of vertices like [ x0,y0, x1,y1, x2,y2, ... ]
-		const holeIndices = []; // array of hole indices
-		const faces = []; // final array of vertex indices like [ [ a,b,d ], [ b,c,d ] ]
-
-		removeDupEndPts( contour );
-		addContour( vertices, contour );
-
-		//
-
-		let holeIndex = contour.length;
-
-		holes.forEach( removeDupEndPts );
-
-		for ( let i = 0; i < holes.length; i ++ ) {
-
-			holeIndices.push( holeIndex );
-			holeIndex += holes[ i ].length;
-			addContour( vertices, holes[ i ] );
-
-		}
-
-		//
-
-		const triangles = Earcut.triangulate( vertices, holeIndices );
-
-		//
-
-		for ( let i = 0; i < triangles.length; i += 3 ) {
-
-			faces.push( triangles.slice( i, i + 3 ) );
-
-		}
-
-		return faces;
-
-	}
-
-}
-
-function removeDupEndPts( points ) {
-
-	const l = points.length;
-
-	if ( l > 2 && points[ l - 1 ].equals( points[ 0 ] ) ) {
-
-		points.pop();
-
-	}
-
-}
-
-function addContour( vertices, contour ) {
-
-	for ( let i = 0; i < contour.length; i ++ ) {
-
-		vertices.push( contour[ i ].x );
-		vertices.push( contour[ i ].y );
-
-	}
-
-}
-
 class SphereGeometry extends BufferGeometry {
 
 	constructor( radius = 1, widthSegments = 32, heightSegments = 16, phiStart = 0, phiLength = Math.PI * 2, thetaStart = 0, thetaLength = Math.PI ) {
@@ -34613,530 +31999,259 @@ class SphereGeometry extends BufferGeometry {
 
 }
 
-const Cache$1 = {
+class Light extends Object3D {
 
-	enabled: false,
+	constructor( color, intensity = 1 ) {
 
-	files: {},
+		super();
 
-	add: function ( key, file ) {
+		this.isLight = true;
 
-		if ( this.enabled === false ) return;
+		this.type = 'Light';
 
-		// console.log( 'THREE.Cache', 'Adding key:', key );
-
-		this.files[ key ] = file;
-
-	},
-
-	get: function ( key ) {
-
-		if ( this.enabled === false ) return;
-
-		// console.log( 'THREE.Cache', 'Checking key:', key );
-
-		return this.files[ key ];
-
-	},
-
-	remove: function ( key ) {
-
-		delete this.files[ key ];
-
-	},
-
-	clear: function () {
-
-		this.files = {};
+		this.color = new Color( color );
+		this.intensity = intensity;
 
 	}
 
-};
+	dispose() {
 
-class LoadingManager {
+		// Empty here in base class; some subclasses override.
 
-	constructor( onLoad, onProgress, onError ) {
+	}
 
-		const scope = this;
+	copy( source, recursive ) {
 
-		let isLoading = false;
-		let itemsLoaded = 0;
-		let itemsTotal = 0;
-		let urlModifier = undefined;
-		const handlers = [];
+		super.copy( source, recursive );
 
-		// Refer to #5689 for the reason why we don't set .onStart
-		// in the constructor
+		this.color.copy( source.color );
+		this.intensity = source.intensity;
 
-		this.onStart = undefined;
-		this.onLoad = onLoad;
-		this.onProgress = onProgress;
-		this.onError = onError;
+		return this;
 
-		this.itemStart = function ( url ) {
+	}
 
-			itemsTotal ++;
+	toJSON( meta ) {
 
-			if ( isLoading === false ) {
+		const data = super.toJSON( meta );
 
-				if ( scope.onStart !== undefined ) {
+		data.object.color = this.color.getHex();
+		data.object.intensity = this.intensity;
 
-					scope.onStart( url, itemsLoaded, itemsTotal );
+		if ( this.groundColor !== undefined ) data.object.groundColor = this.groundColor.getHex();
 
-				}
+		if ( this.distance !== undefined ) data.object.distance = this.distance;
+		if ( this.angle !== undefined ) data.object.angle = this.angle;
+		if ( this.decay !== undefined ) data.object.decay = this.decay;
+		if ( this.penumbra !== undefined ) data.object.penumbra = this.penumbra;
 
-			}
+		if ( this.shadow !== undefined ) data.object.shadow = this.shadow.toJSON();
 
-			isLoading = true;
-
-		};
-
-		this.itemEnd = function ( url ) {
-
-			itemsLoaded ++;
-
-			if ( scope.onProgress !== undefined ) {
-
-				scope.onProgress( url, itemsLoaded, itemsTotal );
-
-			}
-
-			if ( itemsLoaded === itemsTotal ) {
-
-				isLoading = false;
-
-				if ( scope.onLoad !== undefined ) {
-
-					scope.onLoad();
-
-				}
-
-			}
-
-		};
-
-		this.itemError = function ( url ) {
-
-			if ( scope.onError !== undefined ) {
-
-				scope.onError( url );
-
-			}
-
-		};
-
-		this.resolveURL = function ( url ) {
-
-			if ( urlModifier ) {
-
-				return urlModifier( url );
-
-			}
-
-			return url;
-
-		};
-
-		this.setURLModifier = function ( transform ) {
-
-			urlModifier = transform;
-
-			return this;
-
-		};
-
-		this.addHandler = function ( regex, loader ) {
-
-			handlers.push( regex, loader );
-
-			return this;
-
-		};
-
-		this.removeHandler = function ( regex ) {
-
-			const index = handlers.indexOf( regex );
-
-			if ( index !== - 1 ) {
-
-				handlers.splice( index, 2 );
-
-			}
-
-			return this;
-
-		};
-
-		this.getHandler = function ( file ) {
-
-			for ( let i = 0, l = handlers.length; i < l; i += 2 ) {
-
-				const regex = handlers[ i ];
-				const loader = handlers[ i + 1 ];
-
-				if ( regex.global ) regex.lastIndex = 0; // see #17920
-
-				if ( regex.test( file ) ) {
-
-					return loader;
-
-				}
-
-			}
-
-			return null;
-
-		};
+		return data;
 
 	}
 
 }
 
-const DefaultLoadingManager = /*@__PURE__*/ new LoadingManager();
+const _projScreenMatrix$1 = /*@__PURE__*/ new Matrix4();
+const _lightPositionWorld$1 = /*@__PURE__*/ new Vector3();
+const _lookTarget$1 = /*@__PURE__*/ new Vector3();
 
-class Loader {
+class LightShadow {
 
-	constructor( manager ) {
+	constructor( camera ) {
 
-		this.manager = ( manager !== undefined ) ? manager : DefaultLoadingManager;
+		this.camera = camera;
 
-		this.crossOrigin = 'anonymous';
-		this.withCredentials = false;
-		this.path = '';
-		this.resourcePath = '';
-		this.requestHeader = {};
+		this.bias = 0;
+		this.normalBias = 0;
+		this.radius = 1;
+		this.blurSamples = 8;
 
-	}
+		this.mapSize = new Vector2( 512, 512 );
 
-	load( /* url, onLoad, onProgress, onError */ ) {}
+		this.map = null;
+		this.mapPass = null;
+		this.matrix = new Matrix4();
 
-	loadAsync( url, onProgress ) {
+		this.autoUpdate = true;
+		this.needsUpdate = false;
 
-		const scope = this;
+		this._frustum = new Frustum();
+		this._frameExtents = new Vector2( 1, 1 );
 
-		return new Promise( function ( resolve, reject ) {
+		this._viewportCount = 1;
 
-			scope.load( url, resolve, onProgress, reject );
+		this._viewports = [
 
-		} );
+			new Vector4( 0, 0, 1, 1 )
 
-	}
-
-	parse( /* data */ ) {}
-
-	setCrossOrigin( crossOrigin ) {
-
-		this.crossOrigin = crossOrigin;
-		return this;
+		];
 
 	}
 
-	setWithCredentials( value ) {
+	getViewportCount() {
 
-		this.withCredentials = value;
-		return this;
-
-	}
-
-	setPath( path ) {
-
-		this.path = path;
-		return this;
+		return this._viewportCount;
 
 	}
 
-	setResourcePath( resourcePath ) {
+	getFrustum() {
 
-		this.resourcePath = resourcePath;
-		return this;
-
-	}
-
-	setRequestHeader( requestHeader ) {
-
-		this.requestHeader = requestHeader;
-		return this;
+		return this._frustum;
 
 	}
 
-}
+	updateMatrices( light ) {
 
-Loader.DEFAULT_MATERIAL_NAME = '__DEFAULT';
+		const shadowCamera = this.camera;
+		const shadowMatrix = this.matrix;
 
-const loading = {};
+		_lightPositionWorld$1.setFromMatrixPosition( light.matrixWorld );
+		shadowCamera.position.copy( _lightPositionWorld$1 );
 
-class HttpError extends Error {
+		_lookTarget$1.setFromMatrixPosition( light.target.matrixWorld );
+		shadowCamera.lookAt( _lookTarget$1 );
+		shadowCamera.updateMatrixWorld();
 
-	constructor( message, response ) {
+		_projScreenMatrix$1.multiplyMatrices( shadowCamera.projectionMatrix, shadowCamera.matrixWorldInverse );
+		this._frustum.setFromProjectionMatrix( _projScreenMatrix$1 );
 
-		super( message );
-		this.response = response;
+		shadowMatrix.set(
+			0.5, 0.0, 0.0, 0.5,
+			0.0, 0.5, 0.0, 0.5,
+			0.0, 0.0, 0.5, 0.5,
+			0.0, 0.0, 0.0, 1.0
+		);
+
+		shadowMatrix.multiply( _projScreenMatrix$1 );
 
 	}
 
-}
+	getViewport( viewportIndex ) {
 
-class FileLoader extends Loader {
-
-	constructor( manager ) {
-
-		super( manager );
+		return this._viewports[ viewportIndex ];
 
 	}
 
-	load( url, onLoad, onProgress, onError ) {
+	getFrameExtents() {
 
-		if ( url === undefined ) url = '';
+		return this._frameExtents;
 
-		if ( this.path !== undefined ) url = this.path + url;
+	}
 
-		url = this.manager.resolveURL( url );
+	dispose() {
 
-		const cached = Cache$1.get( url );
+		if ( this.map ) {
 
-		if ( cached !== undefined ) {
-
-			this.manager.itemStart( url );
-
-			setTimeout( () => {
-
-				if ( onLoad ) onLoad( cached );
-
-				this.manager.itemEnd( url );
-
-			}, 0 );
-
-			return cached;
+			this.map.dispose();
 
 		}
 
-		// Check if request is duplicate
+		if ( this.mapPass ) {
 
-		if ( loading[ url ] !== undefined ) {
-
-			loading[ url ].push( {
-
-				onLoad: onLoad,
-				onProgress: onProgress,
-				onError: onError
-
-			} );
-
-			return;
+			this.mapPass.dispose();
 
 		}
 
-		// Initialise array for duplicate requests
-		loading[ url ] = [];
-
-		loading[ url ].push( {
-			onLoad: onLoad,
-			onProgress: onProgress,
-			onError: onError,
-		} );
-
-		// create request
-		const req = new Request( url, {
-			headers: new Headers( this.requestHeader ),
-			credentials: this.withCredentials ? 'include' : 'same-origin',
-			// An abort controller could be added within a future PR
-		} );
-
-		// record states ( avoid data race )
-		const mimeType = this.mimeType;
-		const responseType = this.responseType;
-
-		// start the fetch
-		fetch( req )
-			.then( response => {
-
-				if ( response.status === 200 || response.status === 0 ) {
-
-					// Some browsers return HTTP Status 0 when using non-http protocol
-					// e.g. 'file://' or 'data://'. Handle as success.
-
-					if ( response.status === 0 ) {
-
-						console.warn( 'THREE.FileLoader: HTTP Status 0 received.' );
-
-					}
-
-					// Workaround: Checking if response.body === undefined for Alipay browser #23548
-
-					if ( typeof ReadableStream === 'undefined' || response.body === undefined || response.body.getReader === undefined ) {
-
-						return response;
-
-					}
-
-					const callbacks = loading[ url ];
-					const reader = response.body.getReader();
-
-					// Nginx needs X-File-Size check
-					// https://serverfault.com/questions/482875/why-does-nginx-remove-content-length-header-for-chunked-content
-					const contentLength = response.headers.get( 'Content-Length' ) || response.headers.get( 'X-File-Size' );
-					const total = contentLength ? parseInt( contentLength ) : 0;
-					const lengthComputable = total !== 0;
-					let loaded = 0;
-
-					// periodically read data into the new stream tracking while download progress
-					const stream = new ReadableStream( {
-						start( controller ) {
-
-							readData();
-
-							function readData() {
-
-								reader.read().then( ( { done, value } ) => {
-
-									if ( done ) {
-
-										controller.close();
-
-									} else {
-
-										loaded += value.byteLength;
-
-										const event = new ProgressEvent( 'progress', { lengthComputable, loaded, total } );
-										for ( let i = 0, il = callbacks.length; i < il; i ++ ) {
-
-											const callback = callbacks[ i ];
-											if ( callback.onProgress ) callback.onProgress( event );
-
-										}
-
-										controller.enqueue( value );
-										readData();
-
-									}
-
-								} );
-
-							}
-
-						}
-
-					} );
-
-					return new Response( stream );
-
-				} else {
-
-					throw new HttpError( `fetch for "${response.url}" responded with ${response.status}: ${response.statusText}`, response );
-
-				}
-
-			} )
-			.then( response => {
-
-				switch ( responseType ) {
-
-					case 'arraybuffer':
-
-						return response.arrayBuffer();
-
-					case 'blob':
-
-						return response.blob();
-
-					case 'document':
-
-						return response.text()
-							.then( text => {
-
-								const parser = new DOMParser();
-								return parser.parseFromString( text, mimeType );
-
-							} );
-
-					case 'json':
-
-						return response.json();
-
-					default:
-
-						if ( mimeType === undefined ) {
-
-							return response.text();
-
-						} else {
-
-							// sniff encoding
-							const re = /charset="?([^;"\s]*)"?/i;
-							const exec = re.exec( mimeType );
-							const label = exec && exec[ 1 ] ? exec[ 1 ].toLowerCase() : undefined;
-							const decoder = new TextDecoder( label );
-							return response.arrayBuffer().then( ab => decoder.decode( ab ) );
-
-						}
-
-				}
-
-			} )
-			.then( data => {
-
-				// Add to cache only on HTTP success, so that we do not cache
-				// error response bodies as proper responses to requests.
-				Cache$1.add( url, data );
-
-				const callbacks = loading[ url ];
-				delete loading[ url ];
-
-				for ( let i = 0, il = callbacks.length; i < il; i ++ ) {
-
-					const callback = callbacks[ i ];
-					if ( callback.onLoad ) callback.onLoad( data );
-
-				}
-
-			} )
-			.catch( err => {
-
-				// Abort errors and other errors are handled the same
-
-				const callbacks = loading[ url ];
-
-				if ( callbacks === undefined ) {
-
-					// When onLoad was called and url was deleted in `loading`
-					this.manager.itemError( url );
-					throw err;
-
-				}
-
-				delete loading[ url ];
-
-				for ( let i = 0, il = callbacks.length; i < il; i ++ ) {
-
-					const callback = callbacks[ i ];
-					if ( callback.onError ) callback.onError( err );
-
-				}
-
-				this.manager.itemError( url );
-
-			} )
-			.finally( () => {
-
-				this.manager.itemEnd( url );
-
-			} );
-
-		this.manager.itemStart( url );
-
 	}
 
-	setResponseType( value ) {
+	copy( source ) {
 
-		this.responseType = value;
+		this.camera = source.camera.clone();
+
+		this.bias = source.bias;
+		this.radius = source.radius;
+
+		this.mapSize.copy( source.mapSize );
+
 		return this;
 
 	}
 
-	setMimeType( value ) {
+	clone() {
 
-		this.mimeType = value;
+		return new this.constructor().copy( this );
+
+	}
+
+	toJSON() {
+
+		const object = {};
+
+		if ( this.bias !== 0 ) object.bias = this.bias;
+		if ( this.normalBias !== 0 ) object.normalBias = this.normalBias;
+		if ( this.radius !== 1 ) object.radius = this.radius;
+		if ( this.mapSize.x !== 512 || this.mapSize.y !== 512 ) object.mapSize = this.mapSize.toArray();
+
+		object.camera = this.camera.toJSON( false ).object;
+		delete object.camera.matrix;
+
+		return object;
+
+	}
+
+}
+
+class DirectionalLightShadow extends LightShadow {
+
+	constructor() {
+
+		super( new OrthographicCamera( - 5, 5, 5, - 5, 0.5, 500 ) );
+
+		this.isDirectionalLightShadow = true;
+
+	}
+
+}
+
+class DirectionalLight extends Light {
+
+	constructor( color, intensity ) {
+
+		super( color, intensity );
+
+		this.isDirectionalLight = true;
+
+		this.type = 'DirectionalLight';
+
+		this.position.copy( Object3D.DEFAULT_UP );
+		this.updateMatrix();
+
+		this.target = new Object3D();
+
+		this.shadow = new DirectionalLightShadow();
+
+	}
+
+	dispose() {
+
+		this.shadow.dispose();
+
+	}
+
+	copy( source ) {
+
+		super.copy( source );
+
+		this.target = source.target.clone();
+		this.shadow = source.shadow.clone();
+
 		return this;
+
+	}
+
+}
+
+class AmbientLight extends Light {
+
+	constructor( color, intensity ) {
+
+		super( color, intensity );
+
+		this.isAmbientLight = true;
+
+		this.type = 'AmbientLight';
 
 	}
 
@@ -35332,486 +32447,112 @@ class Spherical {
 
 }
 
-const _vector$4 = /*@__PURE__*/ new Vector2();
+const _startP = /*@__PURE__*/ new Vector3();
+const _startEnd = /*@__PURE__*/ new Vector3();
 
-class Box2 {
+class Line3 {
 
-	constructor( min = new Vector2( + Infinity, + Infinity ), max = new Vector2( - Infinity, - Infinity ) ) {
+	constructor( start = new Vector3(), end = new Vector3() ) {
 
-		this.isBox2 = true;
-
-		this.min = min;
-		this.max = max;
+		this.start = start;
+		this.end = end;
 
 	}
 
-	set( min, max ) {
+	set( start, end ) {
 
-		this.min.copy( min );
-		this.max.copy( max );
+		this.start.copy( start );
+		this.end.copy( end );
 
 		return this;
 
 	}
 
-	setFromPoints( points ) {
+	copy( line ) {
 
-		this.makeEmpty();
+		this.start.copy( line.start );
+		this.end.copy( line.end );
 
-		for ( let i = 0, il = points.length; i < il; i ++ ) {
+		return this;
 
-			this.expandByPoint( points[ i ] );
+	}
+
+	getCenter( target ) {
+
+		return target.addVectors( this.start, this.end ).multiplyScalar( 0.5 );
+
+	}
+
+	delta( target ) {
+
+		return target.subVectors( this.end, this.start );
+
+	}
+
+	distanceSq() {
+
+		return this.start.distanceToSquared( this.end );
+
+	}
+
+	distance() {
+
+		return this.start.distanceTo( this.end );
+
+	}
+
+	at( t, target ) {
+
+		return this.delta( target ).multiplyScalar( t ).add( this.start );
+
+	}
+
+	closestPointToPointParameter( point, clampToLine ) {
+
+		_startP.subVectors( point, this.start );
+		_startEnd.subVectors( this.end, this.start );
+
+		const startEnd2 = _startEnd.dot( _startEnd );
+		const startEnd_startP = _startEnd.dot( _startP );
+
+		let t = startEnd_startP / startEnd2;
+
+		if ( clampToLine ) {
+
+			t = clamp( t, 0, 1 );
 
 		}
 
+		return t;
+
+	}
+
+	closestPointToPoint( point, clampToLine, target ) {
+
+		const t = this.closestPointToPointParameter( point, clampToLine );
+
+		return this.delta( target ).multiplyScalar( t ).add( this.start );
+
+	}
+
+	applyMatrix4( matrix ) {
+
+		this.start.applyMatrix4( matrix );
+		this.end.applyMatrix4( matrix );
+
 		return this;
 
 	}
 
-	setFromCenterAndSize( center, size ) {
+	equals( line ) {
 
-		const halfSize = _vector$4.copy( size ).multiplyScalar( 0.5 );
-		this.min.copy( center ).sub( halfSize );
-		this.max.copy( center ).add( halfSize );
-
-		return this;
+		return line.start.equals( this.start ) && line.end.equals( this.end );
 
 	}
 
 	clone() {
 
 		return new this.constructor().copy( this );
-
-	}
-
-	copy( box ) {
-
-		this.min.copy( box.min );
-		this.max.copy( box.max );
-
-		return this;
-
-	}
-
-	makeEmpty() {
-
-		this.min.x = this.min.y = + Infinity;
-		this.max.x = this.max.y = - Infinity;
-
-		return this;
-
-	}
-
-	isEmpty() {
-
-		// this is a more robust check for empty than ( volume <= 0 ) because volume can get positive with two negative axes
-
-		return ( this.max.x < this.min.x ) || ( this.max.y < this.min.y );
-
-	}
-
-	getCenter( target ) {
-
-		return this.isEmpty() ? target.set( 0, 0 ) : target.addVectors( this.min, this.max ).multiplyScalar( 0.5 );
-
-	}
-
-	getSize( target ) {
-
-		return this.isEmpty() ? target.set( 0, 0 ) : target.subVectors( this.max, this.min );
-
-	}
-
-	expandByPoint( point ) {
-
-		this.min.min( point );
-		this.max.max( point );
-
-		return this;
-
-	}
-
-	expandByVector( vector ) {
-
-		this.min.sub( vector );
-		this.max.add( vector );
-
-		return this;
-
-	}
-
-	expandByScalar( scalar ) {
-
-		this.min.addScalar( - scalar );
-		this.max.addScalar( scalar );
-
-		return this;
-
-	}
-
-	containsPoint( point ) {
-
-		return point.x < this.min.x || point.x > this.max.x ||
-			point.y < this.min.y || point.y > this.max.y ? false : true;
-
-	}
-
-	containsBox( box ) {
-
-		return this.min.x <= box.min.x && box.max.x <= this.max.x &&
-			this.min.y <= box.min.y && box.max.y <= this.max.y;
-
-	}
-
-	getParameter( point, target ) {
-
-		// This can potentially have a divide by zero if the box
-		// has a size dimension of 0.
-
-		return target.set(
-			( point.x - this.min.x ) / ( this.max.x - this.min.x ),
-			( point.y - this.min.y ) / ( this.max.y - this.min.y )
-		);
-
-	}
-
-	intersectsBox( box ) {
-
-		// using 4 splitting planes to rule out intersections
-
-		return box.max.x < this.min.x || box.min.x > this.max.x ||
-			box.max.y < this.min.y || box.min.y > this.max.y ? false : true;
-
-	}
-
-	clampPoint( point, target ) {
-
-		return target.copy( point ).clamp( this.min, this.max );
-
-	}
-
-	distanceToPoint( point ) {
-
-		return this.clampPoint( point, _vector$4 ).distanceTo( point );
-
-	}
-
-	intersect( box ) {
-
-		this.min.max( box.min );
-		this.max.min( box.max );
-
-		if ( this.isEmpty() ) this.makeEmpty();
-
-		return this;
-
-	}
-
-	union( box ) {
-
-		this.min.min( box.min );
-		this.max.max( box.max );
-
-		return this;
-
-	}
-
-	translate( offset ) {
-
-		this.min.add( offset );
-		this.max.add( offset );
-
-		return this;
-
-	}
-
-	equals( box ) {
-
-		return box.min.equals( this.min ) && box.max.equals( this.max );
-
-	}
-
-}
-
-class ShapePath {
-
-	constructor() {
-
-		this.type = 'ShapePath';
-
-		this.color = new Color();
-
-		this.subPaths = [];
-		this.currentPath = null;
-
-	}
-
-	moveTo( x, y ) {
-
-		this.currentPath = new Path();
-		this.subPaths.push( this.currentPath );
-		this.currentPath.moveTo( x, y );
-
-		return this;
-
-	}
-
-	lineTo( x, y ) {
-
-		this.currentPath.lineTo( x, y );
-
-		return this;
-
-	}
-
-	quadraticCurveTo( aCPx, aCPy, aX, aY ) {
-
-		this.currentPath.quadraticCurveTo( aCPx, aCPy, aX, aY );
-
-		return this;
-
-	}
-
-	bezierCurveTo( aCP1x, aCP1y, aCP2x, aCP2y, aX, aY ) {
-
-		this.currentPath.bezierCurveTo( aCP1x, aCP1y, aCP2x, aCP2y, aX, aY );
-
-		return this;
-
-	}
-
-	splineThru( pts ) {
-
-		this.currentPath.splineThru( pts );
-
-		return this;
-
-	}
-
-	toShapes( isCCW ) {
-
-		function toShapesNoHoles( inSubpaths ) {
-
-			const shapes = [];
-
-			for ( let i = 0, l = inSubpaths.length; i < l; i ++ ) {
-
-				const tmpPath = inSubpaths[ i ];
-
-				const tmpShape = new Shape();
-				tmpShape.curves = tmpPath.curves;
-
-				shapes.push( tmpShape );
-
-			}
-
-			return shapes;
-
-		}
-
-		function isPointInsidePolygon( inPt, inPolygon ) {
-
-			const polyLen = inPolygon.length;
-
-			// inPt on polygon contour => immediate success    or
-			// toggling of inside/outside at every single! intersection point of an edge
-			//  with the horizontal line through inPt, left of inPt
-			//  not counting lowerY endpoints of edges and whole edges on that line
-			let inside = false;
-			for ( let p = polyLen - 1, q = 0; q < polyLen; p = q ++ ) {
-
-				let edgeLowPt = inPolygon[ p ];
-				let edgeHighPt = inPolygon[ q ];
-
-				let edgeDx = edgeHighPt.x - edgeLowPt.x;
-				let edgeDy = edgeHighPt.y - edgeLowPt.y;
-
-				if ( Math.abs( edgeDy ) > Number.EPSILON ) {
-
-					// not parallel
-					if ( edgeDy < 0 ) {
-
-						edgeLowPt = inPolygon[ q ]; edgeDx = - edgeDx;
-						edgeHighPt = inPolygon[ p ]; edgeDy = - edgeDy;
-
-					}
-
-					if ( ( inPt.y < edgeLowPt.y ) || ( inPt.y > edgeHighPt.y ) ) 		continue;
-
-					if ( inPt.y === edgeLowPt.y ) {
-
-						if ( inPt.x === edgeLowPt.x )		return	true;		// inPt is on contour ?
-						// continue;				// no intersection or edgeLowPt => doesn't count !!!
-
-					} else {
-
-						const perpEdge = edgeDy * ( inPt.x - edgeLowPt.x ) - edgeDx * ( inPt.y - edgeLowPt.y );
-						if ( perpEdge === 0 )				return	true;		// inPt is on contour ?
-						if ( perpEdge < 0 ) 				continue;
-						inside = ! inside;		// true intersection left of inPt
-
-					}
-
-				} else {
-
-					// parallel or collinear
-					if ( inPt.y !== edgeLowPt.y ) 		continue;			// parallel
-					// edge lies on the same horizontal line as inPt
-					if ( ( ( edgeHighPt.x <= inPt.x ) && ( inPt.x <= edgeLowPt.x ) ) ||
-						 ( ( edgeLowPt.x <= inPt.x ) && ( inPt.x <= edgeHighPt.x ) ) )		return	true;	// inPt: Point on contour !
-					// continue;
-
-				}
-
-			}
-
-			return	inside;
-
-		}
-
-		const isClockWise = ShapeUtils.isClockWise;
-
-		const subPaths = this.subPaths;
-		if ( subPaths.length === 0 ) return [];
-
-		let solid, tmpPath, tmpShape;
-		const shapes = [];
-
-		if ( subPaths.length === 1 ) {
-
-			tmpPath = subPaths[ 0 ];
-			tmpShape = new Shape();
-			tmpShape.curves = tmpPath.curves;
-			shapes.push( tmpShape );
-			return shapes;
-
-		}
-
-		let holesFirst = ! isClockWise( subPaths[ 0 ].getPoints() );
-		holesFirst = isCCW ? ! holesFirst : holesFirst;
-
-		// console.log("Holes first", holesFirst);
-
-		const betterShapeHoles = [];
-		const newShapes = [];
-		let newShapeHoles = [];
-		let mainIdx = 0;
-		let tmpPoints;
-
-		newShapes[ mainIdx ] = undefined;
-		newShapeHoles[ mainIdx ] = [];
-
-		for ( let i = 0, l = subPaths.length; i < l; i ++ ) {
-
-			tmpPath = subPaths[ i ];
-			tmpPoints = tmpPath.getPoints();
-			solid = isClockWise( tmpPoints );
-			solid = isCCW ? ! solid : solid;
-
-			if ( solid ) {
-
-				if ( ( ! holesFirst ) && ( newShapes[ mainIdx ] ) )	mainIdx ++;
-
-				newShapes[ mainIdx ] = { s: new Shape(), p: tmpPoints };
-				newShapes[ mainIdx ].s.curves = tmpPath.curves;
-
-				if ( holesFirst )	mainIdx ++;
-				newShapeHoles[ mainIdx ] = [];
-
-				//console.log('cw', i);
-
-			} else {
-
-				newShapeHoles[ mainIdx ].push( { h: tmpPath, p: tmpPoints[ 0 ] } );
-
-				//console.log('ccw', i);
-
-			}
-
-		}
-
-		// only Holes? -> probably all Shapes with wrong orientation
-		if ( ! newShapes[ 0 ] )	return	toShapesNoHoles( subPaths );
-
-
-		if ( newShapes.length > 1 ) {
-
-			let ambiguous = false;
-			let toChange = 0;
-
-			for ( let sIdx = 0, sLen = newShapes.length; sIdx < sLen; sIdx ++ ) {
-
-				betterShapeHoles[ sIdx ] = [];
-
-			}
-
-			for ( let sIdx = 0, sLen = newShapes.length; sIdx < sLen; sIdx ++ ) {
-
-				const sho = newShapeHoles[ sIdx ];
-
-				for ( let hIdx = 0; hIdx < sho.length; hIdx ++ ) {
-
-					const ho = sho[ hIdx ];
-					let hole_unassigned = true;
-
-					for ( let s2Idx = 0; s2Idx < newShapes.length; s2Idx ++ ) {
-
-						if ( isPointInsidePolygon( ho.p, newShapes[ s2Idx ].p ) ) {
-
-							if ( sIdx !== s2Idx )	toChange ++;
-
-							if ( hole_unassigned ) {
-
-								hole_unassigned = false;
-								betterShapeHoles[ s2Idx ].push( ho );
-
-							} else {
-
-								ambiguous = true;
-
-							}
-
-						}
-
-					}
-
-					if ( hole_unassigned ) {
-
-						betterShapeHoles[ sIdx ].push( ho );
-
-					}
-
-				}
-
-			}
-
-			if ( toChange > 0 && ambiguous === false ) {
-
-				newShapeHoles = betterShapeHoles;
-
-			}
-
-		}
-
-		let tmpHoles;
-
-		for ( let i = 0, il = newShapes.length; i < il; i ++ ) {
-
-			tmpShape = newShapes[ i ].s;
-			shapes.push( tmpShape );
-			tmpHoles = newShapeHoles[ i ];
-
-			for ( let j = 0, jl = tmpHoles.length; j < jl; j ++ ) {
-
-				tmpShape.holes.push( tmpHoles[ j ].h );
-
-			}
-
-		}
-
-		//console.log("shape", shapes);
-
-		return shapes;
 
 	}
 
@@ -35836,6 +32577,5576 @@ if ( typeof window !== 'undefined' ) {
 		window.__THREE__ = REVISION;
 
 	}
+
+}
+
+// Split strategy constants
+const CENTER = 0;
+const AVERAGE = 1;
+const SAH = 2;
+const CONTAINED = 2;
+
+// SAH cost constants
+// TODO: hone these costs more. The relative difference between them should be the
+// difference in measured time to perform a triangle intersection vs traversing
+// bounds.
+const TRIANGLE_INTERSECT_COST = 1.25;
+const TRAVERSAL_COST = 1;
+
+
+// Build constants
+const BYTES_PER_NODE = 6 * 4 + 4 + 4;
+const IS_LEAFNODE_FLAG = 0xFFFF;
+
+// EPSILON for computing floating point error during build
+// https://en.wikipedia.org/wiki/Machine_epsilon#Values_for_standard_hardware_floating_point_arithmetics
+const FLOAT32_EPSILON = Math.pow( 2, - 24 );
+
+const SKIP_GENERATION = Symbol( 'SKIP_GENERATION' );
+
+function getVertexCount( geo ) {
+
+	return geo.index ? geo.index.count : geo.attributes.position.count;
+
+}
+
+function getTriCount( geo ) {
+
+	return getVertexCount( geo ) / 3;
+
+}
+
+function getIndexArray( vertexCount, BufferConstructor = ArrayBuffer ) {
+
+	if ( vertexCount > 65535 ) {
+
+		return new Uint32Array( new BufferConstructor( 4 * vertexCount ) );
+
+	} else {
+
+		return new Uint16Array( new BufferConstructor( 2 * vertexCount ) );
+
+	}
+
+}
+
+// ensures that an index is present on the geometry
+function ensureIndex( geo, options ) {
+
+	if ( ! geo.index ) {
+
+		const vertexCount = geo.attributes.position.count;
+		const BufferConstructor = options.useSharedArrayBuffer ? SharedArrayBuffer : ArrayBuffer;
+		const index = getIndexArray( vertexCount, BufferConstructor );
+		geo.setIndex( new BufferAttribute( index, 1 ) );
+
+		for ( let i = 0; i < vertexCount; i ++ ) {
+
+			index[ i ] = i;
+
+		}
+
+	}
+
+}
+
+// Computes the set of { offset, count } ranges which need independent BVH roots. Each
+// region in the geometry index that belongs to a different set of material groups requires
+// a separate BVH root, so that triangles indices belonging to one group never get swapped
+// with triangle indices belongs to another group. For example, if the groups were like this:
+//
+// [-------------------------------------------------------------]
+// |__________________|
+//   g0 = [0, 20]  |______________________||_____________________|
+//                      g1 = [16, 40]           g2 = [41, 60]
+//
+// we would need four BVH roots: [0, 15], [16, 20], [21, 40], [41, 60].
+function getFullGeometryRange( geo ) {
+
+	const triCount = getTriCount( geo );
+	const drawRange = geo.drawRange;
+	const start = drawRange.start / 3;
+	const end = ( drawRange.start + drawRange.count ) / 3;
+
+	const offset = Math.max( 0, start );
+	const count = Math.min( triCount, end ) - offset;
+	return [ {
+		offset: Math.floor( offset ),
+		count: Math.floor( count ),
+	} ];
+
+}
+
+function getRootIndexRanges( geo ) {
+
+	if ( ! geo.groups || ! geo.groups.length ) {
+
+		return getFullGeometryRange( geo );
+
+	}
+
+	const ranges = [];
+	const rangeBoundaries = new Set();
+
+	const drawRange = geo.drawRange;
+	const drawRangeStart = drawRange.start / 3;
+	const drawRangeEnd = ( drawRange.start + drawRange.count ) / 3;
+	for ( const group of geo.groups ) {
+
+		const groupStart = group.start / 3;
+		const groupEnd = ( group.start + group.count ) / 3;
+		rangeBoundaries.add( Math.max( drawRangeStart, groupStart ) );
+		rangeBoundaries.add( Math.min( drawRangeEnd, groupEnd ) );
+
+	}
+
+
+	// note that if you don't pass in a comparator, it sorts them lexicographically as strings :-(
+	const sortedBoundaries = Array.from( rangeBoundaries.values() ).sort( ( a, b ) => a - b );
+	for ( let i = 0; i < sortedBoundaries.length - 1; i ++ ) {
+
+		const start = sortedBoundaries[ i ];
+		const end = sortedBoundaries[ i + 1 ];
+
+		ranges.push( {
+			offset: Math.floor( start ),
+			count: Math.floor( end - start ),
+		} );
+
+	}
+
+	return ranges;
+
+}
+
+function hasGroupGaps( geometry ) {
+
+	if ( geometry.groups.length === 0 ) {
+
+		return false;
+
+	}
+
+	const vertexCount = getTriCount( geometry );
+	const groups = getRootIndexRanges( geometry )
+		.sort( ( a, b ) => a.offset - b.offset );
+
+	const finalGroup = groups[ groups.length - 1 ];
+	finalGroup.count = Math.min( vertexCount - finalGroup.offset, finalGroup.count );
+
+	let total = 0;
+	groups.forEach( ( { count } ) => total += count );
+	return vertexCount !== total;
+
+}
+
+// computes the union of the bounds of all of the given triangles and puts the resulting box in "target".
+// A bounding box is computed for the centroids of the triangles, as well, and placed in "centroidTarget".
+// These are computed together to avoid redundant accesses to bounds array.
+function getBounds( triangleBounds, offset, count, target, centroidTarget ) {
+
+	let minx = Infinity;
+	let miny = Infinity;
+	let minz = Infinity;
+	let maxx = - Infinity;
+	let maxy = - Infinity;
+	let maxz = - Infinity;
+
+	let cminx = Infinity;
+	let cminy = Infinity;
+	let cminz = Infinity;
+	let cmaxx = - Infinity;
+	let cmaxy = - Infinity;
+	let cmaxz = - Infinity;
+
+	for ( let i = offset * 6, end = ( offset + count ) * 6; i < end; i += 6 ) {
+
+		const cx = triangleBounds[ i + 0 ];
+		const hx = triangleBounds[ i + 1 ];
+		const lx = cx - hx;
+		const rx = cx + hx;
+		if ( lx < minx ) minx = lx;
+		if ( rx > maxx ) maxx = rx;
+		if ( cx < cminx ) cminx = cx;
+		if ( cx > cmaxx ) cmaxx = cx;
+
+		const cy = triangleBounds[ i + 2 ];
+		const hy = triangleBounds[ i + 3 ];
+		const ly = cy - hy;
+		const ry = cy + hy;
+		if ( ly < miny ) miny = ly;
+		if ( ry > maxy ) maxy = ry;
+		if ( cy < cminy ) cminy = cy;
+		if ( cy > cmaxy ) cmaxy = cy;
+
+		const cz = triangleBounds[ i + 4 ];
+		const hz = triangleBounds[ i + 5 ];
+		const lz = cz - hz;
+		const rz = cz + hz;
+		if ( lz < minz ) minz = lz;
+		if ( rz > maxz ) maxz = rz;
+		if ( cz < cminz ) cminz = cz;
+		if ( cz > cmaxz ) cmaxz = cz;
+
+	}
+
+	target[ 0 ] = minx;
+	target[ 1 ] = miny;
+	target[ 2 ] = minz;
+
+	target[ 3 ] = maxx;
+	target[ 4 ] = maxy;
+	target[ 5 ] = maxz;
+
+	centroidTarget[ 0 ] = cminx;
+	centroidTarget[ 1 ] = cminy;
+	centroidTarget[ 2 ] = cminz;
+
+	centroidTarget[ 3 ] = cmaxx;
+	centroidTarget[ 4 ] = cmaxy;
+	centroidTarget[ 5 ] = cmaxz;
+
+}
+
+// precomputes the bounding box for each triangle; required for quickly calculating tree splits.
+// result is an array of size tris.length * 6 where triangle i maps to a
+// [x_center, x_delta, y_center, y_delta, z_center, z_delta] tuple starting at index i * 6,
+// representing the center and half-extent in each dimension of triangle i
+function computeTriangleBounds( geo, target = null, offset = null, count = null ) {
+
+	const posAttr = geo.attributes.position;
+	const index = geo.index ? geo.index.array : null;
+	const triCount = getTriCount( geo );
+	const normalized = posAttr.normalized;
+	let triangleBounds;
+	if ( target === null ) {
+
+		triangleBounds = new Float32Array( triCount * 6 * 4 );
+		offset = 0;
+		count = triCount;
+
+	} else {
+
+		triangleBounds = target;
+		offset = offset || 0;
+		count = count || triCount;
+
+	}
+
+	// used for non-normalized positions
+	const posArr = posAttr.array;
+
+	// support for an interleaved position buffer
+	const bufferOffset = posAttr.offset || 0;
+	let stride = 3;
+	if ( posAttr.isInterleavedBufferAttribute ) {
+
+		stride = posAttr.data.stride;
+
+	}
+
+	// used for normalized positions
+	const getters = [ 'getX', 'getY', 'getZ' ];
+
+	for ( let tri = offset; tri < offset + count; tri ++ ) {
+
+		const tri3 = tri * 3;
+		const tri6 = tri * 6;
+
+		let ai = tri3 + 0;
+		let bi = tri3 + 1;
+		let ci = tri3 + 2;
+
+		if ( index ) {
+
+			ai = index[ ai ];
+			bi = index[ bi ];
+			ci = index[ ci ];
+
+		}
+
+		// we add the stride and offset here since we access the array directly
+		// below for the sake of performance
+		if ( ! normalized ) {
+
+			ai = ai * stride + bufferOffset;
+			bi = bi * stride + bufferOffset;
+			ci = ci * stride + bufferOffset;
+
+		}
+
+		for ( let el = 0; el < 3; el ++ ) {
+
+			let a, b, c;
+
+			if ( normalized ) {
+
+				a = posAttr[ getters[ el ] ]( ai );
+				b = posAttr[ getters[ el ] ]( bi );
+				c = posAttr[ getters[ el ] ]( ci );
+
+			} else {
+
+				a = posArr[ ai + el ];
+				b = posArr[ bi + el ];
+				c = posArr[ ci + el ];
+
+			}
+
+			let min = a;
+			if ( b < min ) min = b;
+			if ( c < min ) min = c;
+
+			let max = a;
+			if ( b > max ) max = b;
+			if ( c > max ) max = c;
+
+			// Increase the bounds size by float32 epsilon to avoid precision errors when
+			// converting to 32 bit float. Scale the epsilon by the size of the numbers being
+			// worked with.
+			const halfExtents = ( max - min ) / 2;
+			const el2 = el * 2;
+			triangleBounds[ tri6 + el2 + 0 ] = min + halfExtents;
+			triangleBounds[ tri6 + el2 + 1 ] = halfExtents + ( Math.abs( min ) + halfExtents ) * FLOAT32_EPSILON;
+
+		}
+
+	}
+
+	return triangleBounds;
+
+}
+
+function arrayToBox( nodeIndex32, array, target ) {
+
+	target.min.x = array[ nodeIndex32 ];
+	target.min.y = array[ nodeIndex32 + 1 ];
+	target.min.z = array[ nodeIndex32 + 2 ];
+
+	target.max.x = array[ nodeIndex32 + 3 ];
+	target.max.y = array[ nodeIndex32 + 4 ];
+	target.max.z = array[ nodeIndex32 + 5 ];
+
+	return target;
+
+}
+
+function getLongestEdgeIndex( bounds ) {
+
+	let splitDimIdx = - 1;
+	let splitDist = - Infinity;
+
+	for ( let i = 0; i < 3; i ++ ) {
+
+		const dist = bounds[ i + 3 ] - bounds[ i ];
+		if ( dist > splitDist ) {
+
+			splitDist = dist;
+			splitDimIdx = i;
+
+		}
+
+	}
+
+	return splitDimIdx;
+
+}
+
+// copies bounds a into bounds b
+function copyBounds( source, target ) {
+
+	target.set( source );
+
+}
+
+// sets bounds target to the union of bounds a and b
+function unionBounds( a, b, target ) {
+
+	let aVal, bVal;
+	for ( let d = 0; d < 3; d ++ ) {
+
+		const d3 = d + 3;
+
+		// set the minimum values
+		aVal = a[ d ];
+		bVal = b[ d ];
+		target[ d ] = aVal < bVal ? aVal : bVal;
+
+		// set the max values
+		aVal = a[ d3 ];
+		bVal = b[ d3 ];
+		target[ d3 ] = aVal > bVal ? aVal : bVal;
+
+	}
+
+}
+
+// expands the given bounds by the provided triangle bounds
+function expandByTriangleBounds( startIndex, triangleBounds, bounds ) {
+
+	for ( let d = 0; d < 3; d ++ ) {
+
+		const tCenter = triangleBounds[ startIndex + 2 * d ];
+		const tHalf = triangleBounds[ startIndex + 2 * d + 1 ];
+
+		const tMin = tCenter - tHalf;
+		const tMax = tCenter + tHalf;
+
+		if ( tMin < bounds[ d ] ) {
+
+			bounds[ d ] = tMin;
+
+		}
+
+		if ( tMax > bounds[ d + 3 ] ) {
+
+			bounds[ d + 3 ] = tMax;
+
+		}
+
+	}
+
+}
+
+// compute bounds surface area
+function computeSurfaceArea( bounds ) {
+
+	const d0 = bounds[ 3 ] - bounds[ 0 ];
+	const d1 = bounds[ 4 ] - bounds[ 1 ];
+	const d2 = bounds[ 5 ] - bounds[ 2 ];
+
+	return 2 * ( d0 * d1 + d1 * d2 + d2 * d0 );
+
+}
+
+const BIN_COUNT = 32;
+const binsSort = ( a, b ) => a.candidate - b.candidate;
+const sahBins = new Array( BIN_COUNT ).fill().map( () => {
+
+	return {
+
+		count: 0,
+		bounds: new Float32Array( 6 ),
+		rightCacheBounds: new Float32Array( 6 ),
+		leftCacheBounds: new Float32Array( 6 ),
+		candidate: 0,
+
+	};
+
+} );
+const leftBounds = new Float32Array( 6 );
+
+function getOptimalSplit( nodeBoundingData, centroidBoundingData, triangleBounds, offset, count, strategy ) {
+
+	let axis = - 1;
+	let pos = 0;
+
+	// Center
+	if ( strategy === CENTER ) {
+
+		axis = getLongestEdgeIndex( centroidBoundingData );
+		if ( axis !== - 1 ) {
+
+			pos = ( centroidBoundingData[ axis ] + centroidBoundingData[ axis + 3 ] ) / 2;
+
+		}
+
+	} else if ( strategy === AVERAGE ) {
+
+		axis = getLongestEdgeIndex( nodeBoundingData );
+		if ( axis !== - 1 ) {
+
+			pos = getAverage( triangleBounds, offset, count, axis );
+
+		}
+
+	} else if ( strategy === SAH ) {
+
+		const rootSurfaceArea = computeSurfaceArea( nodeBoundingData );
+		let bestCost = TRIANGLE_INTERSECT_COST * count;
+
+		// iterate over all axes
+		const cStart = offset * 6;
+		const cEnd = ( offset + count ) * 6;
+		for ( let a = 0; a < 3; a ++ ) {
+
+			const axisLeft = centroidBoundingData[ a ];
+			const axisRight = centroidBoundingData[ a + 3 ];
+			const axisLength = axisRight - axisLeft;
+			const binWidth = axisLength / BIN_COUNT;
+
+			// If we have fewer triangles than we're planning to split then just check all
+			// the triangle positions because it will be faster.
+			if ( count < BIN_COUNT / 4 ) {
+
+				// initialize the bin candidates
+				const truncatedBins = [ ...sahBins ];
+				truncatedBins.length = count;
+
+				// set the candidates
+				let b = 0;
+				for ( let c = cStart; c < cEnd; c += 6, b ++ ) {
+
+					const bin = truncatedBins[ b ];
+					bin.candidate = triangleBounds[ c + 2 * a ];
+					bin.count = 0;
+
+					const {
+						bounds,
+						leftCacheBounds,
+						rightCacheBounds,
+					} = bin;
+					for ( let d = 0; d < 3; d ++ ) {
+
+						rightCacheBounds[ d ] = Infinity;
+						rightCacheBounds[ d + 3 ] = - Infinity;
+
+						leftCacheBounds[ d ] = Infinity;
+						leftCacheBounds[ d + 3 ] = - Infinity;
+
+						bounds[ d ] = Infinity;
+						bounds[ d + 3 ] = - Infinity;
+
+					}
+
+					expandByTriangleBounds( c, triangleBounds, bounds );
+
+				}
+
+				truncatedBins.sort( binsSort );
+
+				// remove redundant splits
+				let splitCount = count;
+				for ( let bi = 0; bi < splitCount; bi ++ ) {
+
+					const bin = truncatedBins[ bi ];
+					while ( bi + 1 < splitCount && truncatedBins[ bi + 1 ].candidate === bin.candidate ) {
+
+						truncatedBins.splice( bi + 1, 1 );
+						splitCount --;
+
+					}
+
+				}
+
+				// find the appropriate bin for each triangle and expand the bounds.
+				for ( let c = cStart; c < cEnd; c += 6 ) {
+
+					const center = triangleBounds[ c + 2 * a ];
+					for ( let bi = 0; bi < splitCount; bi ++ ) {
+
+						const bin = truncatedBins[ bi ];
+						if ( center >= bin.candidate ) {
+
+							expandByTriangleBounds( c, triangleBounds, bin.rightCacheBounds );
+
+						} else {
+
+							expandByTriangleBounds( c, triangleBounds, bin.leftCacheBounds );
+							bin.count ++;
+
+						}
+
+					}
+
+				}
+
+				// expand all the bounds
+				for ( let bi = 0; bi < splitCount; bi ++ ) {
+
+					const bin = truncatedBins[ bi ];
+					const leftCount = bin.count;
+					const rightCount = count - bin.count;
+
+					// check the cost of this split
+					const leftBounds = bin.leftCacheBounds;
+					const rightBounds = bin.rightCacheBounds;
+
+					let leftProb = 0;
+					if ( leftCount !== 0 ) {
+
+						leftProb = computeSurfaceArea( leftBounds ) / rootSurfaceArea;
+
+					}
+
+					let rightProb = 0;
+					if ( rightCount !== 0 ) {
+
+						rightProb = computeSurfaceArea( rightBounds ) / rootSurfaceArea;
+
+					}
+
+					const cost = TRAVERSAL_COST + TRIANGLE_INTERSECT_COST * (
+						leftProb * leftCount + rightProb * rightCount
+					);
+
+					if ( cost < bestCost ) {
+
+						axis = a;
+						bestCost = cost;
+						pos = bin.candidate;
+
+					}
+
+				}
+
+			} else {
+
+				// reset the bins
+				for ( let i = 0; i < BIN_COUNT; i ++ ) {
+
+					const bin = sahBins[ i ];
+					bin.count = 0;
+					bin.candidate = axisLeft + binWidth + i * binWidth;
+
+					const bounds = bin.bounds;
+					for ( let d = 0; d < 3; d ++ ) {
+
+						bounds[ d ] = Infinity;
+						bounds[ d + 3 ] = - Infinity;
+
+					}
+
+				}
+
+				// iterate over all center positions
+				for ( let c = cStart; c < cEnd; c += 6 ) {
+
+					const triCenter = triangleBounds[ c + 2 * a ];
+					const relativeCenter = triCenter - axisLeft;
+
+					// in the partition function if the centroid lies on the split plane then it is
+					// considered to be on the right side of the split
+					let binIndex = ~ ~ ( relativeCenter / binWidth );
+					if ( binIndex >= BIN_COUNT ) binIndex = BIN_COUNT - 1;
+
+					const bin = sahBins[ binIndex ];
+					bin.count ++;
+
+					expandByTriangleBounds( c, triangleBounds, bin.bounds );
+
+				}
+
+				// cache the unioned bounds from right to left so we don't have to regenerate them each time
+				const lastBin = sahBins[ BIN_COUNT - 1 ];
+				copyBounds( lastBin.bounds, lastBin.rightCacheBounds );
+				for ( let i = BIN_COUNT - 2; i >= 0; i -- ) {
+
+					const bin = sahBins[ i ];
+					const nextBin = sahBins[ i + 1 ];
+					unionBounds( bin.bounds, nextBin.rightCacheBounds, bin.rightCacheBounds );
+
+				}
+
+				let leftCount = 0;
+				for ( let i = 0; i < BIN_COUNT - 1; i ++ ) {
+
+					const bin = sahBins[ i ];
+					const binCount = bin.count;
+					const bounds = bin.bounds;
+
+					const nextBin = sahBins[ i + 1 ];
+					const rightBounds = nextBin.rightCacheBounds;
+
+					// don't do anything with the bounds if the new bounds have no triangles
+					if ( binCount !== 0 ) {
+
+						if ( leftCount === 0 ) {
+
+							copyBounds( bounds, leftBounds );
+
+						} else {
+
+							unionBounds( bounds, leftBounds, leftBounds );
+
+						}
+
+					}
+
+					leftCount += binCount;
+
+					// check the cost of this split
+					let leftProb = 0;
+					let rightProb = 0;
+
+					if ( leftCount !== 0 ) {
+
+						leftProb = computeSurfaceArea( leftBounds ) / rootSurfaceArea;
+
+					}
+
+					const rightCount = count - leftCount;
+					if ( rightCount !== 0 ) {
+
+						rightProb = computeSurfaceArea( rightBounds ) / rootSurfaceArea;
+
+					}
+
+					const cost = TRAVERSAL_COST + TRIANGLE_INTERSECT_COST * (
+						leftProb * leftCount + rightProb * rightCount
+					);
+
+					if ( cost < bestCost ) {
+
+						axis = a;
+						bestCost = cost;
+						pos = bin.candidate;
+
+					}
+
+				}
+
+			}
+
+		}
+
+	} else {
+
+		console.warn( `MeshBVH: Invalid build strategy value ${ strategy } used.` );
+
+	}
+
+	return { axis, pos };
+
+}
+
+// returns the average coordinate on the specified axis of the all the provided triangles
+function getAverage( triangleBounds, offset, count, axis ) {
+
+	let avg = 0;
+	for ( let i = offset, end = offset + count; i < end; i ++ ) {
+
+		avg += triangleBounds[ i * 6 + axis * 2 ];
+
+	}
+
+	return avg / count;
+
+}
+
+class MeshBVHNode {
+
+	constructor() {
+
+		// internal nodes have boundingData, left, right, and splitAxis
+		// leaf nodes have offset and count (referring to primitives in the mesh geometry)
+
+		this.boundingData = new Float32Array( 6 );
+
+	}
+
+}
+
+/********************************************************/
+/* This file is generated from "sortUtils.template.js". */
+/********************************************************/
+// reorders `tris` such that for `count` elements after `offset`, elements on the left side of the split
+// will be on the left and elements on the right side of the split will be on the right. returns the index
+// of the first element on the right side, or offset + count if there are no elements on the right side.
+function partition( indirectBuffer, index, triangleBounds, offset, count, split ) {
+
+	let left = offset;
+	let right = offset + count - 1;
+	const pos = split.pos;
+	const axisOffset = split.axis * 2;
+
+	// hoare partitioning, see e.g. https://en.wikipedia.org/wiki/Quicksort#Hoare_partition_scheme
+	while ( true ) {
+
+		while ( left <= right && triangleBounds[ left * 6 + axisOffset ] < pos ) {
+
+			left ++;
+
+		}
+
+		// if a triangle center lies on the partition plane it is considered to be on the right side
+		while ( left <= right && triangleBounds[ right * 6 + axisOffset ] >= pos ) {
+
+			right --;
+
+		}
+
+		if ( left < right ) {
+
+			// we need to swap all of the information associated with the triangles at index
+			// left and right; that's the verts in the geometry index, the bounds,
+			// and perhaps the SAH planes
+
+			for ( let i = 0; i < 3; i ++ ) {
+
+				let t0 = index[ left * 3 + i ];
+				index[ left * 3 + i ] = index[ right * 3 + i ];
+				index[ right * 3 + i ] = t0;
+
+			}
+
+
+			// swap bounds
+			for ( let i = 0; i < 6; i ++ ) {
+
+				let tb = triangleBounds[ left * 6 + i ];
+				triangleBounds[ left * 6 + i ] = triangleBounds[ right * 6 + i ];
+				triangleBounds[ right * 6 + i ] = tb;
+
+			}
+
+			left ++;
+			right --;
+
+		} else {
+
+			return left;
+
+		}
+
+	}
+
+}
+
+/********************************************************/
+/* This file is generated from "sortUtils.template.js". */
+/********************************************************/
+// reorders `tris` such that for `count` elements after `offset`, elements on the left side of the split
+// will be on the left and elements on the right side of the split will be on the right. returns the index
+// of the first element on the right side, or offset + count if there are no elements on the right side.
+function partition_indirect( indirectBuffer, index, triangleBounds, offset, count, split ) {
+
+	let left = offset;
+	let right = offset + count - 1;
+	const pos = split.pos;
+	const axisOffset = split.axis * 2;
+
+	// hoare partitioning, see e.g. https://en.wikipedia.org/wiki/Quicksort#Hoare_partition_scheme
+	while ( true ) {
+
+		while ( left <= right && triangleBounds[ left * 6 + axisOffset ] < pos ) {
+
+			left ++;
+
+		}
+
+		// if a triangle center lies on the partition plane it is considered to be on the right side
+		while ( left <= right && triangleBounds[ right * 6 + axisOffset ] >= pos ) {
+
+			right --;
+
+		}
+
+		if ( left < right ) {
+
+			// we need to swap all of the information associated with the triangles at index
+			// left and right; that's the verts in the geometry index, the bounds,
+			// and perhaps the SAH planes
+			let t = indirectBuffer[ left ];
+			indirectBuffer[ left ] = indirectBuffer[ right ];
+			indirectBuffer[ right ] = t;
+
+
+			// swap bounds
+			for ( let i = 0; i < 6; i ++ ) {
+
+				let tb = triangleBounds[ left * 6 + i ];
+				triangleBounds[ left * 6 + i ] = triangleBounds[ right * 6 + i ];
+				triangleBounds[ right * 6 + i ] = tb;
+
+			}
+
+			left ++;
+			right --;
+
+		} else {
+
+			return left;
+
+		}
+
+	}
+
+}
+
+function IS_LEAF( n16, uint16Array ) {
+
+	return uint16Array[ n16 + 15 ] === 0xFFFF;
+
+}
+
+function OFFSET( n32, uint32Array ) {
+
+	return uint32Array[ n32 + 6 ];
+
+}
+
+function COUNT( n16, uint16Array ) {
+
+	return uint16Array[ n16 + 14 ];
+
+}
+
+function LEFT_NODE( n32 ) {
+
+	return n32 + 8;
+
+}
+
+function RIGHT_NODE( n32, uint32Array ) {
+
+	return uint32Array[ n32 + 6 ];
+
+}
+
+function SPLIT_AXIS( n32, uint32Array ) {
+
+	return uint32Array[ n32 + 7 ];
+
+}
+
+function BOUNDING_DATA_INDEX( n32 ) {
+
+	return n32;
+
+}
+
+let float32Array, uint32Array, uint16Array, uint8Array;
+const MAX_POINTER = Math.pow( 2, 32 );
+
+function countNodes( node ) {
+
+	if ( 'count' in node ) {
+
+		return 1;
+
+	} else {
+
+		return 1 + countNodes( node.left ) + countNodes( node.right );
+
+	}
+
+}
+
+function populateBuffer( byteOffset, node, buffer ) {
+
+	float32Array = new Float32Array( buffer );
+	uint32Array = new Uint32Array( buffer );
+	uint16Array = new Uint16Array( buffer );
+	uint8Array = new Uint8Array( buffer );
+
+	return _populateBuffer( byteOffset, node );
+
+}
+
+// pack structure
+// boundingData  				: 6 float32
+// right / offset 				: 1 uint32
+// splitAxis / isLeaf + count 	: 1 uint32 / 2 uint16
+function _populateBuffer( byteOffset, node ) {
+
+	const stride4Offset = byteOffset / 4;
+	const stride2Offset = byteOffset / 2;
+	const isLeaf = 'count' in node;
+	const boundingData = node.boundingData;
+	for ( let i = 0; i < 6; i ++ ) {
+
+		float32Array[ stride4Offset + i ] = boundingData[ i ];
+
+	}
+
+	if ( isLeaf ) {
+
+		if ( node.buffer ) {
+
+			const buffer = node.buffer;
+			uint8Array.set( new Uint8Array( buffer ), byteOffset );
+
+			for ( let offset = byteOffset, l = byteOffset + buffer.byteLength; offset < l; offset += BYTES_PER_NODE ) {
+
+				const offset2 = offset / 2;
+				if ( ! IS_LEAF( offset2, uint16Array ) ) {
+
+					uint32Array[ ( offset / 4 ) + 6 ] += stride4Offset;
+
+
+				}
+
+			}
+
+			return byteOffset + buffer.byteLength;
+
+		} else {
+
+			const offset = node.offset;
+			const count = node.count;
+			uint32Array[ stride4Offset + 6 ] = offset;
+			uint16Array[ stride2Offset + 14 ] = count;
+			uint16Array[ stride2Offset + 15 ] = IS_LEAFNODE_FLAG;
+			return byteOffset + BYTES_PER_NODE;
+
+		}
+
+	} else {
+
+		const left = node.left;
+		const right = node.right;
+		const splitAxis = node.splitAxis;
+
+		let nextUnusedPointer;
+		nextUnusedPointer = _populateBuffer( byteOffset + BYTES_PER_NODE, left );
+
+		if ( ( nextUnusedPointer / 4 ) > MAX_POINTER ) {
+
+			throw new Error( 'MeshBVH: Cannot store child pointer greater than 32 bits.' );
+
+		}
+
+		uint32Array[ stride4Offset + 6 ] = nextUnusedPointer / 4;
+		nextUnusedPointer = _populateBuffer( nextUnusedPointer, right );
+
+		uint32Array[ stride4Offset + 7 ] = splitAxis;
+		return nextUnusedPointer;
+
+	}
+
+}
+
+function generateIndirectBuffer( geometry, useSharedArrayBuffer ) {
+
+	const triCount = ( geometry.index ? geometry.index.count : geometry.attributes.position.count ) / 3;
+	const useUint32 = triCount > 2 ** 16;
+	const byteCount = useUint32 ? 4 : 2;
+
+	const buffer = useSharedArrayBuffer ? new SharedArrayBuffer( triCount * byteCount ) : new ArrayBuffer( triCount * byteCount );
+	const indirectBuffer = useUint32 ? new Uint32Array( buffer ) : new Uint16Array( buffer );
+	for ( let i = 0, l = indirectBuffer.length; i < l; i ++ ) {
+
+		indirectBuffer[ i ] = i;
+
+	}
+
+	return indirectBuffer;
+
+}
+
+function buildTree( bvh, triangleBounds, offset, count, options ) {
+
+	// epxand variables
+	const {
+		maxDepth,
+		verbose,
+		maxLeafTris,
+		strategy,
+		onProgress,
+		indirect,
+	} = options;
+	const indirectBuffer = bvh._indirectBuffer;
+	const geometry = bvh.geometry;
+	const indexArray = geometry.index ? geometry.index.array : null;
+	const partionFunc = indirect ? partition_indirect : partition;
+
+	// generate intermediate variables
+	const totalTriangles = getTriCount( geometry );
+	const cacheCentroidBoundingData = new Float32Array( 6 );
+	let reachedMaxDepth = false;
+
+	const root = new MeshBVHNode();
+	getBounds( triangleBounds, offset, count, root.boundingData, cacheCentroidBoundingData );
+	splitNode( root, offset, count, cacheCentroidBoundingData );
+	return root;
+
+	function triggerProgress( trianglesProcessed ) {
+
+		if ( onProgress ) {
+
+			onProgress( trianglesProcessed / totalTriangles );
+
+		}
+
+	}
+
+	// either recursively splits the given node, creating left and right subtrees for it, or makes it a leaf node,
+	// recording the offset and count of its triangles and writing them into the reordered geometry index.
+	function splitNode( node, offset, count, centroidBoundingData = null, depth = 0 ) {
+
+		if ( ! reachedMaxDepth && depth >= maxDepth ) {
+
+			reachedMaxDepth = true;
+			if ( verbose ) {
+
+				console.warn( `MeshBVH: Max depth of ${ maxDepth } reached when generating BVH. Consider increasing maxDepth.` );
+				console.warn( geometry );
+
+			}
+
+		}
+
+		// early out if we've met our capacity
+		if ( count <= maxLeafTris || depth >= maxDepth ) {
+
+			triggerProgress( offset + count );
+			node.offset = offset;
+			node.count = count;
+			return node;
+
+		}
+
+		// Find where to split the volume
+		const split = getOptimalSplit( node.boundingData, centroidBoundingData, triangleBounds, offset, count, strategy );
+		if ( split.axis === - 1 ) {
+
+			triggerProgress( offset + count );
+			node.offset = offset;
+			node.count = count;
+			return node;
+
+		}
+
+		const splitOffset = partionFunc( indirectBuffer, indexArray, triangleBounds, offset, count, split );
+
+		// create the two new child nodes
+		if ( splitOffset === offset || splitOffset === offset + count ) {
+
+			triggerProgress( offset + count );
+			node.offset = offset;
+			node.count = count;
+
+		} else {
+
+			node.splitAxis = split.axis;
+
+			// create the left child and compute its bounding box
+			const left = new MeshBVHNode();
+			const lstart = offset;
+			const lcount = splitOffset - offset;
+			node.left = left;
+
+			getBounds( triangleBounds, lstart, lcount, left.boundingData, cacheCentroidBoundingData );
+			splitNode( left, lstart, lcount, cacheCentroidBoundingData, depth + 1 );
+
+			// repeat for right
+			const right = new MeshBVHNode();
+			const rstart = splitOffset;
+			const rcount = count - lcount;
+			node.right = right;
+
+			getBounds( triangleBounds, rstart, rcount, right.boundingData, cacheCentroidBoundingData );
+			splitNode( right, rstart, rcount, cacheCentroidBoundingData, depth + 1 );
+
+		}
+
+		return node;
+
+	}
+
+}
+
+function buildPackedTree( bvh, options ) {
+
+	const geometry = bvh.geometry;
+	if ( options.indirect ) {
+
+		bvh._indirectBuffer = generateIndirectBuffer( geometry, options.useSharedArrayBuffer );
+
+		if ( hasGroupGaps( geometry ) && ! options.verbose ) {
+
+			console.warn(
+				'MeshBVH: Provided geometry contains groups that do not fully span the vertex contents while using the "indirect" option. ' +
+				'BVH may incorrectly report intersections on unrendered portions of the geometry.'
+			);
+
+		}
+
+	}
+
+	if ( ! bvh._indirectBuffer ) {
+
+		ensureIndex( geometry, options );
+
+	}
+
+	const BufferConstructor = options.useSharedArrayBuffer ? SharedArrayBuffer : ArrayBuffer;
+
+	const triangleBounds = computeTriangleBounds( geometry );
+	const geometryRanges = options.indirect ? getFullGeometryRange( geometry ) : getRootIndexRanges( geometry );
+	bvh._roots = geometryRanges.map( range => {
+
+		const root = buildTree( bvh, triangleBounds, range.offset, range.count, options );
+		const nodeCount = countNodes( root );
+		const buffer = new BufferConstructor( BYTES_PER_NODE * nodeCount );
+		populateBuffer( 0, root, buffer );
+		return buffer;
+
+	} );
+
+}
+
+class SeparatingAxisBounds {
+
+	constructor() {
+
+		this.min = Infinity;
+		this.max = - Infinity;
+
+	}
+
+	setFromPointsField( points, field ) {
+
+		let min = Infinity;
+		let max = - Infinity;
+		for ( let i = 0, l = points.length; i < l; i ++ ) {
+
+			const p = points[ i ];
+			const val = p[ field ];
+			min = val < min ? val : min;
+			max = val > max ? val : max;
+
+		}
+
+		this.min = min;
+		this.max = max;
+
+	}
+
+	setFromPoints( axis, points ) {
+
+		let min = Infinity;
+		let max = - Infinity;
+		for ( let i = 0, l = points.length; i < l; i ++ ) {
+
+			const p = points[ i ];
+			const val = axis.dot( p );
+			min = val < min ? val : min;
+			max = val > max ? val : max;
+
+		}
+
+		this.min = min;
+		this.max = max;
+
+	}
+
+	isSeparated( other ) {
+
+		return this.min > other.max || other.min > this.max;
+
+	}
+
+}
+
+SeparatingAxisBounds.prototype.setFromBox = ( function () {
+
+	const p = new Vector3();
+	return function setFromBox( axis, box ) {
+
+		const boxMin = box.min;
+		const boxMax = box.max;
+		let min = Infinity;
+		let max = - Infinity;
+		for ( let x = 0; x <= 1; x ++ ) {
+
+			for ( let y = 0; y <= 1; y ++ ) {
+
+				for ( let z = 0; z <= 1; z ++ ) {
+
+					p.x = boxMin.x * x + boxMax.x * ( 1 - x );
+					p.y = boxMin.y * y + boxMax.y * ( 1 - y );
+					p.z = boxMin.z * z + boxMax.z * ( 1 - z );
+
+					const val = axis.dot( p );
+					min = Math.min( val, min );
+					max = Math.max( val, max );
+
+				}
+
+			}
+
+		}
+
+		this.min = min;
+		this.max = max;
+
+	};
+
+} )();
+
+const closestPointLineToLine = ( function () {
+
+	// https://github.com/juj/MathGeoLib/blob/master/src/Geometry/Line.cpp#L56
+	const dir1 = new Vector3();
+	const dir2 = new Vector3();
+	const v02 = new Vector3();
+	return function closestPointLineToLine( l1, l2, result ) {
+
+		const v0 = l1.start;
+		const v10 = dir1;
+		const v2 = l2.start;
+		const v32 = dir2;
+
+		v02.subVectors( v0, v2 );
+		dir1.subVectors( l1.end, l1.start );
+		dir2.subVectors( l2.end, l2.start );
+
+		// float d0232 = v02.Dot(v32);
+		const d0232 = v02.dot( v32 );
+
+		// float d3210 = v32.Dot(v10);
+		const d3210 = v32.dot( v10 );
+
+		// float d3232 = v32.Dot(v32);
+		const d3232 = v32.dot( v32 );
+
+		// float d0210 = v02.Dot(v10);
+		const d0210 = v02.dot( v10 );
+
+		// float d1010 = v10.Dot(v10);
+		const d1010 = v10.dot( v10 );
+
+		// float denom = d1010*d3232 - d3210*d3210;
+		const denom = d1010 * d3232 - d3210 * d3210;
+
+		let d, d2;
+		if ( denom !== 0 ) {
+
+			d = ( d0232 * d3210 - d0210 * d3232 ) / denom;
+
+		} else {
+
+			d = 0;
+
+		}
+
+		d2 = ( d0232 + d * d3210 ) / d3232;
+
+		result.x = d;
+		result.y = d2;
+
+	};
+
+} )();
+
+const closestPointsSegmentToSegment = ( function () {
+
+	// https://github.com/juj/MathGeoLib/blob/master/src/Geometry/LineSegment.cpp#L187
+	const paramResult = new Vector2();
+	const temp1 = new Vector3();
+	const temp2 = new Vector3();
+	return function closestPointsSegmentToSegment( l1, l2, target1, target2 ) {
+
+		closestPointLineToLine( l1, l2, paramResult );
+
+		let d = paramResult.x;
+		let d2 = paramResult.y;
+		if ( d >= 0 && d <= 1 && d2 >= 0 && d2 <= 1 ) {
+
+			l1.at( d, target1 );
+			l2.at( d2, target2 );
+
+			return;
+
+		} else if ( d >= 0 && d <= 1 ) {
+
+			// Only d2 is out of bounds.
+			if ( d2 < 0 ) {
+
+				l2.at( 0, target2 );
+
+			} else {
+
+				l2.at( 1, target2 );
+
+			}
+
+			l1.closestPointToPoint( target2, true, target1 );
+			return;
+
+		} else if ( d2 >= 0 && d2 <= 1 ) {
+
+			// Only d is out of bounds.
+			if ( d < 0 ) {
+
+				l1.at( 0, target1 );
+
+			} else {
+
+				l1.at( 1, target1 );
+
+			}
+
+			l2.closestPointToPoint( target1, true, target2 );
+			return;
+
+		} else {
+
+			// Both u and u2 are out of bounds.
+			let p;
+			if ( d < 0 ) {
+
+				p = l1.start;
+
+			} else {
+
+				p = l1.end;
+
+			}
+
+			let p2;
+			if ( d2 < 0 ) {
+
+				p2 = l2.start;
+
+			} else {
+
+				p2 = l2.end;
+
+			}
+
+			const closestPoint = temp1;
+			const closestPoint2 = temp2;
+			l1.closestPointToPoint( p2, true, temp1 );
+			l2.closestPointToPoint( p, true, temp2 );
+
+			if ( closestPoint.distanceToSquared( p2 ) <= closestPoint2.distanceToSquared( p ) ) {
+
+				target1.copy( closestPoint );
+				target2.copy( p2 );
+				return;
+
+			} else {
+
+				target1.copy( p );
+				target2.copy( closestPoint2 );
+				return;
+
+			}
+
+		}
+
+	};
+
+} )();
+
+
+const sphereIntersectTriangle = ( function () {
+
+	// https://stackoverflow.com/questions/34043955/detect-collision-between-sphere-and-triangle-in-three-js
+	const closestPointTemp = new Vector3();
+	const projectedPointTemp = new Vector3();
+	const planeTemp = new Plane();
+	const lineTemp = new Line3();
+	return function sphereIntersectTriangle( sphere, triangle ) {
+
+		const { radius, center } = sphere;
+		const { a, b, c } = triangle;
+
+		// phase 1
+		lineTemp.start = a;
+		lineTemp.end = b;
+		const closestPoint1 = lineTemp.closestPointToPoint( center, true, closestPointTemp );
+		if ( closestPoint1.distanceTo( center ) <= radius ) return true;
+
+		lineTemp.start = a;
+		lineTemp.end = c;
+		const closestPoint2 = lineTemp.closestPointToPoint( center, true, closestPointTemp );
+		if ( closestPoint2.distanceTo( center ) <= radius ) return true;
+
+		lineTemp.start = b;
+		lineTemp.end = c;
+		const closestPoint3 = lineTemp.closestPointToPoint( center, true, closestPointTemp );
+		if ( closestPoint3.distanceTo( center ) <= radius ) return true;
+
+		// phase 2
+		const plane = triangle.getPlane( planeTemp );
+		const dp = Math.abs( plane.distanceToPoint( center ) );
+		if ( dp <= radius ) {
+
+			const pp = plane.projectPoint( center, projectedPointTemp );
+			const cp = triangle.containsPoint( pp );
+			if ( cp ) return true;
+
+		}
+
+		return false;
+
+	};
+
+} )();
+
+const ZERO_EPSILON = 1e-15;
+function isNearZero( value ) {
+
+	return Math.abs( value ) < ZERO_EPSILON;
+
+}
+
+class ExtendedTriangle extends Triangle {
+
+	constructor( ...args ) {
+
+		super( ...args );
+
+		this.isExtendedTriangle = true;
+		this.satAxes = new Array( 4 ).fill().map( () => new Vector3() );
+		this.satBounds = new Array( 4 ).fill().map( () => new SeparatingAxisBounds() );
+		this.points = [ this.a, this.b, this.c ];
+		this.sphere = new Sphere();
+		this.plane = new Plane();
+		this.needsUpdate = true;
+
+	}
+
+	intersectsSphere( sphere ) {
+
+		return sphereIntersectTriangle( sphere, this );
+
+	}
+
+	update() {
+
+		const a = this.a;
+		const b = this.b;
+		const c = this.c;
+		const points = this.points;
+
+		const satAxes = this.satAxes;
+		const satBounds = this.satBounds;
+
+		const axis0 = satAxes[ 0 ];
+		const sab0 = satBounds[ 0 ];
+		this.getNormal( axis0 );
+		sab0.setFromPoints( axis0, points );
+
+		const axis1 = satAxes[ 1 ];
+		const sab1 = satBounds[ 1 ];
+		axis1.subVectors( a, b );
+		sab1.setFromPoints( axis1, points );
+
+		const axis2 = satAxes[ 2 ];
+		const sab2 = satBounds[ 2 ];
+		axis2.subVectors( b, c );
+		sab2.setFromPoints( axis2, points );
+
+		const axis3 = satAxes[ 3 ];
+		const sab3 = satBounds[ 3 ];
+		axis3.subVectors( c, a );
+		sab3.setFromPoints( axis3, points );
+
+		this.sphere.setFromPoints( this.points );
+		this.plane.setFromNormalAndCoplanarPoint( axis0, a );
+		this.needsUpdate = false;
+
+	}
+
+}
+
+ExtendedTriangle.prototype.closestPointToSegment = ( function () {
+
+	const point1 = new Vector3();
+	const point2 = new Vector3();
+	const edge = new Line3();
+
+	return function distanceToSegment( segment, target1 = null, target2 = null ) {
+
+		const { start, end } = segment;
+		const points = this.points;
+		let distSq;
+		let closestDistanceSq = Infinity;
+
+		// check the triangle edges
+		for ( let i = 0; i < 3; i ++ ) {
+
+			const nexti = ( i + 1 ) % 3;
+			edge.start.copy( points[ i ] );
+			edge.end.copy( points[ nexti ] );
+
+			closestPointsSegmentToSegment( edge, segment, point1, point2 );
+
+			distSq = point1.distanceToSquared( point2 );
+			if ( distSq < closestDistanceSq ) {
+
+				closestDistanceSq = distSq;
+				if ( target1 ) target1.copy( point1 );
+				if ( target2 ) target2.copy( point2 );
+
+			}
+
+		}
+
+		// check end points
+		this.closestPointToPoint( start, point1 );
+		distSq = start.distanceToSquared( point1 );
+		if ( distSq < closestDistanceSq ) {
+
+			closestDistanceSq = distSq;
+			if ( target1 ) target1.copy( point1 );
+			if ( target2 ) target2.copy( start );
+
+		}
+
+		this.closestPointToPoint( end, point1 );
+		distSq = end.distanceToSquared( point1 );
+		if ( distSq < closestDistanceSq ) {
+
+			closestDistanceSq = distSq;
+			if ( target1 ) target1.copy( point1 );
+			if ( target2 ) target2.copy( end );
+
+		}
+
+		return Math.sqrt( closestDistanceSq );
+
+	};
+
+} )();
+
+ExtendedTriangle.prototype.intersectsTriangle = ( function () {
+
+	const saTri2 = new ExtendedTriangle();
+	const arr1 = new Array( 3 );
+	const arr2 = new Array( 3 );
+	const cachedSatBounds = new SeparatingAxisBounds();
+	const cachedSatBounds2 = new SeparatingAxisBounds();
+	const cachedAxis = new Vector3();
+	const dir = new Vector3();
+	const dir1 = new Vector3();
+	const dir2 = new Vector3();
+	const tempDir = new Vector3();
+	const edge = new Line3();
+	const edge1 = new Line3();
+	const edge2 = new Line3();
+	const tempPoint = new Vector3();
+
+	function triIntersectPlane( tri, plane, targetEdge ) {
+
+		// find the edge that intersects the other triangle plane
+		const points = tri.points;
+		let count = 0;
+		let startPointIntersection = - 1;
+		for ( let i = 0; i < 3; i ++ ) {
+
+			const { start, end } = edge;
+			start.copy( points[ i ] );
+			end.copy( points[ ( i + 1 ) % 3 ] );
+			edge.delta( dir );
+
+			const startIntersects = isNearZero( plane.distanceToPoint( start ) );
+			if ( isNearZero( plane.normal.dot( dir ) ) && startIntersects ) {
+
+				// if the edge lies on the plane then take the line
+				targetEdge.copy( edge );
+				count = 2;
+				break;
+
+			}
+
+			// check if the start point is near the plane because "intersectLine" is not robust to that case
+			const doesIntersect = plane.intersectLine( edge, tempPoint );
+			if ( ! doesIntersect && startIntersects ) {
+
+				tempPoint.copy( start );
+
+			}
+
+			// ignore the end point
+			if ( ( doesIntersect || startIntersects ) && ! isNearZero( tempPoint.distanceTo( end ) ) ) {
+
+				if ( count <= 1 ) {
+
+					// assign to the start or end point and save which index was snapped to
+					// the start point if necessary
+					const point = count === 1 ? targetEdge.start : targetEdge.end;
+					point.copy( tempPoint );
+					if ( startIntersects ) {
+
+						startPointIntersection = count;
+
+					}
+
+				} else if ( count >= 2 ) {
+
+					// if we're here that means that there must have been one point that had
+					// snapped to the start point so replace it here
+					const point = startPointIntersection === 1 ? targetEdge.start : targetEdge.end;
+					point.copy( tempPoint );
+					count = 2;
+					break;
+
+				}
+
+				count ++;
+				if ( count === 2 && startPointIntersection === - 1 ) {
+
+					break;
+
+				}
+
+			}
+
+		}
+
+		return count;
+
+	}
+
+	// TODO: If the triangles are coplanar and intersecting the target is nonsensical. It should at least
+	// be a line contained by both triangles if not a different special case somehow represented in the return result.
+	return function intersectsTriangle( other, target = null, suppressLog = false ) {
+
+		if ( this.needsUpdate ) {
+
+			this.update();
+
+		}
+
+		if ( ! other.isExtendedTriangle ) {
+
+			saTri2.copy( other );
+			saTri2.update();
+			other = saTri2;
+
+		} else if ( other.needsUpdate ) {
+
+			other.update();
+
+		}
+
+		const plane1 = this.plane;
+		const plane2 = other.plane;
+
+		if ( Math.abs( plane1.normal.dot( plane2.normal ) ) > 1.0 - 1e-10 ) {
+
+			// perform separating axis intersection test only for coplanar triangles
+			const satBounds1 = this.satBounds;
+			const satAxes1 = this.satAxes;
+			arr2[ 0 ] = other.a;
+			arr2[ 1 ] = other.b;
+			arr2[ 2 ] = other.c;
+			for ( let i = 0; i < 4; i ++ ) {
+
+				const sb = satBounds1[ i ];
+				const sa = satAxes1[ i ];
+				cachedSatBounds.setFromPoints( sa, arr2 );
+				if ( sb.isSeparated( cachedSatBounds ) ) return false;
+
+			}
+
+			const satBounds2 = other.satBounds;
+			const satAxes2 = other.satAxes;
+			arr1[ 0 ] = this.a;
+			arr1[ 1 ] = this.b;
+			arr1[ 2 ] = this.c;
+			for ( let i = 0; i < 4; i ++ ) {
+
+				const sb = satBounds2[ i ];
+				const sa = satAxes2[ i ];
+				cachedSatBounds.setFromPoints( sa, arr1 );
+				if ( sb.isSeparated( cachedSatBounds ) ) return false;
+
+			}
+
+			// check crossed axes
+			for ( let i = 0; i < 4; i ++ ) {
+
+				const sa1 = satAxes1[ i ];
+				for ( let i2 = 0; i2 < 4; i2 ++ ) {
+
+					const sa2 = satAxes2[ i2 ];
+					cachedAxis.crossVectors( sa1, sa2 );
+					cachedSatBounds.setFromPoints( cachedAxis, arr1 );
+					cachedSatBounds2.setFromPoints( cachedAxis, arr2 );
+					if ( cachedSatBounds.isSeparated( cachedSatBounds2 ) ) return false;
+
+				}
+
+			}
+
+			if ( target ) {
+
+				// TODO find two points that intersect on the edges and make that the result
+				if ( ! suppressLog ) {
+
+					console.warn( 'ExtendedTriangle.intersectsTriangle: Triangles are coplanar which does not support an output edge. Setting edge to 0, 0, 0.' );
+
+				}
+
+				target.start.set( 0, 0, 0 );
+				target.end.set( 0, 0, 0 );
+
+			}
+
+			return true;
+
+		} else {
+
+			// find the edge that intersects the other triangle plane
+			const count1 = triIntersectPlane( this, plane2, edge1 );
+			if ( count1 === 1 && other.containsPoint( edge1.end ) ) {
+
+				if ( target ) {
+
+					target.start.copy( edge1.end );
+					target.end.copy( edge1.end );
+
+				}
+
+				return true;
+
+			} else if ( count1 !== 2 ) {
+
+				return false;
+
+			}
+
+			// find the other triangles edge that intersects this plane
+			const count2 = triIntersectPlane( other, plane1, edge2 );
+			if ( count2 === 1 && this.containsPoint( edge2.end ) ) {
+
+				if ( target ) {
+
+					target.start.copy( edge2.end );
+					target.end.copy( edge2.end );
+
+				}
+
+				return true;
+
+			} else if ( count2 !== 2 ) {
+
+				return false;
+
+			}
+
+			// find swap the second edge so both lines are running the same direction
+			edge1.delta( dir1 );
+			edge2.delta( dir2 );
+
+			if ( dir1.dot( dir2 ) < 0 ) {
+
+				let tmp = edge2.start;
+				edge2.start = edge2.end;
+				edge2.end = tmp;
+
+			}
+
+			// check if the edges are overlapping
+			const s1 = edge1.start.dot( dir1 );
+			const e1 = edge1.end.dot( dir1 );
+			const s2 = edge2.start.dot( dir1 );
+			const e2 = edge2.end.dot( dir1 );
+			const separated1 = e1 < s2;
+			const separated2 = s1 < e2;
+
+			if ( s1 !== e2 && s2 !== e1 && separated1 === separated2 ) {
+
+				return false;
+
+			}
+
+			// assign the target output
+			if ( target ) {
+
+				tempDir.subVectors( edge1.start, edge2.start );
+				if ( tempDir.dot( dir1 ) > 0 ) {
+
+					target.start.copy( edge1.start );
+
+				} else {
+
+					target.start.copy( edge2.start );
+
+				}
+
+				tempDir.subVectors( edge1.end, edge2.end );
+				if ( tempDir.dot( dir1 ) < 0 ) {
+
+					target.end.copy( edge1.end );
+
+				} else {
+
+					target.end.copy( edge2.end );
+
+				}
+
+			}
+
+			return true;
+
+		}
+
+	};
+
+} )();
+
+
+ExtendedTriangle.prototype.distanceToPoint = ( function () {
+
+	const target = new Vector3();
+	return function distanceToPoint( point ) {
+
+		this.closestPointToPoint( point, target );
+		return point.distanceTo( target );
+
+	};
+
+} )();
+
+
+ExtendedTriangle.prototype.distanceToTriangle = ( function () {
+
+	const point = new Vector3();
+	const point2 = new Vector3();
+	const cornerFields = [ 'a', 'b', 'c' ];
+	const line1 = new Line3();
+	const line2 = new Line3();
+
+	return function distanceToTriangle( other, target1 = null, target2 = null ) {
+
+		const lineTarget = target1 || target2 ? line1 : null;
+		if ( this.intersectsTriangle( other, lineTarget ) ) {
+
+			if ( target1 || target2 ) {
+
+				if ( target1 ) lineTarget.getCenter( target1 );
+				if ( target2 ) lineTarget.getCenter( target2 );
+
+			}
+
+			return 0;
+
+		}
+
+		let closestDistanceSq = Infinity;
+
+		// check all point distances
+		for ( let i = 0; i < 3; i ++ ) {
+
+			let dist;
+			const field = cornerFields[ i ];
+			const otherVec = other[ field ];
+			this.closestPointToPoint( otherVec, point );
+
+			dist = otherVec.distanceToSquared( point );
+
+			if ( dist < closestDistanceSq ) {
+
+				closestDistanceSq = dist;
+				if ( target1 ) target1.copy( point );
+				if ( target2 ) target2.copy( otherVec );
+
+			}
+
+
+			const thisVec = this[ field ];
+			other.closestPointToPoint( thisVec, point );
+
+			dist = thisVec.distanceToSquared( point );
+
+			if ( dist < closestDistanceSq ) {
+
+				closestDistanceSq = dist;
+				if ( target1 ) target1.copy( thisVec );
+				if ( target2 ) target2.copy( point );
+
+			}
+
+		}
+
+		for ( let i = 0; i < 3; i ++ ) {
+
+			const f11 = cornerFields[ i ];
+			const f12 = cornerFields[ ( i + 1 ) % 3 ];
+			line1.set( this[ f11 ], this[ f12 ] );
+			for ( let i2 = 0; i2 < 3; i2 ++ ) {
+
+				const f21 = cornerFields[ i2 ];
+				const f22 = cornerFields[ ( i2 + 1 ) % 3 ];
+				line2.set( other[ f21 ], other[ f22 ] );
+
+				closestPointsSegmentToSegment( line1, line2, point, point2 );
+
+				const dist = point.distanceToSquared( point2 );
+				if ( dist < closestDistanceSq ) {
+
+					closestDistanceSq = dist;
+					if ( target1 ) target1.copy( point );
+					if ( target2 ) target2.copy( point2 );
+
+				}
+
+			}
+
+		}
+
+		return Math.sqrt( closestDistanceSq );
+
+	};
+
+} )();
+
+class OrientedBox {
+
+	constructor( min, max, matrix ) {
+
+		this.isOrientedBox = true;
+		this.min = new Vector3();
+		this.max = new Vector3();
+		this.matrix = new Matrix4();
+		this.invMatrix = new Matrix4();
+		this.points = new Array( 8 ).fill().map( () => new Vector3() );
+		this.satAxes = new Array( 3 ).fill().map( () => new Vector3() );
+		this.satBounds = new Array( 3 ).fill().map( () => new SeparatingAxisBounds() );
+		this.alignedSatBounds = new Array( 3 ).fill().map( () => new SeparatingAxisBounds() );
+		this.needsUpdate = false;
+
+		if ( min ) this.min.copy( min );
+		if ( max ) this.max.copy( max );
+		if ( matrix ) this.matrix.copy( matrix );
+
+	}
+
+	set( min, max, matrix ) {
+
+		this.min.copy( min );
+		this.max.copy( max );
+		this.matrix.copy( matrix );
+		this.needsUpdate = true;
+
+	}
+
+	copy( other ) {
+
+		this.min.copy( other.min );
+		this.max.copy( other.max );
+		this.matrix.copy( other.matrix );
+		this.needsUpdate = true;
+
+	}
+
+}
+
+OrientedBox.prototype.update = ( function () {
+
+	return function update() {
+
+		const matrix = this.matrix;
+		const min = this.min;
+		const max = this.max;
+
+		const points = this.points;
+		for ( let x = 0; x <= 1; x ++ ) {
+
+			for ( let y = 0; y <= 1; y ++ ) {
+
+				for ( let z = 0; z <= 1; z ++ ) {
+
+					const i = ( ( 1 << 0 ) * x ) | ( ( 1 << 1 ) * y ) | ( ( 1 << 2 ) * z );
+					const v = points[ i ];
+					v.x = x ? max.x : min.x;
+					v.y = y ? max.y : min.y;
+					v.z = z ? max.z : min.z;
+
+					v.applyMatrix4( matrix );
+
+				}
+
+			}
+
+		}
+
+		const satBounds = this.satBounds;
+		const satAxes = this.satAxes;
+		const minVec = points[ 0 ];
+		for ( let i = 0; i < 3; i ++ ) {
+
+			const axis = satAxes[ i ];
+			const sb = satBounds[ i ];
+			const index = 1 << i;
+			const pi = points[ index ];
+
+			axis.subVectors( minVec, pi );
+			sb.setFromPoints( axis, points );
+
+		}
+
+		const alignedSatBounds = this.alignedSatBounds;
+		alignedSatBounds[ 0 ].setFromPointsField( points, 'x' );
+		alignedSatBounds[ 1 ].setFromPointsField( points, 'y' );
+		alignedSatBounds[ 2 ].setFromPointsField( points, 'z' );
+
+		this.invMatrix.copy( this.matrix ).invert();
+		this.needsUpdate = false;
+
+	};
+
+} )();
+
+OrientedBox.prototype.intersectsBox = ( function () {
+
+	const aabbBounds = new SeparatingAxisBounds();
+	return function intersectsBox( box ) {
+
+		// TODO: should this be doing SAT against the AABB?
+		if ( this.needsUpdate ) {
+
+			this.update();
+
+		}
+
+		const min = box.min;
+		const max = box.max;
+		const satBounds = this.satBounds;
+		const satAxes = this.satAxes;
+		const alignedSatBounds = this.alignedSatBounds;
+
+		aabbBounds.min = min.x;
+		aabbBounds.max = max.x;
+		if ( alignedSatBounds[ 0 ].isSeparated( aabbBounds ) ) return false;
+
+		aabbBounds.min = min.y;
+		aabbBounds.max = max.y;
+		if ( alignedSatBounds[ 1 ].isSeparated( aabbBounds ) ) return false;
+
+		aabbBounds.min = min.z;
+		aabbBounds.max = max.z;
+		if ( alignedSatBounds[ 2 ].isSeparated( aabbBounds ) ) return false;
+
+		for ( let i = 0; i < 3; i ++ ) {
+
+			const axis = satAxes[ i ];
+			const sb = satBounds[ i ];
+			aabbBounds.setFromBox( axis, box );
+			if ( sb.isSeparated( aabbBounds ) ) return false;
+
+		}
+
+		return true;
+
+	};
+
+} )();
+
+OrientedBox.prototype.intersectsTriangle = ( function () {
+
+	const saTri = new ExtendedTriangle();
+	const pointsArr = new Array( 3 );
+	const cachedSatBounds = new SeparatingAxisBounds();
+	const cachedSatBounds2 = new SeparatingAxisBounds();
+	const cachedAxis = new Vector3();
+	return function intersectsTriangle( triangle ) {
+
+		if ( this.needsUpdate ) {
+
+			this.update();
+
+		}
+
+		if ( ! triangle.isExtendedTriangle ) {
+
+			saTri.copy( triangle );
+			saTri.update();
+			triangle = saTri;
+
+		} else if ( triangle.needsUpdate ) {
+
+			triangle.update();
+
+		}
+
+		const satBounds = this.satBounds;
+		const satAxes = this.satAxes;
+
+		pointsArr[ 0 ] = triangle.a;
+		pointsArr[ 1 ] = triangle.b;
+		pointsArr[ 2 ] = triangle.c;
+
+		for ( let i = 0; i < 3; i ++ ) {
+
+			const sb = satBounds[ i ];
+			const sa = satAxes[ i ];
+			cachedSatBounds.setFromPoints( sa, pointsArr );
+			if ( sb.isSeparated( cachedSatBounds ) ) return false;
+
+		}
+
+		const triSatBounds = triangle.satBounds;
+		const triSatAxes = triangle.satAxes;
+		const points = this.points;
+		for ( let i = 0; i < 3; i ++ ) {
+
+			const sb = triSatBounds[ i ];
+			const sa = triSatAxes[ i ];
+			cachedSatBounds.setFromPoints( sa, points );
+			if ( sb.isSeparated( cachedSatBounds ) ) return false;
+
+		}
+
+		// check crossed axes
+		for ( let i = 0; i < 3; i ++ ) {
+
+			const sa1 = satAxes[ i ];
+			for ( let i2 = 0; i2 < 4; i2 ++ ) {
+
+				const sa2 = triSatAxes[ i2 ];
+				cachedAxis.crossVectors( sa1, sa2 );
+				cachedSatBounds.setFromPoints( cachedAxis, pointsArr );
+				cachedSatBounds2.setFromPoints( cachedAxis, points );
+				if ( cachedSatBounds.isSeparated( cachedSatBounds2 ) ) return false;
+
+			}
+
+		}
+
+		return true;
+
+	};
+
+} )();
+
+OrientedBox.prototype.closestPointToPoint = ( function () {
+
+	return function closestPointToPoint( point, target1 ) {
+
+		if ( this.needsUpdate ) {
+
+			this.update();
+
+		}
+
+		target1
+			.copy( point )
+			.applyMatrix4( this.invMatrix )
+			.clamp( this.min, this.max )
+			.applyMatrix4( this.matrix );
+
+		return target1;
+
+	};
+
+} )();
+
+OrientedBox.prototype.distanceToPoint = ( function () {
+
+	const target = new Vector3();
+	return function distanceToPoint( point ) {
+
+		this.closestPointToPoint( point, target );
+		return point.distanceTo( target );
+
+	};
+
+} )();
+
+OrientedBox.prototype.distanceToBox = ( function () {
+
+	const xyzFields = [ 'x', 'y', 'z' ];
+	const segments1 = new Array( 12 ).fill().map( () => new Line3() );
+	const segments2 = new Array( 12 ).fill().map( () => new Line3() );
+
+	const point1 = new Vector3();
+	const point2 = new Vector3();
+
+	// early out if we find a value below threshold
+	return function distanceToBox( box, threshold = 0, target1 = null, target2 = null ) {
+
+		if ( this.needsUpdate ) {
+
+			this.update();
+
+		}
+
+		if ( this.intersectsBox( box ) ) {
+
+			if ( target1 || target2 ) {
+
+				box.getCenter( point2 );
+				this.closestPointToPoint( point2, point1 );
+				box.closestPointToPoint( point1, point2 );
+
+				if ( target1 ) target1.copy( point1 );
+				if ( target2 ) target2.copy( point2 );
+
+			}
+
+			return 0;
+
+		}
+
+		const threshold2 = threshold * threshold;
+		const min = box.min;
+		const max = box.max;
+		const points = this.points;
+
+
+		// iterate over every edge and compare distances
+		let closestDistanceSq = Infinity;
+
+		// check over all these points
+		for ( let i = 0; i < 8; i ++ ) {
+
+			const p = points[ i ];
+			point2.copy( p ).clamp( min, max );
+
+			const dist = p.distanceToSquared( point2 );
+			if ( dist < closestDistanceSq ) {
+
+				closestDistanceSq = dist;
+				if ( target1 ) target1.copy( p );
+				if ( target2 ) target2.copy( point2 );
+
+				if ( dist < threshold2 ) return Math.sqrt( dist );
+
+			}
+
+		}
+
+		// generate and check all line segment distances
+		let count = 0;
+		for ( let i = 0; i < 3; i ++ ) {
+
+			for ( let i1 = 0; i1 <= 1; i1 ++ ) {
+
+				for ( let i2 = 0; i2 <= 1; i2 ++ ) {
+
+					const nextIndex = ( i + 1 ) % 3;
+					const nextIndex2 = ( i + 2 ) % 3;
+
+					// get obb line segments
+					const index = i1 << nextIndex | i2 << nextIndex2;
+					const index2 = 1 << i | i1 << nextIndex | i2 << nextIndex2;
+					const p1 = points[ index ];
+					const p2 = points[ index2 ];
+					const line1 = segments1[ count ];
+					line1.set( p1, p2 );
+
+
+					// get aabb line segments
+					const f1 = xyzFields[ i ];
+					const f2 = xyzFields[ nextIndex ];
+					const f3 = xyzFields[ nextIndex2 ];
+					const line2 = segments2[ count ];
+					const start = line2.start;
+					const end = line2.end;
+
+					start[ f1 ] = min[ f1 ];
+					start[ f2 ] = i1 ? min[ f2 ] : max[ f2 ];
+					start[ f3 ] = i2 ? min[ f3 ] : max[ f2 ];
+
+					end[ f1 ] = max[ f1 ];
+					end[ f2 ] = i1 ? min[ f2 ] : max[ f2 ];
+					end[ f3 ] = i2 ? min[ f3 ] : max[ f2 ];
+
+					count ++;
+
+				}
+
+			}
+
+		}
+
+		// check all the other boxes point
+		for ( let x = 0; x <= 1; x ++ ) {
+
+			for ( let y = 0; y <= 1; y ++ ) {
+
+				for ( let z = 0; z <= 1; z ++ ) {
+
+					point2.x = x ? max.x : min.x;
+					point2.y = y ? max.y : min.y;
+					point2.z = z ? max.z : min.z;
+
+					this.closestPointToPoint( point2, point1 );
+					const dist = point2.distanceToSquared( point1 );
+					if ( dist < closestDistanceSq ) {
+
+						closestDistanceSq = dist;
+						if ( target1 ) target1.copy( point1 );
+						if ( target2 ) target2.copy( point2 );
+
+						if ( dist < threshold2 ) return Math.sqrt( dist );
+
+					}
+
+				}
+
+			}
+
+		}
+
+		for ( let i = 0; i < 12; i ++ ) {
+
+			const l1 = segments1[ i ];
+			for ( let i2 = 0; i2 < 12; i2 ++ ) {
+
+				const l2 = segments2[ i2 ];
+				closestPointsSegmentToSegment( l1, l2, point1, point2 );
+				const dist = point1.distanceToSquared( point2 );
+				if ( dist < closestDistanceSq ) {
+
+					closestDistanceSq = dist;
+					if ( target1 ) target1.copy( point1 );
+					if ( target2 ) target2.copy( point2 );
+
+					if ( dist < threshold2 ) return Math.sqrt( dist );
+
+				}
+
+			}
+
+		}
+
+		return Math.sqrt( closestDistanceSq );
+
+	};
+
+} )();
+
+class PrimitivePool {
+
+	constructor( getNewPrimitive ) {
+
+		this._getNewPrimitive = getNewPrimitive;
+		this._primitives = [];
+
+	}
+
+	getPrimitive() {
+
+		const primitives = this._primitives;
+		if ( primitives.length === 0 ) {
+
+			return this._getNewPrimitive();
+
+		} else {
+
+			return primitives.pop();
+
+		}
+
+	}
+
+	releasePrimitive( primitive ) {
+
+		this._primitives.push( primitive );
+
+	}
+
+}
+
+class ExtendedTrianglePoolBase extends PrimitivePool {
+
+	constructor() {
+
+		super( () => new ExtendedTriangle() );
+
+	}
+
+}
+
+const ExtendedTrianglePool = /* @__PURE__ */ new ExtendedTrianglePoolBase();
+
+class _BufferStack {
+
+	constructor() {
+
+		this.float32Array = null;
+		this.uint16Array = null;
+		this.uint32Array = null;
+
+		const stack = [];
+		let prevBuffer = null;
+		this.setBuffer = buffer => {
+
+			if ( prevBuffer ) {
+
+				stack.push( prevBuffer );
+
+			}
+
+			prevBuffer = buffer;
+			this.float32Array = new Float32Array( buffer );
+			this.uint16Array = new Uint16Array( buffer );
+			this.uint32Array = new Uint32Array( buffer );
+
+		};
+
+		this.clearBuffer = () => {
+
+			prevBuffer = null;
+			this.float32Array = null;
+			this.uint16Array = null;
+			this.uint32Array = null;
+
+			if ( stack.length !== 0 ) {
+
+				this.setBuffer( stack.pop() );
+
+			}
+
+		};
+
+	}
+
+}
+
+const BufferStack = new _BufferStack();
+
+let _box1, _box2;
+const boxStack = [];
+const boxPool = /* @__PURE__ */ new PrimitivePool( () => new Box3() );
+
+function shapecast( bvh, root, intersectsBounds, intersectsRange, boundsTraverseOrder, byteOffset ) {
+
+	// setup
+	_box1 = boxPool.getPrimitive();
+	_box2 = boxPool.getPrimitive();
+	boxStack.push( _box1, _box2 );
+	BufferStack.setBuffer( bvh._roots[ root ] );
+
+	const result = shapecastTraverse( 0, bvh.geometry, intersectsBounds, intersectsRange, boundsTraverseOrder, byteOffset );
+
+	// cleanup
+	BufferStack.clearBuffer();
+	boxPool.releasePrimitive( _box1 );
+	boxPool.releasePrimitive( _box2 );
+	boxStack.pop();
+	boxStack.pop();
+
+	const length = boxStack.length;
+	if ( length > 0 ) {
+
+		_box2 = boxStack[ length - 1 ];
+		_box1 = boxStack[ length - 2 ];
+
+	}
+
+	return result;
+
+}
+
+function shapecastTraverse(
+	nodeIndex32,
+	geometry,
+	intersectsBoundsFunc,
+	intersectsRangeFunc,
+	nodeScoreFunc = null,
+	nodeIndexByteOffset = 0, // offset for unique node identifier
+	depth = 0
+) {
+
+	const { float32Array, uint16Array, uint32Array } = BufferStack;
+	let nodeIndex16 = nodeIndex32 * 2;
+
+	const isLeaf = IS_LEAF( nodeIndex16, uint16Array );
+	if ( isLeaf ) {
+
+		const offset = OFFSET( nodeIndex32, uint32Array );
+		const count = COUNT( nodeIndex16, uint16Array );
+		arrayToBox( BOUNDING_DATA_INDEX( nodeIndex32 ), float32Array, _box1 );
+		return intersectsRangeFunc( offset, count, false, depth, nodeIndexByteOffset + nodeIndex32, _box1 );
+
+	} else {
+
+		const left = LEFT_NODE( nodeIndex32 );
+		const right = RIGHT_NODE( nodeIndex32, uint32Array );
+		let c1 = left;
+		let c2 = right;
+
+		let score1, score2;
+		let box1, box2;
+		if ( nodeScoreFunc ) {
+
+			box1 = _box1;
+			box2 = _box2;
+
+			// bounding data is not offset
+			arrayToBox( BOUNDING_DATA_INDEX( c1 ), float32Array, box1 );
+			arrayToBox( BOUNDING_DATA_INDEX( c2 ), float32Array, box2 );
+
+			score1 = nodeScoreFunc( box1 );
+			score2 = nodeScoreFunc( box2 );
+
+			if ( score2 < score1 ) {
+
+				c1 = right;
+				c2 = left;
+
+				const temp = score1;
+				score1 = score2;
+				score2 = temp;
+
+				box1 = box2;
+				// box2 is always set before use below
+
+			}
+
+		}
+
+		// Check box 1 intersection
+		if ( ! box1 ) {
+
+			box1 = _box1;
+			arrayToBox( BOUNDING_DATA_INDEX( c1 ), float32Array, box1 );
+
+		}
+
+		const isC1Leaf = IS_LEAF( c1 * 2, uint16Array );
+		const c1Intersection = intersectsBoundsFunc( box1, isC1Leaf, score1, depth + 1, nodeIndexByteOffset + c1 );
+
+		let c1StopTraversal;
+		if ( c1Intersection === CONTAINED ) {
+
+			const offset = getLeftOffset( c1 );
+			const end = getRightEndOffset( c1 );
+			const count = end - offset;
+
+			c1StopTraversal = intersectsRangeFunc( offset, count, true, depth + 1, nodeIndexByteOffset + c1, box1 );
+
+		} else {
+
+			c1StopTraversal =
+				c1Intersection &&
+				shapecastTraverse(
+					c1,
+					geometry,
+					intersectsBoundsFunc,
+					intersectsRangeFunc,
+					nodeScoreFunc,
+					nodeIndexByteOffset,
+					depth + 1
+				);
+
+		}
+
+		if ( c1StopTraversal ) return true;
+
+		// Check box 2 intersection
+		// cached box2 will have been overwritten by previous traversal
+		box2 = _box2;
+		arrayToBox( BOUNDING_DATA_INDEX( c2 ), float32Array, box2 );
+
+		const isC2Leaf = IS_LEAF( c2 * 2, uint16Array );
+		const c2Intersection = intersectsBoundsFunc( box2, isC2Leaf, score2, depth + 1, nodeIndexByteOffset + c2 );
+
+		let c2StopTraversal;
+		if ( c2Intersection === CONTAINED ) {
+
+			const offset = getLeftOffset( c2 );
+			const end = getRightEndOffset( c2 );
+			const count = end - offset;
+
+			c2StopTraversal = intersectsRangeFunc( offset, count, true, depth + 1, nodeIndexByteOffset + c2, box2 );
+
+		} else {
+
+			c2StopTraversal =
+				c2Intersection &&
+				shapecastTraverse(
+					c2,
+					geometry,
+					intersectsBoundsFunc,
+					intersectsRangeFunc,
+					nodeScoreFunc,
+					nodeIndexByteOffset,
+					depth + 1
+				);
+
+		}
+
+		if ( c2StopTraversal ) return true;
+
+		return false;
+
+		// Define these inside the function so it has access to the local variables needed
+		// when converting to the buffer equivalents
+		function getLeftOffset( nodeIndex32 ) {
+
+			const { uint16Array, uint32Array } = BufferStack;
+			let nodeIndex16 = nodeIndex32 * 2;
+
+			// traverse until we find a leaf
+			while ( ! IS_LEAF( nodeIndex16, uint16Array ) ) {
+
+				nodeIndex32 = LEFT_NODE( nodeIndex32 );
+				nodeIndex16 = nodeIndex32 * 2;
+
+			}
+
+			return OFFSET( nodeIndex32, uint32Array );
+
+		}
+
+		function getRightEndOffset( nodeIndex32 ) {
+
+			const { uint16Array, uint32Array } = BufferStack;
+			let nodeIndex16 = nodeIndex32 * 2;
+
+			// traverse until we find a leaf
+			while ( ! IS_LEAF( nodeIndex16, uint16Array ) ) {
+
+				// adjust offset to point to the right node
+				nodeIndex32 = RIGHT_NODE( nodeIndex32, uint32Array );
+				nodeIndex16 = nodeIndex32 * 2;
+
+			}
+
+			// return the end offset of the triangle range
+			return OFFSET( nodeIndex32, uint32Array ) + COUNT( nodeIndex16, uint16Array );
+
+		}
+
+	}
+
+}
+
+const temp = /* @__PURE__ */ new Vector3();
+const temp1$2 = /* @__PURE__ */ new Vector3();
+
+function closestPointToPoint(
+	bvh,
+	point,
+	target = { },
+	minThreshold = 0,
+	maxThreshold = Infinity,
+) {
+
+	// early out if under minThreshold
+	// skip checking if over maxThreshold
+	// set minThreshold = maxThreshold to quickly check if a point is within a threshold
+	// returns Infinity if no value found
+	const minThresholdSq = minThreshold * minThreshold;
+	const maxThresholdSq = maxThreshold * maxThreshold;
+	let closestDistanceSq = Infinity;
+	let closestDistanceTriIndex = null;
+	bvh.shapecast(
+
+		{
+
+			boundsTraverseOrder: box => {
+
+				temp.copy( point ).clamp( box.min, box.max );
+				return temp.distanceToSquared( point );
+
+			},
+
+			intersectsBounds: ( box, isLeaf, score ) => {
+
+				return score < closestDistanceSq && score < maxThresholdSq;
+
+			},
+
+			intersectsTriangle: ( tri, triIndex ) => {
+
+				tri.closestPointToPoint( point, temp );
+				const distSq = point.distanceToSquared( temp );
+				if ( distSq < closestDistanceSq ) {
+
+					temp1$2.copy( temp );
+					closestDistanceSq = distSq;
+					closestDistanceTriIndex = triIndex;
+
+				}
+
+				if ( distSq < minThresholdSq ) {
+
+					return true;
+
+				} else {
+
+					return false;
+
+				}
+
+			},
+
+		}
+
+	);
+
+	if ( closestDistanceSq === Infinity ) return null;
+
+	const closestDistance = Math.sqrt( closestDistanceSq );
+
+	if ( ! target.point ) target.point = temp1$2.clone();
+	else target.point.copy( temp1$2 );
+	target.distance = closestDistance,
+	target.faceIndex = closestDistanceTriIndex;
+
+	return target;
+
+}
+
+// Ripped and modified From THREE.js Mesh raycast
+// https://github.com/mrdoob/three.js/blob/0aa87c999fe61e216c1133fba7a95772b503eddf/src/objects/Mesh.js#L115
+const _vA = /* @__PURE__ */ new Vector3();
+const _vB = /* @__PURE__ */ new Vector3();
+const _vC = /* @__PURE__ */ new Vector3();
+
+const _uvA = /* @__PURE__ */ new Vector2();
+const _uvB = /* @__PURE__ */ new Vector2();
+const _uvC = /* @__PURE__ */ new Vector2();
+
+const _normalA = /* @__PURE__ */ new Vector3();
+const _normalB = /* @__PURE__ */ new Vector3();
+const _normalC = /* @__PURE__ */ new Vector3();
+
+const _intersectionPoint = /* @__PURE__ */ new Vector3();
+function checkIntersection( ray, pA, pB, pC, point, side, near, far ) {
+
+	let intersect;
+	if ( side === BackSide ) {
+
+		intersect = ray.intersectTriangle( pC, pB, pA, true, point );
+
+	} else {
+
+		intersect = ray.intersectTriangle( pA, pB, pC, side !== DoubleSide, point );
+
+	}
+
+	if ( intersect === null ) return null;
+
+	const distance = ray.origin.distanceTo( point );
+
+	if ( distance < near || distance > far ) return null;
+
+	return {
+
+		distance: distance,
+		point: point.clone(),
+
+	};
+
+}
+
+function checkBufferGeometryIntersection( ray, position, normal, uv, uv1, a, b, c, side, near, far ) {
+
+	_vA.fromBufferAttribute( position, a );
+	_vB.fromBufferAttribute( position, b );
+	_vC.fromBufferAttribute( position, c );
+
+	const intersection = checkIntersection( ray, _vA, _vB, _vC, _intersectionPoint, side, near, far );
+
+	if ( intersection ) {
+
+		if ( uv ) {
+
+			_uvA.fromBufferAttribute( uv, a );
+			_uvB.fromBufferAttribute( uv, b );
+			_uvC.fromBufferAttribute( uv, c );
+
+			intersection.uv = Triangle.getInterpolation( _intersectionPoint, _vA, _vB, _vC, _uvA, _uvB, _uvC, new Vector2() );
+
+		}
+
+		if ( uv1 ) {
+
+			_uvA.fromBufferAttribute( uv1, a );
+			_uvB.fromBufferAttribute( uv1, b );
+			_uvC.fromBufferAttribute( uv1, c );
+
+			intersection.uv1 = Triangle.getInterpolation( _intersectionPoint, _vA, _vB, _vC, _uvA, _uvB, _uvC, new Vector2() );
+
+		}
+
+		if ( normal ) {
+
+			_normalA.fromBufferAttribute( normal, a );
+			_normalB.fromBufferAttribute( normal, b );
+			_normalC.fromBufferAttribute( normal, c );
+
+			intersection.normal = Triangle.getInterpolation( _intersectionPoint, _vA, _vB, _vC, _normalA, _normalB, _normalC, new Vector3() );
+			if ( intersection.normal.dot( ray.direction ) > 0 ) {
+
+				intersection.normal.multiplyScalar( - 1 );
+
+			}
+
+		}
+
+		const face = {
+			a: a,
+			b: b,
+			c: c,
+			normal: new Vector3(),
+			materialIndex: 0
+		};
+
+		Triangle.getNormal( _vA, _vB, _vC, face.normal );
+
+		intersection.face = face;
+		intersection.faceIndex = a;
+
+	}
+
+	return intersection;
+
+}
+
+// https://github.com/mrdoob/three.js/blob/0aa87c999fe61e216c1133fba7a95772b503eddf/src/objects/Mesh.js#L258
+function intersectTri( geo, side, ray, tri, intersections, near, far ) {
+
+	const triOffset = tri * 3;
+	let a = triOffset + 0;
+	let b = triOffset + 1;
+	let c = triOffset + 2;
+
+	const index = geo.index;
+	if ( geo.index ) {
+
+		a = index.getX( a );
+		b = index.getX( b );
+		c = index.getX( c );
+
+	}
+
+	const { position, normal, uv, uv1 } = geo.attributes;
+	const intersection = checkBufferGeometryIntersection( ray, position, normal, uv, uv1, a, b, c, side, near, far );
+
+	if ( intersection ) {
+
+		intersection.faceIndex = tri;
+		if ( intersections ) intersections.push( intersection );
+		return intersection;
+
+	}
+
+	return null;
+
+}
+
+// sets the vertices of triangle `tri` with the 3 vertices after i
+function setTriangle( tri, i, index, pos ) {
+
+	const ta = tri.a;
+	const tb = tri.b;
+	const tc = tri.c;
+
+	let i0 = i;
+	let i1 = i + 1;
+	let i2 = i + 2;
+	if ( index ) {
+
+		i0 = index.getX( i0 );
+		i1 = index.getX( i1 );
+		i2 = index.getX( i2 );
+
+	}
+
+	ta.x = pos.getX( i0 );
+	ta.y = pos.getY( i0 );
+	ta.z = pos.getZ( i0 );
+
+	tb.x = pos.getX( i1 );
+	tb.y = pos.getY( i1 );
+	tb.z = pos.getZ( i1 );
+
+	tc.x = pos.getX( i2 );
+	tc.y = pos.getY( i2 );
+	tc.z = pos.getZ( i2 );
+
+}
+
+/*************************************************************/
+/* This file is generated from "iterationUtils.template.js". */
+/*************************************************************/
+/* eslint-disable indent */
+
+function intersectTris( bvh, side, ray, offset, count, intersections, near, far ) {
+
+	const { geometry, _indirectBuffer } = bvh;
+	for ( let i = offset, end = offset + count; i < end; i ++ ) {
+
+
+		intersectTri( geometry, side, ray, i, intersections, near, far );
+
+
+	}
+
+}
+
+function intersectClosestTri( bvh, side, ray, offset, count, near, far ) {
+
+	const { geometry, _indirectBuffer } = bvh;
+	let dist = Infinity;
+	let res = null;
+	for ( let i = offset, end = offset + count; i < end; i ++ ) {
+
+		let intersection;
+
+		intersection = intersectTri( geometry, side, ray, i, null, near, far );
+
+
+		if ( intersection && intersection.distance < dist ) {
+
+			res = intersection;
+			dist = intersection.distance;
+
+		}
+
+	}
+
+	return res;
+
+}
+
+function iterateOverTriangles(
+	offset,
+	count,
+	bvh,
+	intersectsTriangleFunc,
+	contained,
+	depth,
+	triangle
+) {
+
+	const { geometry } = bvh;
+	const { index } = geometry;
+	const pos = geometry.attributes.position;
+	for ( let i = offset, l = count + offset; i < l; i ++ ) {
+
+		let tri;
+
+		tri = i;
+
+		setTriangle( triangle, tri * 3, index, pos );
+		triangle.needsUpdate = true;
+
+		if ( intersectsTriangleFunc( triangle, tri, contained, depth ) ) {
+
+			return true;
+
+		}
+
+	}
+
+	return false;
+
+}
+
+/****************************************************/
+/* This file is generated from "refit.template.js". */
+/****************************************************/
+
+function refit( bvh, nodeIndices = null ) {
+
+	if ( nodeIndices && Array.isArray( nodeIndices ) ) {
+
+		nodeIndices = new Set( nodeIndices );
+
+	}
+
+	const geometry = bvh.geometry;
+	const indexArr = geometry.index ? geometry.index.array : null;
+	const posAttr = geometry.attributes.position;
+
+	let buffer, uint32Array, uint16Array, float32Array;
+	let byteOffset = 0;
+	const roots = bvh._roots;
+	for ( let i = 0, l = roots.length; i < l; i ++ ) {
+
+		buffer = roots[ i ];
+		uint32Array = new Uint32Array( buffer );
+		uint16Array = new Uint16Array( buffer );
+		float32Array = new Float32Array( buffer );
+
+		_traverse( 0, byteOffset );
+		byteOffset += buffer.byteLength;
+
+	}
+
+	function _traverse( node32Index, byteOffset, force = false ) {
+
+		const node16Index = node32Index * 2;
+		const isLeaf = uint16Array[ node16Index + 15 ] === IS_LEAFNODE_FLAG;
+		if ( isLeaf ) {
+
+			const offset = uint32Array[ node32Index + 6 ];
+			const count = uint16Array[ node16Index + 14 ];
+
+			let minx = Infinity;
+			let miny = Infinity;
+			let minz = Infinity;
+			let maxx = - Infinity;
+			let maxy = - Infinity;
+			let maxz = - Infinity;
+
+
+			for ( let i = 3 * offset, l = 3 * ( offset + count ); i < l; i ++ ) {
+
+				let index = indexArr[ i ];
+				const x = posAttr.getX( index );
+				const y = posAttr.getY( index );
+				const z = posAttr.getZ( index );
+
+				if ( x < minx ) minx = x;
+				if ( x > maxx ) maxx = x;
+
+				if ( y < miny ) miny = y;
+				if ( y > maxy ) maxy = y;
+
+				if ( z < minz ) minz = z;
+				if ( z > maxz ) maxz = z;
+
+			}
+
+
+			if (
+				float32Array[ node32Index + 0 ] !== minx ||
+				float32Array[ node32Index + 1 ] !== miny ||
+				float32Array[ node32Index + 2 ] !== minz ||
+
+				float32Array[ node32Index + 3 ] !== maxx ||
+				float32Array[ node32Index + 4 ] !== maxy ||
+				float32Array[ node32Index + 5 ] !== maxz
+			) {
+
+				float32Array[ node32Index + 0 ] = minx;
+				float32Array[ node32Index + 1 ] = miny;
+				float32Array[ node32Index + 2 ] = minz;
+
+				float32Array[ node32Index + 3 ] = maxx;
+				float32Array[ node32Index + 4 ] = maxy;
+				float32Array[ node32Index + 5 ] = maxz;
+
+				return true;
+
+			} else {
+
+				return false;
+
+			}
+
+		} else {
+
+			const left = node32Index + 8;
+			const right = uint32Array[ node32Index + 6 ];
+
+			// the identifying node indices provided by the shapecast function include offsets of all
+			// root buffers to guarantee they're unique between roots so offset left and right indices here.
+			const offsetLeft = left + byteOffset;
+			const offsetRight = right + byteOffset;
+			let forceChildren = force;
+			let includesLeft = false;
+			let includesRight = false;
+
+			if ( nodeIndices ) {
+
+				// if we see that neither the left or right child are included in the set that need to be updated
+				// then we assume that all children need to be updated.
+				if ( ! forceChildren ) {
+
+					includesLeft = nodeIndices.has( offsetLeft );
+					includesRight = nodeIndices.has( offsetRight );
+					forceChildren = ! includesLeft && ! includesRight;
+
+				}
+
+			} else {
+
+				includesLeft = true;
+				includesRight = true;
+
+			}
+
+			const traverseLeft = forceChildren || includesLeft;
+			const traverseRight = forceChildren || includesRight;
+
+			let leftChange = false;
+			if ( traverseLeft ) {
+
+				leftChange = _traverse( left, byteOffset, forceChildren );
+
+			}
+
+			let rightChange = false;
+			if ( traverseRight ) {
+
+				rightChange = _traverse( right, byteOffset, forceChildren );
+
+			}
+
+			const didChange = leftChange || rightChange;
+			if ( didChange ) {
+
+				for ( let i = 0; i < 3; i ++ ) {
+
+					const lefti = left + i;
+					const righti = right + i;
+					const minLeftValue = float32Array[ lefti ];
+					const maxLeftValue = float32Array[ lefti + 3 ];
+					const minRightValue = float32Array[ righti ];
+					const maxRightValue = float32Array[ righti + 3 ];
+
+					float32Array[ node32Index + i ] = minLeftValue < minRightValue ? minLeftValue : minRightValue;
+					float32Array[ node32Index + i + 3 ] = maxLeftValue > maxRightValue ? maxLeftValue : maxRightValue;
+
+				}
+
+			}
+
+			return didChange;
+
+		}
+
+	}
+
+}
+
+/**
+ * This function performs intersection tests similar to Ray.intersectBox in three.js,
+ * with the difference that the box values are read from an array to improve performance.
+ */
+function intersectRay( nodeIndex32, array, ray, near, far ) {
+
+	let tmin, tmax, tymin, tymax, tzmin, tzmax;
+
+	const invdirx = 1 / ray.direction.x,
+		invdiry = 1 / ray.direction.y,
+		invdirz = 1 / ray.direction.z;
+
+	const ox = ray.origin.x;
+	const oy = ray.origin.y;
+	const oz = ray.origin.z;
+
+	let minx = array[ nodeIndex32 ];
+	let maxx = array[ nodeIndex32 + 3 ];
+
+	let miny = array[ nodeIndex32 + 1 ];
+	let maxy = array[ nodeIndex32 + 3 + 1 ];
+
+	let minz = array[ nodeIndex32 + 2 ];
+	let maxz = array[ nodeIndex32 + 3 + 2 ];
+
+	if ( invdirx >= 0 ) {
+
+		tmin = ( minx - ox ) * invdirx;
+		tmax = ( maxx - ox ) * invdirx;
+
+	} else {
+
+		tmin = ( maxx - ox ) * invdirx;
+		tmax = ( minx - ox ) * invdirx;
+
+	}
+
+	if ( invdiry >= 0 ) {
+
+		tymin = ( miny - oy ) * invdiry;
+		tymax = ( maxy - oy ) * invdiry;
+
+	} else {
+
+		tymin = ( maxy - oy ) * invdiry;
+		tymax = ( miny - oy ) * invdiry;
+
+	}
+
+	if ( ( tmin > tymax ) || ( tymin > tmax ) ) return false;
+
+	if ( tymin > tmin || isNaN( tmin ) ) tmin = tymin;
+
+	if ( tymax < tmax || isNaN( tmax ) ) tmax = tymax;
+
+	if ( invdirz >= 0 ) {
+
+		tzmin = ( minz - oz ) * invdirz;
+		tzmax = ( maxz - oz ) * invdirz;
+
+	} else {
+
+		tzmin = ( maxz - oz ) * invdirz;
+		tzmax = ( minz - oz ) * invdirz;
+
+	}
+
+	if ( ( tmin > tzmax ) || ( tzmin > tmax ) ) return false;
+
+	if ( tzmin > tmin || tmin !== tmin ) tmin = tzmin;
+
+	if ( tzmax < tmax || tmax !== tmax ) tmax = tzmax;
+
+	//return point closest to the ray (positive side)
+
+	return tmin <= far && tmax >= near;
+
+}
+
+/*************************************************************/
+/* This file is generated from "iterationUtils.template.js". */
+/*************************************************************/
+/* eslint-disable indent */
+
+function intersectTris_indirect( bvh, side, ray, offset, count, intersections, near, far ) {
+
+	const { geometry, _indirectBuffer } = bvh;
+	for ( let i = offset, end = offset + count; i < end; i ++ ) {
+
+		let vi = _indirectBuffer ? _indirectBuffer[ i ] : i;
+		intersectTri( geometry, side, ray, vi, intersections, near, far );
+
+
+	}
+
+}
+
+function intersectClosestTri_indirect( bvh, side, ray, offset, count, near, far ) {
+
+	const { geometry, _indirectBuffer } = bvh;
+	let dist = Infinity;
+	let res = null;
+	for ( let i = offset, end = offset + count; i < end; i ++ ) {
+
+		let intersection;
+		intersection = intersectTri( geometry, side, ray, _indirectBuffer ? _indirectBuffer[ i ] : i, null, near, far );
+
+
+		if ( intersection && intersection.distance < dist ) {
+
+			res = intersection;
+			dist = intersection.distance;
+
+		}
+
+	}
+
+	return res;
+
+}
+
+function iterateOverTriangles_indirect(
+	offset,
+	count,
+	bvh,
+	intersectsTriangleFunc,
+	contained,
+	depth,
+	triangle
+) {
+
+	const { geometry } = bvh;
+	const { index } = geometry;
+	const pos = geometry.attributes.position;
+	for ( let i = offset, l = count + offset; i < l; i ++ ) {
+
+		let tri;
+		tri = bvh.resolveTriangleIndex( i );
+
+		setTriangle( triangle, tri * 3, index, pos );
+		triangle.needsUpdate = true;
+
+		if ( intersectsTriangleFunc( triangle, tri, contained, depth ) ) {
+
+			return true;
+
+		}
+
+	}
+
+	return false;
+
+}
+
+/******************************************************/
+/* This file is generated from "raycast.template.js". */
+/******************************************************/
+
+function raycast( bvh, root, side, ray, intersects, near, far ) {
+
+	BufferStack.setBuffer( bvh._roots[ root ] );
+	_raycast$1( 0, bvh, side, ray, intersects, near, far );
+	BufferStack.clearBuffer();
+
+}
+
+function _raycast$1( nodeIndex32, bvh, side, ray, intersects, near, far ) {
+
+	const { float32Array, uint16Array, uint32Array } = BufferStack;
+	const nodeIndex16 = nodeIndex32 * 2;
+	const isLeaf = IS_LEAF( nodeIndex16, uint16Array );
+	if ( isLeaf ) {
+
+		const offset = OFFSET( nodeIndex32, uint32Array );
+		const count = COUNT( nodeIndex16, uint16Array );
+
+
+		intersectTris( bvh, side, ray, offset, count, intersects, near, far );
+
+
+	} else {
+
+		const leftIndex = LEFT_NODE( nodeIndex32 );
+		if ( intersectRay( leftIndex, float32Array, ray, near, far ) ) {
+
+			_raycast$1( leftIndex, bvh, side, ray, intersects, near, far );
+
+		}
+
+		const rightIndex = RIGHT_NODE( nodeIndex32, uint32Array );
+		if ( intersectRay( rightIndex, float32Array, ray, near, far ) ) {
+
+			_raycast$1( rightIndex, bvh, side, ray, intersects, near, far );
+
+		}
+
+	}
+
+}
+
+/***********************************************************/
+/* This file is generated from "raycastFirst.template.js". */
+/***********************************************************/
+
+const _xyzFields$1 = [ 'x', 'y', 'z' ];
+
+function raycastFirst( bvh, root, side, ray, near, far ) {
+
+	BufferStack.setBuffer( bvh._roots[ root ] );
+	const result = _raycastFirst$1( 0, bvh, side, ray, near, far );
+	BufferStack.clearBuffer();
+
+	return result;
+
+}
+
+function _raycastFirst$1( nodeIndex32, bvh, side, ray, near, far ) {
+
+	const { float32Array, uint16Array, uint32Array } = BufferStack;
+	let nodeIndex16 = nodeIndex32 * 2;
+
+	const isLeaf = IS_LEAF( nodeIndex16, uint16Array );
+	if ( isLeaf ) {
+
+		const offset = OFFSET( nodeIndex32, uint32Array );
+		const count = COUNT( nodeIndex16, uint16Array );
+
+
+		// eslint-disable-next-line no-unreachable
+		return intersectClosestTri( bvh, side, ray, offset, count, near, far );
+
+
+	} else {
+
+		// consider the position of the split plane with respect to the oncoming ray; whichever direction
+		// the ray is coming from, look for an intersection among that side of the tree first
+		const splitAxis = SPLIT_AXIS( nodeIndex32, uint32Array );
+		const xyzAxis = _xyzFields$1[ splitAxis ];
+		const rayDir = ray.direction[ xyzAxis ];
+		const leftToRight = rayDir >= 0;
+
+		// c1 is the child to check first
+		let c1, c2;
+		if ( leftToRight ) {
+
+			c1 = LEFT_NODE( nodeIndex32 );
+			c2 = RIGHT_NODE( nodeIndex32, uint32Array );
+
+		} else {
+
+			c1 = RIGHT_NODE( nodeIndex32, uint32Array );
+			c2 = LEFT_NODE( nodeIndex32 );
+
+		}
+
+		const c1Intersection = intersectRay( c1, float32Array, ray, near, far );
+		const c1Result = c1Intersection ? _raycastFirst$1( c1, bvh, side, ray, near, far ) : null;
+
+		// if we got an intersection in the first node and it's closer than the second node's bounding
+		// box, we don't need to consider the second node because it couldn't possibly be a better result
+		if ( c1Result ) {
+
+			// check if the point is within the second bounds
+			// "point" is in the local frame of the bvh
+			const point = c1Result.point[ xyzAxis ];
+			const isOutside = leftToRight ?
+				point <= float32Array[ c2 + splitAxis ] : // min bounding data
+				point >= float32Array[ c2 + splitAxis + 3 ]; // max bounding data
+
+			if ( isOutside ) {
+
+				return c1Result;
+
+			}
+
+		}
+
+		// either there was no intersection in the first node, or there could still be a closer
+		// intersection in the second, so check the second node and then take the better of the two
+		const c2Intersection = intersectRay( c2, float32Array, ray, near, far );
+		const c2Result = c2Intersection ? _raycastFirst$1( c2, bvh, side, ray, near, far ) : null;
+
+		if ( c1Result && c2Result ) {
+
+			return c1Result.distance <= c2Result.distance ? c1Result : c2Result;
+
+		} else {
+
+			return c1Result || c2Result || null;
+
+		}
+
+	}
+
+}
+
+/*****************************************************************/
+/* This file is generated from "intersectsGeometry.template.js". */
+/*****************************************************************/
+/* eslint-disable indent */
+
+const boundingBox$1 = /* @__PURE__ */ new Box3();
+const triangle$1 = /* @__PURE__ */ new ExtendedTriangle();
+const triangle2$1 = /* @__PURE__ */ new ExtendedTriangle();
+const invertedMat$1 = /* @__PURE__ */ new Matrix4();
+
+const obb$4 = /* @__PURE__ */ new OrientedBox();
+const obb2$3 = /* @__PURE__ */ new OrientedBox();
+
+function intersectsGeometry( bvh, root, otherGeometry, geometryToBvh ) {
+
+	BufferStack.setBuffer( bvh._roots[ root ] );
+	const result = _intersectsGeometry$1( 0, bvh, otherGeometry, geometryToBvh );
+	BufferStack.clearBuffer();
+
+	return result;
+
+}
+
+function _intersectsGeometry$1( nodeIndex32, bvh, otherGeometry, geometryToBvh, cachedObb = null ) {
+
+	const { float32Array, uint16Array, uint32Array } = BufferStack;
+	let nodeIndex16 = nodeIndex32 * 2;
+
+	if ( cachedObb === null ) {
+
+		if ( ! otherGeometry.boundingBox ) {
+
+			otherGeometry.computeBoundingBox();
+
+		}
+
+		obb$4.set( otherGeometry.boundingBox.min, otherGeometry.boundingBox.max, geometryToBvh );
+		cachedObb = obb$4;
+
+	}
+
+	const isLeaf = IS_LEAF( nodeIndex16, uint16Array );
+	if ( isLeaf ) {
+
+		const thisGeometry = bvh.geometry;
+		const thisIndex = thisGeometry.index;
+		const thisPos = thisGeometry.attributes.position;
+
+		const index = otherGeometry.index;
+		const pos = otherGeometry.attributes.position;
+
+		const offset = OFFSET( nodeIndex32, uint32Array );
+		const count = COUNT( nodeIndex16, uint16Array );
+
+		// get the inverse of the geometry matrix so we can transform our triangles into the
+		// geometry space we're trying to test. We assume there are fewer triangles being checked
+		// here.
+		invertedMat$1.copy( geometryToBvh ).invert();
+
+		if ( otherGeometry.boundsTree ) {
+
+			// if there's a bounds tree
+			arrayToBox( BOUNDING_DATA_INDEX( nodeIndex32 ), float32Array, obb2$3 );
+			obb2$3.matrix.copy( invertedMat$1 );
+			obb2$3.needsUpdate = true;
+
+			// TODO: use a triangle iteration function here
+			const res = otherGeometry.boundsTree.shapecast( {
+
+				intersectsBounds: box => obb2$3.intersectsBox( box ),
+
+				intersectsTriangle: tri => {
+
+					tri.a.applyMatrix4( geometryToBvh );
+					tri.b.applyMatrix4( geometryToBvh );
+					tri.c.applyMatrix4( geometryToBvh );
+					tri.needsUpdate = true;
+
+
+					for ( let i = offset * 3, l = ( count + offset ) * 3; i < l; i += 3 ) {
+
+						// this triangle needs to be transformed into the current BVH coordinate frame
+						setTriangle( triangle2$1, i, thisIndex, thisPos );
+						triangle2$1.needsUpdate = true;
+						if ( tri.intersectsTriangle( triangle2$1 ) ) {
+
+							return true;
+
+						}
+
+					}
+
+
+					return false;
+
+				}
+
+			} );
+
+			return res;
+
+		} else {
+
+			// if we're just dealing with raw geometry
+
+			for ( let i = offset * 3, l = ( count + offset ) * 3; i < l; i += 3 ) {
+
+				// this triangle needs to be transformed into the current BVH coordinate frame
+				setTriangle( triangle$1, i, thisIndex, thisPos );
+
+
+				triangle$1.a.applyMatrix4( invertedMat$1 );
+				triangle$1.b.applyMatrix4( invertedMat$1 );
+				triangle$1.c.applyMatrix4( invertedMat$1 );
+				triangle$1.needsUpdate = true;
+
+				for ( let i2 = 0, l2 = index.count; i2 < l2; i2 += 3 ) {
+
+					setTriangle( triangle2$1, i2, index, pos );
+					triangle2$1.needsUpdate = true;
+
+					if ( triangle$1.intersectsTriangle( triangle2$1 ) ) {
+
+						return true;
+
+					}
+
+				}
+
+
+			}
+
+
+		}
+
+	} else {
+
+		const left = nodeIndex32 + 8;
+		const right = uint32Array[ nodeIndex32 + 6 ];
+
+		arrayToBox( BOUNDING_DATA_INDEX( left ), float32Array, boundingBox$1 );
+		const leftIntersection =
+			cachedObb.intersectsBox( boundingBox$1 ) &&
+			_intersectsGeometry$1( left, bvh, otherGeometry, geometryToBvh, cachedObb );
+
+		if ( leftIntersection ) return true;
+
+		arrayToBox( BOUNDING_DATA_INDEX( right ), float32Array, boundingBox$1 );
+		const rightIntersection =
+			cachedObb.intersectsBox( boundingBox$1 ) &&
+			_intersectsGeometry$1( right, bvh, otherGeometry, geometryToBvh, cachedObb );
+
+		if ( rightIntersection ) return true;
+
+		return false;
+
+	}
+
+}
+
+/*********************************************************************/
+/* This file is generated from "closestPointToGeometry.template.js". */
+/*********************************************************************/
+
+const tempMatrix$1 = /* @__PURE__ */ new Matrix4();
+const obb$3 = /* @__PURE__ */ new OrientedBox();
+const obb2$2 = /* @__PURE__ */ new OrientedBox();
+const temp1$1 = /* @__PURE__ */ new Vector3();
+const temp2$1 = /* @__PURE__ */ new Vector3();
+const temp3$1 = /* @__PURE__ */ new Vector3();
+const temp4$1 = /* @__PURE__ */ new Vector3();
+
+function closestPointToGeometry(
+	bvh,
+	otherGeometry,
+	geometryToBvh,
+	target1 = { },
+	target2 = { },
+	minThreshold = 0,
+	maxThreshold = Infinity,
+) {
+
+	if ( ! otherGeometry.boundingBox ) {
+
+		otherGeometry.computeBoundingBox();
+
+	}
+
+	obb$3.set( otherGeometry.boundingBox.min, otherGeometry.boundingBox.max, geometryToBvh );
+	obb$3.needsUpdate = true;
+
+	const geometry = bvh.geometry;
+	const pos = geometry.attributes.position;
+	const index = geometry.index;
+	const otherPos = otherGeometry.attributes.position;
+	const otherIndex = otherGeometry.index;
+	const triangle = ExtendedTrianglePool.getPrimitive();
+	const triangle2 = ExtendedTrianglePool.getPrimitive();
+
+	let tempTarget1 = temp1$1;
+	let tempTargetDest1 = temp2$1;
+	let tempTarget2 = null;
+	let tempTargetDest2 = null;
+
+	if ( target2 ) {
+
+		tempTarget2 = temp3$1;
+		tempTargetDest2 = temp4$1;
+
+	}
+
+	let closestDistance = Infinity;
+	let closestDistanceTriIndex = null;
+	let closestDistanceOtherTriIndex = null;
+	tempMatrix$1.copy( geometryToBvh ).invert();
+	obb2$2.matrix.copy( tempMatrix$1 );
+	bvh.shapecast(
+		{
+
+			boundsTraverseOrder: box => {
+
+				return obb$3.distanceToBox( box );
+
+			},
+
+			intersectsBounds: ( box, isLeaf, score ) => {
+
+				if ( score < closestDistance && score < maxThreshold ) {
+
+					// if we know the triangles of this bounds will be intersected next then
+					// save the bounds to use during triangle checks.
+					if ( isLeaf ) {
+
+						obb2$2.min.copy( box.min );
+						obb2$2.max.copy( box.max );
+						obb2$2.needsUpdate = true;
+
+					}
+
+					return true;
+
+				}
+
+				return false;
+
+			},
+
+			intersectsRange: ( offset, count ) => {
+
+				if ( otherGeometry.boundsTree ) {
+
+					// if the other geometry has a bvh then use the accelerated path where we use shapecast to find
+					// the closest bounds in the other geometry to check.
+					const otherBvh = otherGeometry.boundsTree;
+					return otherBvh.shapecast( {
+						boundsTraverseOrder: box => {
+
+							return obb2$2.distanceToBox( box );
+
+						},
+
+						intersectsBounds: ( box, isLeaf, score ) => {
+
+							return score < closestDistance && score < maxThreshold;
+
+						},
+
+						intersectsRange: ( otherOffset, otherCount ) => {
+
+							for ( let i2 = otherOffset, l2 = otherOffset + otherCount; i2 < l2; i2 ++ ) {
+
+
+								setTriangle( triangle2, 3 * i2, otherIndex, otherPos );
+
+								triangle2.a.applyMatrix4( geometryToBvh );
+								triangle2.b.applyMatrix4( geometryToBvh );
+								triangle2.c.applyMatrix4( geometryToBvh );
+								triangle2.needsUpdate = true;
+
+								for ( let i = offset, l = offset + count; i < l; i ++ ) {
+
+
+									setTriangle( triangle, 3 * i, index, pos );
+
+									triangle.needsUpdate = true;
+
+									const dist = triangle.distanceToTriangle( triangle2, tempTarget1, tempTarget2 );
+									if ( dist < closestDistance ) {
+
+										tempTargetDest1.copy( tempTarget1 );
+
+										if ( tempTargetDest2 ) {
+
+											tempTargetDest2.copy( tempTarget2 );
+
+										}
+
+										closestDistance = dist;
+										closestDistanceTriIndex = i;
+										closestDistanceOtherTriIndex = i2;
+
+									}
+
+									// stop traversal if we find a point that's under the given threshold
+									if ( dist < minThreshold ) {
+
+										return true;
+
+									}
+
+								}
+
+							}
+
+						},
+					} );
+
+				} else {
+
+					// If no bounds tree then we'll just check every triangle.
+					const triCount = getTriCount( otherGeometry );
+					for ( let i2 = 0, l2 = triCount; i2 < l2; i2 ++ ) {
+
+						setTriangle( triangle2, 3 * i2, otherIndex, otherPos );
+						triangle2.a.applyMatrix4( geometryToBvh );
+						triangle2.b.applyMatrix4( geometryToBvh );
+						triangle2.c.applyMatrix4( geometryToBvh );
+						triangle2.needsUpdate = true;
+
+						for ( let i = offset, l = offset + count; i < l; i ++ ) {
+
+
+							setTriangle( triangle, 3 * i, index, pos );
+
+							triangle.needsUpdate = true;
+
+							const dist = triangle.distanceToTriangle( triangle2, tempTarget1, tempTarget2 );
+							if ( dist < closestDistance ) {
+
+								tempTargetDest1.copy( tempTarget1 );
+
+								if ( tempTargetDest2 ) {
+
+									tempTargetDest2.copy( tempTarget2 );
+
+								}
+
+								closestDistance = dist;
+								closestDistanceTriIndex = i;
+								closestDistanceOtherTriIndex = i2;
+
+							}
+
+							// stop traversal if we find a point that's under the given threshold
+							if ( dist < minThreshold ) {
+
+								return true;
+
+							}
+
+						}
+
+					}
+
+				}
+
+			},
+
+		}
+
+	);
+
+	ExtendedTrianglePool.releasePrimitive( triangle );
+	ExtendedTrianglePool.releasePrimitive( triangle2 );
+
+	if ( closestDistance === Infinity ) {
+
+		return null;
+
+	}
+
+	if ( ! target1.point ) {
+
+		target1.point = tempTargetDest1.clone();
+
+	} else {
+
+		target1.point.copy( tempTargetDest1 );
+
+	}
+
+	target1.distance = closestDistance,
+	target1.faceIndex = closestDistanceTriIndex;
+
+	if ( target2 ) {
+
+		if ( ! target2.point ) target2.point = tempTargetDest2.clone();
+		else target2.point.copy( tempTargetDest2 );
+		target2.point.applyMatrix4( tempMatrix$1 );
+		tempTargetDest1.applyMatrix4( tempMatrix$1 );
+		target2.distance = tempTargetDest1.sub( target2.point ).length();
+		target2.faceIndex = closestDistanceOtherTriIndex;
+
+	}
+
+	return target1;
+
+}
+
+/****************************************************/
+/* This file is generated from "refit.template.js". */
+/****************************************************/
+
+function refit_indirect( bvh, nodeIndices = null ) {
+
+	if ( nodeIndices && Array.isArray( nodeIndices ) ) {
+
+		nodeIndices = new Set( nodeIndices );
+
+	}
+
+	const geometry = bvh.geometry;
+	const indexArr = geometry.index ? geometry.index.array : null;
+	const posAttr = geometry.attributes.position;
+
+	let buffer, uint32Array, uint16Array, float32Array;
+	let byteOffset = 0;
+	const roots = bvh._roots;
+	for ( let i = 0, l = roots.length; i < l; i ++ ) {
+
+		buffer = roots[ i ];
+		uint32Array = new Uint32Array( buffer );
+		uint16Array = new Uint16Array( buffer );
+		float32Array = new Float32Array( buffer );
+
+		_traverse( 0, byteOffset );
+		byteOffset += buffer.byteLength;
+
+	}
+
+	function _traverse( node32Index, byteOffset, force = false ) {
+
+		const node16Index = node32Index * 2;
+		const isLeaf = uint16Array[ node16Index + 15 ] === IS_LEAFNODE_FLAG;
+		if ( isLeaf ) {
+
+			const offset = uint32Array[ node32Index + 6 ];
+			const count = uint16Array[ node16Index + 14 ];
+
+			let minx = Infinity;
+			let miny = Infinity;
+			let minz = Infinity;
+			let maxx = - Infinity;
+			let maxy = - Infinity;
+			let maxz = - Infinity;
+
+			for ( let i = offset, l = offset + count; i < l; i ++ ) {
+
+				const t = 3 * bvh.resolveTriangleIndex( i );
+				for ( let j = 0; j < 3; j ++ ) {
+
+					let index = t + j;
+					index = indexArr ? indexArr[ index ] : index;
+
+					const x = posAttr.getX( index );
+					const y = posAttr.getY( index );
+					const z = posAttr.getZ( index );
+
+					if ( x < minx ) minx = x;
+					if ( x > maxx ) maxx = x;
+
+					if ( y < miny ) miny = y;
+					if ( y > maxy ) maxy = y;
+
+					if ( z < minz ) minz = z;
+					if ( z > maxz ) maxz = z;
+
+
+				}
+
+			}
+
+
+			if (
+				float32Array[ node32Index + 0 ] !== minx ||
+				float32Array[ node32Index + 1 ] !== miny ||
+				float32Array[ node32Index + 2 ] !== minz ||
+
+				float32Array[ node32Index + 3 ] !== maxx ||
+				float32Array[ node32Index + 4 ] !== maxy ||
+				float32Array[ node32Index + 5 ] !== maxz
+			) {
+
+				float32Array[ node32Index + 0 ] = minx;
+				float32Array[ node32Index + 1 ] = miny;
+				float32Array[ node32Index + 2 ] = minz;
+
+				float32Array[ node32Index + 3 ] = maxx;
+				float32Array[ node32Index + 4 ] = maxy;
+				float32Array[ node32Index + 5 ] = maxz;
+
+				return true;
+
+			} else {
+
+				return false;
+
+			}
+
+		} else {
+
+			const left = node32Index + 8;
+			const right = uint32Array[ node32Index + 6 ];
+
+			// the identifying node indices provided by the shapecast function include offsets of all
+			// root buffers to guarantee they're unique between roots so offset left and right indices here.
+			const offsetLeft = left + byteOffset;
+			const offsetRight = right + byteOffset;
+			let forceChildren = force;
+			let includesLeft = false;
+			let includesRight = false;
+
+			if ( nodeIndices ) {
+
+				// if we see that neither the left or right child are included in the set that need to be updated
+				// then we assume that all children need to be updated.
+				if ( ! forceChildren ) {
+
+					includesLeft = nodeIndices.has( offsetLeft );
+					includesRight = nodeIndices.has( offsetRight );
+					forceChildren = ! includesLeft && ! includesRight;
+
+				}
+
+			} else {
+
+				includesLeft = true;
+				includesRight = true;
+
+			}
+
+			const traverseLeft = forceChildren || includesLeft;
+			const traverseRight = forceChildren || includesRight;
+
+			let leftChange = false;
+			if ( traverseLeft ) {
+
+				leftChange = _traverse( left, byteOffset, forceChildren );
+
+			}
+
+			let rightChange = false;
+			if ( traverseRight ) {
+
+				rightChange = _traverse( right, byteOffset, forceChildren );
+
+			}
+
+			const didChange = leftChange || rightChange;
+			if ( didChange ) {
+
+				for ( let i = 0; i < 3; i ++ ) {
+
+					const lefti = left + i;
+					const righti = right + i;
+					const minLeftValue = float32Array[ lefti ];
+					const maxLeftValue = float32Array[ lefti + 3 ];
+					const minRightValue = float32Array[ righti ];
+					const maxRightValue = float32Array[ righti + 3 ];
+
+					float32Array[ node32Index + i ] = minLeftValue < minRightValue ? minLeftValue : minRightValue;
+					float32Array[ node32Index + i + 3 ] = maxLeftValue > maxRightValue ? maxLeftValue : maxRightValue;
+
+				}
+
+			}
+
+			return didChange;
+
+		}
+
+	}
+
+}
+
+/******************************************************/
+/* This file is generated from "raycast.template.js". */
+/******************************************************/
+
+function raycast_indirect( bvh, root, side, ray, intersects, near, far ) {
+
+	BufferStack.setBuffer( bvh._roots[ root ] );
+	_raycast( 0, bvh, side, ray, intersects, near, far );
+	BufferStack.clearBuffer();
+
+}
+
+function _raycast( nodeIndex32, bvh, side, ray, intersects, near, far ) {
+
+	const { float32Array, uint16Array, uint32Array } = BufferStack;
+	const nodeIndex16 = nodeIndex32 * 2;
+	const isLeaf = IS_LEAF( nodeIndex16, uint16Array );
+	if ( isLeaf ) {
+
+		const offset = OFFSET( nodeIndex32, uint32Array );
+		const count = COUNT( nodeIndex16, uint16Array );
+
+		intersectTris_indirect( bvh, side, ray, offset, count, intersects, near, far );
+
+
+	} else {
+
+		const leftIndex = LEFT_NODE( nodeIndex32 );
+		if ( intersectRay( leftIndex, float32Array, ray, near, far ) ) {
+
+			_raycast( leftIndex, bvh, side, ray, intersects, near, far );
+
+		}
+
+		const rightIndex = RIGHT_NODE( nodeIndex32, uint32Array );
+		if ( intersectRay( rightIndex, float32Array, ray, near, far ) ) {
+
+			_raycast( rightIndex, bvh, side, ray, intersects, near, far );
+
+		}
+
+	}
+
+}
+
+/***********************************************************/
+/* This file is generated from "raycastFirst.template.js". */
+/***********************************************************/
+
+const _xyzFields = [ 'x', 'y', 'z' ];
+
+function raycastFirst_indirect( bvh, root, side, ray, near, far ) {
+
+	BufferStack.setBuffer( bvh._roots[ root ] );
+	const result = _raycastFirst( 0, bvh, side, ray, near, far );
+	BufferStack.clearBuffer();
+
+	return result;
+
+}
+
+function _raycastFirst( nodeIndex32, bvh, side, ray, near, far ) {
+
+	const { float32Array, uint16Array, uint32Array } = BufferStack;
+	let nodeIndex16 = nodeIndex32 * 2;
+
+	const isLeaf = IS_LEAF( nodeIndex16, uint16Array );
+	if ( isLeaf ) {
+
+		const offset = OFFSET( nodeIndex32, uint32Array );
+		const count = COUNT( nodeIndex16, uint16Array );
+
+		return intersectClosestTri_indirect( bvh, side, ray, offset, count, near, far );
+
+
+	} else {
+
+		// consider the position of the split plane with respect to the oncoming ray; whichever direction
+		// the ray is coming from, look for an intersection among that side of the tree first
+		const splitAxis = SPLIT_AXIS( nodeIndex32, uint32Array );
+		const xyzAxis = _xyzFields[ splitAxis ];
+		const rayDir = ray.direction[ xyzAxis ];
+		const leftToRight = rayDir >= 0;
+
+		// c1 is the child to check first
+		let c1, c2;
+		if ( leftToRight ) {
+
+			c1 = LEFT_NODE( nodeIndex32 );
+			c2 = RIGHT_NODE( nodeIndex32, uint32Array );
+
+		} else {
+
+			c1 = RIGHT_NODE( nodeIndex32, uint32Array );
+			c2 = LEFT_NODE( nodeIndex32 );
+
+		}
+
+		const c1Intersection = intersectRay( c1, float32Array, ray, near, far );
+		const c1Result = c1Intersection ? _raycastFirst( c1, bvh, side, ray, near, far ) : null;
+
+		// if we got an intersection in the first node and it's closer than the second node's bounding
+		// box, we don't need to consider the second node because it couldn't possibly be a better result
+		if ( c1Result ) {
+
+			// check if the point is within the second bounds
+			// "point" is in the local frame of the bvh
+			const point = c1Result.point[ xyzAxis ];
+			const isOutside = leftToRight ?
+				point <= float32Array[ c2 + splitAxis ] : // min bounding data
+				point >= float32Array[ c2 + splitAxis + 3 ]; // max bounding data
+
+			if ( isOutside ) {
+
+				return c1Result;
+
+			}
+
+		}
+
+		// either there was no intersection in the first node, or there could still be a closer
+		// intersection in the second, so check the second node and then take the better of the two
+		const c2Intersection = intersectRay( c2, float32Array, ray, near, far );
+		const c2Result = c2Intersection ? _raycastFirst( c2, bvh, side, ray, near, far ) : null;
+
+		if ( c1Result && c2Result ) {
+
+			return c1Result.distance <= c2Result.distance ? c1Result : c2Result;
+
+		} else {
+
+			return c1Result || c2Result || null;
+
+		}
+
+	}
+
+}
+
+/*****************************************************************/
+/* This file is generated from "intersectsGeometry.template.js". */
+/*****************************************************************/
+/* eslint-disable indent */
+
+const boundingBox = /* @__PURE__ */ new Box3();
+const triangle = /* @__PURE__ */ new ExtendedTriangle();
+const triangle2 = /* @__PURE__ */ new ExtendedTriangle();
+const invertedMat = /* @__PURE__ */ new Matrix4();
+
+const obb$2 = /* @__PURE__ */ new OrientedBox();
+const obb2$1 = /* @__PURE__ */ new OrientedBox();
+
+function intersectsGeometry_indirect( bvh, root, otherGeometry, geometryToBvh ) {
+
+	BufferStack.setBuffer( bvh._roots[ root ] );
+	const result = _intersectsGeometry( 0, bvh, otherGeometry, geometryToBvh );
+	BufferStack.clearBuffer();
+
+	return result;
+
+}
+
+function _intersectsGeometry( nodeIndex32, bvh, otherGeometry, geometryToBvh, cachedObb = null ) {
+
+	const { float32Array, uint16Array, uint32Array } = BufferStack;
+	let nodeIndex16 = nodeIndex32 * 2;
+
+	if ( cachedObb === null ) {
+
+		if ( ! otherGeometry.boundingBox ) {
+
+			otherGeometry.computeBoundingBox();
+
+		}
+
+		obb$2.set( otherGeometry.boundingBox.min, otherGeometry.boundingBox.max, geometryToBvh );
+		cachedObb = obb$2;
+
+	}
+
+	const isLeaf = IS_LEAF( nodeIndex16, uint16Array );
+	if ( isLeaf ) {
+
+		const thisGeometry = bvh.geometry;
+		const thisIndex = thisGeometry.index;
+		const thisPos = thisGeometry.attributes.position;
+
+		const index = otherGeometry.index;
+		const pos = otherGeometry.attributes.position;
+
+		const offset = OFFSET( nodeIndex32, uint32Array );
+		const count = COUNT( nodeIndex16, uint16Array );
+
+		// get the inverse of the geometry matrix so we can transform our triangles into the
+		// geometry space we're trying to test. We assume there are fewer triangles being checked
+		// here.
+		invertedMat.copy( geometryToBvh ).invert();
+
+		if ( otherGeometry.boundsTree ) {
+
+			// if there's a bounds tree
+			arrayToBox( BOUNDING_DATA_INDEX( nodeIndex32 ), float32Array, obb2$1 );
+			obb2$1.matrix.copy( invertedMat );
+			obb2$1.needsUpdate = true;
+
+			// TODO: use a triangle iteration function here
+			const res = otherGeometry.boundsTree.shapecast( {
+
+				intersectsBounds: box => obb2$1.intersectsBox( box ),
+
+				intersectsTriangle: tri => {
+
+					tri.a.applyMatrix4( geometryToBvh );
+					tri.b.applyMatrix4( geometryToBvh );
+					tri.c.applyMatrix4( geometryToBvh );
+					tri.needsUpdate = true;
+
+					for ( let i = offset, l = count + offset; i < l; i ++ ) {
+
+						// this triangle needs to be transformed into the current BVH coordinate frame
+						setTriangle( triangle2, 3 * bvh.resolveTriangleIndex( i ), thisIndex, thisPos );
+						triangle2.needsUpdate = true;
+						if ( tri.intersectsTriangle( triangle2 ) ) {
+
+							return true;
+
+						}
+
+					}
+
+
+					return false;
+
+				}
+
+			} );
+
+			return res;
+
+		} else {
+
+			// if we're just dealing with raw geometry
+			for ( let i = offset, l = count + offset; i < l; i ++ ) {
+
+				// this triangle needs to be transformed into the current BVH coordinate frame
+				const ti = bvh.resolveTriangleIndex( i );
+				setTriangle( triangle, 3 * ti, thisIndex, thisPos );
+
+
+				triangle.a.applyMatrix4( invertedMat );
+				triangle.b.applyMatrix4( invertedMat );
+				triangle.c.applyMatrix4( invertedMat );
+				triangle.needsUpdate = true;
+
+				for ( let i2 = 0, l2 = index.count; i2 < l2; i2 += 3 ) {
+
+					setTriangle( triangle2, i2, index, pos );
+					triangle2.needsUpdate = true;
+
+					if ( triangle.intersectsTriangle( triangle2 ) ) {
+
+						return true;
+
+					}
+
+				}
+
+			}
+
+
+		}
+
+	} else {
+
+		const left = nodeIndex32 + 8;
+		const right = uint32Array[ nodeIndex32 + 6 ];
+
+		arrayToBox( BOUNDING_DATA_INDEX( left ), float32Array, boundingBox );
+		const leftIntersection =
+			cachedObb.intersectsBox( boundingBox ) &&
+			_intersectsGeometry( left, bvh, otherGeometry, geometryToBvh, cachedObb );
+
+		if ( leftIntersection ) return true;
+
+		arrayToBox( BOUNDING_DATA_INDEX( right ), float32Array, boundingBox );
+		const rightIntersection =
+			cachedObb.intersectsBox( boundingBox ) &&
+			_intersectsGeometry( right, bvh, otherGeometry, geometryToBvh, cachedObb );
+
+		if ( rightIntersection ) return true;
+
+		return false;
+
+	}
+
+}
+
+/*********************************************************************/
+/* This file is generated from "closestPointToGeometry.template.js". */
+/*********************************************************************/
+
+const tempMatrix = /* @__PURE__ */ new Matrix4();
+const obb$1 = /* @__PURE__ */ new OrientedBox();
+const obb2 = /* @__PURE__ */ new OrientedBox();
+const temp1 = /* @__PURE__ */ new Vector3();
+const temp2 = /* @__PURE__ */ new Vector3();
+const temp3 = /* @__PURE__ */ new Vector3();
+const temp4 = /* @__PURE__ */ new Vector3();
+
+function closestPointToGeometry_indirect(
+	bvh,
+	otherGeometry,
+	geometryToBvh,
+	target1 = { },
+	target2 = { },
+	minThreshold = 0,
+	maxThreshold = Infinity,
+) {
+
+	if ( ! otherGeometry.boundingBox ) {
+
+		otherGeometry.computeBoundingBox();
+
+	}
+
+	obb$1.set( otherGeometry.boundingBox.min, otherGeometry.boundingBox.max, geometryToBvh );
+	obb$1.needsUpdate = true;
+
+	const geometry = bvh.geometry;
+	const pos = geometry.attributes.position;
+	const index = geometry.index;
+	const otherPos = otherGeometry.attributes.position;
+	const otherIndex = otherGeometry.index;
+	const triangle = ExtendedTrianglePool.getPrimitive();
+	const triangle2 = ExtendedTrianglePool.getPrimitive();
+
+	let tempTarget1 = temp1;
+	let tempTargetDest1 = temp2;
+	let tempTarget2 = null;
+	let tempTargetDest2 = null;
+
+	if ( target2 ) {
+
+		tempTarget2 = temp3;
+		tempTargetDest2 = temp4;
+
+	}
+
+	let closestDistance = Infinity;
+	let closestDistanceTriIndex = null;
+	let closestDistanceOtherTriIndex = null;
+	tempMatrix.copy( geometryToBvh ).invert();
+	obb2.matrix.copy( tempMatrix );
+	bvh.shapecast(
+		{
+
+			boundsTraverseOrder: box => {
+
+				return obb$1.distanceToBox( box );
+
+			},
+
+			intersectsBounds: ( box, isLeaf, score ) => {
+
+				if ( score < closestDistance && score < maxThreshold ) {
+
+					// if we know the triangles of this bounds will be intersected next then
+					// save the bounds to use during triangle checks.
+					if ( isLeaf ) {
+
+						obb2.min.copy( box.min );
+						obb2.max.copy( box.max );
+						obb2.needsUpdate = true;
+
+					}
+
+					return true;
+
+				}
+
+				return false;
+
+			},
+
+			intersectsRange: ( offset, count ) => {
+
+				if ( otherGeometry.boundsTree ) {
+
+					// if the other geometry has a bvh then use the accelerated path where we use shapecast to find
+					// the closest bounds in the other geometry to check.
+					const otherBvh = otherGeometry.boundsTree;
+					return otherBvh.shapecast( {
+						boundsTraverseOrder: box => {
+
+							return obb2.distanceToBox( box );
+
+						},
+
+						intersectsBounds: ( box, isLeaf, score ) => {
+
+							return score < closestDistance && score < maxThreshold;
+
+						},
+
+						intersectsRange: ( otherOffset, otherCount ) => {
+
+							for ( let i2 = otherOffset, l2 = otherOffset + otherCount; i2 < l2; i2 ++ ) {
+
+								const ti2 = otherBvh.resolveTriangleIndex( i2 );
+								setTriangle( triangle2, 3 * ti2, otherIndex, otherPos );
+
+								triangle2.a.applyMatrix4( geometryToBvh );
+								triangle2.b.applyMatrix4( geometryToBvh );
+								triangle2.c.applyMatrix4( geometryToBvh );
+								triangle2.needsUpdate = true;
+
+								for ( let i = offset, l = offset + count; i < l; i ++ ) {
+
+									const ti = bvh.resolveTriangleIndex( i );
+									setTriangle( triangle, 3 * ti, index, pos );
+
+									triangle.needsUpdate = true;
+
+									const dist = triangle.distanceToTriangle( triangle2, tempTarget1, tempTarget2 );
+									if ( dist < closestDistance ) {
+
+										tempTargetDest1.copy( tempTarget1 );
+
+										if ( tempTargetDest2 ) {
+
+											tempTargetDest2.copy( tempTarget2 );
+
+										}
+
+										closestDistance = dist;
+										closestDistanceTriIndex = i;
+										closestDistanceOtherTriIndex = i2;
+
+									}
+
+									// stop traversal if we find a point that's under the given threshold
+									if ( dist < minThreshold ) {
+
+										return true;
+
+									}
+
+								}
+
+							}
+
+						},
+					} );
+
+				} else {
+
+					// If no bounds tree then we'll just check every triangle.
+					const triCount = getTriCount( otherGeometry );
+					for ( let i2 = 0, l2 = triCount; i2 < l2; i2 ++ ) {
+
+						setTriangle( triangle2, 3 * i2, otherIndex, otherPos );
+						triangle2.a.applyMatrix4( geometryToBvh );
+						triangle2.b.applyMatrix4( geometryToBvh );
+						triangle2.c.applyMatrix4( geometryToBvh );
+						triangle2.needsUpdate = true;
+
+						for ( let i = offset, l = offset + count; i < l; i ++ ) {
+
+							const ti = bvh.resolveTriangleIndex( i );
+							setTriangle( triangle, 3 * ti, index, pos );
+
+							triangle.needsUpdate = true;
+
+							const dist = triangle.distanceToTriangle( triangle2, tempTarget1, tempTarget2 );
+							if ( dist < closestDistance ) {
+
+								tempTargetDest1.copy( tempTarget1 );
+
+								if ( tempTargetDest2 ) {
+
+									tempTargetDest2.copy( tempTarget2 );
+
+								}
+
+								closestDistance = dist;
+								closestDistanceTriIndex = i;
+								closestDistanceOtherTriIndex = i2;
+
+							}
+
+							// stop traversal if we find a point that's under the given threshold
+							if ( dist < minThreshold ) {
+
+								return true;
+
+							}
+
+						}
+
+					}
+
+				}
+
+			},
+
+		}
+
+	);
+
+	ExtendedTrianglePool.releasePrimitive( triangle );
+	ExtendedTrianglePool.releasePrimitive( triangle2 );
+
+	if ( closestDistance === Infinity ) {
+
+		return null;
+
+	}
+
+	if ( ! target1.point ) {
+
+		target1.point = tempTargetDest1.clone();
+
+	} else {
+
+		target1.point.copy( tempTargetDest1 );
+
+	}
+
+	target1.distance = closestDistance,
+	target1.faceIndex = closestDistanceTriIndex;
+
+	if ( target2 ) {
+
+		if ( ! target2.point ) target2.point = tempTargetDest2.clone();
+		else target2.point.copy( tempTargetDest2 );
+		target2.point.applyMatrix4( tempMatrix );
+		tempTargetDest1.applyMatrix4( tempMatrix );
+		target2.distance = tempTargetDest1.sub( target2.point ).length();
+		target2.faceIndex = closestDistanceOtherTriIndex;
+
+	}
+
+	return target1;
+
+}
+
+function isSharedArrayBufferSupported() {
+
+	return typeof SharedArrayBuffer !== 'undefined';
+
+}
+
+const _bufferStack1 = new BufferStack.constructor();
+const _bufferStack2 = new BufferStack.constructor();
+const _boxPool = new PrimitivePool( () => new Box3() );
+const _leftBox1 = new Box3();
+const _rightBox1 = new Box3();
+
+const _leftBox2 = new Box3();
+const _rightBox2 = new Box3();
+
+let _active = false;
+
+function bvhcast( bvh, otherBvh, matrixToLocal, intersectsRanges ) {
+
+	if ( _active ) {
+
+		throw new Error( 'MeshBVH: Recursive calls to bvhcast not supported.' );
+
+	}
+
+	_active = true;
+
+	const roots = bvh._roots;
+	const otherRoots = otherBvh._roots;
+	let result;
+	let offset1 = 0;
+	let offset2 = 0;
+	const invMat = new Matrix4().copy( matrixToLocal ).invert();
+
+	// iterate over the first set of roots
+	for ( let i = 0, il = roots.length; i < il; i ++ ) {
+
+		_bufferStack1.setBuffer( roots[ i ] );
+		offset2 = 0;
+
+		// prep the initial root box
+		const localBox = _boxPool.getPrimitive();
+		arrayToBox( BOUNDING_DATA_INDEX( 0 ), _bufferStack1.float32Array, localBox );
+		localBox.applyMatrix4( invMat );
+
+		// iterate over the second set of roots
+		for ( let j = 0, jl = otherRoots.length; j < jl; j ++ ) {
+
+			_bufferStack2.setBuffer( otherRoots[ i ] );
+
+			result = _traverse(
+				0, 0, matrixToLocal, invMat, intersectsRanges,
+				offset1, offset2, 0, 0,
+				localBox,
+			);
+
+			_bufferStack2.clearBuffer();
+			offset2 += otherRoots[ j ].length;
+
+			if ( result ) {
+
+				break;
+
+			}
+
+		}
+
+		// release stack info
+		_boxPool.releasePrimitive( localBox );
+		_bufferStack1.clearBuffer();
+		offset1 += roots[ i ].length;
+
+		if ( result ) {
+
+			break;
+
+		}
+
+	}
+
+	_active = false;
+	return result;
+
+}
+
+function _traverse(
+	node1Index32,
+	node2Index32,
+	matrix2to1,
+	matrix1to2,
+	intersectsRangesFunc,
+
+	// offsets for ids
+	node1IndexByteOffset = 0,
+	node2IndexByteOffset = 0,
+
+	// tree depth
+	depth1 = 0,
+	depth2 = 0,
+
+	currBox = null,
+	reversed = false,
+
+) {
+
+	// get the buffer stacks associated with the current indices
+	let bufferStack1, bufferStack2;
+	if ( reversed ) {
+
+		bufferStack1 = _bufferStack2;
+		bufferStack2 = _bufferStack1;
+
+	} else {
+
+		bufferStack1 = _bufferStack1;
+		bufferStack2 = _bufferStack2;
+
+	}
+
+	// get the local instances of the typed buffers
+	const
+		float32Array1 = bufferStack1.float32Array,
+		uint32Array1 = bufferStack1.uint32Array,
+		uint16Array1 = bufferStack1.uint16Array,
+		float32Array2 = bufferStack2.float32Array,
+		uint32Array2 = bufferStack2.uint32Array,
+		uint16Array2 = bufferStack2.uint16Array;
+
+	const node1Index16 = node1Index32 * 2;
+	const node2Index16 = node2Index32 * 2;
+	const isLeaf1 = IS_LEAF( node1Index16, uint16Array1 );
+	const isLeaf2 = IS_LEAF( node2Index16, uint16Array2 );
+	let result = false;
+	if ( isLeaf2 && isLeaf1 ) {
+
+		// if both bounds are leaf nodes then fire the callback if the boxes intersect
+		if ( reversed ) {
+
+			result = intersectsRangesFunc(
+				OFFSET( node2Index32, uint32Array2 ), COUNT( node2Index32 * 2, uint16Array2 ),
+				OFFSET( node1Index32, uint32Array1 ), COUNT( node1Index32 * 2, uint16Array1 ),
+				depth2, node2IndexByteOffset + node2Index32,
+				depth1, node1IndexByteOffset + node1Index32,
+			);
+
+		} else {
+
+			result = intersectsRangesFunc(
+				OFFSET( node1Index32, uint32Array1 ), COUNT( node1Index32 * 2, uint16Array1 ),
+				OFFSET( node2Index32, uint32Array2 ), COUNT( node2Index32 * 2, uint16Array2 ),
+				depth1, node1IndexByteOffset + node1Index32,
+				depth2, node2IndexByteOffset + node2Index32,
+			);
+
+		}
+
+	} else if ( isLeaf2 ) {
+
+		// SWAP
+		// If we've traversed to the leaf node on the other bvh then we need to swap over
+		// to traverse down the first one
+
+		// get the new box to use
+		const newBox = _boxPool.getPrimitive();
+		arrayToBox( BOUNDING_DATA_INDEX( node2Index32 ), float32Array2, newBox );
+		newBox.applyMatrix4( matrix2to1 );
+
+		// get the child bounds to check before traversal
+		const cl1 = LEFT_NODE( node1Index32 );
+		const cr1 = RIGHT_NODE( node1Index32, uint32Array1 );
+		arrayToBox( BOUNDING_DATA_INDEX( cl1 ), float32Array1, _leftBox1 );
+		arrayToBox( BOUNDING_DATA_INDEX( cr1 ), float32Array1, _rightBox1 );
+
+		// precompute the intersections otherwise the global boxes will be modified during traversal
+		const intersectCl1 = newBox.intersectsBox( _leftBox1 );
+		const intersectCr1 = newBox.intersectsBox( _rightBox1 );
+		result = (
+			intersectCl1 && _traverse(
+				node2Index32, cl1, matrix1to2, matrix2to1, intersectsRangesFunc,
+				node2IndexByteOffset, node1IndexByteOffset, depth2, depth1 + 1,
+				newBox, ! reversed,
+			)
+		) || (
+			intersectCr1 && _traverse(
+				node2Index32, cr1, matrix1to2, matrix2to1, intersectsRangesFunc,
+				node2IndexByteOffset, node1IndexByteOffset, depth2, depth1 + 1,
+				newBox, ! reversed,
+			)
+		);
+
+		_boxPool.releasePrimitive( newBox );
+
+	} else {
+
+		// if neither are leaves then we should swap if one of the children does not
+		// intersect with the current bounds
+
+		// get the child bounds to check
+		const cl2 = LEFT_NODE( node2Index32 );
+		const cr2 = RIGHT_NODE( node2Index32, uint32Array2 );
+		arrayToBox( BOUNDING_DATA_INDEX( cl2 ), float32Array2, _leftBox2 );
+		arrayToBox( BOUNDING_DATA_INDEX( cr2 ), float32Array2, _rightBox2 );
+
+		const leftIntersects = currBox.intersectsBox( _leftBox2 );
+		const rightIntersects = currBox.intersectsBox( _rightBox2 );
+		if ( leftIntersects && rightIntersects ) {
+
+			// continue to traverse both children if they both intersect
+			result = _traverse(
+				node1Index32, cl2, matrix2to1, matrix1to2, intersectsRangesFunc,
+				node1IndexByteOffset, node2IndexByteOffset, depth1, depth2 + 1,
+				currBox, reversed,
+			) || _traverse(
+				node1Index32, cr2, matrix2to1, matrix1to2, intersectsRangesFunc,
+				node1IndexByteOffset, node2IndexByteOffset, depth1, depth2 + 1,
+				currBox, reversed,
+			);
+
+		} else if ( leftIntersects ) {
+
+			if ( isLeaf1 ) {
+
+				// if the current box is a leaf then just continue
+				result = _traverse(
+					node1Index32, cl2, matrix2to1, matrix1to2, intersectsRangesFunc,
+					node1IndexByteOffset, node2IndexByteOffset, depth1, depth2 + 1,
+					currBox, reversed,
+				);
+
+			} else {
+
+				// SWAP
+				// if only one box intersects then we have to swap to the other bvh to continue
+				const newBox = _boxPool.getPrimitive();
+				newBox.copy( _leftBox2 ).applyMatrix4( matrix2to1 );
+
+				const cl1 = LEFT_NODE( node1Index32 );
+				const cr1 = RIGHT_NODE( node1Index32, uint32Array1 );
+				arrayToBox( BOUNDING_DATA_INDEX( cl1 ), float32Array1, _leftBox1 );
+				arrayToBox( BOUNDING_DATA_INDEX( cr1 ), float32Array1, _rightBox1 );
+
+				// precompute the intersections otherwise the global boxes will be modified during traversal
+				const intersectCl1 = newBox.intersectsBox( _leftBox1 );
+				const intersectCr1 = newBox.intersectsBox( _rightBox1 );
+				result = (
+					intersectCl1 && _traverse(
+						cl2, cl1, matrix1to2, matrix2to1, intersectsRangesFunc,
+						node2IndexByteOffset, node1IndexByteOffset, depth2, depth1 + 1,
+						newBox, ! reversed,
+					)
+				) || (
+					intersectCr1 && _traverse(
+						cl2, cr1, matrix1to2, matrix2to1, intersectsRangesFunc,
+						node2IndexByteOffset, node1IndexByteOffset, depth2, depth1 + 1,
+						newBox, ! reversed,
+					)
+				);
+
+				_boxPool.releasePrimitive( newBox );
+
+			}
+
+		} else if ( rightIntersects ) {
+
+			if ( isLeaf1 ) {
+
+				// if the current box is a leaf then just continue
+				result = _traverse(
+					node1Index32, cr2, matrix2to1, matrix1to2, intersectsRangesFunc,
+					node1IndexByteOffset, node2IndexByteOffset, depth1, depth2 + 1,
+					currBox, reversed,
+				);
+
+			} else {
+
+				// SWAP
+				// if only one box intersects then we have to swap to the other bvh to continue
+				const newBox = _boxPool.getPrimitive();
+				newBox.copy( _rightBox2 ).applyMatrix4( matrix2to1 );
+
+				const cl1 = LEFT_NODE( node1Index32 );
+				const cr1 = RIGHT_NODE( node1Index32, uint32Array1 );
+				arrayToBox( BOUNDING_DATA_INDEX( cl1 ), float32Array1, _leftBox1 );
+				arrayToBox( BOUNDING_DATA_INDEX( cr1 ), float32Array1, _rightBox1 );
+
+				// precompute the intersections otherwise the global boxes will be modified during traversal
+				const intersectCl1 = newBox.intersectsBox( _leftBox1 );
+				const intersectCr1 = newBox.intersectsBox( _rightBox1 );
+				result = (
+					intersectCl1 && _traverse(
+						cr2, cl1, matrix1to2, matrix2to1, intersectsRangesFunc,
+						node2IndexByteOffset, node1IndexByteOffset, depth2, depth1 + 1,
+						newBox, ! reversed,
+					)
+				) || (
+					intersectCr1 && _traverse(
+						cr2, cr1, matrix1to2, matrix2to1, intersectsRangesFunc,
+						node2IndexByteOffset, node1IndexByteOffset, depth2, depth1 + 1,
+						newBox, ! reversed,
+					)
+				);
+
+				_boxPool.releasePrimitive( newBox );
+
+			}
+
+		}
+
+	}
+
+	return result;
+
+}
+
+const obb = /* @__PURE__ */ new OrientedBox();
+const tempBox = /* @__PURE__ */ new Box3();
+const DEFAULT_OPTIONS = {
+	strategy: CENTER,
+	maxDepth: 40,
+	maxLeafTris: 10,
+	useSharedArrayBuffer: false,
+	setBoundingBox: true,
+	onProgress: null,
+	indirect: false,
+	verbose: true,
+};
+
+class MeshBVH {
+
+	static serialize( bvh, options = {} ) {
+
+		options = {
+			cloneBuffers: true,
+			...options,
+		};
+
+		const geometry = bvh.geometry;
+		const rootData = bvh._roots;
+		const indirectBuffer = bvh._indirectBuffer;
+		const indexAttribute = geometry.getIndex();
+		let result;
+		if ( options.cloneBuffers ) {
+
+			result = {
+				roots: rootData.map( root => root.slice() ),
+				index: indexAttribute ? indexAttribute.array.slice() : null,
+				indirectBuffer: indirectBuffer ? indirectBuffer.slice() : null,
+			};
+
+		} else {
+
+			result = {
+				roots: rootData,
+				index: indexAttribute ? indexAttribute.array : null,
+				indirectBuffer: indirectBuffer,
+			};
+
+		}
+
+		return result;
+
+	}
+
+	static deserialize( data, geometry, options = {} ) {
+
+		options = {
+			setIndex: true,
+			indirect: Boolean( data.indirectBuffer ),
+			...options,
+		};
+
+		const { index, roots, indirectBuffer } = data;
+		const bvh = new MeshBVH( geometry, { ...options, [ SKIP_GENERATION ]: true } );
+		bvh._roots = roots;
+		bvh._indirectBuffer = indirectBuffer || null;
+
+		if ( options.setIndex ) {
+
+			const indexAttribute = geometry.getIndex();
+			if ( indexAttribute === null ) {
+
+				const newIndex = new BufferAttribute( data.index, 1, false );
+				geometry.setIndex( newIndex );
+
+			} else if ( indexAttribute.array !== index ) {
+
+				indexAttribute.array.set( index );
+				indexAttribute.needsUpdate = true;
+
+			}
+
+		}
+
+		return bvh;
+
+	}
+
+	get indirect() {
+
+		return ! ! this._indirectBuffer;
+
+	}
+
+	constructor( geometry, options = {} ) {
+
+		if ( ! geometry.isBufferGeometry ) {
+
+			throw new Error( 'MeshBVH: Only BufferGeometries are supported.' );
+
+		} else if ( geometry.index && geometry.index.isInterleavedBufferAttribute ) {
+
+			throw new Error( 'MeshBVH: InterleavedBufferAttribute is not supported for the index attribute.' );
+
+		}
+
+		// default options
+		options = Object.assign( {
+
+			...DEFAULT_OPTIONS,
+
+			// undocumented options
+
+			// Whether to skip generating the tree. Used for deserialization.
+			[ SKIP_GENERATION ]: false,
+
+		}, options );
+
+		if ( options.useSharedArrayBuffer && ! isSharedArrayBufferSupported() ) {
+
+			throw new Error( 'MeshBVH: SharedArrayBuffer is not available.' );
+
+		}
+
+		// retain references to the geometry so we can use them it without having to
+		// take a geometry reference in every function.
+		this.geometry = geometry;
+		this._roots = null;
+		this._indirectBuffer = null;
+		if ( ! options[ SKIP_GENERATION ] ) {
+
+			buildPackedTree( this, options );
+
+			if ( ! geometry.boundingBox && options.setBoundingBox ) {
+
+				geometry.boundingBox = this.getBoundingBox( new Box3() );
+
+			}
+
+		}
+
+		this.resolveTriangleIndex = options.indirect ? i => this._indirectBuffer[ i ] : i => i;
+
+	}
+
+	refit( nodeIndices = null ) {
+
+		const refitFunc = this.indirect ? refit_indirect : refit;
+		return refitFunc( this, nodeIndices );
+
+	}
+
+	traverse( callback, rootIndex = 0 ) {
+
+		const buffer = this._roots[ rootIndex ];
+		const uint32Array = new Uint32Array( buffer );
+		const uint16Array = new Uint16Array( buffer );
+		_traverse( 0 );
+
+		function _traverse( node32Index, depth = 0 ) {
+
+			const node16Index = node32Index * 2;
+			const isLeaf = uint16Array[ node16Index + 15 ] === IS_LEAFNODE_FLAG;
+			if ( isLeaf ) {
+
+				const offset = uint32Array[ node32Index + 6 ];
+				const count = uint16Array[ node16Index + 14 ];
+				callback( depth, isLeaf, new Float32Array( buffer, node32Index * 4, 6 ), offset, count );
+
+			} else {
+
+				// TODO: use node functions here
+				const left = node32Index + BYTES_PER_NODE / 4;
+				const right = uint32Array[ node32Index + 6 ];
+				const splitAxis = uint32Array[ node32Index + 7 ];
+				const stopTraversal = callback( depth, isLeaf, new Float32Array( buffer, node32Index * 4, 6 ), splitAxis );
+
+				if ( ! stopTraversal ) {
+
+					_traverse( left, depth + 1 );
+					_traverse( right, depth + 1 );
+
+				}
+
+			}
+
+		}
+
+	}
+
+	/* Core Cast Functions */
+	raycast( ray, materialOrSide = FrontSide, near = 0, far = Infinity ) {
+
+		const roots = this._roots;
+		const geometry = this.geometry;
+		const intersects = [];
+		const isMaterial = materialOrSide.isMaterial;
+		const isArrayMaterial = Array.isArray( materialOrSide );
+
+		const groups = geometry.groups;
+		const side = isMaterial ? materialOrSide.side : materialOrSide;
+		const raycastFunc = this.indirect ? raycast_indirect : raycast;
+		for ( let i = 0, l = roots.length; i < l; i ++ ) {
+
+			const materialSide = isArrayMaterial ? materialOrSide[ groups[ i ].materialIndex ].side : side;
+			const startCount = intersects.length;
+
+			raycastFunc( this, i, materialSide, ray, intersects, near, far );
+
+			if ( isArrayMaterial ) {
+
+				const materialIndex = groups[ i ].materialIndex;
+				for ( let j = startCount, jl = intersects.length; j < jl; j ++ ) {
+
+					intersects[ j ].face.materialIndex = materialIndex;
+
+				}
+
+			}
+
+		}
+
+		return intersects;
+
+	}
+
+	raycastFirst( ray, materialOrSide = FrontSide, near = 0, far = Infinity ) {
+
+		const roots = this._roots;
+		const geometry = this.geometry;
+		const isMaterial = materialOrSide.isMaterial;
+		const isArrayMaterial = Array.isArray( materialOrSide );
+
+		let closestResult = null;
+
+		const groups = geometry.groups;
+		const side = isMaterial ? materialOrSide.side : materialOrSide;
+		const raycastFirstFunc = this.indirect ? raycastFirst_indirect : raycastFirst;
+		for ( let i = 0, l = roots.length; i < l; i ++ ) {
+
+			const materialSide = isArrayMaterial ? materialOrSide[ groups[ i ].materialIndex ].side : side;
+			const result = raycastFirstFunc( this, i, materialSide, ray, near, far );
+			if ( result != null && ( closestResult == null || result.distance < closestResult.distance ) ) {
+
+				closestResult = result;
+				if ( isArrayMaterial ) {
+
+					result.face.materialIndex = groups[ i ].materialIndex;
+
+				}
+
+			}
+
+		}
+
+		return closestResult;
+
+	}
+
+	intersectsGeometry( otherGeometry, geomToMesh ) {
+
+		let result = false;
+		const roots = this._roots;
+		const intersectsGeometryFunc = this.indirect ? intersectsGeometry_indirect : intersectsGeometry;
+		for ( let i = 0, l = roots.length; i < l; i ++ ) {
+
+			result = intersectsGeometryFunc( this, i, otherGeometry, geomToMesh );
+
+			if ( result ) {
+
+				break;
+
+			}
+
+		}
+
+		return result;
+
+	}
+
+	shapecast( callbacks ) {
+
+		const triangle = ExtendedTrianglePool.getPrimitive();
+		const iterateFunc = this.indirect ? iterateOverTriangles_indirect : iterateOverTriangles;
+		let {
+			boundsTraverseOrder,
+			intersectsBounds,
+			intersectsRange,
+			intersectsTriangle,
+		} = callbacks;
+
+		// wrap the intersectsRange function
+		if ( intersectsRange && intersectsTriangle ) {
+
+			const originalIntersectsRange = intersectsRange;
+			intersectsRange = ( offset, count, contained, depth, nodeIndex ) => {
+
+				if ( ! originalIntersectsRange( offset, count, contained, depth, nodeIndex ) ) {
+
+					return iterateFunc( offset, count, this, intersectsTriangle, contained, depth, triangle );
+
+				}
+
+				return true;
+
+			};
+
+		} else if ( ! intersectsRange ) {
+
+			if ( intersectsTriangle ) {
+
+				intersectsRange = ( offset, count, contained, depth ) => {
+
+					return iterateFunc( offset, count, this, intersectsTriangle, contained, depth, triangle );
+
+				};
+
+			} else {
+
+				intersectsRange = ( offset, count, contained ) => {
+
+					return contained;
+
+				};
+
+			}
+
+		}
+
+		// run shapecast
+		let result = false;
+		let byteOffset = 0;
+		const roots = this._roots;
+		for ( let i = 0, l = roots.length; i < l; i ++ ) {
+
+			const root = roots[ i ];
+			result = shapecast( this, i, intersectsBounds, intersectsRange, boundsTraverseOrder, byteOffset );
+
+			if ( result ) {
+
+				break;
+
+			}
+
+			byteOffset += root.byteLength;
+
+		}
+
+		ExtendedTrianglePool.releasePrimitive( triangle );
+
+		return result;
+
+	}
+
+	bvhcast( otherBvh, matrixToLocal, callbacks ) {
+
+		let {
+			intersectsRanges,
+			intersectsTriangles,
+		} = callbacks;
+
+		const triangle1 = ExtendedTrianglePool.getPrimitive();
+		const indexAttr1 = this.geometry.index;
+		const positionAttr1 = this.geometry.attributes.position;
+		const assignTriangle1 = this.indirect ?
+			i1 => {
+
+
+				const ti = this.resolveTriangleIndex( i1 );
+				setTriangle( triangle1, ti * 3, indexAttr1, positionAttr1 );
+
+			} :
+			i1 => {
+
+				setTriangle( triangle1, i1 * 3, indexAttr1, positionAttr1 );
+
+			};
+
+		const triangle2 = ExtendedTrianglePool.getPrimitive();
+		const indexAttr2 = otherBvh.geometry.index;
+		const positionAttr2 = otherBvh.geometry.attributes.position;
+		const assignTriangle2 = otherBvh.indirect ?
+			i2 => {
+
+				const ti2 = otherBvh.resolveTriangleIndex( i2 );
+				setTriangle( triangle2, ti2 * 3, indexAttr2, positionAttr2 );
+
+			} :
+			i2 => {
+
+				setTriangle( triangle2, i2 * 3, indexAttr2, positionAttr2 );
+
+			};
+
+		// generate triangle callback if needed
+		if ( intersectsTriangles ) {
+
+			const iterateOverDoubleTriangles = ( offset1, count1, offset2, count2, depth1, index1, depth2, index2 ) => {
+
+				for ( let i2 = offset2, l2 = offset2 + count2; i2 < l2; i2 ++ ) {
+
+					assignTriangle2( i2 );
+
+					triangle2.a.applyMatrix4( matrixToLocal );
+					triangle2.b.applyMatrix4( matrixToLocal );
+					triangle2.c.applyMatrix4( matrixToLocal );
+					triangle2.needsUpdate = true;
+
+					for ( let i1 = offset1, l1 = offset1 + count1; i1 < l1; i1 ++ ) {
+
+						assignTriangle1( i1 );
+
+						triangle1.needsUpdate = true;
+
+						if ( intersectsTriangles( triangle1, triangle2, i1, i2, depth1, index1, depth2, index2 ) ) {
+
+							return true;
+
+						}
+
+					}
+
+				}
+
+				return false;
+
+			};
+
+			if ( intersectsRanges ) {
+
+				const originalIntersectsRanges = intersectsRanges;
+				intersectsRanges = function ( offset1, count1, offset2, count2, depth1, index1, depth2, index2 ) {
+
+					if ( ! originalIntersectsRanges( offset1, count1, offset2, count2, depth1, index1, depth2, index2 ) ) {
+
+						return iterateOverDoubleTriangles( offset1, count1, offset2, count2, depth1, index1, depth2, index2 );
+
+					}
+
+					return true;
+
+				};
+
+			} else {
+
+				intersectsRanges = iterateOverDoubleTriangles;
+
+			}
+
+		}
+
+		return bvhcast( this, otherBvh, matrixToLocal, intersectsRanges );
+
+	}
+
+
+	/* Derived Cast Functions */
+	intersectsBox( box, boxToMesh ) {
+
+		obb.set( box.min, box.max, boxToMesh );
+		obb.needsUpdate = true;
+
+		return this.shapecast(
+			{
+				intersectsBounds: box => obb.intersectsBox( box ),
+				intersectsTriangle: tri => obb.intersectsTriangle( tri )
+			}
+		);
+
+	}
+
+	intersectsSphere( sphere ) {
+
+		return this.shapecast(
+			{
+				intersectsBounds: box => sphere.intersectsBox( box ),
+				intersectsTriangle: tri => tri.intersectsSphere( sphere )
+			}
+		);
+
+	}
+
+	closestPointToGeometry( otherGeometry, geometryToBvh, target1 = { }, target2 = { }, minThreshold = 0, maxThreshold = Infinity ) {
+
+		const closestPointToGeometryFunc = this.indirect ? closestPointToGeometry_indirect : closestPointToGeometry;
+		return closestPointToGeometryFunc(
+			this,
+			otherGeometry,
+			geometryToBvh,
+			target1,
+			target2,
+			minThreshold,
+			maxThreshold,
+		);
+
+	}
+
+	closestPointToPoint( point, target = { }, minThreshold = 0, maxThreshold = Infinity ) {
+
+		return closestPointToPoint(
+			this,
+			point,
+			target,
+			minThreshold,
+			maxThreshold,
+		);
+
+	}
+
+	getBoundingBox( target ) {
+
+		target.makeEmpty();
+
+		const roots = this._roots;
+		roots.forEach( buffer => {
+
+			arrayToBox( 0, new Float32Array( buffer ), tempBox );
+			target.union( tempBox );
+
+		} );
+
+		return target;
+
+	}
+
+}
+
+// converts the given BVH raycast intersection to align with the three.js raycast
+// structure (include object, world space distance and point).
+function convertRaycastIntersect( hit, object, raycaster ) {
+
+	if ( hit === null ) {
+
+		return null;
+
+	}
+
+	hit.point.applyMatrix4( object.matrixWorld );
+	hit.distance = hit.point.distanceTo( raycaster.ray.origin );
+	hit.object = object;
+
+	return hit;
+
+}
+
+const ray = /* @__PURE__ */ new Ray();
+const direction$1 = /* @__PURE__ */ new Vector3();
+const tmpInverseMatrix = /* @__PURE__ */ new Matrix4();
+const origMeshRaycastFunc = Mesh.prototype.raycast;
+const _worldScale = /* @__PURE__ */ new Vector3();
+
+function acceleratedRaycast( raycaster, intersects ) {
+
+	if ( this.geometry.boundsTree ) {
+
+		if ( this.material === undefined ) return;
+
+		tmpInverseMatrix.copy( this.matrixWorld ).invert();
+		ray.copy( raycaster.ray ).applyMatrix4( tmpInverseMatrix );
+
+		extractMatrixScale( this.matrixWorld, _worldScale );
+		direction$1.copy( ray.direction ).multiply( _worldScale );
+
+		const scaleFactor = direction$1.length();
+		const near = raycaster.near / scaleFactor;
+		const far = raycaster.far / scaleFactor;
+
+		const bvh = this.geometry.boundsTree;
+		if ( raycaster.firstHitOnly === true ) {
+
+			const hit = convertRaycastIntersect( bvh.raycastFirst( ray, this.material, near, far ), this, raycaster );
+			if ( hit ) {
+
+				intersects.push( hit );
+
+			}
+
+		} else {
+
+			const hits = bvh.raycast( ray, this.material, near, far );
+			for ( let i = 0, l = hits.length; i < l; i ++ ) {
+
+				const hit = convertRaycastIntersect( hits[ i ], this, raycaster );
+				if ( hit ) {
+
+					intersects.push( hit );
+
+				}
+
+			}
+
+		}
+
+	} else {
+
+		origMeshRaycastFunc.call( this, raycaster, intersects );
+
+	}
+
+}
+
+function computeBoundsTree( options ) {
+
+	this.boundsTree = new MeshBVH( this, options );
+	return this.boundsTree;
+
+}
+
+function disposeBoundsTree() {
+
+	this.boundsTree = null;
+
+}
+
+// https://github.com/mrdoob/three.js/blob/dev/src/math/Matrix4.js#L732
+// extracting the scale directly is ~3x faster than using "decompose"
+function extractMatrixScale( matrix, target ) {
+
+	const te = matrix.elements;
+	const sx = target.set( te[ 0 ], te[ 1 ], te[ 2 ] ).length();
+	const sy = target.set( te[ 4 ], te[ 5 ], te[ 6 ] ).length();
+	const sz = target.set( te[ 8 ], te[ 9 ], te[ 10 ] ).length();
+	return target.set( sx, sy, sz );
 
 }
 
@@ -37218,3153 +39529,6 @@ class OrbitControls extends EventDispatcher {
 		this.update();
 
 	}
-
-}
-
-const COLOR_SPACE_SVG = SRGBColorSpace;
-
-class SVGLoader extends Loader {
-
-	constructor( manager ) {
-
-		super( manager );
-
-		// Default dots per inch
-		this.defaultDPI = 90;
-
-		// Accepted units: 'mm', 'cm', 'in', 'pt', 'pc', 'px'
-		this.defaultUnit = 'px';
-
-	}
-
-	load( url, onLoad, onProgress, onError ) {
-
-		const scope = this;
-
-		const loader = new FileLoader( scope.manager );
-		loader.setPath( scope.path );
-		loader.setRequestHeader( scope.requestHeader );
-		loader.setWithCredentials( scope.withCredentials );
-		loader.load( url, function ( text ) {
-
-			try {
-
-				onLoad( scope.parse( text ) );
-
-			} catch ( e ) {
-
-				if ( onError ) {
-
-					onError( e );
-
-				} else {
-
-					console.error( e );
-
-				}
-
-				scope.manager.itemError( url );
-
-			}
-
-		}, onProgress, onError );
-
-	}
-
-	parse( text ) {
-
-		const scope = this;
-
-		function parseNode( node, style ) {
-
-			if ( node.nodeType !== 1 ) return;
-
-			const transform = getNodeTransform( node );
-
-			let isDefsNode = false;
-
-			let path = null;
-
-			switch ( node.nodeName ) {
-
-				case 'svg':
-					style = parseStyle( node, style );
-					break;
-
-				case 'style':
-					parseCSSStylesheet( node );
-					break;
-
-				case 'g':
-					style = parseStyle( node, style );
-					break;
-
-				case 'path':
-					style = parseStyle( node, style );
-					if ( node.hasAttribute( 'd' ) ) path = parsePathNode( node );
-					break;
-
-				case 'rect':
-					style = parseStyle( node, style );
-					path = parseRectNode( node );
-					break;
-
-				case 'polygon':
-					style = parseStyle( node, style );
-					path = parsePolygonNode( node );
-					break;
-
-				case 'polyline':
-					style = parseStyle( node, style );
-					path = parsePolylineNode( node );
-					break;
-
-				case 'circle':
-					style = parseStyle( node, style );
-					path = parseCircleNode( node );
-					break;
-
-				case 'ellipse':
-					style = parseStyle( node, style );
-					path = parseEllipseNode( node );
-					break;
-
-				case 'line':
-					style = parseStyle( node, style );
-					path = parseLineNode( node );
-					break;
-
-				case 'defs':
-					isDefsNode = true;
-					break;
-
-				case 'use':
-					style = parseStyle( node, style );
-
-					const href = node.getAttributeNS( 'http://www.w3.org/1999/xlink', 'href' ) || '';
-					const usedNodeId = href.substring( 1 );
-					const usedNode = node.viewportElement.getElementById( usedNodeId );
-					if ( usedNode ) {
-
-						parseNode( usedNode, style );
-
-					} else {
-
-						console.warn( 'SVGLoader: \'use node\' references non-existent node id: ' + usedNodeId );
-
-					}
-
-					break;
-					// console.log( node );
-
-			}
-
-			if ( path ) {
-
-				if ( style.fill !== undefined && style.fill !== 'none' ) {
-
-					path.color.setStyle( style.fill, COLOR_SPACE_SVG );
-
-				}
-
-				transformPath( path, currentTransform );
-
-				paths.push( path );
-
-				path.userData = { node: node, style: style };
-
-			}
-
-			const childNodes = node.childNodes;
-
-			for ( let i = 0; i < childNodes.length; i ++ ) {
-
-				const node = childNodes[ i ];
-
-				if ( isDefsNode && node.nodeName !== 'style' && node.nodeName !== 'defs' ) {
-
-					// Ignore everything in defs except CSS style definitions
-					// and nested defs, because it is OK by the standard to have
-					// <style/> there.
-					continue;
-
-				}
-
-				parseNode( node, style );
-
-			}
-
-
-			if ( transform ) {
-
-				transformStack.pop();
-
-				if ( transformStack.length > 0 ) {
-
-					currentTransform.copy( transformStack[ transformStack.length - 1 ] );
-
-				} else {
-
-					currentTransform.identity();
-
-				}
-
-			}
-
-		}
-
-		function parsePathNode( node ) {
-
-			const path = new ShapePath();
-
-			const point = new Vector2();
-			const control = new Vector2();
-
-			const firstPoint = new Vector2();
-			let isFirstPoint = true;
-			let doSetFirstPoint = false;
-
-			const d = node.getAttribute( 'd' );
-
-			if ( d === '' || d === 'none' ) return null;
-
-			// console.log( d );
-
-			const commands = d.match( /[a-df-z][^a-df-z]*/ig );
-
-			for ( let i = 0, l = commands.length; i < l; i ++ ) {
-
-				const command = commands[ i ];
-
-				const type = command.charAt( 0 );
-				const data = command.slice( 1 ).trim();
-
-				if ( isFirstPoint === true ) {
-
-					doSetFirstPoint = true;
-					isFirstPoint = false;
-
-				}
-
-				let numbers;
-
-				switch ( type ) {
-
-					case 'M':
-						numbers = parseFloats( data );
-						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
-
-							point.x = numbers[ j + 0 ];
-							point.y = numbers[ j + 1 ];
-							control.x = point.x;
-							control.y = point.y;
-
-							if ( j === 0 ) {
-
-								path.moveTo( point.x, point.y );
-
-							} else {
-
-								path.lineTo( point.x, point.y );
-
-							}
-
-							if ( j === 0 ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'H':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j ++ ) {
-
-							point.x = numbers[ j ];
-							control.x = point.x;
-							control.y = point.y;
-							path.lineTo( point.x, point.y );
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'V':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j ++ ) {
-
-							point.y = numbers[ j ];
-							control.x = point.x;
-							control.y = point.y;
-							path.lineTo( point.x, point.y );
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'L':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
-
-							point.x = numbers[ j + 0 ];
-							point.y = numbers[ j + 1 ];
-							control.x = point.x;
-							control.y = point.y;
-							path.lineTo( point.x, point.y );
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'C':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 6 ) {
-
-							path.bezierCurveTo(
-								numbers[ j + 0 ],
-								numbers[ j + 1 ],
-								numbers[ j + 2 ],
-								numbers[ j + 3 ],
-								numbers[ j + 4 ],
-								numbers[ j + 5 ]
-							);
-							control.x = numbers[ j + 2 ];
-							control.y = numbers[ j + 3 ];
-							point.x = numbers[ j + 4 ];
-							point.y = numbers[ j + 5 ];
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'S':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 4 ) {
-
-							path.bezierCurveTo(
-								getReflection( point.x, control.x ),
-								getReflection( point.y, control.y ),
-								numbers[ j + 0 ],
-								numbers[ j + 1 ],
-								numbers[ j + 2 ],
-								numbers[ j + 3 ]
-							);
-							control.x = numbers[ j + 0 ];
-							control.y = numbers[ j + 1 ];
-							point.x = numbers[ j + 2 ];
-							point.y = numbers[ j + 3 ];
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'Q':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 4 ) {
-
-							path.quadraticCurveTo(
-								numbers[ j + 0 ],
-								numbers[ j + 1 ],
-								numbers[ j + 2 ],
-								numbers[ j + 3 ]
-							);
-							control.x = numbers[ j + 0 ];
-							control.y = numbers[ j + 1 ];
-							point.x = numbers[ j + 2 ];
-							point.y = numbers[ j + 3 ];
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'T':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
-
-							const rx = getReflection( point.x, control.x );
-							const ry = getReflection( point.y, control.y );
-							path.quadraticCurveTo(
-								rx,
-								ry,
-								numbers[ j + 0 ],
-								numbers[ j + 1 ]
-							);
-							control.x = rx;
-							control.y = ry;
-							point.x = numbers[ j + 0 ];
-							point.y = numbers[ j + 1 ];
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'A':
-						numbers = parseFloats( data, [ 3, 4 ], 7 );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 7 ) {
-
-							// skip command if start point == end point
-							if ( numbers[ j + 5 ] == point.x && numbers[ j + 6 ] == point.y ) continue;
-
-							const start = point.clone();
-							point.x = numbers[ j + 5 ];
-							point.y = numbers[ j + 6 ];
-							control.x = point.x;
-							control.y = point.y;
-							parseArcCommand(
-								path, numbers[ j ], numbers[ j + 1 ], numbers[ j + 2 ], numbers[ j + 3 ], numbers[ j + 4 ], start, point
-							);
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'm':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
-
-							point.x += numbers[ j + 0 ];
-							point.y += numbers[ j + 1 ];
-							control.x = point.x;
-							control.y = point.y;
-
-							if ( j === 0 ) {
-
-								path.moveTo( point.x, point.y );
-
-							} else {
-
-								path.lineTo( point.x, point.y );
-
-							}
-
-							if ( j === 0 ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'h':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j ++ ) {
-
-							point.x += numbers[ j ];
-							control.x = point.x;
-							control.y = point.y;
-							path.lineTo( point.x, point.y );
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'v':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j ++ ) {
-
-							point.y += numbers[ j ];
-							control.x = point.x;
-							control.y = point.y;
-							path.lineTo( point.x, point.y );
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'l':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
-
-							point.x += numbers[ j + 0 ];
-							point.y += numbers[ j + 1 ];
-							control.x = point.x;
-							control.y = point.y;
-							path.lineTo( point.x, point.y );
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'c':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 6 ) {
-
-							path.bezierCurveTo(
-								point.x + numbers[ j + 0 ],
-								point.y + numbers[ j + 1 ],
-								point.x + numbers[ j + 2 ],
-								point.y + numbers[ j + 3 ],
-								point.x + numbers[ j + 4 ],
-								point.y + numbers[ j + 5 ]
-							);
-							control.x = point.x + numbers[ j + 2 ];
-							control.y = point.y + numbers[ j + 3 ];
-							point.x += numbers[ j + 4 ];
-							point.y += numbers[ j + 5 ];
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 's':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 4 ) {
-
-							path.bezierCurveTo(
-								getReflection( point.x, control.x ),
-								getReflection( point.y, control.y ),
-								point.x + numbers[ j + 0 ],
-								point.y + numbers[ j + 1 ],
-								point.x + numbers[ j + 2 ],
-								point.y + numbers[ j + 3 ]
-							);
-							control.x = point.x + numbers[ j + 0 ];
-							control.y = point.y + numbers[ j + 1 ];
-							point.x += numbers[ j + 2 ];
-							point.y += numbers[ j + 3 ];
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'q':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 4 ) {
-
-							path.quadraticCurveTo(
-								point.x + numbers[ j + 0 ],
-								point.y + numbers[ j + 1 ],
-								point.x + numbers[ j + 2 ],
-								point.y + numbers[ j + 3 ]
-							);
-							control.x = point.x + numbers[ j + 0 ];
-							control.y = point.y + numbers[ j + 1 ];
-							point.x += numbers[ j + 2 ];
-							point.y += numbers[ j + 3 ];
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 't':
-						numbers = parseFloats( data );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 2 ) {
-
-							const rx = getReflection( point.x, control.x );
-							const ry = getReflection( point.y, control.y );
-							path.quadraticCurveTo(
-								rx,
-								ry,
-								point.x + numbers[ j + 0 ],
-								point.y + numbers[ j + 1 ]
-							);
-							control.x = rx;
-							control.y = ry;
-							point.x = point.x + numbers[ j + 0 ];
-							point.y = point.y + numbers[ j + 1 ];
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'a':
-						numbers = parseFloats( data, [ 3, 4 ], 7 );
-
-						for ( let j = 0, jl = numbers.length; j < jl; j += 7 ) {
-
-							// skip command if no displacement
-							if ( numbers[ j + 5 ] == 0 && numbers[ j + 6 ] == 0 ) continue;
-
-							const start = point.clone();
-							point.x += numbers[ j + 5 ];
-							point.y += numbers[ j + 6 ];
-							control.x = point.x;
-							control.y = point.y;
-							parseArcCommand(
-								path, numbers[ j ], numbers[ j + 1 ], numbers[ j + 2 ], numbers[ j + 3 ], numbers[ j + 4 ], start, point
-							);
-
-							if ( j === 0 && doSetFirstPoint === true ) firstPoint.copy( point );
-
-						}
-
-						break;
-
-					case 'Z':
-					case 'z':
-						path.currentPath.autoClose = true;
-
-						if ( path.currentPath.curves.length > 0 ) {
-
-							// Reset point to beginning of Path
-							point.copy( firstPoint );
-							path.currentPath.currentPoint.copy( point );
-							isFirstPoint = true;
-
-						}
-
-						break;
-
-					default:
-						console.warn( command );
-
-				}
-
-				// console.log( type, parseFloats( data ), parseFloats( data ).length  )
-
-				doSetFirstPoint = false;
-
-			}
-
-			return path;
-
-		}
-
-		function parseCSSStylesheet( node ) {
-
-			if ( ! node.sheet || ! node.sheet.cssRules || ! node.sheet.cssRules.length ) return;
-
-			for ( let i = 0; i < node.sheet.cssRules.length; i ++ ) {
-
-				const stylesheet = node.sheet.cssRules[ i ];
-
-				if ( stylesheet.type !== 1 ) continue;
-
-				const selectorList = stylesheet.selectorText
-					.split( /,/gm )
-					.filter( Boolean )
-					.map( i => i.trim() );
-
-				for ( let j = 0; j < selectorList.length; j ++ ) {
-
-					// Remove empty rules
-					const definitions = Object.fromEntries(
-						Object.entries( stylesheet.style ).filter( ( [ , v ] ) => v !== '' )
-					);
-
-					stylesheets[ selectorList[ j ] ] = Object.assign(
-						stylesheets[ selectorList[ j ] ] || {},
-						definitions
-					);
-
-				}
-
-			}
-
-		}
-
-		/**
-		 * https://www.w3.org/TR/SVG/implnote.html#ArcImplementationNotes
-		 * https://mortoray.com/2017/02/16/rendering-an-svg-elliptical-arc-as-bezier-curves/ Appendix: Endpoint to center arc conversion
-		 * From
-		 * rx ry x-axis-rotation large-arc-flag sweep-flag x y
-		 * To
-		 * aX, aY, xRadius, yRadius, aStartAngle, aEndAngle, aClockwise, aRotation
-		 */
-
-		function parseArcCommand( path, rx, ry, x_axis_rotation, large_arc_flag, sweep_flag, start, end ) {
-
-			if ( rx == 0 || ry == 0 ) {
-
-				// draw a line if either of the radii == 0
-				path.lineTo( end.x, end.y );
-				return;
-
-			}
-
-			x_axis_rotation = x_axis_rotation * Math.PI / 180;
-
-			// Ensure radii are positive
-			rx = Math.abs( rx );
-			ry = Math.abs( ry );
-
-			// Compute (x1', y1')
-			const dx2 = ( start.x - end.x ) / 2.0;
-			const dy2 = ( start.y - end.y ) / 2.0;
-			const x1p = Math.cos( x_axis_rotation ) * dx2 + Math.sin( x_axis_rotation ) * dy2;
-			const y1p = - Math.sin( x_axis_rotation ) * dx2 + Math.cos( x_axis_rotation ) * dy2;
-
-			// Compute (cx', cy')
-			let rxs = rx * rx;
-			let rys = ry * ry;
-			const x1ps = x1p * x1p;
-			const y1ps = y1p * y1p;
-
-			// Ensure radii are large enough
-			const cr = x1ps / rxs + y1ps / rys;
-
-			if ( cr > 1 ) {
-
-				// scale up rx,ry equally so cr == 1
-				const s = Math.sqrt( cr );
-				rx = s * rx;
-				ry = s * ry;
-				rxs = rx * rx;
-				rys = ry * ry;
-
-			}
-
-			const dq = ( rxs * y1ps + rys * x1ps );
-			const pq = ( rxs * rys - dq ) / dq;
-			let q = Math.sqrt( Math.max( 0, pq ) );
-			if ( large_arc_flag === sweep_flag ) q = - q;
-			const cxp = q * rx * y1p / ry;
-			const cyp = - q * ry * x1p / rx;
-
-			// Step 3: Compute (cx, cy) from (cx', cy')
-			const cx = Math.cos( x_axis_rotation ) * cxp - Math.sin( x_axis_rotation ) * cyp + ( start.x + end.x ) / 2;
-			const cy = Math.sin( x_axis_rotation ) * cxp + Math.cos( x_axis_rotation ) * cyp + ( start.y + end.y ) / 2;
-
-			// Step 4: Compute θ1 and Δθ
-			const theta = svgAngle( 1, 0, ( x1p - cxp ) / rx, ( y1p - cyp ) / ry );
-			const delta = svgAngle( ( x1p - cxp ) / rx, ( y1p - cyp ) / ry, ( - x1p - cxp ) / rx, ( - y1p - cyp ) / ry ) % ( Math.PI * 2 );
-
-			path.currentPath.absellipse( cx, cy, rx, ry, theta, theta + delta, sweep_flag === 0, x_axis_rotation );
-
-		}
-
-		function svgAngle( ux, uy, vx, vy ) {
-
-			const dot = ux * vx + uy * vy;
-			const len = Math.sqrt( ux * ux + uy * uy ) * Math.sqrt( vx * vx + vy * vy );
-			let ang = Math.acos( Math.max( - 1, Math.min( 1, dot / len ) ) ); // floating point precision, slightly over values appear
-			if ( ( ux * vy - uy * vx ) < 0 ) ang = - ang;
-			return ang;
-
-		}
-
-		/*
-		* According to https://www.w3.org/TR/SVG/shapes.html#RectElementRXAttribute
-		* rounded corner should be rendered to elliptical arc, but bezier curve does the job well enough
-		*/
-		function parseRectNode( node ) {
-
-			const x = parseFloatWithUnits( node.getAttribute( 'x' ) || 0 );
-			const y = parseFloatWithUnits( node.getAttribute( 'y' ) || 0 );
-			const rx = parseFloatWithUnits( node.getAttribute( 'rx' ) || node.getAttribute( 'ry' ) || 0 );
-			const ry = parseFloatWithUnits( node.getAttribute( 'ry' ) || node.getAttribute( 'rx' ) || 0 );
-			const w = parseFloatWithUnits( node.getAttribute( 'width' ) );
-			const h = parseFloatWithUnits( node.getAttribute( 'height' ) );
-
-			// Ellipse arc to Bezier approximation Coefficient (Inversed). See:
-			// https://spencermortensen.com/articles/bezier-circle/
-			const bci = 1 - 0.551915024494;
-
-			const path = new ShapePath();
-
-			// top left
-			path.moveTo( x + rx, y );
-
-			// top right
-			path.lineTo( x + w - rx, y );
-			if ( rx !== 0 || ry !== 0 ) {
-
-				path.bezierCurveTo(
-					x + w - rx * bci,
-					y,
-					x + w,
-					y + ry * bci,
-					x + w,
-					y + ry
-				);
-
-			}
-
-			// bottom right
-			path.lineTo( x + w, y + h - ry );
-			if ( rx !== 0 || ry !== 0 ) {
-
-				path.bezierCurveTo(
-					x + w,
-					y + h - ry * bci,
-					x + w - rx * bci,
-					y + h,
-					x + w - rx,
-					y + h
-				);
-
-			}
-
-			// bottom left
-			path.lineTo( x + rx, y + h );
-			if ( rx !== 0 || ry !== 0 ) {
-
-				path.bezierCurveTo(
-					x + rx * bci,
-					y + h,
-					x,
-					y + h - ry * bci,
-					x,
-					y + h - ry
-				);
-
-			}
-
-			// back to top left
-			path.lineTo( x, y + ry );
-			if ( rx !== 0 || ry !== 0 ) {
-
-				path.bezierCurveTo( x, y + ry * bci, x + rx * bci, y, x + rx, y );
-
-			}
-
-			return path;
-
-		}
-
-		function parsePolygonNode( node ) {
-
-			function iterator( match, a, b ) {
-
-				const x = parseFloatWithUnits( a );
-				const y = parseFloatWithUnits( b );
-
-				if ( index === 0 ) {
-
-					path.moveTo( x, y );
-
-				} else {
-
-					path.lineTo( x, y );
-
-				}
-
-				index ++;
-
-			}
-
-			const regex = /([+-]?\d*\.?\d+(?:e[+-]?\d+)?)(?:,|\s)([+-]?\d*\.?\d+(?:e[+-]?\d+)?)/g;
-
-			const path = new ShapePath();
-
-			let index = 0;
-
-			node.getAttribute( 'points' ).replace( regex, iterator );
-
-			path.currentPath.autoClose = true;
-
-			return path;
-
-		}
-
-		function parsePolylineNode( node ) {
-
-			function iterator( match, a, b ) {
-
-				const x = parseFloatWithUnits( a );
-				const y = parseFloatWithUnits( b );
-
-				if ( index === 0 ) {
-
-					path.moveTo( x, y );
-
-				} else {
-
-					path.lineTo( x, y );
-
-				}
-
-				index ++;
-
-			}
-
-			const regex = /([+-]?\d*\.?\d+(?:e[+-]?\d+)?)(?:,|\s)([+-]?\d*\.?\d+(?:e[+-]?\d+)?)/g;
-
-			const path = new ShapePath();
-
-			let index = 0;
-
-			node.getAttribute( 'points' ).replace( regex, iterator );
-
-			path.currentPath.autoClose = false;
-
-			return path;
-
-		}
-
-		function parseCircleNode( node ) {
-
-			const x = parseFloatWithUnits( node.getAttribute( 'cx' ) || 0 );
-			const y = parseFloatWithUnits( node.getAttribute( 'cy' ) || 0 );
-			const r = parseFloatWithUnits( node.getAttribute( 'r' ) || 0 );
-
-			const subpath = new Path();
-			subpath.absarc( x, y, r, 0, Math.PI * 2 );
-
-			const path = new ShapePath();
-			path.subPaths.push( subpath );
-
-			return path;
-
-		}
-
-		function parseEllipseNode( node ) {
-
-			const x = parseFloatWithUnits( node.getAttribute( 'cx' ) || 0 );
-			const y = parseFloatWithUnits( node.getAttribute( 'cy' ) || 0 );
-			const rx = parseFloatWithUnits( node.getAttribute( 'rx' ) || 0 );
-			const ry = parseFloatWithUnits( node.getAttribute( 'ry' ) || 0 );
-
-			const subpath = new Path();
-			subpath.absellipse( x, y, rx, ry, 0, Math.PI * 2 );
-
-			const path = new ShapePath();
-			path.subPaths.push( subpath );
-
-			return path;
-
-		}
-
-		function parseLineNode( node ) {
-
-			const x1 = parseFloatWithUnits( node.getAttribute( 'x1' ) || 0 );
-			const y1 = parseFloatWithUnits( node.getAttribute( 'y1' ) || 0 );
-			const x2 = parseFloatWithUnits( node.getAttribute( 'x2' ) || 0 );
-			const y2 = parseFloatWithUnits( node.getAttribute( 'y2' ) || 0 );
-
-			const path = new ShapePath();
-			path.moveTo( x1, y1 );
-			path.lineTo( x2, y2 );
-			path.currentPath.autoClose = false;
-
-			return path;
-
-		}
-
-		//
-
-		function parseStyle( node, style ) {
-
-			style = Object.assign( {}, style ); // clone style
-
-			let stylesheetStyles = {};
-
-			if ( node.hasAttribute( 'class' ) ) {
-
-				const classSelectors = node.getAttribute( 'class' )
-					.split( /\s/ )
-					.filter( Boolean )
-					.map( i => i.trim() );
-
-				for ( let i = 0; i < classSelectors.length; i ++ ) {
-
-					stylesheetStyles = Object.assign( stylesheetStyles, stylesheets[ '.' + classSelectors[ i ] ] );
-
-				}
-
-			}
-
-			if ( node.hasAttribute( 'id' ) ) {
-
-				stylesheetStyles = Object.assign( stylesheetStyles, stylesheets[ '#' + node.getAttribute( 'id' ) ] );
-
-			}
-
-			function addStyle( svgName, jsName, adjustFunction ) {
-
-				if ( adjustFunction === undefined ) adjustFunction = function copy( v ) {
-
-					if ( v.startsWith( 'url' ) ) console.warn( 'SVGLoader: url access in attributes is not implemented.' );
-
-					return v;
-
-				};
-
-				if ( node.hasAttribute( svgName ) ) style[ jsName ] = adjustFunction( node.getAttribute( svgName ) );
-				if ( stylesheetStyles[ svgName ] ) style[ jsName ] = adjustFunction( stylesheetStyles[ svgName ] );
-				if ( node.style && node.style[ svgName ] !== '' ) style[ jsName ] = adjustFunction( node.style[ svgName ] );
-
-			}
-
-			function clamp( v ) {
-
-				return Math.max( 0, Math.min( 1, parseFloatWithUnits( v ) ) );
-
-			}
-
-			function positive( v ) {
-
-				return Math.max( 0, parseFloatWithUnits( v ) );
-
-			}
-
-			addStyle( 'fill', 'fill' );
-			addStyle( 'fill-opacity', 'fillOpacity', clamp );
-			addStyle( 'fill-rule', 'fillRule' );
-			addStyle( 'opacity', 'opacity', clamp );
-			addStyle( 'stroke', 'stroke' );
-			addStyle( 'stroke-opacity', 'strokeOpacity', clamp );
-			addStyle( 'stroke-width', 'strokeWidth', positive );
-			addStyle( 'stroke-linejoin', 'strokeLineJoin' );
-			addStyle( 'stroke-linecap', 'strokeLineCap' );
-			addStyle( 'stroke-miterlimit', 'strokeMiterLimit', positive );
-			addStyle( 'visibility', 'visibility' );
-
-			return style;
-
-		}
-
-		// http://www.w3.org/TR/SVG11/implnote.html#PathElementImplementationNotes
-
-		function getReflection( a, b ) {
-
-			return a - ( b - a );
-
-		}
-
-		// from https://github.com/ppvg/svg-numbers (MIT License)
-
-		function parseFloats( input, flags, stride ) {
-
-			if ( typeof input !== 'string' ) {
-
-				throw new TypeError( 'Invalid input: ' + typeof input );
-
-			}
-
-			// Character groups
-			const RE = {
-				SEPARATOR: /[ \t\r\n\,.\-+]/,
-				WHITESPACE: /[ \t\r\n]/,
-				DIGIT: /[\d]/,
-				SIGN: /[-+]/,
-				POINT: /\./,
-				COMMA: /,/,
-				EXP: /e/i,
-				FLAGS: /[01]/
-			};
-
-			// States
-			const SEP = 0;
-			const INT = 1;
-			const FLOAT = 2;
-			const EXP = 3;
-
-			let state = SEP;
-			let seenComma = true;
-			let number = '', exponent = '';
-			const result = [];
-
-			function throwSyntaxError( current, i, partial ) {
-
-				const error = new SyntaxError( 'Unexpected character "' + current + '" at index ' + i + '.' );
-				error.partial = partial;
-				throw error;
-
-			}
-
-			function newNumber() {
-
-				if ( number !== '' ) {
-
-					if ( exponent === '' ) result.push( Number( number ) );
-					else result.push( Number( number ) * Math.pow( 10, Number( exponent ) ) );
-
-				}
-
-				number = '';
-				exponent = '';
-
-			}
-
-			let current;
-			const length = input.length;
-
-			for ( let i = 0; i < length; i ++ ) {
-
-				current = input[ i ];
-
-				// check for flags
-				if ( Array.isArray( flags ) && flags.includes( result.length % stride ) && RE.FLAGS.test( current ) ) {
-
-					state = INT;
-					number = current;
-					newNumber();
-					continue;
-
-				}
-
-				// parse until next number
-				if ( state === SEP ) {
-
-					// eat whitespace
-					if ( RE.WHITESPACE.test( current ) ) {
-
-						continue;
-
-					}
-
-					// start new number
-					if ( RE.DIGIT.test( current ) || RE.SIGN.test( current ) ) {
-
-						state = INT;
-						number = current;
-						continue;
-
-					}
-
-					if ( RE.POINT.test( current ) ) {
-
-						state = FLOAT;
-						number = current;
-						continue;
-
-					}
-
-					// throw on double commas (e.g. "1, , 2")
-					if ( RE.COMMA.test( current ) ) {
-
-						if ( seenComma ) {
-
-							throwSyntaxError( current, i, result );
-
-						}
-
-						seenComma = true;
-
-					}
-
-				}
-
-				// parse integer part
-				if ( state === INT ) {
-
-					if ( RE.DIGIT.test( current ) ) {
-
-						number += current;
-						continue;
-
-					}
-
-					if ( RE.POINT.test( current ) ) {
-
-						number += current;
-						state = FLOAT;
-						continue;
-
-					}
-
-					if ( RE.EXP.test( current ) ) {
-
-						state = EXP;
-						continue;
-
-					}
-
-					// throw on double signs ("-+1"), but not on sign as separator ("-1-2")
-					if ( RE.SIGN.test( current )
-							&& number.length === 1
-							&& RE.SIGN.test( number[ 0 ] ) ) {
-
-						throwSyntaxError( current, i, result );
-
-					}
-
-				}
-
-				// parse decimal part
-				if ( state === FLOAT ) {
-
-					if ( RE.DIGIT.test( current ) ) {
-
-						number += current;
-						continue;
-
-					}
-
-					if ( RE.EXP.test( current ) ) {
-
-						state = EXP;
-						continue;
-
-					}
-
-					// throw on double decimal points (e.g. "1..2")
-					if ( RE.POINT.test( current ) && number[ number.length - 1 ] === '.' ) {
-
-						throwSyntaxError( current, i, result );
-
-					}
-
-				}
-
-				// parse exponent part
-				if ( state === EXP ) {
-
-					if ( RE.DIGIT.test( current ) ) {
-
-						exponent += current;
-						continue;
-
-					}
-
-					if ( RE.SIGN.test( current ) ) {
-
-						if ( exponent === '' ) {
-
-							exponent += current;
-							continue;
-
-						}
-
-						if ( exponent.length === 1 && RE.SIGN.test( exponent ) ) {
-
-							throwSyntaxError( current, i, result );
-
-						}
-
-					}
-
-				}
-
-
-				// end of number
-				if ( RE.WHITESPACE.test( current ) ) {
-
-					newNumber();
-					state = SEP;
-					seenComma = false;
-
-				} else if ( RE.COMMA.test( current ) ) {
-
-					newNumber();
-					state = SEP;
-					seenComma = true;
-
-				} else if ( RE.SIGN.test( current ) ) {
-
-					newNumber();
-					state = INT;
-					number = current;
-
-				} else if ( RE.POINT.test( current ) ) {
-
-					newNumber();
-					state = FLOAT;
-					number = current;
-
-				} else {
-
-					throwSyntaxError( current, i, result );
-
-				}
-
-			}
-
-			// add the last number found (if any)
-			newNumber();
-
-			return result;
-
-		}
-
-		// Units
-
-		const units = [ 'mm', 'cm', 'in', 'pt', 'pc', 'px' ];
-
-		// Conversion: [ fromUnit ][ toUnit ] (-1 means dpi dependent)
-		const unitConversion = {
-
-			'mm': {
-				'mm': 1,
-				'cm': 0.1,
-				'in': 1 / 25.4,
-				'pt': 72 / 25.4,
-				'pc': 6 / 25.4,
-				'px': - 1
-			},
-			'cm': {
-				'mm': 10,
-				'cm': 1,
-				'in': 1 / 2.54,
-				'pt': 72 / 2.54,
-				'pc': 6 / 2.54,
-				'px': - 1
-			},
-			'in': {
-				'mm': 25.4,
-				'cm': 2.54,
-				'in': 1,
-				'pt': 72,
-				'pc': 6,
-				'px': - 1
-			},
-			'pt': {
-				'mm': 25.4 / 72,
-				'cm': 2.54 / 72,
-				'in': 1 / 72,
-				'pt': 1,
-				'pc': 6 / 72,
-				'px': - 1
-			},
-			'pc': {
-				'mm': 25.4 / 6,
-				'cm': 2.54 / 6,
-				'in': 1 / 6,
-				'pt': 72 / 6,
-				'pc': 1,
-				'px': - 1
-			},
-			'px': {
-				'px': 1
-			}
-
-		};
-
-		function parseFloatWithUnits( string ) {
-
-			let theUnit = 'px';
-
-			if ( typeof string === 'string' || string instanceof String ) {
-
-				for ( let i = 0, n = units.length; i < n; i ++ ) {
-
-					const u = units[ i ];
-
-					if ( string.endsWith( u ) ) {
-
-						theUnit = u;
-						string = string.substring( 0, string.length - u.length );
-						break;
-
-					}
-
-				}
-
-			}
-
-			let scale = undefined;
-
-			if ( theUnit === 'px' && scope.defaultUnit !== 'px' ) {
-
-				// Conversion scale from  pixels to inches, then to default units
-
-				scale = unitConversion[ 'in' ][ scope.defaultUnit ] / scope.defaultDPI;
-
-			} else {
-
-				scale = unitConversion[ theUnit ][ scope.defaultUnit ];
-
-				if ( scale < 0 ) {
-
-					// Conversion scale to pixels
-
-					scale = unitConversion[ theUnit ][ 'in' ] * scope.defaultDPI;
-
-				}
-
-			}
-
-			return scale * parseFloat( string );
-
-		}
-
-		// Transforms
-
-		function getNodeTransform( node ) {
-
-			if ( ! ( node.hasAttribute( 'transform' ) || ( node.nodeName === 'use' && ( node.hasAttribute( 'x' ) || node.hasAttribute( 'y' ) ) ) ) ) {
-
-				return null;
-
-			}
-
-			const transform = parseNodeTransform( node );
-
-			if ( transformStack.length > 0 ) {
-
-				transform.premultiply( transformStack[ transformStack.length - 1 ] );
-
-			}
-
-			currentTransform.copy( transform );
-			transformStack.push( transform );
-
-			return transform;
-
-		}
-
-		function parseNodeTransform( node ) {
-
-			const transform = new Matrix3();
-			const currentTransform = tempTransform0;
-
-			if ( node.nodeName === 'use' && ( node.hasAttribute( 'x' ) || node.hasAttribute( 'y' ) ) ) {
-
-				const tx = parseFloatWithUnits( node.getAttribute( 'x' ) );
-				const ty = parseFloatWithUnits( node.getAttribute( 'y' ) );
-
-				transform.translate( tx, ty );
-
-			}
-
-			if ( node.hasAttribute( 'transform' ) ) {
-
-				const transformsTexts = node.getAttribute( 'transform' ).split( ')' );
-
-				for ( let tIndex = transformsTexts.length - 1; tIndex >= 0; tIndex -- ) {
-
-					const transformText = transformsTexts[ tIndex ].trim();
-
-					if ( transformText === '' ) continue;
-
-					const openParPos = transformText.indexOf( '(' );
-					const closeParPos = transformText.length;
-
-					if ( openParPos > 0 && openParPos < closeParPos ) {
-
-						const transformType = transformText.slice( 0, openParPos );
-
-						const array = parseFloats( transformText.slice( openParPos + 1 ) );
-
-						currentTransform.identity();
-
-						switch ( transformType ) {
-
-							case 'translate':
-
-								if ( array.length >= 1 ) {
-
-									const tx = array[ 0 ];
-									let ty = 0;
-
-									if ( array.length >= 2 ) {
-
-										ty = array[ 1 ];
-
-									}
-
-									currentTransform.translate( tx, ty );
-
-								}
-
-								break;
-
-							case 'rotate':
-
-								if ( array.length >= 1 ) {
-
-									let angle = 0;
-									let cx = 0;
-									let cy = 0;
-
-									// Angle
-									angle = array[ 0 ] * Math.PI / 180;
-
-									if ( array.length >= 3 ) {
-
-										// Center x, y
-										cx = array[ 1 ];
-										cy = array[ 2 ];
-
-									}
-
-									// Rotate around center (cx, cy)
-									tempTransform1.makeTranslation( - cx, - cy );
-									tempTransform2.makeRotation( angle );
-									tempTransform3.multiplyMatrices( tempTransform2, tempTransform1 );
-									tempTransform1.makeTranslation( cx, cy );
-									currentTransform.multiplyMatrices( tempTransform1, tempTransform3 );
-
-								}
-
-								break;
-
-							case 'scale':
-
-								if ( array.length >= 1 ) {
-
-									const scaleX = array[ 0 ];
-									let scaleY = scaleX;
-
-									if ( array.length >= 2 ) {
-
-										scaleY = array[ 1 ];
-
-									}
-
-									currentTransform.scale( scaleX, scaleY );
-
-								}
-
-								break;
-
-							case 'skewX':
-
-								if ( array.length === 1 ) {
-
-									currentTransform.set(
-										1, Math.tan( array[ 0 ] * Math.PI / 180 ), 0,
-										0, 1, 0,
-										0, 0, 1
-									);
-
-								}
-
-								break;
-
-							case 'skewY':
-
-								if ( array.length === 1 ) {
-
-									currentTransform.set(
-										1, 0, 0,
-										Math.tan( array[ 0 ] * Math.PI / 180 ), 1, 0,
-										0, 0, 1
-									);
-
-								}
-
-								break;
-
-							case 'matrix':
-
-								if ( array.length === 6 ) {
-
-									currentTransform.set(
-										array[ 0 ], array[ 2 ], array[ 4 ],
-										array[ 1 ], array[ 3 ], array[ 5 ],
-										0, 0, 1
-									);
-
-								}
-
-								break;
-
-						}
-
-					}
-
-					transform.premultiply( currentTransform );
-
-				}
-
-			}
-
-			return transform;
-
-		}
-
-		function transformPath( path, m ) {
-
-			function transfVec2( v2 ) {
-
-				tempV3.set( v2.x, v2.y, 1 ).applyMatrix3( m );
-
-				v2.set( tempV3.x, tempV3.y );
-
-			}
-
-			function transfEllipseGeneric( curve ) {
-
-				// For math description see:
-				// https://math.stackexchange.com/questions/4544164
-
-				const a = curve.xRadius;
-				const b = curve.yRadius;
-
-				const cosTheta = Math.cos( curve.aRotation );
-				const sinTheta = Math.sin( curve.aRotation );
-
-				const v1 = new Vector3( a * cosTheta, a * sinTheta, 0 );
-				const v2 = new Vector3( - b * sinTheta, b * cosTheta, 0 );
-
-				const f1 = v1.applyMatrix3( m );
-				const f2 = v2.applyMatrix3( m );
-
-				const mF = tempTransform0.set(
-					f1.x, f2.x, 0,
-					f1.y, f2.y, 0,
-					0, 0, 1,
-				);
-
-				const mFInv = tempTransform1.copy( mF ).invert();
-				const mFInvT = tempTransform2.copy( mFInv ).transpose();
-				const mQ = mFInvT.multiply( mFInv );
-				const mQe = mQ.elements;
-
-				const ed = eigenDecomposition( mQe[ 0 ], mQe[ 1 ], mQe[ 4 ] );
-				const rt1sqrt = Math.sqrt( ed.rt1 );
-				const rt2sqrt = Math.sqrt( ed.rt2 );
-
-				curve.xRadius = 1 / rt1sqrt;
-				curve.yRadius = 1 / rt2sqrt;
-				curve.aRotation = Math.atan2( ed.sn, ed.cs );
-
-				const isFullEllipse =
-					( curve.aEndAngle - curve.aStartAngle ) % ( 2 * Math.PI ) < Number.EPSILON;
-
-				// Do not touch angles of a full ellipse because after transformation they
-				// would converge to a sinle value effectively removing the whole curve
-
-				if ( ! isFullEllipse ) {
-
-					const mDsqrt = tempTransform1.set(
-						rt1sqrt, 0, 0,
-						0, rt2sqrt, 0,
-						0, 0, 1,
-					);
-
-					const mRT = tempTransform2.set(
-						ed.cs, ed.sn, 0,
-						- ed.sn, ed.cs, 0,
-						0, 0, 1,
-					);
-
-					const mDRF = mDsqrt.multiply( mRT ).multiply( mF );
-
-					const transformAngle = phi => {
-
-						const { x: cosR, y: sinR } =
-							new Vector3( Math.cos( phi ), Math.sin( phi ), 0 ).applyMatrix3( mDRF );
-
-						return Math.atan2( sinR, cosR );
-
-					};
-
-					curve.aStartAngle = transformAngle( curve.aStartAngle );
-					curve.aEndAngle = transformAngle( curve.aEndAngle );
-
-					if ( isTransformFlipped( m ) ) {
-
-						curve.aClockwise = ! curve.aClockwise;
-
-					}
-
-				}
-
-			}
-
-			function transfEllipseNoSkew( curve ) {
-
-				// Faster shortcut if no skew is applied
-				// (e.g, a euclidean transform of a group containing the ellipse)
-
-				const sx = getTransformScaleX( m );
-				const sy = getTransformScaleY( m );
-
-				curve.xRadius *= sx;
-				curve.yRadius *= sy;
-
-				// Extract rotation angle from the matrix of form:
-				//
-				//  | cosθ sx   -sinθ sy |
-				//  | sinθ sx    cosθ sy |
-				//
-				// Remembering that tanθ = sinθ / cosθ; and that
-				// `sx`, `sy`, or both might be zero.
-				const theta =
-					sx > Number.EPSILON
-						? Math.atan2( m.elements[ 1 ], m.elements[ 0 ] )
-						: Math.atan2( - m.elements[ 3 ], m.elements[ 4 ] );
-
-				curve.aRotation += theta;
-
-				if ( isTransformFlipped( m ) ) {
-
-					curve.aStartAngle *= - 1;
-					curve.aEndAngle *= - 1;
-					curve.aClockwise = ! curve.aClockwise;
-
-				}
-
-			}
-
-			const subPaths = path.subPaths;
-
-			for ( let i = 0, n = subPaths.length; i < n; i ++ ) {
-
-				const subPath = subPaths[ i ];
-				const curves = subPath.curves;
-
-				for ( let j = 0; j < curves.length; j ++ ) {
-
-					const curve = curves[ j ];
-
-					if ( curve.isLineCurve ) {
-
-						transfVec2( curve.v1 );
-						transfVec2( curve.v2 );
-
-					} else if ( curve.isCubicBezierCurve ) {
-
-						transfVec2( curve.v0 );
-						transfVec2( curve.v1 );
-						transfVec2( curve.v2 );
-						transfVec2( curve.v3 );
-
-					} else if ( curve.isQuadraticBezierCurve ) {
-
-						transfVec2( curve.v0 );
-						transfVec2( curve.v1 );
-						transfVec2( curve.v2 );
-
-					} else if ( curve.isEllipseCurve ) {
-
-						// Transform ellipse center point
-
-						tempV2.set( curve.aX, curve.aY );
-						transfVec2( tempV2 );
-						curve.aX = tempV2.x;
-						curve.aY = tempV2.y;
-
-						// Transform ellipse shape parameters
-
-						if ( isTransformSkewed( m ) ) {
-
-							transfEllipseGeneric( curve );
-
-						} else {
-
-							transfEllipseNoSkew( curve );
-
-						}
-
-					}
-
-				}
-
-			}
-
-		}
-
-		function isTransformFlipped( m ) {
-
-			const te = m.elements;
-			return te[ 0 ] * te[ 4 ] - te[ 1 ] * te[ 3 ] < 0;
-
-		}
-
-		function isTransformSkewed( m ) {
-
-			const te = m.elements;
-			const basisDot = te[ 0 ] * te[ 3 ] + te[ 1 ] * te[ 4 ];
-
-			// Shortcut for trivial rotations and transformations
-			if ( basisDot === 0 ) return false;
-
-			const sx = getTransformScaleX( m );
-			const sy = getTransformScaleY( m );
-
-			return Math.abs( basisDot / ( sx * sy ) ) > Number.EPSILON;
-
-		}
-
-		function getTransformScaleX( m ) {
-
-			const te = m.elements;
-			return Math.sqrt( te[ 0 ] * te[ 0 ] + te[ 1 ] * te[ 1 ] );
-
-		}
-
-		function getTransformScaleY( m ) {
-
-			const te = m.elements;
-			return Math.sqrt( te[ 3 ] * te[ 3 ] + te[ 4 ] * te[ 4 ] );
-
-		}
-
-		// Calculates the eigensystem of a real symmetric 2x2 matrix
-		//    [ A  B ]
-		//    [ B  C ]
-		// in the form
-		//    [ A  B ]  =  [ cs  -sn ] [ rt1   0  ] [  cs  sn ]
-		//    [ B  C ]     [ sn   cs ] [  0   rt2 ] [ -sn  cs ]
-		// where rt1 >= rt2.
-		//
-		// Adapted from: https://www.mpi-hd.mpg.de/personalhomes/globes/3x3/index.html
-		// -> Algorithms for real symmetric matrices -> Analytical (2x2 symmetric)
-		function eigenDecomposition( A, B, C ) {
-
-			let rt1, rt2, cs, sn, t;
-			const sm = A + C;
-			const df = A - C;
-			const rt = Math.sqrt( df * df + 4 * B * B );
-
-			if ( sm > 0 ) {
-
-				rt1 = 0.5 * ( sm + rt );
-				t = 1 / rt1;
-				rt2 = A * t * C - B * t * B;
-
-			} else if ( sm < 0 ) {
-
-				rt2 = 0.5 * ( sm - rt );
-
-			} else {
-
-				// This case needs to be treated separately to avoid div by 0
-
-				rt1 = 0.5 * rt;
-				rt2 = - 0.5 * rt;
-
-			}
-
-			// Calculate eigenvectors
-
-			if ( df > 0 ) {
-
-				cs = df + rt;
-
-			} else {
-
-				cs = df - rt;
-
-			}
-
-			if ( Math.abs( cs ) > 2 * Math.abs( B ) ) {
-
-				t = - 2 * B / cs;
-				sn = 1 / Math.sqrt( 1 + t * t );
-				cs = t * sn;
-
-			} else if ( Math.abs( B ) === 0 ) {
-
-				cs = 1;
-				sn = 0;
-
-			} else {
-
-				t = - 0.5 * cs / B;
-				cs = 1 / Math.sqrt( 1 + t * t );
-				sn = t * cs;
-
-			}
-
-			if ( df > 0 ) {
-
-				t = cs;
-				cs = - sn;
-				sn = t;
-
-			}
-
-			return { rt1, rt2, cs, sn };
-
-		}
-
-		//
-
-		const paths = [];
-		const stylesheets = {};
-
-		const transformStack = [];
-
-		const tempTransform0 = new Matrix3();
-		const tempTransform1 = new Matrix3();
-		const tempTransform2 = new Matrix3();
-		const tempTransform3 = new Matrix3();
-		const tempV2 = new Vector2();
-		const tempV3 = new Vector3();
-
-		const currentTransform = new Matrix3();
-
-		const xml = new DOMParser().parseFromString( text, 'image/svg+xml' ); // application/xml
-
-		parseNode( xml.documentElement, {
-			fill: '#000',
-			fillOpacity: 1,
-			strokeOpacity: 1,
-			strokeWidth: 1,
-			strokeLineJoin: 'miter',
-			strokeLineCap: 'butt',
-			strokeMiterLimit: 4
-		} );
-
-		const data = { paths: paths, xml: xml.documentElement };
-
-		// console.log( paths );
-		return data;
-
-	}
-
-	static createShapes( shapePath ) {
-
-		// Param shapePath: a shapepath as returned by the parse function of this class
-		// Returns Shape object
-
-		const BIGNUMBER = 999999999;
-
-		const IntersectionLocationType = {
-			ORIGIN: 0,
-			DESTINATION: 1,
-			BETWEEN: 2,
-			LEFT: 3,
-			RIGHT: 4,
-			BEHIND: 5,
-			BEYOND: 6
-		};
-
-		const classifyResult = {
-			loc: IntersectionLocationType.ORIGIN,
-			t: 0
-		};
-
-		function findEdgeIntersection( a0, a1, b0, b1 ) {
-
-			const x1 = a0.x;
-			const x2 = a1.x;
-			const x3 = b0.x;
-			const x4 = b1.x;
-			const y1 = a0.y;
-			const y2 = a1.y;
-			const y3 = b0.y;
-			const y4 = b1.y;
-			const nom1 = ( x4 - x3 ) * ( y1 - y3 ) - ( y4 - y3 ) * ( x1 - x3 );
-			const nom2 = ( x2 - x1 ) * ( y1 - y3 ) - ( y2 - y1 ) * ( x1 - x3 );
-			const denom = ( y4 - y3 ) * ( x2 - x1 ) - ( x4 - x3 ) * ( y2 - y1 );
-			const t1 = nom1 / denom;
-			const t2 = nom2 / denom;
-
-			if ( ( ( denom === 0 ) && ( nom1 !== 0 ) ) || ( t1 <= 0 ) || ( t1 >= 1 ) || ( t2 < 0 ) || ( t2 > 1 ) ) {
-
-				//1. lines are parallel or edges don't intersect
-
-				return null;
-
-			} else if ( ( nom1 === 0 ) && ( denom === 0 ) ) {
-
-				//2. lines are colinear
-
-				//check if endpoints of edge2 (b0-b1) lies on edge1 (a0-a1)
-				for ( let i = 0; i < 2; i ++ ) {
-
-					classifyPoint( i === 0 ? b0 : b1, a0, a1 );
-					//find position of this endpoints relatively to edge1
-					if ( classifyResult.loc == IntersectionLocationType.ORIGIN ) {
-
-						const point = ( i === 0 ? b0 : b1 );
-						return { x: point.x, y: point.y, t: classifyResult.t };
-
-					} else if ( classifyResult.loc == IntersectionLocationType.BETWEEN ) {
-
-						const x = + ( ( x1 + classifyResult.t * ( x2 - x1 ) ).toPrecision( 10 ) );
-						const y = + ( ( y1 + classifyResult.t * ( y2 - y1 ) ).toPrecision( 10 ) );
-						return { x: x, y: y, t: classifyResult.t, };
-
-					}
-
-				}
-
-				return null;
-
-			} else {
-
-				//3. edges intersect
-
-				for ( let i = 0; i < 2; i ++ ) {
-
-					classifyPoint( i === 0 ? b0 : b1, a0, a1 );
-
-					if ( classifyResult.loc == IntersectionLocationType.ORIGIN ) {
-
-						const point = ( i === 0 ? b0 : b1 );
-						return { x: point.x, y: point.y, t: classifyResult.t };
-
-					}
-
-				}
-
-				const x = + ( ( x1 + t1 * ( x2 - x1 ) ).toPrecision( 10 ) );
-				const y = + ( ( y1 + t1 * ( y2 - y1 ) ).toPrecision( 10 ) );
-				return { x: x, y: y, t: t1 };
-
-			}
-
-		}
-
-		function classifyPoint( p, edgeStart, edgeEnd ) {
-
-			const ax = edgeEnd.x - edgeStart.x;
-			const ay = edgeEnd.y - edgeStart.y;
-			const bx = p.x - edgeStart.x;
-			const by = p.y - edgeStart.y;
-			const sa = ax * by - bx * ay;
-
-			if ( ( p.x === edgeStart.x ) && ( p.y === edgeStart.y ) ) {
-
-				classifyResult.loc = IntersectionLocationType.ORIGIN;
-				classifyResult.t = 0;
-				return;
-
-			}
-
-			if ( ( p.x === edgeEnd.x ) && ( p.y === edgeEnd.y ) ) {
-
-				classifyResult.loc = IntersectionLocationType.DESTINATION;
-				classifyResult.t = 1;
-				return;
-
-			}
-
-			if ( sa < - Number.EPSILON ) {
-
-				classifyResult.loc = IntersectionLocationType.LEFT;
-				return;
-
-			}
-
-			if ( sa > Number.EPSILON ) {
-
-				classifyResult.loc = IntersectionLocationType.RIGHT;
-				return;
-
-
-			}
-
-			if ( ( ( ax * bx ) < 0 ) || ( ( ay * by ) < 0 ) ) {
-
-				classifyResult.loc = IntersectionLocationType.BEHIND;
-				return;
-
-			}
-
-			if ( ( Math.sqrt( ax * ax + ay * ay ) ) < ( Math.sqrt( bx * bx + by * by ) ) ) {
-
-				classifyResult.loc = IntersectionLocationType.BEYOND;
-				return;
-
-			}
-
-			let t;
-
-			if ( ax !== 0 ) {
-
-				t = bx / ax;
-
-			} else {
-
-				t = by / ay;
-
-			}
-
-			classifyResult.loc = IntersectionLocationType.BETWEEN;
-			classifyResult.t = t;
-
-		}
-
-		function getIntersections( path1, path2 ) {
-
-			const intersectionsRaw = [];
-			const intersections = [];
-
-			for ( let index = 1; index < path1.length; index ++ ) {
-
-				const path1EdgeStart = path1[ index - 1 ];
-				const path1EdgeEnd = path1[ index ];
-
-				for ( let index2 = 1; index2 < path2.length; index2 ++ ) {
-
-					const path2EdgeStart = path2[ index2 - 1 ];
-					const path2EdgeEnd = path2[ index2 ];
-
-					const intersection = findEdgeIntersection( path1EdgeStart, path1EdgeEnd, path2EdgeStart, path2EdgeEnd );
-
-					if ( intersection !== null && intersectionsRaw.find( i => i.t <= intersection.t + Number.EPSILON && i.t >= intersection.t - Number.EPSILON ) === undefined ) {
-
-						intersectionsRaw.push( intersection );
-						intersections.push( new Vector2( intersection.x, intersection.y ) );
-
-					}
-
-				}
-
-			}
-
-			return intersections;
-
-		}
-
-		function getScanlineIntersections( scanline, boundingBox, paths ) {
-
-			const center = new Vector2();
-			boundingBox.getCenter( center );
-
-			const allIntersections = [];
-
-			paths.forEach( path => {
-
-				// check if the center of the bounding box is in the bounding box of the paths.
-				// this is a pruning method to limit the search of intersections in paths that can't envelop of the current path.
-				// if a path envelops another path. The center of that oter path, has to be inside the bounding box of the enveloping path.
-				if ( path.boundingBox.containsPoint( center ) ) {
-
-					const intersections = getIntersections( scanline, path.points );
-
-					intersections.forEach( p => {
-
-						allIntersections.push( { identifier: path.identifier, isCW: path.isCW, point: p } );
-
-					} );
-
-				}
-
-			} );
-
-			allIntersections.sort( ( i1, i2 ) => {
-
-				return i1.point.x - i2.point.x;
-
-			} );
-
-			return allIntersections;
-
-		}
-
-		function isHoleTo( simplePath, allPaths, scanlineMinX, scanlineMaxX, _fillRule ) {
-
-			if ( _fillRule === null || _fillRule === undefined || _fillRule === '' ) {
-
-				_fillRule = 'nonzero';
-
-			}
-
-			const centerBoundingBox = new Vector2();
-			simplePath.boundingBox.getCenter( centerBoundingBox );
-
-			const scanline = [ new Vector2( scanlineMinX, centerBoundingBox.y ), new Vector2( scanlineMaxX, centerBoundingBox.y ) ];
-
-			const scanlineIntersections = getScanlineIntersections( scanline, simplePath.boundingBox, allPaths );
-
-			scanlineIntersections.sort( ( i1, i2 ) => {
-
-				return i1.point.x - i2.point.x;
-
-			} );
-
-			const baseIntersections = [];
-			const otherIntersections = [];
-
-			scanlineIntersections.forEach( i => {
-
-				if ( i.identifier === simplePath.identifier ) {
-
-					baseIntersections.push( i );
-
-				} else {
-
-					otherIntersections.push( i );
-
-				}
-
-			} );
-
-			const firstXOfPath = baseIntersections[ 0 ].point.x;
-
-			// build up the path hierarchy
-			const stack = [];
-			let i = 0;
-
-			while ( i < otherIntersections.length && otherIntersections[ i ].point.x < firstXOfPath ) {
-
-				if ( stack.length > 0 && stack[ stack.length - 1 ] === otherIntersections[ i ].identifier ) {
-
-					stack.pop();
-
-				} else {
-
-					stack.push( otherIntersections[ i ].identifier );
-
-				}
-
-				i ++;
-
-			}
-
-			stack.push( simplePath.identifier );
-
-			if ( _fillRule === 'evenodd' ) {
-
-				const isHole = stack.length % 2 === 0 ? true : false;
-				const isHoleFor = stack[ stack.length - 2 ];
-
-				return { identifier: simplePath.identifier, isHole: isHole, for: isHoleFor };
-
-			} else if ( _fillRule === 'nonzero' ) {
-
-				// check if path is a hole by counting the amount of paths with alternating rotations it has to cross.
-				let isHole = true;
-				let isHoleFor = null;
-				let lastCWValue = null;
-
-				for ( let i = 0; i < stack.length; i ++ ) {
-
-					const identifier = stack[ i ];
-					if ( isHole ) {
-
-						lastCWValue = allPaths[ identifier ].isCW;
-						isHole = false;
-						isHoleFor = identifier;
-
-					} else if ( lastCWValue !== allPaths[ identifier ].isCW ) {
-
-						lastCWValue = allPaths[ identifier ].isCW;
-						isHole = true;
-
-					}
-
-				}
-
-				return { identifier: simplePath.identifier, isHole: isHole, for: isHoleFor };
-
-			} else {
-
-				console.warn( 'fill-rule: "' + _fillRule + '" is currently not implemented.' );
-
-			}
-
-		}
-
-		// check for self intersecting paths
-		// TODO
-
-		// check intersecting paths
-		// TODO
-
-		// prepare paths for hole detection
-		let scanlineMinX = BIGNUMBER;
-		let scanlineMaxX = - BIGNUMBER;
-
-		let simplePaths = shapePath.subPaths.map( p => {
-
-			const points = p.getPoints();
-			let maxY = - BIGNUMBER;
-			let minY = BIGNUMBER;
-			let maxX = - BIGNUMBER;
-			let minX = BIGNUMBER;
-
-	      	//points.forEach(p => p.y *= -1);
-
-			for ( let i = 0; i < points.length; i ++ ) {
-
-				const p = points[ i ];
-
-				if ( p.y > maxY ) {
-
-					maxY = p.y;
-
-				}
-
-				if ( p.y < minY ) {
-
-					minY = p.y;
-
-				}
-
-				if ( p.x > maxX ) {
-
-					maxX = p.x;
-
-				}
-
-				if ( p.x < minX ) {
-
-					minX = p.x;
-
-				}
-
-			}
-
-			//
-			if ( scanlineMaxX <= maxX ) {
-
-				scanlineMaxX = maxX + 1;
-
-			}
-
-			if ( scanlineMinX >= minX ) {
-
-				scanlineMinX = minX - 1;
-
-			}
-
-			return { curves: p.curves, points: points, isCW: ShapeUtils.isClockWise( points ), identifier: - 1, boundingBox: new Box2( new Vector2( minX, minY ), new Vector2( maxX, maxY ) ) };
-
-		} );
-
-		simplePaths = simplePaths.filter( sp => sp.points.length > 1 );
-
-		for ( let identifier = 0; identifier < simplePaths.length; identifier ++ ) {
-
-			simplePaths[ identifier ].identifier = identifier;
-
-		}
-
-		// check if path is solid or a hole
-		const isAHole = simplePaths.map( p => isHoleTo( p, simplePaths, scanlineMinX, scanlineMaxX, ( shapePath.userData ? shapePath.userData.style.fillRule : undefined ) ) );
-
-
-		const shapesToReturn = [];
-		simplePaths.forEach( p => {
-
-			const amIAHole = isAHole[ p.identifier ];
-
-			if ( ! amIAHole.isHole ) {
-
-				const shape = new Shape();
-				shape.curves = p.curves;
-				const holes = isAHole.filter( h => h.isHole && h.for === p.identifier );
-				holes.forEach( h => {
-
-					const hole = simplePaths[ h.identifier ];
-					const path = new Path();
-					path.curves = hole.curves;
-					shape.holes.push( path );
-
-				} );
-				shapesToReturn.push( shape );
-
-			}
-
-		} );
-
-		return shapesToReturn;
-
-	}
-
-	static getStrokeStyle( width, color, lineJoin, lineCap, miterLimit ) {
-
-		// Param width: Stroke width
-		// Param color: As returned by THREE.Color.getStyle()
-		// Param lineJoin: One of "round", "bevel", "miter" or "miter-limit"
-		// Param lineCap: One of "round", "square" or "butt"
-		// Param miterLimit: Maximum join length, in multiples of the "width" parameter (join is truncated if it exceeds that distance)
-		// Returns style object
-
-		width = width !== undefined ? width : 1;
-		color = color !== undefined ? color : '#000';
-		lineJoin = lineJoin !== undefined ? lineJoin : 'miter';
-		lineCap = lineCap !== undefined ? lineCap : 'butt';
-		miterLimit = miterLimit !== undefined ? miterLimit : 4;
-
-		return {
-			strokeColor: color,
-			strokeWidth: width,
-			strokeLineJoin: lineJoin,
-			strokeLineCap: lineCap,
-			strokeMiterLimit: miterLimit
-		};
-
-	}
-
-	static pointsToStroke( points, style, arcDivisions, minDistance ) {
-
-		// Generates a stroke with some width around the given path.
-		// The path can be open or closed (last point equals to first point)
-		// Param points: Array of Vector2D (the path). Minimum 2 points.
-		// Param style: Object with SVG properties as returned by SVGLoader.getStrokeStyle(), or SVGLoader.parse() in the path.userData.style object
-		// Params arcDivisions: Arc divisions for round joins and endcaps. (Optional)
-		// Param minDistance: Points closer to this distance will be merged. (Optional)
-		// Returns BufferGeometry with stroke triangles (In plane z = 0). UV coordinates are generated ('u' along path. 'v' across it, from left to right)
-
-		const vertices = [];
-		const normals = [];
-		const uvs = [];
-
-		if ( SVGLoader.pointsToStrokeWithBuffers( points, style, arcDivisions, minDistance, vertices, normals, uvs ) === 0 ) {
-
-			return null;
-
-		}
-
-		const geometry = new BufferGeometry();
-		geometry.setAttribute( 'position', new Float32BufferAttribute( vertices, 3 ) );
-		geometry.setAttribute( 'normal', new Float32BufferAttribute( normals, 3 ) );
-		geometry.setAttribute( 'uv', new Float32BufferAttribute( uvs, 2 ) );
-
-		return geometry;
-
-	}
-
-	static pointsToStrokeWithBuffers( points, style, arcDivisions, minDistance, vertices, normals, uvs, vertexOffset ) {
-
-		// This function can be called to update existing arrays or buffers.
-		// Accepts same parameters as pointsToStroke, plus the buffers and optional offset.
-		// Param vertexOffset: Offset vertices to start writing in the buffers (3 elements/vertex for vertices and normals, and 2 elements/vertex for uvs)
-		// Returns number of written vertices / normals / uvs pairs
-		// if 'vertices' parameter is undefined no triangles will be generated, but the returned vertices count will still be valid (useful to preallocate the buffers)
-		// 'normals' and 'uvs' buffers are optional
-
-		const tempV2_1 = new Vector2();
-		const tempV2_2 = new Vector2();
-		const tempV2_3 = new Vector2();
-		const tempV2_4 = new Vector2();
-		const tempV2_5 = new Vector2();
-		const tempV2_6 = new Vector2();
-		const tempV2_7 = new Vector2();
-		const lastPointL = new Vector2();
-		const lastPointR = new Vector2();
-		const point0L = new Vector2();
-		const point0R = new Vector2();
-		const currentPointL = new Vector2();
-		const currentPointR = new Vector2();
-		const nextPointL = new Vector2();
-		const nextPointR = new Vector2();
-		const innerPoint = new Vector2();
-		const outerPoint = new Vector2();
-
-		arcDivisions = arcDivisions !== undefined ? arcDivisions : 12;
-		minDistance = minDistance !== undefined ? minDistance : 0.001;
-		vertexOffset = vertexOffset !== undefined ? vertexOffset : 0;
-
-		// First ensure there are no duplicated points
-		points = removeDuplicatedPoints( points );
-
-		const numPoints = points.length;
-
-		if ( numPoints < 2 ) return 0;
-
-		const isClosed = points[ 0 ].equals( points[ numPoints - 1 ] );
-
-		let currentPoint;
-		let previousPoint = points[ 0 ];
-		let nextPoint;
-
-		const strokeWidth2 = style.strokeWidth / 2;
-
-		const deltaU = 1 / ( numPoints - 1 );
-		let u0 = 0, u1;
-
-		let innerSideModified;
-		let joinIsOnLeftSide;
-		let isMiter;
-		let initialJoinIsOnLeftSide = false;
-
-		let numVertices = 0;
-		let currentCoordinate = vertexOffset * 3;
-		let currentCoordinateUV = vertexOffset * 2;
-
-		// Get initial left and right stroke points
-		getNormal( points[ 0 ], points[ 1 ], tempV2_1 ).multiplyScalar( strokeWidth2 );
-		lastPointL.copy( points[ 0 ] ).sub( tempV2_1 );
-		lastPointR.copy( points[ 0 ] ).add( tempV2_1 );
-		point0L.copy( lastPointL );
-		point0R.copy( lastPointR );
-
-		for ( let iPoint = 1; iPoint < numPoints; iPoint ++ ) {
-
-			currentPoint = points[ iPoint ];
-
-			// Get next point
-			if ( iPoint === numPoints - 1 ) {
-
-				if ( isClosed ) {
-
-					// Skip duplicated initial point
-					nextPoint = points[ 1 ];
-
-				} else nextPoint = undefined;
-
-			} else {
-
-				nextPoint = points[ iPoint + 1 ];
-
-			}
-
-			// Normal of previous segment in tempV2_1
-			const normal1 = tempV2_1;
-			getNormal( previousPoint, currentPoint, normal1 );
-
-			tempV2_3.copy( normal1 ).multiplyScalar( strokeWidth2 );
-			currentPointL.copy( currentPoint ).sub( tempV2_3 );
-			currentPointR.copy( currentPoint ).add( tempV2_3 );
-
-			u1 = u0 + deltaU;
-
-			innerSideModified = false;
-
-			if ( nextPoint !== undefined ) {
-
-				// Normal of next segment in tempV2_2
-				getNormal( currentPoint, nextPoint, tempV2_2 );
-
-				tempV2_3.copy( tempV2_2 ).multiplyScalar( strokeWidth2 );
-				nextPointL.copy( currentPoint ).sub( tempV2_3 );
-				nextPointR.copy( currentPoint ).add( tempV2_3 );
-
-				joinIsOnLeftSide = true;
-				tempV2_3.subVectors( nextPoint, previousPoint );
-				if ( normal1.dot( tempV2_3 ) < 0 ) {
-
-					joinIsOnLeftSide = false;
-
-				}
-
-				if ( iPoint === 1 ) initialJoinIsOnLeftSide = joinIsOnLeftSide;
-
-				tempV2_3.subVectors( nextPoint, currentPoint );
-				tempV2_3.normalize();
-				const dot = Math.abs( normal1.dot( tempV2_3 ) );
-
-				// If path is straight, don't create join
-				if ( dot > Number.EPSILON ) {
-
-					// Compute inner and outer segment intersections
-					const miterSide = strokeWidth2 / dot;
-					tempV2_3.multiplyScalar( - miterSide );
-					tempV2_4.subVectors( currentPoint, previousPoint );
-					tempV2_5.copy( tempV2_4 ).setLength( miterSide ).add( tempV2_3 );
-					innerPoint.copy( tempV2_5 ).negate();
-					const miterLength2 = tempV2_5.length();
-					const segmentLengthPrev = tempV2_4.length();
-					tempV2_4.divideScalar( segmentLengthPrev );
-					tempV2_6.subVectors( nextPoint, currentPoint );
-					const segmentLengthNext = tempV2_6.length();
-					tempV2_6.divideScalar( segmentLengthNext );
-					// Check that previous and next segments doesn't overlap with the innerPoint of intersection
-					if ( tempV2_4.dot( innerPoint ) < segmentLengthPrev && tempV2_6.dot( innerPoint ) < segmentLengthNext ) {
-
-						innerSideModified = true;
-
-					}
-
-					outerPoint.copy( tempV2_5 ).add( currentPoint );
-					innerPoint.add( currentPoint );
-
-					isMiter = false;
-
-					if ( innerSideModified ) {
-
-						if ( joinIsOnLeftSide ) {
-
-							nextPointR.copy( innerPoint );
-							currentPointR.copy( innerPoint );
-
-						} else {
-
-							nextPointL.copy( innerPoint );
-							currentPointL.copy( innerPoint );
-
-						}
-
-					} else {
-
-						// The segment triangles are generated here if there was overlapping
-
-						makeSegmentTriangles();
-
-					}
-
-					switch ( style.strokeLineJoin ) {
-
-						case 'bevel':
-
-							makeSegmentWithBevelJoin( joinIsOnLeftSide, innerSideModified, u1 );
-
-							break;
-
-						case 'round':
-
-							// Segment triangles
-
-							createSegmentTrianglesWithMiddleSection( joinIsOnLeftSide, innerSideModified );
-
-							// Join triangles
-
-							if ( joinIsOnLeftSide ) {
-
-								makeCircularSector( currentPoint, currentPointL, nextPointL, u1, 0 );
-
-							} else {
-
-								makeCircularSector( currentPoint, nextPointR, currentPointR, u1, 1 );
-
-							}
-
-							break;
-
-						case 'miter':
-						case 'miter-clip':
-						default:
-
-							const miterFraction = ( strokeWidth2 * style.strokeMiterLimit ) / miterLength2;
-
-							if ( miterFraction < 1 ) {
-
-								// The join miter length exceeds the miter limit
-
-								if ( style.strokeLineJoin !== 'miter-clip' ) {
-
-									makeSegmentWithBevelJoin( joinIsOnLeftSide, innerSideModified, u1 );
-									break;
-
-								} else {
-
-									// Segment triangles
-
-									createSegmentTrianglesWithMiddleSection( joinIsOnLeftSide, innerSideModified );
-
-									// Miter-clip join triangles
-
-									if ( joinIsOnLeftSide ) {
-
-										tempV2_6.subVectors( outerPoint, currentPointL ).multiplyScalar( miterFraction ).add( currentPointL );
-										tempV2_7.subVectors( outerPoint, nextPointL ).multiplyScalar( miterFraction ).add( nextPointL );
-
-										addVertex( currentPointL, u1, 0 );
-										addVertex( tempV2_6, u1, 0 );
-										addVertex( currentPoint, u1, 0.5 );
-
-										addVertex( currentPoint, u1, 0.5 );
-										addVertex( tempV2_6, u1, 0 );
-										addVertex( tempV2_7, u1, 0 );
-
-										addVertex( currentPoint, u1, 0.5 );
-										addVertex( tempV2_7, u1, 0 );
-										addVertex( nextPointL, u1, 0 );
-
-									} else {
-
-										tempV2_6.subVectors( outerPoint, currentPointR ).multiplyScalar( miterFraction ).add( currentPointR );
-										tempV2_7.subVectors( outerPoint, nextPointR ).multiplyScalar( miterFraction ).add( nextPointR );
-
-										addVertex( currentPointR, u1, 1 );
-										addVertex( tempV2_6, u1, 1 );
-										addVertex( currentPoint, u1, 0.5 );
-
-										addVertex( currentPoint, u1, 0.5 );
-										addVertex( tempV2_6, u1, 1 );
-										addVertex( tempV2_7, u1, 1 );
-
-										addVertex( currentPoint, u1, 0.5 );
-										addVertex( tempV2_7, u1, 1 );
-										addVertex( nextPointR, u1, 1 );
-
-									}
-
-								}
-
-							} else {
-
-								// Miter join segment triangles
-
-								if ( innerSideModified ) {
-
-									// Optimized segment + join triangles
-
-									if ( joinIsOnLeftSide ) {
-
-										addVertex( lastPointR, u0, 1 );
-										addVertex( lastPointL, u0, 0 );
-										addVertex( outerPoint, u1, 0 );
-
-										addVertex( lastPointR, u0, 1 );
-										addVertex( outerPoint, u1, 0 );
-										addVertex( innerPoint, u1, 1 );
-
-									} else {
-
-										addVertex( lastPointR, u0, 1 );
-										addVertex( lastPointL, u0, 0 );
-										addVertex( outerPoint, u1, 1 );
-
-										addVertex( lastPointL, u0, 0 );
-										addVertex( innerPoint, u1, 0 );
-										addVertex( outerPoint, u1, 1 );
-
-									}
-
-
-									if ( joinIsOnLeftSide ) {
-
-										nextPointL.copy( outerPoint );
-
-									} else {
-
-										nextPointR.copy( outerPoint );
-
-									}
-
-
-								} else {
-
-									// Add extra miter join triangles
-
-									if ( joinIsOnLeftSide ) {
-
-										addVertex( currentPointL, u1, 0 );
-										addVertex( outerPoint, u1, 0 );
-										addVertex( currentPoint, u1, 0.5 );
-
-										addVertex( currentPoint, u1, 0.5 );
-										addVertex( outerPoint, u1, 0 );
-										addVertex( nextPointL, u1, 0 );
-
-									} else {
-
-										addVertex( currentPointR, u1, 1 );
-										addVertex( outerPoint, u1, 1 );
-										addVertex( currentPoint, u1, 0.5 );
-
-										addVertex( currentPoint, u1, 0.5 );
-										addVertex( outerPoint, u1, 1 );
-										addVertex( nextPointR, u1, 1 );
-
-									}
-
-								}
-
-								isMiter = true;
-
-							}
-
-							break;
-
-					}
-
-				} else {
-
-					// The segment triangles are generated here when two consecutive points are collinear
-
-					makeSegmentTriangles();
-
-				}
-
-			} else {
-
-				// The segment triangles are generated here if it is the ending segment
-
-				makeSegmentTriangles();
-
-			}
-
-			if ( ! isClosed && iPoint === numPoints - 1 ) {
-
-				// Start line endcap
-				addCapGeometry( points[ 0 ], point0L, point0R, joinIsOnLeftSide, true, u0 );
-
-			}
-
-			// Increment loop variables
-
-			u0 = u1;
-
-			previousPoint = currentPoint;
-
-			lastPointL.copy( nextPointL );
-			lastPointR.copy( nextPointR );
-
-		}
-
-		if ( ! isClosed ) {
-
-			// Ending line endcap
-			addCapGeometry( currentPoint, currentPointL, currentPointR, joinIsOnLeftSide, false, u1 );
-
-		} else if ( innerSideModified && vertices ) {
-
-			// Modify path first segment vertices to adjust to the segments inner and outer intersections
-
-			let lastOuter = outerPoint;
-			let lastInner = innerPoint;
-
-			if ( initialJoinIsOnLeftSide !== joinIsOnLeftSide ) {
-
-				lastOuter = innerPoint;
-				lastInner = outerPoint;
-
-			}
-
-			if ( joinIsOnLeftSide ) {
-
-				if ( isMiter || initialJoinIsOnLeftSide ) {
-
-					lastInner.toArray( vertices, 0 * 3 );
-					lastInner.toArray( vertices, 3 * 3 );
-
-					if ( isMiter ) {
-
-						lastOuter.toArray( vertices, 1 * 3 );
-
-					}
-
-				}
-
-			} else {
-
-				if ( isMiter || ! initialJoinIsOnLeftSide ) {
-
-					lastInner.toArray( vertices, 1 * 3 );
-					lastInner.toArray( vertices, 3 * 3 );
-
-					if ( isMiter ) {
-
-						lastOuter.toArray( vertices, 0 * 3 );
-
-					}
-
-				}
-
-			}
-
-		}
-
-		return numVertices;
-
-		// -- End of algorithm
-
-		// -- Functions
-
-		function getNormal( p1, p2, result ) {
-
-			result.subVectors( p2, p1 );
-			return result.set( - result.y, result.x ).normalize();
-
-		}
-
-		function addVertex( position, u, v ) {
-
-			if ( vertices ) {
-
-				vertices[ currentCoordinate ] = position.x;
-				vertices[ currentCoordinate + 1 ] = position.y;
-				vertices[ currentCoordinate + 2 ] = 0;
-
-				if ( normals ) {
-
-					normals[ currentCoordinate ] = 0;
-					normals[ currentCoordinate + 1 ] = 0;
-					normals[ currentCoordinate + 2 ] = 1;
-
-				}
-
-				currentCoordinate += 3;
-
-				if ( uvs ) {
-
-					uvs[ currentCoordinateUV ] = u;
-					uvs[ currentCoordinateUV + 1 ] = v;
-
-					currentCoordinateUV += 2;
-
-				}
-
-			}
-
-			numVertices += 3;
-
-		}
-
-		function makeCircularSector( center, p1, p2, u, v ) {
-
-			// param p1, p2: Points in the circle arc.
-			// p1 and p2 are in clockwise direction.
-
-			tempV2_1.copy( p1 ).sub( center ).normalize();
-			tempV2_2.copy( p2 ).sub( center ).normalize();
-
-			let angle = Math.PI;
-			const dot = tempV2_1.dot( tempV2_2 );
-			if ( Math.abs( dot ) < 1 ) angle = Math.abs( Math.acos( dot ) );
-
-			angle /= arcDivisions;
-
-			tempV2_3.copy( p1 );
-
-			for ( let i = 0, il = arcDivisions - 1; i < il; i ++ ) {
-
-				tempV2_4.copy( tempV2_3 ).rotateAround( center, angle );
-
-				addVertex( tempV2_3, u, v );
-				addVertex( tempV2_4, u, v );
-				addVertex( center, u, 0.5 );
-
-				tempV2_3.copy( tempV2_4 );
-
-			}
-
-			addVertex( tempV2_4, u, v );
-			addVertex( p2, u, v );
-			addVertex( center, u, 0.5 );
-
-		}
-
-		function makeSegmentTriangles() {
-
-			addVertex( lastPointR, u0, 1 );
-			addVertex( lastPointL, u0, 0 );
-			addVertex( currentPointL, u1, 0 );
-
-			addVertex( lastPointR, u0, 1 );
-			addVertex( currentPointL, u1, 1 );
-			addVertex( currentPointR, u1, 0 );
-
-		}
-
-		function makeSegmentWithBevelJoin( joinIsOnLeftSide, innerSideModified, u ) {
-
-			if ( innerSideModified ) {
-
-				// Optimized segment + bevel triangles
-
-				if ( joinIsOnLeftSide ) {
-
-					// Path segments triangles
-
-					addVertex( lastPointR, u0, 1 );
-					addVertex( lastPointL, u0, 0 );
-					addVertex( currentPointL, u1, 0 );
-
-					addVertex( lastPointR, u0, 1 );
-					addVertex( currentPointL, u1, 0 );
-					addVertex( innerPoint, u1, 1 );
-
-					// Bevel join triangle
-
-					addVertex( currentPointL, u, 0 );
-					addVertex( nextPointL, u, 0 );
-					addVertex( innerPoint, u, 0.5 );
-
-				} else {
-
-					// Path segments triangles
-
-					addVertex( lastPointR, u0, 1 );
-					addVertex( lastPointL, u0, 0 );
-					addVertex( currentPointR, u1, 1 );
-
-					addVertex( lastPointL, u0, 0 );
-					addVertex( innerPoint, u1, 0 );
-					addVertex( currentPointR, u1, 1 );
-
-					// Bevel join triangle
-
-					addVertex( currentPointR, u, 1 );
-					addVertex( nextPointR, u, 0 );
-					addVertex( innerPoint, u, 0.5 );
-
-				}
-
-			} else {
-
-				// Bevel join triangle. The segment triangles are done in the main loop
-
-				if ( joinIsOnLeftSide ) {
-
-					addVertex( currentPointL, u, 0 );
-					addVertex( nextPointL, u, 0 );
-					addVertex( currentPoint, u, 0.5 );
-
-				} else {
-
-					addVertex( currentPointR, u, 1 );
-					addVertex( nextPointR, u, 0 );
-					addVertex( currentPoint, u, 0.5 );
-
-				}
-
-			}
-
-		}
-
-		function createSegmentTrianglesWithMiddleSection( joinIsOnLeftSide, innerSideModified ) {
-
-			if ( innerSideModified ) {
-
-				if ( joinIsOnLeftSide ) {
-
-					addVertex( lastPointR, u0, 1 );
-					addVertex( lastPointL, u0, 0 );
-					addVertex( currentPointL, u1, 0 );
-
-					addVertex( lastPointR, u0, 1 );
-					addVertex( currentPointL, u1, 0 );
-					addVertex( innerPoint, u1, 1 );
-
-					addVertex( currentPointL, u0, 0 );
-					addVertex( currentPoint, u1, 0.5 );
-					addVertex( innerPoint, u1, 1 );
-
-					addVertex( currentPoint, u1, 0.5 );
-					addVertex( nextPointL, u0, 0 );
-					addVertex( innerPoint, u1, 1 );
-
-				} else {
-
-					addVertex( lastPointR, u0, 1 );
-					addVertex( lastPointL, u0, 0 );
-					addVertex( currentPointR, u1, 1 );
-
-					addVertex( lastPointL, u0, 0 );
-					addVertex( innerPoint, u1, 0 );
-					addVertex( currentPointR, u1, 1 );
-
-					addVertex( currentPointR, u0, 1 );
-					addVertex( innerPoint, u1, 0 );
-					addVertex( currentPoint, u1, 0.5 );
-
-					addVertex( currentPoint, u1, 0.5 );
-					addVertex( innerPoint, u1, 0 );
-					addVertex( nextPointR, u0, 1 );
-
-				}
-
-			}
-
-		}
-
-		function addCapGeometry( center, p1, p2, joinIsOnLeftSide, start, u ) {
-
-			// param center: End point of the path
-			// param p1, p2: Left and right cap points
-
-			switch ( style.strokeLineCap ) {
-
-				case 'round':
-
-					if ( start ) {
-
-						makeCircularSector( center, p2, p1, u, 0.5 );
-
-					} else {
-
-						makeCircularSector( center, p1, p2, u, 0.5 );
-
-					}
-
-					break;
-
-				case 'square':
-
-					if ( start ) {
-
-						tempV2_1.subVectors( p1, center );
-						tempV2_2.set( tempV2_1.y, - tempV2_1.x );
-
-						tempV2_3.addVectors( tempV2_1, tempV2_2 ).add( center );
-						tempV2_4.subVectors( tempV2_2, tempV2_1 ).add( center );
-
-						// Modify already existing vertices
-						if ( joinIsOnLeftSide ) {
-
-							tempV2_3.toArray( vertices, 1 * 3 );
-							tempV2_4.toArray( vertices, 0 * 3 );
-							tempV2_4.toArray( vertices, 3 * 3 );
-
-						} else {
-
-							tempV2_3.toArray( vertices, 1 * 3 );
-							tempV2_3.toArray( vertices, 3 * 3 );
-							tempV2_4.toArray( vertices, 0 * 3 );
-
-						}
-
-					} else {
-
-						tempV2_1.subVectors( p2, center );
-						tempV2_2.set( tempV2_1.y, - tempV2_1.x );
-
-						tempV2_3.addVectors( tempV2_1, tempV2_2 ).add( center );
-						tempV2_4.subVectors( tempV2_2, tempV2_1 ).add( center );
-
-						const vl = vertices.length;
-
-						// Modify already existing vertices
-						if ( joinIsOnLeftSide ) {
-
-							tempV2_3.toArray( vertices, vl - 1 * 3 );
-							tempV2_4.toArray( vertices, vl - 2 * 3 );
-							tempV2_4.toArray( vertices, vl - 4 * 3 );
-
-						} else {
-
-							tempV2_3.toArray( vertices, vl - 2 * 3 );
-							tempV2_4.toArray( vertices, vl - 1 * 3 );
-							tempV2_4.toArray( vertices, vl - 4 * 3 );
-
-						}
-
-					}
-
-					break;
-
-			}
-
-		}
-
-		function removeDuplicatedPoints( points ) {
-
-			// Creates a new array if necessary with duplicated points removed.
-			// This does not remove duplicated initial and ending points of a closed path.
-
-			let dupPoints = false;
-			for ( let i = 1, n = points.length - 1; i < n; i ++ ) {
-
-				if ( points[ i ].distanceTo( points[ i + 1 ] ) < minDistance ) {
-
-					dupPoints = true;
-					break;
-
-				}
-
-			}
-
-			if ( ! dupPoints ) return points;
-
-			const newPoints = [];
-			newPoints.push( points[ 0 ] );
-
-			for ( let i = 1, n = points.length - 1; i < n; i ++ ) {
-
-				if ( points[ i ].distanceTo( points[ i + 1 ] ) >= minDistance ) {
-
-					newPoints.push( points[ i ] );
-
-				}
-
-			}
-
-			newPoints.push( points[ points.length - 1 ] );
-
-			return newPoints;
-
-		}
-
-	}
-
 
 }
 
@@ -48328,6 +47492,213 @@ var createFileName = function createFileName() {
   return "".concat(names.join(''), ".").concat(extension);
 };
 
+const createPlane = (width, height, color, name) => {
+    const geometry = new PlaneGeometry(width, height);
+    const material = new MeshBasicMaterial({
+        color: color,
+        side: DoubleSide,
+    });
+    const plane = new Mesh(geometry, material);
+    plane.userData.name = name;
+    plane.userData.color = color;
+    return plane;
+};
+const createCube = (size, color) => {
+    const cube = new Object3D();
+    const planeFront = createPlane(size, size, color, "XY Plane");
+    const planeBack = createPlane(size, size, color, "XY Plane");
+    const planeLeft = createPlane(size, size, color, "YZ Plane");
+    const planeRight = createPlane(size, size, color, "YZ Plane");
+    const planeTop = createPlane(size, size, color, "XZ Plane");
+    const planeBottom = createPlane(size, size, color, "XZ Plane");
+    planeLeft.rotation.y = Math.PI / 2;
+    planeRight.rotation.y = Math.PI / 2;
+    planeTop.rotation.x = Math.PI / 2;
+    planeBottom.rotation.x = Math.PI / 2;
+    planeFront.position.set(size / 2, size / 2, size);
+    planeBack.position.set(size / 2, size / 2, 0);
+    planeLeft.position.set(0, size / 2, size / 2);
+    planeRight.position.set(size, size / 2, size / 2);
+    planeTop.position.set(size / 2, size, size / 2);
+    planeBottom.position.set(size / 2, 0, size / 2);
+    cube.add(planeFront, planeBack, planeLeft, planeRight, planeTop, planeBottom);
+    return cube;
+};
+const createBigCube = (minX, maxX, minY, maxY, minZ, maxZ) => {
+    const width = maxX - minX;
+    const height = maxY - minY;
+    const depth = maxZ - minZ;
+    const centerX = (minX + maxX) / 2;
+    const centerY = (minY + maxY) / 2;
+    const centerZ = (minZ + maxZ) / 2;
+    const edgesGeometry = new BufferGeometry();
+    const vertices = new Float32Array([
+        -width / 2,
+        -height / 2,
+        -depth / 2,
+        width / 2,
+        -height / 2,
+        -depth / 2,
+        width / 2,
+        -height / 2,
+        -depth / 2,
+        width / 2,
+        -height / 2,
+        depth / 2,
+        width / 2,
+        -height / 2,
+        depth / 2,
+        -width / 2,
+        -height / 2,
+        depth / 2,
+        -width / 2,
+        -height / 2,
+        depth / 2,
+        -width / 2,
+        -height / 2,
+        -depth / 2,
+        -width / 2,
+        height / 2,
+        -depth / 2,
+        width / 2,
+        height / 2,
+        -depth / 2,
+        width / 2,
+        height / 2,
+        -depth / 2,
+        width / 2,
+        height / 2,
+        depth / 2,
+        width / 2,
+        height / 2,
+        depth / 2,
+        -width / 2,
+        height / 2,
+        depth / 2,
+        -width / 2,
+        height / 2,
+        depth / 2,
+        -width / 2,
+        height / 2,
+        -depth / 2,
+        -width / 2,
+        -height / 2,
+        -depth / 2,
+        -width / 2,
+        height / 2,
+        -depth / 2,
+        width / 2,
+        -height / 2,
+        -depth / 2,
+        width / 2,
+        height / 2,
+        -depth / 2,
+        width / 2,
+        -height / 2,
+        depth / 2,
+        width / 2,
+        height / 2,
+        depth / 2,
+        -width / 2,
+        -height / 2,
+        depth / 2,
+        -width / 2,
+        height / 2,
+        depth / 2,
+    ]);
+    edgesGeometry.setAttribute("position", new BufferAttribute(vertices, 3));
+    const material = new LineBasicMaterial({ color: 0xadd8e6 });
+    const cubeEdges = new LineSegments(edgesGeometry, material);
+    cubeEdges.position.set(centerX, centerY, centerZ);
+    cubeEdges.name = "cube";
+    return cubeEdges;
+};
+const drawBoxEdges = (minX, maxX, minY, maxY, minZ, maxZ, svgContainer, camera, toScreenPosition) => {
+    const corners = [
+        new Vector3(minX, minY, minZ),
+        new Vector3(maxX, minY, minZ),
+        new Vector3(maxX, maxY, minZ),
+        new Vector3(minX, maxY, minZ),
+        new Vector3(minX, minY, maxZ),
+        new Vector3(maxX, minY, maxZ),
+        new Vector3(maxX, maxY, maxZ),
+        new Vector3(minX, maxY, maxZ),
+    ];
+    const edges = [
+        [0, 1],
+        [1, 2],
+        [2, 3],
+        [3, 0], // Bottom edges
+        [4, 5],
+        [5, 6],
+        [6, 7],
+        [7, 4], // Top edges
+        [0, 4],
+        [1, 5],
+        [2, 6],
+        [3, 7], // Side edges
+    ];
+    edges.forEach(([start, end]) => {
+        const startProj = toScreenPosition(corners[start], camera);
+        const endProj = toScreenPosition(corners[end], camera);
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", startProj.x.toString());
+        line.setAttribute("y1", startProj.y.toString());
+        line.setAttribute("x2", endProj.x.toString());
+        line.setAttribute("y2", endProj.y.toString());
+        line.style.stroke = "grey"; // Color of the box edges
+        line.style.strokeWidth = "1"; // Thickness of the box edges
+        svgContainer.appendChild(line);
+    });
+};
+const downloadImage = (image, { name = "scatter-plot", extension = "png" } = {}, setLoading) => __awaiter$1(void 0, void 0, void 0, function* () {
+    const a = document.createElement("a");
+    a.id = "a";
+    const mergedCanvas = document.createElement("canvas");
+    mergedCanvas.id = "mergedCanvas";
+    mergedCanvas.width = window.innerWidth;
+    mergedCanvas.height = window.innerHeight;
+    const mergedContext = mergedCanvas.getContext("2d");
+    if (!mergedContext) {
+        setLoading(false);
+        return;
+    }
+    let base_image = new Image();
+    base_image.src = image;
+    base_image.onload = function () {
+        var _a, _b;
+        return __awaiter$1(this, void 0, void 0, function* () {
+            const aspectRatio = base_image.width / base_image.height;
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            let targetWidth = width;
+            let targetHeight = height;
+            if (width / height > aspectRatio) {
+                targetWidth = height * aspectRatio;
+            }
+            else {
+                targetHeight = width / aspectRatio;
+            }
+            const xOffset = (width - targetWidth) / 2;
+            const yOffset = (height - targetHeight) / 2;
+            mergedContext.drawImage(base_image, xOffset, yOffset, targetWidth, targetHeight);
+            a.href = mergedCanvas.toDataURL();
+            a.download = createFileName(extension, name);
+            a.click();
+            setLoading(false);
+            (_a = document.getElementById("mergedCanvas")) === null || _a === void 0 ? void 0 : _a.remove();
+            (_b = document.getElementById("a")) === null || _b === void 0 ? void 0 : _b.remove();
+            URL.revokeObjectURL(image);
+        });
+    };
+});
+
+BufferGeometry.prototype.computeBoundsTree = computeBoundsTree;
+BufferGeometry.prototype.disposeBoundsTree = disposeBoundsTree;
+Mesh.prototype.raycast = acceleratedRaycast;
+var stats = new Stats();
+stats.showPanel(1); // 0: fps, 1: ms, 2: mb, 3+: custom
+document.body.appendChild(stats.dom);
 const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorParam, setShapeParam, keyList, setListParam, twoLegend, isLegendOpen, searchItems, dataItems, colorKey, colorParam, shapeKey, shapeParam, threeD, data, technique, shapeParamList, colorParamList, cameraPosition, cameraRotation, colorList, setCustomFeatures, shapeList, setErrorMessage, onVisualizeClicked, onCompareClicked, customFeatures, }, ref) => {
     const containerRef = useRef();
     const legendRef = useRef();
@@ -48340,8 +47711,8 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
     const miniControlsRef = useRef();
     const [loading, setLoading] = useState(false);
     const [axisName, setAxisName] = useState("");
-    const raycaster = new Raycaster();
-    const pointer = new Vector2();
+    const raycaster = useMemo(() => new Raycaster(), []);
+    const pointer = useMemo(() => new Vector2(), []);
     const [info, setInfo] = useState("");
     const [identifierName, setIdentifierName] = useState("");
     const [controllerShown, setControllerShown] = useState(false);
@@ -48355,10 +47726,19 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
     const [maxY, setMaxY] = useState(0);
     const [minZ, setMinZ] = useState(0);
     const [maxZ, setMaxZ] = useState(0);
-    const legendRefFull = (React__default.createElement("div", { className: "absolute h-full w-full -z-20", ref: legendRef },
+    const legendRefFull = useMemo(() => (React__default.createElement("div", { className: "absolute h-full w-full -z-20", ref: legendRef },
         React__default.createElement("div", { className: "inline" },
             React__default.createElement("div", { className: "flex absolute right-0" },
-                React__default.createElement(ColorLegend, { keyList: keyList, screenshot: true, setListParam: (param) => setListParam(param), colorKey: colorKey, colorParamList: colorParamList, colorParam: colorParam, setColorParam: (param) => setColorParam(param), colorList: colorList, setCustomFeatures: setCustomFeatures, customizations: customFeatures, lightMode: lightMode })))));
+                React__default.createElement(ColorLegend, { keyList: keyList, screenshot: true, setListParam: (param) => setListParam(param), colorKey: colorKey, colorParamList: colorParamList, colorParam: colorParam, setColorParam: (param) => setColorParam(param), colorList: colorList, setCustomFeatures: setCustomFeatures, customizations: customFeatures, lightMode: lightMode }))))), [
+        keyList,
+        colorKey,
+        colorParamList,
+        colorParam,
+        colorList,
+        setCustomFeatures,
+        customFeatures,
+        lightMode,
+    ]);
     useImperativeHandle(ref, () => ({
         downloadScreenshot() {
             createScreenshot();
@@ -48367,204 +47747,35 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
             downloadSVG();
         },
     }));
-    const removeObjectByName = (name) => {
+    const removeObjectByName = useCallback((name) => {
         const selectedObject = sceneRef.current.getObjectByName(name);
         if (selectedObject) {
             sceneRef.current.remove(selectedObject);
         }
-    };
-    function createScreenshot() {
-        return __awaiter$1(this, void 0, void 0, function* () {
-            setLoading(true);
-            toPng(document.getElementById("pngFile"), { backgroundColor: "white" })
-                .then(function (dataUrl) {
-                download(dataUrl, {
-                    name: "legend",
-                });
-            });
-            rendererRef.current.render(sceneRef.current, cameraRef.current);
-            const imageLegend = yield takeScreenshot(rendererRef.current.domElement);
-            yield download(imageLegend);
+    }, []);
+    const createScreenshot = useCallback(() => __awaiter$1(void 0, void 0, void 0, function* () {
+        setLoading(true);
+        toPng(document.getElementById("pngFile"), { backgroundColor: "white" })
+            .then(function (dataUrl) {
+            downloadImage(dataUrl, {
+                name: "legend",
+            }, setLoading);
         });
-    }
-    const download = (image, { name = "scatter-plot", extension = "png" } = {}) => __awaiter$1(void 0, void 0, void 0, function* () {
-        const a = document.createElement("a");
-        a.id = "a";
-        const mergedCanvas = document.createElement("canvas");
-        mergedCanvas.id = "mergedCanvas";
-        mergedCanvas.width = window.innerWidth;
-        mergedCanvas.height = window.innerHeight;
-        const mergedContext = mergedCanvas.getContext("2d");
-        if (!mergedContext) {
-            setLoading(false);
-            return;
-        }
-        let base_image = new Image();
-        base_image.src = image;
-        base_image.onload = function () {
-            var _a, _b;
-            return __awaiter$1(this, void 0, void 0, function* () {
-                // Calculate the scaled dimensions while maintaining aspect ratio
-                var aspectRatio = base_image.width / base_image.height;
-                var width = window.innerWidth;
-                var height = window.innerHeight;
-                var targetWidth = width;
-                var targetHeight = height;
-                if (width / height > aspectRatio) {
-                    targetWidth = height * aspectRatio;
-                }
-                else {
-                    targetHeight = width / aspectRatio;
-                }
-                // Calculate the position to center the image
-                var xOffset = (width - targetWidth) / 2;
-                var yOffset = (height - targetHeight) / 2;
-                mergedContext.drawImage(base_image, xOffset, yOffset, targetWidth, targetHeight);
-                // if (isLegendOpen) {
-                //   const legend = await html2canvas(legendRef.current, {
-                //     backgroundColor: null,
-                //   });
-                //   const aspectRatio = legend.width / legend.height;
-                //   let targetWidth = window.innerWidth;
-                //   let targetHeight = window.innerHeight;
-                //   if (width / height > aspectRatio) {
-                //     targetWidth = height * aspectRatio;
-                //   } else {
-                //     targetHeight = width / aspectRatio;
-                //   }
-                //   // Calculate the position to center the image
-                //   const xOffset = (width - targetWidth) / 2;
-                //   const yOffset = (height - targetHeight) / 2;
-                //   mergedContext.drawImage(
-                //     legend,
-                //     xOffset,
-                //     yOffset,
-                //     targetWidth,
-                //     targetHeight
-                //   );
-                // }
-                a.href = mergedCanvas.toDataURL();
-                a.download = createFileName(extension, name);
-                a.click();
-                setLoading(false);
-                (_a = document.getElementById("mergedCanvas")) === null || _a === void 0 ? void 0 : _a.remove();
-                (_b = document.getElementById("a")) === null || _b === void 0 ? void 0 : _b.remove();
-                URL.revokeObjectURL(imageSrc);
-            });
-        };
-    });
-    function drawBoxEdges(minX, maxX, minY, maxY, minZ, maxZ, svgContainer, camera) {
-        const tempObj = new Object3D();
-        const corners = [
-            new Vector3(minX, minY, minZ),
-            new Vector3(maxX, minY, minZ),
-            new Vector3(maxX, maxY, minZ),
-            new Vector3(minX, maxY, minZ),
-            new Vector3(minX, minY, maxZ),
-            new Vector3(maxX, minY, maxZ),
-            new Vector3(maxX, maxY, maxZ),
-            new Vector3(minX, maxY, maxZ),
-        ];
-        const edges = [
-            [0, 1],
-            [1, 2],
-            [2, 3],
-            [3, 0], // Bottom edges
-            [4, 5],
-            [5, 6],
-            [6, 7],
-            [7, 4], // Top edges
-            [0, 4],
-            [1, 5],
-            [2, 6],
-            [3, 7], // Side edges
-        ];
-        edges.forEach(([start, end]) => {
-            // Set the position of the temp object to the start corner for projection
-            tempObj.position.copy(corners[start]);
-            const startProj = toScreenPosition(tempObj, camera);
-            // Set the position of the temp object to the end corner for projection
-            tempObj.position.copy(corners[end]);
-            const endProj = toScreenPosition(tempObj, camera);
-            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-            line.setAttribute("x1", startProj.x.toString());
-            line.setAttribute("y1", startProj.y.toString());
-            line.setAttribute("x2", endProj.x.toString());
-            line.setAttribute("y2", endProj.y.toString());
-            line.style.stroke = "grey"; // Color of the box edges
-            line.style.strokeWidth = "1"; // Thickness of the box edges
-            svgContainer.appendChild(line);
-        });
-    }
-    function createShape(dataLength, twoLegend, scaledCoordinates, colorInScene, opacity, userData) {
-        var _a;
-        new SVGLoader();
-        // const divElement = document.createElement("div");
-        // divElement.innerHTML = "Info about " + userData[dataItems[0].category];
-        // divElement.style.background = "red";
-        // divElement.className = "info-div"; // Add a class for styling
-        // document.body.appendChild(divElement);
-        // let svgContainer = document.getElementById("svg-container");
-        // if (!svgContainer) {
-        //   // @ts-expect-error ts-migrate(2339) FIXME: Property 'createElementNS' does not exist on type 'Document'.
-        //   svgContainer = document.createElementNS(
-        //     "http://www.w3.org/2000/svg",
-        //     "svg"
-        //   );
-        //   svgContainer!.id = "svg-container";
-        //   svgContainer!.style.position = "absolute";
-        //   svgContainer!.style.width = "100%";
-        //   svgContainer!.style.height = "100%";
-        //   svgContainer!.style.top = "0";
-        //   svgContainer!.style.left = "0";
-        //   svgContainer!.style.zIndex = "-1";
-        //   document.body.appendChild(svgContainer!);
-        // }
-        // // Create an SVG circle element
-        // const svgCircle = document.createElementNS(
-        //   "http://www.w3.org/2000/svg",
-        //   "circle"
-        // );
-        // // svgCircle.setAttribute("r", `${coordinates.z}`); // Radius of the circle
-        // svgCircle.setAttribute("cx", "100"); // Center the circle horizontally
-        // svgCircle.setAttribute("cy", "200"); // Center the circle vertically
-        // svgCircle.style.fill = userData.color; // Color from userData
-        // svgCircle.style.position = "absolute";
-        // svgContainer!.appendChild(svgCircle);
-        const geometry = new SphereGeometry(dataLength < 500 ? 0.3 : 0.25);
-        const material = new MeshBasicMaterial({
-            transparent: true,
-            color: colorInScene,
-            side: FrontSide,
-            depthTest: false,
-            opacity: opacity,
-        });
-        const mesh = new Mesh(geometry, material);
-        mesh.userData = userData;
-        mesh.position.set(scaledCoordinates.x, scaledCoordinates.y, (_a = scaledCoordinates.z) !== null && _a !== void 0 ? _a : 0);
-        // objArr.current.push({ divObj: mesh, divElem: divElement });
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-        objArr.current.push({ divObj: mesh });
-        sceneRef.current.add(mesh);
-    }
-    function calculateScaleFactor(distance) {
-        // Simple linear scaling based on distance
-        // You may need to adjust the formula to get the desired effect
-        const minScale = 0.5; // Minimum scale at maximum distance
-        const maxDistance = 60; // Adjust as per your scene's size
+        rendererRef.current.render(sceneRef.current, cameraRef.current);
+        const imageLegend = yield takeScreenshot(rendererRef.current.domElement);
+        yield downloadImage(imageLegend, {}, setLoading);
+    }), [takeScreenshot]);
+    const calculateScaleFactor = useCallback((distance) => {
+        const minScale = 0.5;
+        const maxDistance = 60;
         return 1 - Math.min(distance / maxDistance, 1) * (1 - minScale);
-    }
-    useEffect(() => {
-        colorReset();
-    }, [data, colorParam, shapeParam, searchItems, customFeatures]);
-    function toScreenPosition(obj, camera) {
-        var vector = new Vector3();
-        // TODO: need to update this when resize window
-        var widthHalf = 0.5 * window.innerWidth;
-        var heightHalf = 0.5 * window.innerHeight;
-        obj.updateMatrixWorld();
-        vector.setFromMatrixPosition(obj.matrixWorld);
-        vector.project(camera);
+    }, []);
+    function toScreenPosition(position, camera) {
+        const widthHalf = 0.5 * window.innerWidth;
+        const heightHalf = 0.5 * window.innerHeight;
+        const vector = position.x !== 0 && position.y !== 0 && position.x !== undefined
+            ? position.clone().project(camera)
+            : position.clone();
         vector.x = vector.x * widthHalf + widthHalf;
         vector.y = -(vector.y * heightHalf) + heightHalf;
         return {
@@ -48572,25 +47783,20 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
             y: vector.y,
         };
     }
-    function onClick(event) {
+    const onClick = useCallback((event) => {
         if (event.detail === 1) {
             setControllerShown(false);
             return;
         }
-        // calculate pointer position in normalized device coordinates (-1 to +1) for
-        // both components
         pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
         pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
-        // Calculate the container's position relative to the viewport
         const containerRect = containerRef.current.getBoundingClientRect();
-        // Calculate the mouse down position relative to the container
         const containerX = event.clientX - containerRect.left;
         const containerY = event.clientY - containerRect.top;
         setControllerPosition({
             top: containerY + "px",
             left: containerX + "px",
         });
-        // update the picking ray with the camera and pointer position
         raycaster.setFromCamera(pointer, cameraRef.current);
         const intersects = raycaster.intersectObjects(sceneRef.current.children);
         for (let i = 0; i < intersects.length; i++) {
@@ -48599,117 +47805,195 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
                 obj.geometry.type !== "BufferGeometry") {
                 obj.material.color.set("#FD1C03");
                 obj.material.opacity = 1;
-                setEntityName(obj.userData.identifier); // should change with structure at some point
+                setEntityName(obj.userData.identifier);
                 setControllerShown(true);
                 return;
             }
         }
         setControllerShown(false);
-    }
-    function colorReset() {
+    }, [raycaster, pointer]);
+    useCallback((hex) => {
+        let colorCode = hex.slice(0, 7);
+        let opacity = 1;
+        if (hex.length === 9) {
+            let opacityHex = hex.slice(7, 9);
+            // @ts-ignore
+            opacity = parseInt(opacityHex, 16) / 255;
+        }
+        return { colorCode, opacity };
+    }, []);
+    const updateVisibility = useCallback((keyToRemove, onlyShowKey = null) => {
         objArr.current.forEach((objData) => {
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-            let color = objData.divObj.userData.color.slice(0, 7); // Default color from userData
-            let opacity = 
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-            parseInt(objData.divObj.userData.color.slice(7, 9), 16) / 255 || 0.8; // Default opacity
-            // Apply customizations as baseline
-            const customization = customFeatures.find((feature) => feature.featureName ===
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-                objData.divObj.userData.features[colorKey] &&
-                feature.category === colorKey);
-            // Dim colors for non-matching colorParam
-            if (colorParam !== "" &&
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-                colorParam != objData.divObj.userData.features[colorKey]) {
-                color = "#EEEEEE";
-                opacity = 0.4;
-            }
-            // Highlight or dim based on searchItems
-            const isMatched = searchItems.some((item) => {
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-                return Object.values(objData.divObj.userData.features).includes(item.name);
-            });
-            if (isMatched) {
-                // Apply search item color, unless already set by customization
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-                color = customization ? color : objData.divObj.userData.color; // Keep customization color if exists
-            }
-            else if (searchItems.length) {
-                color = "#EEEEEE"; // Dim color if there are search items but no match
-                opacity = 0.4;
-            }
-            if (dataItems[0] &&
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-                objData.divObj.userData.features[dataItems[0].category] === entityName) {
-                color = "#0400ff"; // Highlight color
-                opacity = 1;
-            }
-            if (customization) {
-                const isCustomizationIncludeSearch = searchItems.some((item) => {
-                    // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-                    return Object.values(customization).includes(item.name);
-                });
-                if (isCustomizationIncludeSearch) {
-                    color = customization.color;
-                    opacity = 1;
-                }
-            }
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-            objData.divObj.material.color.set(color);
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-            objData.divObj.material.opacity = opacity;
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'material' does not exist on type 'Object3D'.
-            objData.divObj.material.transparent = opacity < 1;
-            // Assuming objData also has a way to directly set SVG element styles, if needed
-            // objData.svgElem.style.fill = color; // Uncomment and adjust if applicable
-            // objData.svgElem.style.opacity = svgOpacity; // Uncomment and adjust if applicable
-        });
-    }
-    function onPointerMove(event) {
-        // calculate pointer position in normalized device coordinates (-1 to +1) for
-        // both components
-        pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-        pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
-        // update the picking ray with the camera and pointer position
-        raycaster.setFromCamera(pointer, cameraRef.current);
-        // calculate objects intersecting the picking ray
-        colorReset();
-        const intersects = raycaster.intersectObjects(sceneRef.current.children);
-        setInfo("");
-        setIdentifierName("");
-        for (let i = 0; i < intersects.length; i++) {
-            const obj = intersects[i].object;
-            if (obj instanceof Mesh &&
-                obj.geometry.type !== "BufferGeometry") {
-                obj.material.color.set("#16FF00");
-                obj.material.opacity = 0.8;
-                if (obj.geometry.type !== "BufferGeometry") {
-                    const customFeature = customFeatures.find((feature) => feature.featureName === obj.userData.features[colorKey]);
-                    if (customFeature) {
-                        setInfo(customFeature.customName);
+            // @ts-ignore
+            const mesh = objData.divObj;
+            const matrix = new Matrix4();
+            const dummyMatrix = new Matrix4();
+            const dummyPosition = new Vector3(10000, 10000, 10000);
+            const instanceUserData = mesh.userData.instanceUserData;
+            instanceUserData.forEach((data, index) => {
+                if (onlyShowKey) {
+                    // Only show instances matching the onlyShowKey
+                    if (data.features[colorKey] === onlyShowKey) {
+                        matrix.setPosition(parseFloat(data.coordinates.x || 0), parseFloat(data.coordinates.y || 0), parseFloat(data.coordinates.z || 0));
+                        mesh.setMatrixAt(index, matrix);
                     }
                     else {
-                        setInfo(obj.userData.features[colorKey]);
+                        dummyMatrix.setPosition(dummyPosition);
+                        mesh.setMatrixAt(index, dummyMatrix);
                     }
-                    setIdentifierName(obj.userData.identifier);
+                }
+                else if (keyToRemove && data.features[colorKey] === keyToRemove) {
+                    dummyMatrix.setPosition(dummyPosition);
+                    mesh.setMatrixAt(index, dummyMatrix);
+                }
+                else {
+                    matrix.setPosition(parseFloat(data.coordinates.x || 0), parseFloat(data.coordinates.y || 0), parseFloat(data.coordinates.z || 0));
+                    mesh.setMatrixAt(index, matrix);
+                }
+            });
+            mesh.instanceMatrix.needsUpdate = true;
+        });
+        // Force render the scene to reflect changes
+        rendererRef.current &&
+            rendererRef.current.render(sceneRef.current, cameraRef.current);
+    }, [colorKey]);
+    const colorReset = () => {
+        if (colorParam) {
+            updateVisibility(colorParam);
+        }
+        else {
+            updateVisibility(null);
+        }
+        // objArr.current.forEach((objData: any) => {
+        //   const mesh = objData.divObj as THREE.InstancedMesh;
+        //   const colorInstance = new THREE.Color();
+        //   mesh.setColorAt(0, colorInstance.set(objData.color));
+        //   // Check if the mesh has the instanceColor attribute
+        //   if (!mesh.instanceColor) {
+        //     console.error("InstanceColor attribute is missing");
+        //     return;
+        //   }
+        //   // Iterate over each instance's userData
+        //   mesh.userData.instanceUserData.forEach(
+        //     (instanceUserData: any, index: number) => {
+        //       let color = new THREE.Color(instanceUserData.color.slice(0, 7));
+        //       let opacity =
+        //         parseInt(instanceUserData.color.slice(7, 9), 16) / 255 || 0.8;
+        //       let svgOpacity = 1.0;
+        //       const customization = customFeatures.find(
+        //         (feature: {
+        //           featureName: any;
+        //           customName: any;
+        //           category: string;
+        //         }) =>
+        //           feature.featureName === instanceUserData.features[colorKey] &&
+        //           feature.category === colorKey
+        //       );
+        //       if (
+        //         colorParam !== "" &&
+        //         colorParam !== instanceUserData.features[colorKey]
+        //       ) {
+        //         color.set("#EEEEEE");
+        //         opacity = 0.4;
+        //         svgOpacity = 0.4;
+        //       }
+        //       const isMatched = searchItems.some((item) => {
+        //         return Object.values(instanceUserData.features).includes(
+        //           item.name
+        //         );
+        //       });
+        //       if (isMatched) {
+        //         color.set(
+        //           customization ? customization.color : instanceUserData.color
+        //         );
+        //       } else if (searchItems.length) {
+        //         color.set("#EEEEEE");
+        //         opacity = 0.4;
+        //         svgOpacity = 0.4;
+        //       }
+        //       if (
+        //         dataItems[0] &&
+        //         instanceUserData.features[dataItems[0].category] === entityName
+        //       ) {
+        //         color.set("#0400ff");
+        //         opacity = 1;
+        //         svgOpacity = 1.0;
+        //       }
+        //       if (customization) {
+        //         const isCustomizationIncludeSearch = searchItems.some((item) => {
+        //           return Object.values(customization).includes(item.name);
+        //         });
+        //         if (isCustomizationIncludeSearch) {
+        //           color.set(customization.color);
+        //           opacity = 1;
+        //         }
+        //       }
+        //       mesh.setColorAt(index, colorInstance.set(color));
+        //     }
+        //   );
+        //   // Ensure instanceColor is updated
+        //   mesh.instanceColor.needsUpdate = true;
+        // });
+        rendererRef.current &&
+            rendererRef.current.render(sceneRef.current, cameraRef.current);
+    };
+    useEffect(() => {
+        colorReset();
+    }, [data, colorParam, searchItems, dataItems]);
+    const throttle = (func, limit) => {
+        let inThrottle;
+        return function (...args) {
+            if (!inThrottle) {
+                // @ts-ignore
+                func.apply(this, args);
+                inThrottle = true;
+                setTimeout(() => (inThrottle = false), limit);
+            }
+        };
+    };
+    const onPointerMove = useCallback(throttle((event) => {
+        pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+        pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        raycaster.setFromCamera(pointer, cameraRef.current);
+        const intersects = raycaster.intersectObjects(sceneRef.current.children);
+        let newInfo = "";
+        let newIdentifierName = "";
+        for (let i = 0; i < intersects.length; i++) {
+            const intersection = intersects[i];
+            const obj = intersection.object;
+            if (obj instanceof InstancedMesh) {
+                const instanceId = intersection.instanceId;
+                if (instanceId !== undefined) {
+                    const color = new Color(0x16ff00); // green color
+                    obj.setColorAt(instanceId, color);
+                    obj.instanceColor.needsUpdate = true;
+                    const userData = obj.userData.instanceUserData[instanceId];
+                    const customFeature = customFeatures.find((feature) => feature.featureName === userData.features[colorKey]);
+                    if (customFeature) {
+                        newInfo = customFeature.customName;
+                    }
+                    else {
+                        newInfo = userData.features[colorKey];
+                    }
+                    newIdentifierName = userData.identifier;
+                    break; // exit loop early as we only need the first intersection
                 }
             }
         }
-    }
-    function onPointerDown() {
+        setInfo(newInfo);
+        setIdentifierName(newIdentifierName);
+    }, 50), // adjust the throttle limit as needed
+    [raycaster, pointer, customFeatures, colorKey]);
+    const onPointerDown = useCallback(() => {
         setEntityName("");
         setControllerShown(false);
-    }
-    function onClickMini(event) {
+    }, []);
+    const onClickMini = useCallback((event) => {
         const miniContainerRect = miniContainerRef.current.getBoundingClientRect();
-        // Calculate the mouse position relative to the miniContainerRef
         const containerX = event.clientX - miniContainerRect.left;
         const containerY = event.clientY - miniContainerRect.top;
-        // Calculate the normalized device coordinates (-1 to +1) for both components
         pointer.x = (containerX / miniContainerRect.width) * 2 - 1;
         pointer.y = -(containerY / miniContainerRect.height) * 2 + 1;
-        // update the picking ray with the camera and pointer position
         raycaster.setFromCamera(pointer, miniCameraRef.current);
         const intersects = raycaster.intersectObjects(miniSceneRef.current.children);
         for (let i = 0; i < intersects.length; i++) {
@@ -48749,23 +48033,19 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
                 return;
             }
         }
-    }
-    function onPointerMoveMini(event) {
+    }, [raycaster, pointer]);
+    const onPointerMoveMini = useCallback((event) => {
         const miniContainerRect = miniContainerRef.current.getBoundingClientRect();
-        // Calculate the mouse position relative to the miniContainerRef
         const containerX = event.clientX - miniContainerRect.left;
         const containerY = event.clientY - miniContainerRect.top;
-        // Calculate the normalized device coordinates (-1 to +1) for both components
         pointer.x = (containerX / miniContainerRect.width) * 2 - 1;
         pointer.y = -(containerY / miniContainerRect.height) * 2 + 1;
-        // update the picking ray with the camera and pointer position
         miniSceneRef.current.traverse((obj) => {
             if (obj instanceof Line || obj instanceof Mesh) {
                 obj.material.color.set(obj.userData.color);
             }
         });
         raycaster.setFromCamera(pointer, miniCameraRef.current);
-        // calculate objects intersecting the picking ray
         const intersects = raycaster.intersectObjects(miniSceneRef.current.children);
         var name = "";
         for (let i = 0; i < intersects.length; i++) {
@@ -48779,167 +48059,23 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
             }
         }
         setAxisName(name);
-    }
-    function createPlane(width, height, color, name) {
-        const geometry = new PlaneGeometry(width, height);
-        const material = new MeshBasicMaterial({
-            color: color,
-            side: DoubleSide,
-        });
-        const plane = new Mesh(geometry, material);
-        // Set the userData for the plane
-        plane.userData.name = name;
-        plane.userData.color = color;
-        return plane;
-    }
-    function createCube(size, color) {
-        const cube = new Object3D();
-        // Create planes for each side of the cube
-        const planeFront = createPlane(size, size, color, "XY Plane");
-        const planeBack = createPlane(size, size, color, "XY Plane");
-        const planeLeft = createPlane(size, size, color, "YZ Plane");
-        const planeRight = createPlane(size, size, color, "YZ Plane");
-        const planeTop = createPlane(size, size, color, "XZ Plane");
-        const planeBottom = createPlane(size, size, color, "XZ Plane");
-        // Position the planes to form a cube
-        planeLeft.rotation.y = Math.PI / 2;
-        planeRight.rotation.y = Math.PI / 2;
-        planeTop.rotation.x = Math.PI / 2;
-        planeBottom.rotation.x = Math.PI / 2;
-        planeFront.position.set(size / 2, size / 2, size);
-        planeBack.position.set(size / 2, size / 2, 0);
-        planeLeft.position.set(0, size / 2, size / 2);
-        planeRight.position.set(size, size / 2, size / 2);
-        planeTop.position.set(size / 2, size, size / 2);
-        planeBottom.position.set(size / 2, 0, size / 2);
-        // Add the planes to the cube object
-        cube.add(planeFront, planeBack, planeLeft, planeRight, planeTop, planeBottom);
-        return cube;
-    }
-    function createBigCube(minX, maxX, minY, maxY, minZ, maxZ) {
-        // Calculate the size and position of the cube
-        const width = maxX - minX;
-        const height = maxY - minY;
-        const depth = maxZ - minZ;
-        const centerX = (minX + maxX) / 2;
-        const centerY = (minY + maxY) / 2;
-        const centerZ = (minZ + maxZ) / 2;
-        // Create the cube
-        // const geometry = new THREE.BoxGeometry(width, height, depth);
-        // const material = new THREE.MeshBasicMaterial({
-        //   color: 0x000000,
-        //   wireframe: true,
-        //   side: THREE.FrontSide,
-        // });
-        // const cube = new THREE.Mesh(geometry, material);
-        // cube.position.set(centerX, centerY, centerZ);
-        const edgesGeometry = new BufferGeometry();
-        // Define the vertices for the edges
-        const vertices = new Float32Array([
-            // Bottom rectangle
-            -width / 2,
-            -height / 2,
-            -depth / 2,
-            width / 2,
-            -height / 2,
-            -depth / 2,
-            width / 2,
-            -height / 2,
-            -depth / 2,
-            width / 2,
-            -height / 2,
-            depth / 2,
-            width / 2,
-            -height / 2,
-            depth / 2,
-            -width / 2,
-            -height / 2,
-            depth / 2,
-            -width / 2,
-            -height / 2,
-            depth / 2,
-            -width / 2,
-            -height / 2,
-            -depth / 2,
-            // Top rectangle
-            -width / 2,
-            height / 2,
-            -depth / 2,
-            width / 2,
-            height / 2,
-            -depth / 2,
-            width / 2,
-            height / 2,
-            -depth / 2,
-            width / 2,
-            height / 2,
-            depth / 2,
-            width / 2,
-            height / 2,
-            depth / 2,
-            -width / 2,
-            height / 2,
-            depth / 2,
-            -width / 2,
-            height / 2,
-            depth / 2,
-            -width / 2,
-            height / 2,
-            -depth / 2,
-            // Vertical lines
-            -width / 2,
-            -height / 2,
-            -depth / 2,
-            -width / 2,
-            height / 2,
-            -depth / 2,
-            width / 2,
-            -height / 2,
-            -depth / 2,
-            width / 2,
-            height / 2,
-            -depth / 2,
-            width / 2,
-            -height / 2,
-            depth / 2,
-            width / 2,
-            height / 2,
-            depth / 2,
-            -width / 2,
-            -height / 2,
-            depth / 2,
-            -width / 2,
-            height / 2,
-            depth / 2,
-        ]);
-        // Add vertices to geometry
-        edgesGeometry.setAttribute("position", new BufferAttribute(vertices, 3));
-        // Create a material for the edges
-        const material = new LineBasicMaterial({ color: 0xadd8e6 });
-        // Create a line segments object to represent the edges
-        const cubeEdges = new LineSegments(edgesGeometry, material);
-        // Set the position of the cube
-        cubeEdges.position.set(centerX, centerY, centerZ);
-        cubeEdges.name = "cube";
-        return cubeEdges;
-        // return cube;
-    }
-    function getFeatureColor(featureValue, customizations, colorList, colorParamList) {
-        // Check if the feature value has a customization
-        const customization = Object.keys(customizations).length !== 0 &&
-            customizations.find((c) => c.featureName === featureValue && c.category === colorKey);
-        if (customization) {
+    }, [raycaster, pointer]);
+    const getFeatureColor = (featureValue, customFeatures, colorList, colorParamList) => {
+        const customization = customFeatures.find((c) => c.featureName === featureValue && c.category === colorKey);
+        if (customization && customization.color) {
             return customization.color;
         }
-        else {
-            // Otherwise, fall back to the original logic
-            return featureValue === "NaN" || featureValue === ""
-                ? "#000000"
-                : colorList[colorParamList.indexOf(`${featureValue}`) % colorList.length];
+        const index = colorParamList.indexOf(featureValue);
+        if (index !== -1) {
+            return colorList[index];
         }
-    }
+        return "#ff0000";
+    };
+    const scalePoint = (point, min, max, newMin, newMax) => {
+        const result = ((point - min) / (max - min)) * (newMax - newMin) + newMin;
+        return result;
+    };
     useEffect(() => {
-        objArr.current = [];
         const miniScene = new Scene();
         miniSceneRef.current = miniScene;
         const miniCamera = new PerspectiveCamera(60, 1, 0.1, 1000);
@@ -48996,7 +48132,12 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
             ? new Color(0xffffff)
             : new Color(0x2e2e3a);
         const camera = new PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new WebGLRenderer({ antialias: true });
+        let light = new DirectionalLight(0xffffff, 1);
+        light.position.setScalar(1);
+        scene.add(light, new AmbientLight(0xffffff, 0.5));
+        const renderer = new WebGLRenderer({
+            powerPreference: "high-performance",
+        });
         sceneRef.current = scene;
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setClearColor(0xffffff);
@@ -49018,7 +48159,7 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
         var maxY = -Infinity;
         var minZ = Infinity;
         var maxZ = -Infinity;
-        data.forEach((point, index) => __awaiter$1(void 0, void 0, void 0, function* () {
+        data.forEach((point) => {
             var _a, _b;
             if (threeD) {
                 coordinates = {
@@ -49045,19 +48186,14 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
             maxY = Math.max(maxY !== null && maxY !== void 0 ? maxY : -Infinity, coordinates.y);
             minZ = Math.min(minZ !== null && minZ !== void 0 ? minZ : Infinity, (_a = coordinates.z) !== null && _a !== void 0 ? _a : 0);
             maxZ = Math.max(maxZ !== null && maxZ !== void 0 ? maxZ : -Infinity, (_b = coordinates.z) !== null && _b !== void 0 ? _b : 0);
-        }));
+        });
         var localMinX = Infinity;
         var localMaxX = -Infinity;
         var localMinY = Infinity;
         var localMaxY = -Infinity;
         var localMinZ = Infinity;
         var localMaxZ = -Infinity;
-        var scaledCoordinates = {
-            x: 0,
-            y: 0,
-            z: 0,
-        };
-        data.forEach((point, index) => __awaiter$1(void 0, void 0, void 0, function* () {
+        data.forEach((point) => {
             if (threeD) {
                 coordinates = {
                     x: point.coordinates.x,
@@ -49077,15 +48213,10 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
                     setErrorMessage("Could not find the coordinates. Please check the CSV file.");
                 return;
             }
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-            const scalePoint = (point, min, max, newMin, newMax) => {
-                const result = ((point - min) / (max - min)) * (newMax - newMin) + newMin;
-                return result;
-            };
-            const scaledX = scalePoint(coordinates.x, minX, maxX, -20, 20);
-            const scaledY = scalePoint(coordinates.y, minY, maxY, -20, 20);
+            const scaledX = scalePoint(coordinates.x, minX, maxX, -40, 40);
+            const scaledY = scalePoint(coordinates.y, minY, maxY, -40, 40);
             const scaledZ = threeD
-                ? scalePoint(coordinates.z, minZ, maxZ, -20, 20)
+                ? scalePoint(coordinates.z || 0, minZ, maxZ, -40, 40)
                 : 0;
             localMinX = Math.min(localMinX !== null && localMinX !== void 0 ? localMinX : Infinity, scaledX);
             localMaxX = Math.max(localMaxX !== null && localMaxX !== void 0 ? localMaxX : -Infinity, scaledX);
@@ -49093,9 +48224,10 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
             localMaxY = Math.max(localMaxY !== null && localMaxY !== void 0 ? localMaxY : -Infinity, scaledY);
             localMinZ = Math.min(localMinZ !== null && localMinZ !== void 0 ? localMinZ : Infinity, scaledZ !== null && scaledZ !== void 0 ? scaledZ : 0);
             localMaxZ = Math.max(localMaxZ !== null && localMaxZ !== void 0 ? localMaxZ : -Infinity, scaledZ !== null && scaledZ !== void 0 ? scaledZ : 0);
-        }));
-        data.forEach((point, index) => __awaiter$1(void 0, void 0, void 0, function* () {
-            var _c, _d, _e;
+        });
+        var colorInScene = "";
+        data.forEach((point, index) => {
+            var _a, _b, _c;
             if (threeD) {
                 coordinates = {
                     x: point.coordinates.x,
@@ -49115,21 +48247,16 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
                     setErrorMessage("Could not find the coordinates. Please check the CSV file.");
                 return;
             }
-            let color = getFeatureColor(point.features[colorKey], customFeatures, colorList, colorParamList);
-            // let color =
-            //   point.features[colorKey] === "NaN" || point.features[colorKey] === ""
-            //     ? "#000000"
-            //     : colorList[
-            //         colorParamList.indexOf(point.features[colorKey]) %
-            //           colorList.length
-            //       ];
-            var colorInScene = "";
+            // let color = getFeatureColor(
+            //   point.features[colorKey],
+            //   customFeatures,
+            //   colorList,
+            //   colorParamList
+            // );
             if (point.coordinates.x && point.coordinates.y) {
-                colorInScene = color;
-                let opacity = 0.8;
+                colorInScene = "#FF0000";
                 if (colorParam !== "" && colorParam !== point.features[colorKey]) {
                     colorInScene = "#EEEEEE";
-                    opacity = 0.4;
                 }
                 if (searchItems.length &&
                     !searchItems.find((item) => {
@@ -49141,42 +48268,31 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
                         return false;
                     })) {
                     colorInScene = "#EEEEEE";
-                    opacity = 0.4;
                 }
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
                 const scalePoint = (point, min, max, newMin, newMax) => {
                     const result = ((point - min) / (max - min)) * (newMax - newMin) + newMin;
                     return result;
                 };
-                const maxExtent = 20;
+                const maxExtent = 40;
                 const deltaX = maxX - minX;
                 const deltaY = maxY - minY;
                 const deltaZ = maxZ - minZ;
                 var maxDelta = Math.max(deltaX, deltaY, deltaZ);
-                const scaledX = scalePoint(coordinates.x, minX, maxX, -((deltaX / maxDelta) * maxExtent), (deltaX / maxDelta) * maxExtent);
-                const scaledY = scalePoint(coordinates.y, minY, maxY, -((deltaY / maxDelta) * maxExtent), (deltaY / maxDelta) * maxExtent);
-                const scaledZ = threeD
-                    ? scalePoint(coordinates.z, minZ, maxZ, -((deltaZ / maxDelta) * maxExtent), (deltaZ / maxDelta) * maxExtent)
+                scalePoint(coordinates.x, minX, maxX, -((deltaX / maxDelta) * maxExtent), (deltaX / maxDelta) * maxExtent);
+                scalePoint(coordinates.y, minY, maxY, -((deltaY / maxDelta) * maxExtent), (deltaY / maxDelta) * maxExtent);
+                threeD
+                    ? scalePoint(coordinates.z || 0, minZ, maxZ, -((deltaZ / maxDelta) * maxExtent), (deltaZ / maxDelta) * maxExtent)
                     : 0;
-                scaledCoordinates.x = scaledX;
-                scaledCoordinates.y = scaledY;
-                scaledCoordinates.z = scaledZ;
-                const dataLength = data.length;
-                createShape(dataLength, twoLegend, (scaledCoordinates = {
-                    x: scaledX,
-                    y: scaledY,
-                    z: scaledZ,
-                }), colorInScene, opacity, Object.assign({ color: color, index: index }, point));
             }
             middle.x += coordinates.x;
             middle.y += coordinates.y;
-            middle.z += (_c = coordinates.z) !== null && _c !== void 0 ? _c : 0;
+            middle.z += (_a = coordinates.z) !== null && _a !== void 0 ? _a : 0;
             minX = Math.min(minX !== null && minX !== void 0 ? minX : Infinity, coordinates.x);
             maxX = Math.max(maxX !== null && maxX !== void 0 ? maxX : -Infinity, coordinates.x);
             minY = Math.min(minY !== null && minY !== void 0 ? minY : Infinity, coordinates.y);
             maxY = Math.max(maxY !== null && maxY !== void 0 ? maxY : -Infinity, coordinates.y);
-            minZ = Math.min(minZ !== null && minZ !== void 0 ? minZ : Infinity, (_d = coordinates.z) !== null && _d !== void 0 ? _d : 0);
-            maxZ = Math.max(maxZ !== null && maxZ !== void 0 ? maxZ : -Infinity, (_e = coordinates.z) !== null && _e !== void 0 ? _e : 0);
+            minZ = Math.min(minZ !== null && minZ !== void 0 ? minZ : Infinity, (_b = coordinates.z) !== null && _b !== void 0 ? _b : 0);
+            maxZ = Math.max(maxZ !== null && maxZ !== void 0 ? maxZ : -Infinity, (_c = coordinates.z) !== null && _c !== void 0 ? _c : 0);
             if (index === data.length - 1) {
                 const cubeBig = createBigCube(localMinX, localMaxX, localMinY, localMaxY, localMinZ, localMaxZ);
                 setMinX(localMinX);
@@ -49190,7 +48306,7 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
             else {
                 removeObjectByName("cube");
             }
-        }));
+        });
         middle.x /= data.length;
         middle.y /= data.length;
         middle.z /= data.length;
@@ -49211,34 +48327,7 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
             }
         }
         cameraRef.current = camera;
-        // set up orbit controls
         const controls = new OrbitControls(camera, renderer.domElement);
-        // controls.addEventListener("change", () => {
-        //   console.log(controls);
-        // });
-        controls.minDistance = 0;
-        controls.maxDistance = 70;
-        // controls.addEventListener("change", () => {
-        //   objArr.current.forEach(function (objData) {
-        //     const proj = toScreenPosition(
-        //       // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-        //       objData.divObj,
-        //       cameraRef.current
-        //       // rendererRef.current
-        //     );
-        //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-        //     objData.svgElem.setAttribute("cx", proj.x);
-        //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-        //     objData.svgElem.setAttribute("cy", proj.y);
-        //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-        //     const distance = objData.divObj.position.distanceTo(
-        //       cameraRef.current.position
-        //     );
-        //     const scaleFactor = calculateScaleFactor(distance);
-        //     // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-        //     objData.svgElem.setAttribute("r", 5 * scaleFactor);
-        //   });
-        // });
         const miniControls = new OrbitControls(miniCamera, miniRenderer.domElement);
         controlsRef.current = controls;
         miniControlsRef.current = miniControls;
@@ -49248,21 +48337,44 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
         controls.enableDamping = true;
         controls.dampingFactor = 0.25;
         controls.enablePan = true;
+        controls.addEventListener("change", () => {
+            loadVisibleData();
+        });
         if (!threeD) {
-            controls.enableRotate = false; // Disable rotation
-            controls.enablePan = true; // Enable panning
+            controls.enableRotate = false;
+            controls.enablePan = true;
         }
         controls.target.distanceTo(controls.object.position);
-        // const stats = new Stats();
-        // stats.showPanel(0);
-        // document.body.appendChild(stats.dom);
-        // Animation loop
+        let shapeMesh = null;
+        const loadVisibleData = (camera) => {
+            if (!shapeMesh) {
+                shapeMesh = createShape(data, colorInScene, data.length, colorList, customFeatures, colorParamList, colorKey, minX, maxX, minY, maxY, minZ, maxZ, threeD);
+                sceneRef.current.add(shapeMesh);
+            }
+            else {
+                // Update existing mesh if needed
+                // For example, update colors or visibility
+                updateMesh(shapeMesh);
+            }
+        };
+        const updateMesh = (mesh) => {
+            const colorInstance = new Color();
+            for (let i = 0; i < mesh.count; i++) {
+                const userData = mesh.userData.instanceUserData[i];
+                let newColor = getFeatureColor(userData.features[colorKey], customFeatures, colorList, colorParamList);
+                mesh.setColorAt(i, colorInstance.set(newColor));
+            }
+            mesh.instanceColor.needsUpdate = true;
+        };
         const animate = () => {
-            // stats.begin();
+            stats.begin();
             requestAnimationFrame(animate);
             camera.position.copy(miniCamera.position);
             camera.rotation.copy(miniCamera.rotation);
             controls.update();
+            if (shapeMesh) {
+                updateMesh(shapeMesh);
+            }
             controls.target.distanceTo(controls.object.position);
             sceneRef.current.traverse((obj) => {
                 if (obj instanceof Mesh) {
@@ -49270,19 +48382,23 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
                 }
             });
             renderer.render(scene, camera);
-            // stats.end();
+            stats.end();
         };
-        function animateMini() {
+        const animateMini = () => {
             requestAnimationFrame(animateMini);
             miniCamera.position.copy(camera.position);
             miniCamera.rotation.copy(camera.rotation);
             miniControls.update();
             miniRenderer.render(miniScene, miniCamera);
-        }
+        };
         animateMini();
         animate();
-        // Clean up on unmount
         return () => {
+            controls.removeEventListener("change", () => loadVisibleData());
+            if (shapeMesh) {
+                sceneRef.current.remove(shapeMesh);
+                shapeMesh.geometry.dispose();
+            }
             if (containerRef.current) {
                 containerRef.current.removeChild(renderer.domElement);
             }
@@ -49306,39 +48422,41 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
         colorList,
         customFeatures,
         lightMode,
-        // setColorList,
     ]);
-    function drawSVG(svgContainer) {
+    const drawSVG = useCallback((svgContainer) => {
         objArr.current.forEach(function (objData) {
-            // Create an SVG circle element
             const svgCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-            // svgCircle.setAttribute("r", `${coordinates.z}`); // Radius of the circle
-            svgCircle.setAttribute("cx", "100"); // Center the circle horizontally
-            svgCircle.setAttribute("cy", "200"); // Center the circle vertically
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-            svgCircle.style.fill = objData.divObj.userData.color;
+            // @ts-ignore
+            const instanceMesh = objData.divObj;
+            // @ts-ignore
+            const instanceId = objData.instanceId; // Assuming instanceId is stored in objData
+            if (!(instanceMesh instanceof Object3D)) {
+                console.error("objData.divObj is not an instance of THREE.Object3D");
+                return;
+            }
+            // @ts-ignore
+            const matrixWorld = instanceMesh.instanceMatrix;
+            const position = new Vector3();
+            const matrix = new Matrix4();
+            matrix.fromArray(matrixWorld.array, instanceId * 16);
+            position.setFromMatrixPosition(matrix);
+            svgCircle.setAttribute("cx", "100");
+            svgCircle.setAttribute("cy", "200");
+            svgCircle.style.fill = instanceMesh.userData.color;
             svgCircle.style.position = "absolute";
-            const proj = toScreenPosition(
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-            objData.divObj, cameraRef.current
-            // rendererRef.current
-            );
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-            svgCircle.setAttribute("cx", proj.x);
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-            svgCircle.setAttribute("cy", proj.y);
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-            const distance = objData.divObj.position.distanceTo(cameraRef.current.position);
+            const proj = toScreenPosition(position, cameraRef.current);
+            svgCircle.setAttribute("cx", proj.x.toString());
+            svgCircle.setAttribute("cy", proj.y.toString());
+            const distance = position.distanceTo(cameraRef.current.position);
             const scaleFactor = calculateScaleFactor(distance);
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-            svgCircle.setAttribute("r", 5 * scaleFactor);
+            svgCircle.setAttribute("r", (5 * scaleFactor).toString());
             svgContainer.appendChild(svgCircle);
         });
-    }
-    function downloadSVG() {
+    }, [calculateScaleFactor, toScreenPosition]);
+    const downloadSVG = useCallback(() => {
         let svgContainer = document.getElementById("svg-container");
         if (!svgContainer) {
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'createElementNS' does not exist on type 'Document'.
+            // @ts-ignore
             svgContainer = document.createElementNS("http://www.w3.org/2000/svg", "svg");
             svgContainer.id = "svg-container";
             svgContainer.style.position = "absolute";
@@ -49352,8 +48470,7 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
         if (svgContainer) {
             svgContainer.innerHTML = "";
             drawSVG(svgContainer);
-            drawBoxEdges(minX, maxX, minY, maxY, minZ, maxZ, svgContainer, cameraRef.current);
-            // Serialize and download the SVG
+            drawBoxEdges(minX, maxX, minY, maxY, minZ, maxZ, svgContainer, cameraRef.current, toScreenPosition);
             const serializer = new XMLSerializer();
             const svgString = serializer.serializeToString(svgContainer);
             const blob = new Blob([svgString], { type: "image/svg+xml" });
@@ -49367,11 +48484,10 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
         else {
             drawSVG();
             drawBoxEdges(minX, maxX, minY, maxY, minZ, maxZ, 
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
-            svgContainer, cameraRef.current);
-            // Serialize and download the SVG
+            // @ts-ignore
+            svgContainer, cameraRef.current, toScreenPosition);
             const serializer = new XMLSerializer();
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'current' does not exist on type 'never'.
+            // @ts-ignore
             const svgString = serializer.serializeToString(svgContainer);
             const blob = new Blob([svgString], { type: "image/svg+xml" });
             const downloadLink = document.createElement("a");
@@ -49381,7 +48497,49 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
             downloadLink.click();
             document.body.removeChild(downloadLink);
         }
-    }
+    }, [drawSVG, drawBoxEdges, minX, maxX, minY, maxY, minZ, maxZ]);
+    const createShape = useCallback((cluster, color, length, _colorList, _customFeatures, _colorParamList, _colorKey, minX, maxX, minY, maxY, minZ, maxZ, isThreeD) => {
+        objArr.current = [];
+        const geometry = new SphereGeometry(0.3);
+        const material = new MeshBasicMaterial({
+            transparent: true,
+        });
+        const mesh = new InstancedMesh(geometry, material, length);
+        mesh.instanceMatrix.setUsage(DynamicDrawUsage);
+        mesh.setColorAt(0, new Color());
+        const colorInstance = new Color();
+        const dummyMatrix = new Object3D();
+        new Matrix4();
+        const instanceUserData = [];
+        for (let i = 0; i < length; i++) {
+            const point = cluster[i];
+            let newColor = getFeatureColor(point.features[_colorKey], _customFeatures, _colorList, _colorParamList);
+            const maxExtent = 40;
+            const deltaX = maxX - minX;
+            const deltaY = maxY - minY;
+            const deltaZ = maxZ - minZ;
+            var maxDelta = Math.max(deltaX, deltaY, deltaZ);
+            const scaledX = scalePoint(parseFloat(point.coordinates.x), minX, maxX, -((deltaX / maxDelta) * maxExtent), (deltaX / maxDelta) * maxExtent);
+            const scaledY = scalePoint(parseFloat(point.coordinates.y), minY, maxY, -((deltaY / maxDelta) * maxExtent), (deltaY / maxDelta) * maxExtent);
+            const scaledZ = isThreeD
+                ? scalePoint(parseFloat(point.coordinates.z) || 0, minZ, maxZ, -((deltaZ / maxDelta) * maxExtent), (deltaZ / maxDelta) * maxExtent)
+                : 0;
+            dummyMatrix.position.set(scaledX, scaledY, scaledZ || 0);
+            dummyMatrix.updateMatrix();
+            mesh.setMatrixAt(i, dummyMatrix.matrix);
+            mesh.setColorAt(i, colorInstance.set(newColor));
+            instanceUserData.push(Object.assign(Object.assign({}, point), { identifier: point.identifier, features: point.features, color: newColor, coordinates: { x: scaledX, y: scaledY, z: scaledZ } }));
+            // @ts-ignore
+            objArr.current.push({ divObj: mesh, instanceId: i });
+        }
+        mesh.userData.instanceUserData = instanceUserData;
+        mesh.instanceMatrix.needsUpdate = true;
+        mesh.instanceColor.needsUpdate = true;
+        return mesh;
+    }, []);
+    const onColorKeyDoubleClick = (selectedColorKey) => {
+        updateVisibility(null, selectedColorKey);
+    };
     return (React__default.createElement("div", { className: "relative h-full flex overflow-hidden" },
         React__default.createElement("div", { className: loading
                 ? "absolute inset-0 z-30 flex justify-center items-center bg-opacity-50 bg-gray-300"
@@ -49393,7 +48551,7 @@ const ScatterBoard = forwardRef(({ lightMode, cameraRef = useRef(), setColorPara
             twoLegend && (React__default.createElement("div", { className: "flex absolute right-64 top-24" },
                 React__default.createElement(ShapeLegend, { screenshot: false, shapeKey: shapeKey, shapeParamList: shapeParamList, shapeParam: shapeParam, setShapeParam: (param) => setShapeParam(param), shapeList: shapeList }))),
             React__default.createElement("div", { className: "flex absolute right-0 top-32" },
-                React__default.createElement(ColorLegend, { lightMode: lightMode, keyList: keyList, setListParam: (param) => setListParam(param), screenshot: false, colorKey: colorKey, colorParamList: colorParamList, colorParam: colorParam, setColorParam: (param) => setColorParam(param), colorList: colorList, setCustomFeatures: (list) => setCustomFeatures(list), customizations: customFeatures }))),
+                React__default.createElement(ColorLegend, { onDoubleClick: onColorKeyDoubleClick, lightMode: lightMode, keyList: keyList, setListParam: (param) => setListParam(param), screenshot: false, colorKey: colorKey, colorParamList: colorParamList, colorParam: colorParam, setColorParam: (param) => setColorParam(param), colorList: colorList, setCustomFeatures: (list) => setCustomFeatures(list), customizations: customFeatures }))),
         React__default.createElement("div", { className: "absolute z-20", style: {
                 top: controllerPosition.top,
                 left: controllerPosition.left,
