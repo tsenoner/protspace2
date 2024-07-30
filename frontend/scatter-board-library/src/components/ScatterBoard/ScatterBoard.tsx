@@ -41,6 +41,11 @@ var stats = new Stats();
 stats.showPanel(1); // 0: fps, 1: ms, 2: mb, 3+: custom
 document.body.appendChild(stats.dom);
 
+interface CategoryMesh {
+  mesh: THREE.InstancedMesh;
+  count: number;
+}
+
 const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
   (
     {
@@ -104,6 +109,7 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
     const [maxY, setMaxY] = useState(0);
     const [minZ, setMinZ] = useState(0);
     const [maxZ, setMaxZ] = useState(0);
+    const categoryMeshes = useRef(new Map<string, CategoryMesh>());
 
     const legendRefFull = useMemo(
       () => (
@@ -250,51 +256,41 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       return { colorCode, opacity };
     }, []);
 
+    const matrixPool = new Array(10000)
+      .fill(null)
+      .map(() => new THREE.Matrix4());
+    let poolIndex = 0;
+
+    const getMatrix = () => {
+      if (poolIndex >= matrixPool.length) poolIndex = 0;
+      return matrixPool[poolIndex++];
+    };
+
+    // Convert instanceUserData to a typed array
+    const convertToTypedArray = (instanceUserData: any[]) => {
+      const array = new Float32Array(instanceUserData.length * 3);
+      instanceUserData.forEach((data, i) => {
+        array[i * 3] = parseFloat(data.coordinates.x || 0);
+        array[i * 3 + 1] = parseFloat(data.coordinates.y || 0);
+        array[i * 3 + 2] = parseFloat(data.coordinates.z || 0);
+      });
+      return array;
+    };
+
     const updateVisibility = useCallback(
       (keyToRemove: string | null, onlyShowKey: string | null = null) => {
-        objArr.current.forEach((objData) => {
-          // @ts-ignore
-          const mesh = objData.divObj as THREE.InstancedMesh;
-          const matrix = new THREE.Matrix4();
-          const dummyMatrix = new THREE.Matrix4();
-          const dummyPosition = new THREE.Vector3(10000, 10000, 10000);
-          const instanceUserData = mesh.userData.instanceUserData;
-
-          instanceUserData.forEach((data: any, index: number) => {
-            if (onlyShowKey) {
-              // Only show instances matching the onlyShowKey
-              if (data.features[colorKey] === onlyShowKey) {
-                matrix.setPosition(
-                  parseFloat(data.coordinates.x || 0),
-                  parseFloat(data.coordinates.y || 0),
-                  parseFloat(data.coordinates.z || 0)
-                );
-                mesh.setMatrixAt(index, matrix);
-              } else {
-                dummyMatrix.setPosition(dummyPosition);
-                mesh.setMatrixAt(index, dummyMatrix);
-              }
-            } else if (keyToRemove && data.features[colorKey] === keyToRemove) {
-              dummyMatrix.setPosition(dummyPosition);
-              mesh.setMatrixAt(index, dummyMatrix);
-            } else {
-              matrix.setPosition(
-                parseFloat(data.coordinates.x || 0),
-                parseFloat(data.coordinates.y || 0),
-                parseFloat(data.coordinates.z || 0)
-              );
-              mesh.setMatrixAt(index, matrix);
-            }
-          });
-
-          mesh.instanceMatrix.needsUpdate = true;
+        categoryMeshes.current.forEach((categoryMesh, key) => {
+          if (onlyShowKey) {
+            categoryMesh.mesh.visible = key === onlyShowKey;
+          } else if (keyToRemove) {
+            categoryMesh.mesh.visible = key !== keyToRemove;
+          } else {
+            categoryMesh.mesh.visible = true;
+          }
         });
-
-        // Force render the scene to reflect changes
-        rendererRef.current &&
-          rendererRef.current.render(sceneRef.current, cameraRef.current);
+        rendererRef.current?.render(sceneRef.current!, cameraRef.current!);
       },
-      [colorKey]
+      []
     );
 
     const colorReset = () => {
@@ -423,10 +419,9 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
           if (obj instanceof THREE.InstancedMesh) {
             const instanceId = intersection.instanceId;
             if (instanceId !== undefined) {
-              const color = new THREE.Color(0x16ff00); // green color
-              obj.setColorAt(instanceId, color);
-              obj.instanceColor!.needsUpdate = true;
-
+              // const color = new THREE.Color(0x16ff00); // green color
+              // obj.setColorAt(instanceId, color);
+              // obj.instanceColor!.needsUpdate = true;
               const userData = obj.userData.instanceUserData[instanceId];
               const customFeature = customFeatures.find(
                 (feature: { featureName: any }) =>
@@ -445,7 +440,7 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
 
         setInfo(newInfo);
         setIdentifierName(newIdentifierName);
-      }, 50), // adjust the throttle limit as needed
+      }, 50),
       [raycaster, pointer, customFeatures, colorKey]
     );
     const onPointerDown = useCallback(() => {
@@ -941,9 +936,73 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       controls.enableDamping = true;
       controls.dampingFactor = 0.25;
       controls.enablePan = true;
-      controls.addEventListener("change", () => {
-        loadVisibleData(camera);
-      });
+
+      const loadVisibleData = (camera: THREE.PerspectiveCamera): void => {
+        // Remove existing meshes from the scene
+        categoryMeshes.current.forEach((meshData) => {
+          sceneRef.current?.remove(meshData.mesh);
+        });
+
+        // Create new meshes
+        const newMeshes = createShape(
+          data,
+          colorInScene,
+          data.length,
+          colorList,
+          customFeatures,
+          colorParamList,
+          colorKey,
+          minX,
+          maxX,
+          minY,
+          maxY,
+          minZ,
+          maxZ,
+          threeD
+        );
+
+        // Clear existing meshes
+        categoryMeshes.current.clear();
+        // Add new meshes to the scene and update categoryMeshes
+        newMeshes.forEach((meshData, key) => {
+          categoryMeshes.current.set(key, meshData);
+          sceneRef.current?.add(meshData.mesh);
+        });
+
+        // Update existing meshes
+        updateExistingMeshes();
+
+        // Render the scene
+        rendererRef.current?.render(sceneRef.current!, camera);
+      };
+
+      const updateExistingMeshes = () => {
+        categoryMeshes.current.forEach((categoryMesh, key) => {
+          // Update material color
+          const newColor = getFeatureColor(
+            key,
+            customFeatures,
+            colorList,
+            colorParamList
+          );
+          (categoryMesh.mesh.material as THREE.MeshBasicMaterial).color.set(
+            newColor
+          );
+
+          // Update visibility based on the current state
+          const isVisible = shouldBeVisible(key);
+          categoryMesh.mesh.visible = isVisible;
+        });
+      };
+
+      // Helper function to determine if a category should be visible
+      const shouldBeVisible = (category: string): boolean => {
+        return true;
+      };
+
+      // Call loadVisibleData
+      loadVisibleData(camera);
+
       if (!threeD) {
         controls.enableRotate = false;
         controls.enablePan = true;
@@ -951,35 +1010,6 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       let previousDistance = controls.target.distanceTo(
         controls.object.position
       );
-
-      let shapeMesh: THREE.InstancedMesh | null = null;
-
-      const loadVisibleData = (camera: THREE.PerspectiveCamera): void => {
-        if (!shapeMesh) {
-          shapeMesh = createShape(
-            data,
-            colorInScene,
-            data.length,
-            colorList,
-            customFeatures,
-            colorParamList,
-            colorKey,
-            minX,
-            maxX,
-            minY,
-            maxY,
-            minZ,
-            maxZ,
-            threeD
-          );
-
-          sceneRef.current.add(shapeMesh);
-        } else {
-          // Update existing mesh if needed
-          // For example, update colors or visibility
-          updateMesh(shapeMesh);
-        }
-      };
 
       const updateMesh = (mesh: THREE.InstancedMesh) => {
         const colorInstance = new THREE.Color();
@@ -1003,20 +1033,20 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
         camera.position.copy(miniCamera.position);
         camera.rotation.copy(miniCamera.rotation);
         controls.update();
-        if (shapeMesh) {
-          updateMesh(shapeMesh);
-        }
+        // if (shapeMesh) {
+        //   updateMesh(shapeMesh);
+        // }
         const currentDistance = controls.target.distanceTo(
           controls.object.position
         );
 
         previousDistance = currentDistance;
 
-        sceneRef.current.traverse((obj: any) => {
-          if (obj instanceof THREE.Mesh) {
-            obj.lookAt(obj.position.clone().add(camera.position));
-          }
-        });
+        // sceneRef.current.traverse((obj: any) => {
+        //   if (obj instanceof THREE.Mesh) {
+        //     obj.lookAt(obj.position.clone().add(camera.position));
+        //   }
+        // });
         renderer.render(scene, camera);
         stats.end();
       };
@@ -1034,11 +1064,10 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       animate();
 
       return () => {
-        controls.removeEventListener("change", () => loadVisibleData(camera));
-        if (shapeMesh) {
-          sceneRef.current.remove(shapeMesh);
-          shapeMesh.geometry.dispose();
-        }
+        // if (shapeMesh) {
+        //   sceneRef.current.remove(shapeMesh);
+        //   shapeMesh.geometry.dispose();
+        // }
         if (containerRef.current) {
           containerRef.current.removeChild(renderer.domElement);
         }
@@ -1193,37 +1222,57 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
         minZ: number,
         maxZ: number,
         isThreeD: boolean
-      ): THREE.InstancedMesh => {
-        objArr.current = [];
+      ): Map<string, { mesh: THREE.InstancedMesh; count: number }> => {
+        const newCategoryMeshes = new Map<
+          string,
+          { mesh: THREE.InstancedMesh; count: number }
+        >();
         const geometry = new THREE.SphereGeometry(0.3);
-        const material = new THREE.MeshBasicMaterial({
-          transparent: true,
-        });
-        const mesh = new THREE.InstancedMesh(geometry, material, length);
-        mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
-        mesh.setColorAt(0, new THREE.Color());
-        const colorInstance = new THREE.Color();
 
-        const dummyMatrix = new THREE.Object3D();
-        const matrix = new THREE.Matrix4();
-        const instanceUserData = [];
+        const maxExtent = 40;
+        const deltaX = maxX - minX;
+        const deltaY = maxY - minY;
+        const deltaZ = maxZ - minZ;
+        const maxDelta = Math.max(deltaX, deltaY, deltaZ);
 
+        // Count instances per category
+        const categoryCounts = new Map<string, number>();
         for (let i = 0; i < length; i++) {
           const point = cluster[i];
-
-          let newColor = getFeatureColor(
-            point.features[_colorKey],
-            _customFeatures,
-            _colorList,
-            _colorParamList
+          const categoryKey = point.features[_colorKey];
+          categoryCounts.set(
+            categoryKey,
+            (categoryCounts.get(categoryKey) || 0) + 1
           );
+        }
 
-          const maxExtent = 40;
+        // Create meshes
+        categoryCounts.forEach((count, categoryKey) => {
+          const material = new THREE.MeshBasicMaterial({
+            transparent: true,
+            color: new THREE.Color(
+              getFeatureColor(
+                categoryKey,
+                _customFeatures,
+                _colorList,
+                _colorParamList
+              )
+            ),
+            opacity: 1,
+          });
+          const mesh = new THREE.InstancedMesh(geometry, material, count);
+          // @ts-ignore
+          objArr.current.push({ divObj: mesh });
+          mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+          mesh.userData.instanceUserData = [];
+          newCategoryMeshes.set(categoryKey, { mesh, count: 0 });
+        });
 
-          const deltaX = maxX - minX;
-          const deltaY = maxY - minY;
-          const deltaZ = maxZ - minZ;
-          var maxDelta = Math.max(deltaX, deltaY, deltaZ);
+        // Set instance matrices and user data
+        for (let i = 0; i < length; i++) {
+          const point = cluster[i];
+          const categoryKey = point.features[_colorKey];
+          const meshData = newCategoryMeshes.get(categoryKey)!;
 
           const scaledX = scalePoint(
             parseFloat(point.coordinates.x),
@@ -1248,25 +1297,33 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
                 (deltaZ / maxDelta) * maxExtent
               )
             : 0;
-          dummyMatrix.position.set(scaledX, scaledY, scaledZ || 0);
-          dummyMatrix.updateMatrix();
-          mesh.setMatrixAt(i, dummyMatrix.matrix);
-          mesh.setColorAt(i, colorInstance.set(newColor));
-          instanceUserData.push({
+
+          const dummyObject = new THREE.Object3D();
+          dummyObject.position.set(scaledX, scaledY, scaledZ);
+          dummyObject.updateMatrix();
+          meshData.mesh.setMatrixAt(meshData.count, dummyObject.matrix);
+
+          // Set user data for this instance
+          meshData.mesh.userData.instanceUserData.push({
             ...point,
             identifier: point.identifier,
             features: point.features,
-            color: newColor,
+            color: getFeatureColor(
+              categoryKey,
+              _customFeatures,
+              _colorList,
+              _colorParamList
+            ),
             coordinates: { x: scaledX, y: scaledY, z: scaledZ },
           });
-          // @ts-ignore
-          objArr.current.push({ divObj: mesh, instanceId: i });
-        }
 
-        mesh.userData.instanceUserData = instanceUserData;
-        mesh.instanceMatrix.needsUpdate = true;
-        mesh.instanceColor!.needsUpdate = true;
-        return mesh;
+          meshData.count++;
+        }
+        newCategoryMeshes.forEach((meshData) => {
+          meshData.mesh.instanceMatrix.needsUpdate = true;
+        });
+
+        return newCategoryMeshes;
       },
       []
     );

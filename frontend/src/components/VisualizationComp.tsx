@@ -24,8 +24,8 @@ import { colorList, shapeList } from "../helpers/constants";
 import { useAppDispatch, useAppSelector } from "../helpers/hooks";
 import {
   fetchAndSetData,
-  setCamera,
   setCameraPosition,
+  setCamera,
   setCameraRotation,
   setColorAndShapeKey,
   setColorKey,
@@ -63,6 +63,7 @@ import MolstarViewer from "./MolstarViewer";
 import QuickAccessLinks from "./QuickAccessLinks";
 import SvgSpinner from "./SvgSpinner";
 import VisualizationWaitingModal from "./WaitingModal";
+import pako from "pako";
 
 const VisualizationComp = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -144,96 +145,61 @@ const VisualizationComp = () => {
     URL.revokeObjectURL(url);
   }
 
-  // function exportFile() {
-  //   const jsonData = {
-  //     data: settings.data,
-  //     keyList: settings.keyList,
-  //     technique: settings.technique,
-  //     colorParam: settings.colorParam,
-  //     colorKey: settings.colorKey,
-  //     shapeParam: settings.shapeParam,
-  //     shapeKey: settings.shapeKey,
-  //     searchItems: settings.searchItems,
-  //     colorParamList: settings.colorParamList,
-  //     shapeParamList: settings.shapeParamList,
-  //     threeD: settings.threeD,
-  //     twoLegend: settings.twoLegend,
-  //     csvFilePath: settings.csvFilePath,
-  //     position: {
-  //       x: cameraRef.current.position.x,
-  //       y: cameraRef.current.position.y,
-  //       z: cameraRef.current.position.z,
-  //     },
-  //     rotation: {
-  //       x: cameraRef.current.rotation.x,
-  //       y: cameraRef.current.rotation.y,
-  //       z: cameraRef.current.rotation.z,
-  //     },
-  //   };
-
-  //   const jsonString = JSON.stringify(jsonData, null, 2);
-  //   const blob = new Blob([jsonString], { type: "application/json" });
-
-  //   const url = URL.createObjectURL(blob);
-  //   const link = document.createElement("a");
-  //   link.href = url;
-  //   link.download = "data.json"; // Change the filename as needed
-  //   link.click();
-
-  //   // Clean up
-  //   URL.revokeObjectURL(url);
-  // }
-
   const handleFileChangeJSON = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       dispatch(setIsLoading(true));
-      readFileContentsJSON(file);
+      if (file.name.endsWith(".json")) {
+        readFileContentsJSONOnly(file);
+      } else if (file.name.endsWith(".json.gz")) {
+        readFileContentsJSON(file);
+      } else {
+        dispatch(setIsLoading(false));
+        dispatch(setErrorMessage("Unsupported file type."));
+      }
     }
   };
+
+  const readFileContentsJSONOnly = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      if (event.target?.result) {
+        const parsedData = JSON.parse(event.target.result as string);
+        importFileV2(parsedData);
+      }
+    };
+
+    reader.onerror = (error) => {
+      dispatch(setIsLoading(false));
+      dispatch(setErrorMessage("Error reading file."));
+      console.error("Error reading file:", error);
+    };
+
+    dispatch(setIsLoading(true));
+    reader.readAsText(file);
+  };
+
   const readFileContentsJSON = (file: File) => {
     const reader = new FileReader();
-    const chunkSize = 4 * 1024 * 1024; // 1MB chunks
+    const chunkSize = 4 * 1024 * 1024; // 4MB chunks
     let offset = 0;
-    let buffer = "";
+    let chunks: Uint8Array[] = [];
 
     const readChunk = () => {
       const slice = file.slice(offset, offset + chunkSize);
-      reader.readAsText(slice);
-    };
-
-    const processBuffer = () => {
-      try {
-        // Attempt to parse the current buffer as JSON
-        const parsedData = JSON.parse(buffer);
-        // If successful, process the parsed data
-        importFileV2(parsedData);
-        // Clear the buffer
-        buffer = "";
-      } catch (error) {
-        // If parsing fails, continue accumulating chunks
-        if (error instanceof SyntaxError) {
-          console.log("SyntaxError: Incomplete JSON, waiting for more data.");
-        } else {
-          throw error;
-        }
-      }
+      reader.readAsArrayBuffer(slice);
     };
 
     reader.onload = (event) => {
       if (event.target?.result) {
-        buffer += event.target.result; // Accumulate chunks in buffer
+        const arrayBuffer = event.target.result as ArrayBuffer;
+        chunks.push(new Uint8Array(arrayBuffer));
         offset += chunkSize;
-
-        // Try to process the buffer if it contains complete JSON
-        processBuffer();
 
         if (offset < file.size) {
           readChunk();
         } else {
-          // Final attempt to process remaining buffer after reading all chunks
-          processBuffer();
-          dispatch(setIsLoading(false));
+          processBuffer(chunks);
         }
       }
     };
@@ -248,42 +214,32 @@ const VisualizationComp = () => {
     readChunk();
   };
 
-  // function importFile(parsedObject: any) {
-  //   dispatch(setTechnique(parsedObject.technique ?? ""));
-  //   dispatch(setColorParam(parsedObject.colorParam ?? ""));
-  //   dispatch(setShapeParam(parsedObject.shapeParam ?? ""));
-  //   dispatch(setSearchItems(parsedObject.searchItems ?? []));
-  //   dispatch(setThreeD(parsedObject.threeD ?? false));
-  //   dispatch(setTwoLegend(parsedObject.twoLegend ?? false));
-  //   dispatch(setCSVFilePath(parsedObject.csvFilePath ?? ""));
-  //   dispatch(setColorKey(parsedObject.colorKey ?? ""));
-  //   dispatch(setData(parsedObject.data ?? []));
-  //   dispatch(setKeyList(parsedObject.keyList ?? []));
-  //   dispatch(setColorParamList(parsedObject.colorParamList ?? []));
-  //   dispatch(setShapeParamList(parsedObject.shapeParamList ?? []));
-  //   dispatch(setSelectedMols([]));
-  //   dispatch(setPdbExists(false));
-  //   dispatch(
-  //     setCameraPosition(
-  //       new Vector3(
-  //         parsedObject.position.x,
-  //         parsedObject.position.y,
-  //         parsedObject.position.z
-  //       )
-  //     )
-  //   );
-  //   dispatch(
-  //     setCameraRotation(
-  //       new Vector3(
-  //         parsedObject.position.x,
-  //         parsedObject.position.y,
-  //         parsedObject.position.z
-  //       )
-  //     )
-  //   );
+  const processBuffer = (chunks: Uint8Array[]) => {
+    try {
+      const concatenatedChunks = concatenateChunks(chunks);
+      const decompressedData = pako.inflate(concatenatedChunks, {
+        to: "string",
+      });
+      const parsedData = JSON.parse(decompressedData);
+      importFileV2(parsedData);
+    } catch (error) {
+      console.error("Decompression or parsing error:", error);
+      dispatch(setErrorMessage("Failed to decompress or parse the file."));
+    } finally {
+      dispatch(setIsLoading(false));
+    }
+  };
 
-  //   dispatch(setIsLoading(false));
-  // }
+  const concatenateChunks = (chunks: Uint8Array[]) => {
+    const totalLength = chunks.reduce((acc, chunk) => acc + chunk.length, 0);
+    const result = new Uint8Array(totalLength);
+    let offset = 0;
+    for (const chunk of chunks) {
+      result.set(chunk, offset);
+      offset += chunk.length;
+    }
+    return result;
+  };
 
   function importFileV2(parsedObject: any) {
     dispatch(setIsLoading(true));
@@ -295,80 +251,59 @@ const VisualizationComp = () => {
     dispatch(setColorParamList([]));
     dispatch(setSearchItems([]));
     dispatch(setColorList(colorList));
-
     dispatch(setProjections([]));
     dispatch(setProteinData([]));
 
-    const selectedProjection =
-      (parsedObject.visualization_state &&
-        parsedObject.visualization_state.technique) ??
-      0;
-    parsedObject.projections[selectedProjection].data.forEach(
-      (element: any) => {
-        element = element = parsedObject.protein_data
-          ? Object.assign(
-              element,
-              parsedObject.protein_data[element.identifier]
-            )
-          : element;
-      }
-    );
+    const selectedProjection = parsedObject.visualization_state?.technique ?? 0;
+    const projectionData = parsedObject.projections[selectedProjection].data;
 
-    let ifColorParamListEmpty = false;
-    const items: Item[] = [];
-    if (!parsedObject.visualization_state) {
-      ifColorParamListEmpty = true;
+    if (parsedObject.protein_data) {
+      projectionData.forEach((element: any) => {
+        Object.assign(element, parsedObject.protein_data[element.identifier]);
+      });
     }
     const colorParamList: string[] =
-      (parsedObject.visualization_state &&
-        parsedObject.visualization_state.colorParamList) ??
-      [];
-
+      parsedObject.visualization_state?.colorParamList ?? [];
+    const ifColorParamListEmpty = !parsedObject.visualization_state;
+    const items: Item[] = [];
     const keys = parsedObject.protein_data
-      ? Object.keys(
-          parsedObject.projections[selectedProjection].data[0].features
-        ).filter(
-          (item: any) =>
-            parsedObject.projections[selectedProjection].data[0].features[item]
+      ? Object.keys(projectionData[0].features).filter(
+          (item: any) => projectionData[0].features[item]
         )
       : ["NaN"];
-
     const colorKey = keys[0];
+
     const newData = parsedObject.protein_data
-      ? parsedObject.projections[selectedProjection].data.map((item: any) => {
-          const newItem = {
-            ...item,
-          }; // Create a copy of the current item
-          for (const key in newItem.features) {
+      ? projectionData.map((item: any) => {
+          const newItem = { ...item };
+          Object.keys(newItem.features).forEach((key) => {
             if (newItem.features[key] === "") {
               newItem.features[key] = "NaN";
             }
-          }
+          });
           return newItem;
         })
       : [];
 
-    parsedObject.protein_data &&
+    if (parsedObject.protein_data) {
       newData.forEach((element: any) => {
-        for (const key in element.features) {
+        Object.keys(element.features).forEach((key) => {
           const value = element.features[key];
-          if (
-            items.filter((e) => e.category === key && e.name === value)
-              .length === 0
-          ) {
+          if (!items.some((e) => e.category === key && e.name === value)) {
             if (key === colorKey) {
               items.push({
                 category: key,
                 color: colorList[colorParamList.length % colorList.length],
                 name: value,
               });
-              ifColorParamListEmpty && colorParamList.push(value);
+              if (ifColorParamListEmpty) colorParamList.push(value);
             } else {
               items.push({ category: key, name: value });
             }
           }
-        }
+        });
       });
+    }
 
     const updatedDataItems = parsedObject.visualization_state?.customFeatures
       ? settings.dataItems.map((item: { name: any; category: any }) => {
@@ -378,50 +313,36 @@ const VisualizationComp = () => {
                 custom.featureName === item.name &&
                 custom.category === item.category
             );
-          if (customization) {
-            return {
-              ...item,
-              name: customization.customName,
-              color: customization.color,
-            };
-          }
-          return item;
+          return customization
+            ? {
+                ...item,
+                name: customization.customName,
+                color: customization.color,
+              }
+            : item;
         })
       : null;
 
-    dispatch(setData(parsedObject.projections[selectedProjection].data));
-    dispatch(
-      setKeyList(
-        parsedObject.protein_data
-          ? Object.keys(
-              parsedObject.projections[selectedProjection].data[0].features
-            )
-          : ["NaN"]
-      )
-    );
+    dispatch(setData(projectionData));
+    dispatch(setKeyList(keys));
     dispatch(
       setThreeD(parsedObject.projections[selectedProjection].dimensions === 3)
     );
-
     dispatch(setColorParam(parsedObject.visualization_state?.colorParam ?? ""));
     dispatch(
       setSearchItems(parsedObject.visualization_state?.searchItems ?? [])
     );
-
     dispatch(setProjections(parsedObject.projections));
     dispatch(setProteinData(parsedObject.protein_data));
     dispatch(setTechnique(parsedObject.visualization_state?.technique ?? 0));
     dispatch(
-      setColorKey(
-        (parsedObject.visualization_state &&
-          parsedObject.visualization_state.colorKey) ??
-          colorKey
-      )
+      setColorKey(parsedObject.visualization_state?.colorKey ?? colorKey)
     );
-    let customFeatures = parsedObject.visualization_state?.customFeatures;
+
+    const customFeatures = parsedObject.visualization_state?.customFeatures;
     const sortedCustomFeatures = Array.isArray(customFeatures)
       ? customFeatures.sort(
-          (a: { customName: string }, b: { customName: any }) =>
+          (a: { customName: string }, b: { customName: string }) =>
             a.customName.localeCompare(b.customName)
         )
       : [];
@@ -444,13 +365,6 @@ const VisualizationComp = () => {
           : colorParamList
       )
     );
-    // dispatch(
-    //   setColorList(
-    //     (parsedObject.visualization_state &&
-    //       parsedObject.visualization_state.colorList) ??
-    //       settings.colorList
-    //   )
-    // );
     dispatch(setDataItems(updatedDataItems ?? []));
 
     if (
@@ -462,7 +376,6 @@ const VisualizationComp = () => {
           new Vector3(0.05273795378094992, 3.473258577458065, 59.89936304805207)
         )
       );
-
       dispatch(
         setCameraRotation(
           new Vector3(
@@ -473,31 +386,21 @@ const VisualizationComp = () => {
         )
       );
     } else {
+      const cameraPosition =
+        parsedObject.visualization_state.camera[0].position;
       dispatch(
         setCameraPosition(
-          new Vector3(
-            parsedObject.visualization_state.camera[0].position.x,
-            parsedObject.visualization_state.camera[0].position.y,
-            parsedObject.visualization_state.camera[0].position.z
-          )
+          new Vector3(cameraPosition.x, cameraPosition.y, cameraPosition.z)
         )
       );
       dispatch(
         setCameraRotation(
-          new Vector3(
-            parsedObject.visualization_state.camera[0].position.x,
-            parsedObject.visualization_state.camera[0].position.y,
-            parsedObject.visualization_state.camera[0].position.z
-          )
+          new Vector3(cameraPosition.x, cameraPosition.y, cameraPosition.z)
         )
       );
       dispatch(setCamera(parsedObject.visualization_state.camera[0]));
     }
-    // dispatch(
-    //   setSearchItems(
-    //     parsedObject.visualization_state.highlighting.search_selection ?? []
-    //   )
-    // );
+
     dispatch(setIsLoading(false));
   }
 
@@ -893,7 +796,7 @@ const VisualizationComp = () => {
                         <input
                           id="file-upload-json"
                           type="file"
-                          accept=".json"
+                          accept=".json,.gz"
                           onChange={handleFileChangeJSON}
                           className="hidden"
                         />

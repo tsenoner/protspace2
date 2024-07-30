@@ -374,7 +374,6 @@ const settingsReducer = (
             }
           }
         });
-      console.log("RENDERED");
       return {
         ...state,
         colorParamList: colorParamListLocal,
