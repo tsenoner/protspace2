@@ -243,149 +243,35 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       [raycaster, pointer]
     );
 
-    const parseHex = useCallback((hex: string | any[]) => {
-      let colorCode = hex.slice(0, 7);
-      let opacity = 1;
-
-      if (hex.length === 9) {
-        let opacityHex = hex.slice(7, 9);
-        // @ts-ignore
-        opacity = parseInt(opacityHex, 16) / 255;
-      }
-
-      return { colorCode, opacity };
-    }, []);
-
-    const matrixPool = new Array(10000)
-      .fill(null)
-      .map(() => new THREE.Matrix4());
-    let poolIndex = 0;
-
-    const getMatrix = () => {
-      if (poolIndex >= matrixPool.length) poolIndex = 0;
-      return matrixPool[poolIndex++];
-    };
-
-    // Convert instanceUserData to a typed array
-    const convertToTypedArray = (instanceUserData: any[]) => {
-      const array = new Float32Array(instanceUserData.length * 3);
-      instanceUserData.forEach((data, i) => {
-        array[i * 3] = parseFloat(data.coordinates.x || 0);
-        array[i * 3 + 1] = parseFloat(data.coordinates.y || 0);
-        array[i * 3 + 2] = parseFloat(data.coordinates.z || 0);
-      });
-      return array;
-    };
-
     const updateVisibility = useCallback(
-      (keyToRemove: string | null, onlyShowKey: string | null = null) => {
+      (categoriesToHide: string) => {
+        const categoriesToHideArray = categoriesToHide
+          ? categoriesToHide.split(",")
+          : [];
+
+        // Convert searchItems to a set of category names for faster lookup
+        const searchCategories = new Set(searchItems.map((item) => item.name));
         categoryMeshes.current.forEach((categoryMesh, key) => {
-          if (onlyShowKey) {
-            categoryMesh.mesh.visible = key === onlyShowKey;
-          } else if (keyToRemove) {
-            categoryMesh.mesh.visible = key !== keyToRemove;
-          } else {
-            categoryMesh.mesh.visible = true;
-          }
+          const isNotHidden = !categoriesToHideArray.includes(key);
+          const isSearched =
+            searchItems.length === 0 || searchCategories.has(key);
+
+          // An item is visible if it's not hidden AND (there's no search OR it matches the search)
+          categoryMesh.mesh.visible = isNotHidden && isSearched;
         });
+
         rendererRef.current?.render(sceneRef.current!, cameraRef.current!);
       },
-      []
+      [searchItems]
     );
 
-    const colorReset = () => {
-      if (colorParam) {
-        updateVisibility(colorParam);
-      } else {
-        updateVisibility(null);
-      }
-      // objArr.current.forEach((objData: any) => {
-      //   const mesh = objData.divObj as THREE.InstancedMesh;
-      //   const colorInstance = new THREE.Color();
-      //   mesh.setColorAt(0, colorInstance.set(objData.color));
-      //   // Check if the mesh has the instanceColor attribute
-      //   if (!mesh.instanceColor) {
-      //     console.error("InstanceColor attribute is missing");
-      //     return;
-      //   }
-
-      //   // Iterate over each instance's userData
-      //   mesh.userData.instanceUserData.forEach(
-      //     (instanceUserData: any, index: number) => {
-      //       let color = new THREE.Color(instanceUserData.color.slice(0, 7));
-      //       let opacity =
-      //         parseInt(instanceUserData.color.slice(7, 9), 16) / 255 || 0.8;
-      //       let svgOpacity = 1.0;
-
-      //       const customization = customFeatures.find(
-      //         (feature: {
-      //           featureName: any;
-      //           customName: any;
-      //           category: string;
-      //         }) =>
-      //           feature.featureName === instanceUserData.features[colorKey] &&
-      //           feature.category === colorKey
-      //       );
-
-      //       if (
-      //         colorParam !== "" &&
-      //         colorParam !== instanceUserData.features[colorKey]
-      //       ) {
-      //         color.set("#EEEEEE");
-      //         opacity = 0.4;
-      //         svgOpacity = 0.4;
-      //       }
-
-      //       const isMatched = searchItems.some((item) => {
-      //         return Object.values(instanceUserData.features).includes(
-      //           item.name
-      //         );
-      //       });
-
-      //       if (isMatched) {
-      //         color.set(
-      //           customization ? customization.color : instanceUserData.color
-      //         );
-      //       } else if (searchItems.length) {
-      //         color.set("#EEEEEE");
-      //         opacity = 0.4;
-      //         svgOpacity = 0.4;
-      //       }
-
-      //       if (
-      //         dataItems[0] &&
-      //         instanceUserData.features[dataItems[0].category] === entityName
-      //       ) {
-      //         color.set("#0400ff");
-      //         opacity = 1;
-      //         svgOpacity = 1.0;
-      //       }
-
-      //       if (customization) {
-      //         const isCustomizationIncludeSearch = searchItems.some((item) => {
-      //           return Object.values(customization).includes(item.name);
-      //         });
-      //         if (isCustomizationIncludeSearch) {
-      //           color.set(customization.color);
-      //           opacity = 1;
-      //         }
-      //       }
-
-      //       mesh.setColorAt(index, colorInstance.set(color));
-      //     }
-      //   );
-
-      //   // Ensure instanceColor is updated
-      //   mesh.instanceColor.needsUpdate = true;
-      // });
-
-      rendererRef.current &&
-        rendererRef.current.render(sceneRef.current, cameraRef.current);
-    };
+    useEffect(() => {
+      updateVisibility(colorParam);
+    }, [updateVisibility, colorParam, searchItems]);
 
     useEffect(() => {
-      colorReset();
-    }, [data, colorParam, searchItems, dataItems]);
+      updateVisibility(colorParam);
+    }, [updateVisibility, colorParam, data, searchItems, dataItems]);
 
     const throttle = (func: (...args: any[]) => void, limit: number) => {
       let inThrottle: boolean;
@@ -549,6 +435,10 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       );
       if (customization && customization.color) {
         return customization.color;
+      } else {
+        if (featureValue === "NaN") {
+          return "#000000";
+        }
       }
 
       const index = colorParamList.indexOf(featureValue);
@@ -936,6 +826,7 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       controls.enableDamping = true;
       controls.dampingFactor = 0.25;
       controls.enablePan = true;
+      controls.maxDistance = 200;
 
       const loadVisibleData = (camera: THREE.PerspectiveCamera): void => {
         // Remove existing meshes from the scene
@@ -971,7 +862,9 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
 
         // Update existing meshes
         updateExistingMeshes();
-
+        if (colorParam) {
+          updateVisibility(colorParam);
+        }
         // Render the scene
         rendererRef.current?.render(sceneRef.current!, camera);
       };
@@ -1095,117 +988,88 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
 
     const drawSVG = useCallback(
       (svgContainer?: HTMLElement | null) => {
-        objArr.current.forEach(function (objData) {
-          const svgCircle = document.createElementNS(
-            "http://www.w3.org/2000/svg",
-            "circle"
-          );
-          // @ts-ignore
-          const instanceMesh = objData.divObj;
-          // @ts-ignore
-          const instanceId = objData.instanceId; // Assuming instanceId is stored in objData
+        categoryMeshes.current.forEach((categoryMesh, categoryKey) => {
+          const { mesh, count } = categoryMesh;
 
-          if (!(instanceMesh instanceof THREE.Object3D)) {
-            console.error(
-              "objData.divObj is not an instance of THREE.Object3D"
+          // Skip drawing if the mesh is not visible
+          if (!mesh.visible) return;
+
+          const color = (mesh.material as THREE.MeshBasicMaterial).color;
+
+          for (let i = 0; i < count; i++) {
+            const svgCircle = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "circle"
             );
-            return;
+
+            const matrix = new THREE.Matrix4();
+            mesh.getMatrixAt(i, matrix);
+            const position = new THREE.Vector3();
+            position.setFromMatrixPosition(matrix);
+
+            const proj = toScreenPosition(position, cameraRef.current);
+            svgCircle.setAttribute("cx", proj.x.toString());
+            svgCircle.setAttribute("cy", proj.y.toString());
+
+            svgCircle.style.fill = `rgb(${color.r * 255},${color.g * 255},${
+              color.b * 255
+            })`;
+            svgCircle.style.position = "absolute";
+
+            const distance = position.distanceTo(cameraRef.current.position);
+            const scaleFactor = calculateScaleFactor(distance);
+            svgCircle.setAttribute("r", (5 * scaleFactor).toString());
+            svgContainer!.appendChild(svgCircle);
           }
-          // @ts-ignore
-          const matrixWorld = instanceMesh.instanceMatrix;
-          const position = new THREE.Vector3();
-          const matrix = new THREE.Matrix4();
-          matrix.fromArray(matrixWorld.array, instanceId * 16);
-          position.setFromMatrixPosition(matrix);
-
-          svgCircle.setAttribute("cx", "100");
-          svgCircle.setAttribute("cy", "200");
-
-          svgCircle.style.fill = instanceMesh.userData.color;
-          svgCircle.style.position = "absolute";
-
-          const proj = toScreenPosition(position, cameraRef.current);
-          svgCircle.setAttribute("cx", proj.x.toString());
-          svgCircle.setAttribute("cy", proj.y.toString());
-
-          const distance = position.distanceTo(cameraRef.current.position);
-          const scaleFactor = calculateScaleFactor(distance);
-          svgCircle.setAttribute("r", (5 * scaleFactor).toString());
-          svgContainer!.appendChild(svgCircle);
         });
       },
       [calculateScaleFactor, toScreenPosition]
     );
 
     const downloadSVG = useCallback(() => {
-      let svgContainer = document.getElementById("svg-container");
+      let svgContainer = document.getElementById(
+        "svg-container"
+      ) as HTMLElement;
       if (!svgContainer) {
         // @ts-ignore
         svgContainer = document.createElementNS(
           "http://www.w3.org/2000/svg",
           "svg"
         );
-        svgContainer!.id = "svg-container";
-        svgContainer!.style.position = "absolute";
-        svgContainer!.style.width = "100%";
-        svgContainer!.style.height = "100%";
-        svgContainer!.style.top = "0";
-        svgContainer!.style.left = "0";
-        svgContainer!.style.zIndex = "-1";
-        document.body.appendChild(svgContainer!);
+        svgContainer.id = "svg-container";
+        svgContainer.style.position = "absolute";
+        svgContainer.style.width = "100%";
+        svgContainer.style.height = "100%";
+        svgContainer.style.top = "0";
+        svgContainer.style.left = "0";
+        svgContainer.style.zIndex = "-1";
+        document.body.appendChild(svgContainer);
       }
 
-      if (svgContainer) {
-        svgContainer.innerHTML = "";
-        drawSVG(svgContainer);
-        drawBoxEdges(
-          minX,
-          maxX,
-          minY,
-          maxY,
-          minZ,
-          maxZ,
-          svgContainer,
-          cameraRef.current,
-          toScreenPosition
-        );
+      svgContainer.innerHTML = "";
+      drawSVG(svgContainer);
+      drawBoxEdges(
+        minX,
+        maxX,
+        minY,
+        maxY,
+        minZ,
+        maxZ,
+        svgContainer,
+        cameraRef.current,
+        toScreenPosition
+      );
 
-        const serializer = new XMLSerializer();
-        const svgString = serializer.serializeToString(svgContainer);
-        const blob = new Blob([svgString], { type: "image/svg+xml" });
-        const downloadLink = document.createElement("a");
-        downloadLink.href = URL.createObjectURL(blob);
-        downloadLink.download = "scatterplot.svg";
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-      } else {
-        drawSVG();
-        drawBoxEdges(
-          minX,
-          maxX,
-          minY,
-          maxY,
-          minZ,
-          maxZ,
-          // @ts-ignore
-          svgContainer,
-          cameraRef.current,
-          toScreenPosition
-        );
-        const serializer = new XMLSerializer();
-        // @ts-ignore
-        const svgString = serializer.serializeToString(svgContainer);
-        const blob = new Blob([svgString], { type: "image/svg+xml" });
-        const downloadLink = document.createElement("a");
-        downloadLink.href = URL.createObjectURL(blob);
-        downloadLink.download = "scatterplot.svg";
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-      }
+      const serializer = new XMLSerializer();
+      const svgString = serializer.serializeToString(svgContainer);
+      const blob = new Blob([svgString], { type: "image/svg+xml" });
+      const downloadLink = document.createElement("a");
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = "scatterplot.svg";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
     }, [drawSVG, drawBoxEdges, minX, maxX, minY, maxY, minZ, maxZ]);
-
     const createShape = useCallback(
       (
         cluster: any,
@@ -1331,7 +1195,13 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
     const onColorKeyDoubleClick = (
       selectedColorKey: string | null | undefined
     ) => {
-      updateVisibility(null, selectedColorKey);
+      if (selectedColorKey) {
+        setColorParam(selectedColorKey);
+        updateVisibility(selectedColorKey);
+      } else {
+        setColorParam("");
+        updateVisibility("");
+      }
     };
 
     return (

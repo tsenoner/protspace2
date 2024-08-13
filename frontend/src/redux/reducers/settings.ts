@@ -305,14 +305,14 @@ const settingsReducer = (
 
       if (selectedProjection.dimensions === 2) {
         state.cameraPosition = new Vector3(
-          0.05273795378094992,
-          3.473258577458065,
-          59.89936304805207
+          0.09759779633072208,
+          6.427674169056172,
+          110.85082783806372
         );
         state.cameraRotation = new Vector3(
-          -0.05792004425389763,
-          0.0008789660095279366,
-          0.00005096674957453894
+          -0.05792004425389765,
+          0.0008789660095279251,
+          0.00005096674957453828
         );
       } else {
         if (state.camera.position !== undefined) {

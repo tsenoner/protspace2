@@ -43,7 +43,7 @@ const EditColorModal: React.FC<EditColorModalProps> = ({
         // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
         customName: existingCustomization?.customName || featureName,
         color:
-          featureName === "NaN"
+          featureName === "NaN" && !existingCustomization
             ? "#000000"
             : // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
               existingCustomization?.color ||
@@ -257,6 +257,30 @@ const ColorLegend: React.FC<ColorLegendProps> = ({
 }) => {
   const [closed, setClosed] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+
+  useEffect(() => {
+    // Initialize selectedCategories based on colorParam
+    if (colorParam) {
+      setSelectedCategories(colorParam.split(","));
+    } else {
+      setSelectedCategories([]);
+    }
+  }, [colorParam]);
+
+  const toggleCategory = (value: string) => {
+    setSelectedCategories((prev) => {
+      const newSelection = prev.includes(value)
+        ? prev.filter((cat) => cat !== value)
+        : [...prev, value];
+
+      // Update the parent component with the new selection immediately
+      setColorParam(newSelection.join(","));
+
+      return newSelection;
+    });
+  };
+
   const findCustomization = (featureName: string) => {
     return (
       Object.keys(customizations).length !== 0 &&
@@ -366,17 +390,13 @@ const ColorLegend: React.FC<ColorLegendProps> = ({
               <li key={value}>
                 <ColorLegendItem
                   onDoubleClick={() => onDoubleClick && onDoubleClick(value)}
-                  color={value === "NaN" ? "#000000" : displayColor}
+                  color={
+                    value === "NaN" && !customization ? "#000000" : displayColor
+                  }
                   text={displayName}
                   screenshot={screenshot}
-                  selected={colorParam === "" || value === colorParam}
-                  onClick={() => {
-                    if (value === colorParam) {
-                      setColorParam("");
-                    } else {
-                      setColorParam(`${value}`);
-                    }
-                  }}
+                  selected={!selectedCategories.includes(value)}
+                  onClick={() => toggleCategory(value)}
                   lightMode={lightMode}
                 />
               </li>

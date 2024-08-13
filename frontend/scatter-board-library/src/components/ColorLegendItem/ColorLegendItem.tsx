@@ -28,11 +28,7 @@ const ColorLegendItem: React.FC<ColorLegendItemProps> = ({
         <p
           style={{ color: screenshot ? "black" : textColor }}
           className={`${
-            selected
-              ? "text-black"
-              : screenshot
-              ? "text-black"
-              : "text-black line-through opacity-50"
+            selected ? "text-black" : "text-black line-through opacity-50"
           } w-60 break-all`}
         >
           {text}
