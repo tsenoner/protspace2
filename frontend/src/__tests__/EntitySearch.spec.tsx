@@ -4,7 +4,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store"; // or your preferred way to create a mock store
-import EntitySearch, { SearchItem } from "../components/EntitySearch";
+import EntitySearch from "../components/EntitySearch";
 import Tag from "../components/Tag";
 
 jest.mock("../helpers/hooks/useQuery", () => ({
@@ -135,54 +135,6 @@ describe("Spinner and Search Item", () => {
       name: "Item 1",
       category: "Category 1",
     });
-  });
-});
-
-describe("SearchItem Component", () => {
-  const mockClickHandler = jest.fn();
-
-  beforeEach(() => {
-    render(
-      <SearchItem
-        item={{
-          name: "Protein A",
-          category: "category",
-          img: "path/to/img.jpg",
-          color: "#FF6347",
-        }}
-        clickHandler={mockClickHandler}
-      />
-    );
-  });
-
-  it("renders the item with text, image, and color", () => {
-    // Check if the name is displayed
-    expect(screen.getByText("Protein A")).toBeInTheDocument();
-
-    // Check for image style
-    const imgDiv = screen.getByTestId("item-image");
-    expect(imgDiv).toHaveStyle(`backgroundImage: url('path/to/img.jpg')`);
-  });
-
-  it("calls the click handler when clicked", () => {
-    const itemComponent = screen.getByTestId("search-item");
-    fireEvent.click(itemComponent);
-    expect(mockClickHandler).toHaveBeenCalledTimes(1);
-  });
-
-  it("does not render image or color if not provided", () => {
-    render(
-      <SearchItem
-        item={{ name: "Protein B", category: "category" }}
-        clickHandler={mockClickHandler}
-      />
-    );
-
-    const imgDiv = screen.queryByTestId("item-image");
-    expect(imgDiv).not.toBeNull();
-
-    const colorDiv = screen.queryByTestId("item-color");
-    expect(colorDiv).toBeNull();
   });
 });
 

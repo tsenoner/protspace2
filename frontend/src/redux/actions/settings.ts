@@ -31,6 +31,8 @@ import {
   SET_SELECTED_MOLS,
   SET_SHAPE_PARAM,
   SET_SHAPE_PARAM_LIST,
+  SET_STATE,
+  SET_STATES,
   SET_STRUCTURES,
   SET_TECHNIQUE,
   SET_THREE_D,
@@ -157,6 +159,14 @@ export function setCustomFeature(customization: any) {
   return { type: SET_CUSTOM_FEATURE, payload: { customization } };
 }
 
+export function setStates(states: any) {
+  return { type: SET_STATES, payload: states };
+}
+
+export function setState(stateIndex: number) {
+  return { type: SET_STATE, payload: stateIndex };
+}
+
 export function setProjections(projections: any) {
   return { type: SET_PROJECTIONS, payload: projections };
 }
@@ -224,10 +234,11 @@ export const fetchAndSetData = createAsyncThunk<
               category: key,
               color: colorList[(colorParamList.length % colorList.length) + 1],
               name: value,
+              id: element.identifier,
             });
             colorParamList.push(value);
           } else {
-            items.push({ category: key, name: value });
+            items.push({ category: key, name: value, id: element.identifier });
           }
         }
       }

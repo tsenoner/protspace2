@@ -29,10 +29,12 @@ import {
   SET_SELECTED_MOLS,
   SET_SHAPE_PARAM,
   SET_SHAPE_PARAM_LIST,
+  SET_STATES,
   SET_STRUCTURES,
   SET_TECHNIQUE,
   SET_THREE_D,
   SET_TWO_LEGEND,
+  SET_STATE,
 } from "../actionTypes";
 
 const initialAtomStyleState: AtomStyleSpec = {
@@ -87,6 +89,8 @@ export interface SettingsState {
   protein_data: any;
   customFeatures: any;
   items: Item[];
+  states: any;
+  stateIndex: number;
 }
 
 const initialState: SettingsState = {
@@ -127,6 +131,8 @@ const initialState: SettingsState = {
   protein_data: {},
   customFeatures: [],
   items: [],
+  states: [],
+  stateIndex: 0,
 };
 
 const settingsReducer = (
@@ -265,6 +271,7 @@ const settingsReducer = (
                 category: key,
                 color: colorList[colorParamList.length % colorList.length],
                 name: value,
+                id: element.identifier,
               });
               colorParamList.push(value);
             } else if (key === state.shapeKey) {
@@ -272,10 +279,15 @@ const settingsReducer = (
                 category: key,
                 img: shapeList[shapeParamList.length % shapeList.length],
                 name: value,
+                id: element.identifier,
               });
               shapeParamList.push(value);
             } else {
-              items.push({ category: key, name: value });
+              items.push({
+                category: key,
+                name: value,
+                id: element.identifier,
+              });
             }
           }
         }
@@ -286,6 +298,11 @@ const settingsReducer = (
         shapeParamList: shapeParamList,
         items: items,
         colorKey: action.payload,
+      };
+    case SET_STATES:
+      return {
+        ...state,
+        states: action.payload,
       };
     case SET_TWO_LEGEND:
       return {
@@ -366,14 +383,20 @@ const settingsReducer = (
                   color:
                     colorList[colorParamListLocal.length % colorList.length],
                   name: value,
+                  id: element.identifier,
                 });
                 colorParamListLocal.push(value);
               } else {
-                itemsLocal.push({ category: key, name: value });
+                itemsLocal.push({
+                  category: key,
+                  name: value,
+                  id: element.identifier,
+                });
               }
             }
           }
         });
+
       return {
         ...state,
         colorParamList: colorParamListLocal,
@@ -437,6 +460,104 @@ const settingsReducer = (
         ...state,
         protein_data: action.payload,
       };
+    case SET_STATE:
+      const { stateIndex } = action.payload; // Pass in the selected state index
+      const selectedState = state.states[stateIndex];
+      if (!selectedState) return state;
+
+      const selectedProjection2 = state.projections[selectedState.technique];
+      if (!selectedProjection2) return state;
+
+      // Map protein data and populate new items
+      const newData2 = selectedProjection2.data.map(
+        (element: { features: any; identifier: string | number }) => {
+          const features = state.protein_data
+            ? { ...element.features, ...state.protein_data[element.identifier] }
+            : { features: "NaN" };
+          return { ...element, features };
+        }
+      );
+
+      const itemsLocal2: {
+        category: string;
+        color?: string;
+        name: unknown;
+        id: any;
+      }[] = [];
+      const colorParamListLocal2: string[] = [];
+      const colorKey2 = state.colorKey ?? Object.keys(newData2[0]?.features)[0];
+
+      newData2.forEach(
+        (element: {
+          features: { [s: string]: string } | ArrayLike<string>;
+          identifier: any;
+        }) => {
+          Object.entries(element.features).forEach(([key, value]) => {
+            if (
+              !itemsLocal2.some((e) => e.category === key && e.name === value)
+            ) {
+              if (key === colorKey2) {
+                itemsLocal2.push({
+                  category: key,
+                  color:
+                    colorList[colorParamListLocal2.length % colorList.length],
+                  name: value,
+                  id: element.identifier,
+                });
+                colorParamListLocal2.push(value);
+              } else {
+                itemsLocal2.push({
+                  category: key,
+                  name: value,
+                  id: element.identifier,
+                });
+              }
+            }
+          });
+        }
+      );
+
+      return {
+        ...state,
+        cameraPosition: new Vector3(
+          selectedState.cameraPosition.x,
+          selectedState.cameraPosition.y,
+          selectedState.cameraPosition.z
+        ),
+        cameraRotation: new Vector3(
+          selectedState.cameraRotation.x,
+          selectedState.cameraRotation.y,
+          selectedState.cameraRotation.z
+        ),
+        technique: selectedState.technique,
+        data: newData2,
+        customFeatures: selectedState.customFeatures,
+        colorParamList: colorParamListLocal2,
+        threeD: selectedProjection2.dimensions === 3,
+        stateIndex: action.payload,
+        colorParam: selectedState.colorParam,
+        searchItems: selectedState.searchItems,
+      };
+
+    //   return {
+    //     ...state,
+    //     cameraPosition: new Vector3(
+    //       selectedState.cameraPosition.x,
+    //       selectedState.cameraPosition.y,
+    //       selectedState.cameraPosition.z
+    //     ),
+    //     cameraRotation: new Vector3(
+    //       selectedState.cameraRotation.x,
+    //       selectedState.cameraRotation.y,
+    //       selectedState.cameraRotation.z
+    //     ),
+    //     technique: selectedState.technique,
+    //     data: newData,
+    //     customFeatures: selectedState.customFeatures,
+    //     colorParamList: colorParamListLocal2,
+    //     dataItems: itemsLocal2,
+    //     threeD: selectedProjection.dimensions === 3,
+    //   };
 
     default:
       return state;

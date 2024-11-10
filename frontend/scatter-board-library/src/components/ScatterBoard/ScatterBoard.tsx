@@ -32,6 +32,7 @@ import ColorLegend from "../ColorLegend/ColorLegend";
 import Controller from "../Controller/Controller";
 import ShapeLegend from "../ShapeLegend/ShapeLegend";
 import { ScatterBoardProps, ScatterBoardRef } from "./ScatterBoard.types";
+import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader.js";
 
 THREE.BufferGeometry.prototype.computeBoundsTree = computeBoundsTree;
 THREE.BufferGeometry.prototype.disposeBoundsTree = disposeBoundsTree;
@@ -225,19 +226,47 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
         const intersects = raycaster.intersectObjects(
           sceneRef.current.children
         );
-        for (let i = 0; i < intersects.length; i++) {
-          const obj = intersects[i].object;
-          if (
-            obj instanceof THREE.Mesh &&
-            obj.geometry.type !== "BufferGeometry"
-          ) {
-            obj.material.color.set("#FD1C03");
-            obj.material.opacity = 1;
-            setEntityName(obj.userData.identifier);
-            setControllerShown(true);
-            return;
+
+        if (intersects.length > 0) {
+          const intersection = intersects[0];
+          const obj = intersection.object;
+
+          if (obj instanceof THREE.InstancedMesh) {
+            const instanceId = intersection.instanceId;
+            if (instanceId !== undefined) {
+              const clickedColor = new THREE.Color(0xfd1c03); // Red color
+              const defaultColor = new THREE.Color(0xffffff); // White color (or whatever your default color is)
+
+              // Reset all instances to the default color
+              for (let j = 0; j < obj.count; j++) {
+                obj.setColorAt(j, defaultColor);
+              }
+
+              // Set the clicked instance to red
+              obj.setColorAt(instanceId, clickedColor);
+              obj.instanceColor!.needsUpdate = true;
+
+              const userData = obj.userData.instanceUserData[instanceId];
+              setEntityName(userData.identifier);
+              setControllerShown(true);
+              return;
+            }
           }
         }
+
+        // If we reach here, it means no point was clicked
+        // Reset all InstancedMesh objects to default color
+        sceneRef.current.children.forEach((child) => {
+          if (child instanceof THREE.InstancedMesh) {
+            const defaultColor = new THREE.Color(0xffffff); // White color (or whatever your default color is)
+            for (let j = 0; j < child.count; j++) {
+              child.setColorAt(j, defaultColor);
+            }
+            child.instanceColor!.needsUpdate = true;
+          }
+        });
+
+        setEntityName("");
         setControllerShown(false);
       },
       [raycaster, pointer]
@@ -264,10 +293,6 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       },
       [searchItems]
     );
-
-    useEffect(() => {
-      updateVisibility(colorParam);
-    }, [updateVisibility, colorParam, searchItems]);
 
     useEffect(() => {
       updateVisibility(colorParam);
@@ -828,16 +853,18 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
       controls.enablePan = true;
       controls.maxDistance = 200;
 
-      const loadVisibleData = (camera: THREE.PerspectiveCamera): void => {
+      const loadVisibleData = async (
+        camera: THREE.PerspectiveCamera
+      ): Promise<void> => {
         // Remove existing meshes from the scene
         categoryMeshes.current.forEach((meshData) => {
           sceneRef.current?.remove(meshData.mesh);
         });
 
         // Create new meshes
-        const newMeshes = createShape(
+        const newMeshes = await createShape(
           data,
-          colorInScene,
+          "./svgs/NCBI|ASPSC_GHOC01000043.1_C425_180|Aspidelaps_scutatus_simple-coil_familyVis_True_simpleHelix_True_vis.svg",
           data.length,
           colorList,
           customFeatures,
@@ -849,7 +876,8 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
           maxY,
           minZ,
           maxZ,
-          threeD
+          threeD,
+          false
         );
 
         // Clear existing meshes
@@ -869,6 +897,24 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
         rendererRef.current?.render(sceneRef.current!, camera);
       };
 
+      function hexToRGBA(hex: string) {
+        // Remove the '#' if it's there
+        hex = hex.replace("#", "");
+
+        // Extract the RGB values
+        const r = parseInt(hex.substring(0, 2), 16);
+        const g = parseInt(hex.substring(2, 4), 16);
+        const b = parseInt(hex.substring(4, 6), 16);
+
+        // Extract the alpha value (if present)
+        let a = 1;
+        if (hex.length === 8) {
+          a = parseInt(hex.substring(6, 8), 16) / 255;
+        }
+
+        return { r: r / 255, g: g / 255, b: b / 255, a: a };
+      }
+
       const updateExistingMeshes = () => {
         categoryMeshes.current.forEach((categoryMesh, key) => {
           // Update material color
@@ -878,10 +924,23 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
             colorList,
             colorParamList
           );
-          (categoryMesh.mesh.material as THREE.MeshBasicMaterial).color.set(
-            newColor
-          );
 
+          const rgbaColor = hexToRGBA(newColor);
+          // Update the material
+          if (
+            !(categoryMesh.mesh.material instanceof THREE.MeshBasicMaterial)
+          ) {
+            categoryMesh.mesh.material = new THREE.MeshBasicMaterial();
+          }
+          const material = categoryMesh.mesh
+            .material as THREE.MeshBasicMaterial;
+          if (newColor.length >= 8) {
+            material.color.setRGB(rgbaColor.r, rgbaColor.g, rgbaColor.b);
+            material.opacity = rgbaColor.a;
+            material.transparent = rgbaColor.a < 1;
+          } else {
+            material.color.set(newColor);
+          }
           // Update visibility based on the current state
           const isVisible = shouldBeVisible(key);
           categoryMesh.mesh.visible = isVisible;
@@ -1073,7 +1132,7 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
     const createShape = useCallback(
       (
         cluster: any,
-        color: string,
+        svgUrl: string,
         length: number,
         _colorList: string[],
         _customFeatures: any[],
@@ -1085,109 +1144,161 @@ const ScatterBoard = forwardRef<ScatterBoardRef, ScatterBoardProps>(
         maxY: number,
         minZ: number,
         maxZ: number,
-        isThreeD: boolean
-      ): Map<string, { mesh: THREE.InstancedMesh; count: number }> => {
-        const newCategoryMeshes = new Map<
-          string,
-          { mesh: THREE.InstancedMesh; count: number }
-        >();
-        const geometry = new THREE.SphereGeometry(0.3);
+        isThreeD: boolean,
+        useSVG: boolean = false
+      ): Promise<Map<string, { mesh: THREE.InstancedMesh; count: number }>> => {
+        return new Promise((resolve, reject) => {
+          const maxExtent = 40;
+          const deltaX = maxX - minX;
+          const deltaY = maxY - minY;
+          const deltaZ = maxZ - minZ;
+          const maxDelta = Math.max(deltaX, deltaY, deltaZ);
 
-        const maxExtent = 40;
-        const deltaX = maxX - minX;
-        const deltaY = maxY - minY;
-        const deltaZ = maxZ - minZ;
-        const maxDelta = Math.max(deltaX, deltaY, deltaZ);
+          const createMeshes = (geometry: THREE.BufferGeometry) => {
+            const newCategoryMeshes = new Map<
+              string,
+              { mesh: THREE.InstancedMesh; count: number }
+            >();
 
-        // Count instances per category
-        const categoryCounts = new Map<string, number>();
-        for (let i = 0; i < length; i++) {
-          const point = cluster[i];
-          const categoryKey = point.features[_colorKey];
-          categoryCounts.set(
-            categoryKey,
-            (categoryCounts.get(categoryKey) || 0) + 1
-          );
-        }
-
-        // Create meshes
-        categoryCounts.forEach((count, categoryKey) => {
-          const material = new THREE.MeshBasicMaterial({
-            transparent: true,
-            color: new THREE.Color(
-              getFeatureColor(
+            // Count instances per category
+            const categoryCounts = new Map<string, number>();
+            for (let i = 0; i < length; i++) {
+              const point = cluster[i];
+              const categoryKey = point.features[_colorKey];
+              categoryCounts.set(
                 categoryKey,
-                _customFeatures,
-                _colorList,
-                _colorParamList
-              )
-            ),
-            opacity: 1,
-          });
-          const mesh = new THREE.InstancedMesh(geometry, material, count);
-          // @ts-ignore
-          objArr.current.push({ divObj: mesh });
-          mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
-          mesh.userData.instanceUserData = [];
-          newCategoryMeshes.set(categoryKey, { mesh, count: 0 });
+                (categoryCounts.get(categoryKey) || 0) + 1
+              );
+            }
+
+            // Create meshes
+            categoryCounts.forEach((count, categoryKey) => {
+              const material = new THREE.MeshBasicMaterial({
+                transparent: true,
+                color: new THREE.Color(
+                  getFeatureColor(
+                    categoryKey,
+                    _customFeatures,
+                    _colorList,
+                    _colorParamList
+                  )
+                ),
+                opacity: 1,
+                side: THREE.DoubleSide,
+                depthTest: false,
+              });
+              const mesh = new THREE.InstancedMesh(geometry, material, count);
+              // @ts-ignore
+              objArr.current.push({ divObj: mesh });
+              mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+              mesh.userData.instanceUserData = [];
+              newCategoryMeshes.set(categoryKey, { mesh, count: 0 });
+            });
+
+            // Set instance matrices and user data
+            for (let i = 0; i < length; i++) {
+              const point = cluster[i];
+              const categoryKey = point.features[_colorKey];
+              const meshData = newCategoryMeshes.get(categoryKey)!;
+
+              const scaledX = scalePoint(
+                parseFloat(point.coordinates.x),
+                minX,
+                maxX,
+                -((deltaX / maxDelta) * maxExtent),
+                (deltaX / maxDelta) * maxExtent
+              );
+              const scaledY = scalePoint(
+                parseFloat(point.coordinates.y),
+                minY,
+                maxY,
+                -((deltaY / maxDelta) * maxExtent),
+                (deltaY / maxDelta) * maxExtent
+              );
+              const scaledZ = isThreeD
+                ? scalePoint(
+                    parseFloat(point.coordinates.z) || 0,
+                    minZ,
+                    maxZ,
+                    -((deltaZ / maxDelta) * maxExtent),
+                    (deltaZ / maxDelta) * maxExtent
+                  )
+                : 0;
+
+              const dummyObject = new THREE.Object3D();
+              dummyObject.position.set(scaledX, scaledY, scaledZ);
+              if (useSVG) {
+                dummyObject.scale.set(0.01, -0.01, 0.01); // Scale and flip Y for SVG
+              }
+              dummyObject.updateMatrix();
+              meshData.mesh.setMatrixAt(meshData.count, dummyObject.matrix);
+
+              // Set user data for this instance
+              meshData.mesh.userData.instanceUserData.push({
+                ...point,
+                identifier: point.identifier,
+                features: point.features,
+                color: getFeatureColor(
+                  categoryKey,
+                  _customFeatures,
+                  _colorList,
+                  _colorParamList
+                ),
+                coordinates: { x: scaledX, y: scaledY, z: scaledZ },
+              });
+
+              meshData.count++;
+            }
+
+            newCategoryMeshes.forEach((meshData) => {
+              meshData.mesh.instanceMatrix.needsUpdate = true;
+            });
+
+            return newCategoryMeshes;
+          };
+
+          let star = { url: "star-svgrepo-com.svg", scale: 2.5 };
+          let example = {
+            url: "NCBI|ASPSC_GHOC01000043.1_C425_180|Aspidelaps_scutatus_simple-coil_familyVis_True_simpleHelix_True_vis.svg",
+            scale: 0.3,
+          };
+
+          if (useSVG) {
+            const loader = new SVGLoader();
+            loader.load(
+              example.url,
+              (data) => {
+                const paths = data.paths;
+                const shapes: THREE.Shape[] = [];
+
+                paths.forEach((path) => {
+                  const pathShapes = SVGLoader.createShapes(path);
+                  shapes.push(...pathShapes);
+                });
+
+                let geometry: THREE.BufferGeometry;
+                if (shapes.length > 0) {
+                  geometry = new THREE.ShapeGeometry(shapes);
+
+                  const scaleFactor = example.scale;
+                  geometry.scale(scaleFactor, scaleFactor, scaleFactor);
+                } else {
+                  console.warn(
+                    "No valid shapes found in SVG. Falling back to sphere geometry."
+                  );
+                  geometry = new THREE.SphereGeometry(0.3);
+                }
+
+                resolve(createMeshes(geometry));
+              },
+              undefined,
+              reject
+            );
+          } else {
+            const geometry = new THREE.SphereGeometry(0.3);
+            resolve(createMeshes(geometry));
+          }
         });
-
-        // Set instance matrices and user data
-        for (let i = 0; i < length; i++) {
-          const point = cluster[i];
-          const categoryKey = point.features[_colorKey];
-          const meshData = newCategoryMeshes.get(categoryKey)!;
-
-          const scaledX = scalePoint(
-            parseFloat(point.coordinates.x),
-            minX,
-            maxX,
-            -((deltaX / maxDelta) * maxExtent),
-            (deltaX / maxDelta) * maxExtent
-          );
-          const scaledY = scalePoint(
-            parseFloat(point.coordinates.y),
-            minY,
-            maxY,
-            -((deltaY / maxDelta) * maxExtent),
-            (deltaY / maxDelta) * maxExtent
-          );
-          const scaledZ = isThreeD
-            ? scalePoint(
-                parseFloat(point.coordinates.z) || 0,
-                minZ,
-                maxZ,
-                -((deltaZ / maxDelta) * maxExtent),
-                (deltaZ / maxDelta) * maxExtent
-              )
-            : 0;
-
-          const dummyObject = new THREE.Object3D();
-          dummyObject.position.set(scaledX, scaledY, scaledZ);
-          dummyObject.updateMatrix();
-          meshData.mesh.setMatrixAt(meshData.count, dummyObject.matrix);
-
-          // Set user data for this instance
-          meshData.mesh.userData.instanceUserData.push({
-            ...point,
-            identifier: point.identifier,
-            features: point.features,
-            color: getFeatureColor(
-              categoryKey,
-              _customFeatures,
-              _colorList,
-              _colorParamList
-            ),
-            coordinates: { x: scaledX, y: scaledY, z: scaledZ },
-          });
-
-          meshData.count++;
-        }
-        newCategoryMeshes.forEach((meshData) => {
-          meshData.mesh.instanceMatrix.needsUpdate = true;
-        });
-
-        return newCategoryMeshes;
       },
       []
     );

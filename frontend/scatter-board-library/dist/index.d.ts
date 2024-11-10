@@ -48,6 +48,7 @@ interface Item {
     name: string;
     color?: string;
     img?: string;
+    id: string;
 }
 
 interface ScatterBoardRef {

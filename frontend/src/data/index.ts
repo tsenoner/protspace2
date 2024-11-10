@@ -37,6 +37,7 @@ export interface Item {
   name: string;
   color?: string;
   img?: string;
+  id?: string;
 }
 
 export const defaultDatasets = ["3FTx", "KLK"];

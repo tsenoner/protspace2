@@ -29,3 +29,5 @@ export const SET_PROTEIN_DATA = "SET_PROTEIN_DATA";
 export const SET_COLOR_LIST = "SET_COLOR_LIST";
 export const SET_CUSTOM_FEATURE = "SET_CUSTOM_FEATURE";
 export const SET_LIGHT_MODE = "SET_LIGHT_MODE";
+export const SET_STATES = "SET_STATES";
+export const SET_STATE = "SET_STATE";

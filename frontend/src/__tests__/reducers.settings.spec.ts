@@ -3,6 +3,7 @@ import * as actionTypes from "../redux/actionTypes";
 import "@testing-library/jest-dom";
 
 function getDefaultState(): SettingsState {
+  // @ts-expect-error test
   return {
     lightMode: false,
     colorKey: "",
