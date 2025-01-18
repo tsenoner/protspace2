@@ -19,6 +19,10 @@
 - break down big components into smaller ones (e.g. VisualizationComp)
 - move utils out of the components folder
 - remove the **pages** folder
+- fix failing tests
+- add prettier (formatting) and eslint (stricter rules for consistency)
+- add a github action to run the tests, linting and formatting
+- add a precommit hook to run linting and formatting
 
 # Questions
 
