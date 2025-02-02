@@ -1,6 +1,6 @@
-import { Vector3 } from "three";
-import { AtomStyleSpec, Item } from "../../data";
-import { colorList, shapeList } from "../../helpers/constants";
+import { Vector3 } from 'three';
+import { Item } from '../../data';
+import { colorList, shapeList } from '../../helpers/constants';
 import {
   SET_CAMERA,
   SET_CAMERA_POSITION,
@@ -34,22 +34,8 @@ import {
   SET_TECHNIQUE,
   SET_THREE_D,
   SET_TWO_LEGEND,
-  SET_STATE,
-} from "../actionTypes";
-
-const initialAtomStyleState: AtomStyleSpec = {
-  cartoon: {
-    hidden: false,
-    color: "spectrum",
-    style: "rectangle",
-    ribbon: false,
-    arrows: false,
-    tubes: false,
-    thickness: 0.4,
-    width: 1,
-    opacity: 1,
-  },
-};
+  SET_STATE
+} from '../actionTypes';
 
 export interface SettingsState {
   lightMode: boolean;
@@ -58,8 +44,7 @@ export interface SettingsState {
   twoLegend: boolean;
   technique: number;
   threeD: boolean;
-  atomStyle: AtomStyleSpec;
-  searchAtomStyle: AtomStyleSpec;
+
   searchItems: Item[];
   colorParam: string;
   shapeParam: string;
@@ -95,28 +80,26 @@ export interface SettingsState {
 
 const initialState: SettingsState = {
   lightMode: false,
-  colorKey: "",
-  shapeKey: "",
+  colorKey: '',
+  shapeKey: '',
   twoLegend: false,
   technique: 3,
   threeD: true,
-  atomStyle: initialAtomStyleState,
-  searchAtomStyle: initialAtomStyleState,
   searchItems: [],
-  colorParam: "",
-  shapeParam: "",
+  colorParam: '',
+  shapeParam: '',
   moleculeShown: false,
   data: [],
   colorList: [],
   shapeParamList: [],
   colorParamList: [],
-  csvFilePath: "df_3FTx_mature_esm2.csv",
+  csvFilePath: 'df_3FTx_mature_esm2.csv',
   dataItems: [],
   keyList: [],
   isLegendOpen: true,
-  errorMessage: "",
+  errorMessage: '',
   pdbExists: true,
-  moleculeName: "",
+  moleculeName: '',
   cameraPosition: null,
   cameraRotation: null,
   selectedMols: [],
@@ -132,7 +115,7 @@ const initialState: SettingsState = {
   customFeatures: [],
   items: [],
   states: [],
-  stateIndex: 0,
+  stateIndex: 0
 };
 
 const settingsReducer = (
@@ -149,96 +132,93 @@ const settingsReducer = (
     case SET_DATA:
       return {
         ...state,
-        data: action.payload,
+        data: action.payload
       };
     case SET_PDB_EXISTS:
       return {
         ...state,
-        pdbExists: action.payload,
+        pdbExists: action.payload
       };
     case SET_ERROR_MESSAGE:
       return {
         ...state,
-        errorMessage: action.payload,
+        errorMessage: action.payload
       };
     case SET_CAMERA_POSITION:
       return {
         ...state,
-        cameraPosition: action.payload,
+        cameraPosition: action.payload
       };
     case SET_CAMERA_ROTATION:
       return {
         ...state,
-        cameraRotation: action.payload,
+        cameraRotation: action.payload
       };
     case SET_COLOR_LIST:
       return {
         ...state,
-        colorList: action.payload,
+        colorList: action.payload
       };
     case SET_SHAPE_PARAM_LIST:
       return {
         ...state,
-        shapeParamList: action.payload,
+        shapeParamList: action.payload
       };
     case SET_COLOR_PARAM_LIST:
       return {
         ...state,
-        colorParamList: action.payload,
+        colorParamList: action.payload
       };
     case SET_CSV_FILE_PATH:
       return {
         ...state,
-        csvFilePath: action.payload,
+        csvFilePath: action.payload
       };
     case SET_SELECTED_MOLS:
       return {
         ...state,
-        selectedMols: action.payload,
+        selectedMols: action.payload
       };
     case SET_DATA_ITEMS:
       return {
         ...state,
-        dataItems: action.payload,
+        dataItems: action.payload
       };
     case SET_CUSTOM_FEATURE:
       return {
         ...state,
-        customFeatures: action.payload.customization,
+        customFeatures: action.payload.customization
       };
     case SET_LIGHT_MODE:
       return {
         ...state,
-        lightMode: action.payload,
+        lightMode: action.payload
       };
     case SET_CAMERA:
       return {
         ...state,
-        camera: action.payload,
+        camera: action.payload
       };
     case SET_COLOR_PARAM:
       return {
         ...state,
-        colorParam: action.payload,
+        colorParam: action.payload
       };
     case SET_SHAPE_PARAM:
       return {
         ...state,
-        shapeParam: action.payload,
+        shapeParam: action.payload
       };
     case SET_COLOR_AND_SHAPE_KEY:
       state.data.forEach((element: any) => {
         for (const key in element.features) {
           const value = element.features[key];
-          if (
-            items.filter((e) => e.category === key && e.name === value)
-              .length === 0
-          ) {
+          if (items.filter((e) => e.category === key && e.name === value).length === 0) {
             if (key === action.payload.colorKey) {
               items.push({
                 category: key,
                 color: colorList[colorParamList.length % colorList.length],
-                name: value as string,
+                name: value as string
               });
 
               colorParamList.push(`${value}` as string);
@@ -255,23 +235,22 @@ const settingsReducer = (
         shapeParamList: shapeParamList,
         items: items,
         colorKey: action.payload.colorKey,
-        shapeKey: action.payload.shapeKey,
+        shapeKey: action.payload.shapeKey
       };
     case SET_COLOR_KEY:
       state.data.forEach((element: any) => {
         for (const key in element) {
           const value = element[key];
           if (
-            typeof value === "string" &&
-            items.filter((e) => e.category === key && e.name === value)
-              .length === 0
+            typeof value === 'string' &&
+            items.filter((e) => e.category === key && e.name === value).length === 0
           ) {
             if (key === action.payload) {
               items.push({
                 category: key,
                 color: colorList[colorParamList.length % colorList.length],
                 name: value,
-                id: element.identifier,
+                id: element.identifier
               });
               colorParamList.push(value);
             } else if (key === state.shapeKey) {
@@ -279,14 +258,14 @@ const settingsReducer = (
                 category: key,
                 img: shapeList[shapeParamList.length % shapeList.length],
                 name: value,
-                id: element.identifier,
+                id: element.identifier
               });
               shapeParamList.push(value);
             } else {
               items.push({
                 category: key,
                 name: value,
-                id: element.identifier,
+                id: element.identifier
               });
             }
           }
@@ -297,26 +276,26 @@ const settingsReducer = (
         colorParamList: colorParamList,
         shapeParamList: shapeParamList,
         items: items,
-        colorKey: action.payload,
+        colorKey: action.payload
       };
     case SET_STATES:
       return {
         ...state,
-        states: action.payload,
+        states: action.payload
       };
     case SET_TWO_LEGEND:
       return {
         ...state,
-        twoLegend: action.payload,
+        twoLegend: action.payload
       };
-    case SET_TECHNIQUE:
+    case SET_TECHNIQUE: {
       const selectedProjection = state.projections[action.payload];
       if (!selectedProjection) return state;
       selectedProjection.data.forEach((element: any) => {
         if (state.protein_data) {
           Object.assign(element, state.protein_data[element.identifier]);
         } else {
-          element.features = "NaN";
+          element.features = 'NaN';
         }
       });
 
@@ -353,44 +332,41 @@ const settingsReducer = (
         ? Object.keys(selectedProjection.data[0].features).filter(
             (item: any) => selectedProjection.data[0].features[item]
           )
-        : ["NaN"];
+        : ['NaN'];
       const colorKey = state.colorKey ?? keys[0];
       const newData = state.protein_data
         ? selectedProjection.data.map((item: any) => {
             const newItem = {
-              ...item,
+              ...item
             }; // Create a copy of the current item
             for (const key in newItem.features) {
-              if (newItem.features[key] === "") {
-                newItem.features[key] = "NaN";
+              if (newItem.features[key] === '') {
+                newItem.features[key] = 'NaN';
               }
             }
             return newItem;
           })
         : [];
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       state.protein_data &&
         newData.forEach((element: any) => {
           for (const key in element.features) {
             const value = element.features[key];
-            if (
-              itemsLocal.filter((e) => e.category === key && e.name === value)
-                .length === 0
-            ) {
+            if (itemsLocal.filter((e) => e.category === key && e.name === value).length === 0) {
               if (key === colorKey) {
                 itemsLocal.push({
                   category: key,
-                  color:
-                    colorList[colorParamListLocal.length % colorList.length],
+                  color: colorList[colorParamListLocal.length % colorList.length],
                   name: value,
-                  id: element.identifier,
+                  id: element.identifier
                 });
                 colorParamListLocal.push(value);
               } else {
                 itemsLocal.push({
                   category: key,
                   name: value,
-                  id: element.identifier,
+                  id: element.identifier
                 });
               }
             }
@@ -403,64 +379,65 @@ const settingsReducer = (
         data: selectedProjection.data,
         threeD: selectedProjection.dimensions === 3,
         technique: action.payload,
-        dataItems: itemsLocal,
+        dataItems: itemsLocal
       };
+    }
     case SET_MOLECULE_NAME:
       return {
         ...state,
-        moleculeName: action.payload,
+        moleculeName: action.payload
       };
     case SET_THREE_D:
       return {
         ...state,
-        threeD: action.payload,
+        threeD: action.payload
       };
     case SET_SEARCH_ITEMS:
       return {
         ...state,
-        searchItems: action.payload,
+        searchItems: action.payload
       };
     case SET_IS_LEGEND_OPEN:
       return {
         ...state,
-        isLegendOpen: action.payload,
+        isLegendOpen: action.payload
       };
     case SET_KEY_LIST:
       return {
         ...state,
-        keyList: action.payload,
+        keyList: action.payload
       };
     case SET_MOLECULE_SHOWN:
       return {
         ...state,
-        moleculeShown: action.payload,
+        moleculeShown: action.payload
       };
     case SET_IS_LOADING:
       return {
         ...state,
-        isLoading: action.payload,
+        isLoading: action.payload
       };
     case SET_PDB:
       return {
         ...state,
-        pdb: action.payload,
+        pdb: action.payload
       };
     case SET_PROJECTIONS:
       return {
         ...state,
-        projections: action.payload,
+        projections: action.payload
       };
     case SET_STRUCTURES:
       return {
         ...state,
-        structures: action.payload,
+        structures: action.payload
       };
     case SET_PROTEIN_DATA:
       return {
         ...state,
-        protein_data: action.payload,
+        protein_data: action.payload
       };
-    case SET_STATE:
+    case SET_STATE: {
       const { stateIndex } = action.payload; // Pass in the selected state index
       const selectedState = state.states[stateIndex];
       if (!selectedState) return state;
@@ -473,7 +450,7 @@ const settingsReducer = (
         (element: { features: any; identifier: string | number }) => {
           const features = state.protein_data
             ? { ...element.features, ...state.protein_data[element.identifier] }
-            : { features: "NaN" };
+            : { features: 'NaN' };
           return { ...element, features };
         }
       );
@@ -488,28 +465,22 @@ const settingsReducer = (
       const colorKey2 = state.colorKey ?? Object.keys(newData2[0]?.features)[0];
 
       newData2.forEach(
-        (element: {
-          features: { [s: string]: string } | ArrayLike<string>;
-          identifier: any;
-        }) => {
+        (element: { features: { [s: string]: string } | ArrayLike<string>; identifier: any }) => {
           Object.entries(element.features).forEach(([key, value]) => {
-            if (
-              !itemsLocal2.some((e) => e.category === key && e.name === value)
-            ) {
+            if (!itemsLocal2.some((e) => e.category === key && e.name === value)) {
               if (key === colorKey2) {
                 itemsLocal2.push({
                   category: key,
-                  color:
-                    colorList[colorParamListLocal2.length % colorList.length],
+                  color: colorList[colorParamListLocal2.length % colorList.length],
                   name: value,
-                  id: element.identifier,
+                  id: element.identifier
                 });
                 colorParamListLocal2.push(value);
               } else {
                 itemsLocal2.push({
                   category: key,
                   name: value,
-                  id: element.identifier,
+                  id: element.identifier
                 });
               }
             }
@@ -536,28 +507,9 @@ const settingsReducer = (
         threeD: selectedProjection2.dimensions === 3,
         stateIndex: action.payload,
         colorParam: selectedState.colorParam,
-        searchItems: selectedState.searchItems,
+        searchItems: selectedState.searchItems
       };
-
-    //   return {
-    //     ...state,
-    //     cameraPosition: new Vector3(
-    //       selectedState.cameraPosition.x,
-    //       selectedState.cameraPosition.y,
-    //       selectedState.cameraPosition.z
-    //     ),
-    //     cameraRotation: new Vector3(
-    //       selectedState.cameraRotation.x,
-    //       selectedState.cameraRotation.y,
-    //       selectedState.cameraRotation.z
-    //     ),
-    //     technique: selectedState.technique,
-    //     data: newData,
-    //     customFeatures: selectedState.customFeatures,
-    //     colorParamList: colorParamListLocal2,
-    //     dataItems: itemsLocal2,
-    //     threeD: selectedProjection.dimensions === 3,
-    //   };
+    }
 
     default:
       return state;
