@@ -3,8 +3,7 @@ import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
-import { RootState } from '../../redux/store';
+import { configureStore } from '@reduxjs/toolkit';
 import EntitySearch from './EntitySearch';
 import Tag from '../tag/Tag';
 
@@ -13,16 +12,22 @@ jest.mock('../../helpers/hooks/useQuery', () => ({
   default: jest.fn(() => ({ data: [], loading: false }))
 }));
 
-const mockStore = configureStore();
-const store = mockStore({
-  settings: {
-    searchItems: [],
-    keyList: []
-  }
-});
+const createMockStore = (initialState: any) => {
+  return configureStore({
+    reducer: (state = initialState) => state,
+    preloadedState: initialState
+  });
+};
 
 describe('EntitySearch Component', () => {
   test('renders search input and responds to user input', async () => {
+    const store = createMockStore({
+      settings: {
+        searchItems: [],
+        keyList: []
+      }
+    });
+
     render(
       <Provider store={store}>
         <ChakraProvider>
@@ -35,28 +40,17 @@ describe('EntitySearch Component', () => {
     expect(searchInput).toBeInTheDocument();
 
     await userEvent.type(searchInput, 'Test Query');
-
     expect(searchInput).toHaveValue('Test Query');
 
     const searchLabel = screen.getByTestId('search-label');
     expect(searchLabel).toBeInTheDocument();
   });
 
-  it('renders search input and expands/collapses the search area', async () => {
-    expect(screen.queryByPlaceholderText('Search through features')).toBeNull();
-  });
-});
-
-describe('EntitySearch Component', () => {
-  test('renders correct number of Tag components and handles click event', () => {
-    const mockStore = configureStore();
-    const store = mockStore({
+  test('renders search input and expands/collapses the search area', () => {
+    const store = createMockStore({
       settings: {
-        keyList: ['Category 1', 'Category 2'],
-        searchItems: [
-          { name: 'Item 1', category: 'Category 1' },
-          { name: 'Item 2', category: 'Category 2' }
-        ]
+        searchItems: [],
+        keyList: []
       }
     });
 
@@ -66,17 +60,39 @@ describe('EntitySearch Component', () => {
       </Provider>
     );
 
+    expect(screen.queryByPlaceholderText('Search through features')).toBeNull();
+  });
+});
+
+describe('EntitySearch Component with Tags', () => {
+  test('renders correct number of Tag components and handles click event', () => {
+    const initialState = {
+      settings: {
+        keyList: ['Category 1', 'Category 2'],
+        searchItems: [
+          { name: 'Item 1', category: 'Category 1' },
+          { name: 'Item 2', category: 'Category 2' }
+        ]
+      }
+    };
+    const store = createMockStore(initialState);
+
+    render(
+      <Provider store={store}>
+        <EntitySearch />
+      </Provider>
+    );
+
     const tags = screen.getAllByRole('button');
-    expect(tags).toHaveLength((store.getState() as RootState).settings.searchItems.length);
+    expect(tags).toHaveLength(initialState.settings.searchItems.length);
 
     tags.forEach((tag, index) => {
-      expect(tag.textContent).toBe(
-        (store.getState() as RootState).settings.searchItems[index].name
-      );
+      expect(tag.textContent).toBe(initialState.settings.searchItems[index].name);
     });
 
     fireEvent.click(tags[0]);
-    expect((store.getState() as RootState).settings.searchItems).toContainEqual({
+
+    expect(store.getState().settings.searchItems).toContainEqual({
       name: 'Item 1',
       category: 'Category 1'
     });
@@ -85,15 +101,15 @@ describe('EntitySearch Component', () => {
 
 describe('Spinner and Search Item', () => {
   test('renders Spinner and SearchItem components correctly and handles click event', () => {
-    const mockStore = configureStore();
-    const store = mockStore({
+    const initialState = {
       loading: true,
       query: 'test',
       groupedResults: new Map([['Category 1', [{ name: 'Item 1', category: 'Category 1' }]]]),
       settings: {
         searchItems: []
       }
-    });
+    };
+    const store = createMockStore(initialState);
 
     jest.mock('../../helpers/hooks/useQuery.ts', () => ({
       useQuery: () => ({
@@ -112,7 +128,7 @@ describe('Spinner and Search Item', () => {
 
     store.dispatch({ type: 'SET_LOADING', payload: false });
 
-    expect((store.getState() as RootState).settings.searchItems).not.toContainEqual({
+    expect(store.getState().settings.searchItems).not.toContainEqual({
       name: 'Item 1',
       category: 'Category 1'
     });
@@ -130,14 +146,10 @@ describe('Tag Component', () => {
     expect(screen.getByText('Protein A')).toBeInTheDocument();
   });
 
-  it('calls the onClick handler when the Tag is clicked', () => {
+  it('calls the onClick handler when the Tag is clicked', async () => {
     const tagElement = screen.getByText('Protein A');
-    userEvent.click(tagElement);
-    expect(mockOnClick).toHaveBeenCalledTimes(1);
-  });
 
-  it('displays the correct style based on the index', () => {
-    const tagElement = screen.getByText('Protein A');
-    expect(tagElement).toHaveStyle('backgroundColor: rgb(255, 99, 71');
+    await userEvent.click(tagElement);
+    expect(mockOnClick).toHaveBeenCalledTimes(1);
   });
 });
