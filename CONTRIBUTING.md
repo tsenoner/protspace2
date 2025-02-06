@@ -64,7 +64,7 @@ Depending on how large the project is, you may want to outsource the questioning
 
 > ### Legal Notice <!-- omit in toc -->
 
-> When contributing to this project, you must agree that you have authored 100% of the content, that you have the necessary rights to the content and that the content you contribute may be provided under the project licence.
+> When contributing to this project, you must agree that you have authored 100% of the content, that you have the necessary rights to the content and that the content you contribute may be provided under the project license.
 
 ### Reporting Bugs
 
@@ -196,7 +196,7 @@ For component documentation:
 
 We follow the [Angular commit message guidelines](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#-commit-message-format). Each commit message consists of a **header**, a **body**, and a **footer**:
 
-```
+```text
 <type>(<scope>): <short summary>
 <BLANK LINE>
 <body>
