@@ -13,7 +13,7 @@ import { BsFiletypePng, BsFiletypeSvg } from 'react-icons/bs';
 import { MdDarkMode, MdLightMode } from 'react-icons/md';
 import { CSSTransition } from 'react-transition-group';
 
-import { ScatterBoard, type ScatterBoardRef } from 'scatter-board-library';
+import { ScatterBoardRef } from '../../lib/scatter-board-library/components/ScatterBoard/ScatterBoard.types';
 import { Vector3 } from 'three';
 import { colorList, shapeList } from '../../helpers/constants';
 import { useAppDispatch, useAppSelector } from '../../helpers/hooks';
@@ -60,6 +60,7 @@ import SvgSpinner from '../svg-spinner/SvgSpinner';
 import VisualizationWaitingModal from '../waiting-modal/WaitingModal';
 import pako from 'pako';
 import { StatesModal } from '../states-modal/StatesModal';
+import ScatterBoard from '../../lib/scatter-board-library/components/ScatterBoard';
 
 const VisualizationComp = () => {
   const { colorMode, toggleColorMode } = useColorMode();
